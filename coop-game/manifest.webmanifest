@@ -1,0 +1,26 @@
+{
+  "name": "Cedole & Catastrofi",
+  "short_name": "Cedole",
+  "description": "Cooperativo narrativo ironico da tavolo per un solo device, fino a 6 giocatori locali.",
+  "lang": "it",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff7dd",
+  "theme_color": "#ff6b4a",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

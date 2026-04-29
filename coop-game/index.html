@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cedole & Catastrofi</title>
+  <meta name="theme-color" content="#ff6b4a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-orbit orbit-a" aria-hidden="true"></div>
+  <div class="background-orbit orbit-b" aria-hidden="true"></div>
+  <div class="background-grid" aria-hidden="true"></div>
+
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">Cooperativo narrativo da tavolo, ma con meno dignita' fiscale</p>
+      <h1>Cedole &amp; Catastrofi</h1>
+      <p class="subtitle">Cronaca cooperativa di un agriturismo biotech quasi legale</p>
+    </div>
+    <div class="header-actions">
+      <button id="install-app" class="ghost-button" type="button" hidden>Installa</button>
+      <button id="sound-toggle" class="ghost-button" type="button" aria-pressed="true">Suoni: ON</button>
+      <button id="go-home" class="ghost-button" type="button">Menu</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section id="screen-home" class="screen screen-home is-active" aria-labelledby="home-title">
+      <div class="hero-card panel jumbo-panel">
+        <div class="hero-copy">
+          <p class="badge badge-chaos">Sitcom strategica per amici senza tutorial emotivo</p>
+          <h2 id="home-title">Benvenuti nel 2026, l'anno in cui il mutuo ha imparato a mandare vocali.</h2>
+          <p id="home-lore" class="lead"></p>
+          <div class="hero-actions">
+            <button id="new-game-home" class="primary-button" type="button">Nuova partita</button>
+            <button id="resume-game-home" class="secondary-button" type="button">Riprendi ultimo disastro</button>
+            <button id="open-rules-home" class="secondary-button" type="button">Regole deliranti</button>
+          </div>
+        </div>
+        <aside class="mission-teaser">
+          <div class="panel inset-panel">
+            <h3>Missione finale</h3>
+            <p id="mission-home-title" class="mission-title"></p>
+            <p id="mission-home-text"></p>
+          </div>
+          <div class="panel inset-panel">
+            <h3>Migliori risultati</h3>
+            <dl id="best-results" class="stats-list"></dl>
+          </div>
+        </aside>
+      </div>
+
+      <div class="home-grid">
+        <article class="panel">
+          <h3>Perche' e' cooperativo</h3>
+          <p>Ogni professionista ha un talento improbabile e un difetto tragicomico. Da solo combina figuracce. In squadra, forse, produce miracoli amministrativi.</p>
+        </article>
+        <article class="panel">
+          <h3>Cosa puo' andare storto</h3>
+          <p>Appuntamenti tossici, ex improvvise, HR infernali, weekend motivazionali, mutui con personalita' e notifiche alle 03:00. Il cattivo e' il caos, non l'umanita'.</p>
+        </article>
+        <article class="panel">
+          <h3>Come si vince</h3>
+          <p>Completate il progetto finale prima che Caos, Dignita', Carriera o Stabilita' mentale del gruppo collassino in un elegante crumble psicologico.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="screen-rules" class="screen" aria-labelledby="rules-title">
+      <div class="panel jumbo-panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Manuale non certificato dal Ministero dell'Equilibrio</p>
+            <h2 id="rules-title">Regole semplici per una tragedia amministrativa complessa</h2>
+          </div>
+          <button id="back-from-rules" class="ghost-button" type="button">Indietro</button>
+        </div>
+        <div id="rules-content" class="rules-grid"></div>
+      </div>
+    </section>
+
+    <section id="screen-select" class="screen" aria-labelledby="select-title">
+      <div class="panel jumbo-panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Selezione della squadra piu' credibile del continente</p>
+            <h2 id="select-title">Raduna il collettivo che salvera' l'agriturismo biofiscale</h2>
+            <p class="lead">Scegli da 3 a 6 personaggi. Su un solo device si gioca in pass-and-play: uno muove, poi passa il telefono al prossimo eroe amministrativo.</p>
+          </div>
+          <div class="selection-meta">
+            <div class="chip" id="selection-count">0 selezionati</div>
+            <div class="chip" id="selection-goal">Obiettivo: --</div>
+          </div>
+        </div>
+
+        <div id="character-selection-grid" class="character-grid"></div>
+
+        <div id="selection-player-names" class="panel inset-panel player-names-panel"></div>
+
+        <div class="selection-footer">
+          <div class="panel inset-panel selection-preview">
+            <h3>Sinergie attive</h3>
+            <div id="selection-synergies" class="synergy-list"></div>
+          </div>
+          <div class="panel inset-panel selection-preview">
+            <h3>Anteprima missione</h3>
+            <p id="selection-mission-text"></p>
+            <p id="selection-warning" class="warning-line"></p>
+          </div>
+          <div class="panel inset-panel selection-preview mode-preview">
+            <div class="section-heading compact-heading no-margin">
+              <div>
+                <h3>Modalita' Penitenza Solidale</h3>
+                <p id="selection-mode-copy" class="mode-copy"></p>
+              </div>
+              <button id="toggle-solidarity-mode" class="ghost-button" type="button" aria-pressed="false">Penitenza solidale: OFF</button>
+            </div>
+            <div id="selection-mode-tags" class="synergy-list"></div>
+          </div>
+        </div>
+
+        <div class="hero-actions align-right">
+          <button id="back-to-home" class="ghost-button" type="button">Menu</button>
+          <button id="open-rules-select" class="secondary-button" type="button">Rileggi regole</button>
+          <button id="start-game" class="primary-button" type="button" disabled>Avvia il disastro</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-game" class="screen" aria-labelledby="game-title">
+      <div class="game-layout">
+        <section class="panel mission-banner" aria-labelledby="game-title">
+          <div>
+            <p class="eyebrow">Missione cooperativa impossibile</p>
+            <h2 id="game-title"></h2>
+            <p id="game-objective"></p>
+          </div>
+          <div class="round-boxes">
+            <div class="round-card">
+              <span>Round</span>
+              <strong id="round-counter">1</strong>
+            </div>
+            <div class="round-card">
+              <span>Turno</span>
+              <strong id="turn-counter">1</strong>
+            </div>
+            <div class="round-card">
+              <span>Squadra</span>
+              <strong id="team-size-counter">0</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel resources-panel" aria-label="Risorse condivise">
+          <div id="resource-bars" class="resource-bars"></div>
+          <div id="shared-resources" class="shared-resources"></div>
+        </section>
+
+        <section class="panel board-panel" aria-labelledby="board-title">
+          <div class="section-heading compact-heading">
+            <div>
+              <p class="eyebrow">Tabellone stilizzato del destino</p>
+              <h3 id="board-title">Mappa dei luoghi dove le scelte di vita prendono fuoco con garbo</h3>
+            </div>
+            <div class="chip live-chip" id="current-stage-label"></div>
+          </div>
+          <div id="board-track" class="board-track"></div>
+        </section>
+
+        <div class="game-columns">
+          <section class="panel team-panel" aria-labelledby="team-title">
+            <div class="section-heading compact-heading">
+              <div>
+                <p class="eyebrow">Talenti improbabili</p>
+                <h3 id="team-title">Personaggi in campo</h3>
+              </div>
+              <div class="chip" id="team-tip"></div>
+            </div>
+            <div id="local-play-panel" class="local-play-panel"></div>
+            <div id="selected-team-grid" class="team-grid"></div>
+          </section>
+
+          <aside class="side-column">
+            <section class="panel current-event-panel" aria-labelledby="event-title">
+              <div class="section-heading compact-heading">
+                <div>
+                  <p class="eyebrow">Carta evento attiva</p>
+                  <h3 id="event-title">Il caos del momento</h3>
+                </div>
+                <button id="manual-save" class="ghost-button" type="button">Salva</button>
+              </div>
+              <div id="current-event-card"></div>
+            </section>
+
+            <section class="panel missions-panel" aria-labelledby="missions-title">
+              <div class="section-heading compact-heading">
+                <div>
+                  <p class="eyebrow">Missioni secondarie</p>
+                  <h3 id="missions-title">Problemi collaterali assolutamente evitabili</h3>
+                </div>
+              </div>
+              <div id="missions-list" class="missions-list"></div>
+            </section>
+
+            <section id="solidarity-panel" class="panel solidarity-panel" aria-labelledby="solidarity-title" hidden>
+              <div class="section-heading compact-heading">
+                <div>
+                  <p class="eyebrow">Penitenze solidali</p>
+                  <h3 id="solidarity-title">Micro-donazioni da 1 euro per errori evitabili</h3>
+                </div>
+              </div>
+              <div id="solidarity-summary" class="shared-resources"></div>
+              <div id="solidarity-list" class="missions-list"></div>
+            </section>
+          </aside>
+        </div>
+
+        <section class="panel log-panel" aria-labelledby="log-title">
+          <div class="section-heading compact-heading">
+            <div>
+              <p class="eyebrow">Cronaca in tempo reale</p>
+              <h3 id="log-title">Log narrativo del disastro controllato</h3>
+            </div>
+            <div class="hero-actions log-actions">
+              <button id="draw-chaos-now" class="secondary-button" type="button">Pesca un mini-drama</button>
+              <button id="end-round" class="primary-button" type="button">Chiudi round</button>
+            </div>
+          </div>
+          <div id="log-list" class="log-list" role="log" aria-live="polite"></div>
+        </section>
+      </div>
+    </section>
+
+    <section id="screen-victory" class="screen" aria-labelledby="victory-title">
+      <div class="panel jumbo-panel end-screen victory-screen">
+        <p class="badge badge-victory">Vittoria cooperativa improbabile ma legalmente emozionante</p>
+        <h2 id="victory-title">Avete consegnato il dossier senza evaporare socialmente.</h2>
+        <p id="victory-text" class="lead"></p>
+        <div id="victory-summary" class="end-summary"></div>
+        <div class="hero-actions center-actions">
+          <button id="victory-new-game" class="primary-button" type="button">Nuova impresa</button>
+          <button id="victory-home" class="secondary-button" type="button">Menu</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-defeat" class="screen" aria-labelledby="defeat-title">
+      <div class="panel jumbo-panel end-screen defeat-screen">
+        <p class="badge badge-defeat">Sconfitta corale con ricevuta emotiva allegata</p>
+        <h2 id="defeat-title">Il gruppo e' imploso con un rumore simile a una PEC respinta.</h2>
+        <p id="defeat-text" class="lead"></p>
+        <div id="defeat-summary" class="end-summary"></div>
+        <div class="hero-actions center-actions">
+          <button id="defeat-retry" class="primary-button" type="button">Riprova con la stessa squadra</button>
+          <button id="defeat-home" class="secondary-button" type="button">Menu</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Apri questo file nel browser, scegli la squadra e prova a battere il caos prima che il caos apra una startup.</p>
+  </footer>
+
+  <script src="js/data.js" defer></script>
+  <script src="js/helpers.js" defer></script>
+  <script src="js/pwa.js" defer></script>
+  <script src="js/bootstrap.js" defer></script>
+  <script src="js/render.js" defer></script>
+  <script src="js/gameplay.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>

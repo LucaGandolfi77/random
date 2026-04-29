@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sims AI City Inspector</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;400;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Mosswhistle civic broadcast</p>
+          <h1 id="town-name">Sims AI City</h1>
+          <p id="town-motto" class="hero-motto">Loading town motto...</p>
+          <p id="last-recap" class="hero-recap">Collecting recent drama.</p>
+        </div>
+        <div class="hero-panel">
+          <div class="stat-grid" id="hero-stats"></div>
+          <div class="controls">
+            <button data-days="1">Advance 1 day</button>
+            <button data-days="7">Advance 7 days</button>
+            <button data-days="30">Advance 30 days</button>
+            <button id="reset-button" class="ghost">Reset town</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="panel panel-wide">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Live timeline</p>
+              <h2>Recent events</h2>
+            </div>
+            <p id="timeline-note" class="muted">Waiting for the next scandal.</p>
+          </div>
+          <div id="timeline" class="timeline"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Population register</p>
+              <h2>Residents</h2>
+            </div>
+          </div>
+          <div id="characters" class="card-grid"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Family chronicles</p>
+              <h2>Lineages</h2>
+            </div>
+          </div>
+          <div id="families" class="family-grid"></div>
+        </section>
+
+        <section class="panel panel-wide split-panel">
+          <div>
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Memory vault</p>
+                <h2>Recent memories</h2>
+              </div>
+            </div>
+            <div id="memories" class="memory-list"></div>
+          </div>
+          <div>
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Yearbook</p>
+                <h2>Annual summaries</h2>
+              </div>
+            </div>
+            <div id="year-summaries" class="summary-list"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="chip-template">
+      <span class="chip"></span>
+    </template>
+
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>

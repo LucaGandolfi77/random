@@ -1,0 +1,74 @@
+{
+  "aa197639-4510-484f-800c-217d6680de25": {
+    "surname": "Brine",
+    "legendary_hook": "The Brine lineage keeps producing suspiciously gifted children and one excellent accordion player.",
+    "members": [
+      {
+        "id": "e2d2456c-b710-4edb-b8e6-e8beb4e7c177",
+        "name": "Mabel Brine",
+        "age": 67,
+        "children": []
+      },
+      {
+        "id": "3e589253-b3ed-4fb8-8144-d57ddc917d70",
+        "name": "Juniper Brine",
+        "age": 29,
+        "children": []
+      }
+    ]
+  },
+  "76c08808-5271-4eb2-bb09-e4a81bdc56a4": {
+    "surname": "Pepperglow",
+    "legendary_hook": "Nobody can prove it, but the Pepperglow family has won every major soup dispute since year three.",
+    "members": [
+      {
+        "id": "21932e44-769a-40f4-a03e-fef9320b116c",
+        "name": "Orrin Pepperglow",
+        "age": 34,
+        "children": []
+      }
+    ]
+  },
+  "31871729-e256-4020-8f99-60d0ab8ecdd8": {
+    "surname": "Fernwick",
+    "legendary_hook": "The Fernwick family is rumored to settle arguments with desserts and thunderous eye contact.",
+    "members": [
+      {
+        "id": "d90a008e-aa65-4c44-9a68-7fba0b85f600",
+        "name": "Selkie Fernwick",
+        "age": 31,
+        "children": []
+      }
+    ]
+  },
+  "16d636b3-6522-4867-97a6-4ace7e26b04c": {
+    "surname": "Vale",
+    "legendary_hook": "The Vale lineage keeps producing suspiciously gifted children and one excellent accordion player.",
+    "members": [
+      {
+        "id": "917d67a3-4816-4086-8950-d2439e470119",
+        "name": "Crispin Vale",
+        "age": 27,
+        "children": []
+      },
+      {
+        "id": "b56a1edc-1a66-4369-9fa1-0360aed49693",
+        "name": "Poppy Vale",
+        "age": 24,
+        "children": []
+      }
+    ]
+  },
+  "616d419e-fa30-4673-af7e-4188d7b3ebdd": {
+    "surname": "Thistle",
+    "legendary_hook": "Nobody can prove it, but the Thistle family has won every major soup dispute since year three.",
+    "members": [
+      {
+        "id": "136f1cb3-ee7b-42a4-aaf8-02ce59c53784",
+        "name": "Bramble Thistle",
+        "age": 41,
+        "children": []
+      }
+    ]
+  }
+}

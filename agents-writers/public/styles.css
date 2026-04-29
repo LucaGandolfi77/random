@@ -23,6 +23,10 @@ body {
   color: var(--text);
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
 .shell {
   width: min(1200px, calc(100vw - 32px));
   margin: 0 auto;
@@ -269,6 +273,239 @@ button.secondary {
   word-break: break-word;
 }
 
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  align-items: start;
+  justify-items: end;
+  padding: 20px;
+  background: rgba(3, 6, 16, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.modal {
+  width: min(460px, calc(100vw - 24px));
+  max-height: calc(100vh - 40px);
+  overflow: auto;
+  backdrop-filter: blur(18px);
+  background: rgba(10, 16, 34, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+}
+
+.guide-modal {
+  padding: 24px;
+}
+
+.guide-layout {
+  display: grid;
+  gap: 16px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.modal-header-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.modal-close {
+  width: auto;
+  min-width: 110px;
+}
+
+.modal-backdrop.is-minimized {
+  align-items: end;
+  justify-items: end;
+  background: transparent;
+  backdrop-filter: none;
+  pointer-events: none;
+}
+
+.modal-backdrop.is-minimized .modal {
+  width: min(360px, calc(100vw - 24px));
+  max-height: none;
+  pointer-events: auto;
+}
+
+.modal-backdrop.is-minimized .guide-modal {
+  padding: 18px;
+}
+
+.modal-backdrop.is-minimized .modal-header {
+  margin-bottom: 0;
+  align-items: center;
+}
+
+.modal-backdrop.is-minimized .guide-layout,
+.modal-backdrop.is-minimized .modal-actions {
+  display: none;
+}
+
+.guide-progress {
+  display: grid;
+  gap: 10px;
+}
+
+.guide-progress-meta {
+  margin: 0;
+}
+
+.guide-progress-list {
+  display: grid;
+  gap: 8px;
+}
+
+.guide-progress-item {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.guide-progress-item strong {
+  font-size: 0.95rem;
+}
+
+.guide-progress-item span {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.guide-progress-item.is-active {
+  border-color: rgba(124, 156, 255, 0.35);
+  background: rgba(124, 156, 255, 0.12);
+}
+
+.guide-stage {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.guide-status-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.guide-status-row h3 {
+  margin: 0;
+}
+
+.guide-status-badge {
+  padding: 7px 11px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+}
+
+.guide-status-badge[data-tone="complete"] {
+  background: rgba(86, 224, 196, 0.16);
+  color: var(--accent-2);
+}
+
+.guide-status-badge[data-tone="active"] {
+  background: rgba(124, 156, 255, 0.18);
+  color: var(--accent);
+}
+
+.guide-status-badge[data-tone="optional"] {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+.guide-status-badge[data-tone="pending"] {
+  background: rgba(255, 113, 143, 0.14);
+  color: #ffb0c2;
+}
+
+.guide-target {
+  margin: 10px 0 0;
+  color: var(--accent-2);
+  font-size: 0.92rem;
+}
+
+.guide-toolbar {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.guide-toolbar button,
+.modal-actions button {
+  width: auto;
+}
+
+.guide-toolbar button[hidden] {
+  display: none;
+}
+
+.guide-code {
+  margin: 14px 0 0;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(2, 5, 14, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #bcd2ff;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+.guide-code[hidden] {
+  display: none;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.guide-focus-target {
+  position: relative;
+  z-index: 1;
+  box-shadow:
+    0 0 0 2px rgba(86, 224, 196, 0.95),
+    0 0 0 8px rgba(86, 224, 196, 0.12),
+    0 16px 42px rgba(0, 0, 0, 0.28);
+}
+
+.guide-focus-target::after {
+  content: attr(data-guide-label);
+  position: absolute;
+  top: -8px;
+  right: 14px;
+  transform: translateY(-100%);
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--accent-2);
+  color: #05101b;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
 @media (max-width: 900px) {
   .grid.two,
   .summary-grid,
@@ -279,5 +516,38 @@ button.secondary {
 
   .hero {
     flex-direction: column;
+  }
+
+  .modal-header {
+    flex-direction: column;
+  }
+
+  .modal-header-actions {
+    width: 100%;
+  }
+
+  .modal-backdrop {
+    justify-items: stretch;
+  }
+
+  .modal {
+    width: 100%;
+  }
+
+  .guide-status-row,
+  .guide-toolbar,
+  .modal-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .guide-toolbar button,
+  .modal-actions button {
+    width: 100%;
+  }
+
+  .guide-focus-target::after {
+    right: auto;
+    left: 12px;
   }
 }

@@ -1,3 +1,4 @@
+import fs from 'node:fs/promises';
 import path from 'node:path';
 
 import { recordActionLog, withActionLog } from './action-log.js';
@@ -194,6 +195,7 @@ export async function getStatus(rootPath) {
   }, async () => {
     const state = await loadState(rootPath);
     const env = await loadEnv(rootPath);
+    const translations = await collectTranslationStatus(rootPath, state.timeline.chapters || []);
 
     return {
       activeBookId: state.activeBook.id,
@@ -220,6 +222,7 @@ export async function getStatus(rootPath) {
       activePresets: state.agentState.activePresets || [],
       availablePresets: Object.keys(state.presets.presets || {}),
       chaptersWritten: state.timeline.chapters?.length || 0,
+      translations,
       recentChapters: (state.timeline.chapters || []).slice(-5),
       outline: {
         currentPhase: state.outlineMemory.story_arc?.current_phase || 'opening',
@@ -450,6 +453,94 @@ export async function generateChapter(rootPath, options) {
   });
 }
 
+export async function translateChapter(rootPath, options = {}) {
+  return withActionLog(rootPath, {
+    source: 'workflow',
+    action: 'translate-chapter',
+    input: { options }
+  }, async () => {
+    const chapter = Number(options.chapter);
+
+    if (!chapter) {
+      throw new Error('Provide a chapter number with --chapter <n>.');
+    }
+
+    const state = await loadState(rootPath);
+    const env = await loadEnv(rootPath);
+    const chapterId = padChapter(chapter);
+    const finalSourceFile = `${CHAPTERS_DIR}/chapter_${chapterId}_final.md`;
+    const draftSourceFile = `${CHAPTERS_DIR}/chapter_${chapterId}_draft.md`;
+    const translationFile = `${CHAPTERS_DIR}/chapter_${chapterId}_it.md`;
+    const metadataFile = `${CHAPTERS_DIR}/chapter_${chapterId}_translation.json`;
+    const finalMarkdown = String(await readText(path.join(rootPath, finalSourceFile), null) || '').trim();
+    const draftMarkdown = String(await readText(path.join(rootPath, draftSourceFile), null) || '').trim();
+    const sourceMarkdown = finalMarkdown || draftMarkdown;
+    const sourceFile = finalMarkdown ? finalSourceFile : draftMarkdown ? draftSourceFile : null;
+
+    if (!sourceMarkdown || !sourceFile) {
+      throw new Error(`No chapter text found for chapter ${chapter}. Generate or edit ${finalSourceFile} first.`);
+    }
+
+    const chapterEntry = (state.timeline.chapters || []).find((entry) => Number(entry.chapter) === chapter) || null;
+    const translation = await runAgent(rootPath, state, env, 'translator', {
+      USER_INTENT: {
+        task: 'translate_chapter',
+        chapter,
+        target_language: 'Italian',
+        notes: options.notes || '',
+        preserve_markdown: true
+      },
+      BOOK_BIBLE: state.bookBible,
+      STYLE_GUIDE: state.styleGuide,
+      OUTLINE_MEMORY: state.outlineMemory,
+      SOURCE_CHAPTER: {
+        title: chapterEntry?.title || `Chapter ${chapter}`,
+        summary: chapterEntry?.summary || '',
+        markdown: sourceMarkdown
+      }
+    }, Boolean(options.dryRun));
+
+    if (options.dryRun) {
+      return {
+        message: `Dry run ready for Italian translation of chapter ${chapter}.`,
+        activeBookId: state.activeBook.id,
+        chapter,
+        sourceFile,
+        preview: translation
+      };
+    }
+
+    const translatedMarkdown = String(translation.translated_markdown || '').trim();
+
+    if (!translatedMarkdown) {
+      throw new Error('Translator returned no translated_markdown field.');
+    }
+
+    await Promise.all([
+      writeText(path.join(rootPath, translationFile), `${translatedMarkdown}\n`),
+      writeJson(path.join(rootPath, metadataFile), {
+        chapter,
+        language: 'it',
+        translatedAt: new Date().toISOString(),
+        sourceFile,
+        translator: translation
+      })
+    ]);
+
+    return {
+      message: `Chapter ${chapter} translated to Italian.`,
+      activeBookId: state.activeBook.id,
+      chapter,
+      chapterTitle: chapterEntry?.title || `Chapter ${chapter}`,
+      files: {
+        source: sourceFile,
+        translation: translationFile,
+        metadata: metadataFile
+      }
+    };
+  });
+}
+
 async function loadState(rootPath) {
   const defaults = buildDefaultMemorySet();
   const [agentsConfig, routing, presets, agentState, seriesBundle, allSeriesBooks, seriesContinuity] = await Promise.all([
@@ -591,6 +682,8 @@ function needsRevision(critic, continuity, votes, approval) {
 
 async function persistChapter(rootPath, chapterId, payload) {
   await Promise.all([
+    fs.rm(path.join(rootPath, CHAPTERS_DIR, `chapter_${chapterId}_it.md`), { force: true }),
+    fs.rm(path.join(rootPath, CHAPTERS_DIR, `chapter_${chapterId}_translation.json`), { force: true }),
     writeJson(path.join(rootPath, CHAPTERS_DIR, `chapter_${chapterId}_plan.json`), {
       outline_snapshot: payload.outlineSnapshot,
       architect: payload.architect,
@@ -607,6 +700,41 @@ async function persistChapter(rootPath, chapterId, payload) {
     }),
     writeText(path.join(rootPath, CHAPTERS_DIR, `chapter_${chapterId}_final.md`), `${payload.finalMarkdown}\n`)
   ]);
+}
+
+async function collectTranslationStatus(rootPath, chapters = []) {
+  const translatedChapters = [];
+
+  for (const chapter of chapters) {
+    const chapterId = padChapter(chapter.chapter);
+    const translationContent = String(await readText(path.join(rootPath, CHAPTERS_DIR, `chapter_${chapterId}_it.md`), null) || '').trim();
+
+    if (!translationContent) {
+      continue;
+    }
+
+    translatedChapters.push({
+      chapter: chapter.chapter,
+      title: chapter.title || `Chapter ${chapter.chapter}`,
+      file: `${CHAPTERS_DIR}/chapter_${chapterId}_it.md`
+    });
+  }
+
+  translatedChapters.sort((left, right) => left.chapter - right.chapter);
+  const translatedIds = new Set(translatedChapters.map((chapter) => Number(chapter.chapter)));
+  const pendingChapters = chapters
+    .filter((chapter) => !translatedIds.has(Number(chapter.chapter)))
+    .map((chapter) => ({
+      chapter: chapter.chapter,
+      title: chapter.title || `Chapter ${chapter.chapter}`
+    }));
+
+  return {
+    translatedCount: translatedChapters.length,
+    pendingCount: pendingChapters.length,
+    nextPendingChapter: pendingChapters[0] || null,
+    chapters: translatedChapters.slice(-6)
+  };
 }
 
 async function updateMemory(rootPath, chapter, payload) {

@@ -1,0 +1,832 @@
+{
+  "town_name": "Mosswhistle",
+  "town_motto": "Everyone knows your secrets by lunch, but they bring pie about it.",
+  "current_date": {
+    "day": 1,
+    "season": "spring",
+    "year": 1
+  },
+  "day_index": 0,
+  "random_seed": 17,
+  "characters": {
+    "e2d2456c-b710-4edb-b8e6-e8beb4e7c177": {
+      "id": "e2d2456c-b710-4edb-b8e6-e8beb4e7c177",
+      "first_name": "Mabel",
+      "last_name": "Brine",
+      "age_years": 67,
+      "age_stage": "elder",
+      "birthday_day_of_year": 15,
+      "traits": {
+        "temperament": "glorious schemer",
+        "social_style": "gossip aunt with perfect timing",
+        "ambition": 0.65,
+        "humor": 0.84,
+        "patience": 0.86,
+        "romance_style": "flirts only by insulting hats",
+        "quirks": [
+          "names every kettle",
+          "keeps apology ribbons in pockets"
+        ],
+        "weird_habits": [
+          "predicts scandals from cloud shapes"
+        ],
+        "values": [
+          "loyalty",
+          "spectacle",
+          "soup justice"
+        ],
+        "talents": [
+          "tiny woodworking",
+          "pie diplomacy"
+        ],
+        "weaknesses": [
+          "cannot resist a terrible idea with ribbons on it",
+          "dramatic about mild inconveniences"
+        ],
+        "visual_descriptors": [
+          "silver braid",
+          "stormy eyebrows",
+          "velvet shawls"
+        ],
+        "hidden_traits": [],
+        "inherited_from": [],
+        "mutation_notes": []
+      },
+      "appearance_descriptors": [
+        "silver braid",
+        "stormy eyebrows",
+        "velvet shawls"
+      ],
+      "hobbies": [
+        "fermented pear contests",
+        "spying from balconies"
+      ],
+      "social_needs": 0.9,
+      "romance_preferences": [
+        "slow-burn devotion",
+        "witty banter"
+      ],
+      "friendship_tendency": 0.8,
+      "ambition_level": 0.65,
+      "weird_habits": [
+        "predicts scandals from cloud shapes"
+      ],
+      "family_background": "descended from five generations of dramatic caterers",
+      "home_location_id": "plaza",
+      "favorite_location_id": "plaza",
+      "family_id": "aa197639-4510-484f-800c-217d6680de25",
+      "parent_ids": [],
+      "children_ids": [],
+      "spouse_id": null,
+      "mood": "romantically overprepared",
+      "reputation": "legendary grandmother with suspiciously accurate rumors",
+      "alive": true,
+      "fertility_cooldown": 0,
+      "notable_memories": [],
+      "birth_year": -66
+    },
+    "3e589253-b3ed-4fb8-8144-d57ddc917d70": {
+      "id": "3e589253-b3ed-4fb8-8144-d57ddc917d70",
+      "first_name": "Juniper",
+      "last_name": "Brine",
+      "age_years": 29,
+      "age_stage": "adult",
+      "birthday_day_of_year": 20,
+      "traits": {
+        "temperament": "earnest tornado",
+        "social_style": "overshares warmly and then panics about it",
+        "ambition": 0.81,
+        "humor": 0.74,
+        "patience": 0.68,
+        "romance_style": "writes love notes and loses them in public",
+        "quirks": [
+          "collects pretty buttons",
+          "sobs at accordion music"
+        ],
+        "weird_habits": [
+          "renames pigeons after exes"
+        ],
+        "values": [
+          "honesty",
+          "family",
+          "adventure"
+        ],
+        "talents": [
+          "ornamental soup judging",
+          "gossip interception"
+        ],
+        "weaknesses": [
+          "chronically late to sincere moments",
+          "dramatic about mild inconveniences"
+        ],
+        "visual_descriptors": [
+          "freckled nose",
+          "apricot scarf",
+          "mismatched boots"
+        ],
+        "hidden_traits": [
+          "suspiciously serene chaos magnet"
+        ],
+        "inherited_from": [],
+        "mutation_notes": []
+      },
+      "appearance_descriptors": [
+        "freckled nose",
+        "apricot scarf",
+        "mismatched boots"
+      ],
+      "hobbies": [
+        "river sketching",
+        "cake experiments"
+      ],
+      "social_needs": 0.88,
+      "romance_preferences": [
+        "mutual weirdness",
+        "competence in emergencies"
+      ],
+      "friendship_tendency": 0.79,
+      "ambition_level": 0.81,
+      "weird_habits": [
+        "renames pigeons after exes"
+      ],
+      "family_background": "raised above a catering kitchen full of opinions",
+      "home_location_id": "cafe",
+      "favorite_location_id": "cafe",
+      "family_id": "aa197639-4510-484f-800c-217d6680de25",
+      "parent_ids": [],
+      "children_ids": [],
+      "spouse_id": null,
+      "mood": "hopeful",
+      "reputation": "beloved romantic disaster",
+      "alive": true,
+      "fertility_cooldown": 0,
+      "notable_memories": [],
+      "birth_year": -28
+    },
+    "21932e44-769a-40f4-a03e-fef9320b116c": {
+      "id": "21932e44-769a-40f4-a03e-fef9320b116c",
+      "first_name": "Orrin",
+      "last_name": "Pepperglow",
+      "age_years": 34,
+      "age_stage": "adult",
+      "birthday_day_of_year": 61,
+      "traits": {
+        "temperament": "smiling menace",
+        "social_style": "playfully competitive charmer",
+        "ambition": 0.66,
+        "humor": 0.89,
+        "patience": 0.65,
+        "romance_style": "dramatic eye contact followed by pie gifts",
+        "quirks": [
+          "wears theatrical gloves to buy turnips"
+        ],
+        "weird_habits": [
+          "practices acceptance speeches in mirrors"
+        ],
+        "values": [
+          "ambition",
+          "craft",
+          "applause"
+        ],
+        "talents": [
+          "tiny woodworking",
+          "gossip interception"
+        ],
+        "weaknesses": [
+          "jealous about applause",
+          "dramatic about mild inconveniences"
+        ],
+        "visual_descriptors": [
+          "golden curls",
+          "bright waistcoats",
+          "too many rings"
+        ],
+        "hidden_traits": [],
+        "inherited_from": [],
+        "mutation_notes": []
+      },
+      "appearance_descriptors": [
+        "golden curls",
+        "bright waistcoats",
+        "too many rings"
+      ],
+      "hobbies": [
+        "jam sculpting",
+        "festival choreography"
+      ],
+      "social_needs": 0.73,
+      "romance_preferences": [
+        "mutual weirdness",
+        "slow-burn devotion"
+      ],
+      "friendship_tendency": 0.71,
+      "ambition_level": 0.66,
+      "weird_habits": [
+        "practices acceptance speeches in mirrors"
+      ],
+      "family_background": "comes from competitive bakers with no sense of moderation",
+      "home_location_id": "market",
+      "favorite_location_id": "market",
+      "family_id": "76c08808-5271-4eb2-bb09-e4a81bdc56a4",
+      "parent_ids": [],
+      "children_ids": [],
+      "spouse_id": null,
+      "mood": "hopeful",
+      "reputation": "dangerously charming pie prince",
+      "alive": true,
+      "fertility_cooldown": 0,
+      "notable_memories": [],
+      "birth_year": -33
+    },
+    "d90a008e-aa65-4c44-9a68-7fba0b85f600": {
+      "id": "d90a008e-aa65-4c44-9a68-7fba0b85f600",
+      "first_name": "Selkie",
+      "last_name": "Fernwick",
+      "age_years": 31,
+      "age_stage": "adult",
+      "birthday_day_of_year": 1,
+      "traits": {
+        "temperament": "gentle gremlin",
+        "social_style": "soft voice, ruthless memory",
+        "ambition": 0.36,
+        "humor": 0.58,
+        "patience": 0.28,
+        "romance_style": "falls in love through shared secrets and weird snacks",
+        "quirks": [
+          "presses flowers inside tax documents"
+        ],
+        "weird_habits": [
+          "talks to moths as if they owe rent"
+        ],
+        "values": [
+          "kindness",
+          "beauty",
+          "revenge through elegance"
+        ],
+        "talents": [
+          "ornamental soup judging",
+          "tiny woodworking"
+        ],
+        "weaknesses": [
+          "jealous about applause",
+          "too proud during soup disputes"
+        ],
+        "visual_descriptors": [
+          "ink-dark curls",
+          "garden gloves",
+          "luminous dimples"
+        ],
+        "hidden_traits": [],
+        "inherited_from": [],
+        "mutation_notes": []
+      },
+      "appearance_descriptors": [
+        "ink-dark curls",
+        "garden gloves",
+        "luminous dimples"
+      ],
+      "hobbies": [
+        "midnight gardening",
+        "tiny sculpture making"
+      ],
+      "social_needs": 0.87,
+      "romance_preferences": [
+        "slow-burn devotion",
+        "grand gestures"
+      ],
+      "friendship_tendency": 0.62,
+      "ambition_level": 0.36,
+      "weird_habits": [
+        "talks to moths as if they owe rent"
+      ],
+      "family_background": "grew up in a greenhouse full of melancholy aunties",
+      "home_location_id": "garden",
+      "favorite_location_id": "garden",
+      "family_id": "31871729-e256-4020-8f99-60d0ab8ecdd8",
+      "parent_ids": [],
+      "children_ids": [],
+      "spouse_id": null,
+      "mood": "hopeful",
+      "reputation": "charming until crossed",
+      "alive": true,
+      "fertility_cooldown": 0,
+      "notable_memories": [],
+      "birth_year": -30
+    },
+    "917d67a3-4816-4086-8950-d2439e470119": {
+      "id": "917d67a3-4816-4086-8950-d2439e470119",
+      "first_name": "Crispin",
+      "last_name": "Vale",
+      "age_years": 27,
+      "age_stage": "adult",
+      "birthday_day_of_year": 17,
+      "traits": {
+        "temperament": "anxious idealist",
+        "social_style": "polite until soup is mentioned",
+        "ambition": 0.38,
+        "humor": 0.39,
+        "patience": 0.42,
+        "romance_style": "devoted, awkward, and absurdly sincere",
+        "quirks": [
+          "carries backup napkins for emotional emergencies"
+        ],
+        "weird_habits": [
+          "keeps a ranked list of spoons"
+        ],
+        "values": [
+          "fairness",
+          "craft",
+          "public decency"
+        ],
+        "talents": [
+          "ornamental soup judging",
+          "improbable charisma"
+        ],
+        "weaknesses": [
+          "dramatic about mild inconveniences",
+          "cannot resist a terrible idea with ribbons on it"
+        ],
+        "visual_descriptors": [
+          "square glasses",
+          "careful posture",
+          "ink-stained cuffs"
+        ],
+        "hidden_traits": [],
+        "inherited_from": [],
+        "mutation_notes": []
+      },
+      "appearance_descriptors": [
+        "square glasses",
+        "careful posture",
+        "ink-stained cuffs"
+      ],
+      "hobbies": [
+        "recipe archiving",
+        "budget poetry"
+      ],
+      "social_needs": 0.5,
+      "romance_preferences": [
+        "shared hobbies",
+        "competence in emergencies"
+      ],
+      "friendship_tendency": 0.46,
+      "ambition_level": 0.38,
+      "weird_habits": [
+        "keeps a ranked list of spoons"
+      ],
+      "family_background": "raised by librarians who argued about soup grammar",
+      "home_location_id": "hall",
+      "favorite_location_id": "hall",
+      "family_id": "16d636b3-6522-4867-97a6-4ace7e26b04c",
+      "parent_ids": [],
+      "children_ids": [],
+      "spouse_id": "b56a1edc-1a66-4369-9fa1-0360aed49693",
+      "mood": "romantically overprepared",
+      "reputation": "competent until provoked about broth",
+      "alive": true,
+      "fertility_cooldown": 0,
+      "notable_memories": [],
+      "birth_year": -26
+    },
+    "b56a1edc-1a66-4369-9fa1-0360aed49693": {
+      "id": "b56a1edc-1a66-4369-9fa1-0360aed49693",
+      "first_name": "Poppy",
+      "last_name": "Vale",
+      "age_years": 24,
+      "age_stage": "adult",
+      "birthday_day_of_year": 7,
+      "traits": {
+        "temperament": "sparkler in boots",
+        "social_style": "friendly chaos with excellent cheekbones",
+        "ambition": 0.68,
+        "humor": 0.52,
+        "patience": 0.26,
+        "romance_style": "reckless flirt with surprise tenderness",
+        "quirks": [
+          "wears festival ribbons year-round"
+        ],
+        "weird_habits": [
+          "declares rivalries with bakery signs"
+        ],
+        "values": [
+          "freedom",
+          "humor",
+          "dramatic entrances"
+        ],
+        "talents": [
+          "tiny woodworking",
+          "festival singing"
+        ],
+        "weaknesses": [
+          "too proud during soup disputes",
+          "easily distracted by pastries"
+        ],
+        "visual_descriptors": [
+          "copper hair",
+          "laugh lines",
+          "clattering bracelets"
+        ],
+        "hidden_traits": [],
+        "inherited_from": [],
+        "mutation_notes": []
+      },
+      "appearance_descriptors": [
+        "copper hair",
+        "laugh lines",
+        "clattering bracelets"
+      ],
+      "hobbies": [
+        "street dancing",
+        "inventing fake holidays"
+      ],
+      "social_needs": 0.79,
+      "romance_preferences": [
+        "shared hobbies",
+        "competence in emergencies"
+      ],
+      "friendship_tendency": 0.3,
+      "ambition_level": 0.68,
+      "weird_habits": [
+        "declares rivalries with bakery signs"
+      ],
+      "family_background": "youngest child in a loudly affectionate household",
+      "home_location_id": "plaza",
+      "favorite_location_id": "plaza",
+      "family_id": "16d636b3-6522-4867-97a6-4ace7e26b04c",
+      "parent_ids": [],
+      "children_ids": [],
+      "spouse_id": "917d67a3-4816-4086-8950-d2439e470119",
+      "mood": "curious",
+      "reputation": "dangerously fun cousin",
+      "alive": true,
+      "fertility_cooldown": 0,
+      "notable_memories": [],
+      "birth_year": -23
+    },
+    "136f1cb3-ee7b-42a4-aaf8-02ce59c53784": {
+      "id": "136f1cb3-ee7b-42a4-aaf8-02ce59c53784",
+      "first_name": "Bramble",
+      "last_name": "Thistle",
+      "age_years": 41,
+      "age_stage": "adult",
+      "birthday_day_of_year": 33,
+      "traits": {
+        "temperament": "melancholy comedian",
+        "social_style": "dry wit with accidental emotional honesty",
+        "ambition": 0.7,
+        "humor": 0.67,
+        "patience": 0.34,
+        "romance_style": "slow-burn devotion with panic attacks",
+        "quirks": [
+          "collects weather proverbs"
+        ],
+        "weird_habits": [
+          "hums funeral marches while baking biscuits"
+        ],
+        "values": [
+          "stability",
+          "wit",
+          "quiet heroics"
+        ],
+        "talents": [
+          "gossip interception",
+          "improbable charisma"
+        ],
+        "weaknesses": [
+          "too proud during soup disputes",
+          "chronically late to sincere moments"
+        ],
+        "visual_descriptors": [
+          "soft beard",
+          "battered hat",
+          "kind eyes"
+        ],
+        "hidden_traits": [],
+        "inherited_from": [],
+        "mutation_notes": []
+      },
+      "appearance_descriptors": [
+        "soft beard",
+        "battered hat",
+        "kind eyes"
+      ],
+      "hobbies": [
+        "repairing chairs",
+        "riverbank singing"
+      ],
+      "social_needs": 0.93,
+      "romance_preferences": [
+        "competence in emergencies",
+        "grand gestures"
+      ],
+      "friendship_tendency": 0.86,
+      "ambition_level": 0.7,
+      "weird_habits": [
+        "hums funeral marches while baking biscuits"
+      ],
+      "family_background": "old ferrymen with a knack for improbable wisdom",
+      "home_location_id": "riverbank",
+      "favorite_location_id": "riverbank",
+      "family_id": "616d419e-fa30-4673-af7e-4188d7b3ebdd",
+      "parent_ids": [],
+      "children_ids": [],
+      "spouse_id": null,
+      "mood": "hopeful",
+      "reputation": "sad clown everybody trusts",
+      "alive": true,
+      "fertility_cooldown": 0,
+      "notable_memories": [],
+      "birth_year": -40
+    },
+    "db2bbd86-fafa-4eac-9cce-4c35db71d1d7": {
+      "id": "db2bbd86-fafa-4eac-9cce-4c35db71d1d7",
+      "first_name": "Lark",
+      "last_name": "Thistle",
+      "age_years": 14,
+      "age_stage": "teen",
+      "birthday_day_of_year": 40,
+      "traits": {
+        "temperament": "tiny revolutionary",
+        "social_style": "wins arguments through charm and trapdoors",
+        "ambition": 0.81,
+        "humor": 0.91,
+        "patience": 0.76,
+        "romance_style": "currently more interested in beetles than courtship",
+        "quirks": [
+          "annotates family gossip in color"
+        ],
+        "weird_habits": [
+          "teaches crows to boo politely"
+        ],
+        "values": [
+          "curiosity",
+          "justice",
+          "funny hats"
+        ],
+        "talents": [
+          "festival singing",
+          "pie diplomacy"
+        ],
+        "weaknesses": [
+          "too proud during soup disputes",
+          "jealous about applause"
+        ],
+        "visual_descriptors": [
+          "crooked grin",
+          "grass-stained knees",
+          "hero cape"
+        ],
+        "hidden_traits": [],
+        "inherited_from": [],
+        "mutation_notes": []
+      },
+      "appearance_descriptors": [
+        "crooked grin",
+        "grass-stained knees",
+        "hero cape"
+      ],
+      "hobbies": [
+        "insect theatre",
+        "secret map making"
+      ],
+      "social_needs": 0.85,
+      "romance_preferences": [
+        "competence in emergencies",
+        "witty banter"
+      ],
+      "friendship_tendency": 0.57,
+      "ambition_level": 0.81,
+      "weird_habits": [
+        "teaches crows to boo politely"
+      ],
+      "family_background": "raised on ferryman stories and dramatic cautionary tales",
+      "home_location_id": "riverbank",
+      "favorite_location_id": "riverbank",
+      "family_id": "616d419e-fa30-4673-af7e-4188d7b3ebdd",
+      "parent_ids": [],
+      "children_ids": [],
+      "spouse_id": null,
+      "mood": "romantically overprepared",
+      "reputation": "suspiciously talented teenager",
+      "alive": true,
+      "fertility_cooldown": 0,
+      "notable_memories": [],
+      "birth_year": -13
+    }
+  },
+  "relationships": {},
+  "families": {
+    "aa197639-4510-484f-800c-217d6680de25": {
+      "id": "aa197639-4510-484f-800c-217d6680de25",
+      "surname": "Brine",
+      "member_ids": [
+        "e2d2456c-b710-4edb-b8e6-e8beb4e7c177",
+        "3e589253-b3ed-4fb8-8144-d57ddc917d70"
+      ],
+      "founder_ids": [
+        "e2d2456c-b710-4edb-b8e6-e8beb4e7c177",
+        "3e589253-b3ed-4fb8-8144-d57ddc917d70"
+      ],
+      "traditions": [
+        "The Festival of Convenient Coincidences",
+        "The Great Soup Verdict"
+      ],
+      "legendary_hook": "The Brine lineage keeps producing suspiciously gifted children and one excellent accordion player.",
+      "scandals": [],
+      "home_location_id": "market"
+    },
+    "76c08808-5271-4eb2-bb09-e4a81bdc56a4": {
+      "id": "76c08808-5271-4eb2-bb09-e4a81bdc56a4",
+      "surname": "Pepperglow",
+      "member_ids": [
+        "21932e44-769a-40f4-a03e-fef9320b116c"
+      ],
+      "founder_ids": [
+        "21932e44-769a-40f4-a03e-fef9320b116c"
+      ],
+      "traditions": [
+        "The Great Soup Verdict",
+        "Moonlight Apology Week"
+      ],
+      "legendary_hook": "Nobody can prove it, but the Pepperglow family has won every major soup dispute since year three.",
+      "scandals": [],
+      "home_location_id": "hall"
+    },
+    "31871729-e256-4020-8f99-60d0ab8ecdd8": {
+      "id": "31871729-e256-4020-8f99-60d0ab8ecdd8",
+      "surname": "Fernwick",
+      "member_ids": [
+        "d90a008e-aa65-4c44-9a68-7fba0b85f600"
+      ],
+      "founder_ids": [
+        "d90a008e-aa65-4c44-9a68-7fba0b85f600"
+      ],
+      "traditions": [
+        "Moonlight Apology Week",
+        "The Spring Umbrella Parade"
+      ],
+      "legendary_hook": "The Fernwick family is rumored to settle arguments with desserts and thunderous eye contact.",
+      "scandals": [],
+      "home_location_id": "cafe"
+    },
+    "16d636b3-6522-4867-97a6-4ace7e26b04c": {
+      "id": "16d636b3-6522-4867-97a6-4ace7e26b04c",
+      "surname": "Vale",
+      "member_ids": [
+        "917d67a3-4816-4086-8950-d2439e470119",
+        "b56a1edc-1a66-4369-9fa1-0360aed49693"
+      ],
+      "founder_ids": [
+        "917d67a3-4816-4086-8950-d2439e470119",
+        "b56a1edc-1a66-4369-9fa1-0360aed49693"
+      ],
+      "traditions": [
+        "The Festival of Convenient Coincidences",
+        "Moonlight Apology Week"
+      ],
+      "legendary_hook": "The Vale lineage keeps producing suspiciously gifted children and one excellent accordion player.",
+      "scandals": [],
+      "home_location_id": "market"
+    },
+    "616d419e-fa30-4673-af7e-4188d7b3ebdd": {
+      "id": "616d419e-fa30-4673-af7e-4188d7b3ebdd",
+      "surname": "Thistle",
+      "member_ids": [
+        "136f1cb3-ee7b-42a4-aaf8-02ce59c53784",
+        "db2bbd86-fafa-4eac-9cce-4c35db71d1d7"
+      ],
+      "founder_ids": [
+        "136f1cb3-ee7b-42a4-aaf8-02ce59c53784"
+      ],
+      "traditions": [
+        "Moonlight Apology Week",
+        "The Festival of Convenient Coincidences"
+      ],
+      "legendary_hook": "Nobody can prove it, but the Thistle family has won every major soup dispute since year three.",
+      "scandals": [],
+      "home_location_id": "riverbank"
+    }
+  },
+  "locations": {
+    "plaza": {
+      "id": "plaza",
+      "name": "Clocktower Plaza",
+      "kind": "plaza",
+      "description": "The town square where gossip arrives before the pigeons do.",
+      "mood": "noisy and theatrical",
+      "gossip_bonus": 0.85,
+      "romance_bonus": 0.2,
+      "drama_bonus": 0.75,
+      "child_friendliness": 0.55,
+      "seasonal_events": [
+        "umbrella parade",
+        "snow choir"
+      ],
+      "traditions": [
+        "public apologies",
+        "dramatic announcements"
+      ]
+    },
+    "cafe": {
+      "id": "cafe",
+      "name": "Sigh & Sip Tea House",
+      "kind": "cafe",
+      "description": "A velvet tea room where confessions happen over cinnamon foam.",
+      "mood": "romantic and overcaffeinated",
+      "gossip_bonus": 0.65,
+      "romance_bonus": 0.78,
+      "drama_bonus": 0.42,
+      "child_friendliness": 0.18,
+      "seasonal_events": [
+        "poetry fog night"
+      ],
+      "traditions": [
+        "breakup scones",
+        "secret note saucers"
+      ]
+    },
+    "market": {
+      "id": "market",
+      "name": "Turnip Jubilee Market",
+      "kind": "market",
+      "description": "A market where vegetables are sold, judged, and occasionally applauded.",
+      "mood": "friendly chaos",
+      "gossip_bonus": 0.72,
+      "romance_bonus": 0.12,
+      "drama_bonus": 0.58,
+      "child_friendliness": 0.5,
+      "seasonal_events": [
+        "pie riots",
+        "lantern carrot auction"
+      ],
+      "traditions": [
+        "complimenting produce",
+        "passive-aggressive jam contests"
+      ]
+    },
+    "garden": {
+      "id": "garden",
+      "name": "Whisper Fern Garden",
+      "kind": "garden",
+      "description": "A moonlit garden where people practice forgiveness and suspiciously elegant flirting.",
+      "mood": "soft, fragrant, and a little haunted",
+      "gossip_bonus": 0.28,
+      "romance_bonus": 0.88,
+      "drama_bonus": 0.33,
+      "child_friendliness": 0.61,
+      "seasonal_events": [
+        "petal vows",
+        "moth lantern courtship"
+      ],
+      "traditions": [
+        "apology bouquets",
+        "secret bench proposals"
+      ]
+    },
+    "hall": {
+      "id": "hall",
+      "name": "Town Hall of Mildly Alarming Decisions",
+      "kind": "hall",
+      "description": "Where committees meet and somehow always invent new formal hats.",
+      "mood": "bureaucratic absurdity",
+      "gossip_bonus": 0.44,
+      "romance_bonus": 0.08,
+      "drama_bonus": 0.67,
+      "child_friendliness": 0.2,
+      "seasonal_events": [
+        "election of ceremonial spoon keeper"
+      ],
+      "traditions": [
+        "grandmother speeches",
+        "public soup rulings"
+      ]
+    },
+    "riverbank": {
+      "id": "riverbank",
+      "name": "Moonbucket Riverbank",
+      "kind": "riverbank",
+      "description": "A dreamy bank with fireflies, reeds, and at least one dramatic confession per week.",
+      "mood": "tender, muddy, and cinematic",
+      "gossip_bonus": 0.21,
+      "romance_bonus": 0.81,
+      "drama_bonus": 0.47,
+      "child_friendliness": 0.48,
+      "seasonal_events": [
+        "lantern float",
+        "forgiveness skipping stones"
+      ],
+      "traditions": [
+        "first kiss dares",
+        "sad accordion solos"
+      ]
+    }
+  },
+  "events": [],
+  "year_summaries": [],
+  "memory_records": [],
+  "active_story_hooks": [
+    "Somebody is definitely lying about the lucky spoon.",
+    "At least one resident is hiding a spectacular crush behind civic paperwork."
+  ],
+  "last_yearly_recap": ""
+}

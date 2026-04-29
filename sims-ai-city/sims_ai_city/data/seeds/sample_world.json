@@ -1,0 +1,97 @@
+{
+  "town_name": "Mosswhistle",
+  "town_motto": "Everyone knows your secrets by lunch, but they bring pie about it.",
+  "traditions": [
+    "The Spring Umbrella Parade",
+    "The Great Soup Verdict",
+    "Moonlight Apology Week",
+    "The Festival of Convenient Coincidences"
+  ],
+  "incidents": [
+    "a rumor about a haunted casserole dish escapes into the market",
+    "the mayor's goose steals someone's bouquet again",
+    "a toddler wins an accordion duel by accident",
+    "a suspiciously perfect pie sparks allegations of sorcery",
+    "three cousins claim ownership of the same lucky spoon"
+  ],
+  "locations": [
+    {
+      "id": "plaza",
+      "name": "Clocktower Plaza",
+      "kind": "plaza",
+      "description": "The town square where gossip arrives before the pigeons do.",
+      "mood": "noisy and theatrical",
+      "gossip_bonus": 0.85,
+      "romance_bonus": 0.20,
+      "drama_bonus": 0.75,
+      "child_friendliness": 0.55,
+      "seasonal_events": ["umbrella parade", "snow choir"],
+      "traditions": ["public apologies", "dramatic announcements"]
+    },
+    {
+      "id": "cafe",
+      "name": "Sigh & Sip Tea House",
+      "kind": "cafe",
+      "description": "A velvet tea room where confessions happen over cinnamon foam.",
+      "mood": "romantic and overcaffeinated",
+      "gossip_bonus": 0.65,
+      "romance_bonus": 0.78,
+      "drama_bonus": 0.42,
+      "child_friendliness": 0.18,
+      "seasonal_events": ["poetry fog night"],
+      "traditions": ["breakup scones", "secret note saucers"]
+    },
+    {
+      "id": "market",
+      "name": "Turnip Jubilee Market",
+      "kind": "market",
+      "description": "A market where vegetables are sold, judged, and occasionally applauded.",
+      "mood": "friendly chaos",
+      "gossip_bonus": 0.72,
+      "romance_bonus": 0.12,
+      "drama_bonus": 0.58,
+      "child_friendliness": 0.50,
+      "seasonal_events": ["pie riots", "lantern carrot auction"],
+      "traditions": ["complimenting produce", "passive-aggressive jam contests"]
+    },
+    {
+      "id": "garden",
+      "name": "Whisper Fern Garden",
+      "kind": "garden",
+      "description": "A moonlit garden where people practice forgiveness and suspiciously elegant flirting.",
+      "mood": "soft, fragrant, and a little haunted",
+      "gossip_bonus": 0.28,
+      "romance_bonus": 0.88,
+      "drama_bonus": 0.33,
+      "child_friendliness": 0.61,
+      "seasonal_events": ["petal vows", "moth lantern courtship"],
+      "traditions": ["apology bouquets", "secret bench proposals"]
+    },
+    {
+      "id": "hall",
+      "name": "Town Hall of Mildly Alarming Decisions",
+      "kind": "hall",
+      "description": "Where committees meet and somehow always invent new formal hats.",
+      "mood": "bureaucratic absurdity",
+      "gossip_bonus": 0.44,
+      "romance_bonus": 0.08,
+      "drama_bonus": 0.67,
+      "child_friendliness": 0.20,
+      "seasonal_events": ["election of ceremonial spoon keeper"],
+      "traditions": ["grandmother speeches", "public soup rulings"]
+    },
+    {
+      "id": "riverbank",
+      "name": "Moonbucket Riverbank",
+      "kind": "riverbank",
+      "description": "A dreamy bank with fireflies, reeds, and at least one dramatic confession per week.",
+      "mood": "tender, muddy, and cinematic",
+      "gossip_bonus": 0.21,
+      "romance_bonus": 0.81,
+      "drama_bonus": 0.47,
+      "child_friendliness": 0.48,
+      "seasonal_events": ["lantern float", "forgiveness skipping stones"],
+      "traditions": ["first kiss dares", "sad accordion solos"]
+    }
+  ]
+}

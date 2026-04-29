@@ -12,7 +12,8 @@ import {
   getStatus,
   initBook,
   selectBook,
-  setBehavior
+  setBehavior,
+  translateChapter
 } from './lib/workflow.js';
 
 async function main() {
@@ -58,6 +59,11 @@ async function main() {
         return generateBook(rootPath, options);
       }
 
+      case 'translate': {
+        const options = parseFlags(rest);
+        return translateChapter(rootPath, options);
+      }
+
       case 'set': {
         const [agentName, key, rawValue] = rest;
         if (!agentName || !key || rawValue === undefined) {
@@ -97,7 +103,7 @@ async function main() {
 
       default:
         return {
-          message: 'Available commands: init-book, new-book, use-book, generate, generate-book, export, set, preset, status, serve-ui, auto.'
+          message: 'Available commands: init-book, new-book, use-book, generate, generate-book, translate, export, set, preset, status, serve-ui, auto.'
         };
     }
   });

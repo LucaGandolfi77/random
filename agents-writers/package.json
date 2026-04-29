@@ -11,6 +11,7 @@
     "use-book": "node src/index.js use-book",
     "generate": "node src/index.js generate",
     "generate-book": "node src/index.js generate-book",
+    "translate": "node src/index.js translate",
     "export": "node src/index.js export",
     "set": "node src/index.js set",
     "preset": "node src/index.js preset",

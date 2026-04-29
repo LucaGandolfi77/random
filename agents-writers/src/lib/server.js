@@ -4,7 +4,7 @@ import { URL } from 'node:url';
 
 import { withActionLog } from './action-log.js';
 import { exportBundle } from './exporter.js';
-import { applyPreset, createBook, generateBook, generateChapter, getStatus, initBook, selectBook, setBehavior } from './workflow.js';
+import { applyPreset, createBook, generateBook, generateChapter, getStatus, initBook, selectBook, setBehavior, translateChapter } from './workflow.js';
 import { readText, setEnvVariable } from './utils.js';
 
 const MIME_TYPES = {
@@ -90,6 +90,10 @@ async function handleApi(rootPath, request, response, url) {
 
       if (method === 'POST' && url.pathname === '/api/generate-book') {
         return generateBook(rootPath, body);
+      }
+
+      if (method === 'POST' && url.pathname === '/api/translate') {
+        return translateChapter(rootPath, body);
       }
 
       if (method === 'POST' && url.pathname === '/api/export') {

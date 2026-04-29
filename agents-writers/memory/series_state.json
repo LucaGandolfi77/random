@@ -1,5 +1,5 @@
 {
-  "activeBookId": "book-06",
+  "activeBookId": "book-07",
   "series": {
     "title": "Untitled Series",
     "description": "A shelf of interconnected book projects managed by the writer room."
@@ -142,6 +142,29 @@
       },
       "createdAt": "2026-04-28T20:55:29.801Z",
       "updatedAt": "2026-04-28T20:55:29.809Z"
+    },
+    {
+      "id": "book-07",
+      "title": "Book 07",
+      "slug": "book-07",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
+      "themes": [
+        "grief",
+        "ambition",
+        "memory"
+      ],
+      "exportBaseName": "book-07",
+      "cover": {
+        "title": "Book 07",
+        "subtitle": "",
+        "author": "OpenRouter Book Agents",
+        "tagline": "A group of rival agents write a book while trying to outmaneuver each other.",
+        "color": "#7c9cff"
+      },
+      "createdAt": "2026-04-29T10:12:23.049Z",
+      "updatedAt": "2026-04-29T10:12:23.058Z"
     }
   ]
 }

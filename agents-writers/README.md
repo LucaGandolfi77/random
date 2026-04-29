@@ -14,6 +14,7 @@ A small Node.js starter for a multi-agent book-writing workflow using OpenRouter
 - Tracks chapter-to-chapter outline memory and arc targets
 - Tracks per-arc success, momentum, and decay metrics
 - Runs an agent vote before a chapter is accepted into canon
+- Adds a dedicated translator agent that can render the current final chapter into Italian one chapter at a time
 - Exports the manuscript as a Markdown bundle and EPUB file
 - Stores multiple books in one series instead of only one global manuscript state
 - Can boot into an `auto` mode with the standard default setup on port `4174`
@@ -61,6 +62,14 @@ Generate several chapters automatically:
 ```bash
 npm run generate-book -- --count 3 --idea "The orchard starts speaking through reflected weather."
 ```
+
+Translate one finished chapter into Italian:
+
+```bash
+npm run translate -- --chapter 1
+```
+
+This writes the translated chapter to `chapters/chapter_01_it.md` and stores the translator response metadata in `chapters/chapter_01_translation.json`.
 
 Change one behavior value:
 
@@ -122,6 +131,7 @@ This reuses port `4174` if the UI is already running there, otherwise it starts 
 - [src/lib/workflow.js](src/lib/workflow.js)
 - [src/lib/server.js](src/lib/server.js)
 - [public/index.html](public/index.html)
+- [prompts/translator.txt](prompts/translator.txt)
 
 ## Notes
 
@@ -130,3 +140,4 @@ This reuses port `4174` if the UI is already running there, otherwise it starts 
 - The workflow currently does a small revision loop when the critic rejects a chapter or continuity fails.
 - Approval now includes a multi-agent vote with configurable thresholds in [config/routing.json](config/routing.json).
 - The UI is zero-dependency and talks to the same workflow functions as the CLI.
+- Regenerating a chapter invalidates any older Italian translation for that same chapter so the translated file cannot silently drift out of sync.

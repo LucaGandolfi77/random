@@ -15,6 +15,7 @@
           <p class="lede">Tune the writer room, trigger chapters, and let rival agents fight over the manuscript.</p>
         </div>
         <div class="hero-actions">
+          <button id="openQuickstart" class="secondary" type="button">How to run</button>
           <button id="refreshStatus">Refresh</button>
           <span id="statusBadge" class="badge">idle</span>
         </div>
@@ -138,11 +139,77 @@
         </div>
       </section>
 
+      <section class="panel grid two">
+        <div>
+          <div class="panel-head">
+            <h2>Translate one chapter to Italian</h2>
+            <p>Uses the translator agent on the current final chapter and writes a separate Italian Markdown file.</p>
+          </div>
+          <form id="translateForm" class="stack compact-form">
+            <label>Chapter <input name="chapter" type="number" min="1" value="1" /></label>
+            <label>Translator notes <textarea name="notes" rows="4" placeholder="Optional glossary choices, register, or localization constraints."></textarea></label>
+            <button type="submit">Translate chapter</button>
+          </form>
+        </div>
+        <div>
+          <div class="panel-head">
+            <h2>Italian translation status</h2>
+            <p>Each translation is stored beside the English final chapter.</p>
+          </div>
+          <div id="translationSummary" class="summary"></div>
+        </div>
+      </section>
+
       <section class="panel">
         <div class="panel-head">
           <h2>Activity</h2>
         </div>
         <pre id="activityLog" class="log"></pre>
+      </section>
+    </div>
+
+    <div id="quickstartModal" class="modal-backdrop" hidden aria-hidden="true">
+      <section id="quickstartDialog" class="modal guide-modal" role="dialog" aria-modal="true" aria-labelledby="quickstartTitle">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Quickstart Guide</p>
+            <h2 id="quickstartTitle">How to run Book Agents Lab</h2>
+            <p id="quickstartEnvironmentSummary" class="meta">Checking your local setup...</p>
+          </div>
+          <div class="modal-header-actions">
+            <button id="toggleQuickstartMinimize" class="secondary modal-close" type="button">Minimize</button>
+            <button id="closeQuickstart" class="secondary modal-close" type="button">Close</button>
+          </div>
+        </div>
+
+        <div class="guide-layout">
+          <nav class="guide-progress" aria-label="Quickstart progress">
+            <p id="quickstartProgressMeta" class="meta guide-progress-meta">Loading guide progress...</p>
+            <div id="quickstartSteps" class="guide-progress-list"></div>
+          </nav>
+
+          <div class="guide-stage">
+            <p id="quickstartStepEyebrow" class="eyebrow">Step 1</p>
+            <div class="guide-status-row">
+              <h3 id="quickstartStepTitle">Preparing guide…</h3>
+              <span id="quickstartStepStatus" class="guide-status-badge" data-tone="pending">pending</span>
+            </div>
+            <p id="quickstartStepDescription" class="meta">Checking what is already configured and what still blocks generation.</p>
+            <p id="quickstartStepTarget" class="guide-target"></p>
+            <pre id="quickstartStepCode" class="guide-code" hidden></pre>
+
+            <div class="guide-toolbar">
+              <button id="focusQuickstartTarget" class="secondary" type="button">Highlight area</button>
+              <button id="copyQuickstartCode" class="secondary" type="button">Copy command</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button id="quickstartPrev" class="secondary" type="button">Previous</button>
+          <button id="quickstartNext" type="button">Next step</button>
+          <button id="dismissQuickstart" class="secondary" type="button">Close guide</button>
+        </div>
       </section>
     </div>
 

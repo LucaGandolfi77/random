@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Signal Check icon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#12242a" />
+      <stop offset="100%" stop-color="#0d8d87" />
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#bbdb4f" />
+      <stop offset="100%" stop-color="#f0cb6a" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="url(#bg)" />
+  <circle cx="256" cy="256" r="156" fill="none" stroke="url(#ring)" stroke-width="34" stroke-dasharray="22 20" />
+  <rect x="198" y="112" width="116" height="192" rx="58" fill="#fff7ea" />
+  <rect x="178" y="293" width="156" height="30" rx="15" fill="#fff7ea" />
+  <path d="M152 245c0 58 46 104 104 104s104-46 104-104" fill="none" stroke="#fff7ea" stroke-linecap="round" stroke-width="28" />
+  <path d="M236 366h40v46h68c13 0 23 10 23 23v3H145v-3c0-13 10-23 23-23h68z" fill="#ff6f4d" />
+  <path d="M327 173l22 22-89 89-43 4 4-43z" fill="#bbdb4f" />
+  <path d="M213 291l31-3-28-28z" fill="#0d6376" />
+</svg>

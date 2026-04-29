@@ -1,0 +1,26 @@
+{
+  "name": "Signal Check",
+  "short_name": "SignalCheck",
+  "description": "PWA that listens to speech, transcribes it in the browser, and asks OpenRouter free models for extra context and fact-checking.",
+  "lang": "en",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f4efe3",
+  "theme_color": "#12242a",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

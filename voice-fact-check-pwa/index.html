@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signal Check</title>
+  <meta name="description" content="Installable PWA that keeps listening to speech, transcribes it in the browser, and asks OpenRouter free models for context and fact-checking.">
+  <meta name="theme-color" content="#12242a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="background-grid" aria-hidden="true"></div>
+  <div class="background-blob blob-a" aria-hidden="true"></div>
+  <div class="background-blob blob-b" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand-block">
+      <p class="kicker">Continuous Transcript + Fact Check</p>
+      <h1>Signal Check</h1>
+      <p class="deck">Keep the browser listening, transcribe speech on-device, and send only the transcript to an OpenRouter <span>:free</span> model for extra context and reality checks.</p>
+    </div>
+
+    <div class="topbar-actions">
+      <button id="installButton" class="ghost-button" type="button" hidden>Install app</button>
+      <a class="ghost-link" href="#settingsPanel">Settings</a>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel panel-hero" aria-labelledby="captureTitle">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Live Capture</p>
+          <h2 id="captureTitle">Listen continuously</h2>
+        </div>
+
+        <div class="status-row" aria-label="Application status badges">
+          <span id="micSupportBadge" class="pill">Mic support</span>
+          <span id="onlineBadge" class="pill">Network</span>
+          <span id="modelBadge" class="pill">Model</span>
+        </div>
+      </div>
+
+      <div class="control-strip">
+        <button id="startButton" class="primary-button" type="button">Start listening</button>
+        <button id="stopButton" class="secondary-button" type="button">Stop</button>
+        <button id="analyzeButton" class="ghost-button" type="button">Analyze now</button>
+        <button id="clearButton" class="ghost-button" type="button">Clear session</button>
+      </div>
+
+      <div class="status-banner" aria-live="polite">
+        <div id="signalDot" class="signal-dot" data-state="idle"></div>
+        <div>
+          <p class="status-label">Status</p>
+          <p id="statusText" class="status-text">Idle. Press Start listening to request microphone access.</p>
+        </div>
+      </div>
+
+      <div class="listen-grid">
+        <article class="inset-card current-hearing">
+          <div class="subheading">
+            <div>
+              <p class="eyebrow">Transcript Stream</p>
+              <h3>What the app hears</h3>
+            </div>
+            <span id="segmentCount" class="counter-chip">0 segments</span>
+          </div>
+
+          <div id="transcriptFeed" class="transcript-feed"></div>
+          <p id="transcriptEmpty" class="empty-state">Nothing captured yet. Start the microphone and speak near the device.</p>
+
+          <div id="interimBox" class="interim-box" hidden>
+            <span class="interim-label">Listening now</span>
+            <p id="interimText"></p>
+          </div>
+        </article>
+
+        <article class="inset-card workflow-card">
+          <div class="subheading tight">
+            <div>
+              <p class="eyebrow">Privacy Model</p>
+              <h3>Text leaves the device, not raw audio</h3>
+            </div>
+          </div>
+
+          <p class="support-copy">Speech recognition happens in the browser. When analysis runs, the app sends a recent transcript window to OpenRouter and asks for added context plus a cautious fact-check.</p>
+
+          <ul class="bullet-list">
+            <li>Works best in recent Chrome or Edge over HTTPS or localhost.</li>
+            <li>Continuous capture can still pause if the browser or OS suspends the app in the background.</li>
+            <li>OpenRouter free models are convenient, but latency and factual accuracy vary by model.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <aside class="side-stack">
+      <section class="panel" id="settingsPanel" aria-labelledby="settingsTitle">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">OpenRouter</p>
+            <h2 id="settingsTitle">Runtime settings</h2>
+          </div>
+        </div>
+
+        <form id="settingsForm" class="settings-form" autocomplete="off">
+          <label class="field">
+            <span>OpenRouter API key</span>
+            <input id="apiKeyInput" name="apiKey" type="password" placeholder="sk-or-v1-..." inputmode="text" spellcheck="false">
+          </label>
+
+          <div class="field-row">
+            <label class="field grow">
+              <span>Free model id</span>
+              <input id="modelInput" name="modelId" type="text" list="modelSuggestions" placeholder="google/gemma-3-27b-it:free" spellcheck="false">
+            </label>
+
+            <button id="refreshModelsButton" class="ghost-button slim-button" type="button">Load free models</button>
+          </div>
+
+          <datalist id="modelSuggestions"></datalist>
+
+          <div class="field-row compact-row">
+            <label class="field">
+              <span>Speech language</span>
+              <select id="languageSelect" name="language">
+                <option value="en-US">English (US)</option>
+                <option value="en-GB">English (UK)</option>
+                <option value="it-IT">Italiano</option>
+                <option value="es-ES">Español</option>
+                <option value="fr-FR">Français</option>
+                <option value="de-DE">Deutsch</option>
+              </select>
+            </label>
+
+            <label class="toggle-field" for="autoAnalyzeInput">
+              <input id="autoAnalyzeInput" name="autoAnalyze" type="checkbox">
+              <span>Auto-analyze when the speaker pauses</span>
+            </label>
+          </div>
+        </form>
+
+        <p id="settingsHint" class="hint-text">The API key is stored locally in this browser only.</p>
+      </section>
+
+      <section class="panel analysis-panel" aria-labelledby="analysisTitle">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Latest Pass</p>
+            <h2 id="analysisTitle">Context and fact check</h2>
+          </div>
+          <span id="analysisStateBadge" class="pill pill-accent">Waiting</span>
+        </div>
+
+        <div id="analysisEmpty" class="empty-state empty-state-strong">No analysis yet. Speak for a few seconds, then let the app pause or press Analyze now.</div>
+
+        <div id="analysisContent" class="analysis-content" hidden>
+          <article class="analysis-card">
+            <p class="mini-label">Heard summary</p>
+            <p id="summaryText" class="summary-text"></p>
+          </article>
+
+          <article class="analysis-card">
+            <div class="subheading tight">
+              <p class="mini-label">Reliability</p>
+              <span id="reliabilityBadge" class="badge-pill">Medium</span>
+            </div>
+            <p id="notesText" class="notes-text"></p>
+          </article>
+
+          <article class="analysis-card">
+            <div class="subheading tight">
+              <p class="mini-label">Fact checks</p>
+            </div>
+            <div id="factCheckList" class="stack-list"></div>
+          </article>
+
+          <article class="analysis-card">
+            <div class="subheading tight">
+              <p class="mini-label">Extra context</p>
+            </div>
+            <ul id="extraContextList" class="stack-list list-reset"></ul>
+          </article>
+
+          <article class="analysis-card">
+            <div class="subheading tight">
+              <p class="mini-label">Follow-up prompts</p>
+            </div>
+            <ul id="followUpList" class="stack-list list-reset"></ul>
+          </article>
+
+          <article class="analysis-card">
+            <div class="subheading tight">
+              <p class="mini-label">Recent runs</p>
+            </div>
+            <div id="historyList" class="history-list"></div>
+          </article>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <p>Installable PWA shell with offline static assets. Live model analysis still needs a network connection.</p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

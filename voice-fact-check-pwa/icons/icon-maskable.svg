@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Signal Check maskable icon">
+  <rect width="512" height="512" fill="#12242a" />
+  <circle cx="256" cy="256" r="190" fill="#0d8d87" />
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#bbdb4f" stroke-width="30" stroke-dasharray="24 18" />
+  <rect x="198" y="126" width="116" height="182" rx="58" fill="#fff7ea" />
+  <path d="M156 245c0 55 45 100 100 100s100-45 100-100" fill="none" stroke="#fff7ea" stroke-linecap="round" stroke-width="26" />
+  <rect x="240" y="342" width="32" height="46" rx="16" fill="#fff7ea" />
+  <rect x="178" y="388" width="156" height="34" rx="17" fill="#ff6f4d" />
+  <path d="M326 179l20 20-86 86-40 4 4-40z" fill="#bbdb4f" />
+</svg>

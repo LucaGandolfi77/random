@@ -1,0 +1,512 @@
+{
+  "appName": "Unstable Imaginary Countries Generator",
+  "exportedAt": "2026-04-29T09:10:36.624Z",
+  "sessionId": "fae90c2c-5317-4675-b764-f08abb109438",
+  "meta": {
+    "createdAt": "2026-04-29T09:10:36.586Z",
+    "updatedAt": "2026-04-29T09:10:36.612Z",
+    "storageMode": "json-files"
+  },
+  "country": {
+    "id": "veloria",
+    "name": "Republic of Veloria",
+    "capital": "Port Azure",
+    "politicalSystem": "Presidential republic under rolling emergency powers",
+    "description": "A coastal transit state where gas wealth, patronage networks, and a restless conscript army pull politics in opposite directions.",
+    "tagline": "Ports, pipelines, and a brittle executive center.",
+    "flag": {
+      "orientation": "horizontal",
+      "colors": [
+        "#0c4458",
+        "#e8d3a8",
+        "#b5433d"
+      ]
+    },
+    "resources": [
+      "Offshore gas",
+      "Rare-earth logistics",
+      "Deep-water shipping"
+    ],
+    "socialTensions": [
+      "Regional inequality",
+      "Youth unemployment",
+      "Security force rivalry"
+    ],
+    "mediaFreedom": 34,
+    "foreignInfluence": 62
+  },
+  "settings": {
+    "model": "baidu/qianfan-ocr-fast:free",
+    "useMock": true,
+    "maxTurns": 12
+  },
+  "status": {
+    "ended": false,
+    "outcome": null
+  },
+  "actorProfiles": {
+    "government": {
+      "ideology": "order-first siege statism wrapped in patriotic necessity",
+      "constituency": [
+        "presidential loyalists",
+        "security ministries",
+        "state media managers",
+        "urban patronage brokers"
+      ],
+      "sacredValues": [
+        "continuity of rule",
+        "sovereignty",
+        "visible order"
+      ],
+      "redLines": [
+        "army fragmentation",
+        "foreign humiliation",
+        "leader appearing weak"
+      ],
+      "preferredLevers": [
+        "narrative control",
+        "coercive signaling",
+        "selective concessions",
+        "elite bargaining"
+      ],
+      "narrativeStyle": "executive certainty, paternal nationalism, clipped technocratic confidence",
+      "longGame": "Keep the capital and the officer corps aligned long enough to outlast unrest driven by Regional inequality.",
+      "contradiction": "Needs legitimacy but keeps relying on instruments that deepen anger around Youth unemployment.",
+      "currentPosture": "defensive and suspicious"
+    },
+    "opposition": {
+      "ideology": "anti-corruption civic populism with coalition instincts",
+      "constituency": [
+        "students",
+        "disaffected professionals",
+        "labor organizers",
+        "excluded elites"
+      ],
+      "sacredValues": [
+        "dignity",
+        "fair representation",
+        "public accountability"
+      ],
+      "redLines": [
+        "looking like a foreign puppet",
+        "random violence without political gain",
+        "elite deals that demobilize supporters"
+      ],
+      "preferredLevers": [
+        "scandal exposure",
+        "protest choreography",
+        "elite splitting",
+        "election pressure"
+      ],
+      "narrativeStyle": "moral indictment, constitutional language, wounded civic pride",
+      "longGame": "Reframe Regional inequality as proof that the current order has broken the social contract.",
+      "contradiction": "Needs mass pressure and elite reassurance at the same time, especially while Youth unemployment remains unresolved.",
+      "currentPosture": "organizing for a broader opening"
+    },
+    "lobby_groups": {
+      "ideology": "transnational rent protection with local political brokerage",
+      "constituency": [
+        "extractive elites",
+        "import cartels",
+        "well-connected fixers",
+        "security-linked businesses"
+      ],
+      "sacredValues": [
+        "access",
+        "contract continuity",
+        "capital preservation"
+      ],
+      "redLines": [
+        "nationalization",
+        "chaotic collapse",
+        "sanctions that freeze channels"
+      ],
+      "preferredLevers": [
+        "price shocks",
+        "liquidity pressure",
+        "quiet bargains",
+        "patronage financing"
+      ],
+      "narrativeStyle": "transactional realism, boardroom understatement, veiled threats",
+      "longGame": "Keep Offshore gas profitable regardless of who occupies the ministries.",
+      "contradiction": "Fears collapse but often intensifies it when protecting margins under Rare-earth logistics.",
+      "currentPosture": "quietly consolidating influence"
+    },
+    "citizens": {
+      "ideology": "municipal mutualism that wants safety without surrendering dignity",
+      "constituency": [
+        "households",
+        "workers",
+        "street vendors",
+        "neighborhood committees"
+      ],
+      "sacredValues": [
+        "food security",
+        "personal dignity",
+        "community safety"
+      ],
+      "redLines": [
+        "disappearances",
+        "unpayable prices",
+        "public humiliation by authorities"
+      ],
+      "preferredLevers": [
+        "strikes",
+        "mutual aid",
+        "street mobilization",
+        "local self-organization"
+      ],
+      "narrativeStyle": "plainspoken anger, survival logic, collective dignity",
+      "longGame": "Force elites to treat Regional inequality as a lived emergency rather than a slogan.",
+      "contradiction": "People want order and revolt at once when daily life keeps deteriorating around Youth unemployment.",
+      "currentPosture": "restless and watchful"
+    },
+    "foreign_media": {
+      "ideology": "rights-first international crisis framing",
+      "constituency": [
+        "foreign correspondents",
+        "editorial boards",
+        "policy audiences",
+        "market watchers"
+      ],
+      "sacredValues": [
+        "credibility",
+        "narrative clarity",
+        "audience attention"
+      ],
+      "redLines": [
+        "being manipulated by propaganda",
+        "covering a crisis nobody can explain",
+        "missing a decisive rupture"
+      ],
+      "preferredLevers": [
+        "framing abuses",
+        "spotlighting dissent",
+        "market signals",
+        "sanctions discourse"
+      ],
+      "narrativeStyle": "compressed moral framing mixed with geopolitical shorthand",
+      "longGame": "Turn instability around Offshore gas and Regional inequality into a legible international storyline.",
+      "contradiction": "Needs spectacle for attention but loses interest when crises become structurally complex instead of cinematic.",
+      "currentPosture": "searching for a decisive frame"
+    }
+  },
+  "currentState": {
+    "turn": 1,
+    "stability": 52,
+    "protestIntensity": 41,
+    "propagandaIntensity": 53,
+    "coupRisk": 27,
+    "corruption": 59,
+    "inflation": 48,
+    "treasuryPressure": 38,
+    "internationalPressure": 31,
+    "publicTrust": 46,
+    "militaryLoyalty": 62,
+    "regimeLegitimacy": 48,
+    "regions": [
+      {
+        "slot": "north",
+        "name": "Namar Delta",
+        "resource": "Gas terminals",
+        "unrest": 39,
+        "foreignPressure": 44,
+        "repression": 32,
+        "separatistPressure": 16
+      },
+      {
+        "slot": "west",
+        "name": "Red Basin",
+        "resource": "Copper smelters",
+        "unrest": 54,
+        "foreignPressure": 23,
+        "repression": 47,
+        "separatistPressure": 21
+      },
+      {
+        "slot": "central",
+        "name": "Civic Ring",
+        "resource": "Government district",
+        "unrest": 35,
+        "foreignPressure": 20,
+        "repression": 54,
+        "separatistPressure": 8
+      },
+      {
+        "slot": "east",
+        "name": "Kesh Frontier",
+        "resource": "Border trade",
+        "unrest": 43,
+        "foreignPressure": 58,
+        "repression": 36,
+        "separatistPressure": 31
+      },
+      {
+        "slot": "south",
+        "name": "Marrow Coast",
+        "resource": "Food ports",
+        "unrest": 30,
+        "foreignPressure": 37,
+        "repression": 28,
+        "separatistPressure": 11
+      }
+    ]
+  },
+  "latestTurn": {
+    "index": 1,
+    "actions": [
+      {
+        "agentKey": "government",
+        "agentName": "Government",
+        "actionType": "state_broadcast",
+        "target": "nationwide",
+        "intensity": 58,
+        "rationale": "The presidency leans on patriotic messaging to project control while avoiding a more expensive intervention. Defensive and suspicious, the faction frames this move through order-first siege statism wrapped in patriotic necessity.",
+        "expectedEffect": {
+          "stability": 2,
+          "propagandaIntensity": 7,
+          "publicTrust": 2,
+          "regimeLegitimacy": 3,
+          "internationalPressure": 1
+        },
+        "source": "mock"
+      },
+      {
+        "agentKey": "opposition",
+        "agentName": "Opposition",
+        "actionType": "mobilize_protest",
+        "target": "west",
+        "intensity": 67,
+        "rationale": "Organizers push for a protest surge in Red Basin to build a visible center of gravity. Organizing for a broader opening, the faction frames this move through anti-corruption civic populism with coalition instincts.",
+        "expectedEffect": {
+          "protestIntensity": 6,
+          "stability": -3,
+          "regimeLegitimacy": -3,
+          "publicTrust": 1,
+          "coupRisk": 1
+        },
+        "source": "mock"
+      },
+      {
+        "agentKey": "lobby_groups",
+        "agentName": "Lobby Groups",
+        "actionType": "price_manipulation",
+        "target": "west",
+        "intensity": 57,
+        "rationale": "Lobby actors exploit volatility while keeping a back door open to whoever controls the ministries next. Quietly consolidating influence, the faction frames this move through transnational rent protection with local political brokerage.",
+        "expectedEffect": {
+          "inflation": 5,
+          "publicTrust": -3,
+          "protestIntensity": 2,
+          "treasuryPressure": 2,
+          "stability": -1
+        },
+        "source": "mock"
+      },
+      {
+        "agentKey": "citizens",
+        "agentName": "Citizens",
+        "actionType": "neighborhood_councils",
+        "target": "west",
+        "intensity": 56,
+        "rationale": "Residents in Red Basin build local coping structures because national institutions feel unreliable. Restless and watchful, the faction frames this move through municipal mutualism that wants safety without surrendering dignity.",
+        "expectedEffect": {
+          "publicTrust": 3,
+          "stability": 2,
+          "protestIntensity": -1,
+          "regimeLegitimacy": 1
+        },
+        "source": "mock"
+      },
+      {
+        "agentKey": "foreign_media",
+        "agentName": "Foreign Media",
+        "actionType": "conflict_fatigue_piece",
+        "target": "west",
+        "intensity": 52,
+        "rationale": "Outside coverage decides whether the crisis is a democratic opening, a market warning, or just background noise. Searching for a decisive frame, the faction frames this move through rights-first international crisis framing.",
+        "expectedEffect": {
+          "protestIntensity": -1,
+          "internationalPressure": -1,
+          "regimeLegitimacy": 1,
+          "publicTrust": -1,
+          "stability": 1
+        },
+        "source": "mock"
+      }
+    ],
+    "events": [
+      {
+        "type": "fragile_calm",
+        "severity": "low",
+        "headline": "The turn closes in fragile calm",
+        "detail": "Street energy and elite maneuvering remain active, but no single flashpoint dominates beyond Civic Ring.",
+        "region": "central"
+      }
+    ],
+    "metricDeltas": {
+      "stability": 1,
+      "protestIntensity": 7,
+      "propagandaIntensity": 7,
+      "coupRisk": 1,
+      "corruption": 0,
+      "inflation": 5,
+      "treasuryPressure": 2,
+      "internationalPressure": 0,
+      "publicTrust": 3,
+      "militaryLoyalty": 0,
+      "regimeLegitimacy": 1
+    },
+    "summary": {
+      "headline": "Republic of Veloria enters turn 1 under renewed political strain",
+      "summary": "Government and Opposition set the tone this turn while street pressure and elite maneuvering reshaped the balance. The turn closes in fragile calm",
+      "reasons": [
+        "Protest intensity rose by 7 points",
+        "Propaganda intensity rose by 7 points",
+        "Inflation rose by 5 points"
+      ]
+    },
+    "outcome": null
+  },
+  "history": [
+    {
+      "index": 0,
+      "actions": [],
+      "events": [
+        {
+          "type": "briefing",
+          "severity": "low",
+          "headline": "Opening briefing for Republic of Veloria",
+          "detail": "Port Azure faces an unstable opening balance between elite control, public frustration, and outside scrutiny."
+        }
+      ],
+      "metricDeltas": {},
+      "summary": {
+        "headline": "Republic of Veloria starts in a fragile equilibrium",
+        "summary": "Republic of Veloria opens with layered political stress around Port Azure. The dashboard is ready to simulate how government, opposition, lobbies, citizens, and foreign media push the country toward survival or rupture.",
+        "reasons": [
+          "Baseline stability begins under pressure from regional inequality.",
+          "Foreign influence is already meaningful around strategic resources and media attention.",
+          "Military loyalty and public trust will determine whether tension becomes transition or coercion."
+        ]
+      },
+      "outcome": null
+    },
+    {
+      "index": 1,
+      "actions": [
+        {
+          "agentKey": "government",
+          "agentName": "Government",
+          "actionType": "state_broadcast",
+          "target": "nationwide",
+          "intensity": 58,
+          "rationale": "The presidency leans on patriotic messaging to project control while avoiding a more expensive intervention. Defensive and suspicious, the faction frames this move through order-first siege statism wrapped in patriotic necessity.",
+          "expectedEffect": {
+            "stability": 2,
+            "propagandaIntensity": 7,
+            "publicTrust": 2,
+            "regimeLegitimacy": 3,
+            "internationalPressure": 1
+          },
+          "source": "mock"
+        },
+        {
+          "agentKey": "opposition",
+          "agentName": "Opposition",
+          "actionType": "mobilize_protest",
+          "target": "west",
+          "intensity": 67,
+          "rationale": "Organizers push for a protest surge in Red Basin to build a visible center of gravity. Organizing for a broader opening, the faction frames this move through anti-corruption civic populism with coalition instincts.",
+          "expectedEffect": {
+            "protestIntensity": 6,
+            "stability": -3,
+            "regimeLegitimacy": -3,
+            "publicTrust": 1,
+            "coupRisk": 1
+          },
+          "source": "mock"
+        },
+        {
+          "agentKey": "lobby_groups",
+          "agentName": "Lobby Groups",
+          "actionType": "price_manipulation",
+          "target": "west",
+          "intensity": 57,
+          "rationale": "Lobby actors exploit volatility while keeping a back door open to whoever controls the ministries next. Quietly consolidating influence, the faction frames this move through transnational rent protection with local political brokerage.",
+          "expectedEffect": {
+            "inflation": 5,
+            "publicTrust": -3,
+            "protestIntensity": 2,
+            "treasuryPressure": 2,
+            "stability": -1
+          },
+          "source": "mock"
+        },
+        {
+          "agentKey": "citizens",
+          "agentName": "Citizens",
+          "actionType": "neighborhood_councils",
+          "target": "west",
+          "intensity": 56,
+          "rationale": "Residents in Red Basin build local coping structures because national institutions feel unreliable. Restless and watchful, the faction frames this move through municipal mutualism that wants safety without surrendering dignity.",
+          "expectedEffect": {
+            "publicTrust": 3,
+            "stability": 2,
+            "protestIntensity": -1,
+            "regimeLegitimacy": 1
+          },
+          "source": "mock"
+        },
+        {
+          "agentKey": "foreign_media",
+          "agentName": "Foreign Media",
+          "actionType": "conflict_fatigue_piece",
+          "target": "west",
+          "intensity": 52,
+          "rationale": "Outside coverage decides whether the crisis is a democratic opening, a market warning, or just background noise. Searching for a decisive frame, the faction frames this move through rights-first international crisis framing.",
+          "expectedEffect": {
+            "protestIntensity": -1,
+            "internationalPressure": -1,
+            "regimeLegitimacy": 1,
+            "publicTrust": -1,
+            "stability": 1
+          },
+          "source": "mock"
+        }
+      ],
+      "events": [
+        {
+          "type": "fragile_calm",
+          "severity": "low",
+          "headline": "The turn closes in fragile calm",
+          "detail": "Street energy and elite maneuvering remain active, but no single flashpoint dominates beyond Civic Ring.",
+          "region": "central"
+        }
+      ],
+      "metricDeltas": {
+        "stability": 1,
+        "protestIntensity": 7,
+        "propagandaIntensity": 7,
+        "coupRisk": 1,
+        "corruption": 0,
+        "inflation": 5,
+        "treasuryPressure": 2,
+        "internationalPressure": 0,
+        "publicTrust": 3,
+        "militaryLoyalty": 0,
+        "regimeLegitimacy": 1
+      },
+      "summary": {
+        "headline": "Republic of Veloria enters turn 1 under renewed political strain",
+        "summary": "Government and Opposition set the tone this turn while street pressure and elite maneuvering reshaped the balance. The turn closes in fragile calm",
+        "reasons": [
+          "Protest intensity rose by 7 points",
+          "Propaganda intensity rose by 7 points",
+          "Inflation rose by 5 points"
+        ]
+      },
+      "outcome": null
+    }
+  ]
+}

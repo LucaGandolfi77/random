@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Unstable Imaginary Countries Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Geopolitical Simulation Control Room</p>
+          <h1>Unstable Imaginary Countries Generator</h1>
+          <p class="hero-copy">Model fragile fictional states turn by turn with five competing agents: government, opposition, lobby groups, citizens, and foreign media.</p>
+          <p id="modeBanner" class="status-banner">Booting dashboard...</p>
+        </div>
+        <div class="hero-stats">
+          <article class="hero-stat">
+            <span>Session</span>
+            <strong id="sessionState">Awaiting bootstrap</strong>
+          </article>
+          <article class="hero-stat">
+            <span>Turn</span>
+            <strong id="turnBadge">0 / 12</strong>
+          </article>
+        </div>
+      </header>
+
+      <section class="control-bar panel">
+        <label>
+          Scenario seed
+          <select id="seedSelect"></select>
+        </label>
+        <label>
+          Agent model
+          <select id="modelSelect"></select>
+        </label>
+        <label class="toggle-control">
+          <input id="mockToggle" type="checkbox">
+          <span>Force mock mode</span>
+        </label>
+        <button id="newSessionButton" class="primary-button" type="button">Generate country</button>
+        <button id="nextTurnButton" class="secondary-button" type="button">Advance turn</button>
+        <button id="exportJsonButton" class="secondary-button" type="button">Export JSON</button>
+        <button id="exportHtmlButton" class="secondary-button" type="button">Export HTML report</button>
+        <p id="exportStatus" class="export-status">No export generated yet.</p>
+      </section>
+
+      <section class="panel resume-panel">
+        <div class="panel-head">
+          <p class="eyebrow">Resume Sessions</p>
+          <span id="resumeCount" class="badge neutral">0 stored</span>
+        </div>
+        <div class="resume-toolbar">
+          <label>
+            Search persisted sessions
+            <input id="resumeSearch" type="search" placeholder="Country, capital, or latest headline">
+          </label>
+          <label>
+            Status filter
+            <select id="resumeStatusFilter">
+              <option value="all">All</option>
+              <option value="active">Active</option>
+              <option value="ended">Ended</option>
+            </select>
+          </label>
+          <button id="refreshSessionsButton" class="secondary-button" type="button">Refresh sessions</button>
+        </div>
+        <div id="resumeSessionsList" class="resume-list"></div>
+      </section>
+
+      <main class="dashboard">
+        <section class="panel country-panel">
+          <div class="panel-head">
+            <p class="eyebrow">Country Overview</p>
+            <span id="countryOutcome" class="badge neutral">Monitoring</span>
+          </div>
+          <div class="country-header">
+            <div id="flagPreview" class="flag-preview" aria-hidden="true"></div>
+            <div>
+              <h2 id="countryName">Loading scenario...</h2>
+              <p id="countryTagline" class="panel-copy"></p>
+              <dl class="meta-grid">
+                <div>
+                  <dt>Capital</dt>
+                  <dd id="capitalValue">-</dd>
+                </div>
+                <div>
+                  <dt>System</dt>
+                  <dd id="systemValue">-</dd>
+                </div>
+                <div>
+                  <dt>Media Freedom</dt>
+                  <dd id="mediaFreedomValue">-</dd>
+                </div>
+                <div>
+                  <dt>Foreign Influence</dt>
+                  <dd id="foreignInfluenceValue">-</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+          <p id="countryDescription" class="panel-copy"></p>
+          <div class="split-columns">
+            <div>
+              <h3>Strategic resources</h3>
+              <ul id="resourcesList" class="tag-list"></ul>
+            </div>
+            <div>
+              <h3>Social tensions</h3>
+              <ul id="tensionsList" class="tag-list warning"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel map-panel">
+          <div class="panel-head">
+            <p class="eyebrow">Regional Pressure Map</p>
+            <span class="badge neutral">SVG theatre</span>
+          </div>
+          <svg id="mapSvg" class="country-map" viewBox="0 0 400 260" role="img" aria-label="Stylized fictional country map"></svg>
+          <div id="mapLegend" class="map-legend"></div>
+          <div id="regionInspector" class="region-inspector"></div>
+        </section>
+
+        <section class="panel meters-panel">
+          <div class="panel-head">
+            <p class="eyebrow">Critical Indicators</p>
+            <span class="badge neutral">Turn delta aware</span>
+          </div>
+          <div id="primaryMetrics" class="metric-grid large"></div>
+        </section>
+
+        <section class="panel pressure-panel">
+          <div class="panel-head">
+            <p class="eyebrow">System Pressure</p>
+            <span class="badge neutral">Core state variables</span>
+          </div>
+          <div id="secondaryMetrics" class="metric-grid compact"></div>
+        </section>
+
+        <section class="panel foreign-panel">
+          <div class="panel-head">
+            <p class="eyebrow">Foreign Pressure</p>
+            <span id="foreignPressureBadge" class="badge neutral">Watching</span>
+          </div>
+          <div class="foreign-summary">
+            <div>
+              <p class="mini-label">International pressure</p>
+              <strong id="internationalPressureValue" class="big-number">0</strong>
+            </div>
+            <div>
+              <p class="mini-label">Most exposed region</p>
+              <strong id="exposedRegionValue">-</strong>
+            </div>
+          </div>
+          <div id="foreignPressureTrack" class="meter-track"><span></span></div>
+          <div id="exposureList" class="rank-list"></div>
+        </section>
+
+        <section class="panel summary-panel">
+          <div class="panel-head">
+            <p class="eyebrow">Turn Summary</p>
+            <span class="badge neutral">Narrative synthesis</span>
+          </div>
+          <h2 id="summaryHeadline">Initializing...</h2>
+          <p id="summaryBody" class="panel-copy"></p>
+          <ul id="summaryReasons" class="reason-list"></ul>
+        </section>
+
+        <section class="panel actions-panel">
+          <div class="panel-head">
+            <p class="eyebrow">Agent Actions</p>
+            <span class="badge neutral">Five competing incentives</span>
+          </div>
+          <div id="actionsList" class="action-list"></div>
+        </section>
+
+        <section class="panel currents-panel">
+          <div class="panel-head">
+            <p class="eyebrow">Faction Currents</p>
+            <span class="badge neutral">Internal coalitions and splits</span>
+          </div>
+          <div id="currentsList" class="currents-grid"></div>
+        </section>
+
+        <section class="panel timeline-panel">
+          <div class="panel-head">
+            <p class="eyebrow">Live Timeline</p>
+            <span class="badge neutral">Events and fault lines</span>
+          </div>
+          <div id="timelineList" class="timeline-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

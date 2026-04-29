@@ -1,0 +1,99 @@
+{
+  "story_arc": {
+    "current_phase": "escalation",
+    "global_targets": [
+      "Reveal what the orchard takes from memory",
+      "Pressure Elisa to choose truth over control",
+      "Make grief produce a concrete cost",
+      "Introduce a contradiction tied to the orchard's history"
+    ],
+    "endgame_promises": [
+      "The first orchard fire must matter again",
+      "The mother's disappearance must connect to the orchard's rules"
+    ]
+  },
+  "active_arcs": [
+    "Elisa's fear of inherited guilt",
+    "The orchard reshaping memory through weather",
+    "Make grief produce a concrete cost",
+    "Introduce a contradiction tied to the orchard's history"
+  ],
+  "arc_metrics": {},
+  "next_targets": [],
+  "chapter_outlines": [
+    {
+      "chapter": 1,
+      "title": "Chapter 1",
+      "chapter_goal": "Establish the tone of haunted inheritance.",
+      "arc_targets": [
+        "Introduce Elisa's wound",
+        "Signal the orchard is active"
+      ],
+      "next_arc_targets": [
+        "Escalate the orchard's response to grief"
+      ],
+      "unresolved_threads": []
+    },
+    {
+      "chapter": 2,
+      "title": "Chapter 2",
+      "chapter_goal": "Deepen the cost of memory manipulation.",
+      "arc_targets": [
+        "Connect the orchard to family secrecy"
+      ],
+      "next_arc_targets": [
+        "Force Elisa into a more dangerous choice"
+      ],
+      "unresolved_threads": []
+    },
+    {
+      "chapter": 3,
+      "title": "Chapter 3",
+      "chapter_goal": "Make grief produce a concrete cost",
+      "arc_targets": [
+        "Make grief produce a concrete cost",
+        "Introduce a contradiction tied to the orchard's history"
+      ],
+      "next_arc_targets": [],
+      "unresolved_threads": [],
+      "planned_payoffs": [],
+      "outline_notes": [],
+      "vote_summary": {
+        "approvals": 5,
+        "revises": 0,
+        "rejects": 0,
+        "averageScore": 0.75,
+        "approved": true,
+        "blockingVotes": []
+      },
+      "updatedAt": "2026-04-28T20:12:02.101Z"
+    },
+    {
+      "chapter": 4,
+      "title": "Chapter 4",
+      "chapter_goal": "",
+      "arc_targets": [],
+      "next_arc_targets": [],
+      "unresolved_threads": [],
+      "planned_payoffs": [],
+      "outline_notes": [],
+      "vote_summary": {
+        "approvals": 5,
+        "revises": 0,
+        "rejects": 0,
+        "averageScore": 0.75,
+        "approved": true,
+        "blockingVotes": []
+      },
+      "updatedAt": "2026-04-28T20:25:40.865Z"
+    }
+  ],
+  "last_vote_summary": {
+    "approvals": 5,
+    "revises": 0,
+    "rejects": 0,
+    "averageScore": 0.75,
+    "approved": true,
+    "blockingVotes": []
+  }
+}

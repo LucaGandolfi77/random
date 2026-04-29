@@ -1,0 +1,21 @@
+{
+  "routing": {
+    "architect": ["qwen/qwen3-14b:free", "mistralai/mistral-small-3.2-24b-instruct:free"],
+    "character_master": ["qwen/qwen3-14b:free", "mistralai/mistral-small-3.2-24b-instruct:free"],
+    "chapter_planner": ["qwen/qwen3-14b:free", "mistralai/mistral-small-3.2-24b-instruct:free"],
+    "writer": ["deepseek/deepseek-chat-v3-0324:free", "qwen/qwen3-14b:free"],
+    "critic": ["qwen/qwen3-14b:free", "mistralai/mistral-small-3.2-24b-instruct:free"],
+    "continuity_keeper": ["qwen/qwen3-14b:free", "mistralai/mistral-small-3.2-24b-instruct:free"],
+    "editor": ["qwen/qwen3-14b:free", "deepseek/deepseek-chat-v3-0324:free"]
+  },
+  "approval": {
+    "critic_max_high_issues": 1,
+    "continuity_must_pass": true,
+    "editor_voice_preservation_min": 0.8,
+    "max_revision_rounds": 2,
+    "voters": ["architect", "character_master", "critic", "continuity_keeper", "editor"],
+    "min_approve_votes": 3,
+    "max_reject_votes": 0,
+    "min_average_vote_score": 0.65
+  }
+}

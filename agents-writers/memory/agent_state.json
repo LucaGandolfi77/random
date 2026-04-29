@@ -1,0 +1,48 @@
+{
+  "activePresets": [
+    "Sad Poet"
+  ],
+  "ui": {
+    "lastPort": 4173
+  },
+  "overrides": {
+    "agents": {
+      "writer": {
+        "behavior": {
+          "prose_style": "lyrical",
+          "poetic_level": 0.9,
+          "verbosity": 0.8,
+          "humor": 0.1
+        }
+      }
+    }
+  },
+  "notes": {
+    "architect": {
+      "current_preset": "base",
+      "private_mood": "hungry for bigger payoffs"
+    },
+    "writer": {
+      "current_preset": "Sad Poet",
+      "last_problem": "none"
+    },
+    "critic": {
+      "current_preset": "base",
+      "last_verdict": "unknown"
+    },
+    "editor": {
+      "current_preset": "base",
+      "last_change_count": 0
+    },
+    "room_vote": {
+      "last_summary": {
+        "approvals": 5,
+        "revises": 0,
+        "rejects": 0,
+        "averageScore": 0.75,
+        "approved": true,
+        "blockingVotes": []
+      }
+    }
+  }
+}

@@ -96,6 +96,7 @@ let quickstartMinimized = false;
 
 async function main() {
   bindEvents();
+  connectProgressStream();
   await refreshStatus();
 }
 
@@ -716,6 +717,85 @@ async function post(url, payload) {
 function log(payload) {
   const next = typeof payload === 'string' ? payload : JSON.stringify(payload, null, 2);
   activityLog.textContent = `${new Date().toLocaleTimeString()}\n${next}\n\n${activityLog.textContent}`.trim();
+}
+
+function logProgress(event, data) {
+  const AGENT_LABELS = {
+    architect: '🏛 Architect',
+    character_master: '🎭 Character Master',
+    chapter_planner: '📋 Chapter Planner',
+    writer: '✍️  Writer',
+    critic: '🔍 Critic',
+    continuity_keeper: '🧵 Continuity Keeper',
+    editor: '📝 Editor',
+    translator: '🌐 Translator'
+  };
+
+  let line = '';
+
+  if (event === 'chapter-start') {
+    line = `▶ Chapter ${data.chapter} — generation started`;
+  } else if (event === 'chapter-done') {
+    const approved = data.approved === false ? '✗ not approved' : '✓ approved';
+    line = `✅ Chapter ${data.chapter} "${data.chapterTitle}" done (${data.revisionRound} revision${data.revisionRound === 1 ? '' : 's'}, ${approved})`;
+  } else if (event === 'agent-start') {
+    const label = AGENT_LABELS[data.agent] || data.agent;
+    const rev = data.revision > 0 ? ` rev.${data.revision}` : '';
+    line = `  → ${label}${rev} running…`;
+  } else if (event === 'agent-done') {
+    const label = AGENT_LABELS[data.agent] || data.agent;
+    const detail = data.verdict ? ` [${data.verdict}]` : data.pass === false ? ' [continuity ✗]' : '';
+    line = `  ✓ ${label}${detail}`;
+  } else if (event === 'vote-start') {
+    line = `  🗳 Vote round ${data.revision + 1} in progress…`;
+  } else if (event === 'vote-done') {
+    const result = data.approved ? '✓ approved' : '✗ needs revision';
+    line = `  🗳 Vote: ${result} (avg score: ${data.score ?? '?'})`;
+  } else {
+    line = `[${event}] ${JSON.stringify(data)}`;
+  }
+
+  activityLog.textContent = `${new Date().toLocaleTimeString()}  ${line}\n${activityLog.textContent}`.trim();
+}
+
+function connectProgressStream() {
+  let source = null;
+  let reconnectDelay = 1000;
+
+  function connect() {
+    if (source) {
+      source.close();
+    }
+
+    source = new EventSource('/api/events');
+
+    source.addEventListener('message', (event) => {
+      try {
+        const { event: name, data } = JSON.parse(event.data);
+        logProgress(name, data);
+
+        // Auto-refresh the dashboard after a chapter or translation completes.
+        if (name === 'chapter-done') {
+          refreshStatus();
+        }
+      } catch {
+        // Ignore malformed events.
+      }
+    });
+
+    source.addEventListener('open', () => {
+      reconnectDelay = 1000;
+    });
+
+    source.addEventListener('error', () => {
+      source.close();
+      // Reconnect with capped exponential back-off.
+      reconnectDelay = Math.min(reconnectDelay * 2, 30_000);
+      setTimeout(connect, reconnectDelay);
+    });
+  }
+
+  connect();
 }
 
 function setBusy(state) {

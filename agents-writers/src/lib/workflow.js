@@ -3,6 +3,7 @@ import path from 'node:path';
 
 import { recordActionLog, withActionLog } from './action-log.js';
 import { callOpenRouter } from './openrouter.js';
+import { emitProgress } from './progress.js';
 import {
   analyzeSeriesContinuity,
   createSeriesBook,
@@ -324,17 +325,28 @@ export async function generateChapter(rootPath, options) {
       WRITERS_ROOM: buildRoomState(state.effectiveAgents.agents)
     };
 
+    emitProgress('chapter-start', { chapter });
+
+    emitProgress('agent-start', { agent: 'architect', chapter });
     const architect = await runAgent(rootPath, state, env, 'architect', baseInput, options.dryRun);
+    emitProgress('agent-done', { agent: 'architect', chapter });
+
+    emitProgress('agent-start', { agent: 'character_master', chapter });
     const characterMaster = await runAgent(rootPath, state, env, 'character_master', {
       ...baseInput,
       ARCHITECT: architect
     }, options.dryRun);
+    emitProgress('agent-done', { agent: 'character_master', chapter });
+
+    emitProgress('agent-start', { agent: 'chapter_planner', chapter });
     const chapterPlanner = await runAgent(rootPath, state, env, 'chapter_planner', {
       ...baseInput,
       ARCHITECT: architect,
       CHARACTER_MASTER: characterMaster
     }, options.dryRun);
+    emitProgress('agent-done', { agent: 'chapter_planner', chapter });
 
+    emitProgress('agent-start', { agent: 'writer', chapter, revision: 0 });
     let writer = await runAgent(rootPath, state, env, 'writer', {
       ...baseInput,
       ARCHITECT: architect,
@@ -343,6 +355,7 @@ export async function generateChapter(rootPath, options) {
       REVISION_REQUEST: null,
       PREVIOUS_DRAFT: null
     }, options.dryRun);
+    emitProgress('agent-done', { agent: 'writer', chapter, revision: 0 });
 
     let critic = null;
     let continuity = null;
@@ -351,18 +364,20 @@ export async function generateChapter(rootPath, options) {
     let revisionRound = 0;
 
     while (revisionRound <= maxRevisionRounds) {
-      critic = await runAgent(rootPath, state, env, 'critic', {
-        ...baseInput,
-        CHAPTER_PLANNER: chapterPlanner,
-        DRAFT: writer
-      }, options.dryRun);
+      // critic and continuity_keeper read the same inputs — run them in parallel.
+      emitProgress('agent-start', { agent: 'critic', chapter, revision: revisionRound });
+      emitProgress('agent-start', { agent: 'continuity_keeper', chapter, revision: revisionRound });
 
-      continuity = await runAgent(rootPath, state, env, 'continuity_keeper', {
-        ...baseInput,
-        CHAPTER_PLANNER: chapterPlanner,
-        DRAFT: writer
-      }, options.dryRun);
+      const reviewInput = { ...baseInput, CHAPTER_PLANNER: chapterPlanner, DRAFT: writer };
+      [critic, continuity] = await Promise.all([
+        runAgent(rootPath, state, env, 'critic', reviewInput, options.dryRun),
+        runAgent(rootPath, state, env, 'continuity_keeper', reviewInput, options.dryRun)
+      ]);
 
+      emitProgress('agent-done', { agent: 'critic', chapter, revision: revisionRound, verdict: critic.verdict });
+      emitProgress('agent-done', { agent: 'continuity_keeper', chapter, revision: revisionRound, pass: continuity.pass });
+
+      emitProgress('agent-start', { agent: 'editor', chapter, revision: revisionRound });
       editor = await runAgent(rootPath, state, env, 'editor', {
         ...baseInput,
         CHAPTER_PLANNER: chapterPlanner,
@@ -370,7 +385,9 @@ export async function generateChapter(rootPath, options) {
         CRITIC: critic,
         CONTINUITY: continuity
       }, options.dryRun);
+      emitProgress('agent-done', { agent: 'editor', chapter, revision: revisionRound });
 
+      emitProgress('vote-start', { chapter, revision: revisionRound });
       votes = await runApprovalVote(rootPath, state, env, {
         ...baseInput,
         ARCHITECT: architect,
@@ -381,12 +398,14 @@ export async function generateChapter(rootPath, options) {
         CONTINUITY: continuity,
         EDITOR: editor
       }, options.dryRun);
+      emitProgress('vote-done', { chapter, revision: revisionRound, approved: votes?.summary?.approved, score: votes?.summary?.averageScore });
 
       if (!needsRevision(critic, continuity, votes, approval) || revisionRound === maxRevisionRounds) {
         break;
       }
 
       revisionRound += 1;
+      emitProgress('agent-start', { agent: 'writer', chapter, revision: revisionRound });
       writer = await runAgent(rootPath, state, env, 'writer', {
         ...baseInput,
         ARCHITECT: architect,
@@ -399,6 +418,7 @@ export async function generateChapter(rootPath, options) {
         VOTES: votes,
         REVISION_REQUEST: 'Revise the chapter to fix all high-severity issues first, then medium issues, while preserving the strongest voice and scene images.'
       }, options.dryRun);
+      emitProgress('agent-done', { agent: 'writer', chapter, revision: revisionRound });
     }
 
     const finalMarkdown = editor.final_markdown || writer.draft_markdown || '';
@@ -436,7 +456,7 @@ export async function generateChapter(rootPath, options) {
       outlineSnapshot
     });
 
-    return {
+    const result = {
       message: `Chapter ${chapter} generated.`,
       activeBookId: state.activeBook.id,
       chapter,
@@ -450,6 +470,10 @@ export async function generateChapter(rootPath, options) {
         final: `${CHAPTERS_DIR}/chapter_${chapterId}_final.md`
       }
     };
+
+    emitProgress('chapter-done', { chapter, chapterTitle, revisionRound, approved: votes?.summary?.approved });
+
+    return result;
   });
 }
 

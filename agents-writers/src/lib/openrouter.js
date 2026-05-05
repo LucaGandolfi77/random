@@ -58,31 +58,48 @@ export async function callOpenRouter({
     throw new Error('Missing OPENROUTER_API_KEY. Copy .env.example to .env and set the key.');
   }
 
-  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-      'HTTP-Referer': httpReferer || 'https://localhost',
-      'X-Title': appTitle || 'Book Agents Lab'
-    },
-    body: JSON.stringify({
-      model,
-      temperature,
-      max_tokens: maxTokens,
-      response_format: { type: 'json_object' },
-      messages: [
-        {
-          role: 'system',
-          content: systemPrompt
-        },
-        {
-          role: 'user',
-          content: JSON.stringify(input, null, 2)
-        }
-      ]
-    })
-  });
+  // 30-second timeout per request — prevents indefinite hangs on slow free models.
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 30_000);
+
+  let response;
+
+  try {
+    response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      signal: controller.signal,
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': httpReferer || 'https://localhost',
+        'X-Title': appTitle || 'Book Agents Lab'
+      },
+      body: JSON.stringify({
+        model,
+        temperature,
+        max_tokens: maxTokens,
+        response_format: { type: 'json_object' },
+        messages: [
+          {
+            role: 'system',
+            content: systemPrompt
+          },
+          {
+            role: 'user',
+            content: JSON.stringify(input, null, 2)
+          }
+        ]
+      })
+    });
+  } catch (fetchError) {
+    if (fetchError.name === 'AbortError') {
+      throw new Error(`OpenRouter request timed out after 30s for model ${model}.`);
+    }
+
+    throw fetchError;
+  } finally {
+    clearTimeout(timeoutId);
+  }
 
   const payload = await response.json().catch(() => ({}));
 

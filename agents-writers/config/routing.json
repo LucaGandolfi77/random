@@ -15,7 +15,7 @@
     "max_revision_rounds": 2,
     "voters": ["architect", "character_master", "critic", "continuity_keeper", "editor"],
     "min_approve_votes": 3,
-    "max_reject_votes": 0,
+    "max_reject_votes": 1,
     "min_average_vote_score": 0.65
   }
 }

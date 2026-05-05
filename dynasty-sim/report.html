@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Dynasty Sim Report — 1200–1249</title>
+  <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.5; }
+nav { position: sticky; top: 0; z-index: 100; background: #1e293b; padding: .5rem 1.5rem;
+      display: flex; gap: 1.5rem; align-items: center; border-bottom: 1px solid #334155; }
+nav a { color: #94a3b8; text-decoration: none; font-size: .875rem; }
+nav a:hover { color: #f8fafc; }
+nav .brand { color: #f8fafc; font-weight: 700; font-size: 1rem; margin-right: auto; }
+main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+h2 { font-size: 1.5rem; font-weight: 700; color: #f1f5f9; margin: 2rem 0 1rem; border-bottom: 1px solid #334155; padding-bottom: .5rem; }
+h4 { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: #94a3b8; margin: 1rem 0 .5rem; }
+
+/* Stats */
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: .75rem; }
+.stat-card { background: #1e293b; border: 1px solid #334155; border-radius: .5rem;
+             padding: 1rem; text-align: center; }
+.stat-num { display: block; font-size: 2rem; font-weight: 700; color: #38bdf8; }
+.stat-lbl { font-size: .75rem; color: #94a3b8; }
+
+/* Timeline table */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+th { background: #1e293b; color: #94a3b8; text-align: left; padding: .5rem .75rem;
+     position: sticky; top: 48px; }
+td { padding: .4rem .75rem; border-bottom: 1px solid #1e293b; vertical-align: top; }
+tr:hover td { background: #1e293b55; }
+.year-col { font-weight: 600; color: #38bdf8; white-space: nowrap; }
+.pop-col  { color: #94a3b8; }
+.narrative-col { color: #cbd5e1; font-style: italic; }
+.badge { display: inline-block; border-radius: .25rem; padding: .1rem .35rem;
+         font-size: .75rem; margin-right: .25rem; font-weight: 600; }
+.badge.green  { background: #14532d; color: #86efac; }
+.badge.red    { background: #450a0a; color: #fca5a5; }
+.badge.blue   { background: #1e3a5f; color: #93c5fd; }
+.badge.orange { background: #431407; color: #fdba74; }
+
+/* Dynasty sections */
+.dynasty-meta { display: flex; flex-wrap: wrap; gap: 1rem; font-size: .875rem;
+                color: #94a3b8; margin-bottom: 1rem; }
+.dynasty-meta span::before { content: "• "; }
+.notable-events { margin: .5rem 0 1rem 1.2rem; font-size: .875rem; color: #94a3b8; }
+
+/* Character grid */
+.char-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(520px,1fr)); gap: 1rem; }
+.char-card { background: #1e293b; border: 1px solid #334155; border-radius: .5rem; overflow: hidden; }
+.char-card.deceased { opacity: .65; }
+.char-header { display: flex; align-items: baseline; gap: .75rem; padding: .75rem 1rem;
+               background: #162032; flex-wrap: wrap; }
+.char-name  { font-weight: 700; font-size: 1rem; color: #f8fafc; }
+.char-meta  { font-size: .8rem; color: #94a3b8; }
+.char-status-badge { margin-left: auto; font-size: .7rem; font-weight: 600;
+                     padding: .1rem .5rem; border-radius: 1rem; }
+.char-status-badge.alive    { background: #14532d; color: #86efac; }
+.char-status-badge.deceased { background: #450a0a; color: #fca5a5; }
+.char-body { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: .75rem 1rem; }
+.traits-col, .mem-col { min-width: 0; }
+
+/* Trait bars */
+.trait-row { display: flex; align-items: center; gap: .4rem; margin-bottom: .2rem; font-size: .75rem; }
+.trait-label { width: 110px; flex-shrink: 0; color: #cbd5e1; }
+.bar-bg  { flex: 1; background: #0f172a; border-radius: 4px; height: 6px; }
+.bar-fill{ height: 6px; border-radius: 4px; transition: width .3s; }
+.trait-val { width: 26px; text-align: right; color: #64748b; }
+
+/* Memories */
+.mem-list { list-style: none; font-size: .8rem; max-height: 220px; overflow-y: auto;
+            scrollbar-width: thin; }
+.mem-item { padding: .2rem 0; border-bottom: 1px solid #1e293b55; }
+.mem-item.val-pos { border-left: 2px solid #22c55e; padding-left: .4rem; }
+.mem-item.val-neg { border-left: 2px solid #ef4444; padding-left: .4rem; }
+
+/* Family tree canvas */
+#tree-canvas-wrap { background: #1e293b; border: 1px solid #334155; border-radius: .5rem;
+                    padding: 1rem; overflow: auto; min-height: 300px; }
+#tree-canvas { display: block; }
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">⚔ Dynasty Sim</span>
+  <a href="#summary">Summary</a>
+  <a href="#timeline">Timeline</a>
+  <a href="#family-tree">Family Tree</a>
+  <a href="#dynasties">Dynasties</a>
+</nav>
+<main>
+  
+<section id="summary">
+  <h2>Simulation Summary</h2>
+  <div class="stat-grid">
+    <div class="stat-card"><span class="stat-num">1200</span><span class="stat-lbl">Start year</span></div>
+    <div class="stat-card"><span class="stat-num">1249</span><span class="stat-lbl">End year</span></div>
+    <div class="stat-card"><span class="stat-num">50</span><span class="stat-lbl">Years simulated</span></div>
+    <div class="stat-card"><span class="stat-num">10</span><span class="stat-lbl">Characters ever</span></div>
+    <div class="stat-card"><span class="stat-num">3</span><span class="stat-lbl">Living at end</span></div>
+    <div class="stat-card"><span class="stat-num">3</span><span class="stat-lbl">Dynasties</span></div>
+    <div class="stat-card"><span class="stat-num">69</span><span class="stat-lbl">Events logged</span></div>
+    <div class="stat-card"><span class="stat-num">50</span><span class="stat-lbl">Year summaries</span></div>
+  </div>
+</section>
+  
+<section id="timeline">
+  <h2>Year-by-Year Timeline</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Year</th><th>Pop</th><th>Events</th><th>Chronicle</th></tr></thead>
+    <tbody>
+  <tr>
+    <td class="year-col">1200</td>
+    <td class="pop-col">6</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1201</td>
+    <td class="pop-col">7</td>
+    <td><span class="badge green">+1 born</span></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1202</td>
+    <td class="pop-col">7</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1203</td>
+    <td class="pop-col">8</td>
+    <td><span class="badge green">+1 born</span></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1204</td>
+    <td class="pop-col">9</td>
+    <td><span class="badge green">+1 born</span></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1205</td>
+    <td class="pop-col">8</td>
+    <td><span class="badge red">-1 died</span></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1206</td>
+    <td class="pop-col">9</td>
+    <td><span class="badge green">+1 born</span></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1207</td>
+    <td class="pop-col">9</td>
+    <td><span class="badge orange">🔥1</span></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1208</td>
+    <td class="pop-col">9</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1209</td>
+    <td class="pop-col">9</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1210</td>
+    <td class="pop-col">9</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1211</td>
+    <td class="pop-col">9</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1212</td>
+    <td class="pop-col">9</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1213</td>
+    <td class="pop-col">9</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1214</td>
+    <td class="pop-col">9</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1215</td>
+    <td class="pop-col">9</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1216</td>
+    <td class="pop-col">8</td>
+    <td><span class="badge red">-1 died</span></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1217</td>
+    <td class="pop-col">8</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1218</td>
+    <td class="pop-col">8</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1219</td>
+    <td class="pop-col">8</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1220</td>
+    <td class="pop-col">8</td>
+    <td><span class="badge orange">🔥1</span></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1221</td>
+    <td class="pop-col">8</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1222</td>
+    <td class="pop-col">8</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1223</td>
+    <td class="pop-col">7</td>
+    <td><span class="badge red">-1 died</span></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1224</td>
+    <td class="pop-col">7</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1225</td>
+    <td class="pop-col">7</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1226</td>
+    <td class="pop-col">7</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1227</td>
+    <td class="pop-col">7</td>
+    <td><span class="badge orange">🔥1</span></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1228</td>
+    <td class="pop-col">7</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1229</td>
+    <td class="pop-col">7</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1230</td>
+    <td class="pop-col">7</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1231</td>
+    <td class="pop-col">7</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1232</td>
+    <td class="pop-col">7</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1233</td>
+    <td class="pop-col">6</td>
+    <td><span class="badge red">-1 died</span></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1234</td>
+    <td class="pop-col">6</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1235</td>
+    <td class="pop-col">5</td>
+    <td><span class="badge red">-1 died</span></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1236</td>
+    <td class="pop-col">4</td>
+    <td><span class="badge red">-1 died</span></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1237</td>
+    <td class="pop-col">4</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1238</td>
+    <td class="pop-col">4</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1239</td>
+    <td class="pop-col">3</td>
+    <td><span class="badge red">-1 died</span></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1240</td>
+    <td class="pop-col">3</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1241</td>
+    <td class="pop-col">3</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1242</td>
+    <td class="pop-col">3</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1243</td>
+    <td class="pop-col">3</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1244</td>
+    <td class="pop-col">3</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1245</td>
+    <td class="pop-col">3</td>
+    <td><span class="badge orange">🔥1</span></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1246</td>
+    <td class="pop-col">3</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1247</td>
+    <td class="pop-col">3</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1248</td>
+    <td class="pop-col">3</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr>
+  <tr>
+    <td class="year-col">1249</td>
+    <td class="pop-col">3</td>
+    <td></td>
+    <td class="narrative-col"></td>
+  </tr></tbody>
+  </table>
+  </div>
+</section>
+
+  <section id="family-tree">
+    <h2>Family Tree</h2>
+    <div id="tree-canvas-wrap">
+      <canvas id="tree-canvas"></canvas>
+    </div>
+    <script type="application/json" id="tree-data">{"nodes": [{"id": "9c7cc05b-e380-47bf-94e1-053b5857599e", "label": "Edmund Ashford", "year": 1162, "alive": false, "sex": "male", "dynasty": "100655ba-507f-4770-9f22-dd8090aae9e4"}, {"id": "c88bfd7e-d6d3-441f-b440-c622ff9016ee", "label": "Eleanor Ashford", "year": 1165, "alive": false, "sex": "female", "dynasty": "100655ba-507f-4770-9f22-dd8090aae9e4"}, {"id": "17a68bdf-52a0-4125-8854-adb394e59957", "label": "Magnus Blackwood", "year": 1158, "alive": false, "sex": "male", "dynasty": "cbe7b537-fa9a-4568-aac6-81a1a4c0c626"}, {"id": "7e5158ee-714c-43d4-b7f7-d93eb14c481d", "label": "Ingrid Blackwood", "year": 1160, "alive": false, "sex": "female", "dynasty": "cbe7b537-fa9a-4568-aac6-81a1a4c0c626"}, {"id": "8dcd0ddc-6e4a-4b16-b1ea-bcf08d2e26f7", "label": "Silas Drake", "year": 1170, "alive": false, "sex": "male", "dynasty": "a4642496-08fe-4189-9fe7-73288d4afd57"}, {"id": "89ada78f-54cf-4d6f-a85d-84dbc716e9a3", "label": "Vivienne Drake", "year": 1172, "alive": false, "sex": "female", "dynasty": "a4642496-08fe-4189-9fe7-73288d4afd57"}, {"id": "64366a75-9c5c-427a-87e1-788064344252", "label": "Soren Drake", "year": 1201, "alive": false, "sex": "male", "dynasty": "a4642496-08fe-4189-9fe7-73288d4afd57"}, {"id": "bf14c12c-fdac-401f-8c45-5c83e742db04", "label": "Jorla Ashford", "year": 1203, "alive": true, "sex": "female", "dynasty": "100655ba-507f-4770-9f22-dd8090aae9e4"}, {"id": "60294679-5e8a-4da7-a9cd-10cb4f86d80d", "label": "Hadrian Ashford", "year": 1204, "alive": true, "sex": "male", "dynasty": "100655ba-507f-4770-9f22-dd8090aae9e4"}, {"id": "4e31cc44-9bac-4444-bed6-1e2360de643d", "label": "Vivaan Drake", "year": 1206, "alive": true, "sex": "female", "dynasty": "a4642496-08fe-4189-9fe7-73288d4afd57"}], "edges": [{"from": "9c7cc05b-e380-47bf-94e1-053b5857599e", "to": "bf14c12c-fdac-401f-8c45-5c83e742db04"}, {"from": "9c7cc05b-e380-47bf-94e1-053b5857599e", "to": "60294679-5e8a-4da7-a9cd-10cb4f86d80d"}, {"from": "c88bfd7e-d6d3-441f-b440-c622ff9016ee", "to": "bf14c12c-fdac-401f-8c45-5c83e742db04"}, {"from": "c88bfd7e-d6d3-441f-b440-c622ff9016ee", "to": "60294679-5e8a-4da7-a9cd-10cb4f86d80d"}, {"from": "8dcd0ddc-6e4a-4b16-b1ea-bcf08d2e26f7", "to": "64366a75-9c5c-427a-87e1-788064344252"}, {"from": "8dcd0ddc-6e4a-4b16-b1ea-bcf08d2e26f7", "to": "4e31cc44-9bac-4444-bed6-1e2360de643d"}, {"from": "89ada78f-54cf-4d6f-a85d-84dbc716e9a3", "to": "64366a75-9c5c-427a-87e1-788064344252"}, {"from": "89ada78f-54cf-4d6f-a85d-84dbc716e9a3", "to": "4e31cc44-9bac-4444-bed6-1e2360de643d"}]}</script>
+  </section>
+
+  <section id="dynasties">
+    <h2>Dynasty Chronicles</h2>
+    
+<section class="dynasty-section">
+  <h2>House Ashford</h2>
+  <div class="dynasty-meta">
+    <span>Founded: 1200</span>
+    <span>Founder: Edmund Ashford</span>
+    <span>Members: 2 (0 living)</span>
+    <span>Known for: diplomacy, charisma, wealth</span>
+  </div>
+  
+  <div class="char-grid">
+<div class="char-card deceased" id="char-c88bfd7e">
+  <div class="char-header">
+    <span class="char-name">Eleanor Ashford</span>
+    <span class="char-meta">female · Noblewoman · age 51</span>
+    <span class="char-status-badge deceased">†1216</span>
+  </div>
+  <div class="char-body">
+    <div class="traits-col">
+      <h4>Learned Traits</h4><div class="trait-row"><span class="trait-label">Confidence</span><div class="bar-bg"><div class="bar-fill" style="width:72%;background:#4ade80"></div></div><span class="trait-val">72</span></div><div class="trait-row"><span class="trait-label">Empathy</span><div class="bar-bg"><div class="bar-fill" style="width:82%;background:#4ade80"></div></div><span class="trait-val">82</span></div><div class="trait-row"><span class="trait-label">Ambition</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Creativity</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Stubbornness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Loyalty</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Humour</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Work Ethic</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Romanticism</span><div class="bar-bg"><div class="bar-fill" style="width:55%;background:#facc15"></div></div><span class="trait-val">55</span></div><div class="trait-row"><span class="trait-label">Curiosity</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Resilience</span><div class="bar-bg"><div class="bar-fill" style="width:74%;background:#4ade80"></div></div><span class="trait-val">74</span></div><div class="trait-row"><span class="trait-label">Rebelliousness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div>
+      <h4>Inherited Traits</h4><div class="trait-row"><span class="trait-label">Height Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Build Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Hair Darkness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Hair Thickness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Eye Lightness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Stamina Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Temperament Baseline</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Sociability Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:80%;background:#4ade80"></div></div><span class="trait-val">80</span></div><div class="trait-row"><span class="trait-label">Risk Taking Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Learning Aptitude</span><div class="bar-bg"><div class="bar-fill" style="width:74%;background:#4ade80"></div></div><span class="trait-val">74</span></div><div class="trait-row"><span class="trait-label">Emotional Reactivity</span><div class="bar-bg"><div class="bar-fill" style="width:78%;background:#4ade80"></div></div><span class="trait-val">78</span></div><div class="trait-row"><span class="trait-label">Health Resilience</span><div class="bar-bg"><div class="bar-fill" style="width:68%;background:#4ade80"></div></div><span class="trait-val">68</span></div>
+    </div>
+    <div class="mem-col">
+      <h4>Key Memories</h4><ul class='mem-list'><li class="mem-item val-pos">[1203] Jorla Ashford was born.</li><li class="mem-item val-pos">[1204] Hadrian Ashford was born.</li><li class="mem-item val-neg">[1205] Lost my beloved Edmund Ashford.</li><li class="mem-item val-pos">[1210] Met Vivaan Drake during community gathering.</li><li class="mem-item val-pos">[1207] Met Hadrian Ashford during community gathering.</li><li class="mem-item val-pos">[1200] Met Ingrid Blackwood during community gathering.</li><li class="mem-item val-pos">[1200] Met Silas Drake during community gathering.</li><li class="mem-item val-pos">[1204] Met Soren Drake during community gathering.</li></ul>
+    </div>
+  </div>
+</div>
+<div class="char-card deceased" id="char-9c7cc05b">
+  <div class="char-header">
+    <span class="char-name">Edmund Ashford</span>
+    <span class="char-meta">male · Nobleman · age 43</span>
+    <span class="char-status-badge deceased">†1205</span>
+  </div>
+  <div class="char-body">
+    <div class="traits-col">
+      <h4>Learned Traits</h4><div class="trait-row"><span class="trait-label">Confidence</span><div class="bar-bg"><div class="bar-fill" style="width:85%;background:#4ade80"></div></div><span class="trait-val">85</span></div><div class="trait-row"><span class="trait-label">Empathy</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Ambition</span><div class="bar-bg"><div class="bar-fill" style="width:80%;background:#4ade80"></div></div><span class="trait-val">80</span></div><div class="trait-row"><span class="trait-label">Creativity</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Stubbornness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Loyalty</span><div class="bar-bg"><div class="bar-fill" style="width:78%;background:#4ade80"></div></div><span class="trait-val">78</span></div><div class="trait-row"><span class="trait-label">Humour</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Work Ethic</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Romanticism</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Curiosity</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Resilience</span><div class="bar-bg"><div class="bar-fill" style="width:60%;background:#4ade80"></div></div><span class="trait-val">60</span></div><div class="trait-row"><span class="trait-label">Rebelliousness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div>
+      <h4>Inherited Traits</h4><div class="trait-row"><span class="trait-label">Height Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Build Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Hair Darkness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Hair Thickness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Eye Lightness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Stamina Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:72%;background:#4ade80"></div></div><span class="trait-val">72</span></div><div class="trait-row"><span class="trait-label">Temperament Baseline</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Sociability Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:82%;background:#4ade80"></div></div><span class="trait-val">82</span></div><div class="trait-row"><span class="trait-label">Risk Taking Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Learning Aptitude</span><div class="bar-bg"><div class="bar-fill" style="width:78%;background:#4ade80"></div></div><span class="trait-val">78</span></div><div class="trait-row"><span class="trait-label">Emotional Reactivity</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Health Resilience</span><div class="bar-bg"><div class="bar-fill" style="width:70%;background:#4ade80"></div></div><span class="trait-val">70</span></div>
+    </div>
+    <div class="mem-col">
+      <h4>Key Memories</h4><ul class='mem-list'><li class="mem-item val-pos">[1203] Jorla Ashford was born.</li><li class="mem-item val-pos">[1204] Hadrian Ashford was born.</li><li class="mem-item val-pos">[1204] Met Hadrian Ashford during community gathering.</li><li class="mem-item val-pos">[1201] Met Soren Drake during community gathering.</li><li class="mem-item val-pos">[1200] Met Vivienne Drake during community gathering.</li><li class="mem-item val-pos">[1200] Met Magnus Blackwood during community gathering.</li><li class="mem-item val-pos">[1203] Edmund Ashford and Vivienne Drake had a delightful conversation.</li><li class="mem-item val-pos">[1200] Met Ingrid Blackwood during community gathering.</li></ul>
+    </div>
+  </div>
+</div></div>
+</section>
+<section class="dynasty-section">
+  <h2>Clan Blackwood</h2>
+  <div class="dynasty-meta">
+    <span>Founded: 1200</span>
+    <span>Founder: Magnus Blackwood</span>
+    <span>Members: 2 (0 living)</span>
+    <span>Known for: craftsmanship, stubbornness, loyalty</span>
+  </div>
+  
+  <div class="char-grid">
+<div class="char-card deceased" id="char-17a68bdf">
+  <div class="char-header">
+    <span class="char-name">Magnus Blackwood</span>
+    <span class="char-meta">male · Master Blacksmith · age 78</span>
+    <span class="char-status-badge deceased">†1236</span>
+  </div>
+  <div class="char-body">
+    <div class="traits-col">
+      <h4>Learned Traits</h4><div class="trait-row"><span class="trait-label">Confidence</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Empathy</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Ambition</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Creativity</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Stubbornness</span><div class="bar-bg"><div class="bar-fill" style="width:72%;background:#4ade80"></div></div><span class="trait-val">72</span></div><div class="trait-row"><span class="trait-label">Loyalty</span><div class="bar-bg"><div class="bar-fill" style="width:82%;background:#4ade80"></div></div><span class="trait-val">82</span></div><div class="trait-row"><span class="trait-label">Humour</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Work Ethic</span><div class="bar-bg"><div class="bar-fill" style="width:90%;background:#4ade80"></div></div><span class="trait-val">90</span></div><div class="trait-row"><span class="trait-label">Romanticism</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Curiosity</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Resilience</span><div class="bar-bg"><div class="bar-fill" style="width:74%;background:#4ade80"></div></div><span class="trait-val">74</span></div><div class="trait-row"><span class="trait-label">Rebelliousness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div>
+      <h4>Inherited Traits</h4><div class="trait-row"><span class="trait-label">Height Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Build Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:82%;background:#4ade80"></div></div><span class="trait-val">82</span></div><div class="trait-row"><span class="trait-label">Hair Darkness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Hair Thickness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Eye Lightness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Stamina Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:78%;background:#4ade80"></div></div><span class="trait-val">78</span></div><div class="trait-row"><span class="trait-label">Temperament Baseline</span><div class="bar-bg"><div class="bar-fill" style="width:65%;background:#4ade80"></div></div><span class="trait-val">65</span></div><div class="trait-row"><span class="trait-label">Sociability Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Risk Taking Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Learning Aptitude</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Emotional Reactivity</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Health Resilience</span><div class="bar-bg"><div class="bar-fill" style="width:80%;background:#4ade80"></div></div><span class="trait-val">80</span></div>
+    </div>
+    <div class="mem-col">
+      <h4>Key Memories</h4><ul class='mem-list'><li class="mem-item val-neg">[1223] Lost my beloved Ingrid Blackwood.</li><li class="mem-item val-pos">[1212] Met Vivienne Drake during community gathering.</li><li class="mem-item val-pos">[1202] Met Vivienne Drake during community gathering.</li><li class="mem-item val-pos">[1201] Met Soren Drake during community gathering.</li><li class="mem-item val-pos">[1204] Met Hadrian Ashford during community gathering.</li><li class="mem-item val-pos">[1200] Met Edmund Ashford during community gathering.</li><li class="mem-item val-pos">[1212] Met Soren Drake during community gathering.</li><li class="mem-item val-pos">[1202] Met Silas Drake during community gathering.</li></ul>
+    </div>
+  </div>
+</div>
+<div class="char-card deceased" id="char-7e5158ee">
+  <div class="char-header">
+    <span class="char-name">Ingrid Blackwood</span>
+    <span class="char-meta">female · Herbalist · age 63</span>
+    <span class="char-status-badge deceased">†1223</span>
+  </div>
+  <div class="char-body">
+    <div class="traits-col">
+      <h4>Learned Traits</h4><div class="trait-row"><span class="trait-label">Confidence</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Empathy</span><div class="bar-bg"><div class="bar-fill" style="width:84%;background:#4ade80"></div></div><span class="trait-val">84</span></div><div class="trait-row"><span class="trait-label">Ambition</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Creativity</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Stubbornness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Loyalty</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Humour</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Work Ethic</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Romanticism</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Curiosity</span><div class="bar-bg"><div class="bar-fill" style="width:68%;background:#4ade80"></div></div><span class="trait-val">68</span></div><div class="trait-row"><span class="trait-label">Resilience</span><div class="bar-bg"><div class="bar-fill" style="width:80%;background:#4ade80"></div></div><span class="trait-val">80</span></div><div class="trait-row"><span class="trait-label">Rebelliousness</span><div class="bar-bg"><div class="bar-fill" style="width:15%;background:#f87171"></div></div><span class="trait-val">15</span></div>
+      <h4>Inherited Traits</h4><div class="trait-row"><span class="trait-label">Height Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Build Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Hair Darkness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Hair Thickness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Eye Lightness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Stamina Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:72%;background:#4ade80"></div></div><span class="trait-val">72</span></div><div class="trait-row"><span class="trait-label">Temperament Baseline</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Sociability Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Risk Taking Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Learning Aptitude</span><div class="bar-bg"><div class="bar-fill" style="width:70%;background:#4ade80"></div></div><span class="trait-val">70</span></div><div class="trait-row"><span class="trait-label">Emotional Reactivity</span><div class="bar-bg"><div class="bar-fill" style="width:80%;background:#4ade80"></div></div><span class="trait-val">80</span></div><div class="trait-row"><span class="trait-label">Health Resilience</span><div class="bar-bg"><div class="bar-fill" style="width:78%;background:#4ade80"></div></div><span class="trait-val">78</span></div>
+    </div>
+    <div class="mem-col">
+      <h4>Key Memories</h4><ul class='mem-list'><li class="mem-item val-pos">[1215] Met Jorla Ashford during community gathering.</li><li class="mem-item val-pos">[1203] Met Jorla Ashford during community gathering.</li><li class="mem-item val-pos">[1200] Met Eleanor Ashford during community gathering.</li><li class="mem-item val-pos">[1205] Met Hadrian Ashford during community gathering.</li><li class="mem-item val-pos">[1200] Met Silas Drake during community gathering.</li><li class="mem-item val-pos">[1200] Met Magnus Blackwood during community gathering.</li><li class="mem-item val-pos">[1211] Met Jorla Ashford during community gathering.</li><li class="mem-item val-pos">[1223] Hadrian Ashford helped Ingrid Blackwood with a difficult problem.</li></ul>
+    </div>
+  </div>
+</div></div>
+</section>
+<section class="dynasty-section">
+  <h2>House Drake</h2>
+  <div class="dynasty-meta">
+    <span>Founded: 1200</span>
+    <span>Founder: Silas Drake</span>
+    <span>Members: 2 (0 living)</span>
+    <span>Known for: commerce, risk-taking, charm</span>
+  </div>
+  
+  <div class="char-grid">
+<div class="char-card deceased" id="char-8dcd0ddc">
+  <div class="char-header">
+    <span class="char-name">Silas Drake</span>
+    <span class="char-meta">male · Merchant · age 69</span>
+    <span class="char-status-badge deceased">†1239</span>
+  </div>
+  <div class="char-body">
+    <div class="traits-col">
+      <h4>Learned Traits</h4><div class="trait-row"><span class="trait-label">Confidence</span><div class="bar-bg"><div class="bar-fill" style="width:78%;background:#4ade80"></div></div><span class="trait-val">78</span></div><div class="trait-row"><span class="trait-label">Empathy</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Ambition</span><div class="bar-bg"><div class="bar-fill" style="width:86%;background:#4ade80"></div></div><span class="trait-val">86</span></div><div class="trait-row"><span class="trait-label">Creativity</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Stubbornness</span><div class="bar-bg"><div class="bar-fill" style="width:42%;background:#facc15"></div></div><span class="trait-val">42</span></div><div class="trait-row"><span class="trait-label">Loyalty</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Humour</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Work Ethic</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Romanticism</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Curiosity</span><div class="bar-bg"><div class="bar-fill" style="width:72%;background:#4ade80"></div></div><span class="trait-val">72</span></div><div class="trait-row"><span class="trait-label">Resilience</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Rebelliousness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div>
+      <h4>Inherited Traits</h4><div class="trait-row"><span class="trait-label">Height Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Build Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Hair Darkness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Hair Thickness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Eye Lightness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Stamina Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Temperament Baseline</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Sociability Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:76%;background:#4ade80"></div></div><span class="trait-val">76</span></div><div class="trait-row"><span class="trait-label">Risk Taking Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:82%;background:#4ade80"></div></div><span class="trait-val">82</span></div><div class="trait-row"><span class="trait-label">Learning Aptitude</span><div class="bar-bg"><div class="bar-fill" style="width:75%;background:#4ade80"></div></div><span class="trait-val">75</span></div><div class="trait-row"><span class="trait-label">Emotional Reactivity</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Health Resilience</span><div class="bar-bg"><div class="bar-fill" style="width:68%;background:#4ade80"></div></div><span class="trait-val">68</span></div>
+    </div>
+    <div class="mem-col">
+      <h4>Key Memories</h4><ul class='mem-list'><li class="mem-item val-pos">[1201] Soren Drake was born.</li><li class="mem-item val-pos">[1206] Vivaan Drake was born.</li><li class="mem-item val-neg">[1235] Lost my beloved Vivienne Drake.</li><li class="mem-item val-pos">[1204] Met Hadrian Ashford during community gathering.</li><li class="mem-item val-pos">[1208] Met Vivienne Drake during community gathering.</li><li class="mem-item val-pos">[1209] Met Vivaan Drake during community gathering.</li><li class="mem-item val-pos">[1203] Met Jorla Ashford during community gathering.</li><li class="mem-item val-pos">[1200] Met Ingrid Blackwood during community gathering.</li></ul>
+    </div>
+  </div>
+</div>
+<div class="char-card deceased" id="char-89ada78f">
+  <div class="char-header">
+    <span class="char-name">Vivienne Drake</span>
+    <span class="char-meta">female · Trader · age 63</span>
+    <span class="char-status-badge deceased">†1235</span>
+  </div>
+  <div class="char-body">
+    <div class="traits-col">
+      <h4>Learned Traits</h4><div class="trait-row"><span class="trait-label">Confidence</span><div class="bar-bg"><div class="bar-fill" style="width:72%;background:#4ade80"></div></div><span class="trait-val">72</span></div><div class="trait-row"><span class="trait-label">Empathy</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Ambition</span><div class="bar-bg"><div class="bar-fill" style="width:80%;background:#4ade80"></div></div><span class="trait-val">80</span></div><div class="trait-row"><span class="trait-label">Creativity</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Stubbornness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Loyalty</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Humour</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Work Ethic</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Romanticism</span><div class="bar-bg"><div class="bar-fill" style="width:70%;background:#4ade80"></div></div><span class="trait-val">70</span></div><div class="trait-row"><span class="trait-label">Curiosity</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Resilience</span><div class="bar-bg"><div class="bar-fill" style="width:62%;background:#4ade80"></div></div><span class="trait-val">62</span></div><div class="trait-row"><span class="trait-label">Rebelliousness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div>
+      <h4>Inherited Traits</h4><div class="trait-row"><span class="trait-label">Height Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Build Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Hair Darkness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Hair Thickness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Eye Lightness</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Stamina Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Temperament Baseline</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Sociability Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:74%;background:#4ade80"></div></div><span class="trait-val">74</span></div><div class="trait-row"><span class="trait-label">Risk Taking Tendency</span><div class="bar-bg"><div class="bar-fill" style="width:72%;background:#4ade80"></div></div><span class="trait-val">72</span></div><div class="trait-row"><span class="trait-label">Learning Aptitude</span><div class="bar-bg"><div class="bar-fill" style="width:78%;background:#4ade80"></div></div><span class="trait-val">78</span></div><div class="trait-row"><span class="trait-label">Emotional Reactivity</span><div class="bar-bg"><div class="bar-fill" style="width:50%;background:#facc15"></div></div><span class="trait-val">50</span></div><div class="trait-row"><span class="trait-label">Health Resilience</span><div class="bar-bg"><div class="bar-fill" style="width:70%;background:#4ade80"></div></div><span class="trait-val">70</span></div>
+    </div>
+    <div class="mem-col">
+      <h4>Key Memories</h4><ul class='mem-list'><li class="mem-item val-pos">[1201] Soren Drake was born.</li><li class="mem-item val-pos">[1206] Vivaan Drake was born.</li><li class="mem-item val-pos">[1204] Met Hadrian Ashford during community gathering.</li><li class="mem-item val-pos">[1212] Met Magnus Blackwood during community gathering.</li><li class="mem-item val-pos">[1202] Met Magnus Blackwood during community gathering.</li><li class="mem-item val-pos">[1206] Met Vivaan Drake during community gathering.</li><li class="mem-item val-pos">[1208] Met Silas Drake during community gathering.</li><li class="mem-item val-pos">[1200] Met Edmund Ashford during community gathering.</li></ul>
+    </div>
+  </div>
+</div></div>
+</section>
+  </section>
+</main>
+<script>
+(function() {
+  const raw = JSON.parse(document.getElementById('tree-data').textContent);
+  const canvas = document.getElementById('tree-canvas');
+  const wrap   = document.getElementById('tree-canvas-wrap');
+  if (!raw.nodes.length) { wrap.textContent = 'No family tree data.'; return; }
+
+  // Layout: group by birth_year as X, spread vertically
+  const years = [...new Set(raw.nodes.map(n => n.year))].sort((a,b)=>a-b);
+  const yearIdx = Object.fromEntries(years.map((y,i)=>[y,i]));
+  const nodeCols = {};
+  years.forEach(y => nodeCols[y] = 0);
+  const PX = 160, PY = 60, PAD = 30;
+  const pos = {};
+  raw.nodes.forEach(n => {
+    const col = yearIdx[n.year];
+    const row = nodeCols[n.year]++;
+    pos[n.id] = { x: PAD + col * PX, y: PAD + row * PY };
+  });
+
+  const maxX = Math.max(...Object.values(pos).map(p=>p.x)) + PX;
+  const maxY = Math.max(...Object.values(pos).map(p=>p.y)) + PY;
+  canvas.width  = maxX;
+  canvas.height = maxY;
+
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, maxX, maxY);
+
+  // Draw edges
+  ctx.lineWidth = 1;
+  raw.edges.forEach(e => {
+    const a = pos[e.from], b = pos[e.to];
+    if (!a || !b) return;
+    ctx.strokeStyle = '#334155';
+    ctx.beginPath();
+    ctx.moveTo(a.x + 50, a.y + 12);
+    ctx.bezierCurveTo(a.x + 50, (a.y + b.y)/2, b.x + 50, (a.y + b.y)/2, b.x + 50, b.y + 12);
+    ctx.stroke();
+  });
+
+  // Draw nodes
+  raw.nodes.forEach(n => {
+    const p = pos[n.id];
+    ctx.fillStyle = n.alive
+      ? (n.sex === 'male' ? '#1e40af' : '#701a75')
+      : '#374151';
+    ctx.beginPath();
+    ctx.roundRect(p.x, p.y, 100, 24, 4);
+    ctx.fill();
+    ctx.fillStyle = n.alive ? '#f8fafc' : '#9ca3af';
+    ctx.font = '10px system-ui';
+    ctx.fillText(n.label.length > 16 ? n.label.slice(0,15)+'…' : n.label, p.x+4, p.y+16);
+  });
+})();
+</script>
+</body>
+</html>

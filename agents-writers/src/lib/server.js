@@ -4,6 +4,7 @@ import { URL } from 'node:url';
 
 import { withActionLog } from './action-log.js';
 import { exportBundle } from './exporter.js';
+import { progressEmitter } from './progress.js';
 import { applyPreset, createBook, generateBook, generateChapter, getStatus, initBook, selectBook, setBehavior, translateChapter } from './workflow.js';
 import { readText, setEnvVariable } from './utils.js';
 
@@ -11,6 +12,13 @@ const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
   '.js': 'application/javascript; charset=utf-8'
+};
+
+// Basic security headers applied to every response.
+const SECURITY_HEADERS = {
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'Referrer-Policy': 'same-origin'
 };
 
 export async function startUiServer(rootPath, options = {}) {
@@ -31,17 +39,26 @@ export async function startUiServer(rootPath, options = {}) {
           return;
         }
 
+        // Prevent path traversal: resolve and confirm the target is inside publicDir.
         const target = url.pathname === '/' ? 'index.html' : url.pathname.slice(1);
-        const filePath = path.join(publicDir, target);
+        const filePath = path.resolve(publicDir, target);
+
+        if (!filePath.startsWith(publicDir + path.sep) && filePath !== publicDir) {
+          response.writeHead(403, { 'Content-Type': 'application/json; charset=utf-8', ...SECURITY_HEADERS });
+          response.end(JSON.stringify({ error: 'Forbidden.' }));
+          return;
+        }
+
         const extension = path.extname(filePath);
         const content = await readText(filePath);
 
         response.writeHead(200, {
-          'Content-Type': MIME_TYPES[extension] || 'text/plain; charset=utf-8'
+          'Content-Type': MIME_TYPES[extension] || 'text/plain; charset=utf-8',
+          ...SECURITY_HEADERS
         });
         response.end(content);
       } catch (error) {
-        response.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
+        response.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8', ...SECURITY_HEADERS });
         response.end(JSON.stringify({ error: error.message }, null, 2));
       }
     });
@@ -60,6 +77,34 @@ export async function startUiServer(rootPath, options = {}) {
 
 async function handleApi(rootPath, request, response, url) {
   const method = request.method || 'GET';
+
+  // SSE endpoint — no body parsing, no action log, long-lived connection.
+  if (method === 'GET' && url.pathname === '/api/events') {
+    response.writeHead(200, {
+      'Content-Type': 'text/event-stream; charset=utf-8',
+      'Cache-Control': 'no-cache',
+      Connection: 'keep-alive',
+      ...SECURITY_HEADERS
+    });
+
+    const heartbeat = setInterval(() => {
+      response.write(': heartbeat\n\n');
+    }, 20_000);
+
+    const onProgress = (payload) => {
+      response.write(`data: ${JSON.stringify(payload)}\n\n`);
+    };
+
+    progressEmitter.on('progress', onProgress);
+
+    request.on('close', () => {
+      clearInterval(heartbeat);
+      progressEmitter.off('progress', onProgress);
+    });
+
+    return;
+  }
+
   const body = method === 'GET' ? {} : await readBody(request);
 
   try {
@@ -119,6 +164,11 @@ async function handleApi(rootPath, request, response, url) {
           throw new Error('Provide an API key.');
         }
 
+        // Validate basic OpenRouter key format.
+        if (!apiKey.startsWith('sk-or-')) {
+          throw new Error('API key must start with sk-or-');
+        }
+
         await setEnvVariable(rootPath, 'OPENROUTER_API_KEY', apiKey);
         return {
           message: 'OpenRouter API key saved to .env.',
@@ -150,6 +200,6 @@ async function readBody(request) {
 }
 
 function sendJson(response, status, payload) {
-  response.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' });
+  response.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', ...SECURITY_HEADERS });
   response.end(JSON.stringify(payload, null, 2));
 }

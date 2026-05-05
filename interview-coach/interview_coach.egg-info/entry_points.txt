@@ -1,0 +1,2 @@
+[console_scripts]
+interview-coach = interview_coach.cli:main

@@ -1,0 +1,2 @@
+[console_scripts]
+dynasty-sim = dynasty_sim.cli:app

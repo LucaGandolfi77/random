@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+    <div class="card-head"><h2>Finance view</h2><p>Cash fragility, tax drag, and delayed payment exposure.</p></div>
+    <div class="metric-grid">
+        <div class="metric"><span>Cash</span><strong>€{{ '{:,.0f}'.format(dashboard.finance.cash) }}</strong></div>
+        <div class="metric"><span>Monthly burn</span><strong>€{{ '{:,.0f}'.format(dashboard.finance.monthly_burn) }}</strong></div>
+        <div class="metric"><span>Monthly revenue</span><strong>€{{ '{:,.0f}'.format(dashboard.finance.monthly_revenue) }}</strong></div>
+        <div class="metric"><span>Taxes due</span><strong>€{{ '{:,.0f}'.format(dashboard.finance.taxes_due) }}</strong></div>
+        <div class="metric"><span>Investor pipeline</span><strong>{{ dashboard.finance.investor_pipeline_score }}</strong></div>
+        <div class="metric"><span>Grant backlog</span><strong>{{ dashboard.finance.grant_backlog_score }}</strong></div>
+        <div class="metric"><span>Bureaucracy backlog</span><strong>{{ dashboard.finance.bureaucracy_backlog }}</strong></div>
+        <div class="metric"><span>Compliance debt</span><strong>{{ dashboard.finance.compliance_debt }}</strong></div>
+        <div class="metric"><span>Founder equity</span><strong>{{ dashboard.finance.founder_equity }}</strong></div>
+        <div class="metric"><span>Investor equity</span><strong>{{ dashboard.finance.investor_equity }}</strong></div>
+        <div class="metric"><span>Option pool</span><strong>{{ dashboard.finance.option_pool_equity }}</strong></div>
+        <div class="metric"><span>Granted options</span><strong>{{ dashboard.finance.employee_option_granted_equity }}</strong></div>
+        <div class="metric"><span>Vested options</span><strong>{{ dashboard.finance.employee_option_vested_equity }}</strong></div>
+        <div class="metric"><span>Forfeited options</span><strong>{{ dashboard.state.employee_option_forfeited_equity }}</strong></div>
+        <div class="metric"><span>Employee departures</span><strong>{{ dashboard.state.employee_departures_count }}</strong></div>
+        <div class="metric"><span>Outstanding note</span><strong>€{{ '{:,.0f}'.format(dashboard.state.outstanding_note_principal) }}</strong></div>
+        <div class="metric"><span>Total dilution</span><strong>{{ dashboard.finance.cumulative_dilution }}</strong></div>
+    </div>
+    <div class="insight-block"><h3>Finance agent</h3><p>{{ dashboard.notes.finance }}</p></div>
+    <div class="insight-block"><h3>Latest term sheet</h3><p>{{ dashboard.state.last_term_sheet_summary }}</p></div>
+    <div class="insight-block"><h3>Latest note financing</h3><p>{{ dashboard.state.last_note_summary }}</p></div>
+    <div class="insight-block"><h3>Latest departure treatment</h3><p>{{ dashboard.state.last_departure_summary }}</p></div>
+    <div class="insight-block">
+        <h3>Cap table history</h3>
+        <ul>
+            {% for round in dashboard.cap_table_rounds[:6] %}
+            <li>Cycle {{ round.cycle_number }} · {{ round.round_label }} · €{{ '{:,.0f}'.format(round.investment_amount) }} at €{{ '{:,.0f}'.format(round.pre_money) }} pre-money · dilution {{ round.dilution }}% · pro-rata €{{ '{:,.0f}'.format(round.existing_investor_follow_on_amount) }} · new €{{ '{:,.0f}'.format(round.new_investor_amount) }}</li>
+            {% else %}
+            <li>No financing rounds recorded.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="insight-block">
+        <h3>Employee option grants</h3>
+        <ul>
+            {% for grant in dashboard.employee_option_grants[:6] %}
+            <li>Cycle {{ grant.cycle_number }} · {{ grant.grant_label }} · granted {{ grant.granted_equity }}% · vested {{ grant.vested_equity }}%</li>
+            {% else %}
+            <li>No employee option grants recorded.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="insight-block">
+        <h3>Illustrative liquidation waterfall</h3>
+        {% if dashboard.liquidation_waterfall %}
+        <ul>
+            <li>Exit value: €{{ '{:,.0f}'.format(dashboard.liquidation_waterfall.exit_value) }}</li>
+            <li>Notes repaid first: €{{ '{:,.0f}'.format(dashboard.liquidation_waterfall.note_payout) }}</li>
+            <li>Preferred equity recovery: €{{ '{:,.0f}'.format(dashboard.liquidation_waterfall.preferred_equity_payout) }}</li>
+            <li>Investor common: €{{ '{:,.0f}'.format(dashboard.liquidation_waterfall.investor_common_payout) }}</li>
+            <li>Founder common: €{{ '{:,.0f}'.format(dashboard.liquidation_waterfall.founder_common_payout) }}</li>
+            <li>Employee options: €{{ '{:,.0f}'.format(dashboard.liquidation_waterfall.employee_option_payout) }}</li>
+        </ul>
+        {% else %}
+        <p>No waterfall yet.</p>
+        {% endif %}
+    </div>
+    <div class="insight-block">
+        <h3>Grant gates</h3>
+        <ul>
+            {% for grant in dashboard.regional_grants[:5] %}
+            <li>{{ grant.name }} — annual window {{ grant.open_month }}-{{ grant.close_month }} · current month {{ grant.annual_month }} · {{ 'eligible now' if grant.eligible else grant.reason }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,15 @@
+{
+  "startup_name": "QuietLedger",
+  "sector": "fintech",
+  "city": "Milan",
+  "region": "Lombardy",
+  "business_model": "saas",
+  "product_type": "SME treasury automation",
+  "target_market": "Italian SMEs with 10-200 employees",
+  "founding_team": "CEO, CTO",
+  "starting_capital": 90000,
+  "founder_name": "Elena",
+  "founder_ambition": 8,
+  "founder_risk_tolerance": "balanced",
+  "initial_assumptions": "Italian SMEs will pay for fewer invoice errors and clearer cash forecasting, but procurement will be slow."
+}

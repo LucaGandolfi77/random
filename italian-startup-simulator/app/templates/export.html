@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+    <div class="card-head"><h2>Export view</h2><p>Download or restore the persistent startup simulation history.</p></div>
+    <div class="button-group"><a class="button-link" href="/export/json">Download JSON export</a><a class="button-link" href="/export/csv-pack">Download CSV report pack</a></div>
+    <form method="post" action="/import/json" enctype="multipart/form-data" class="form-grid compact">
+        <label class="full-span">Import JSON snapshot<input type="file" name="file" accept="application/json" required></label>
+        <button class="secondary" type="submit">Import history</button>
+    </form>
+    <div class="insight-block">
+        <h3>Report pack contents</h3>
+        <p>The ZIP pack includes CSV exports for key simulation tables plus a markdown summary and a full JSON snapshot.</p>
+    </div>
+</section>
+{% endblock %}

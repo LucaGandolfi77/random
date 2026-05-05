@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="grid two-columns">
+    <section class="card">
+        <div class="card-head"><h2>Main dashboard</h2><p>Startup identity, current state, and survival pressure.</p></div>
+        <div class="metric-grid">
+            <div class="metric"><span>Cash</span><strong>€{{ '{:,.0f}'.format(dashboard.state.cash) }}</strong></div>
+            <div class="metric"><span>Runway</span><strong>{{ dashboard.state.runway_months }} mo</strong></div>
+            <div class="metric"><span>Traction</span><strong>{{ dashboard.state.traction_score }}</strong></div>
+            <div class="metric"><span>Survival</span><strong>{{ dashboard.state.survival_probability }}%</strong></div>
+            <div class="metric"><span>Investor pipeline</span><strong>{{ dashboard.state.investor_pipeline_score }}</strong></div>
+            <div class="metric"><span>Grant backlog</span><strong>{{ dashboard.state.grant_backlog_score }}</strong></div>
+            <div class="metric"><span>Bureaucracy backlog</span><strong>{{ dashboard.state.bureaucracy_backlog }}</strong></div>
+            <div class="metric"><span>Compliance debt</span><strong>{{ dashboard.state.compliance_debt }}</strong></div>
+            <div class="metric"><span>Founder equity</span><strong>{{ dashboard.state.founder_equity }}%</strong></div>
+            <div class="metric"><span>Investor equity</span><strong>{{ dashboard.state.investor_equity }}%</strong></div>
+        </div>
+        <div class="insight-block">
+            <h3>{{ dashboard.profile.startup.startup_name }}</h3>
+            <p>{{ dashboard.profile.startup.sector }} · {{ dashboard.profile.startup.city }}, {{ dashboard.profile.startup.region }} · {{ dashboard.profile.startup.business_model }}</p>
+            <p>{{ dashboard.state.last_event_summary }}</p>
+        </div>
+        <div class="chart-card full-span">
+            <h3>Simulation trajectory</h3>
+            <canvas class="js-line-chart" height="220" data-chart='{{ dashboard.chart_data.trajectory | tojson }}'></canvas>
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="card-head"><h2>Simulate next cycle</h2><p>Advance the startup by week or month and choose a strategic move.</p></div>
+        <form method="post" action="/simulate" class="form-grid compact">
+            <label>Cycle type<select name="cycle_type"><option value="week">Week</option><option value="month">Month</option></select></label>
+            <label>Decision<select name="decision_type"><option value="focus_sales">Focus sales</option><option value="product_push">Product push</option><option value="apply_grant">Apply grant</option><option value="hire">Hire</option><option value="cut_costs">Cut costs</option><option value="pivot_services">Pivot to services</option><option value="raise_round">Raise round</option><option value="partnership">Partnership</option><option value="compliance_sprint">Compliance sprint</option></select></label>
+            <label class="full-span">Note<textarea name="note" rows="3" placeholder="Optional rationale or branch assumption"></textarea></label>
+            <button class="primary" type="submit">Run simulation</button>
+        </form>
+        <div class="insight-block">
+            <h3>Current strategic memo</h3>
+            <p><strong>{{ dashboard.strategy_memo.headline }}</strong></p>
+            <p>{{ dashboard.strategy_memo.recommendation }}</p>
+            <small>Confidence: {{ dashboard.strategy_memo.confidence }}</small>
+        </div>
+        <div class="insight-block">
+            <h3>Agent notes</h3>
+            <ul>
+                <li>{{ dashboard.notes.market }}</li>
+                <li>{{ dashboard.notes.finance }}</li>
+                <li>{{ dashboard.notes.operations }}</li>
+            </ul>
+        </div>
+        <div class="insight-block">
+            <h3>Italian execution drag</h3>
+            <p>Backlog {{ dashboard.state.bureaucracy_backlog }} / 10, compliance debt {{ dashboard.state.compliance_debt }} / 10, grant backlog {{ dashboard.state.grant_backlog_score }} / 10.</p>
+        </div>
+        <div class="insight-block">
+            <h3>Latest term sheet</h3>
+            <p>{{ dashboard.state.last_term_sheet_summary }}</p>
+        </div>
+        <div class="insight-block">
+            <h3>Illustrative liquidation waterfall</h3>
+            {% if dashboard.liquidation_waterfall %}
+            <ul>
+                <li>Exit value: €{{ '{:,.0f}'.format(dashboard.liquidation_waterfall.exit_value) }}</li>
+                <li>Notes repaid first: €{{ '{:,.0f}'.format(dashboard.liquidation_waterfall.note_payout) }}</li>
+                <li>Preferred equity recovery: €{{ '{:,.0f}'.format(dashboard.liquidation_waterfall.preferred_equity_payout) }}</li>
+                <li>Investor common: €{{ '{:,.0f}'.format(dashboard.liquidation_waterfall.investor_common_payout) }}</li>
+                <li>Founder common: €{{ '{:,.0f}'.format(dashboard.liquidation_waterfall.founder_common_payout) }}</li>
+                <li>Employee options: €{{ '{:,.0f}'.format(dashboard.liquidation_waterfall.employee_option_payout) }}</li>
+            </ul>
+            {% else %}
+            <p>No waterfall yet.</p>
+            {% endif %}
+        </div>
+        <div class="insight-block">
+            <h3>Regional grant catalog</h3>
+            <ul>
+                {% for grant in dashboard.regional_grants[:4] %}
+                <li>{{ grant.name }} — {{ grant.amount_eur }} · {{ grant.stage }} · match {{ grant.match_score }} · {{ 'eligible' if grant.eligible else grant.reason }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="insight-block">
+            <h3>Cap table rounds</h3>
+            <ul>
+                {% for round in dashboard.cap_table_rounds[:4] %}
+                <li>Cycle {{ round.cycle_number }} — {{ round.round_label }} · €{{ '{:,.0f}'.format(round.investment_amount) }} · founder {{ round.founder_share }}% · investors {{ round.investor_share }}%</li>
+                {% else %}
+                <li>No external rounds yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+</div>
+{% endblock %}

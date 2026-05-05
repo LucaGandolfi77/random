@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+    <div class="card-head"><h2>Event log</h2><p>Weekly and monthly pressure points across the Italian startup journey.</p></div>
+    {% for event in dashboard.events %}
+    <article class="task-card">
+        <div>
+            <h3>{{ event.title }}</h3>
+            <p>{{ event.event_type }} · severity {{ event.severity }}</p>
+            <small>{{ event.description }}</small>
+        </div>
+        <div><span class="pill">cash {{ event.impact_cash }}</span></div>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

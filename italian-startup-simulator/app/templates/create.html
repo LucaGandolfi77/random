@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+    <div class="card-head"><h2>Create startup scenario</h2><p>Set the startup, founder, and Italian operating context before the simulation begins.</p></div>
+    <form method="post" action="/startup" class="form-grid">
+        <label>Startup name<input type="text" name="startup_name" required></label>
+        <label>Sector<input type="text" name="sector" value="AI" required></label>
+        <label>City<input type="text" name="city" value="{{ defaults.default_city }}" required></label>
+        <label>Region<input type="text" name="region" value="{{ defaults.default_region }}" required></label>
+        <label>Business model<select name="business_model"><option value="saas">SaaS</option><option value="marketplace">Marketplace</option><option value="commerce">Commerce</option><option value="deeptech">Deeptech</option><option value="services">Services</option><option value="fintech">Fintech</option><option value="healthtech">Healthtech</option></select></label>
+        <label>Product type<input type="text" name="product_type" value="B2B workflow automation" required></label>
+        <label>Target market<input type="text" name="target_market" value="Italian SMEs" required></label>
+        <label>Founding team<input type="text" name="founding_team" value="CEO, CTO" required></label>
+        <label>Starting capital (€)<input type="number" name="starting_capital" value="75000" min="1000" step="1000" required></label>
+        <label>Founder name<input type="text" name="founder_name" value="Giulia" required></label>
+        <label>Founder ambition (1-10)<input type="number" name="founder_ambition" min="1" max="10" value="8" required></label>
+        <label>Risk tolerance<select name="founder_risk_tolerance"><option value="low">Low</option><option value="balanced" selected>Balanced</option><option value="high">High</option></select></label>
+        <label class="full-span">Initial assumptions<textarea name="initial_assumptions" rows="5">Italian SMEs will buy if the product reduces admin overhead fast. Sales cycles will still be slower than expected.</textarea></label>
+        <button class="primary" type="submit">Create simulation</button>
+    </form>
+</section>
+{% endblock %}

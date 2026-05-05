@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="grid two-columns">
+    <section class="card">
+        <div class="card-head">
+            <h2>Weekly planning screen</h2>
+            <p>Set the week's operating constraints before daily plans multiply.</p>
+        </div>
+        <form method="post" action="/weekly" class="form-grid">
+            <label>
+                Week start
+                <input type="date" name="week_start" value="{{ weekly.week_start }}" required>
+            </label>
+            <label>
+                Weekly theme
+                <input type="text" name="weekly_theme" value="{{ weekly.weekly_plan.weekly_theme if weekly.weekly_plan else '' }}" placeholder="Protect focus while shipping onboarding">
+            </label>
+            <label class="full-span">
+                Top priorities
+                <textarea name="top_priorities_text" rows="5" required placeholder="Ship onboarding polish&#10;Close client proposal&#10;Stabilize sleep schedule">{{ weekly.weekly_plan.top_priorities_text if weekly.weekly_plan else '' }}</textarea>
+            </label>
+            <label class="full-span">
+                Known constraints
+                <textarea name="known_constraints_text" rows="4" placeholder="Client demo Wednesday 14:00&#10;Travel Friday morning">{{ weekly.weekly_plan.known_constraints_text if weekly.weekly_plan else '' }}</textarea>
+            </label>
+            <label class="full-span">
+                Focus areas
+                <textarea name="focus_areas_text" rows="4" placeholder="Product polish&#10;Sales follow-through&#10;Energy management">{{ weekly.weekly_plan.focus_areas_text if weekly.weekly_plan else '' }}</textarea>
+            </label>
+            <label class="full-span">
+                Non-negotiables
+                <textarea name="non_negotiables_text" rows="3" placeholder="Two shutdown rituals&#10;No meetings before 10:00 on Tuesday">{{ weekly.weekly_plan.non_negotiables_text if weekly.weekly_plan else '' }}</textarea>
+            </label>
+            <button class="primary" type="submit">Save weekly plan</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <div class="card-head">
+            <h2>Weekly operating brief</h2>
+            <p>Generated from recent performance, recovery, and current priorities.</p>
+        </div>
+        {% if weekly.weekly_plan %}
+            <p class="summary">{{ weekly.weekly_plan.summary }}</p>
+            <div class="insight-block">
+                <h3>Risk note</h3>
+                <p>{{ weekly.weekly_plan.risk_note }}</p>
+            </div>
+            <div class="insight-block">
+                <h3>Recovery note</h3>
+                <p>{{ weekly.weekly_plan.recovery_note }}</p>
+            </div>
+            <div class="timeline-list">
+                <h3>Focus blocks</h3>
+                {% for block in weekly.weekly_plan.focus_blocks %}
+                <article class="task-card">
+                    <div>
+                        <h3>{{ block.weekday }} · {{ block.block_label }}</h3>
+                        <p>{{ block.objective }}</p>
+                    </div>
+                    <div class="pill">{{ block.load }}</div>
+                </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="muted">No weekly plan yet. Create one to define the week's scope and load pattern.</p>
+        {% endif %}
+    </section>
+</div>
+
+<div class="grid two-columns bottom-grid">
+    <section class="card">
+        <div class="card-head">
+            <h2>Recent weeks</h2>
+            <p>Compare current scope against recent operating patterns.</p>
+        </div>
+        {% if weekly.recent_weekly_plans %}
+            {% for item in weekly.recent_weekly_plans %}
+            <div class="trend-row">
+                <span>{{ item.week_start }}</span>
+                <span>{{ item.weekly_theme or 'No explicit theme' }}</span>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="muted">Weekly plans will accumulate here.</p>
+        {% endif %}
+    </section>
+
+    <section class="card">
+        <div class="card-head">
+            <h2>Weekly signals</h2>
+            <p>Use the latest signals to calibrate the week before overcommitting.</p>
+        </div>
+        {% if weekly.latest_insight %}
+            <ul>
+                <li>{{ weekly.latest_insight.habit_signal }}</li>
+                <li>{{ weekly.latest_insight.workload_signal }}</li>
+                <li>{{ weekly.latest_insight.recovery_signal }}</li>
+            </ul>
+        {% else %}
+            <p class="muted">The habit auditor will surface weekly signals once data accumulates.</p>
+        {% endif %}
+        <div class="chart-grid">
+            <div class="chart-card">
+                <h3>Recent energy and sleep trend</h3>
+                <canvas class="js-line-chart" height="180" data-chart='{{ weekly.chart_data.energy_sleep | tojson }}'></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Completion mix by day</h3>
+                <canvas class="js-bar-chart" height="180" data-chart='{{ weekly.chart_data.completion_mix | tojson }}'></canvas>
+            </div>
+            <div class="chart-card full-span">
+                <h3>Planned load across the week</h3>
+                <canvas class="js-bar-chart" height="180" data-chart='{{ weekly.chart_data.planned_load | tojson }}'></canvas>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

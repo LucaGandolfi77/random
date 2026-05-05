@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+    <div class="card-head"><h2>Branch comparison mode</h2><p>Explore a deterministic decision tree without changing the saved simulation state.</p></div>
+    {% if dashboard %}
+    <form method="post" action="/branches/compare" class="form-grid compact">
+        <label>Cycle type<select name="cycle_type"><option value="week">Week</option><option value="month">Month</option></select></label>
+        <label>Tree depth<select name="depth"><option value="1">1 level</option><option value="2" selected>2 levels</option><option value="3">3 levels</option></select></label>
+        <label>Beam width<select name="beam_width"><option value="2">2</option><option value="3">3</option><option value="5" selected>5</option><option value="8">8</option><option value="12">12</option></select></label>
+        <label>Monte Carlo runs<select name="monte_carlo_runs"><option value="10">10</option><option value="25" selected>25</option><option value="50">50</option><option value="100">100</option></select></label>
+        <label>Noise level<select name="noise_level"><option value="1.5">Low</option><option value="4.0" selected>Medium</option><option value="8.0">High</option></select></label>
+        <label class="full-span">Decision pool
+            <select name="decision_pool" multiple size="7">
+                <option value="focus_sales" selected>Focus sales</option>
+                <option value="product_push" selected>Product push</option>
+                <option value="apply_grant">Apply grant</option>
+                <option value="hire">Hire</option>
+                <option value="cut_costs">Cut costs</option>
+                <option value="pivot_services">Pivot to services</option>
+                <option value="raise_round">Raise round</option>
+                <option value="partnership">Partnership</option>
+                <option value="compliance_sprint">Compliance sprint</option>
+            </select>
+        </label>
+        <label>Sales note<textarea name="note_focus_sales" rows="2" placeholder="Optional note for focus sales"></textarea></label>
+        <label>Product note<textarea name="note_product_push" rows="2" placeholder="Optional note for product push"></textarea></label>
+        <label>Grant note<textarea name="note_apply_grant" rows="2" placeholder="Optional note for apply grant"></textarea></label>
+        <label>Hire note<textarea name="note_hire" rows="2" placeholder="Optional note for hire"></textarea></label>
+        <label>Cut-costs note<textarea name="note_cut_costs" rows="2" placeholder="Optional note for cut costs"></textarea></label>
+        <label>Services note<textarea name="note_pivot_services" rows="2" placeholder="Optional note for pivot services"></textarea></label>
+        <label>Raise note<textarea name="note_raise_round" rows="2" placeholder="Optional note for raise round"></textarea></label>
+        <label>Partnership note<textarea name="note_partnership" rows="2" placeholder="Optional note for partnership"></textarea></label>
+        <label class="full-span">Compliance note<textarea name="note_compliance_sprint" rows="2" placeholder="Optional note for compliance sprint"></textarea></label>
+        <button class="primary" type="submit">Build decision tree</button>
+    </form>
+    {% else %}
+    <p>Create a startup first to compare branches.</p>
+    {% endif %}
+</section>
+
+{% if comparison %}
+<section class="card">
+    <div class="card-head"><h2>Tree verdict</h2><p>{{ comparison.paths|length }} finalist scenarios across {{ comparison.depth }} level(s).</p></div>
+    <p>The strongest current path is <strong>{{ comparison.winner.label }}</strong> with score {{ comparison.winner.score }}.</p>
+    <p>Decision pool: {{ comparison.decision_pool | join(', ') }} · beam width {{ comparison.beam_width }} · Monte Carlo {{ comparison.monte_carlo_runs }} runs @ noise {{ comparison.noise_level }} · expanded {{ comparison.expanded_paths }} nodes.</p>
+</section>
+<div class="grid two-columns">
+    {% for branch in comparison.paths[:6] %}
+    <section class="card">
+        <div class="card-head"><h2>{{ branch.label }}</h2><p>score {{ branch.score }} · MC mean {{ branch.monte_carlo.mean }}</p></div>
+        <div class="metric-grid">
+            <div class="metric"><span>Cash</span><strong>€{{ '{:,.0f}'.format(branch.final_state.cash) }}</strong></div>
+            <div class="metric"><span>Runway</span><strong>{{ branch.final_state.runway_months }} mo</strong></div>
+            <div class="metric"><span>Survival</span><strong>{{ branch.final_state.survival_probability }}%</strong></div>
+            <div class="metric"><span>Bureaucracy</span><strong>{{ branch.final_state.bureaucracy_backlog }}</strong></div>
+            <div class="metric"><span>Founder equity</span><strong>{{ branch.final_state.founder_equity }}%</strong></div>
+            <div class="metric"><span>Investor equity</span><strong>{{ branch.final_state.investor_equity }}%</strong></div>
+            <div class="metric"><span>MC downside</span><strong>{{ branch.monte_carlo.p10 }}</strong></div>
+            <div class="metric"><span>MC upside</span><strong>{{ branch.monte_carlo.p90 }}</strong></div>
+        </div>
+        <div class="trend-list">
+            {% for step in branch.history %}
+            <div class="trend-row"><span>Step {{ step.step }} · {{ step.decision }}</span><span>cash €{{ '{:,.0f}'.format(step.cash) }} · survival {{ step.survival_probability }}%</span></div>
+            {% endfor %}
+        </div>
+        <div class="insight-block">
+            <h3>Recent branch events</h3>
+            <ul>
+                {% for event in branch.events %}
+                <li>{{ event.title }} — {{ event.description }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+    {% endfor %}
+</div>
+<section class="card">
+    <div class="card-head"><h2>Tree levels</h2><p>Top path snapshots by level.</p></div>
+    {% for level in comparison.tree_levels %}
+    <div class="insight-block">
+        <h3>Level {{ loop.index }}</h3>
+        <ul>
+            {% for node in level[:5] %}
+            <li>{{ node.path }} — {{ node.decision }} · cash €{{ '{:,.0f}'.format(node.cash) }} · survival {{ node.survival_probability }}% · founder equity {{ node.founder_equity }}%</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</section>
+{% endif %}
+{% endblock %}

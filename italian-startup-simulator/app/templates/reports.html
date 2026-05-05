@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+    <div class="card-head"><h2>Narrative reports</h2><p>Board-style updates and founder internal notes.</p></div>
+    {% for report in dashboard.reports %}
+    <article class="task-card">
+        <div>
+            <h3>Cycle {{ report.cycle_number }} · {{ report.cycle_type }}</h3>
+            <p>{{ report.report_text }}</p>
+            <small>{{ report.founder_note }}</small>
+        </div>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

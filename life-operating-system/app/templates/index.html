@@ -1,0 +1,306 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="grid two-columns">
+    <section class="card">
+        <div class="card-head">
+            <h2>Morning check-in</h2>
+            <p>Capture real state before planning.</p>
+        </div>
+        <form method="post" action="/checkin" class="form-grid">
+            <label>
+                Date
+                <input type="date" name="checkin_date" value="{{ today }}" required>
+            </label>
+            <label>
+                Sleep hours
+                <input type="number" name="sleep_hours" min="0" max="16" step="0.5" value="{{ dashboard.today_checkin.sleep_hours if dashboard.today_checkin else 7 }}" required>
+            </label>
+            <label>
+                Sleep quality
+                <input type="range" name="sleep_quality" min="1" max="10" value="{{ dashboard.today_checkin.sleep_quality if dashboard.today_checkin else 7 }}">
+            </label>
+            <label>
+                Perceived energy
+                <input type="range" name="perceived_energy" min="1" max="10" value="{{ dashboard.today_checkin.perceived_energy if dashboard.today_checkin else 7 }}">
+            </label>
+            <label>
+                Mood
+                <input type="range" name="mood" min="1" max="10" value="{{ dashboard.today_checkin.mood if dashboard.today_checkin else 7 }}">
+            </label>
+            <label>
+                Stress
+                <input type="range" name="stress_level" min="1" max="10" value="{{ dashboard.today_checkin.stress_level if dashboard.today_checkin else 4 }}">
+            </label>
+            <label>
+                Context
+                <input type="text" name="context_label" value="{{ dashboard.today_checkin.context_label if dashboard.today_checkin else 'Home office' }}" required>
+            </label>
+            <label>
+                Available minutes
+                <input type="number" name="available_minutes" min="30" max="1440" step="15" value="{{ dashboard.today_checkin.available_minutes if dashboard.today_checkin else 360 }}" required>
+            </label>
+            <label class="full-span">
+                Main focus
+                <input type="text" name="focus_text" value="{{ dashboard.today_checkin.focus_text if dashboard.today_checkin else '' }}" placeholder="What matters most today?">
+            </label>
+            <label class="full-span">
+                Constraints
+                <textarea name="constraints_text" rows="3" placeholder="Meetings, travel, parenting, deadlines...">{{ dashboard.today_checkin.constraints_text if dashboard.today_checkin else '' }}</textarea>
+            </label>
+            <label class="full-span">
+                Required tasks
+                <textarea name="required_tasks_text" rows="5" placeholder="Write proposal | 90 | deep&#10;Reply to invoices | 30 | admin">{{ dashboard.today_checkin.required_tasks_text if dashboard.today_checkin else '' }}</textarea>
+            </label>
+            <button class="primary" type="submit">Save check-in and build plan</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <div class="card-head">
+            <h2>Dashboard</h2>
+            <p>Seven-day signal, not vanity metrics.</p>
+        </div>
+        <div class="metric-grid">
+            <div class="metric">
+                <span>Average energy</span>
+                <strong>{{ dashboard.energy_average }}</strong>
+            </div>
+            <div class="metric">
+                <span>Average sleep</span>
+                <strong>{{ dashboard.sleep_average }}h</strong>
+            </div>
+            <div class="metric">
+                <span>Habit completion</span>
+                <strong>{{ dashboard.habit_performance.completion_rate }}%</strong>
+            </div>
+            <div class="metric">
+                <span>Mode</span>
+                <strong>{{ dashboard.today_plan.plan_mode if dashboard.today_plan else '—' }}</strong>
+            </div>
+        </div>
+        <div class="trend-list">
+            <h3>Last 7 days</h3>
+            {% if dashboard.trend %}
+                {% for point in dashboard.trend %}
+                <div class="trend-row">
+                    <span>{{ point.date }}</span>
+                    <span>Energy {{ point.energy }}/10</span>
+                    <span>Sleep {{ point.sleep }}h</span>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="muted">No trend yet. Add your first check-in.</p>
+            {% endif %}
+        </div>
+        <div class="chart-grid">
+            <div class="chart-card">
+                <h3>Energy and sleep</h3>
+                <canvas class="js-line-chart" height="180" data-chart='{{ dashboard.chart_data.trend | tojson }}'></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Today's task status</h3>
+                <canvas class="js-bar-chart" height="180" data-chart='{{ dashboard.chart_data.task_status | tojson }}'></canvas>
+            </div>
+            <div class="chart-card full-span">
+                <h3>Habit streaks</h3>
+                <canvas class="js-bar-chart" height="180" data-chart='{{ dashboard.chart_data.habit_streaks | tojson }}'></canvas>
+            </div>
+        </div>
+        <div class="insight-block">
+            <h3>Weekly insight</h3>
+            {% if dashboard.weekly_insight %}
+                <p>{{ dashboard.weekly_insight.summary }}</p>
+                <ul>
+                    <li>{{ dashboard.weekly_insight.habit_signal }}</li>
+                    <li>{{ dashboard.weekly_insight.workload_signal }}</li>
+                    <li>{{ dashboard.weekly_insight.recovery_signal }}</li>
+                </ul>
+            {% else %}
+                <p class="muted">The habit auditor will write a weekly summary once enough data exists.</p>
+            {% endif %}
+        </div>
+    </section>
+</div>
+
+<div class="grid two-columns bottom-grid">
+    <section class="card">
+        <div class="card-head inline-space">
+            <div>
+                <h2>Today's plan</h2>
+                <p>Planner + Energy Coach output.</p>
+            </div>
+            <form method="post" action="/plan/generate">
+                <input type="hidden" name="plan_date" value="{{ today }}">
+                <button type="submit" class="secondary">Rebuild plan</button>
+            </form>
+        </div>
+        {% if dashboard.today_plan %}
+            <div class="plan-meta">
+                <span class="pill">{{ dashboard.today_plan.plan_mode }}</span>
+                <span class="pill">Energy score {{ dashboard.today_plan.energy_score }}</span>
+            </div>
+            {% if dashboard.carryover_context.weekly_focus_blocks or dashboard.carryover_context.carryover_tasks %}
+            <div class="insight-block">
+                <h3>Weekly carry-over shaping today</h3>
+                {% if dashboard.carryover_context.weekly_focus_blocks %}
+                <ul>
+                    {% for block in dashboard.carryover_context.weekly_focus_blocks[:2] %}
+                    <li>{{ block.weekday }} · {{ block.objective }} · {{ block.load }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% if dashboard.carryover_context.carryover_tasks %}
+                <ul>
+                    {% for item in dashboard.carryover_context.carryover_tasks %}
+                    <li>{{ item.title }} · {{ item.status }} from {{ item.task_date }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            {% endif %}
+            <p class="summary">{{ dashboard.today_plan.summary }}</p>
+            <div class="coach-box">
+                <h3>Energy coach</h3>
+                <pre>{{ dashboard.today_plan.coach_message }}</pre>
+            </div>
+            <div class="task-list">
+                {% for task in dashboard.today_plan.tasks %}
+                <article class="task-card {{ task.status }}">
+                    <div>
+                        <h3>{{ task.title }}</h3>
+                        <p>{{ task.category }} · {{ task.estimated_minutes }} min{% if task.is_protected %} · protected{% endif %}</p>
+                        <small>{{ task.reason }}</small>
+                    </div>
+                    <div class="status-actions">
+                        {% for status in ['done', 'skipped', 'moved', 'pending'] %}
+                        <form method="post" action="/tasks/{{ task.id }}/status">
+                            <input type="hidden" name="plan_date" value="{{ today }}">
+                            <input type="hidden" name="status" value="{{ status }}">
+                            <button type="submit" class="status {{ 'active' if task.status == status else '' }}">{{ status }}</button>
+                        </form>
+                        {% endfor %}
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="muted">No plan yet. Complete the check-in to generate an adaptive day plan.</p>
+        {% endif %}
+    </section>
+
+    <section class="card">
+        <div class="card-head">
+            <h2>Habits</h2>
+            <p>Audit consistency and lower friction.</p>
+        </div>
+        <div class="habit-list">
+            {% for habit in dashboard.habits %}
+            <article class="habit-card">
+                <div>
+                    <h3>{{ habit.name }}</h3>
+                    <p>{{ habit.minimum_viable }}</p>
+                    <small>Target {{ habit.target_frequency }} days / week</small>
+                </div>
+                <div class="habit-actions">
+                    <form method="post" action="/habits/{{ habit.id }}/log">
+                        <input type="hidden" name="log_date" value="{{ today }}">
+                        <input type="hidden" name="completed" value="true">
+                        <button type="submit" class="status {{ 'active' if habit.completed else '' }}">Done</button>
+                    </form>
+                    <form method="post" action="/habits/{{ habit.id }}/log">
+                        <input type="hidden" name="log_date" value="{{ today }}">
+                        <input type="hidden" name="completed" value="false">
+                        <button type="submit" class="status {{ 'active' if habit.completed == 0 else '' }}">Missed</button>
+                    </form>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        <div class="streaks">
+            <h3>Streaks</h3>
+            {% if dashboard.habit_streaks %}
+                {% for streak in dashboard.habit_streaks %}
+                <div class="trend-row">
+                    <span>{{ streak.habit }}</span>
+                    <span>{{ streak.streak }} day streak</span>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <form method="post" action="/habits" class="form-grid compact">
+            <input type="hidden" name="current_date" value="{{ today }}">
+            <label>
+                New habit
+                <input type="text" name="name" placeholder="Hydrate before coffee" required>
+            </label>
+            <label>
+                Weekly target
+                <input type="number" name="target_frequency" min="1" max="7" value="5" required>
+            </label>
+            <label class="full-span">
+                Minimum viable version
+                <input type="text" name="minimum_viable" placeholder="One glass of water before the first espresso" required>
+            </label>
+            <button class="secondary" type="submit">Add habit</button>
+        </form>
+    </section>
+</div>
+
+<section class="card reflection-card">
+    <div class="card-head">
+        <h2>Evening reflection</h2>
+        <p>Capture only what tomorrow needs to know.</p>
+    </div>
+    <div class="reflection-prompts">
+        {% for question in dashboard.reflection_questions %}
+        <div class="prompt">{{ question }}</div>
+        {% endfor %}
+    </div>
+    <form method="post" action="/reflection" class="form-grid">
+        <input type="hidden" name="reflection_date" value="{{ today }}">
+        <label class="full-span">
+            Wins
+            <textarea name="wins_text" rows="3">{{ dashboard.today_reflection.wins_text if dashboard.today_reflection else '' }}</textarea>
+        </label>
+        <label class="full-span">
+            Friction
+            <textarea name="friction_text" rows="3">{{ dashboard.today_reflection.friction_text if dashboard.today_reflection else '' }}</textarea>
+        </label>
+        <label class="full-span">
+            Gratitude or grounding
+            <textarea name="gratitude_text" rows="2">{{ dashboard.today_reflection.gratitude_text if dashboard.today_reflection else '' }}</textarea>
+        </label>
+        <label class="full-span">
+            Adjustment for tomorrow
+            <textarea name="tomorrow_adjustment" rows="2">{{ dashboard.today_reflection.tomorrow_adjustment if dashboard.today_reflection else '' }}</textarea>
+        </label>
+        <button class="primary" type="submit">Save reflection</button>
+    </form>
+    {% if dashboard.today_reflection %}
+    <div class="insight-block">
+        <h3>Stored signal for tomorrow</h3>
+        <p>{{ dashboard.today_reflection.extracted_signal }}</p>
+    </div>
+    {% endif %}
+</section>
+
+<section class="card reflection-card">
+    <div class="card-head inline-space">
+        <div>
+            <h2>Memory portability</h2>
+            <p>Download your local memory as JSON or import a previous snapshot.</p>
+        </div>
+        <div class="button-group">
+            <a class="button-link" href="/memory/export">Download JSON</a>
+            <a class="button-link" href="/memory/export/csv">Download CSV bundle</a>
+        </div>
+    </div>
+    <form method="post" action="/memory/import" enctype="multipart/form-data" class="form-grid compact">
+        <label class="full-span">
+            Import snapshot
+            <input type="file" name="file" accept="application/json" required>
+        </label>
+        <button class="secondary" type="submit">Import memory</button>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{
+  "checkin": {
+    "checkin_date": "2026-05-05",
+    "sleep_hours": 5.5,
+    "sleep_quality": 4,
+    "perceived_energy": 4,
+    "mood": 6,
+    "stress_level": 7,
+    "context_label": "Home office with two afternoon calls",
+    "available_minutes": 320,
+    "focus_text": "Ship the onboarding flow draft",
+    "constraints_text": "Client call at 15:00, grocery errand after 18:00",
+    "required_tasks_text": "Ship onboarding flow draft | 120 | deep\nSend proposal follow-up | 25 | admin\nBook dentist appointment | 15 | admin"
+  },
+  "reflection": {
+    "wins_text": "Protected the proposal and shipped one usable draft.",
+    "friction_text": "Started too big while tired and paid a switching cost.",
+    "gratitude_text": "Short walk after lunch helped me reset.",
+    "tomorrow_adjustment": "Start with a 25-minute block before opening inboxes."
+  }
+}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="grid two-columns">
+<section class="card">
+    <div class="card-head"><h2>Strategy choices</h2><p>Recent decisions and the current recommended direction.</p></div>
+    <div class="insight-block"><h3>{{ dashboard.strategy_memo.headline }}</h3><p>{{ dashboard.strategy_memo.recommendation }}</p></div>
+    <div class="metric-grid">
+        <div class="metric"><span>Investor pipeline</span><strong>{{ dashboard.state.investor_pipeline_score }}</strong></div>
+        <div class="metric"><span>Grant backlog</span><strong>{{ dashboard.state.grant_backlog_score }}</strong></div>
+        <div class="metric"><span>Bureaucracy backlog</span><strong>{{ dashboard.state.bureaucracy_backlog }}</strong></div>
+        <div class="metric"><span>Compliance debt</span><strong>{{ dashboard.state.compliance_debt }}</strong></div>
+    </div>
+    <div class="trend-list">
+        {% for item in dashboard.decisions %}
+        <div class="trend-row"><span>{{ item.cycle_type }} {{ item.cycle_number }}</span><span>{{ item.decision_type }}</span></div>
+        {% endfor %}
+    </div>
+    <div class="insight-block"><a class="button-link" href="/branches">Open branch comparison mode</a></div>
+</section>
+<section class="card">
+    <div class="card-head"><h2>Founder and team</h2><p>Psychology, clarity, and morale matter as much as market logic.</p></div>
+    <div class="metric-grid">
+        <div class="metric"><span>Founder stress</span><strong>{{ dashboard.team.founder_stress }}</strong></div>
+        <div class="metric"><span>Team morale</span><strong>{{ dashboard.team.team_morale }}</strong></div>
+        <div class="metric"><span>Clarity</span><strong>{{ dashboard.team.strategic_clarity }}</strong></div>
+        <div class="metric"><span>Conviction</span><strong>{{ dashboard.team.conviction }}</strong></div>
+    </div>
+</section>
+</div>
+{% endblock %}

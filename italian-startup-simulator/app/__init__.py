@@ -1,0 +1,1 @@
+"""Italian Startup Simulator package."""

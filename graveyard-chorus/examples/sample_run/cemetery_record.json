@@ -1,0 +1,223 @@
+{
+  "town_name": "Morrowfield",
+  "generated_at_year": 1913,
+  "epitaphs": [
+    {
+      "id": "epitaph_3b44b11310",
+      "character_id": "char_mercy_bell",
+      "character_name": "Mercy Bell",
+      "year_written": 1901,
+      "voice": "Bandage, winter lamp, and a pulse counted after everyone else stops listening.",
+      "text": "I am Mercy Bell, speaking now from under vinegar and weather.\nThey thought they knew me by the work I did as a nurse, but my real trade was keeping count of losses.\nMercy Bell died in autumn when work, worry, and weather finally agreed against the body.\nThey praised my usefulness; they were really rewarding how well I concealed reserve.\nThe truth is this: I have long suspected that Silas Vale, not any Bell, gave me my face, and I hated the suspicion because it felt too much like belonging to the wrong room.\nAsk Thomas Quill what silence cost us.\nBury me beside a hand kept steady; let the town call that justice if it needs a pretty word.",
+      "referenced_character_ids": [
+        "char_gideon_bell",
+        "char_thomas_quill"
+      ],
+      "referenced_event_ids": [
+        "life_0af9115ce2",
+        "life_b5795253fd",
+        "life_c6a966d06e",
+        "life_e17cb306bd"
+      ],
+      "hidden_truths": [
+        "I have long suspected that Silas Vale, not any Bell, gave me my face, and I hated the suspicion because it felt too much like belonging to the wrong room."
+      ],
+      "public_contradictions": [
+        "Mercy Bell is the person most people want nearby in a crisis and least understand afterward."
+      ],
+      "mood": "haunted",
+      "actual_model": null
+    },
+    {
+      "id": "epitaph_84a6ed43b6",
+      "character_id": "char_ruth_vale",
+      "character_name": "Ruth Vale",
+      "year_written": 1902,
+      "voice": "A bell of office rung from beneath old water.",
+      "text": "I am Ruth Vale, speaking now from under ledger and weather.\nThey thought they knew me by the work I did as a mayor, but my real trade was keeping count of losses.\nRuth Vale died in autumn when work, worry, and weather finally agreed against the body.\nThey praised my efficiency; they were really rewarding how well I concealed silent cruelty.\nThe truth is this: I kept the flood ledger because it showed Silas drawing relief funds into the mill while the Harrows pawned blankets.\nAsk Silas Vale what silence cost us.\nBury me beside public promises; let the town call that justice if it needs a pretty word.",
+      "referenced_character_ids": [
+        "char_jonah_harrow",
+        "char_silas_vale"
+      ],
+      "referenced_event_ids": [
+        "life_044d01a72b",
+        "life_c9d5b459f5",
+        "life_044d01a72b",
+        "life_fe0c53a05e"
+      ],
+      "hidden_truths": [
+        "I kept the flood ledger because it showed Silas drawing relief funds into the mill while the Harrows pawned blankets."
+      ],
+      "public_contradictions": [
+        "Ruth finally said aloud what the town had only guessed."
+      ],
+      "mood": "haunted",
+      "actual_model": null
+    },
+    {
+      "id": "epitaph_ce06480141",
+      "character_id": "char_gideon_bell",
+      "character_name": "Gideon Bell",
+      "year_written": 1904,
+      "voice": "A cracked hymn book telling the truth between verses.",
+      "text": "I am Gideon Bell, speaking now from under bell rope and weather.\nThey thought they knew me by the work I did as a preacher, but my real trade was keeping count of losses.\nGideon Bell died in spring when work, worry, and weather finally agreed against the body.\nThey praised my eloquence; they were really rewarding how well I concealed severity.\nThe truth is this: I wrote letters to a singer and nearly left the parish with her, then preached twice as hard because desire had learned my handwriting.\nAsk Mercy Bell what silence cost us.\nBury me beside winter pews; let the town call that justice if it needs a pretty word.",
+      "referenced_character_ids": [
+        "char_mercy_bell"
+      ],
+      "referenced_event_ids": [
+        "life_7624857d47",
+        "life_0af9115ce2",
+        "life_589a827ae8",
+        "life_7624857d47"
+      ],
+      "hidden_truths": [
+        "I wrote letters to a singer and nearly left the parish with her, then preached twice as hard because desire had learned my handwriting."
+      ],
+      "public_contradictions": [
+        "Gideon looked composed while hiding a strain no one measured correctly."
+      ],
+      "mood": "haunted",
+      "actual_model": null
+    },
+    {
+      "id": "epitaph_07a99d01bc",
+      "character_id": "char_69c401bd7e",
+      "character_name": "Frank Harrow",
+      "year_written": 1904,
+      "voice": "A future voice still taking shape in the family weather.",
+      "text": "I am Frank Harrow, speaking now from under dust and weather.\nThey thought they knew me by the work I did as a child, but my real trade was keeping count of losses.\nFrank Harrow was born, and every old loyalty in Morrowfield adjusted itself around the cradle.\nThey praised my steadiness; they were really rewarding how well I concealed nothing they could prove.\nThe truth arrived late and had to share a room with pride.\nAsk Arthur Harrow what silence cost us.\nBury me beside a kept promise; let the town call that justice if it needs a pretty word.",
+      "referenced_character_ids": [
+        "char_4b86f9e545",
+        "char_caleb_vale",
+        "char_miriam_harrow"
+      ],
+      "referenced_event_ids": [
+        "life_148e2f9379",
+        "life_148e2f9379",
+        "life_5ea1ba8ccc",
+        "life_148e2f9379"
+      ],
+      "hidden_truths": [],
+      "public_contradictions": [
+        "A new child entered the town's arithmetic."
+      ],
+      "mood": "wistful",
+      "actual_model": null
+    },
+    {
+      "id": "epitaph_b00586a117",
+      "character_id": "char_jonah_harrow",
+      "character_name": "Jonah Harrow",
+      "year_written": 1909,
+      "voice": "A man shaped by sawdust, river damp, and the long memory of wages.",
+      "text": "I am Jonah Harrow, speaking now from under river-wheel and weather.\nThey thought they knew me by the work I did as a miller, but my real trade was keeping count of losses.\nJonah Harrow died in spring when work, worry, and weather finally agreed against the body.\nThey praised my hard work; they were really rewarding how well I concealed bitterness.\nThe truth is this: I shifted the sluice markers one wet spring to make the Vales look greedy, and hated them harder when the trick still felt righteous.\nAsk Samuel Harrow what silence cost us.\nBury me beside wet timber; let the town call that justice if it needs a pretty word.",
+      "referenced_character_ids": [
+        "char_4b86f9e545",
+        "char_ac03b0ec16",
+        "char_caleb_vale",
+        "char_eliza_harrow"
+      ],
+      "referenced_event_ids": [
+        "life_d8e1aac98f",
+        "life_ad8695e0a6",
+        "life_ad8695e0a6",
+        "life_3da370b122"
+      ],
+      "hidden_truths": [
+        "I shifted the sluice markers one wet spring to make the Vales look greedy, and hated them harder when the trick still felt righteous."
+      ],
+      "public_contradictions": [
+        "Jonah finally said aloud what the town had only guessed."
+      ],
+      "mood": "haunted",
+      "actual_model": null
+    },
+    {
+      "id": "epitaph_24596cd8dc",
+      "character_id": "char_silas_vale",
+      "character_name": "Silas Vale",
+      "year_written": 1911,
+      "voice": "A mill wheel speaking after it has broken a hand too many.",
+      "text": "I am Silas Vale, speaking now from under river-wheel and weather.\nThey thought they knew me by the work I did as a miller, but my real trade was keeping count of losses.\nSilas Vale died in spring when age finally collected the debt it had been extending for years.\nThey praised my industry; they were really rewarding how well I concealed greed.\nThe truth is this: I drew relief money into the mill and let gratitude stand in for wages because power was easier to keep than fairness.\nAsk June Harrow what silence cost us.\nBury me beside wet timber; let the town call that justice if it needs a pretty word.",
+      "referenced_character_ids": [
+        "char_2b8234e04b",
+        "char_caleb_vale",
+        "char_miriam_harrow"
+      ],
+      "referenced_event_ids": [
+        "life_844f0e02c6",
+        "life_e9d2737ef0",
+        "life_844f0e02c6",
+        "life_9d1727a8b7"
+      ],
+      "hidden_truths": [
+        "I drew relief money into the mill and let gratitude stand in for wages because power was easier to keep than fairness."
+      ],
+      "public_contradictions": [
+        "Silas finally said aloud what the town had only guessed."
+      ],
+      "mood": "haunted",
+      "actual_model": null
+    },
+    {
+      "id": "epitaph_b80fc323b7",
+      "character_id": "char_ada_quill",
+      "character_name": "Ada Quill",
+      "year_written": 1911,
+      "voice": "Counter wood, midnight glasses, and a candle still refusing the dawn.",
+      "text": "I am Ada Quill, speaking now from under glass light and weather.\nThey thought they knew me by the work I did as a bartender, but my real trade was keeping count of losses.\nAda Quill died in summer when work, worry, and weather finally agreed against the body.\nThey praised my wit; they were really rewarding how well I concealed keeping everybody's secrets.\nThe truth is this: I kept Gideon Bell's letters to the singer from Galena behind the brandy shelf because holiness deserves at least one witness who can laugh.\nAsk Thomas Quill what silence cost us.\nBury me beside midnight laughter; let the town call that justice if it needs a pretty word.",
+      "referenced_character_ids": [
+        "char_thomas_quill"
+      ],
+      "referenced_event_ids": [
+        "life_2ad0c2064a",
+        "life_2ad0c2064a",
+        "life_e7c7a50926",
+        "life_d7064e2483"
+      ],
+      "hidden_truths": [
+        "I kept Gideon Bell's letters to the singer from Galena behind the brandy shelf because holiness deserves at least one witness who can laugh."
+      ],
+      "public_contradictions": [
+        "Ada looked composed while hiding a strain no one measured correctly."
+      ],
+      "mood": "haunted",
+      "actual_model": null
+    }
+  ],
+  "shared_motifs": [
+    "i"
+  ],
+  "cross_references": {
+    "Mercy Bell": [
+      "Gideon Bell",
+      "Thomas Quill"
+    ],
+    "Ruth Vale": [
+      "Jonah Harrow",
+      "Silas Vale"
+    ],
+    "Gideon Bell": [
+      "Mercy Bell"
+    ],
+    "Frank Harrow": [
+      "Arthur Harrow",
+      "Caleb Vale",
+      "Miriam Harrow"
+    ],
+    "Jonah Harrow": [
+      "Arthur Harrow",
+      "Bennett Harrow",
+      "Caleb Vale",
+      "Eliza Harrow"
+    ],
+    "Silas Vale": [
+      "June Harrow",
+      "Caleb Vale",
+      "Miriam Harrow"
+    ],
+    "Ada Quill": [
+      "Thomas Quill"
+    ]
+  }
+}

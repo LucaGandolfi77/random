@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Graveyard Chorus of Morrowfield</title>
+    <style>
+      :root {
+        --paper: #f5eee2;
+        --ink: #2a231d;
+        --red: #7e2b2b;
+        --green: #40513b;
+        --shadow: rgba(42, 35, 29, 0.18);
+      }
+      body {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(126, 43, 43, 0.13), transparent 28%),
+          linear-gradient(180deg, #efe4d5 0%, var(--paper) 55%, #eadfce 100%);
+      }
+      main { max-width: 1120px; margin: 0 auto; padding: 32px 20px 64px; }
+      header { margin-bottom: 28px; }
+      h1, h2, h3 { font-weight: 600; letter-spacing: 0.02em; }
+      .hero {
+        padding: 28px;
+        border: 1px solid rgba(42, 35, 29, 0.14);
+        background: rgba(255, 250, 243, 0.78);
+        box-shadow: 0 20px 45px var(--shadow);
+      }
+      .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      .epitaph-card, .family-card {
+        padding: 18px;
+        background: rgba(255, 252, 247, 0.82);
+        border-left: 4px solid var(--red);
+        box-shadow: 0 12px 30px var(--shadow);
+      }
+      .epitaph-card pre { white-space: pre-wrap; font-family: inherit; line-height: 1.65; }
+      .mood { text-transform: uppercase; letter-spacing: 0.18em; color: var(--red); font-size: 0.72rem; }
+      ul.timeline { list-style: none; padding: 0; display: grid; gap: 12px; }
+      ul.timeline li { padding: 14px 16px; background: rgba(255, 252, 247, 0.68); border-left: 4px solid var(--green); }
+      ul.timeline span { display: block; margin-top: 6px; line-height: 1.5; }
+      @media (max-width: 720px) {
+        main { padding: 20px 14px 48px; }
+        .hero { padding: 20px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <p>Morrowfield anthology export, year 1913</p>
+        <h1>Graveyard Chorus of Morrowfield</h1>
+        <p>the Vale-Harrow quarrel over the mill sluice, the Bell suspicion that the tavern keeps what the church cannot</p>
+                <p><a href="./index.html">Open the PWA explorer</a></p>
+      </header>
+      <section>
+        <h2>Families Under Pressure</h2>
+        <div class="grid">
+        <article class="family-card">
+          <h3>Vale</h3>
+          <p>Mill owners who turned flood relief into civic authority.</p>
+          <p><strong>Members:</strong> Ruth Vale, Silas Vale, Caleb Vale</p>
+          <p><strong>Pressure:</strong> The flood ledger has never been fully opened.</p>
+        </article>
+        
+        <article class="family-card">
+          <h3>Harrow</h3>
+          <p>Working mill folk who remember every insult as labor already paid for.</p>
+          <p><strong>Members:</strong> Jonah Harrow, Eliza Harrow, Miriam Harrow, Samuel Harrow, Arthur Harrow, Frank Harrow, Bennett Harrow, June Harrow</p>
+          <p><strong>Pressure:</strong> Someone in the family has always adjusted the record when truth would destroy a woman first.</p>
+        </article>
+        
+        <article class="family-card">
+          <h3>Quill</h3>
+          <p>River people who trade in conversation, wakeful hours, and the price of burial.</p>
+          <p><strong>Members:</strong> Ada Quill, Thomas Quill, Clara Quill</p>
+          <p><strong>Pressure:</strong> The tavern shelves hold more confessions than the church register.</p>
+        </article>
+        
+        <article class="family-card">
+          <h3>Bell</h3>
+          <p>Clergy and caregivers whose respectability survives by keeping a careful distance from appetite.</p>
+          <p><strong>Members:</strong> Gideon Bell, Mercy Bell</p>
+          <p><strong>Pressure:</strong> Mercy&#x27;s birth was explained on paper more neatly than in blood.</p>
+        </article>
+        </div>
+      </section>
+      <section>
+        <h2>Cemetery Chorus</h2>
+        <div class="grid">
+            <article class="epitaph-card">
+              <h3>Mercy Bell</h3>
+              <p class="mood">Haunted</p>
+              <pre>I am Mercy Bell, speaking now from under vinegar and weather.
+They thought they knew me by the work I did as a nurse, but my real trade was keeping count of losses.
+Mercy Bell died in autumn when work, worry, and weather finally agreed against the body.
+They praised my usefulness; they were really rewarding how well I concealed reserve.
+The truth is this: I have long suspected that Silas Vale, not any Bell, gave me my face, and I hated the suspicion because it felt too much like belonging to the wrong room.
+Ask Thomas Quill what silence cost us.
+Bury me beside a hand kept steady; let the town call that justice if it needs a pretty word.</pre>
+              <p class="refs">Cross references: Gideon Bell, Thomas Quill</p>
+            </article>
+            
+            <article class="epitaph-card">
+              <h3>Ruth Vale</h3>
+              <p class="mood">Haunted</p>
+              <pre>I am Ruth Vale, speaking now from under ledger and weather.
+They thought they knew me by the work I did as a mayor, but my real trade was keeping count of losses.
+Ruth Vale died in autumn when work, worry, and weather finally agreed against the body.
+They praised my efficiency; they were really rewarding how well I concealed silent cruelty.
+The truth is this: I kept the flood ledger because it showed Silas drawing relief funds into the mill while the Harrows pawned blankets.
+Ask Silas Vale what silence cost us.
+Bury me beside public promises; let the town call that justice if it needs a pretty word.</pre>
+              <p class="refs">Cross references: Jonah Harrow, Silas Vale</p>
+            </article>
+            
+            <article class="epitaph-card">
+              <h3>Gideon Bell</h3>
+              <p class="mood">Haunted</p>
+              <pre>I am Gideon Bell, speaking now from under bell rope and weather.
+They thought they knew me by the work I did as a preacher, but my real trade was keeping count of losses.
+Gideon Bell died in spring when work, worry, and weather finally agreed against the body.
+They praised my eloquence; they were really rewarding how well I concealed severity.
+The truth is this: I wrote letters to a singer and nearly left the parish with her, then preached twice as hard because desire had learned my handwriting.
+Ask Mercy Bell what silence cost us.
+Bury me beside winter pews; let the town call that justice if it needs a pretty word.</pre>
+              <p class="refs">Cross references: Mercy Bell</p>
+            </article>
+            
+            <article class="epitaph-card">
+              <h3>Frank Harrow</h3>
+              <p class="mood">Wistful</p>
+              <pre>I am Frank Harrow, speaking now from under dust and weather.
+They thought they knew me by the work I did as a child, but my real trade was keeping count of losses.
+Frank Harrow was born, and every old loyalty in Morrowfield adjusted itself around the cradle.
+They praised my steadiness; they were really rewarding how well I concealed nothing they could prove.
+The truth arrived late and had to share a room with pride.
+Ask Arthur Harrow what silence cost us.
+Bury me beside a kept promise; let the town call that justice if it needs a pretty word.</pre>
+              <p class="refs">Cross references: Arthur Harrow, Caleb Vale, Miriam Harrow</p>
+            </article>
+            
+            <article class="epitaph-card">
+              <h3>Jonah Harrow</h3>
+              <p class="mood">Haunted</p>
+              <pre>I am Jonah Harrow, speaking now from under river-wheel and weather.
+They thought they knew me by the work I did as a miller, but my real trade was keeping count of losses.
+Jonah Harrow died in spring when work, worry, and weather finally agreed against the body.
+They praised my hard work; they were really rewarding how well I concealed bitterness.
+The truth is this: I shifted the sluice markers one wet spring to make the Vales look greedy, and hated them harder when the trick still felt righteous.
+Ask Samuel Harrow what silence cost us.
+Bury me beside wet timber; let the town call that justice if it needs a pretty word.</pre>
+              <p class="refs">Cross references: Arthur Harrow, Bennett Harrow, Caleb Vale, Eliza Harrow</p>
+            </article>
+            
+            <article class="epitaph-card">
+              <h3>Silas Vale</h3>
+              <p class="mood">Haunted</p>
+              <pre>I am Silas Vale, speaking now from under river-wheel and weather.
+They thought they knew me by the work I did as a miller, but my real trade was keeping count of losses.
+Silas Vale died in spring when age finally collected the debt it had been extending for years.
+They praised my industry; they were really rewarding how well I concealed greed.
+The truth is this: I drew relief money into the mill and let gratitude stand in for wages because power was easier to keep than fairness.
+Ask June Harrow what silence cost us.
+Bury me beside wet timber; let the town call that justice if it needs a pretty word.</pre>
+              <p class="refs">Cross references: June Harrow, Caleb Vale, Miriam Harrow</p>
+            </article>
+            
+            <article class="epitaph-card">
+              <h3>Ada Quill</h3>
+              <p class="mood">Haunted</p>
+              <pre>I am Ada Quill, speaking now from under glass light and weather.
+They thought they knew me by the work I did as a bartender, but my real trade was keeping count of losses.
+Ada Quill died in summer when work, worry, and weather finally agreed against the body.
+They praised my wit; they were really rewarding how well I concealed keeping everybody&#x27;s secrets.
+The truth is this: I kept Gideon Bell&#x27;s letters to the singer from Galena behind the brandy shelf because holiness deserves at least one witness who can laugh.
+Ask Thomas Quill what silence cost us.
+Bury me beside midnight laughter; let the town call that justice if it needs a pretty word.</pre>
+              <p class="refs">Cross references: Thomas Quill</p>
+            </article>
+            </div>
+      </section>
+      <section>
+        <h2>Town Chronicle</h2>
+        <ul class="timeline"><li><strong>Morrowfield in 1901</strong><span>The town kept talking about Mercy Bell was carried into town memory, Caleb Vale and Miriam Harrow married under public scrutiny, Arthur Harrow arrived carrying several families at once. while Harvest Supper staged every alliance in public, The Thaw Market reopened credit and appetite reset the public weather. In Morrowfield, even patience left a footprint..</span></li><li><strong>Morrowfield in 1902</strong><span>The town kept talking about Ruth Vale was carried into town memory, Silas Vale let a rumor walk in public shoes, Ruth Vale renewed a family bitterness. while The council reopened the sluice dispute, A heat spell pushed the clinic past mercy reset the public weather. In Morrowfield, even patience left a footprint..</span></li><li><strong>Morrowfield in 1903</strong><span>The town kept talking about Silas Vale renewed a family bitterness, Jonah Harrow renewed a family bitterness, Silas Vale let a rumor walk in public shoes. while Harvest Supper staged every alliance in public, The Thaw Market reopened credit and appetite reset the public weather. In Morrowfield, even patience left a footprint..</span></li><li><strong>Morrowfield in 1904</strong><span>The town kept talking about Gideon Bell was carried into town memory, Frank Harrow was carried into town memory, Frank Harrow arrived carrying several families at once. while A box of old letters surfaced behind the Blue Lantern, The Thaw Market reopened credit and appetite reset the public weather. In Morrowfield, even patience left a footprint..</span></li><li><strong>Morrowfield in 1905</strong><span>The town kept talking about Jonah Harrow renewed a family bitterness, Silas Vale renewed a family bitterness, Jonah Harrow renewed a family bitterness. while An influenza winter thinned the town&#x27;s bravado, The council reopened the sluice dispute reset the public weather. In Morrowfield, even patience left a footprint..</span></li><li><strong>Morrowfield in 1906</strong><span>The town kept talking about Silas Vale let a rumor walk in public shoes, Jonah Harrow let a rumor walk in public shoes, Silas Vale renewed a family bitterness. while Harvest Supper staged every alliance in public, The Thaw Market reopened credit and appetite reset the public weather. In Morrowfield, even patience left a footprint..</span></li><li><strong>Morrowfield in 1907</strong><span>The town kept talking about Silas Vale renewed a family bitterness, Jonah Harrow let a rumor walk in public shoes, Silas Vale renewed a family bitterness. while Harvest Supper staged every alliance in public, The Thaw Market reopened credit and appetite reset the public weather. In Morrowfield, even patience left a footprint..</span></li><li><strong>Morrowfield in 1908</strong><span>The town kept talking about Bennett Harrow arrived carrying several families at once, Silas Vale renewed a family bitterness, Jonah Harrow let a rumor walk in public shoes. while A box of old letters surfaced behind the Blue Lantern, The council reopened the sluice dispute reset the public weather. In Morrowfield, even patience left a footprint..</span></li><li><strong>Morrowfield in 1909</strong><span>The town kept talking about Jonah Harrow was carried into town memory, Jonah Harrow let a rumor walk in public shoes, Eliza Harrow carried a burden for Miriam Harrow. while Harvest Supper staged every alliance in public, The Thaw Market reopened credit and appetite reset the public weather. In Morrowfield, even patience left a footprint..</span></li><li><strong>Morrowfield in 1910</strong><span>The town kept talking about June Harrow arrived carrying several families at once, Silas Vale carried a burden for Caleb Vale, Eliza Harrow carried a burden for Miriam Harrow. while An influenza winter thinned the town&#x27;s bravado, Harvest Supper staged every alliance in public reset the public weather. In Morrowfield, even patience left a footprint..</span></li><li><strong>Morrowfield in 1911</strong><span>The town kept talking about Silas Vale was carried into town memory, Ada Quill was carried into town memory, Silas Vale carried a burden for Caleb Vale. while The council reopened the sluice dispute, Harvest Supper staged every alliance in public reset the public weather. In Morrowfield, even patience left a footprint..</span></li><li><strong>Morrowfield in 1912</strong><span>The town kept talking about Eliza Harrow carried a burden for Miriam Harrow, Eliza Harrow carried a burden for Miriam Harrow, Eliza Harrow carried a burden for Miriam Harrow. while A box of old letters surfaced behind the Blue Lantern, The Thaw Market reopened credit and appetite reset the public weather. In Morrowfield, even patience left a footprint..</span></li></ul>
+      </section>
+    </main>
+  </body>
+</html>

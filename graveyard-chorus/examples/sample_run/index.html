@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#19352c" />
+    <meta name="description" content="A portable cemetery explorer for the literary town simulation of Morrowfield." />
+    <title>Graveyard Chorus of Morrowfield</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon-192.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Portable cemetery explorer</p>
+          <h1>Graveyard Chorus of Morrowfield</h1>
+          <p class="lede">
+            Walk the exported memory of Morrowfield: epitaphs, family weather, scandals, inheritances,
+            and the public timeline that made private griefs intelligible.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <button id="installButton" class="ghost-button" hidden>Install App</button>
+          <a class="ghost-button" href="./report.html">Open Static Report</a>
+          <a class="ghost-button" href="./anthology.md">Read Markdown Anthology</a>
+        </div>
+        <div id="heroStats" class="hero-stats"></div>
+      </header>
+
+      <section class="control-bar panel">
+        <label class="control">
+          <span>Search the town</span>
+          <input id="searchInput" type="search" placeholder="Search names, secrets, districts, events" />
+        </label>
+        <label class="control">
+          <span>Family</span>
+          <select id="familyFilter">
+            <option value="all">All families</option>
+          </select>
+        </label>
+        <div class="control status-control">
+          <span>Status</span>
+          <div class="segmented" id="statusFilter">
+            <button type="button" class="is-active" data-status="all">All</button>
+            <button type="button" data-status="living">Living</button>
+            <button type="button" data-status="dead">Dead</button>
+          </div>
+        </div>
+        <button id="reloadButton" class="ghost-button">Reload Bundle</button>
+      </section>
+
+      <div class="main-layout">
+        <aside class="rail panel">
+          <div class="section-heading">
+            <h2>Town Voices</h2>
+            <p>Choose a life to inspect its kinship, reputation, secrets, and after-voice.</p>
+          </div>
+          <div id="characterRail" class="character-rail"></div>
+        </aside>
+
+        <main class="content-stack">
+          <section class="panel">
+            <div class="section-heading">
+              <h2>Overview</h2>
+              <p>The town as a shared machine of weather, class, memory, and inheritance.</p>
+            </div>
+            <div id="overviewCards" class="overview-grid"></div>
+            <div id="townMetadata" class="metadata-grid"></div>
+          </section>
+
+          <section class="panel">
+            <div class="section-heading">
+              <h2>Cemetery Chorus</h2>
+              <p>Dead voices speaking from the simulation state, not from generic improvisation.</p>
+            </div>
+            <div id="chorusGrid" class="chorus-grid"></div>
+          </section>
+
+          <section class="panel">
+            <div class="section-heading">
+              <h2>Family Weather</h2>
+              <p>Alliances, feuds, inherited secrets, and the domestic climate each line carries.</p>
+            </div>
+            <div id="familyGrid" class="family-grid"></div>
+          </section>
+
+          <section class="panel">
+            <div class="section-heading">
+              <h2>Town Timeline</h2>
+              <p>Public events, crises, courtships, and the slow accumulation of consequences.</p>
+            </div>
+            <ol id="timelineList" class="timeline"></ol>
+          </section>
+        </main>
+
+        <aside class="rail panel detail-shell">
+          <div class="section-heading">
+            <h2>Selected Life</h2>
+            <p>Relationship graph fragments, recent events, and the pressure between private and public story.</p>
+          </div>
+          <div id="detailPanel" class="detail-panel"></div>
+        </aside>
+      </div>
+
+      <div id="appNotice" class="notice" hidden></div>
+    </div>
+  </body>
+</html>

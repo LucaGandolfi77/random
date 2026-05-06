@@ -1,0 +1,270 @@
+# Graveyard Chorus
+
+Graveyard Chorus is a production-minded agentic storytelling system that simulates a fictional town, tracks family memory across generations, and produces a linked cemetery anthology of first-person epitaphs.
+
+The project is designed around OpenRouter free models as a first-class constraint, but it remains fully runnable offline through deterministic literary fallbacks. That means the social world, memory engine, chronology, and exports can all be tested locally without network access, while OpenRouter can be turned on for richer annual chronicles and epitaphs when an API key is available.
+
+Each export bundle now includes a lightweight progressive web app explorer that sits directly on top of the exported JSON artifacts. It can browse characters, family pressure, epitaphs, and town events without any build step or frontend framework.
+
+## Why This Architecture Fits Best
+
+The best fit for this problem is a Python simulation backend with a CLI and a static report exporter.
+
+Why this is the right architecture:
+
+- The social simulation needs strong typed state, replayability, and persistence. Python plus Pydantic gives a reliable backbone for long-horizon world state.
+- OpenRouter free models are excellent for lyric compression and reflective rewriting, but they are too volatile to trust as the sole source of world logic. The simulation therefore keeps causality deterministic and lets LLMs operate where they add the most value: annual chronicle voicing, epitaph voicing, and optional reflective polish.
+- A CLI plus static exports keeps the tool production-friendly. It can run in CI, create reproducible demos, generate anthology artifacts, and avoid the fragility of a heavy web dependency stack.
+- Separate narrative roles make the system agentic without making it opaque. Town history, life choices, relationships, memory summarization, family chronicles, epitaph generation, and consistency review are explicit modules with narrow responsibilities.
+
+## Agentic Narrative Design
+
+The architecture is organized into three layers.
+
+### 1. Simulation Core
+
+- `models.py` defines typed state for characters, families, households, memories, secrets, life events, town events, chronicles, epitaphs, and the cemetery collection.
+- `engine.py` advances the world through seasons and years, handles births, marriages, deaths, kinship refresh, event generation, and long-term consequences.
+- `memory.py` retrieves private, family, and town memories using recency, emotional weight, participant overlap, and contradiction signals.
+
+### 2. Agent Roles
+
+- `CharacterLifeAgent` chooses a next social move for each living character based on desires, fears, secrets, and retrieved memories.
+- `RelationshipCuratorAgent` turns those choices into events and updates relationship strength, rivalry, trust, intimacy, and reputation.
+- `FamilyChronicleAgent` records inherited burdens, alliances, marriages, births, and deaths.
+- `MemorySummarizerAgent` compresses older memory chapters to keep state manageable.
+- `TownHistorianAgent` writes annual chronicle entries from public events and uses OpenRouter when available.
+- `EpitaphPoetAgent` produces first-person poetic epitaphs grounded in lived history.
+- `ConsistencyReviewerAgent` checks that the epitaph references valid people, valid events, and at least one grounded contradiction or hidden truth.
+
+### 3. Literary Output Layer
+
+- `exporters.py` emits Markdown, JSON, and HTML artifacts.
+- `pwa.py` emits a lightweight installable explorer that reads the exported bundle in place.
+- The output bundle includes biographies, family trees, town chronicle, event log, cemetery record, and a linked anthology.
+- The CLI supports a reproducible offline demo as well as a normal simulation run.
+
+## Folder Tree
+
+```text
+graveyard-chorus/
+├── .env.example
+├── README.md
+├── pyproject.toml
+├── examples/
+│   └── sample_run/
+├── graveyard_chorus/
+│   ├── __init__.py
+│   ├── cli.py
+│   ├── client.py
+│   ├── config.py
+│   ├── engine.py
+│   ├── exporters.py
+│   ├── memory.py
+│   ├── models.py
+│   ├── persistence.py
+│   ├── pwa.py
+│   ├── seeds.py
+│   ├── agents/
+│   │   ├── __init__.py
+│   │   └── roles.py
+│   └── data/
+│       ├── family_networks.json
+│       └── town_seed.json
+└── tests/
+```
+
+## OpenRouter Design
+
+The OpenRouter client supports:
+
+- API key from `.env`
+- `openrouter/free` as a router option
+- exact `:free` model IDs as primary or fallback models
+- retries and timeouts
+- structured JSON output with `json_schema`
+- local JSON extraction that tolerates reasoning-heavy wrappers, markdown fences, and partially truncated JSON through Pydantic Core recovery
+- logging of every outbound request and inbound response, with the Authorization header redacted
+- logging of the actual model used for a successful call
+- deterministic fallback when a structured response cannot be recovered cleanly enough to validate
+
+By default, logs are persisted to `logs/graveyard-chorus.log` relative to the directory where you run the CLI command.
+
+Recommended defaults:
+
+- Primary: `openrouter/free`
+- Fallbacks: `inclusionai/ling-2.6-1t-20260423:free`, `liquid/lfm-2.5-1.2b-instruct-20260120:free`
+
+## Seed Town
+
+The bundled seed town is `Morrowfield`, a river town with:
+
+- four districts
+- church, tavern, school, mill, clinic, town hall, cemetery
+- annual festivals and seasonal rhythms
+- a Vale-Harrow mill feud
+- Bell respectability under pressure
+- Quill control of inconvenient letters and overheard truths
+- hidden paternity, civic ledgers, and cross-class courtship
+
+The sample families are:
+
+- Vale: civic power, mill wealth, compromised relief ledgers
+- Harrow: working-class memory, careful rage, protective secrecy
+- Quill: tavern wit, burial labor, hidden letters, unstable money
+- Bell: pulpit authority, caregiving, respectability built on omissions
+
+## Install
+
+```bash
+cd graveyard-chorus
+pip install -e .
+```
+
+Optional development tools:
+
+```bash
+pip install -e .[dev]
+```
+
+## Configure OpenRouter
+
+```bash
+cp .env.example .env
+```
+
+Then add your OpenRouter key.
+
+```dotenv
+OPENROUTER_API_KEY=your_key_here
+GRAVEYARD_PRIMARY_MODEL=openrouter/free
+GRAVEYARD_FALLBACK_MODELS=inclusionai/ling-2.6-1t-20260423:free,liquid/lfm-2.5-1.2b-instruct-20260120:free
+GRAVEYARD_LOG_LEVEL=INFO
+GRAVEYARD_LOG_OPENROUTER_TRAFFIC=true
+GRAVEYARD_LOG_DIR=logs
+GRAVEYARD_LOG_FILE=graveyard-chorus.log
+```
+
+When OpenRouter traffic logging is enabled, the CLI logs:
+
+- the full request payload sent to `/chat/completions`
+- sanitized request headers with the bearer token redacted
+- the raw response body returned by OpenRouter
+- success and failure summaries with requested model, actual model, attempt number, and status code where available
+
+The CLI now prints the active log file path in its summary output and in `serve` mode.
+
+## Run
+
+Offline deterministic simulation:
+
+```bash
+graveyard-chorus run --offline --years 16
+```
+
+OpenRouter-enhanced run:
+
+```bash
+graveyard-chorus run --years 16 --llm
+```
+
+If `--llm` is requested without credentials, the CLI now prints an explicit warning before continuing in deterministic mode.
+
+Probe the currently configured models directly, without fallback contamination:
+
+```bash
+graveyard-chorus probe-models
+```
+
+Probe a custom comma-separated set:
+
+```bash
+graveyard-chorus probe-models --models openrouter/free,inclusionai/ling-2.6-1t-20260423:free
+```
+
+Serve an exported bundle so the PWA explorer and service worker work correctly:
+
+```bash
+graveyard-chorus serve examples/sample_run --host 127.0.0.1 --port 8000
+```
+
+Re-export an anthology from a saved state:
+
+```bash
+graveyard-chorus anthology runs/morrowfield-1917/town_state.json --output-dir exports/morrowfield
+```
+
+Generate the bundled demo anthology:
+
+```bash
+graveyard-chorus demo --years 12
+```
+
+## Output Bundle
+
+Each run exports:
+
+- `town_state.json`
+- `index.html` as the PWA explorer entry point
+- `app.js`, `styles.css`, `manifest.webmanifest`, `sw.js`, `icon-192.svg`, `icon-512.svg`
+- `anthology.md`
+- `biographies.md`
+- `family_trees.md`
+- `town_chronicle.md`
+- `event_log.json`
+- `cemetery_record.json`
+- `report.html`
+
+## PWA Explorer
+
+The exported explorer is a static, framework-free progressive web app designed to travel with the bundle itself.
+
+It provides:
+
+- a searchable character rail
+- family filtering and living/dead filtering
+- a cemetery chorus view driven by `cemetery_record.json`
+- a timeline view driven by `event_log.json`
+- a detail panel driven by `town_state.json`
+- offline caching through a service worker once the bundle is served over HTTP
+
+The explorer reads the same files the exporter already writes, so there is no second data pipeline to maintain.
+
+## Example Anthology Excerpt
+
+An offline run produces epitaphs that remain grounded in simulation state. A typical linked excerpt looks like this:
+
+```text
+I am Silas Vale, speaking now from under river-wheel and weather.
+They thought they knew me by my mill, but my real trade was keeping count of losses.
+He signed his name in a relief ledger and called theft stewardship because the mill had to survive somebody's hunger.
+They praised my industry; they were really rewarding how well I concealed greed.
+The truth is this: I drew relief money into the mill and let gratitude stand in for wages because power was easier to keep than fairness.
+Ask Jonah Harrow what silence cost us.
+Bury me beside quiet hands; let the town call that justice if it needs a pretty word.
+```
+
+Because epitaphs are linked to real people and event identifiers, multiple dead voices can revisit the same letters, the same ledger, the same courtship, or the same winter epidemic from radically different moral positions.
+
+## Testing
+
+```bash
+pytest -q
+```
+
+The tests cover:
+
+- OpenRouter JSON extraction and actual-model reporting
+- memory retrieval prioritization
+- offline simulation runs that produce epitaphs and chronicles
+- export bundle generation
+
+## Project Notes
+
+- Everything in the project is in English: code, comments, data, tests, CLI text, and sample outputs.
+- The literary tone is original and grounded in simulation history, not in copied phrasing.
+- The simulation keeps both private memory and public reputation, allowing contradiction, revision, and unreliable remembrance.
+
+## License
+
+MIT

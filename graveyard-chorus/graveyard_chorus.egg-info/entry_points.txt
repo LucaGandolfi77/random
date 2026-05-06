@@ -1,0 +1,2 @@
+[console_scripts]
+graveyard-chorus = graveyard_chorus.cli:app

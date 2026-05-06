@@ -1,0 +1,73 @@
+{
+  "town_name": "Morrowfield",
+  "families": [
+    {
+      "family_id": "family_vale",
+      "family_name": "Vale",
+      "branch": "Hill Ward line",
+      "core_members": ["Ruth Vale", "Silas Vale", "Caleb Vale"],
+      "alliances": ["Bell"],
+      "feuds": ["Harrow"],
+      "hidden_pressure": "The family standing rests on a flood ledger Ruth never destroyed."
+    },
+    {
+      "family_id": "family_harrow",
+      "family_name": "Harrow",
+      "branch": "Mill Row line",
+      "core_members": ["Jonah Harrow", "Eliza Harrow", "Miriam Harrow", "Samuel Harrow"],
+      "alliances": [],
+      "feuds": ["Vale"],
+      "hidden_pressure": "Eliza's merciful alteration of a birth ledger could redraw the town's idea of lineage."
+    },
+    {
+      "family_id": "family_quill",
+      "family_name": "Quill",
+      "branch": "River Reach rooms",
+      "core_members": ["Ada Quill", "Thomas Quill", "Clara Quill"],
+      "alliances": [],
+      "feuds": ["Bell"],
+      "hidden_pressure": "Letters and overheard confessions function as family capital."
+    },
+    {
+      "family_id": "family_bell",
+      "family_name": "Bell",
+      "branch": "Parsonage line",
+      "core_members": ["Gideon Bell", "Mercy Bell"],
+      "alliances": ["Vale"],
+      "feuds": ["Quill"],
+      "hidden_pressure": "Respectability depends on a birth story that may not survive another decade."
+    }
+  ],
+  "connections": [
+    {
+      "from": "Caleb Vale",
+      "to": "Miriam Harrow",
+      "type": "secret courtship",
+      "effect": "Turns a class feud into a private longing with public consequences."
+    },
+    {
+      "from": "Thomas Quill",
+      "to": "Mercy Bell",
+      "type": "careful courtship",
+      "effect": "Bridges the tavern-church divide through tenderness rather than rhetoric."
+    },
+    {
+      "from": "Ada Quill",
+      "to": "Gideon Bell",
+      "type": "hostile knowledge",
+      "effect": "Ada's possession of the letters gives the tavern leverage over the pulpit."
+    },
+    {
+      "from": "Eliza Harrow",
+      "to": "Mercy Bell",
+      "type": "ledger secret",
+      "effect": "Eliza protects Mercy with a truth that could also wound her."
+    },
+    {
+      "from": "Ruth Vale",
+      "to": "Jonah Harrow",
+      "type": "civic feud",
+      "effect": "Every economic disagreement acquires the flavor of inherited insult."
+    }
+  ]
+}

@@ -1,0 +1,1500 @@
+{
+  "town_name": "Morrowfield",
+  "current_year": 1901,
+  "districts": [
+    "Hill Ward",
+    "River Reach",
+    "Mill Row",
+    "Cemetery Lane"
+  ],
+  "social_clusters": [
+    "old chapel families",
+    "river laborers",
+    "market widows",
+    "civic notables"
+  ],
+  "professions": [
+    "mayor",
+    "miller",
+    "schoolteacher",
+    "midwife",
+    "dressmaker",
+    "bartender",
+    "undertaker",
+    "preacher",
+    "nurse"
+  ],
+  "institutions": [
+    "church",
+    "tavern",
+    "school",
+    "mill",
+    "clinic",
+    "town hall",
+    "cemetery"
+  ],
+  "seasonal_rhythms": {
+    "spring": "debts are renegotiated when the thaw market opens the road",
+    "summer": "courtship leaves the porch and goes public by the river",
+    "autumn": "harvest tables settle old scores under the cover of manners",
+    "winter": "the cemetery and clinic share more traffic than anyone admits"
+  },
+  "festivals": [
+    "The Thaw Market",
+    "Lantern Regatta",
+    "Harvest Supper",
+    "Bell Night"
+  ],
+  "local_scandals": [
+    "a lost tithe box that was never truly explained",
+    "letters hidden behind the Blue Lantern shelves",
+    "the old suspicion that relief money fattened the wrong ledgers"
+  ],
+  "long_running_feuds": [
+    "the Vale-Harrow quarrel over the mill sluice",
+    "the Bell suspicion that the tavern keeps what the church cannot"
+  ],
+  "unwritten_customs": [
+    "No widow sits alone on Bell Night.",
+    "A family debt is not named aloud before harvest unless the speaker wants a feud.",
+    "If the midwife asks for silence, even enemies pretend to be discreet."
+  ],
+  "collective_memory": [
+    {
+      "origin": "town",
+      "year": 1887,
+      "season": "winter",
+      "category": "flood",
+      "summary": "The flood of 1887 rearranged debt more thoroughly than the riverbank.",
+      "emotional_weight": 0.95,
+      "public": true,
+      "tags": ["flood", "debt", "class"]
+    },
+    {
+      "origin": "town",
+      "year": 1894,
+      "season": "autumn",
+      "category": "scandal",
+      "summary": "The year the tithe box vanished, everyone learned how piety can sound like bookkeeping.",
+      "emotional_weight": 0.74,
+      "public": true,
+      "tags": ["church", "money", "gossip"]
+    }
+  ],
+  "economic_conditions": [
+    "the mill still determines wages",
+    "credit loosens only when a festival makes everyone sentimental"
+  ],
+  "political_shifts": [
+    "Ruth Vale has held civic influence long enough for duty to resemble dynasty."
+  ],
+  "gossip_themes": [
+    "water rights",
+    "letters",
+    "marriages"
+  ],
+  "family_alliances": [
+    "Vale-Bell"
+  ],
+  "families": {
+    "family_vale": {
+      "id": "family_vale",
+      "name": "Vale",
+      "origin": "Mill owners who turned flood relief into civic authority.",
+      "branch": "Hill Ward line",
+      "class_status": "gentry",
+      "motto": "We keep the river useful.",
+      "member_ids": [
+        "char_ruth_vale",
+        "char_silas_vale",
+        "char_caleb_vale"
+      ],
+      "allied_family_ids": [
+        "family_bell"
+      ],
+      "feud_family_ids": [
+        "family_harrow"
+      ],
+      "inherited_secrets": [
+        "The flood ledger has never been fully opened."
+      ],
+      "inherited_loyalties": [
+        "Protect the mill before pride, then pretend the order was reversed."
+      ],
+      "collective_memory": [
+        {
+          "origin": "family",
+          "year": 1887,
+          "season": "winter",
+          "category": "flood",
+          "summary": "The Vales survived the flood by turning favor into obligation.",
+          "emotional_weight": 0.81,
+          "public": false,
+          "tags": ["flood", "legacy"]
+        }
+      ],
+      "chronicle_notes": [
+        "1887: the family emerged richer in leverage than in sympathy."
+      ]
+    },
+    "family_harrow": {
+      "id": "family_harrow",
+      "name": "Harrow",
+      "origin": "Working mill folk who remember every insult as labor already paid for.",
+      "branch": "Mill Row line",
+      "class_status": "working",
+      "motto": "We keep count because no one else will.",
+      "member_ids": [
+        "char_jonah_harrow",
+        "char_eliza_harrow",
+        "char_miriam_harrow",
+        "char_samuel_harrow"
+      ],
+      "allied_family_ids": [],
+      "feud_family_ids": [
+        "family_vale"
+      ],
+      "inherited_secrets": [
+        "Someone in the family has always adjusted the record when truth would destroy a woman first."
+      ],
+      "inherited_loyalties": [
+        "Stand by kin even when kin makes the burden heavier."
+      ],
+      "collective_memory": [
+        {
+          "origin": "family",
+          "year": 1890,
+          "season": "spring",
+          "category": "feud",
+          "summary": "The Harrows never forgot who kept the sluice high when their wages were low.",
+          "emotional_weight": 0.86,
+          "public": false,
+          "tags": ["water", "feud", "mill"]
+        }
+      ],
+      "chronicle_notes": [
+        "1890: the sluice grievance became family scripture."
+      ]
+    },
+    "family_quill": {
+      "id": "family_quill",
+      "name": "Quill",
+      "origin": "River people who trade in conversation, wakeful hours, and the price of burial.",
+      "branch": "River Reach rooms",
+      "class_status": "working",
+      "motto": "If we must listen, we may as well remember.",
+      "member_ids": [
+        "char_ada_quill",
+        "char_thomas_quill",
+        "char_clara_quill"
+      ],
+      "allied_family_ids": [],
+      "feud_family_ids": [
+        "family_bell"
+      ],
+      "inherited_secrets": [
+        "The tavern shelves hold more confessions than the church register."
+      ],
+      "inherited_loyalties": [
+        "Never embarrass your own blood in front of a paying room."
+      ],
+      "collective_memory": [
+        {
+          "origin": "family",
+          "year": 1898,
+          "season": "autumn",
+          "category": "letters",
+          "summary": "The Quills learned that paper can weigh more than stone if the names are right.",
+          "emotional_weight": 0.7,
+          "public": false,
+          "tags": ["letters", "tavern", "church"]
+        }
+      ],
+      "chronicle_notes": [
+        "1898: Ada hid a packet and called it tidying."
+      ]
+    },
+    "family_bell": {
+      "id": "family_bell",
+      "name": "Bell",
+      "origin": "Clergy and caregivers whose respectability survives by keeping a careful distance from appetite.",
+      "branch": "Parsonage line",
+      "class_status": "middling",
+      "motto": "Order first, tenderness after.",
+      "member_ids": [
+        "char_gideon_bell",
+        "char_mercy_bell"
+      ],
+      "allied_family_ids": [
+        "family_vale"
+      ],
+      "feud_family_ids": [
+        "family_quill"
+      ],
+      "inherited_secrets": [
+        "Mercy's birth was explained on paper more neatly than in blood."
+      ],
+      "inherited_loyalties": [
+        "Protect public respectability even when private truth goes hungry."
+      ],
+      "collective_memory": [
+        {
+          "origin": "family",
+          "year": 1894,
+          "season": "autumn",
+          "category": "church",
+          "summary": "After the tithe scandal, the Bells preached harder than before and trusted less.",
+          "emotional_weight": 0.72,
+          "public": false,
+          "tags": ["church", "money", "shame"]
+        }
+      ],
+      "chronicle_notes": [
+        "1894: Gideon survived suspicion by sounding more certain."
+      ]
+    }
+  },
+  "households": {
+    "household_vale_manor": {
+      "id": "household_vale_manor",
+      "name": "Vale Manor",
+      "district": "Hill Ward",
+      "member_ids": [
+        "char_ruth_vale",
+        "char_silas_vale",
+        "char_caleb_vale"
+      ],
+      "steward_id": "char_ruth_vale",
+      "status": "prosperous",
+      "assets": [
+        "the upper mill office",
+        "a carriage with a failing axle",
+        "the flood ledger locked in a cedar chest"
+      ],
+      "notes": [
+        "Dinner is where affection goes to be audited."
+      ]
+    },
+    "household_harrow_cottage": {
+      "id": "household_harrow_cottage",
+      "name": "Harrow Cottage",
+      "district": "Mill Row",
+      "member_ids": [
+        "char_jonah_harrow",
+        "char_eliza_harrow",
+        "char_miriam_harrow",
+        "char_samuel_harrow"
+      ],
+      "steward_id": "char_eliza_harrow",
+      "status": "strained",
+      "assets": [
+        "a kitchen garden",
+        "a sewing machine bought on credit",
+        "a drawer of receipts Jonah keeps like evidence"
+      ],
+      "notes": [
+        "Every quarrel is interrupted by useful work."
+      ]
+    },
+    "household_quill_rooms": {
+      "id": "household_quill_rooms",
+      "name": "Quill Rooms",
+      "district": "River Reach",
+      "member_ids": [
+        "char_ada_quill",
+        "char_thomas_quill",
+        "char_clara_quill"
+      ],
+      "steward_id": "char_ada_quill",
+      "status": "precarious",
+      "assets": [
+        "the Blue Lantern tavern lease",
+        "an unfinished burial cabinet",
+        "a violin Clara keeps hidden in a flour sack"
+      ],
+      "notes": [
+        "People pay for drink, burial, and listening in roughly that order."
+      ]
+    },
+    "household_bell_parsonage": {
+      "id": "household_bell_parsonage",
+      "name": "Bell Parsonage",
+      "district": "Hill Ward",
+      "member_ids": [
+        "char_gideon_bell",
+        "char_mercy_bell"
+      ],
+      "steward_id": "char_gideon_bell",
+      "status": "respectable",
+      "assets": [
+        "the church keys",
+        "a locked parish chest",
+        "Mercy's medicine case"
+      ],
+      "notes": [
+        "Respectability is polished daily here, like silver that resents fingerprints."
+      ]
+    }
+  },
+  "characters": {
+    "char_ruth_vale": {
+      "id": "char_ruth_vale",
+      "full_name": "Ruth Vale",
+      "given_name": "Ruth",
+      "surname": "Vale",
+      "age": 67,
+      "birth_year": 1834,
+      "gender": "woman",
+      "family_id": "family_vale",
+      "lineage_branch": "Hill Ward line",
+      "household_id": "household_vale_manor",
+      "class_status": "gentry",
+      "occupation": "mayor",
+      "life_stage": "elder",
+      "family_origin": "Vale mill money and civic office",
+      "desires": ["legacy", "control"],
+      "fears": ["disgrace", "obsolescence"],
+      "virtues": ["discipline", "charity"],
+      "flaws": ["pride", "coldness"],
+      "private_voice": "She counts affection the way other people count rent: carefully, because once it cost too much.",
+      "public_voice": "Measured, civic, and faintly maternal even when she is closing a door.",
+      "poetic_voice": "A bell of office rung from beneath old water.",
+      "health": 0.7,
+      "children": ["char_caleb_vale"],
+      "spouses": ["char_silas_vale"],
+      "memories": [
+        {
+          "origin": "self",
+          "year": 1887,
+          "season": "winter",
+          "category": "flood",
+          "summary": "She watched the flood ledger close and understood that gratitude can be arranged like a mortgage.",
+          "emotional_weight": 0.92,
+          "public": false,
+          "tags": ["ledger", "flood", "power"],
+          "contradictory_to_public_story": true
+        }
+      ],
+      "secrets": [
+        {
+          "owner_id": "char_ruth_vale",
+          "summary": "She buried the proof that Silas profited from relief money.",
+          "truth": "I kept the flood ledger because it showed Silas drawing relief funds into the mill while the Harrows pawned blankets.",
+          "severity": 9,
+          "target_ids": ["char_silas_vale", "char_jonah_harrow"],
+          "public_risk": 0.88,
+          "tags": ["ledger", "flood", "mill"]
+        }
+      ],
+      "relationships": {
+        "char_silas_vale": {
+          "source_id": "char_ruth_vale",
+          "target_id": "char_silas_vale",
+          "kind": "spouse",
+          "affinity": 0.28,
+          "trust": 0.22,
+          "intimacy": 0.14,
+          "dependency": 0.19,
+          "rivalry": 0.08,
+          "family_tie": true,
+          "public_label": "married respectably"
+        },
+        "char_caleb_vale": {
+          "source_id": "char_ruth_vale",
+          "target_id": "char_caleb_vale",
+          "kind": "child",
+          "affinity": 0.43,
+          "trust": 0.36,
+          "intimacy": 0.18,
+          "dependency": 0.2,
+          "rivalry": 0.0,
+          "family_tie": true,
+          "public_label": "mother and son"
+        },
+        "char_jonah_harrow": {
+          "source_id": "char_ruth_vale",
+          "target_id": "char_jonah_harrow",
+          "kind": "rival",
+          "affinity": -0.12,
+          "trust": -0.2,
+          "intimacy": 0.0,
+          "dependency": 0.0,
+          "rivalry": 0.74,
+          "family_tie": false,
+          "public_label": "civic enemies"
+        }
+      },
+      "reputation": {
+        "admired_for": ["efficiency", "charity"],
+        "suspected_for": ["silent cruelty"],
+        "social_rank": 0.92,
+        "trustworthiness": 0.54,
+        "scandal": 0.18,
+        "warmth": 0.22,
+        "gossip_topics": {
+          "mill": 0.7,
+          "elections": 0.5
+        },
+        "public_summary": "The town credits Ruth with keeping the mill standing and fears the cost of her favors."
+      }
+    },
+    "char_silas_vale": {
+      "id": "char_silas_vale",
+      "full_name": "Silas Vale",
+      "given_name": "Silas",
+      "surname": "Vale",
+      "age": 72,
+      "birth_year": 1829,
+      "gender": "man",
+      "family_id": "family_vale",
+      "lineage_branch": "Hill Ward line",
+      "household_id": "household_vale_manor",
+      "class_status": "gentry",
+      "occupation": "miller",
+      "life_stage": "elder",
+      "family_origin": "Vale mill money and civic office",
+      "desires": ["continuity", "forgiveness"],
+      "fears": ["exposure", "physical decline"],
+      "virtues": ["industry", "wit"],
+      "flaws": ["cowardice", "vanity"],
+      "private_voice": "He jokes when frightened and bargains when ashamed.",
+      "public_voice": "A tired patriarch who still expects the room to arrange itself around him.",
+      "poetic_voice": "A mill wheel speaking after it has broken a hand too many.",
+      "health": 0.54,
+      "children": ["char_caleb_vale"],
+      "spouses": ["char_ruth_vale"],
+      "memories": [
+        {
+          "origin": "self",
+          "year": 1887,
+          "season": "winter",
+          "category": "flood",
+          "summary": "He signed his name in a relief ledger and called theft stewardship because the mill had to survive somebody's hunger.",
+          "emotional_weight": 0.9,
+          "public": false,
+          "tags": ["ledger", "flood", "survival"],
+          "contradictory_to_public_story": true
+        }
+      ],
+      "secrets": [
+        {
+          "owner_id": "char_silas_vale",
+          "summary": "He treated flood aid as private capital.",
+          "truth": "I drew relief money into the mill and let gratitude stand in for wages because power was easier to keep than fairness.",
+          "severity": 9,
+          "target_ids": ["char_ruth_vale", "char_jonah_harrow", "char_mercy_bell"],
+          "public_risk": 0.84,
+          "tags": ["mill", "flood", "money"]
+        }
+      ],
+      "relationships": {
+        "char_ruth_vale": {
+          "source_id": "char_silas_vale",
+          "target_id": "char_ruth_vale",
+          "kind": "spouse",
+          "affinity": 0.24,
+          "trust": 0.25,
+          "intimacy": 0.12,
+          "dependency": 0.23,
+          "rivalry": 0.05,
+          "family_tie": true,
+          "public_label": "bound by marriage and ledger"
+        },
+        "char_caleb_vale": {
+          "source_id": "char_silas_vale",
+          "target_id": "char_caleb_vale",
+          "kind": "child",
+          "affinity": 0.31,
+          "trust": 0.18,
+          "intimacy": 0.08,
+          "dependency": 0.11,
+          "rivalry": 0.03,
+          "family_tie": true,
+          "public_label": "father and son"
+        },
+        "char_jonah_harrow": {
+          "source_id": "char_silas_vale",
+          "target_id": "char_jonah_harrow",
+          "kind": "rival",
+          "affinity": -0.14,
+          "trust": -0.16,
+          "intimacy": 0.0,
+          "dependency": 0.0,
+          "rivalry": 0.63,
+          "family_tie": false,
+          "public_label": "water-rights adversaries"
+        }
+      },
+      "reputation": {
+        "admired_for": ["industry"],
+        "suspected_for": ["greed"],
+        "social_rank": 0.86,
+        "trustworthiness": 0.38,
+        "scandal": 0.25,
+        "warmth": 0.17,
+        "gossip_topics": {
+          "sluice": 0.6
+        },
+        "public_summary": "Silas still carries authority, though age has made him look more like evidence than leadership."
+      }
+    },
+    "char_caleb_vale": {
+      "id": "char_caleb_vale",
+      "full_name": "Caleb Vale",
+      "given_name": "Caleb",
+      "surname": "Vale",
+      "age": 31,
+      "birth_year": 1870,
+      "gender": "man",
+      "family_id": "family_vale",
+      "lineage_branch": "Hill Ward line",
+      "household_id": "household_vale_manor",
+      "class_status": "gentry",
+      "occupation": "schoolteacher",
+      "life_stage": "adult",
+      "family_origin": "Vale mill money and civic office",
+      "desires": ["love", "escape"],
+      "fears": ["scandal", "disappointing his mother"],
+      "virtues": ["patience", "curiosity"],
+      "flaws": ["indecision", "vanity"],
+      "private_voice": "He wishes for a life that sounds less inherited.",
+      "public_voice": "Polite, learned, and almost too careful to be trusted.",
+      "poetic_voice": "A classroom window left open toward the cemetery.",
+      "health": 0.93,
+      "parents": ["char_ruth_vale", "char_silas_vale"],
+      "memories": [
+        {
+          "origin": "self",
+          "year": 1900,
+          "season": "autumn",
+          "category": "courtship",
+          "summary": "At Harvest Supper he watched Miriam Harrow laugh without permission and wanted a life that could follow that sound.",
+          "emotional_weight": 0.8,
+          "public": false,
+          "participants": ["char_miriam_harrow"],
+          "tags": ["love", "harvest", "forbidden"]
+        }
+      ],
+      "secrets": [
+        {
+          "owner_id": "char_caleb_vale",
+          "summary": "He keeps Miriam's letters under a geography atlas.",
+          "truth": "I kept Miriam Harrow's letters under the school atlas and called that arrangement restraint when it was only cowardice with stationery.",
+          "severity": 7,
+          "target_ids": ["char_miriam_harrow"],
+          "public_risk": 0.61,
+          "tags": ["letters", "courtship", "school"]
+        }
+      ],
+      "relationships": {
+        "char_ruth_vale": {
+          "source_id": "char_caleb_vale",
+          "target_id": "char_ruth_vale",
+          "kind": "parent",
+          "affinity": 0.38,
+          "trust": 0.28,
+          "intimacy": 0.13,
+          "dependency": 0.18,
+          "rivalry": 0.09,
+          "family_tie": true,
+          "public_label": "dutiful son"
+        },
+        "char_miriam_harrow": {
+          "source_id": "char_caleb_vale",
+          "target_id": "char_miriam_harrow",
+          "kind": "lover",
+          "affinity": 0.47,
+          "trust": 0.29,
+          "intimacy": 0.32,
+          "dependency": 0.08,
+          "rivalry": 0.0,
+          "family_tie": false,
+          "public_label": "seen lingering by the school gate"
+        },
+        "char_mercy_bell": {
+          "source_id": "char_caleb_vale",
+          "target_id": "char_mercy_bell",
+          "kind": "friend",
+          "affinity": 0.2,
+          "trust": 0.18,
+          "intimacy": 0.04,
+          "dependency": 0.03,
+          "rivalry": 0.0,
+          "family_tie": false,
+          "public_label": "allies in gentle hypocrisy"
+        }
+      },
+      "reputation": {
+        "admired_for": ["education"],
+        "suspected_for": ["softness"],
+        "social_rank": 0.73,
+        "trustworthiness": 0.59,
+        "scandal": 0.08,
+        "warmth": 0.42,
+        "gossip_topics": {
+          "school": 0.4,
+          "miriam": 0.34
+        },
+        "public_summary": "Caleb is praised for gentleness in a town that says the word as if it were a warning."
+      }
+    },
+    "char_jonah_harrow": {
+      "id": "char_jonah_harrow",
+      "full_name": "Jonah Harrow",
+      "given_name": "Jonah",
+      "surname": "Harrow",
+      "age": 54,
+      "birth_year": 1847,
+      "gender": "man",
+      "family_id": "family_harrow",
+      "lineage_branch": "Mill Row line",
+      "household_id": "household_harrow_cottage",
+      "class_status": "working",
+      "occupation": "miller",
+      "life_stage": "adult",
+      "family_origin": "Harrow labor and remembered slights",
+      "desires": ["justice", "dignity"],
+      "fears": ["humiliation", "debt"],
+      "virtues": ["loyalty", "endurance"],
+      "flaws": ["resentment", "stubbornness"],
+      "private_voice": "He has been angry so long that tenderness sounds to him like bad accounting.",
+      "public_voice": "Blunt, useful, and one insult away from a speech.",
+      "poetic_voice": "A man shaped by sawdust, river damp, and the long memory of wages.",
+      "health": 0.69,
+      "children": ["char_miriam_harrow", "char_samuel_harrow"],
+      "spouses": ["char_eliza_harrow"],
+      "memories": [
+        {
+          "origin": "self",
+          "year": 1890,
+          "season": "spring",
+          "category": "feud",
+          "summary": "He stood in town hall while the Vales spoke of fairness and knew the word had been ruined for him.",
+          "emotional_weight": 0.85,
+          "public": false,
+          "participants": ["char_ruth_vale", "char_silas_vale"],
+          "tags": ["mill", "feud", "water"]
+        }
+      ],
+      "secrets": [
+        {
+          "owner_id": "char_jonah_harrow",
+          "summary": "He once altered the sluice markers to embarrass the Vales.",
+          "truth": "I shifted the sluice markers one wet spring to make the Vales look greedy, and hated them harder when the trick still felt righteous.",
+          "severity": 6,
+          "target_ids": ["char_ruth_vale", "char_silas_vale"],
+          "public_risk": 0.52,
+          "tags": ["sluice", "revenge", "water"]
+        }
+      ],
+      "relationships": {
+        "char_eliza_harrow": {
+          "source_id": "char_jonah_harrow",
+          "target_id": "char_eliza_harrow",
+          "kind": "spouse",
+          "affinity": 0.44,
+          "trust": 0.39,
+          "intimacy": 0.18,
+          "dependency": 0.16,
+          "rivalry": 0.02,
+          "family_tie": true,
+          "public_label": "married and overworked"
+        },
+        "char_ruth_vale": {
+          "source_id": "char_jonah_harrow",
+          "target_id": "char_ruth_vale",
+          "kind": "rival",
+          "affinity": -0.16,
+          "trust": -0.24,
+          "intimacy": 0.0,
+          "dependency": 0.0,
+          "rivalry": 0.78,
+          "family_tie": false,
+          "public_label": "public adversaries"
+        },
+        "char_miriam_harrow": {
+          "source_id": "char_jonah_harrow",
+          "target_id": "char_miriam_harrow",
+          "kind": "child",
+          "affinity": 0.34,
+          "trust": 0.28,
+          "intimacy": 0.1,
+          "dependency": 0.11,
+          "rivalry": 0.0,
+          "family_tie": true,
+          "public_label": "protective father"
+        }
+      },
+      "reputation": {
+        "admired_for": ["hard work"],
+        "suspected_for": ["bitterness"],
+        "social_rank": 0.34,
+        "trustworthiness": 0.47,
+        "scandal": 0.12,
+        "warmth": 0.26,
+        "gossip_topics": {
+          "sluice": 0.68,
+          "debts": 0.44
+        },
+        "public_summary": "Jonah Harrow is respected for endurance and avoided when endurance turns theatrical."
+      }
+    },
+    "char_eliza_harrow": {
+      "id": "char_eliza_harrow",
+      "full_name": "Eliza Harrow",
+      "given_name": "Eliza",
+      "surname": "Harrow",
+      "age": 49,
+      "birth_year": 1852,
+      "gender": "woman",
+      "family_id": "family_harrow",
+      "lineage_branch": "Mill Row line",
+      "household_id": "household_harrow_cottage",
+      "class_status": "working",
+      "occupation": "midwife",
+      "life_stage": "adult",
+      "family_origin": "Harrow labor and remembered slights",
+      "desires": ["protection", "peace"],
+      "fears": ["public shame", "needless suffering"],
+      "virtues": ["mercy", "craft"],
+      "flaws": ["secrecy", "weariness"],
+      "private_voice": "She knows where the town has bled and where it lied about the wound.",
+      "public_voice": "Practical, tender, and impossible to hurry.",
+      "poetic_voice": "Lamplight over linen, speaking long after the births have stopped crying.",
+      "health": 0.82,
+      "children": ["char_miriam_harrow", "char_samuel_harrow"],
+      "spouses": ["char_jonah_harrow"],
+      "memories": [
+        {
+          "origin": "self",
+          "year": 1872,
+          "season": "spring",
+          "category": "birth",
+          "summary": "She changed one name in a birth ledger and felt the whole town tilt around that small mercy.",
+          "emotional_weight": 0.94,
+          "public": false,
+          "participants": ["char_mercy_bell", "char_silas_vale"],
+          "tags": ["ledger", "birth", "mercy"],
+          "contradictory_to_public_story": true
+        }
+      ],
+      "secrets": [
+        {
+          "owner_id": "char_eliza_harrow",
+          "summary": "She altered Mercy Bell's birth record.",
+          "truth": "I changed Mercy Bell's father in the birth ledger because the living men would have survived the gossip and the dead woman would not.",
+          "severity": 10,
+          "target_ids": ["char_mercy_bell", "char_silas_vale", "char_gideon_bell"],
+          "public_risk": 0.81,
+          "tags": ["ledger", "paternity", "mercy"]
+        }
+      ],
+      "relationships": {
+        "char_jonah_harrow": {
+          "source_id": "char_eliza_harrow",
+          "target_id": "char_jonah_harrow",
+          "kind": "spouse",
+          "affinity": 0.46,
+          "trust": 0.44,
+          "intimacy": 0.2,
+          "dependency": 0.17,
+          "rivalry": 0.0,
+          "family_tie": true,
+          "public_label": "married and tired together"
+        },
+        "char_mercy_bell": {
+          "source_id": "char_eliza_harrow",
+          "target_id": "char_mercy_bell",
+          "kind": "friend",
+          "affinity": 0.41,
+          "trust": 0.38,
+          "intimacy": 0.13,
+          "dependency": 0.07,
+          "rivalry": 0.0,
+          "family_tie": false,
+          "public_label": "professional allies"
+        },
+        "char_miriam_harrow": {
+          "source_id": "char_eliza_harrow",
+          "target_id": "char_miriam_harrow",
+          "kind": "child",
+          "affinity": 0.49,
+          "trust": 0.45,
+          "intimacy": 0.15,
+          "dependency": 0.19,
+          "rivalry": 0.0,
+          "family_tie": true,
+          "public_label": "mother and daughter"
+        }
+      },
+      "reputation": {
+        "admired_for": ["competence", "compassion"],
+        "suspected_for": ["knowing too much"],
+        "social_rank": 0.42,
+        "trustworthiness": 0.71,
+        "scandal": 0.09,
+        "warmth": 0.62,
+        "gossip_topics": {
+          "births": 0.5,
+          "remedies": 0.35
+        },
+        "public_summary": "Eliza Harrow is the person the town trusts with blood but not entirely with silence."
+      }
+    },
+    "char_miriam_harrow": {
+      "id": "char_miriam_harrow",
+      "full_name": "Miriam Harrow",
+      "given_name": "Miriam",
+      "surname": "Harrow",
+      "age": 23,
+      "birth_year": 1878,
+      "gender": "woman",
+      "family_id": "family_harrow",
+      "lineage_branch": "Mill Row line",
+      "household_id": "household_harrow_cottage",
+      "class_status": "working",
+      "occupation": "dressmaker",
+      "life_stage": "adult",
+      "family_origin": "Harrow labor and remembered slights",
+      "desires": ["freedom", "love"],
+      "fears": ["smallness", "becoming silent"],
+      "virtues": ["wit", "devotion"],
+      "flaws": ["restlessness", "impatience"],
+      "private_voice": "She is tired of being told dignity looks best in restraint.",
+      "public_voice": "Quick, capable, and one joke too bright for respectable company.",
+      "poetic_voice": "A hemline catching on a gravestone thorn and calling it destiny.",
+      "health": 0.94,
+      "parents": ["char_jonah_harrow", "char_eliza_harrow"],
+      "siblings": ["char_samuel_harrow"],
+      "memories": [
+        {
+          "origin": "self",
+          "year": 1900,
+          "season": "autumn",
+          "category": "courtship",
+          "summary": "At Harvest Supper she let Caleb Vale walk her home and pretended the entire road was not a scandal already.",
+          "emotional_weight": 0.82,
+          "public": false,
+          "participants": ["char_caleb_vale"],
+          "tags": ["love", "harvest", "letters"]
+        }
+      ],
+      "secrets": [
+        {
+          "owner_id": "char_miriam_harrow",
+          "summary": "She would leave town with Caleb if he chose courage.",
+          "truth": "I said I wanted nothing from Caleb Vale that the town could name, and I would have boarded the first train with him if he had arrived at the station before dawn.",
+          "severity": 7,
+          "target_ids": ["char_caleb_vale"],
+          "public_risk": 0.58,
+          "tags": ["love", "escape", "letters"]
+        }
+      ],
+      "relationships": {
+        "char_caleb_vale": {
+          "source_id": "char_miriam_harrow",
+          "target_id": "char_caleb_vale",
+          "kind": "lover",
+          "affinity": 0.52,
+          "trust": 0.31,
+          "intimacy": 0.35,
+          "dependency": 0.05,
+          "rivalry": 0.0,
+          "family_tie": false,
+          "public_label": "an imprudent tenderness"
+        },
+        "char_eliza_harrow": {
+          "source_id": "char_miriam_harrow",
+          "target_id": "char_eliza_harrow",
+          "kind": "parent",
+          "affinity": 0.47,
+          "trust": 0.43,
+          "intimacy": 0.16,
+          "dependency": 0.17,
+          "rivalry": 0.0,
+          "family_tie": true,
+          "public_label": "daughter and mother"
+        },
+        "char_samuel_harrow": {
+          "source_id": "char_miriam_harrow",
+          "target_id": "char_samuel_harrow",
+          "kind": "sibling",
+          "affinity": 0.36,
+          "trust": 0.41,
+          "intimacy": 0.12,
+          "dependency": 0.1,
+          "rivalry": 0.0,
+          "family_tie": true,
+          "public_label": "sister and brother"
+        }
+      },
+      "reputation": {
+        "admired_for": ["skill"],
+        "suspected_for": ["ambition"],
+        "social_rank": 0.28,
+        "trustworthiness": 0.53,
+        "scandal": 0.15,
+        "warmth": 0.48,
+        "gossip_topics": {
+          "caleb": 0.42,
+          "dresses": 0.32
+        },
+        "public_summary": "Miriam Harrow is liked better in private than in committee, which she considers a compliment."
+      }
+    },
+    "char_samuel_harrow": {
+      "id": "char_samuel_harrow",
+      "full_name": "Samuel Harrow",
+      "given_name": "Samuel",
+      "surname": "Harrow",
+      "age": 10,
+      "birth_year": 1891,
+      "gender": "man",
+      "family_id": "family_harrow",
+      "lineage_branch": "Mill Row line",
+      "household_id": "household_harrow_cottage",
+      "class_status": "working",
+      "occupation": "child",
+      "life_stage": "child",
+      "family_origin": "Harrow labor and remembered slights",
+      "desires": ["belonging", "adventure"],
+      "fears": ["storms", "being forgotten"],
+      "virtues": ["kindness", "attention"],
+      "flaws": ["eavesdropping", "timidity"],
+      "private_voice": "He listens at doors because the truth always seems to begin in another room.",
+      "public_voice": "Quiet until he is sure he has learned the useful part.",
+      "poetic_voice": "A boy storing thunder in his pockets.",
+      "health": 0.97,
+      "parents": ["char_jonah_harrow", "char_eliza_harrow"],
+      "siblings": ["char_miriam_harrow"],
+      "memories": [
+        {
+          "origin": "self",
+          "year": 1900,
+          "season": "winter",
+          "category": "argument",
+          "summary": "He heard Jonah say the word Vale like a curse and decided adults choose enemies the way children choose marbles.",
+          "emotional_weight": 0.42,
+          "public": false,
+          "participants": ["char_jonah_harrow"],
+          "tags": ["feud", "family"]
+        }
+      ],
+      "relationships": {
+        "char_miriam_harrow": {
+          "source_id": "char_samuel_harrow",
+          "target_id": "char_miriam_harrow",
+          "kind": "sibling",
+          "affinity": 0.44,
+          "trust": 0.45,
+          "intimacy": 0.14,
+          "dependency": 0.11,
+          "rivalry": 0.0,
+          "family_tie": true,
+          "public_label": "little brother"
+        },
+        "char_eliza_harrow": {
+          "source_id": "char_samuel_harrow",
+          "target_id": "char_eliza_harrow",
+          "kind": "parent",
+          "affinity": 0.47,
+          "trust": 0.49,
+          "intimacy": 0.18,
+          "dependency": 0.18,
+          "rivalry": 0.0,
+          "family_tie": true,
+          "public_label": "mother"
+        }
+      },
+      "reputation": {
+        "admired_for": ["good manners"],
+        "suspected_for": ["listening too closely"],
+        "social_rank": 0.12,
+        "trustworthiness": 0.58,
+        "scandal": 0.02,
+        "warmth": 0.51,
+        "gossip_topics": {},
+        "public_summary": "Samuel is treated as harmless, which is teaching him habits the adults may regret."
+      }
+    },
+    "char_ada_quill": {
+      "id": "char_ada_quill",
+      "full_name": "Ada Quill",
+      "given_name": "Ada",
+      "surname": "Quill",
+      "age": 36,
+      "birth_year": 1865,
+      "gender": "woman",
+      "family_id": "family_quill",
+      "lineage_branch": "River Reach rooms",
+      "household_id": "household_quill_rooms",
+      "class_status": "working",
+      "occupation": "bartender",
+      "life_stage": "adult",
+      "family_origin": "Quill rooms above the Blue Lantern",
+      "desires": ["independence", "laughter"],
+      "fears": ["poverty", "pity"],
+      "virtues": ["hospitality", "courage"],
+      "flaws": ["mockery", "recklessness"],
+      "private_voice": "She jokes at the edge of pain because solemnity has never once paid the lease.",
+      "public_voice": "Warm enough to attract confession and sharp enough to survive it.",
+      "poetic_voice": "Counter wood, midnight glasses, and a candle still refusing the dawn.",
+      "health": 0.89,
+      "children": ["char_clara_quill"],
+      "siblings": ["char_thomas_quill"],
+      "memories": [
+        {
+          "origin": "self",
+          "year": 1898,
+          "season": "autumn",
+          "category": "letters",
+          "summary": "She found Gideon Bell's letters behind a cracked shelf and understood that virtue leaves paper trails when desire becomes literate.",
+          "emotional_weight": 0.84,
+          "public": false,
+          "participants": ["char_gideon_bell"],
+          "tags": ["letters", "church", "tavern"]
+        }
+      ],
+      "secrets": [
+        {
+          "owner_id": "char_ada_quill",
+          "summary": "She keeps Gideon Bell's old love letters hidden behind the bar.",
+          "truth": "I kept Gideon Bell's letters to the singer from Galena behind the brandy shelf because holiness deserves at least one witness who can laugh.",
+          "severity": 8,
+          "target_ids": ["char_gideon_bell", "char_mercy_bell"],
+          "public_risk": 0.72,
+          "tags": ["letters", "gideon", "scandal"]
+        }
+      ],
+      "relationships": {
+        "char_thomas_quill": {
+          "source_id": "char_ada_quill",
+          "target_id": "char_thomas_quill",
+          "kind": "sibling",
+          "affinity": 0.39,
+          "trust": 0.42,
+          "intimacy": 0.12,
+          "dependency": 0.15,
+          "rivalry": 0.04,
+          "family_tie": true,
+          "public_label": "sister and brother"
+        },
+        "char_mercy_bell": {
+          "source_id": "char_ada_quill",
+          "target_id": "char_mercy_bell",
+          "kind": "friend",
+          "affinity": 0.41,
+          "trust": 0.31,
+          "intimacy": 0.11,
+          "dependency": 0.08,
+          "rivalry": 0.0,
+          "family_tie": false,
+          "public_label": "unlikely confidantes"
+        },
+        "char_gideon_bell": {
+          "source_id": "char_ada_quill",
+          "target_id": "char_gideon_bell",
+          "kind": "rival",
+          "affinity": -0.18,
+          "trust": -0.11,
+          "intimacy": 0.0,
+          "dependency": 0.0,
+          "rivalry": 0.49,
+          "family_tie": false,
+          "public_label": "bar and pulpit enemies"
+        },
+        "char_clara_quill": {
+          "source_id": "char_ada_quill",
+          "target_id": "char_clara_quill",
+          "kind": "child",
+          "affinity": 0.52,
+          "trust": 0.46,
+          "intimacy": 0.17,
+          "dependency": 0.19,
+          "rivalry": 0.0,
+          "family_tie": true,
+          "public_label": "mother and daughter"
+        }
+      },
+      "reputation": {
+        "admired_for": ["wit"],
+        "suspected_for": ["keeping everybody's secrets"],
+        "social_rank": 0.25,
+        "trustworthiness": 0.44,
+        "scandal": 0.23,
+        "warmth": 0.55,
+        "gossip_topics": {
+          "letters": 0.71,
+          "brandy": 0.3
+        },
+        "public_summary": "Ada Quill is welcomed by people who insist, later, that they never trusted her."
+      }
+    },
+    "char_thomas_quill": {
+      "id": "char_thomas_quill",
+      "full_name": "Thomas Quill",
+      "given_name": "Thomas",
+      "surname": "Quill",
+      "age": 41,
+      "birth_year": 1860,
+      "gender": "man",
+      "family_id": "family_quill",
+      "lineage_branch": "River Reach rooms",
+      "household_id": "household_quill_rooms",
+      "class_status": "working",
+      "occupation": "undertaker",
+      "life_stage": "adult",
+      "family_origin": "Quill rooms above the Blue Lantern",
+      "desires": ["respect", "tenderness"],
+      "fears": ["ridicule", "uselessness"],
+      "virtues": ["reliability", "gentleness"],
+      "flaws": ["jealousy", "fatalism"],
+      "private_voice": "Death made him patient with bodies and impatient with vanity.",
+      "public_voice": "Reserved, careful, and unexpectedly courtly when grief enters the room.",
+      "poetic_voice": "Black wool, cedar shavings, and the soft authority of a man who closes lids.",
+      "health": 0.87,
+      "siblings": ["char_ada_quill"],
+      "memories": [
+        {
+          "origin": "self",
+          "year": 1899,
+          "season": "winter",
+          "category": "care",
+          "summary": "He watched Mercy Bell wash a dead child with such steadiness that desire began in him as reverence.",
+          "emotional_weight": 0.76,
+          "public": false,
+          "participants": ["char_mercy_bell"],
+          "tags": ["love", "death", "clinic"]
+        }
+      ],
+      "secrets": [
+        {
+          "owner_id": "char_thomas_quill",
+          "summary": "He has built a room he hopes Mercy Bell will one day use.",
+          "truth": "I built a spare room over the workshop and measured it for Mercy Bell before I had even held her hand properly.",
+          "severity": 5,
+          "target_ids": ["char_mercy_bell"],
+          "public_risk": 0.34,
+          "tags": ["love", "household", "hope"]
+        }
+      ],
+      "relationships": {
+        "char_ada_quill": {
+          "source_id": "char_thomas_quill",
+          "target_id": "char_ada_quill",
+          "kind": "sibling",
+          "affinity": 0.4,
+          "trust": 0.38,
+          "intimacy": 0.1,
+          "dependency": 0.14,
+          "rivalry": 0.04,
+          "family_tie": true,
+          "public_label": "brother and sister"
+        },
+        "char_mercy_bell": {
+          "source_id": "char_thomas_quill",
+          "target_id": "char_mercy_bell",
+          "kind": "lover",
+          "affinity": 0.34,
+          "trust": 0.26,
+          "intimacy": 0.28,
+          "dependency": 0.07,
+          "rivalry": 0.0,
+          "family_tie": false,
+          "public_label": "careful courtship"
+        }
+      },
+      "reputation": {
+        "admired_for": ["reliability"],
+        "suspected_for": ["gloom"],
+        "social_rank": 0.21,
+        "trustworthiness": 0.66,
+        "scandal": 0.06,
+        "warmth": 0.34,
+        "gossip_topics": {
+          "burials": 0.47,
+          "mercy": 0.26
+        },
+        "public_summary": "Thomas Quill is the kind of man people call steady when they do not know how lonely they mean."
+      }
+    },
+    "char_clara_quill": {
+      "id": "char_clara_quill",
+      "full_name": "Clara Quill",
+      "given_name": "Clara",
+      "surname": "Quill",
+      "age": 14,
+      "birth_year": 1887,
+      "gender": "woman",
+      "family_id": "family_quill",
+      "lineage_branch": "River Reach rooms",
+      "household_id": "household_quill_rooms",
+      "class_status": "working",
+      "occupation": "child",
+      "life_stage": "adolescent",
+      "family_origin": "Quill rooms above the Blue Lantern",
+      "desires": ["music", "departure"],
+      "fears": ["poverty", "her mother's loneliness"],
+      "virtues": ["observation", "nerve"],
+      "flaws": ["prying", "impatience"],
+      "private_voice": "She hears escape in any tune played softly enough.",
+      "public_voice": "Half dutiful, half already leaving in imagination.",
+      "poetic_voice": "A fiddle string learning the cemetery wind.",
+      "health": 0.96,
+      "parents": ["char_ada_quill"],
+      "memories": [
+        {
+          "origin": "self",
+          "year": 1900,
+          "season": "autumn",
+          "category": "scandal",
+          "summary": "She saw the packet of letters once and knew paper could frighten adults more than knives.",
+          "emotional_weight": 0.48,
+          "public": false,
+          "participants": ["char_ada_quill"],
+          "tags": ["letters", "adolescence"]
+        }
+      ],
+      "relationships": {
+        "char_ada_quill": {
+          "source_id": "char_clara_quill",
+          "target_id": "char_ada_quill",
+          "kind": "parent",
+          "affinity": 0.53,
+          "trust": 0.48,
+          "intimacy": 0.17,
+          "dependency": 0.2,
+          "rivalry": 0.02,
+          "family_tie": true,
+          "public_label": "daughter"
+        }
+      },
+      "reputation": {
+        "admired_for": ["good hands at the till"],
+        "suspected_for": ["curiosity"],
+        "social_rank": 0.11,
+        "trustworthiness": 0.43,
+        "scandal": 0.03,
+        "warmth": 0.39,
+        "gossip_topics": {},
+        "public_summary": "Clara is young enough to be overlooked and old enough to notice the advantage."
+      }
+    },
+    "char_gideon_bell": {
+      "id": "char_gideon_bell",
+      "full_name": "Gideon Bell",
+      "given_name": "Gideon",
+      "surname": "Bell",
+      "age": 61,
+      "birth_year": 1840,
+      "gender": "man",
+      "family_id": "family_bell",
+      "lineage_branch": "Parsonage line",
+      "household_id": "household_bell_parsonage",
+      "class_status": "middling",
+      "occupation": "preacher",
+      "life_stage": "elder",
+      "family_origin": "Bell parsonage and public restraint",
+      "desires": ["order", "redemption"],
+      "fears": ["desire", "ridicule"],
+      "virtues": ["eloquence", "discipline"],
+      "flaws": ["hypocrisy", "severity"],
+      "private_voice": "He loves doctrine best when it drowns out memory.",
+      "public_voice": "Sonorous, composed, and offended by appetite in whatever body it occupies.",
+      "poetic_voice": "A cracked hymn book telling the truth between verses.",
+      "health": 0.73,
+      "memories": [
+        {
+          "origin": "self",
+          "year": 1881,
+          "season": "summer",
+          "category": "love",
+          "summary": "He nearly ran away with a singer from Galena and spent the next twenty years preaching against the temptation of itinerant charm.",
+          "emotional_weight": 0.88,
+          "public": false,
+          "tags": ["letters", "love", "church"],
+          "contradictory_to_public_story": true
+        }
+      ],
+      "secrets": [
+        {
+          "owner_id": "char_gideon_bell",
+          "summary": "He wrote love letters he still calls a spiritual lapse.",
+          "truth": "I wrote letters to a singer and nearly left the parish with her, then preached twice as hard because desire had learned my handwriting.",
+          "severity": 8,
+          "target_ids": ["char_ada_quill", "char_mercy_bell"],
+          "public_risk": 0.77,
+          "tags": ["letters", "love", "shame"]
+        }
+      ],
+      "relationships": {
+        "char_mercy_bell": {
+          "source_id": "char_gideon_bell",
+          "target_id": "char_mercy_bell",
+          "kind": "patron",
+          "affinity": 0.29,
+          "trust": 0.33,
+          "intimacy": 0.07,
+          "dependency": 0.19,
+          "rivalry": 0.0,
+          "family_tie": true,
+          "public_label": "guardian and niece"
+        },
+        "char_ada_quill": {
+          "source_id": "char_gideon_bell",
+          "target_id": "char_ada_quill",
+          "kind": "rival",
+          "affinity": -0.2,
+          "trust": -0.13,
+          "intimacy": 0.0,
+          "dependency": 0.0,
+          "rivalry": 0.53,
+          "family_tie": false,
+          "public_label": "pulpit and tavern antagonists"
+        }
+      },
+      "reputation": {
+        "admired_for": ["eloquence"],
+        "suspected_for": ["severity"],
+        "social_rank": 0.67,
+        "trustworthiness": 0.49,
+        "scandal": 0.14,
+        "warmth": 0.19,
+        "gossip_topics": {
+          "sermons": 0.46,
+          "letters": 0.29
+        },
+        "public_summary": "Gideon Bell still sounds righteous enough to make people forget how often righteousness is a costume."
+      }
+    },
+    "char_mercy_bell": {
+      "id": "char_mercy_bell",
+      "full_name": "Mercy Bell",
+      "given_name": "Mercy",
+      "surname": "Bell",
+      "age": 29,
+      "birth_year": 1872,
+      "gender": "woman",
+      "family_id": "family_bell",
+      "lineage_branch": "Parsonage line",
+      "household_id": "household_bell_parsonage",
+      "class_status": "middling",
+      "occupation": "nurse",
+      "life_stage": "adult",
+      "family_origin": "Bell parsonage and public restraint",
+      "desires": ["usefulness", "intimacy"],
+      "fears": ["dependency", "public gossip"],
+      "virtues": ["tenderness", "resolve"],
+      "flaws": ["self-neglect", "evasiveness"],
+      "private_voice": "She confuses usefulness with deserving love and knows the confusion may ruin her.",
+      "public_voice": "Calm in crisis, distant when anyone asks how she is sleeping.",
+      "poetic_voice": "Bandage, winter lamp, and a pulse counted after everyone else stops listening.",
+      "health": 0.91,
+      "memories": [
+        {
+          "origin": "self",
+          "year": 1899,
+          "season": "winter",
+          "category": "care",
+          "summary": "Thomas Quill held a basin for her without making a performance of pity, and she has trusted the gesture longer than she trusts language.",
+          "emotional_weight": 0.74,
+          "public": false,
+          "participants": ["char_thomas_quill"],
+          "tags": ["love", "clinic", "care"]
+        }
+      ],
+      "secrets": [
+        {
+          "owner_id": "char_mercy_bell",
+          "summary": "She suspects Silas Vale is her father.",
+          "truth": "I have long suspected that Silas Vale, not any Bell, gave me my face, and I hated the suspicion because it felt too much like belonging to the wrong room.",
+          "severity": 8,
+          "target_ids": ["char_silas_vale", "char_eliza_harrow"],
+          "public_risk": 0.62,
+          "tags": ["paternity", "vale", "ledger"]
+        }
+      ],
+      "relationships": {
+        "char_thomas_quill": {
+          "source_id": "char_mercy_bell",
+          "target_id": "char_thomas_quill",
+          "kind": "lover",
+          "affinity": 0.37,
+          "trust": 0.29,
+          "intimacy": 0.3,
+          "dependency": 0.06,
+          "rivalry": 0.0,
+          "family_tie": false,
+          "public_label": "careful courtship"
+        },
+        "char_eliza_harrow": {
+          "source_id": "char_mercy_bell",
+          "target_id": "char_eliza_harrow",
+          "kind": "friend",
+          "affinity": 0.43,
+          "trust": 0.4,
+          "intimacy": 0.11,
+          "dependency": 0.08,
+          "rivalry": 0.0,
+          "family_tie": false,
+          "public_label": "clinic allies"
+        },
+        "char_gideon_bell": {
+          "source_id": "char_mercy_bell",
+          "target_id": "char_gideon_bell",
+          "kind": "patron",
+          "affinity": 0.22,
+          "trust": 0.24,
+          "intimacy": 0.04,
+          "dependency": 0.18,
+          "rivalry": 0.02,
+          "family_tie": true,
+          "public_label": "ward and guardian"
+        },
+        "char_caleb_vale": {
+          "source_id": "char_mercy_bell",
+          "target_id": "char_caleb_vale",
+          "kind": "friend",
+          "affinity": 0.21,
+          "trust": 0.19,
+          "intimacy": 0.05,
+          "dependency": 0.03,
+          "rivalry": 0.0,
+          "family_tie": false,
+          "public_label": "gentle accomplices"
+        }
+      },
+      "reputation": {
+        "admired_for": ["usefulness", "gentleness"],
+        "suspected_for": ["reserve"],
+        "social_rank": 0.39,
+        "trustworthiness": 0.76,
+        "scandal": 0.08,
+        "warmth": 0.58,
+        "gossip_topics": {
+          "clinic": 0.51,
+          "thomas": 0.24
+        },
+        "public_summary": "Mercy Bell is the person most people want nearby in a crisis and least understand afterward."
+      }
+    }
+  },
+  "config": {
+    "start_year": 1901,
+    "years_to_simulate": 18,
+    "random_seed": 11,
+    "llm_enabled": true,
+    "offline_mode": false,
+    "memory_limit": 24,
+    "summary_interval_years": 6,
+    "birth_base_chance": 0.21,
+    "death_base_chance": 0.015,
+    "relationship_decay": 0.06,
+    "primary_model": "openrouter/free",
+    "fallback_models": [
+      "google/gemma-3-27b-it:free",
+      "qwen/qwen3-14b:free"
+    ],
+    "anthology_title": "Graveyard Chorus of Morrowfield"
+  }
+}

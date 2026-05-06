@@ -349,13 +349,42 @@ Use this when:
 - you suspect a model ID is stale
 - the router path is rate-limited and you want to confirm exact fallback availability
 
-### 6. Serve a Single Bundle PWA
+### 6. Build a Poetry Book From Existing Exports
+
+```bash
+graveyard-chorus book exports/graveyard3
+```
+
+What this command does:
+
+- resolves the latest run inside an archive root, or accepts a direct run folder or `town_state.json`
+- selects the strongest exported situations from the run's yearly chronicle
+- composes new poems with OpenRouter free models when available
+- assembles those poems with selected exported epitaphs
+- runs a second editorial pass to clean spelling, syntax, punctuation, and form
+- writes `poetry_book.md` and `poetry_book.json` into the selected run directory
+
+Useful options:
+
+- `--output-file`: choose a custom markdown destination
+- `--title`: override the book title
+- `--max-poems`: control how many newly composed poems are generated
+- `--max-epitaphs`: control how many exported epitaphs are included
+- `--offline`: force deterministic assembly without OpenRouter
+
+Example against a specific run folder:
+
+```bash
+graveyard-chorus book exports/graveyard3/morrowfield-1921 --title "Morrowfield After the Flood of Names"
+```
+
+### 7. Serve a Single Bundle PWA
 
 ```bash
 graveyard-chorus serve examples/sample_run --host 127.0.0.1 --port 8000
 ```
 
-### 7. Serve the Multi-Run Archive PWA
+### 8. Serve the Multi-Run Archive PWA
 
 ```bash
 graveyard-chorus serve runs --host 127.0.0.1 --port 8000
@@ -390,6 +419,14 @@ graveyard-chorus anthology runs/morrowfield-1911/town_state.json --output-dir ex
 graveyard-chorus serve exports/morrowfield-1911
 ```
 
+### Workflow D: Turn One Exported Run Into a Book
+
+```bash
+graveyard-chorus run --years 20 --llm --output-dir exports/graveyard3
+graveyard-chorus book exports/graveyard3
+graveyard-chorus serve exports/graveyard3
+```
+
 ## Output Layout
 
 ### Single Run Bundle
@@ -406,6 +443,8 @@ Each run bundle exports:
 - `event_log.json`: public event export
 - `cemetery_record.json`: epitaph-focused export
 - `report.html`: static HTML report
+- `poetry_book.md`: poetry-and-epitaph book assembled from exported situations when you run `graveyard-chorus book`
+- `poetry_book.json`: metadata for the generated book, including models used and selected source situations
 
 ### Run Root Archive
 
@@ -463,7 +502,7 @@ When you serve the run root rather than a single bundle, the archive PWA lets yo
 - browse all exported runs
 - filter runs by text query
 - inspect headline results for each run from one page
-- jump directly into any run's explorer, static report, anthology, or town chronicle
+- jump directly into any run's explorer, static report, anthology, town chronicle, or poetry book when available
 
 ### Important PWA Note
 

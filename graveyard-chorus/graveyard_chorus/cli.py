@@ -8,6 +8,7 @@ import typer
 from rich.console import Console
 from rich.table import Table
 
+from .book import PoetryBookBuilder
 from .client import OpenRouterClient
 from .config import configure_logging, load_settings
 from .engine import SimulationEngine
@@ -81,6 +82,62 @@ def anthology(
     state = load_state(state_file)
     paths = export_bundle(state, output_dir)
     _print_summary(state, output_dir, paths, log_path)
+
+
+@app.command()
+def book(
+    source: Path = typer.Argument(..., exists=True, help="Export run directory, archive root, or town_state.json file."),
+    output_file: Path | None = typer.Option(None, help="Optional markdown output path. Defaults to poetry_book.md inside the selected run directory."),
+    title: str | None = typer.Option(None, help="Optional book title override."),
+    max_poems: int = typer.Option(6, min=3, help="Maximum number of newly composed poems to generate from exported situations."),
+    max_epitaphs: int = typer.Option(8, min=1, help="Maximum number of exported epitaphs to include in the book."),
+    offline: bool = typer.Option(False, help="Force deterministic assembly without OpenRouter."),
+    llm: bool = typer.Option(True, help="Use OpenRouter free models for poem composition and editorial correction when credentials are present."),
+) -> None:
+    """Build a poetry-and-epitaph book from an existing export."""
+    settings = load_settings()
+    log_path = configure_logging(settings)
+    if offline:
+        settings.offline_mode = True
+    if llm and not settings.offline_mode and not settings.openrouter_api_key:
+        console.print("LLM book mode requested but OPENROUTER_API_KEY is missing; continuing in deterministic book mode.")
+
+    use_llm = llm and not settings.offline_mode and bool(settings.openrouter_api_key)
+    client = OpenRouterClient(settings) if use_llm else None
+    builder = PoetryBookBuilder(settings=settings, client=client)
+    try:
+        result = builder.build_from_source(
+            source,
+            title=title,
+            output_path=output_file,
+            max_poems=max_poems,
+            max_epitaphs=max_epitaphs,
+        )
+        archive_root = result.run_dir.parent
+        if (archive_root / "index.html").exists() or archive_root == source:
+            export_run_archive(archive_root)
+    finally:
+        if client is not None:
+            client.close()
+
+    table = Table(title="Poetry Book Export")
+    table.add_column("Metric")
+    table.add_column("Value")
+    table.add_row("Book title", result.title)
+    table.add_row("Source run", str(result.run_dir))
+    table.add_row("Source state", str(result.source_state_path))
+    table.add_row("Selected from archive root", "yes" if result.selected_run_from_archive_root else "no")
+    table.add_row("Poems composed", str(result.poem_count))
+    table.add_row("Epitaphs included", str(result.epitaph_count))
+    table.add_row("Used OpenRouter", "yes" if result.used_llm else "no")
+    table.add_row("Composition models", ", ".join(result.composition_models) if result.composition_models else "deterministic fallback only")
+    table.add_row("Editorial model", result.editorial_model or "deterministic fallback only")
+    table.add_row("Log file", str(log_path))
+    console.print(table)
+    console.print(f"Markdown book: {result.markdown_path}")
+    console.print(f"Book metadata: {result.metadata_path}")
+    if (result.run_dir.parent / "index.html").exists():
+        console.print(f"Run archive: {result.run_dir.parent / 'index.html'}")
 
 
 @app.command()

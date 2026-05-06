@@ -1,0 +1,158 @@
+{
+  "generated_at": "2026-05-06T15:19:13.181670+00:00",
+  "title": "Songs from Morrowfield",
+  "source_state_path": "exports/graveyard3/morrowfield-1921/town_state.json",
+  "run_dir": "exports/graveyard3/morrowfield-1921",
+  "selected_run_from_archive_root": true,
+  "used_llm": true,
+  "composition_models": [
+    "liquid/lfm-2.5-1.2b-instruct-20260120:free",
+    "inclusionai/ling-2.6-1t-20260423:free",
+    "openai/gpt-oss-20b:free"
+  ],
+  "editorial_model": "liquid/lfm-2.5-1.2b-instruct-20260120:free",
+  "poem_count": 6,
+  "epitaph_count": 8,
+  "poems": [
+    {
+      "situation_kind": "overture",
+      "situation_title": "Overture for Morrowfield",
+      "year": null,
+      "title": "Overture for Morrowfield",
+      "actual_model": "liquid/lfm-2.5-1.2b-instruct-20260120:free",
+      "source_character_names": [],
+      "source_event_titles": []
+    },
+    {
+      "situation_kind": "chronicle",
+      "situation_title": "Cradles, Rumors, and Old Grievances in 1908 Morrowfield",
+      "year": 1908,
+      "title": "Cradles, Rumors, and Old Grievances in 1908 Morrowfield",
+      "actual_model": "inclusionai/ling-2.6-1t-20260423:free",
+      "source_character_names": [
+        "Bennett Harrow",
+        "Ada Quill",
+        "Caleb Vale",
+        "Clara Quill",
+        "Eliza Harrow",
+        "Jonah Harrow",
+        "Miriam Harrow",
+        "Silas Vale"
+      ],
+      "source_event_titles": [
+        "Silas Vale renewed a family bitterness",
+        "Jonah Harrow let a rumor walk in public shoes",
+        "Eliza Harrow carried a burden for Miriam Harrow",
+        "Thomas Quill held to daily labor",
+        "The council reopened the sluice dispute",
+        "A heat spell pushed the clinic past mercy"
+      ]
+    },
+    {
+      "situation_kind": "chronicle",
+      "situation_title": "Morrowfield, 1909: Kindness Along the River",
+      "year": 1909,
+      "title": "Morrowfield, 1909: Kindness Along the River",
+      "actual_model": "liquid/lfm-2.5-1.2b-instruct-20260120:free",
+      "source_character_names": [
+        "Ada Quill",
+        "Caleb Vale",
+        "Clara Quill",
+        "Eliza Harrow",
+        "Jonah Harrow",
+        "Miriam Harrow",
+        "Samuel Harrow",
+        "Silas Vale"
+      ],
+      "source_event_titles": [
+        "Jonah Harrow let a rumor walk in public shoes",
+        "Eliza Harrow carried a burden for Miriam Harrow",
+        "Thomas Quill held to daily labor",
+        "Caleb Vale held to daily labor",
+        "The Thaw Market reopened credit and appetite",
+        "Lantern Regatta made the river look forgiving"
+      ]
+    },
+    {
+      "situation_kind": "chronicle",
+      "situation_title": "Morrowfield, 1910: Lanterns Over the Thaw",
+      "year": 1910,
+      "title": "Morrowfield, 1910: Lanterns Over{the} Thaw 88",
+      "actual_model": "openai/gpt-oss-20b:free",
+      "source_character_names": [
+        "Ada Quill",
+        "Caleb Vale",
+        "June Harrow",
+        "Clara Quill",
+        "Eliza Harrow",
+        "Miriam Harrow",
+        "Samuel Harrow",
+        "Silas Vale"
+      ],
+      "source_event_titles": [
+        "Silas Vale carried a burden for Caleb Vale",
+        "Eliza Harrow carried a burden for Miriam Harrow",
+        "Thomas Quill carried a burden for Ada Quill",
+        "Miriam Harrow held to daily labor",
+        "The Thaw Market reopened credit and appetite",
+        "Lantern Regatta made the river look forgiving"
+      ]
+    },
+    {
+      "situation_kind": "chronicle",
+      "situation_title": "Morrowfield 1911: Lanterns, Bread, and River",
+      "year": 1911,
+      "title": "Morrowfield 1911: Lanterns, Bread, and River",
+      "actual_model": "liquid/lfm-2.5-1.2b-instruct-20260120:free",
+      "source_character_names": [
+        "Ada Quill",
+        "Caleb Vale",
+        "Clara Quill",
+        "Eliza Harrow",
+        "Miriam Harrow",
+        "Samuel Harrow",
+        "Silas Vale",
+        "Thomas Quill"
+      ],
+      "source_event_titles": [
+        "Silas Vale carried a burden for Caleb Vale",
+        "Eliza Harrow carried a burden for Miriam Harrow",
+        "Thomas Quill carried a burden for Ada Quill",
+        "Caleb Vale held to daily labor",
+        "The council reopened the sluice dispute",
+        "Lantern Regatta made the river look forgiving"
+      ]
+    },
+    {
+      "situation_kind": "coda",
+      "situation_title": "Coda under the lamps of Morrowfield",
+      "year": 1921,
+      "title": "Coda under the lamps of Morrowfield",
+      "actual_model": "liquid/lfm-2.5-1.2b-instruct-20260120:free",
+      "source_character_names": [
+        "Ruth Vale",
+        "Silas Vale",
+        "Jonah Harrow",
+        "Eliza Harrow",
+        "Ada Quill",
+        "Thomas Quill"
+      ],
+      "source_event_titles": [
+        "Mercy Bell",
+        "Ruth Vale",
+        "Gideon Bell",
+        "Frank Harrow"
+      ]
+    }
+  ],
+  "epitaph_names": [
+    "Jonah Harrow",
+    "Silas Vale",
+    "Eliza Harrow",
+    "Thomas Quill",
+    "Ada Quill",
+    "Gideon Bell",
+    "Ruth Vale",
+    "Mercy Bell"
+  ]
+}

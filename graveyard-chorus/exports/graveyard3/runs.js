@@ -205,6 +205,7 @@ function renderRunDetail() {
         <a class="run-link run-link-secondary" href="${escapeArchiveHtml(run.paths.report)}">Open static report</a>
         <a class="run-link run-link-secondary" href="${escapeArchiveHtml(run.paths.anthology)}">Read anthology</a>
         <a class="run-link run-link-secondary" href="${escapeArchiveHtml(run.paths.chronicle)}">Read town chronicle</a>
+        ${run.paths.poetry_book ? `<a class="run-link run-link-secondary" href="${escapeArchiveHtml(run.paths.poetry_book)}">Read poetry book</a>` : ''}
       </div>
     </section>
 

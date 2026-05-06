@@ -107,6 +107,15 @@ def _build_run_archive_entry(base_dir: Path, run_dir: Path, state: TownState) ->
     living_count = len(state.alive_characters())
     deceased_count = len(state.deceased_characters())
     epitaph_count = len(state.cemetery.epitaphs) if state.cemetery else 0
+    paths = {
+        "explorer": f"./{relative_dir}/index.html",
+        "report": f"./{relative_dir}/report.html",
+        "anthology": f"./{relative_dir}/anthology.md",
+        "chronicle": f"./{relative_dir}/town_chronicle.md",
+        "state": f"./{relative_dir}/town_state.json",
+    }
+    if (run_dir / "poetry_book.md").exists():
+        paths["poetry_book"] = f"./{relative_dir}/poetry_book.md"
     return {
         "id": relative_dir,
         "slug": relative_dir,
@@ -126,13 +135,7 @@ def _build_run_archive_entry(base_dir: Path, run_dir: Path, state: TownState) ->
         "families": [family.name for family in sorted(state.families.values(), key=lambda item: item.name)],
         "gossip_themes": state.gossip_themes[-6:],
         "shared_motifs": (state.cemetery.shared_motifs if state.cemetery else [])[:8],
-        "paths": {
-            "explorer": f"./{relative_dir}/index.html",
-            "report": f"./{relative_dir}/report.html",
-            "anthology": f"./{relative_dir}/anthology.md",
-            "chronicle": f"./{relative_dir}/town_chronicle.md",
-            "state": f"./{relative_dir}/town_state.json",
-        },
+        "paths": paths,
     }
 
 

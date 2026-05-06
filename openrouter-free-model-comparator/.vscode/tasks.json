@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Serve OpenRouter comparator",
+			"type": "shell",
+			"command": "/Users/jessicabottarelli/Desktop/Gandalf/Github/random-1/.venv/bin/python",
+			"args": [
+				"-m",
+				"http.server",
+				"4173"
+			],
+			"isBackground": true
+		}
+	]
+}

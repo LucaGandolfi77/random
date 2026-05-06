@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="description" content="Compare free OpenRouter models sequentially in a polished installable PWA." />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="icon" type="image/png" href="./assets/icon-192.png" />
+  <link rel="apple-touch-icon" href="./assets/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+  <script src="./app.js" defer></script>
+  <title>OpenRouter Free Model Comparator</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Progressive Web App</p>
+        <h1>OpenRouter Free Model Comparator</h1>
+        <p class="subtitle">Benchmark free OpenRouter models sequentially with the same prompt, inspect outputs, compare side-by-side, and export metrics.</p>
+      </div>
+      <div class="topbar-actions">
+        <button id="trafficLogsButton" class="button secondary">OpenRouter logs</button>
+        <button id="installButton" class="button secondary" hidden>Install app</button>
+        <button id="themeToggle" class="icon-button" aria-label="Toggle theme">
+          <span aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="status-strip" aria-label="Application state">
+      <div class="pill"><span class="dot online" id="networkDot"></span><span id="networkStatus">Online</span></div>
+      <div class="pill"><span class="dot installed" id="installDot"></span><span id="installStatus">Browser mode</span></div>
+      <div class="pill"><span class="dot idle" id="runDot"></span><span id="runState">Idle</span></div>
+      <div class="pill note">Free model availability changes over time on OpenRouter.</div>
+    </section>
+
+    <main id="main" class="layout-grid">
+      <section class="panel control-panel" aria-labelledby="configTitle">
+        <div class="panel-head">
+          <h2 id="configTitle">Configuration</h2>
+          <button id="examplePromptBtn" class="button ghost">Use example prompt</button>
+        </div>
+
+        <div class="field-group">
+          <label for="apiKey">OpenRouter API key</label>
+          <div class="input-with-button">
+            <input id="apiKey" type="password" placeholder="sk-or-v1-..." autocomplete="off" spellcheck="false" />
+            <button id="toggleKeyBtn" class="button secondary small" type="button">Show</button>
+          </div>
+          <p class="hint">Your key is used directly from the browser. It is stored only for this session unless you choose to persist non-secret preferences.</p>
+        </div>
+
+        <div class="two-col">
+          <div class="field-group">
+            <label for="temperature">Temperature</label>
+            <input id="temperature" type="number" min="0" max="2" step="0.1" value="0.2" />
+          </div>
+          <div class="field-group">
+            <label for="maxTokens">Max tokens</label>
+            <input id="maxTokens" type="number" min="1" step="1" value="512" />
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field-group">
+            <label for="timeoutSeconds">Timeout per model (s)</label>
+            <input id="timeoutSeconds" type="number" min="5" step="1" value="90" />
+          </div>
+          <div class="field-group">
+            <label for="appTitle">OpenRouter headers</label>
+            <input id="appTitle" type="text" value="OpenRouter Free Model Comparator" />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="systemPrompt">System prompt (optional)</label>
+          <textarea id="systemPrompt" rows="4" placeholder="You are a concise and precise assistant."></textarea>
+        </div>
+
+        <div class="field-group">
+          <label for="userPrompt">Prompt</label>
+          <textarea id="userPrompt" rows="8" placeholder="Write the same request here; it will be sent sequentially to all selected models."></textarea>
+        </div>
+
+        <div class="action-row">
+          <button id="runButton" class="button primary">Run comparison</button>
+          <button id="cancelButton" class="button danger" disabled>Cancel run</button>
+          <button id="clearResultsButton" class="button ghost">Clear results</button>
+        </div>
+      </section>
+
+      <section class="panel model-panel" aria-labelledby="modelsTitle">
+        <div class="panel-head">
+          <h2 id="modelsTitle">Models</h2>
+          <button id="addCatalogModelBtn" class="button secondary">Add selected model</button>
+        </div>
+
+        <div class="field-group">
+          <label for="catalogModelSelect">Choose from bundled free-model list</label>
+          <div class="input-with-button">
+            <select id="catalogModelSelect"></select>
+            <button id="saveCatalogModelBtn" class="button primary small" type="button">Add</button>
+          </div>
+          <p class="hint">The list is loaded from openrouter-models-free.txt. Add one model at a time to build your comparison queue.</p>
+        </div>
+
+        <div class="field-group">
+          <label for="newModelInput">Add custom model ID</label>
+          <div class="input-with-button">
+            <input id="newModelInput" type="text" placeholder="google/gemini-2.0-flash-exp:free" spellcheck="false" />
+            <button id="saveNewModelBtn" class="button primary small" type="button">Add</button>
+          </div>
+        </div>
+
+        <div class="models-toolbar">
+          <button id="selectAllBtn" class="button ghost small">Select all</button>
+          <button id="selectNoneBtn" class="button ghost small">Select none</button>
+        </div>
+
+        <ul id="modelList" class="model-list" aria-live="polite"></ul>
+      </section>
+
+      <section class="panel progress-panel" aria-labelledby="progressTitle">
+        <div class="panel-head">
+          <h2 id="progressTitle">Progress</h2>
+          <span id="progressSummary" class="metric-chip">0 / 0 complete</span>
+        </div>
+
+        <div class="progress-grid">
+          <div class="metric-card">
+            <span class="metric-label">Current model</span>
+            <strong id="currentModel">—</strong>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Elapsed wall time</span>
+            <strong id="elapsedWallTime">0.0s</strong>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Successful runs</span>
+            <strong id="successCount">0</strong>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Errors</span>
+            <strong id="errorCount">0</strong>
+          </div>
+        </div>
+
+        <div class="log-wrap">
+          <div class="log-head">
+            <h3>Run log</h3>
+            <button id="clearLogBtn" class="button ghost small">Clear log</button>
+          </div>
+          <ol id="runLog" class="run-log"></ol>
+        </div>
+      </section>
+
+      <section class="panel stats-panel full-span" aria-labelledby="statsTitle">
+        <div class="panel-head">
+          <h2 id="statsTitle">Statistics</h2>
+          <div class="export-actions">
+            <button id="exportJsonBtn" class="button secondary" disabled>Export JSON</button>
+            <button id="exportCsvBtn" class="button secondary" disabled>Export CSV</button>
+          </div>
+        </div>
+
+        <div id="aggregateStats" class="aggregate-grid"></div>
+
+        <div class="charts-grid">
+          <div class="chart-card"><h3>Latency (ms)</h3><canvas id="latencyChart"></canvas></div>
+          <div class="chart-card"><h3>Total tokens</h3><canvas id="tokenChart"></canvas></div>
+          <div class="chart-card"><h3>Tokens / second</h3><canvas id="tpsChart"></canvas></div>
+        </div>
+      </section>
+
+      <section class="panel full-span" aria-labelledby="tableTitle">
+        <div class="panel-head">
+          <h2 id="tableTitle">Summary table</h2>
+          <label class="inline-select">
+            <span>Sort by</span>
+            <select id="sortSelect">
+              <option value="model">Model</option>
+              <option value="elapsedMs">Latency</option>
+              <option value="totalTokens">Total tokens</option>
+              <option value="tokensPerSecond">Tokens / second</option>
+              <option value="chars">Characters</option>
+              <option value="status">Status</option>
+            </select>
+          </label>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Status</th>
+                <th>Latency</th>
+                <th>Prompt tokens</th>
+                <th>Completion tokens</th>
+                <th>Total tokens</th>
+                <th>Tokens/s</th>
+                <th>Chars</th>
+                <th>Words</th>
+              </tr>
+            </thead>
+            <tbody id="summaryBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel full-span" aria-labelledby="resultsTitle">
+        <div class="panel-head">
+          <h2 id="resultsTitle">Model outputs</h2>
+          <button id="diffToggleBtn" class="button ghost">Show side-by-side</button>
+        </div>
+        <div id="resultsList" class="results-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="trafficModal" class="modal-overlay" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="trafficModalTitle">
+      <div class="panel-head modal-head">
+        <div>
+          <h2 id="trafficModalTitle">OpenRouter request and response logs</h2>
+          <p class="hint">Authorization headers are redacted automatically.</p>
+        </div>
+        <div class="export-actions">
+          <button id="copyTrafficLogsBtn" class="button secondary small" type="button">Copy all</button>
+          <button id="clearTrafficLogsBtn" class="button ghost small" type="button">Clear logs</button>
+          <button id="closeTrafficModalBtn" class="button danger small" type="button">Close</button>
+        </div>
+      </div>
+      <div id="trafficLogList" class="traffic-log-list"></div>
+    </div>
+  </div>
+</body>
+</html>

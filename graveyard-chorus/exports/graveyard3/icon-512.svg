@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Graveyard Chorus explorer icon">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#19352c" />
+      <stop offset="100%" stop-color="#315447" />
+    </linearGradient>
+    <linearGradient id="earth" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#9c4a32" />
+      <stop offset="100%" stop-color="#5d2e20" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="#efe7d7" />
+  <rect x="52" y="52" width="408" height="408" rx="80" fill="url(#sky)" />
+  <path d="M104 368c44-26 96-38 152-38s110 12 152 38v66H104z" fill="url(#earth)" />
+  <path d="M184 336v-98c0-40 32-72 72-72s72 32 72 72v98z" fill="#efe7d7" opacity="0.94" />
+  <path d="M210 336v-98c0-25 21-46 46-46s46 21 46 46v98z" fill="#d3ab63" opacity="0.84" />
+  <path d="M256 132c17 0 31 14 31 31v37h-62v-37c0-17 14-31 31-31z" fill="#f9f4ea" />
+  <text x="256" y="418" text-anchor="middle" font-size="72" font-family="Baskerville, serif" fill="#efe7d7">GC</text>
+</svg>

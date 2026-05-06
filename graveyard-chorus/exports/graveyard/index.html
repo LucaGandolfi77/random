@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#19352c" />
+    <meta name="description" content="A multi-run archive for Graveyard Chorus exports." />
+    <title>Graveyard Chorus Run Archive</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon-192.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./runs.css" />
+    <script defer src="./runs.js"></script>
+  </head>
+  <body>
+    <div class="archive-shell">
+      <header class="archive-hero archive-panel">
+        <div>
+          <p class="archive-eyebrow">Graveyard Chorus Archive</p>
+          <h1>Different runs, different cemeteries, different weather.</h1>
+          <p class="archive-lede">
+            Browse exported runs as a single PWA archive: compare who survived, what scandals held,
+            how many epitaphs were written, and open any run’s full explorer or report.
+          </p>
+        </div>
+        <div class="archive-actions">
+          <button id="archiveInstallButton" class="archive-button" hidden>Install Archive</button>
+          <button id="archiveReloadButton" class="archive-button archive-button-secondary">Reload Runs</button>
+        </div>
+        <div id="archiveHeroStats" class="archive-hero-stats"></div>
+      </header>
+
+      <section class="archive-toolbar archive-panel">
+        <label class="archive-control">
+          <span>Search runs</span>
+          <input id="archiveSearchInput" type="search" placeholder="Search town, folder, families, motifs" />
+        </label>
+      </section>
+
+      <div class="archive-layout">
+        <aside class="archive-panel archive-list-shell">
+          <div class="archive-section-heading">
+            <h2>Runs</h2>
+            <p>Each card summarizes one exported simulation bundle.</p>
+          </div>
+          <div id="runList" class="run-list"></div>
+        </aside>
+
+        <main class="archive-panel archive-detail-shell">
+          <div class="archive-section-heading">
+            <h2>Selected Run</h2>
+            <p>High-level results, live archive links, and the exported family atmosphere.</p>
+          </div>
+          <div id="runDetail" class="run-detail"></div>
+        </main>
+      </div>
+
+      <div id="archiveNotice" class="archive-notice" hidden></div>
+    </div>
+  </body>
+</html>

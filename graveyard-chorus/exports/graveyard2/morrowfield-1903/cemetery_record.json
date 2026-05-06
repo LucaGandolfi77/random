@@ -1,0 +1,58 @@
+{
+  "town_name": "Morrowfield",
+  "generated_at_year": 1903,
+  "epitaphs": [
+    {
+      "id": "epitaph_b7156bb546",
+      "character_id": "char_mercy_bell",
+      "character_name": "Mercy Bell",
+      "year_written": 1901,
+      "voice": "Bandage, winter lamp, and a pulse counted after everyone else stops listening.",
+      "text": "I kept the winter lamp lit while bandage met skin and pulse answered after the room went quiet; usefulness bloomed like frost, and I called it love. Thomas Quill held the basin without spectacle, and I kept that hush longer than any vow. Gideon Bell kept the face the town expected, and I carried Mercy Bell into town memory—autumn at last agreed with the body, and I, who feared dependency and gossip, let care count me beyond myself, close enough to be wanted, far enough to remain a stranger to my own sleep. I confused deserving with being needed, and the confusion, sweet and ruinous, outlived me like a small, steady pulse in the cold.",
+      "referenced_character_ids": [],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "I have long suspected that Silas Vale, not any Bell, gave me my face, and I hated the suspicion because it felt too much like belonging to the wrong room."
+      ],
+      "public_contradictions": [
+        "Mercy Bell is the person most people want nearby in a crisis and least understand afterward."
+      ],
+      "mood": "lyrical, intimate, ironic, humane, compressed",
+      "actual_model": "inclusionai/ling-2.6-1t-20260423:free"
+    },
+    {
+      "id": "epitaph_cb3c83c5f7",
+      "character_id": "char_ruth_vale",
+      "character_name": "Ruth Vale",
+      "year_written": 1902,
+      "voice": "A bell of office rung from beneath old water.",
+      "text": ": I, Ruth Vale, stood as a bell of office rung from beneath old water, counting affection like rent because once it cost too much. In autumn, work, worry, and weather finally agreed against my body, and I spoke aloud what the town had only guessed.",
+      "referenced_character_ids": [
+        "char_silas_vale",
+        "char_jonah_harrow"
+      ],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "I kept the flood ledger that revealed Silas drawing relief funds into the mill while the Harrows pawned blankets.",
+        "Silas Vale told me a truth so long concealed it changed us both before supper."
+      ],
+      "public_contradictions": [
+        "Her public voice was measured, civic, and faintly maternal, yet her private voice counted affection like rent, revealing pride and coldness.",
+        "She desired legacy and control, yet feared disgrace and obsolescence, a tension between her civic stature and inner fear."
+      ],
+      "mood": "wry solemnity",
+      "actual_model": "nvidia/nemotron-3-super-120b-a12b-20230311:free"
+    }
+  ],
+  "shared_motifs": [
+    "i",
+    "silas"
+  ],
+  "cross_references": {
+    "Mercy Bell": [],
+    "Ruth Vale": [
+      "Silas Vale",
+      "Jonah Harrow"
+    ]
+  }
+}

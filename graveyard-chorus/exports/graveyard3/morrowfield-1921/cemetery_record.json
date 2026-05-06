@@ -1,0 +1,190 @@
+{
+  "town_name": "Morrowfield",
+  "generated_at_year": 1921,
+  "epitaphs": [
+    {
+      "id": "epitaph_406126673f",
+      "character_id": "char_mercy_bell",
+      "character_name": "Mercy Bell",
+      "year_written": 1901,
+      "voice": "Bandage, winter lamp, and a pulse counted after everyone else stops listening.",
+      "text": "I am Mercy Bell.\nIn autumn, I became a face, not a name, and the town held me close while I wondered if I belonged anywhere.",
+      "referenced_character_ids": [],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "I have long suspected that Silas Vale, not any Bell, gave me my face, and I hated the suspicion because it felt too much like belonging to the wrong room."
+      ],
+      "public_contradictions": [
+        "Mercy Bell is the person most people want nearby in a crisis and least understand afterward."
+      ],
+      "mood": "lyrical, intimate, ironic, humane",
+      "actual_model": "liquid/lfm-2.5-1.2b-instruct-20260120:free"
+    },
+    {
+      "id": "epitaph_7c6d6cc502",
+      "character_id": "char_ruth_vale",
+      "character_name": "Ruth Vale",
+      "year_written": 1902,
+      "voice": "A bell of office rung from beneath old water.",
+      "text": "I am Ruth Vale.\nI am the epitaph I wrote for myself—careful, precise, yet quietly worn. My voice, measured in the hush of office, still echoes the way a landlord counts rent. I count affection like a ledger, but it costs more than rent.",
+      "referenced_character_ids": [],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "I kept the flood ledger because it showed Silas drawing relief funds into the mill while the Harrows pawned blankets."
+      ],
+      "public_contradictions": [
+        "Ruth finally said aloud what the town had only guessed."
+      ],
+      "mood": "reflective and slightly wistful",
+      "actual_model": "liquid/lfm-2.5-1.2b-instruct-20260120:free"
+    },
+    {
+      "id": "epitaph_0ebe814509",
+      "character_id": "char_gideon_bell",
+      "character_name": "Gideon Bell",
+      "year_written": 1904,
+      "voice": "A cracked hymn book telling the truth between verses.",
+      "text": "I am Gideon Bell.\nI am the echo in a quiet pew, the voice that speaks in measured tones while my heart races beneath the surface. In the year of our Lord two thousand and four, I stood among the townsfolk, preaching with a calm that could soothe or unsettle, depending on the hour. My words were order, my discipline unshakable, yet my hands trembled with a hunger I dared not name.",
+      "referenced_character_ids": [],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "I wrote letters to a singer and nearly left the parish with her, then preached twice as hard because desire had learned my handwriting."
+      ],
+      "public_contradictions": [
+        "Gideon looked composed while hiding a strain no one measured correctly."
+      ],
+      "mood": "reflective with a wry edge",
+      "actual_model": "liquid/lfm-2.5-1.2b-instruct-20260120:free"
+    },
+    {
+      "id": "epitaph_4f241c44ab",
+      "character_id": "char_74ededfd73",
+      "character_name": "Frank Harrow",
+      "year_written": 1904,
+      "voice": "A future voice still taking shape in the family weather.",
+      "text": "I am Frank Harrow.\nI was born in Morrowfield, a year the town still counted with a pencil on a ledger. My voice was too young to sing, too young to perform, yet I learned to listen in the hush between Caleb’s restraint and Miriam’s hunger. I carried more than names—carried the weight of several families at once, as the Harrow family remembers. Arthur kept watch for kin, a silent vow in the autumn wind. The town added me to its arithmetic, but none confessed what it meant.",
+      "referenced_character_ids": [],
+      "referenced_event_ids": [],
+      "hidden_truths": [],
+      "public_contradictions": [
+        "A new child entered the town's arithmetic."
+      ],
+      "mood": "lyrical, intimate, ironic, humane",
+      "actual_model": "liquid/lfm-2.5-1.2b-instruct-20260120:free"
+    },
+    {
+      "id": "epitaph_0a7c709d5d",
+      "character_id": "char_jonah_harrow",
+      "character_name": "Jonah Harrow",
+      "year_written": 1909,
+      "voice": "A man shaped by sawdust, river damp, and the long memory of wages.",
+      "text": "I am Jonah Harrow, milled by river‑sawdust and stubborn endurance,\nwho shifted the sluice one wet spring to make the Vales look greedy,\nand hated them harder when the trick still felt righteous.\nSamuel and Arthur kept vigil for my kin, loyal as the mill’s wheel,\nwhile Bennett Harrow bore whole families through our streets like an ark.\nSpring took me when work, worry, and weather finally agreed against my body,\nleaving behind a ledger where tenderness sounded like bad accounting\nand justice, dignity remained unpaid.",
+      "referenced_character_ids": [
+        "char_samuel_harrow",
+        "char_4b16676648",
+        "char_6ca0ea8ae6"
+      ],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "I shifted the sluice markers one wet spring to make the Vales look greedy, and hated them harder when the trick still felt righteous."
+      ],
+      "public_contradictions": [
+        "Public voice: blunt, useful, one insult away from a speech.",
+        "Private voice: anger so long that tenderness sounds like bad accounting."
+      ],
+      "mood": "wry resignation",
+      "actual_model": "nvidia/nemotron-3-super-120b-a12b-20230311:free"
+    },
+    {
+      "id": "epitaph_30d55c0ced",
+      "character_id": "char_silas_vale",
+      "character_name": "Silas Vale",
+      "year_written": 1911,
+      "voice": "A mill wheel speaking after it has broken a hand too many.",
+      "text": ": I, Silas Vale, miller of Morrowfield, lie where the wheel finally stalled—my industry ground grain, my wit kept the jest alive when fear crept in, yet I bargained in shame and expected the world to bend to my tired patriarch’s will. I drew relief into the mill, letting gratitude stand for wages, for power felt easier than fairness. June Harrow arrived bearing many families; beside Caleb I showed practical kindness, making hard hours seem ordinary. Before supper I spoke a truth long concealed, and it changed us both. In spring, age collected the debt it had extended, and the town carried me into its memory. I sought continuity, forgiveness; I feared exposure, the frailty of flesh. Here rests a man who joked when frightened, bargained when ashamed, and hoped the room would arrange itself around him.",
+      "referenced_character_ids": [],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "I drew relief money into the mill and let gratitude stand in for wages because power was easier to keep than fairness."
+      ],
+      "public_contradictions": [
+        "Public voice: a tired patriarch who still expects the room to arrange itself around him.",
+        "Private voice: he jokes when frightened and bargains when ashamed."
+      ],
+      "mood": "wry resignation",
+      "actual_model": "nvidia/nemotron-3-super-120b-a12b-20230311:free"
+    },
+    {
+      "id": "epitaph_ca999a5f12",
+      "character_id": "char_ada_quill",
+      "character_name": "Ada Quill",
+      "year_written": 1911,
+      "voice": "Counter wood, midnight glasses, and a candle still refusing the dawn.",
+      "text": "I was Ada Quill, bartender in Morrowfield, 1911. I served drinks with a smile that could outlast the town’s winter and a heart that beat for laughter more than for duty. I wore my courage like a coat, my humor like a lantern in the dark.",
+      "referenced_character_ids": [],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "I kept Gideon Bell's letters to the singer from Galena behind the brandy shelf because holiness deserves at least one witness who can laugh."
+      ],
+      "public_contradictions": [
+        "Ada looked composed while hiding a strain no one measured correctly."
+      ],
+      "mood": "warm yet wry, like a candle in a drafty room",
+      "actual_model": "liquid/lfm-2.5-1.2b-instruct-20260120:free"
+    },
+    {
+      "id": "epitaph_4ac9247114",
+      "character_id": "char_thomas_quill",
+      "character_name": "Thomas Quill",
+      "year_written": 1917,
+      "voice": "Black wool, cedar shavings, and the soft authority of a man who closes lids.",
+      "text": "I am Thomas Quill.\nBlack wool and cedar kept me courteous; spring, worry, and weather kept me still. I closed lids and counted on being necessary—applause for the working hand—while jealousy and fatalism stitched my patience to fear. The spare room I built for Mercy Bell learned my tenderness before my hand did; now the town carries me into memory, steady as a rumor I never earned and gentle as the proof I left behind: that to be reliable is to risk being loved, and to be gentle is to outlast ridicule without ever silencing it.\"",
+      "referenced_character_ids": [],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "I built a spare room over the workshop and measured it for Mercy Bell before I had even held her hand properly."
+      ],
+      "public_contradictions": [
+        "Thomas Quill is the kind of man people call steady when they do not know how lonely they mean."
+      ],
+      "mood": "lyrical, intimate, ironic, humane, compressed",
+      "actual_model": "inclusionai/ling-2.6-1t-20260423:free"
+    },
+    {
+      "id": "epitaph_44a1f52807",
+      "character_id": "char_eliza_harrow",
+      "character_name": "Eliza Harrow",
+      "year_written": 1919,
+      "voice": "Lamplight over linen, speaking long after the births have stopped crying.",
+      "text": "I am Eliza Harrow.\nI stitched mercy into linen by lamplight and let the hours outrun the hurry; summer, work, and weather finally agreed against me. I kept the ledger soft so the living could survive their names and the dead keep her quiet, and at last I said aloud what Morrowfield only guessed—then asked for nothing louder than peace and a door that closes on shame and needless suffering. Bennett and June kept their vigil; I kept mine in craft and secrecy, and the town bled where it lied about the wound, but the cloth held, and the crying stopped before the light did.\"",
+      "referenced_character_ids": [],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "I changed Mercy Bell's father in the birth ledger because the living men would have survived the gossip and the dead woman would not."
+      ],
+      "public_contradictions": [
+        "Eliza finally said aloud what the town had only guessed."
+      ],
+      "mood": "lyrical, intimate, ironic, humane, compressed",
+      "actual_model": "inclusionai/ling-2.6-1t-20260423:free"
+    }
+  ],
+  "shared_motifs": [
+    "i"
+  ],
+  "cross_references": {
+    "Mercy Bell": [],
+    "Ruth Vale": [],
+    "Gideon Bell": [],
+    "Frank Harrow": [],
+    "Jonah Harrow": [
+      "Samuel Harrow",
+      "Arthur Harrow",
+      "Bennett Harrow"
+    ],
+    "Silas Vale": [],
+    "Ada Quill": [],
+    "Thomas Quill": [],
+    "Eliza Harrow": []
+  }
+}

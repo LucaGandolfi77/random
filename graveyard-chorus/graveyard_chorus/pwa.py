@@ -121,6 +121,714 @@ def render_explorer_html(state: TownState) -> str:
 """.format(title=escape(state.config.anthology_title), town=escape(state.town_name))
 
 
+def render_run_archive_html() -> str:
+    return """<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#19352c" />
+    <meta name="description" content="A multi-run archive for Graveyard Chorus exports." />
+    <title>Graveyard Chorus Run Archive</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon-192.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./runs.css" />
+    <script defer src="./runs.js"></script>
+  </head>
+  <body>
+    <div class="archive-shell">
+      <header class="archive-hero archive-panel">
+        <div>
+          <p class="archive-eyebrow">Graveyard Chorus Archive</p>
+          <h1>Different runs, different cemeteries, different weather.</h1>
+          <p class="archive-lede">
+            Browse exported runs as a single PWA archive: compare who survived, what scandals held,
+            how many epitaphs were written, and open any run’s full explorer or report.
+          </p>
+        </div>
+        <div class="archive-actions">
+          <button id="archiveInstallButton" class="archive-button" hidden>Install Archive</button>
+          <button id="archiveReloadButton" class="archive-button archive-button-secondary">Reload Runs</button>
+        </div>
+        <div id="archiveHeroStats" class="archive-hero-stats"></div>
+      </header>
+
+      <section class="archive-toolbar archive-panel">
+        <label class="archive-control">
+          <span>Search runs</span>
+          <input id="archiveSearchInput" type="search" placeholder="Search town, folder, families, motifs" />
+        </label>
+      </section>
+
+      <div class="archive-layout">
+        <aside class="archive-panel archive-list-shell">
+          <div class="archive-section-heading">
+            <h2>Runs</h2>
+            <p>Each card summarizes one exported simulation bundle.</p>
+          </div>
+          <div id="runList" class="run-list"></div>
+        </aside>
+
+        <main class="archive-panel archive-detail-shell">
+          <div class="archive-section-heading">
+            <h2>Selected Run</h2>
+            <p>High-level results, live archive links, and the exported family atmosphere.</p>
+          </div>
+          <div id="runDetail" class="run-detail"></div>
+        </main>
+      </div>
+
+      <div id="archiveNotice" class="archive-notice" hidden></div>
+    </div>
+  </body>
+</html>
+"""
+
+
+def render_run_archive_css() -> str:
+    return """
+:root {
+  --paper: #efe7d7;
+  --paper-strong: rgba(255, 249, 240, 0.92);
+  --ink: #1f1b17;
+  --muted: #64594d;
+  --forest: #19352c;
+  --copper: #9c4a32;
+  --gold: #d3ab63;
+  --border: rgba(31, 27, 23, 0.12);
+  --shadow: rgba(20, 25, 20, 0.18);
+  --serif: "Baskerville", "Palatino Linotype", "Book Antiqua", serif;
+  --sans: "Avenir Next", "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: var(--sans);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(156, 74, 50, 0.16), transparent 22%),
+    radial-gradient(circle at 82% 8%, rgba(25, 53, 44, 0.19), transparent 24%),
+    linear-gradient(180deg, #e8dbc8 0%, #efe7d7 45%, #e5d7c4 100%);
+}
+
+.archive-shell {
+  max-width: 1460px;
+  margin: 0 auto;
+  padding: 28px 18px 72px;
+}
+
+.archive-panel {
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255, 250, 243, 0.9), rgba(250, 244, 235, 0.78));
+  box-shadow: 0 24px 60px var(--shadow);
+  backdrop-filter: blur(8px);
+}
+
+.archive-hero {
+  padding: 28px;
+  display: grid;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.archive-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -72px -96px auto;
+  width: 240px;
+  height: 240px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(211, 171, 99, 0.28), transparent 70%);
+}
+
+.archive-eyebrow,
+.archive-label,
+.archive-chip,
+.archive-stat-label {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.73rem;
+  color: var(--copper);
+}
+
+.archive-hero h1,
+.archive-section-heading h2,
+.run-card h3,
+.run-detail h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.04;
+}
+
+.archive-hero h1 {
+  font-size: clamp(2.3rem, 4vw, 4.2rem);
+  max-width: 12ch;
+}
+
+.archive-lede,
+.archive-section-heading p,
+.run-card p,
+.run-detail p,
+.archive-control span {
+  color: var(--muted);
+}
+
+.archive-actions,
+.archive-hero-stats,
+.run-card-actions,
+.archive-chip-row,
+.run-detail-links,
+.run-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.archive-button,
+.run-link {
+  appearance: none;
+  border: 1px solid rgba(25, 53, 44, 0.18);
+  background: rgba(25, 53, 44, 0.9);
+  color: #f7efe4;
+  text-decoration: none;
+  padding: 0.78rem 1rem;
+  font: inherit;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.archive-button-secondary,
+.run-link-secondary {
+  background: rgba(255, 250, 243, 0.86);
+  color: var(--forest);
+}
+
+.archive-button:hover,
+.archive-button:focus-visible,
+.run-link:hover,
+.run-link:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(25, 53, 44, 0.18);
+}
+
+.archive-hero-stats {
+  gap: 14px;
+}
+
+.archive-stat-card,
+.run-summary-card {
+  min-width: 150px;
+  padding: 14px 16px;
+  border: 1px solid rgba(25, 53, 44, 0.08);
+  background: var(--paper-strong);
+}
+
+.archive-stat-card strong,
+.run-summary-card strong {
+  display: block;
+  font-size: 1.45rem;
+  color: var(--forest);
+  margin-top: 0.3rem;
+}
+
+.archive-toolbar,
+.archive-layout,
+.run-card,
+.run-detail-grid {
+  margin-top: 22px;
+}
+
+.archive-toolbar {
+  padding: 18px 20px;
+}
+
+.archive-control {
+  display: grid;
+  gap: 8px;
+}
+
+.archive-control input {
+  width: 100%;
+  border: 1px solid rgba(31, 27, 23, 0.14);
+  background: rgba(255, 252, 246, 0.88);
+  padding: 0.85rem 0.95rem;
+  color: var(--ink);
+  font: inherit;
+}
+
+.archive-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+  gap: 22px;
+}
+
+.archive-list-shell,
+.archive-detail-shell {
+  padding: 22px;
+}
+
+.archive-section-heading {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.run-list {
+  display: grid;
+  gap: 16px;
+}
+
+.run-card {
+  padding: 18px;
+  border: 1px solid rgba(31, 27, 23, 0.1);
+  background: rgba(255, 251, 246, 0.88);
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.run-card:hover,
+.run-card.is-active {
+  transform: translateY(-1px);
+  border-color: rgba(25, 53, 44, 0.25);
+  box-shadow: 0 18px 34px rgba(20, 25, 20, 0.12);
+}
+
+.run-card-header,
+.run-detail-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.run-card-header h3,
+.run-detail-header h3 {
+  font-size: 1.55rem;
+}
+
+.archive-chip {
+  border: 1px solid rgba(25, 53, 44, 0.14);
+  background: rgba(25, 53, 44, 0.06);
+  color: var(--forest);
+  padding: 0.32rem 0.55rem;
+}
+
+.run-card-stats,
+.run-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.run-detail {
+  display: grid;
+  gap: 18px;
+}
+
+.run-detail-section {
+  display: grid;
+  gap: 10px;
+}
+
+.archive-notice {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  max-width: 460px;
+  padding: 14px 16px;
+  color: #f7efe4;
+  background: rgba(25, 53, 44, 0.94);
+  box-shadow: 0 20px 36px rgba(20, 25, 20, 0.22);
+}
+
+.archive-empty {
+  padding: 18px;
+  border: 1px dashed rgba(31, 27, 23, 0.16);
+  background: rgba(255, 252, 246, 0.72);
+  color: var(--muted);
+}
+
+@media (max-width: 1040px) {
+  .archive-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .archive-shell {
+    padding: 18px 12px 58px;
+  }
+
+  .archive-hero,
+  .archive-toolbar,
+  .archive-list-shell,
+  .archive-detail-shell {
+    padding: 18px;
+  }
+}
+""".strip() + "\n"
+
+
+def render_run_archive_app(*, index_file: str) -> str:
+    return f"""
+const RUN_ARCHIVE_INDEX = './{index_file}';
+
+const archiveStore = {{
+  runs: [],
+  selectedRunId: null,
+  query: '',
+  installPrompt: null
+}};
+
+document.addEventListener('DOMContentLoaded', archiveBootstrap);
+window.addEventListener('beforeinstallprompt', handleArchiveInstallPrompt);
+window.addEventListener('appinstalled', () => showArchiveNotice('Run archive installed for offline browsing.'));
+
+async function archiveBootstrap() {{
+  bindArchiveControls();
+  registerArchiveServiceWorker();
+
+  if (window.location.protocol === 'file:') {{
+    showArchiveNotice('Serve this folder over HTTP for full PWA support and reliable multi-run loading.', true);
+  }}
+
+  await loadRunArchive();
+}}
+
+function bindArchiveControls() {{
+  document.getElementById('archiveSearchInput').addEventListener('input', (event) => {{
+    archiveStore.query = event.target.value.trim().toLowerCase();
+    renderRunArchive();
+  }});
+
+  document.getElementById('archiveReloadButton').addEventListener('click', () => loadRunArchive());
+  document.getElementById('archiveInstallButton').addEventListener('click', async () => {{
+    if (!archiveStore.installPrompt) {{
+      return;
+    }}
+    archiveStore.installPrompt.prompt();
+    await archiveStore.installPrompt.userChoice;
+    archiveStore.installPrompt = null;
+    document.getElementById('archiveInstallButton').hidden = true;
+  }});
+}}
+
+function handleArchiveInstallPrompt(event) {{
+  event.preventDefault();
+  archiveStore.installPrompt = event;
+  document.getElementById('archiveInstallButton').hidden = false;
+}}
+
+async function registerArchiveServiceWorker() {{
+  if (!('serviceWorker' in navigator) || window.location.protocol === 'file:') {{
+    return;
+  }}
+
+  try {{
+    await navigator.serviceWorker.register('./sw.js');
+  }} catch (error) {{
+    console.warn('Archive service worker registration failed', error);
+  }}
+}}
+
+async function loadRunArchive() {{
+  try {{
+    const payload = await fetchArchiveJson(RUN_ARCHIVE_INDEX);
+    archiveStore.runs = payload.runs || [];
+    const filtered = getFilteredRuns();
+    const existing = archiveStore.runs.find((run) => run.id === archiveStore.selectedRunId);
+    archiveStore.selectedRunId = existing?.id || filtered[0]?.id || archiveStore.runs[0]?.id || null;
+    renderRunArchive();
+    showArchiveNotice(`Loaded ${{archiveStore.runs.length}} exported runs.`);
+  }} catch (error) {{
+    renderArchiveFailure(error);
+  }}
+}}
+
+async function fetchArchiveJson(path) {{
+  const response = await fetch(path, {{ cache: 'no-store' }});
+  if (!response.ok) {{
+    throw new Error(`Failed to load ${{path}}: ${{response.status}}`);
+  }}
+  return response.json();
+}}
+
+function getFilteredRuns() {{
+  if (!archiveStore.query) {{
+    return archiveStore.runs;
+  }}
+
+  return archiveStore.runs.filter((run) => {{
+    const haystack = [
+      run.title,
+      run.town_name,
+      run.slug,
+      ...(run.families || []),
+      ...(run.shared_motifs || []),
+      ...(run.gossip_themes || [])
+    ].join(' ').toLowerCase();
+    return haystack.includes(archiveStore.query);
+  }});
+}}
+
+function renderRunArchive() {{
+  renderArchiveHeroStats();
+  renderRunList();
+  renderRunDetail();
+}}
+
+function renderArchiveHeroStats() {{
+  const runs = archiveStore.runs;
+  const totalEpitaphs = runs.reduce((sum, run) => sum + (run.epitaph_count || 0), 0);
+  const totalEvents = runs.reduce((sum, run) => sum + (run.event_count || 0), 0);
+  const llmRuns = runs.filter((run) => run.llm_enabled).length;
+  const stats = [
+    ['Runs', String(runs.length)],
+    ['LLM runs', String(llmRuns)],
+    ['Epitaphs across runs', String(totalEpitaphs)],
+    ['Logged events', String(totalEvents)]
+  ];
+
+  document.getElementById('archiveHeroStats').innerHTML = stats
+    .map(([label, value]) => `<article class="archive-stat-card"><span class="archive-stat-label">${{escapeArchiveHtml(label)}}</span><strong>${{escapeArchiveHtml(value)}}</strong></article>`)
+    .join('');
+}}
+
+function renderRunList() {{
+  const target = document.getElementById('runList');
+  const runs = getFilteredRuns();
+  if (!runs.length) {{
+    target.innerHTML = '<div class="archive-empty">No runs match the current filter.</div>';
+    return;
+  }}
+
+  if (!runs.some((run) => run.id === archiveStore.selectedRunId)) {{
+    archiveStore.selectedRunId = runs[0].id;
+  }}
+
+  target.innerHTML = runs.map((run) => {{
+    const activeClass = run.id === archiveStore.selectedRunId ? 'is-active' : '';
+    return `
+      <article class="run-card ${{activeClass}}" data-run-id="${{escapeArchiveHtml(run.id)}}">
+        <div class="run-card-header">
+          <div>
+            <span class="archive-label">${{escapeArchiveHtml(run.slug)}}</span>
+            <h3>${{escapeArchiveHtml(run.town_name)}}</h3>
+          </div>
+          <span class="archive-chip">Year ${{escapeArchiveHtml(String(run.current_year))}}</span>
+        </div>
+        <p>${{escapeArchiveHtml(run.title)}}</p>
+        <div class="run-card-stats">
+          ${{renderSummaryCard('Living', String(run.living_count))}}
+          ${{renderSummaryCard('Dead', String(run.deceased_count))}}
+          ${{renderSummaryCard('Epitaphs', String(run.epitaph_count))}}
+          ${{renderSummaryCard('Chronicles', String(run.chronicle_count))}}
+        </div>
+        <div class="run-card-actions">
+          <a class="run-link" href="${{escapeArchiveHtml(run.paths.explorer)}}">Open Explorer</a>
+          <a class="run-link run-link-secondary" href="${{escapeArchiveHtml(run.paths.report)}}">Static Report</a>
+        </div>
+      </article>
+    `;
+  }}).join('');
+
+  for (const card of target.querySelectorAll('[data-run-id]')) {{
+    card.addEventListener('click', () => {{
+      archiveStore.selectedRunId = card.dataset.runId;
+      renderRunArchive();
+    }});
+  }}
+}}
+
+function renderRunDetail() {{
+  const target = document.getElementById('runDetail');
+  const run = archiveStore.runs.find((item) => item.id === archiveStore.selectedRunId);
+  if (!run) {{
+    target.innerHTML = '<div class="archive-empty">Choose a run to inspect its exported results.</div>';
+    return;
+  }}
+
+  const motifs = (run.shared_motifs || []).length ? run.shared_motifs.map(renderArchiveChip).join('') : '<span class="archive-chip">No shared motifs exported</span>';
+  const families = (run.families || []).length ? run.families.map(renderArchiveChip).join('') : '<span class="archive-chip">No families recorded</span>';
+  const gossipThemes = (run.gossip_themes || []).length ? run.gossip_themes.map(renderArchiveChip).join('') : '<span class="archive-chip">No gossip themes recorded</span>';
+  const districts = (run.districts || []).length ? run.districts.map(renderArchiveChip).join('') : '<span class="archive-chip">No districts recorded</span>';
+
+  target.innerHTML = `
+    <section class="run-detail-section">
+      <div class="run-detail-header">
+        <div>
+          <span class="archive-label">${{escapeArchiveHtml(run.slug)}}</span>
+          <h3>${{escapeArchiveHtml(run.title)}}</h3>
+          <p>${{escapeArchiveHtml(run.town_name)}} ran from ${{escapeArchiveHtml(String(run.start_year))}} to ${{escapeArchiveHtml(String(run.current_year))}}.</p>
+        </div>
+        <span class="archive-chip">${{run.llm_enabled ? 'LLM enabled' : 'Offline or deterministic'}}</span>
+      </div>
+      <div class="run-detail-grid">
+        ${{renderSummaryCard('Years simulated', String(run.years_simulated))}}
+        ${{renderSummaryCard('Families', String(run.family_count))}}
+        ${{renderSummaryCard('Events', String(run.event_count))}}
+        ${{renderSummaryCard('Epitaphs', String(run.epitaph_count))}}
+      </div>
+    </section>
+
+    <section class="run-detail-section">
+      <span class="archive-label">Linked results</span>
+      <div class="run-detail-links">
+        <a class="run-link" href="${{escapeArchiveHtml(run.paths.explorer)}}">Open bundle explorer</a>
+        <a class="run-link run-link-secondary" href="${{escapeArchiveHtml(run.paths.report)}}">Open static report</a>
+        <a class="run-link run-link-secondary" href="${{escapeArchiveHtml(run.paths.anthology)}}">Read anthology</a>
+        <a class="run-link run-link-secondary" href="${{escapeArchiveHtml(run.paths.chronicle)}}">Read town chronicle</a>
+      </div>
+    </section>
+
+    <section class="run-detail-section">
+      <span class="archive-label">Shared motifs</span>
+      <div class="archive-chip-row">${{motifs}}</div>
+    </section>
+
+    <section class="run-detail-section">
+      <span class="archive-label">Families</span>
+      <div class="archive-chip-row">${{families}}</div>
+    </section>
+
+    <section class="run-detail-section">
+      <span class="archive-label">Gossip themes</span>
+      <div class="archive-chip-row">${{gossipThemes}}</div>
+    </section>
+
+    <section class="run-detail-section">
+      <span class="archive-label">Districts</span>
+      <div class="archive-chip-row">${{districts}}</div>
+    </section>
+  `;
+}}
+
+function renderSummaryCard(label, value) {{
+  return `<article class="run-summary-card"><span class="archive-stat-label">${{escapeArchiveHtml(label)}}</span><strong>${{escapeArchiveHtml(value)}}</strong></article>`;
+}}
+
+function renderArchiveChip(value) {{
+  return `<span class="archive-chip">${{escapeArchiveHtml(value)}}</span>`;
+}}
+
+function renderArchiveFailure(error) {{
+  document.getElementById('runList').innerHTML = `<div class="archive-empty">${{escapeArchiveHtml(error.message || String(error))}}</div>`;
+  document.getElementById('runDetail').innerHTML = '<div class="archive-empty">The archive could not load exported runs.</div>';
+}}
+
+function showArchiveNotice(message, persistent = false) {{
+  const notice = document.getElementById('archiveNotice');
+  notice.textContent = message;
+  notice.hidden = false;
+  if (persistent) {{
+    return;
+  }}
+  window.clearTimeout(showArchiveNotice.timeoutId);
+  showArchiveNotice.timeoutId = window.setTimeout(() => {{
+    notice.hidden = true;
+  }}, 3200);
+}}
+
+function escapeArchiveHtml(value) {{
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}}
+""".strip() + "\n"
+
+
+def render_run_archive_manifest() -> str:
+    payload = {
+        "name": "Graveyard Chorus Run Archive",
+        "short_name": "Chorus Archive",
+        "description": "A lightweight PWA for browsing multiple Graveyard Chorus runs.",
+        "start_url": "./index.html",
+        "scope": "./",
+        "display": "standalone",
+        "background_color": "#efe7d7",
+        "theme_color": "#19352c",
+        "icons": [
+            {
+                "src": "./icon-192.svg",
+                "sizes": "192x192",
+                "type": "image/svg+xml",
+                "purpose": "any",
+            },
+            {
+                "src": "./icon-512.svg",
+                "sizes": "512x512",
+                "type": "image/svg+xml",
+                "purpose": "any",
+            },
+        ],
+    }
+    return json.dumps(payload, indent=2)
+
+
+def render_run_archive_service_worker(*, index_file: str) -> str:
+    return f"""
+const CACHE_NAME = 'graveyard-chorus-run-archive-v1';
+const CORE_ASSETS = [
+  './',
+  './index.html',
+  './runs.css',
+  './runs.js',
+  './manifest.webmanifest',
+  './{index_file}',
+  './icon-192.svg',
+  './icon-512.svg'
+];
+
+self.addEventListener('install', (event) => {{
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)).then(() => self.skipWaiting())
+  );
+}});
+
+self.addEventListener('activate', (event) => {{
+  event.waitUntil(
+    caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))).then(() => self.clients.claim())
+  );
+}});
+
+self.addEventListener('fetch', (event) => {{
+  const request = event.request;
+  if (request.method !== 'GET') {{
+    return;
+  }}
+
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin) {{
+    return;
+  }}
+
+  event.respondWith(
+    caches.match(request).then((cachedResponse) => {{
+      const networkFetch = fetch(request)
+        .then((response) => {{
+          if (response && response.status === 200) {{
+            const responseCopy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, responseCopy));
+          }}
+          return response;
+        }})
+        .catch(() => cachedResponse);
+
+      return cachedResponse || networkFetch;
+    }})
+  );
+}});
+""".strip() + "\n"
+
+
 def render_explorer_css() -> str:
     return """
 :root {

@@ -1,0 +1,168 @@
+{
+  "town_name": "Morrowfield",
+  "generated_at_year": 1913,
+  "epitaphs": [
+    {
+      "id": "epitaph_93051213b3",
+      "character_id": "char_mercy_bell",
+      "character_name": "Mercy Bell",
+      "year_written": 1901,
+      "voice": "Bandage, winter lamp, and a pulse counted after everyone else stops listening.",
+      "text": "I am Mercy Bell.\nI set the winter lamp and counted pulses after the room emptied, bandaging the town while my own skin went unwarmed; usefulness bloomed like frost, and I called it love. Thomas Quill held a basin without spectacle, and that quiet held me longer than my own confessions. In autumn, work and worry and weather signed their treaty against my body, yet I was carried into town memory—where mercy rings like a borrowed bell. Gideon kept the face they expected; I kept the doubt that Silas Vale lent me mine, and hated how the doubt felt like a door I was never meant to enter, yet longed to knock upon. Let crisis find me calm, but do not ask how I sleep: I have learned to answer only in bandages, and to mistake tending for being tended to, until the lamp gutters and the pulse answers for me at last, soft as a secret tucked into a coat pocket against the gossip of snow. Tenderness, yes; resolve, yes; the rest is the hush between wanting and being wanted, and the careful arithmetic of self-neglect that almost, but never quite, paid for belonging.\"",
+      "referenced_character_ids": [],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "I have long suspected that Silas Vale, not any Bell, gave me my face, and I hated the suspicion because it felt too much like belonging to the wrong room."
+      ],
+      "public_contradictions": [
+        "Mercy Bell is the person most people want nearby in a crisis and least understand afterward."
+      ],
+      "mood": "lyrical, intimate, ironic, humane, compressed",
+      "actual_model": "inclusionai/ling-2.6-1t-20260423:free"
+    },
+    {
+      "id": "epitaph_99bb6dd45a",
+      "character_id": "char_ruth_vale",
+      "character_name": "Ruth Vale",
+      "year_written": 1902,
+      "voice": "A bell of office rung from beneath old water.",
+      "text": "A bell of office, rung from beneath old water,\nI measured love in ledgers, charity in coins,\nwhile Silas drew rivers from the mill’s throat\nand the Harrows pawned blankets for bread.\n\nThey’ll sing of my discipline, my frost-kindled grace,\nbut the flood ledger whispers: *he stole the current.*\n\nI turned Jonah’s grudge into a town meeting,\nlet pride sculpt my face like a statue of stone,\nwhile the autumn gnawed my ribs to dust.\n\nSilas told me truths that unraveled us both—\nbefore supper, before the ledger’s ink dried,\nbefore the town forgot how to breathe.\n\nThey’ll call me mayor. I’ll be the ledger’s ghost,\ncounting affection in arrears, as the mill grinds on.\n\n—Ruth Vale, 1902",
+      "referenced_character_ids": [
+        "char_silas_vale",
+        "char_jonah_harrow"
+      ],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "Silas Vale siphoned relief funds into the mill while the Harrows pawned blankets.",
+        "Ruth’s private ledger revealed Silas’s theft, altering both their fates.",
+        "Ruth weaponized a personal grudge against Jonah Harrow in public.",
+        "Silas confessed a long-hidden truth to Ruth before her death."
+      ],
+      "public_contradictions": [
+        "Measured civic tone vs. private emotional restraint",
+        "Frost-kindled grace vs. coldness flaw",
+        "Desire for legacy vs. fear of obsolescence"
+      ],
+      "mood": "melancholic irony with restrained fury",
+      "actual_model": "nvidia/nemotron-nano-12b-v2-vl:free"
+    },
+    {
+      "id": "epitaph_482bbf0199",
+      "character_id": "char_gideon_bell",
+      "character_name": "Gideon Bell",
+      "year_written": 1904,
+      "voice": "A cracked hymn book telling the truth between verses.",
+      "text": "Here lies the cracked hymn book that sang order into a spring too willing; I preached severity to drown the ink of my own longing, and Mercy was carried into town memory while I carried on, composed, with manners ordinary as a locked gate. Let doctrine keep the ledger: eloquence disciplined the tongue, and hypocrisy paid for the silence between verses where desire learned my handwriting and almost walked away with me. Now work, worry, and weather have agreed, and I am redeemed by the very ridicule I feared—small, middling, and finally stilled in Morrowfield, 1904, where the bell of my name tolls for the appetite I offended and the redemption I could not out-sermon. Let the town remember: Gideon Bell was carried into town memory, and Mercy Bell with him, each step a perfect ordinary manner guarding something costly and unspoken until spring agreed to carry us both home.",
+      "referenced_character_ids": [],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "I wrote letters to a singer and nearly left the parish with her, then preached twice as hard because desire had learned my handwriting."
+      ],
+      "public_contradictions": [
+        "Gideon looked composed while hiding a strain no one measured correctly."
+      ],
+      "mood": "lyrical, intimate, ironic, humane, compressed",
+      "actual_model": "inclusionai/ling-2.6-1t-20260423:free"
+    },
+    {
+      "id": "epitaph_fb2b132a2d",
+      "character_id": "char_c40e0bef13",
+      "character_name": "Frank Harrow",
+      "year_written": 1904,
+      "voice": "A future voice still taking shape in the family weather.",
+      "text": "I am Frank Harrow.\nHere lies the merchant-child who balanced Caleb’s restraint with Miriam’s appetite for feeling—patient, witty, undecided, restless. Born and the old loyalties of Morrowfield bent around his cradle; he carried several families at once while Arthur kept vigil for kin. Autumn came and work, worry, and weather agreed against the body. He wanted only belonging and warmth, feared hunger and abandonment, and left the town’s arithmetic one sum short of choice. The future voice still shapes itself in the family weather, too young to perform, yet already holding us like rain we did not ask for and could not refuse. Rest, small merchant: you counted us in, and we are learning to count without you.\"",
+      "referenced_character_ids": [],
+      "referenced_event_ids": [],
+      "hidden_truths": [],
+      "public_contradictions": [
+        "A new child entered the town's arithmetic."
+      ],
+      "mood": "lyrical, intimate, ironic, humane, compressed",
+      "actual_model": "inclusionai/ling-2.6-1t-20260423:free"
+    },
+    {
+      "id": "epitaph_09386a1ff6",
+      "character_id": "char_jonah_harrow",
+      "character_name": "Jonah Harrow",
+      "year_written": 1909,
+      "voice": "A man shaped by sawdust, river damp, and the long memory of wages.",
+      "text": "I am Jonah Harrow.\nI carved my name in the river’s throat, / where the Vales’ ledgers once whispered my debt. / Sawdust choked my lungs, but I breathed / the arithmetic of justice— / until the sluice markers lied, / and I became the ghost who counted / the cost of a lie in barley and blood.",
+      "referenced_character_ids": [
+        "char_samuel_harrow",
+        "char_efface7131",
+        "char_392eb2f5df"
+      ],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "The sluice markers were altered to shift blame onto the Vales, masking Jonah's own manipulation of resources.",
+        "His 'righteous' trick haunts him, revealing a moral ambiguity beneath his public persona."
+      ],
+      "public_contradictions": [
+        "His blunt, utilitarian public voice clashes with the intimate, poetic reflection on his own deceit.",
+        "Described as 'useful' yet defined by a trick that bred resentment, undermining his claimed virtues."
+      ],
+      "mood": "resentful introspection with undercurrents of grim resolve",
+      "actual_model": "nvidia/nemotron-nano-12b-v2-vl:free"
+    },
+    {
+      "id": "epitaph_ddc3235197",
+      "character_id": "char_silas_vale",
+      "character_name": "Silas Vale",
+      "year_written": 1911,
+      "voice": "A mill wheel speaking after it has broken a hand too many.",
+      "text": "I am Silas Vale.\nI turned when spring came calling and let age cash the note I kept renewing; the wheel still hums, though it has ground a hand too many. I joked when fright knocked, bargained shame into flour, and let gratitude wear the coin of wages so the mill—and I—might stay upright. June Harrow carried several families at once into our door, and I stepped beside Caleb with practical kindness to make the hard hour look almost ordinary; then I told him the secret I had banked like soot, and we were changed before the kettle sang. Continuity begged, forgiveness lingered, and the room, out of habit, arranged itself around a tired patriarch who finally said aloud what the town had only guessed—then folded into the hush of a broken wheel that feared exposure more than rust, and feared the body’s slow unmaking most of all. Let the stone keep spinning; let it be lighter than I was.\"",
+      "referenced_character_ids": [],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "I drew relief money into the mill and let gratitude stand in for wages because power was easier to keep than fairness."
+      ],
+      "public_contradictions": [
+        "Silas finally said aloud what the town had only guessed."
+      ],
+      "mood": "lyrical, intimate, ironic, humane, compressed",
+      "actual_model": "inclusionai/ling-2.6-1t-20260423:free"
+    },
+    {
+      "id": "epitaph_059c14abab",
+      "character_id": "char_ada_quill",
+      "character_name": "Ada Quill",
+      "year_written": 1911,
+      "voice": "Counter wood, midnight glasses, and a candle still refusing the dawn.",
+      "text": "I am Ada Quill.\nI kept Gideon Bell's letters to the singer from Galena behind the brandy shelf because holiness deserves at least one witness who can laugh.",
+      "referenced_character_ids": [],
+      "referenced_event_ids": [],
+      "hidden_truths": [
+        "I kept Gideon Bell's letters to the singer from Galena behind the brandy shelf because holiness deserves at least one witness who can laugh."
+      ],
+      "public_contradictions": [
+        "Ada looked composed while hiding a strain no one measured correctly."
+      ],
+      "mood": "warm yet wry, like a glass half-filled with laughter",
+      "actual_model": "liquid/lfm-2.5-1.2b-instruct-20260120:free"
+    }
+  ],
+  "shared_motifs": [
+    "i",
+    "silas",
+    "ruth’s",
+    "ruth",
+    "the",
+    "his"
+  ],
+  "cross_references": {
+    "Mercy Bell": [],
+    "Ruth Vale": [
+      "Silas Vale",
+      "Jonah Harrow"
+    ],
+    "Gideon Bell": [],
+    "Frank Harrow": [],
+    "Jonah Harrow": [
+      "Samuel Harrow",
+      "Arthur Harrow",
+      "Bennett Harrow"
+    ],
+    "Silas Vale": [],
+    "Ada Quill": []
+  }
+}

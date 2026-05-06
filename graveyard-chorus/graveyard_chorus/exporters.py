@@ -1,18 +1,26 @@
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from html import escape
 from pathlib import Path
 
 from .models import Character, Family, TownState
-from .persistence import ensure_directory, save_json, save_state
+from .persistence import ensure_directory, load_state, save_json, save_state
 from .pwa import (
     render_explorer_app,
     render_explorer_css,
     render_explorer_html,
     render_explorer_manifest,
     render_icon_svg,
+    render_run_archive_app,
+    render_run_archive_css,
+    render_run_archive_html,
+    render_run_archive_manifest,
+    render_run_archive_service_worker,
     render_service_worker,
 )
+
+RUN_ARCHIVE_INDEX = "graveyard-chorus-runs.json"
 
 
 def export_bundle(state: TownState, output_dir: Path) -> dict[str, Path]:
@@ -52,6 +60,80 @@ def export_bundle(state: TownState, output_dir: Path) -> dict[str, Path]:
     (output_dir / "icon-192.svg").write_text(render_icon_svg(size=192, town_name=state.town_name), encoding="utf-8")
     (output_dir / "icon-512.svg").write_text(render_icon_svg(size=512, town_name=state.town_name), encoding="utf-8")
     return paths
+
+
+def export_run_archive(base_dir: Path) -> dict[str, Path]:
+    ensure_directory(base_dir)
+    runs_payload = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "run_count": 0,
+        "runs": [],
+    }
+
+    run_entries = []
+    for child in sorted((path for path in base_dir.iterdir() if path.is_dir()), key=lambda path: path.name, reverse=True):
+        state_path = child / "town_state.json"
+        if not state_path.exists():
+            continue
+        state = load_state(state_path)
+        run_entries.append(_build_run_archive_entry(base_dir, child, state))
+
+    runs_payload["runs"] = run_entries
+    runs_payload["run_count"] = len(run_entries)
+
+    paths = {
+        "archive_index": base_dir / RUN_ARCHIVE_INDEX,
+        "archive_html": base_dir / "index.html",
+        "archive_css": base_dir / "runs.css",
+        "archive_app": base_dir / "runs.js",
+        "archive_manifest": base_dir / "manifest.webmanifest",
+        "archive_service_worker": base_dir / "sw.js",
+        "icon_192": base_dir / "icon-192.svg",
+        "icon_512": base_dir / "icon-512.svg",
+    }
+    save_json(runs_payload, paths["archive_index"])
+    paths["archive_html"].write_text(render_run_archive_html(), encoding="utf-8")
+    paths["archive_css"].write_text(render_run_archive_css(), encoding="utf-8")
+    paths["archive_app"].write_text(render_run_archive_app(index_file=RUN_ARCHIVE_INDEX), encoding="utf-8")
+    paths["archive_manifest"].write_text(render_run_archive_manifest(), encoding="utf-8")
+    paths["archive_service_worker"].write_text(render_run_archive_service_worker(index_file=RUN_ARCHIVE_INDEX), encoding="utf-8")
+    paths["icon_192"].write_text(render_icon_svg(size=192, town_name="Graveyard Chorus"), encoding="utf-8")
+    paths["icon_512"].write_text(render_icon_svg(size=512, town_name="Graveyard Chorus"), encoding="utf-8")
+    return paths
+
+
+def _build_run_archive_entry(base_dir: Path, run_dir: Path, state: TownState) -> dict[str, object]:
+    relative_dir = run_dir.relative_to(base_dir).as_posix()
+    living_count = len(state.alive_characters())
+    deceased_count = len(state.deceased_characters())
+    epitaph_count = len(state.cemetery.epitaphs) if state.cemetery else 0
+    return {
+        "id": relative_dir,
+        "slug": relative_dir,
+        "title": state.config.anthology_title,
+        "town_name": state.town_name,
+        "start_year": state.config.start_year,
+        "current_year": state.current_year,
+        "years_simulated": max(0, state.current_year - state.config.start_year),
+        "llm_enabled": state.config.llm_enabled and not state.config.offline_mode,
+        "living_count": living_count,
+        "deceased_count": deceased_count,
+        "epitaph_count": epitaph_count,
+        "chronicle_count": len(state.chronicles),
+        "event_count": len(state.life_events) + len(state.town_events),
+        "family_count": len(state.families),
+        "districts": state.districts,
+        "families": [family.name for family in sorted(state.families.values(), key=lambda item: item.name)],
+        "gossip_themes": state.gossip_themes[-6:],
+        "shared_motifs": (state.cemetery.shared_motifs if state.cemetery else [])[:8],
+        "paths": {
+            "explorer": f"./{relative_dir}/index.html",
+            "report": f"./{relative_dir}/report.html",
+            "anthology": f"./{relative_dir}/anthology.md",
+            "chronicle": f"./{relative_dir}/town_chronicle.md",
+            "state": f"./{relative_dir}/town_state.json",
+        },
+    }
 
 
 def render_anthology_markdown(state: TownState) -> str:

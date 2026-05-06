@@ -11,7 +11,7 @@ from rich.table import Table
 from .client import OpenRouterClient
 from .config import configure_logging, load_settings
 from .engine import SimulationEngine
-from .exporters import export_bundle
+from .exporters import export_bundle, export_run_archive
 from .persistence import build_run_directory, load_state
 
 app = typer.Typer(add_completion=False, help="Generate linked epitaph anthologies from a small-town literary simulation.")
@@ -47,7 +47,8 @@ def run(
     destination_root = output_dir or settings.save_dir
     run_dir = build_run_directory(destination_root, state.town_name, state.current_year)
     paths = export_bundle(state, run_dir)
-    _print_summary(state, run_dir, paths, log_path, client=engine.client)
+    export_run_archive(destination_root)
+    _print_summary(state, run_dir, paths, log_path, client=engine.client, archive_root=destination_root)
 
 
 @app.command()
@@ -143,6 +144,7 @@ def _print_summary(
     log_path: Path,
     *,
     client: OpenRouterClient | None = None,
+    archive_root: Path | None = None,
 ) -> None:
     table = Table(title=f"{state.town_name} Export Summary")
     table.add_column("Metric")
@@ -158,6 +160,8 @@ def _print_summary(
     table.add_row("Log file", str(log_path))
     console.print(table)
     console.print(f"Output directory: {output_dir}")
+    if archive_root is not None:
+        console.print(f"Run archive: {archive_root / 'index.html'}")
     for label, path in paths.items():
         console.print(f"- {label}: {path}")
 

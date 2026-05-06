@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Graveyard Chorus of Morrowfield</title>
+    <style>
+      :root {
+        --paper: #f5eee2;
+        --ink: #2a231d;
+        --red: #7e2b2b;
+        --green: #40513b;
+        --shadow: rgba(42, 35, 29, 0.18);
+      }
+      body {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(126, 43, 43, 0.13), transparent 28%),
+          linear-gradient(180deg, #efe4d5 0%, var(--paper) 55%, #eadfce 100%);
+      }
+      main { max-width: 1120px; margin: 0 auto; padding: 32px 20px 64px; }
+      header { margin-bottom: 28px; }
+      h1, h2, h3 { font-weight: 600; letter-spacing: 0.02em; }
+      .hero {
+        padding: 28px;
+        border: 1px solid rgba(42, 35, 29, 0.14);
+        background: rgba(255, 250, 243, 0.78);
+        box-shadow: 0 20px 45px var(--shadow);
+      }
+      .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      .epitaph-card, .family-card {
+        padding: 18px;
+        background: rgba(255, 252, 247, 0.82);
+        border-left: 4px solid var(--red);
+        box-shadow: 0 12px 30px var(--shadow);
+      }
+      .epitaph-card pre { white-space: pre-wrap; font-family: inherit; line-height: 1.65; }
+      .mood { text-transform: uppercase; letter-spacing: 0.18em; color: var(--red); font-size: 0.72rem; }
+      ul.timeline { list-style: none; padding: 0; display: grid; gap: 12px; }
+      ul.timeline li { padding: 14px 16px; background: rgba(255, 252, 247, 0.68); border-left: 4px solid var(--green); }
+      ul.timeline span { display: block; margin-top: 6px; line-height: 1.5; }
+      @media (max-width: 720px) {
+        main { padding: 20px 14px 48px; }
+        .hero { padding: 20px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <p>Morrowfield anthology export, year 1903</p>
+        <h1>Graveyard Chorus of Morrowfield</h1>
+        <p>the Vale-Harrow quarrel over the mill sluice, the Bell suspicion that the tavern keeps what the church cannot</p>
+                <p><a href="./index.html">Open the PWA explorer</a></p>
+      </header>
+      <section>
+        <h2>Families Under Pressure</h2>
+        <div class="grid">
+        <article class="family-card">
+          <h3>Vale</h3>
+          <p>Mill owners who turned flood relief into civic authority.</p>
+          <p><strong>Members:</strong> Ruth Vale, Silas Vale, Caleb Vale</p>
+          <p><strong>Pressure:</strong> The flood ledger has never been fully opened.</p>
+        </article>
+        
+        <article class="family-card">
+          <h3>Harrow</h3>
+          <p>Working mill folk who remember every insult as labor already paid for.</p>
+          <p><strong>Members:</strong> Jonah Harrow, Eliza Harrow, Miriam Harrow, Samuel Harrow, Arthur Harrow</p>
+          <p><strong>Pressure:</strong> Someone in the family has always adjusted the record when truth would destroy a woman first.</p>
+        </article>
+        
+        <article class="family-card">
+          <h3>Quill</h3>
+          <p>River people who trade in conversation, wakeful hours, and the price of burial.</p>
+          <p><strong>Members:</strong> Ada Quill, Thomas Quill, Clara Quill</p>
+          <p><strong>Pressure:</strong> The tavern shelves hold more confessions than the church register.</p>
+        </article>
+        
+        <article class="family-card">
+          <h3>Bell</h3>
+          <p>Clergy and caregivers whose respectability survives by keeping a careful distance from appetite.</p>
+          <p><strong>Members:</strong> Gideon Bell, Mercy Bell</p>
+          <p><strong>Pressure:</strong> Mercy&#x27;s birth was explained on paper more neatly than in blood.</p>
+        </article>
+        </div>
+      </section>
+      <section>
+        <h2>Cemetery Chorus</h2>
+        <div class="grid">
+            <article class="epitaph-card">
+              <h3>Mercy Bell</h3>
+              <p class="mood">Lyrical, Intimate, Ironic, Humane, Compressed</p>
+              <pre>I kept the winter lamp lit while bandage met skin and pulse answered after the room went quiet; usefulness bloomed like frost, and I called it love. Thomas Quill held the basin without spectacle, and I kept that hush longer than any vow. Gideon Bell kept the face the town expected, and I carried Mercy Bell into town memory—autumn at last agreed with the body, and I, who feared dependency and gossip, let care count me beyond myself, close enough to be wanted, far enough to remain a stranger to my own sleep. I confused deserving with being needed, and the confusion, sweet and ruinous, outlived me like a small, steady pulse in the cold.</pre>
+              <p class="refs">Cross references: None</p>
+            </article>
+            
+            <article class="epitaph-card">
+              <h3>Ruth Vale</h3>
+              <p class="mood">Wry Solemnity</p>
+              <pre>: I, Ruth Vale, stood as a bell of office rung from beneath old water, counting affection like rent because once it cost too much. In autumn, work, worry, and weather finally agreed against my body, and I spoke aloud what the town had only guessed.</pre>
+              <p class="refs">Cross references: Silas Vale, Jonah Harrow</p>
+            </article>
+            </div>
+      </section>
+      <section>
+        <h2>Town Chronicle</h2>
+        <ul class="timeline"><li><strong>Morrowfield 1901: Contracts and Lanterns</strong><span>Mercy Bell was carried into town memory as autumn pressed work, worry, and weather against the body, while Caleb Vale and Miriam Harrow turned careful courtship into a civic marriage under public scrutiny. Arthur Harrow arrived carrying several families at once, and every old loyalty in Morrowfield bent around the cradle, even as Silas Vale renewed a family bitterness against Jonah Harrow. The church staged Harvest Supper where compliments sounded like contracts, the town hall reopened credit and appetite at the Thaw Market, Bell Night made widows and liars sing together at the cemetery, and the Lantern Regatta let the river look forgiving for a night.</span></li><li><strong>: Autumn&#x27;s Sharp Echoes in Morrowfield</strong><span>Ruth Vale died in autumn as work, worry, and weather finally overcame her. Throughout the year, Ruth and Jonah Harrow traded sharp rumors and renewed old grievances, while Silas Vale spread a tale of Jonah&#x27;s affairs that reached the market by noon. The town council revisited the sluice dispute at town hall, a heat spell overwhelmed the clinic with the smell of vinegar and impatience, and the Harvest Supper at the church turned compliments into contracts and silence into weight.</span></li></ul>
+      </section>
+    </main>
+  </body>
+</html>

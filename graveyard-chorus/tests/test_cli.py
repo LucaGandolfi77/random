@@ -30,8 +30,11 @@ def test_print_summary_includes_chronicle_exact_free_retries(tmp_path, monkeypat
         {"anthology": Path("anthology.md")},
         tmp_path / "graveyard-chorus.log",
         client=fake_client,
+        archive_root=tmp_path / "runs",
     )
 
     output = recording_console.export_text()
     assert "Chronicle exact-free retries" in output
     assert "7" in output
+    assert "Run archive:" in output
+    assert str(tmp_path / "runs" / "index.html") in output

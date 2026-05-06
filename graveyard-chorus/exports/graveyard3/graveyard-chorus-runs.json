@@ -1,0 +1,52 @@
+{
+  "generated_at": "2026-05-06T13:08:58.962111+00:00",
+  "run_count": 1,
+  "runs": [
+    {
+      "id": "morrowfield-1921",
+      "slug": "morrowfield-1921",
+      "title": "Graveyard Chorus of Morrowfield",
+      "town_name": "Morrowfield",
+      "start_year": 1901,
+      "current_year": 1921,
+      "years_simulated": 20,
+      "llm_enabled": true,
+      "living_count": 7,
+      "deceased_count": 9,
+      "epitaph_count": 9,
+      "chronicle_count": 20,
+      "event_count": 865,
+      "family_count": 4,
+      "districts": [
+        "Hill Ward",
+        "River Reach",
+        "Mill Row",
+        "Cemetery Lane"
+      ],
+      "families": [
+        "Bell",
+        "Harrow",
+        "Quill",
+        "Vale"
+      ],
+      "gossip_themes": [
+        "sickness",
+        "water rights",
+        "letters",
+        "marriages",
+        "dowries",
+        "courtships"
+      ],
+      "shared_motifs": [
+        "i"
+      ],
+      "paths": {
+        "explorer": "./morrowfield-1921/index.html",
+        "report": "./morrowfield-1921/report.html",
+        "anthology": "./morrowfield-1921/anthology.md",
+        "chronicle": "./morrowfield-1921/town_chronicle.md",
+        "state": "./morrowfield-1921/town_state.json"
+      }
+    }
+  ]
+}

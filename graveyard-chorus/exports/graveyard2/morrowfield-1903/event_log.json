@@ -1,0 +1,2413 @@
+{
+  "town_events": [
+    {
+      "id": "town_e7f5663a93",
+      "year": 1901,
+      "season": "spring",
+      "title": "The Thaw Market reopened credit and appetite",
+      "description": "Merchants extended trust on thin margins, and old arguments returned with the river road.",
+      "district": "River Reach",
+      "institution": "town hall",
+      "family_ids": [],
+      "public_impact": 0.36,
+      "economic_shift": "spring credit loosened for one hopeful month",
+      "gossip_theme": "dowries",
+      "tags": [
+        "festival",
+        "trade"
+      ]
+    },
+    {
+      "id": "town_19743fcc94",
+      "year": 1901,
+      "season": "summer",
+      "title": "Lantern Regatta made the river look forgiving",
+      "description": "For one night the river carried lanterns, flirtation, and the illusion that grudges could drift away without naming themselves.",
+      "district": "River Reach",
+      "institution": "church",
+      "family_ids": [],
+      "public_impact": 0.31,
+      "economic_shift": null,
+      "gossip_theme": "courtships",
+      "tags": [
+        "festival",
+        "romance"
+      ]
+    },
+    {
+      "id": "town_532e1d5479",
+      "year": 1901,
+      "season": "autumn",
+      "title": "Harvest Supper staged every alliance in public",
+      "description": "At the long tables, compliments sounded like contracts and silence carried more weight than the bread.",
+      "district": "Hill Ward",
+      "institution": "church",
+      "family_ids": [],
+      "public_impact": 0.42,
+      "economic_shift": null,
+      "gossip_theme": "marriages",
+      "tags": [
+        "festival",
+        "class"
+      ]
+    },
+    {
+      "id": "town_b63fdb87af",
+      "year": 1901,
+      "season": "winter",
+      "title": "Bell Night made widows and liars sing together",
+      "description": "During Bell Night the cemetery lamps were lit, the names of the dead were read aloud, and living people behaved like witnesses to one another.",
+      "district": "Cemetery Lane",
+      "institution": "cemetery",
+      "family_ids": [],
+      "public_impact": 0.33,
+      "economic_shift": null,
+      "gossip_theme": "ghosts",
+      "tags": [
+        "festival",
+        "memory"
+      ]
+    },
+    {
+      "id": "town_9381f24d10",
+      "year": 1902,
+      "season": "spring",
+      "title": "The council reopened the sluice dispute",
+      "description": "At town hall the old quarrel over the mill sluice was argued again, with the Harrows and Vales listening as if the river kept score.",
+      "district": "Mill Row",
+      "institution": "town hall",
+      "family_ids": [
+        "family_harrow",
+        "family_vale"
+      ],
+      "public_impact": 0.64,
+      "economic_shift": "the mill contract wavered under civic pressure",
+      "gossip_theme": "water rights",
+      "tags": [
+        "politics",
+        "feud"
+      ]
+    },
+    {
+      "id": "town_b7f134d569",
+      "year": 1902,
+      "season": "summer",
+      "title": "A heat spell pushed the clinic past mercy",
+      "description": "The heat laid children low, drew old complaints out of the bones, and made the clinic smell of vinegar and impatience.",
+      "district": "Hill Ward",
+      "institution": "clinic",
+      "family_ids": [
+        "family_bell"
+      ],
+      "public_impact": 0.58,
+      "economic_shift": null,
+      "gossip_theme": "frailty",
+      "tags": [
+        "disaster",
+        "epidemic",
+        "summer"
+      ]
+    },
+    {
+      "id": "town_b3b31203a1",
+      "year": 1902,
+      "season": "autumn",
+      "title": "Harvest Supper staged every alliance in public",
+      "description": "At the long tables, compliments sounded like contracts and silence carried more weight than the bread.",
+      "district": "Hill Ward",
+      "institution": "church",
+      "family_ids": [],
+      "public_impact": 0.42,
+      "economic_shift": null,
+      "gossip_theme": "marriages",
+      "tags": [
+        "festival",
+        "class"
+      ]
+    },
+    {
+      "id": "town_2ad55354f7",
+      "year": 1902,
+      "season": "winter",
+      "title": "Bell Night made widows and liars sing together",
+      "description": "During Bell Night the cemetery lamps were lit, the names of the dead were read aloud, and living people behaved like witnesses to one another.",
+      "district": "Cemetery Lane",
+      "institution": "cemetery",
+      "family_ids": [],
+      "public_impact": 0.33,
+      "economic_shift": null,
+      "gossip_theme": "ghosts",
+      "tags": [
+        "festival",
+        "memory"
+      ]
+    }
+  ],
+  "life_events": [
+    {
+      "id": "life_d7e1f18adc",
+      "year": 1901,
+      "season": "spring",
+      "event_type": "feud",
+      "title": "Silas Vale renewed a family bitterness",
+      "description": "Silas Vale turned an old grievance against Jonah Harrow into a new public scene.",
+      "participant_ids": [
+        "char_silas_vale",
+        "char_jonah_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "feud",
+        "grudge",
+        "inheritance",
+        "pride",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_fbac7e387b",
+      "year": 1901,
+      "season": "spring",
+      "event_type": "feud",
+      "title": "Ruth Vale renewed a family bitterness",
+      "description": "Ruth Vale turned an old grievance against Jonah Harrow into a new public scene.",
+      "participant_ids": [
+        "char_ruth_vale",
+        "char_jonah_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "feud",
+        "grudge",
+        "inheritance",
+        "pride",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_deab0ec9fe",
+      "year": 1901,
+      "season": "spring",
+      "event_type": "conceal",
+      "title": "Gideon Bell kept the face the town expected",
+      "description": "Gideon Bell moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_gideon_bell"
+      ],
+      "district": "Hill Ward",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "fear",
+        "letters",
+        "love",
+        "shame",
+        "spring",
+        "survival"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_65056b0ea1",
+      "year": 1901,
+      "season": "spring",
+      "event_type": "feud",
+      "title": "Jonah Harrow renewed a family bitterness",
+      "description": "Jonah Harrow turned an old grievance against Ruth Vale into a new public scene.",
+      "participant_ids": [
+        "char_jonah_harrow",
+        "char_ruth_vale"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "feud",
+        "grudge",
+        "inheritance",
+        "pride",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_663ff82400",
+      "year": 1901,
+      "season": "spring",
+      "event_type": "work",
+      "title": "Eliza Harrow held to daily labor",
+      "description": "Eliza Harrow worked at being necessary, which is the nearest thing some lives come to applause.",
+      "participant_ids": [
+        "char_eliza_harrow"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "labor",
+        "reputation",
+        "routine",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_932c8aaa44",
+      "year": 1901,
+      "season": "spring",
+      "event_type": "reflect",
+      "title": "Thomas Quill listened to an inward verdict",
+      "description": "Thomas Quill spent the season in reflection, revising private beliefs against the evidence of time.",
+      "participant_ids": [
+        "char_thomas_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "memory",
+        "routine",
+        "self",
+        "spring",
+        "time"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_9d91669625",
+      "year": 1901,
+      "season": "spring",
+      "event_type": "conceal",
+      "title": "Ada Quill kept the face the town expected",
+      "description": "Ada Quill moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "fear",
+        "gideon",
+        "letters",
+        "shame",
+        "spring",
+        "survival"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_77174fc292",
+      "year": 1901,
+      "season": "spring",
+      "event_type": "court",
+      "title": "Caleb Vale tested the weather of love",
+      "description": "Caleb Vale offered Miriam Harrow a courtship so careful it sounded at first like conversation.",
+      "participant_ids": [
+        "char_caleb_vale",
+        "char_miriam_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.625,
+      "tags": [
+        "courtship",
+        "desire",
+        "longing",
+        "love",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_45c19694de",
+      "year": 1901,
+      "season": "spring",
+      "event_type": "work",
+      "title": "Mercy Bell held to daily labor",
+      "description": "Mercy Bell worked at being necessary, which is the nearest thing some lives come to applause.",
+      "participant_ids": [
+        "char_mercy_bell"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "labor",
+        "reputation",
+        "routine",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_209bbef0d2",
+      "year": 1901,
+      "season": "spring",
+      "event_type": "court",
+      "title": "Miriam Harrow tested the weather of love",
+      "description": "Miriam Harrow offered Caleb Vale a courtship so careful it sounded at first like conversation.",
+      "participant_ids": [
+        "char_miriam_harrow",
+        "char_caleb_vale"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.625,
+      "tags": [
+        "courtship",
+        "desire",
+        "longing",
+        "love",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_09ee7799d6",
+      "year": 1901,
+      "season": "spring",
+      "event_type": "care",
+      "title": "Clara Quill kept vigil for kin",
+      "description": "Clara Quill spent the season tending Ada Quill, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_clara_quill",
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_a07cd508d6",
+      "year": 1901,
+      "season": "spring",
+      "event_type": "care",
+      "title": "Samuel Harrow kept vigil for kin",
+      "description": "Samuel Harrow spent the season tending Eliza Harrow, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_samuel_harrow",
+        "char_eliza_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_a1bbb41170",
+      "year": 1901,
+      "season": "summer",
+      "event_type": "marriage",
+      "title": "Caleb Vale and Miriam Harrow married under public scrutiny",
+      "description": "Caleb Vale and Miriam Harrow married, turning affection into a civic event and family strategy at once.",
+      "participant_ids": [
+        "char_caleb_vale",
+        "char_miriam_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.74,
+      "tags": [
+        "marriage",
+        "family",
+        "alliance"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_6b234183a7",
+      "year": 1901,
+      "season": "spring",
+      "event_type": "birth",
+      "title": "Arthur Harrow arrived carrying several families at once",
+      "description": "Arthur Harrow was born, and every old loyalty in Morrowfield adjusted itself around the cradle.",
+      "participant_ids": [
+        "char_b7a8da5c6f",
+        "char_caleb_vale",
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.72,
+      "tags": [
+        "birth",
+        "family",
+        "harrow"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_cc76efe77d",
+      "year": 1901,
+      "season": "summer",
+      "event_type": "feud",
+      "title": "Silas Vale renewed a family bitterness",
+      "description": "Silas Vale turned an old grievance against Jonah Harrow into a new public scene.",
+      "participant_ids": [
+        "char_silas_vale",
+        "char_jonah_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "feud",
+        "grudge",
+        "inheritance",
+        "pride",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_34aec191db",
+      "year": 1901,
+      "season": "summer",
+      "event_type": "reveal",
+      "title": "Ruth Vale spoke what should have stayed buried",
+      "description": "Ruth Vale told Caleb Vale a truth so long concealed that it changed both of them before supper.",
+      "participant_ids": [
+        "char_ruth_vale",
+        "char_caleb_vale"
+      ],
+      "district": "Hill Ward",
+      "public": false,
+      "impact": 0.665,
+      "tags": [
+        "burden",
+        "confession",
+        "flood",
+        "ledger",
+        "truth"
+      ],
+      "secret_ids": [
+        "secret_5cccb56eb6"
+      ]
+    },
+    {
+      "id": "life_e6e98dbac2",
+      "year": 1901,
+      "season": "summer",
+      "event_type": "conceal",
+      "title": "Gideon Bell kept the face the town expected",
+      "description": "Gideon Bell moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_gideon_bell"
+      ],
+      "district": "Hill Ward",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "fear",
+        "letters",
+        "love",
+        "shame",
+        "summer",
+        "survival"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_36fae6089a",
+      "year": 1901,
+      "season": "summer",
+      "event_type": "feud",
+      "title": "Jonah Harrow renewed a family bitterness",
+      "description": "Jonah Harrow turned an old grievance against Ruth Vale into a new public scene.",
+      "participant_ids": [
+        "char_jonah_harrow",
+        "char_ruth_vale"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "feud",
+        "grudge",
+        "inheritance",
+        "pride",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_3eafa5dd5e",
+      "year": 1901,
+      "season": "summer",
+      "event_type": "reconcile",
+      "title": "Eliza Harrow loosened an old knot",
+      "description": "Eliza Harrow spoke to Miriam Harrow without armor and made a little peace where habit had expected theatre.",
+      "participant_ids": [
+        "char_eliza_harrow",
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.5,
+      "tags": [
+        "forgiveness",
+        "memory",
+        "peace",
+        "reconciliation",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_9ba6c4b6eb",
+      "year": 1901,
+      "season": "summer",
+      "event_type": "reconcile",
+      "title": "Thomas Quill loosened an old knot",
+      "description": "Thomas Quill spoke to Ada Quill without armor and made a little peace where habit had expected theatre.",
+      "participant_ids": [
+        "char_thomas_quill",
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": true,
+      "impact": 0.5,
+      "tags": [
+        "forgiveness",
+        "memory",
+        "peace",
+        "reconciliation",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_daf29817af",
+      "year": 1901,
+      "season": "summer",
+      "event_type": "conceal",
+      "title": "Ada Quill kept the face the town expected",
+      "description": "Ada Quill moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "fear",
+        "gideon",
+        "letters",
+        "shame",
+        "summer",
+        "survival"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_3857f37a29",
+      "year": 1901,
+      "season": "summer",
+      "event_type": "work",
+      "title": "Caleb Vale held to daily labor",
+      "description": "Caleb Vale worked at being necessary, which is the nearest thing some lives come to applause.",
+      "participant_ids": [
+        "char_caleb_vale"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "labor",
+        "reputation",
+        "routine",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_6455307c30",
+      "year": 1901,
+      "season": "summer",
+      "event_type": "reflect",
+      "title": "Mercy Bell listened to an inward verdict",
+      "description": "Mercy Bell spent the season in reflection, revising private beliefs against the evidence of time.",
+      "participant_ids": [
+        "char_mercy_bell"
+      ],
+      "district": "Hill Ward",
+      "public": false,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "memory",
+        "routine",
+        "self",
+        "summer",
+        "time"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_028493255f",
+      "year": 1901,
+      "season": "summer",
+      "event_type": "reconcile",
+      "title": "Miriam Harrow loosened an old knot",
+      "description": "Miriam Harrow spoke to Eliza Harrow without armor and made a little peace where habit had expected theatre.",
+      "participant_ids": [
+        "char_miriam_harrow",
+        "char_eliza_harrow"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.5,
+      "tags": [
+        "forgiveness",
+        "memory",
+        "peace",
+        "reconciliation",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_fbcb97b361",
+      "year": 1901,
+      "season": "summer",
+      "event_type": "care",
+      "title": "Clara Quill kept vigil for kin",
+      "description": "Clara Quill spent the season tending Ada Quill, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_clara_quill",
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_1543b2e75e",
+      "year": 1901,
+      "season": "summer",
+      "event_type": "care",
+      "title": "Samuel Harrow kept vigil for kin",
+      "description": "Samuel Harrow spent the season tending Eliza Harrow, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_samuel_harrow",
+        "char_eliza_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_66ddabd437",
+      "year": 1901,
+      "season": "summer",
+      "event_type": "care",
+      "title": "Arthur Harrow kept vigil for kin",
+      "description": "Arthur Harrow spent the season tending Miriam Harrow, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_b7a8da5c6f",
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_cfdacc7a55",
+      "year": 1901,
+      "season": "autumn",
+      "event_type": "gossip",
+      "title": "Silas Vale let a rumor walk in public shoes",
+      "description": "Silas Vale repeated a sharp version of Jonah Harrow's affairs, and the tale reached the market before noon.",
+      "participant_ids": [
+        "char_silas_vale",
+        "char_jonah_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "autumn",
+        "feud",
+        "rumor",
+        "scandal",
+        "status"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_df2d3eff09",
+      "year": 1901,
+      "season": "autumn",
+      "event_type": "gossip",
+      "title": "Ruth Vale let a rumor walk in public shoes",
+      "description": "Ruth Vale repeated a sharp version of Jonah Harrow's affairs, and the tale reached the market before noon.",
+      "participant_ids": [
+        "char_ruth_vale",
+        "char_jonah_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "autumn",
+        "feud",
+        "rumor",
+        "scandal",
+        "status"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_1f3f7afc3a",
+      "year": 1901,
+      "season": "autumn",
+      "event_type": "conceal",
+      "title": "Gideon Bell kept the face the town expected",
+      "description": "Gideon Bell moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_gideon_bell"
+      ],
+      "district": "Hill Ward",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "autumn",
+        "fear",
+        "letters",
+        "love",
+        "shame",
+        "survival"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_29464535f7",
+      "year": 1901,
+      "season": "autumn",
+      "event_type": "feud",
+      "title": "Jonah Harrow renewed a family bitterness",
+      "description": "Jonah Harrow turned an old grievance against Ruth Vale into a new public scene.",
+      "participant_ids": [
+        "char_jonah_harrow",
+        "char_ruth_vale"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "autumn",
+        "feud",
+        "grudge",
+        "inheritance",
+        "pride"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_baaf87b660",
+      "year": 1901,
+      "season": "autumn",
+      "event_type": "work",
+      "title": "Eliza Harrow held to daily labor",
+      "description": "Eliza Harrow worked at being necessary, which is the nearest thing some lives come to applause.",
+      "participant_ids": [
+        "char_eliza_harrow"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "autumn",
+        "labor",
+        "reputation",
+        "routine"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_a8461e0464",
+      "year": 1901,
+      "season": "autumn",
+      "event_type": "work",
+      "title": "Thomas Quill held to daily labor",
+      "description": "Thomas Quill worked at being necessary, which is the nearest thing some lives come to applause.",
+      "participant_ids": [
+        "char_thomas_quill"
+      ],
+      "district": "River Reach",
+      "public": true,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "autumn",
+        "labor",
+        "reputation",
+        "routine"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_062bd3ed91",
+      "year": 1901,
+      "season": "autumn",
+      "event_type": "conceal",
+      "title": "Ada Quill kept the face the town expected",
+      "description": "Ada Quill moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "autumn",
+        "fear",
+        "gideon",
+        "letters",
+        "shame",
+        "survival"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_9f28586577",
+      "year": 1901,
+      "season": "autumn",
+      "event_type": "reflect",
+      "title": "Caleb Vale listened to an inward verdict",
+      "description": "Caleb Vale spent the season in reflection, revising private beliefs against the evidence of time.",
+      "participant_ids": [
+        "char_caleb_vale"
+      ],
+      "district": "Hill Ward",
+      "public": false,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "autumn",
+        "memory",
+        "routine",
+        "self",
+        "time"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_6f5c9bc7a5",
+      "year": 1901,
+      "season": "autumn",
+      "event_type": "reconcile",
+      "title": "Mercy Bell loosened an old knot",
+      "description": "Mercy Bell spoke to Eliza Harrow without armor and made a little peace where habit had expected theatre.",
+      "participant_ids": [
+        "char_mercy_bell",
+        "char_eliza_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.5,
+      "tags": [
+        "autumn",
+        "forgiveness",
+        "memory",
+        "peace",
+        "reconciliation"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_139fbb9b94",
+      "year": 1901,
+      "season": "autumn",
+      "event_type": "work",
+      "title": "Miriam Harrow held to daily labor",
+      "description": "Miriam Harrow worked at being necessary, which is the nearest thing some lives come to applause.",
+      "participant_ids": [
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "autumn",
+        "labor",
+        "reputation",
+        "routine"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_c56be8f7fc",
+      "year": 1901,
+      "season": "autumn",
+      "event_type": "care",
+      "title": "Clara Quill kept vigil for kin",
+      "description": "Clara Quill spent the season tending Ada Quill, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_clara_quill",
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "autumn",
+        "duty",
+        "family"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_7ad6ccd75e",
+      "year": 1901,
+      "season": "autumn",
+      "event_type": "care",
+      "title": "Samuel Harrow kept vigil for kin",
+      "description": "Samuel Harrow spent the season tending Eliza Harrow, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_samuel_harrow",
+        "char_eliza_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "autumn",
+        "duty",
+        "family"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_bb74bc8cc1",
+      "year": 1901,
+      "season": "autumn",
+      "event_type": "care",
+      "title": "Arthur Harrow kept vigil for kin",
+      "description": "Arthur Harrow spent the season tending Miriam Harrow, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_b7a8da5c6f",
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "autumn",
+        "duty",
+        "family"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_6352d2e332",
+      "year": 1901,
+      "season": "autumn",
+      "event_type": "death",
+      "title": "Mercy Bell was carried into town memory",
+      "description": "Mercy Bell died in autumn when work, worry, and weather finally agreed against the body.",
+      "participant_ids": [
+        "char_mercy_bell"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.95,
+      "tags": [
+        "death",
+        "memory",
+        "bell"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_58207b3bce",
+      "year": 1901,
+      "season": "winter",
+      "event_type": "gossip",
+      "title": "Silas Vale let a rumor walk in public shoes",
+      "description": "Silas Vale repeated a sharp version of Jonah Harrow's affairs, and the tale reached the market before noon.",
+      "participant_ids": [
+        "char_silas_vale",
+        "char_jonah_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "feud",
+        "rumor",
+        "scandal",
+        "status",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_1d6fbc7dd1",
+      "year": 1901,
+      "season": "winter",
+      "event_type": "feud",
+      "title": "Ruth Vale renewed a family bitterness",
+      "description": "Ruth Vale turned an old grievance against Jonah Harrow into a new public scene.",
+      "participant_ids": [
+        "char_ruth_vale",
+        "char_jonah_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "feud",
+        "grudge",
+        "inheritance",
+        "pride",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_7e8f456446",
+      "year": 1901,
+      "season": "winter",
+      "event_type": "conceal",
+      "title": "Gideon Bell kept the face the town expected",
+      "description": "Gideon Bell moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_gideon_bell"
+      ],
+      "district": "Hill Ward",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "fear",
+        "letters",
+        "love",
+        "shame",
+        "survival",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_2e1346f599",
+      "year": 1901,
+      "season": "winter",
+      "event_type": "feud",
+      "title": "Jonah Harrow renewed a family bitterness",
+      "description": "Jonah Harrow turned an old grievance against Ruth Vale into a new public scene.",
+      "participant_ids": [
+        "char_jonah_harrow",
+        "char_ruth_vale"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "feud",
+        "grudge",
+        "inheritance",
+        "pride",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_c2d7ae3684",
+      "year": 1901,
+      "season": "winter",
+      "event_type": "reflect",
+      "title": "Eliza Harrow listened to an inward verdict",
+      "description": "Eliza Harrow spent the season in reflection, revising private beliefs against the evidence of time.",
+      "participant_ids": [
+        "char_eliza_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "memory",
+        "routine",
+        "self",
+        "time",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_640fac2498",
+      "year": 1901,
+      "season": "winter",
+      "event_type": "work",
+      "title": "Thomas Quill held to daily labor",
+      "description": "Thomas Quill worked at being necessary, which is the nearest thing some lives come to applause.",
+      "participant_ids": [
+        "char_thomas_quill"
+      ],
+      "district": "River Reach",
+      "public": true,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "labor",
+        "reputation",
+        "routine",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_75489caade",
+      "year": 1901,
+      "season": "winter",
+      "event_type": "conceal",
+      "title": "Ada Quill kept the face the town expected",
+      "description": "Ada Quill moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "fear",
+        "gideon",
+        "letters",
+        "shame",
+        "survival",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_53fac52e7a",
+      "year": 1901,
+      "season": "winter",
+      "event_type": "reconcile",
+      "title": "Caleb Vale loosened an old knot",
+      "description": "Caleb Vale spoke to Miriam Harrow without armor and made a little peace where habit had expected theatre.",
+      "participant_ids": [
+        "char_caleb_vale",
+        "char_miriam_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.5,
+      "tags": [
+        "forgiveness",
+        "memory",
+        "peace",
+        "reconciliation",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_7cba55327b",
+      "year": 1901,
+      "season": "winter",
+      "event_type": "work",
+      "title": "Miriam Harrow held to daily labor",
+      "description": "Miriam Harrow worked at being necessary, which is the nearest thing some lives come to applause.",
+      "participant_ids": [
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "labor",
+        "reputation",
+        "routine",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_1447031347",
+      "year": 1901,
+      "season": "winter",
+      "event_type": "care",
+      "title": "Clara Quill kept vigil for kin",
+      "description": "Clara Quill spent the season tending Ada Quill, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_clara_quill",
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_0eb0a09144",
+      "year": 1901,
+      "season": "winter",
+      "event_type": "care",
+      "title": "Samuel Harrow kept vigil for kin",
+      "description": "Samuel Harrow spent the season tending Eliza Harrow, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_samuel_harrow",
+        "char_eliza_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_5585cc769c",
+      "year": 1901,
+      "season": "winter",
+      "event_type": "care",
+      "title": "Arthur Harrow kept vigil for kin",
+      "description": "Arthur Harrow spent the season tending Miriam Harrow, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_b7a8da5c6f",
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_e7895329ec",
+      "year": 1902,
+      "season": "spring",
+      "event_type": "gossip",
+      "title": "Silas Vale let a rumor walk in public shoes",
+      "description": "Silas Vale repeated a sharp version of Jonah Harrow's affairs, and the tale reached the market before noon.",
+      "participant_ids": [
+        "char_silas_vale",
+        "char_jonah_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "feud",
+        "rumor",
+        "scandal",
+        "spring",
+        "status"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_e8debce129",
+      "year": 1902,
+      "season": "spring",
+      "event_type": "feud",
+      "title": "Ruth Vale renewed a family bitterness",
+      "description": "Ruth Vale turned an old grievance against Jonah Harrow into a new public scene.",
+      "participant_ids": [
+        "char_ruth_vale",
+        "char_jonah_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "feud",
+        "grudge",
+        "inheritance",
+        "pride",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_fb8f3bf472",
+      "year": 1902,
+      "season": "spring",
+      "event_type": "conceal",
+      "title": "Gideon Bell kept the face the town expected",
+      "description": "Gideon Bell moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_gideon_bell"
+      ],
+      "district": "Hill Ward",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "fear",
+        "letters",
+        "love",
+        "shame",
+        "spring",
+        "survival"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_ea4aec04dc",
+      "year": 1902,
+      "season": "spring",
+      "event_type": "feud",
+      "title": "Jonah Harrow renewed a family bitterness",
+      "description": "Jonah Harrow turned an old grievance against Ruth Vale into a new public scene.",
+      "participant_ids": [
+        "char_jonah_harrow",
+        "char_ruth_vale"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "feud",
+        "grudge",
+        "inheritance",
+        "pride",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_1dc7a9eb46",
+      "year": 1902,
+      "season": "spring",
+      "event_type": "help",
+      "title": "Eliza Harrow carried a burden for Miriam Harrow",
+      "description": "Eliza Harrow stepped beside Miriam Harrow with practical kindness and made the hard hour look almost ordinary.",
+      "participant_ids": [
+        "char_eliza_harrow",
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.585,
+      "tags": [
+        "duty",
+        "kinship",
+        "mercy",
+        "mutual_aid",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_1255a36cb4",
+      "year": 1902,
+      "season": "spring",
+      "event_type": "reconcile",
+      "title": "Thomas Quill loosened an old knot",
+      "description": "Thomas Quill spoke to Ada Quill without armor and made a little peace where habit had expected theatre.",
+      "participant_ids": [
+        "char_thomas_quill",
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": true,
+      "impact": 0.5,
+      "tags": [
+        "forgiveness",
+        "memory",
+        "peace",
+        "reconciliation",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_926aa46ad5",
+      "year": 1902,
+      "season": "spring",
+      "event_type": "conceal",
+      "title": "Ada Quill kept the face the town expected",
+      "description": "Ada Quill moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "fear",
+        "gideon",
+        "letters",
+        "shame",
+        "spring",
+        "survival"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_ce230c9b37",
+      "year": 1902,
+      "season": "spring",
+      "event_type": "reconcile",
+      "title": "Caleb Vale loosened an old knot",
+      "description": "Caleb Vale spoke to Miriam Harrow without armor and made a little peace where habit had expected theatre.",
+      "participant_ids": [
+        "char_caleb_vale",
+        "char_miriam_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.5,
+      "tags": [
+        "forgiveness",
+        "memory",
+        "peace",
+        "reconciliation",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_f1e9b86b4a",
+      "year": 1902,
+      "season": "spring",
+      "event_type": "work",
+      "title": "Miriam Harrow held to daily labor",
+      "description": "Miriam Harrow worked at being necessary, which is the nearest thing some lives come to applause.",
+      "participant_ids": [
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "labor",
+        "reputation",
+        "routine",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_38df19a249",
+      "year": 1902,
+      "season": "spring",
+      "event_type": "care",
+      "title": "Clara Quill kept vigil for kin",
+      "description": "Clara Quill spent the season tending Ada Quill, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_clara_quill",
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_5e3efd8deb",
+      "year": 1902,
+      "season": "spring",
+      "event_type": "care",
+      "title": "Samuel Harrow kept vigil for kin",
+      "description": "Samuel Harrow spent the season tending Eliza Harrow, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_samuel_harrow",
+        "char_eliza_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_488e3725ca",
+      "year": 1902,
+      "season": "spring",
+      "event_type": "care",
+      "title": "Arthur Harrow kept vigil for kin",
+      "description": "Arthur Harrow spent the season tending Miriam Harrow, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_b7a8da5c6f",
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "spring"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_1c385d0499",
+      "year": 1902,
+      "season": "summer",
+      "event_type": "reveal",
+      "title": "Silas Vale spoke what should have stayed buried",
+      "description": "Silas Vale told Ruth Vale a truth so long concealed that it changed both of them before supper.",
+      "participant_ids": [
+        "char_silas_vale",
+        "char_ruth_vale"
+      ],
+      "district": "Hill Ward",
+      "public": false,
+      "impact": 0.665,
+      "tags": [
+        "burden",
+        "confession",
+        "flood",
+        "mill",
+        "truth"
+      ],
+      "secret_ids": [
+        "secret_fe8d72d205"
+      ]
+    },
+    {
+      "id": "life_0c1e04ae06",
+      "year": 1902,
+      "season": "summer",
+      "event_type": "gossip",
+      "title": "Ruth Vale let a rumor walk in public shoes",
+      "description": "Ruth Vale repeated a sharp version of Jonah Harrow's affairs, and the tale reached the market before noon.",
+      "participant_ids": [
+        "char_ruth_vale",
+        "char_jonah_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "feud",
+        "rumor",
+        "scandal",
+        "status",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_db1d127ce2",
+      "year": 1902,
+      "season": "summer",
+      "event_type": "conceal",
+      "title": "Gideon Bell kept the face the town expected",
+      "description": "Gideon Bell moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_gideon_bell"
+      ],
+      "district": "Hill Ward",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "fear",
+        "letters",
+        "love",
+        "shame",
+        "summer",
+        "survival"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_b2c403e80f",
+      "year": 1902,
+      "season": "summer",
+      "event_type": "feud",
+      "title": "Jonah Harrow renewed a family bitterness",
+      "description": "Jonah Harrow turned an old grievance against Ruth Vale into a new public scene.",
+      "participant_ids": [
+        "char_jonah_harrow",
+        "char_ruth_vale"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "feud",
+        "grudge",
+        "inheritance",
+        "pride",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_d11261b69a",
+      "year": 1902,
+      "season": "summer",
+      "event_type": "help",
+      "title": "Eliza Harrow carried a burden for Miriam Harrow",
+      "description": "Eliza Harrow stepped beside Miriam Harrow with practical kindness and made the hard hour look almost ordinary.",
+      "participant_ids": [
+        "char_eliza_harrow",
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.585,
+      "tags": [
+        "duty",
+        "kinship",
+        "mercy",
+        "mutual_aid",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_a7b29a3cee",
+      "year": 1902,
+      "season": "summer",
+      "event_type": "work",
+      "title": "Thomas Quill held to daily labor",
+      "description": "Thomas Quill worked at being necessary, which is the nearest thing some lives come to applause.",
+      "participant_ids": [
+        "char_thomas_quill"
+      ],
+      "district": "River Reach",
+      "public": true,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "labor",
+        "reputation",
+        "routine",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_24be3abf7c",
+      "year": 1902,
+      "season": "summer",
+      "event_type": "conceal",
+      "title": "Ada Quill kept the face the town expected",
+      "description": "Ada Quill moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "fear",
+        "gideon",
+        "letters",
+        "shame",
+        "summer",
+        "survival"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_c987acd012",
+      "year": 1902,
+      "season": "summer",
+      "event_type": "reconcile",
+      "title": "Caleb Vale loosened an old knot",
+      "description": "Caleb Vale spoke to Miriam Harrow without armor and made a little peace where habit had expected theatre.",
+      "participant_ids": [
+        "char_caleb_vale",
+        "char_miriam_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.5,
+      "tags": [
+        "forgiveness",
+        "memory",
+        "peace",
+        "reconciliation",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_5c6a3cfe7b",
+      "year": 1902,
+      "season": "summer",
+      "event_type": "work",
+      "title": "Miriam Harrow held to daily labor",
+      "description": "Miriam Harrow worked at being necessary, which is the nearest thing some lives come to applause.",
+      "participant_ids": [
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "labor",
+        "reputation",
+        "routine",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_a71e10edde",
+      "year": 1902,
+      "season": "summer",
+      "event_type": "care",
+      "title": "Clara Quill kept vigil for kin",
+      "description": "Clara Quill spent the season tending Ada Quill, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_clara_quill",
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_7d2aa62569",
+      "year": 1902,
+      "season": "summer",
+      "event_type": "care",
+      "title": "Samuel Harrow kept vigil for kin",
+      "description": "Samuel Harrow spent the season tending Eliza Harrow, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_samuel_harrow",
+        "char_eliza_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_7dcfb9a42d",
+      "year": 1902,
+      "season": "summer",
+      "event_type": "care",
+      "title": "Arthur Harrow kept vigil for kin",
+      "description": "Arthur Harrow spent the season tending Miriam Harrow, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_b7a8da5c6f",
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "summer"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_dc390dea1f",
+      "year": 1902,
+      "season": "autumn",
+      "event_type": "reveal",
+      "title": "Silas Vale spoke what should have stayed buried",
+      "description": "Silas Vale told Ruth Vale a truth so long concealed that it changed both of them before supper.",
+      "participant_ids": [
+        "char_silas_vale",
+        "char_ruth_vale"
+      ],
+      "district": "Hill Ward",
+      "public": false,
+      "impact": 0.665,
+      "tags": [
+        "burden",
+        "confession",
+        "flood",
+        "mill",
+        "truth"
+      ],
+      "secret_ids": [
+        "secret_fe8d72d205"
+      ]
+    },
+    {
+      "id": "life_f1f228a136",
+      "year": 1902,
+      "season": "autumn",
+      "event_type": "feud",
+      "title": "Ruth Vale renewed a family bitterness",
+      "description": "Ruth Vale turned an old grievance against Jonah Harrow into a new public scene.",
+      "participant_ids": [
+        "char_ruth_vale",
+        "char_jonah_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "autumn",
+        "feud",
+        "grudge",
+        "inheritance",
+        "pride"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_560f6476b4",
+      "year": 1902,
+      "season": "autumn",
+      "event_type": "conceal",
+      "title": "Gideon Bell kept the face the town expected",
+      "description": "Gideon Bell moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_gideon_bell"
+      ],
+      "district": "Hill Ward",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "autumn",
+        "fear",
+        "letters",
+        "love",
+        "shame",
+        "survival"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_476564ac23",
+      "year": 1902,
+      "season": "autumn",
+      "event_type": "feud",
+      "title": "Jonah Harrow renewed a family bitterness",
+      "description": "Jonah Harrow turned an old grievance against Ruth Vale into a new public scene.",
+      "participant_ids": [
+        "char_jonah_harrow",
+        "char_ruth_vale"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "autumn",
+        "feud",
+        "grudge",
+        "inheritance",
+        "pride"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_0dd057b596",
+      "year": 1902,
+      "season": "autumn",
+      "event_type": "help",
+      "title": "Eliza Harrow carried a burden for Miriam Harrow",
+      "description": "Eliza Harrow stepped beside Miriam Harrow with practical kindness and made the hard hour look almost ordinary.",
+      "participant_ids": [
+        "char_eliza_harrow",
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.585,
+      "tags": [
+        "autumn",
+        "duty",
+        "kinship",
+        "mercy",
+        "mutual_aid"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_a6f517b8ba",
+      "year": 1902,
+      "season": "autumn",
+      "event_type": "work",
+      "title": "Thomas Quill held to daily labor",
+      "description": "Thomas Quill worked at being necessary, which is the nearest thing some lives come to applause.",
+      "participant_ids": [
+        "char_thomas_quill"
+      ],
+      "district": "River Reach",
+      "public": true,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "autumn",
+        "labor",
+        "reputation",
+        "routine"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_088e195ad1",
+      "year": 1902,
+      "season": "autumn",
+      "event_type": "conceal",
+      "title": "Ada Quill kept the face the town expected",
+      "description": "Ada Quill moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "autumn",
+        "fear",
+        "gideon",
+        "letters",
+        "shame",
+        "survival"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_8366cfaf21",
+      "year": 1902,
+      "season": "autumn",
+      "event_type": "reconcile",
+      "title": "Caleb Vale loosened an old knot",
+      "description": "Caleb Vale spoke to Miriam Harrow without armor and made a little peace where habit had expected theatre.",
+      "participant_ids": [
+        "char_caleb_vale",
+        "char_miriam_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.5,
+      "tags": [
+        "autumn",
+        "forgiveness",
+        "memory",
+        "peace",
+        "reconciliation"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_446a728789",
+      "year": 1902,
+      "season": "autumn",
+      "event_type": "work",
+      "title": "Miriam Harrow held to daily labor",
+      "description": "Miriam Harrow worked at being necessary, which is the nearest thing some lives come to applause.",
+      "participant_ids": [
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "autumn",
+        "labor",
+        "reputation",
+        "routine"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_79239cf23e",
+      "year": 1902,
+      "season": "autumn",
+      "event_type": "care",
+      "title": "Clara Quill kept vigil for kin",
+      "description": "Clara Quill spent the season tending Ada Quill, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_clara_quill",
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "autumn",
+        "duty",
+        "family"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_ab344b6cfc",
+      "year": 1902,
+      "season": "autumn",
+      "event_type": "care",
+      "title": "Samuel Harrow kept vigil for kin",
+      "description": "Samuel Harrow spent the season tending Eliza Harrow, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_samuel_harrow",
+        "char_eliza_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "autumn",
+        "duty",
+        "family"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_b02743ff73",
+      "year": 1902,
+      "season": "autumn",
+      "event_type": "care",
+      "title": "Arthur Harrow kept vigil for kin",
+      "description": "Arthur Harrow spent the season tending Miriam Harrow, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_b7a8da5c6f",
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "autumn",
+        "duty",
+        "family"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_a300a821ee",
+      "year": 1902,
+      "season": "autumn",
+      "event_type": "death",
+      "title": "Ruth Vale was carried into town memory",
+      "description": "Ruth Vale died in autumn when work, worry, and weather finally agreed against the body.",
+      "participant_ids": [
+        "char_ruth_vale"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.95,
+      "tags": [
+        "death",
+        "memory",
+        "vale"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_12c9b18067",
+      "year": 1902,
+      "season": "winter",
+      "event_type": "feud",
+      "title": "Silas Vale renewed a family bitterness",
+      "description": "Silas Vale turned an old grievance against Jonah Harrow into a new public scene.",
+      "participant_ids": [
+        "char_silas_vale",
+        "char_jonah_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "feud",
+        "grudge",
+        "inheritance",
+        "pride",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_dcc5dd325c",
+      "year": 1902,
+      "season": "winter",
+      "event_type": "conceal",
+      "title": "Gideon Bell kept the face the town expected",
+      "description": "Gideon Bell moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_gideon_bell"
+      ],
+      "district": "Hill Ward",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "fear",
+        "letters",
+        "love",
+        "shame",
+        "survival",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_7589ddab7c",
+      "year": 1902,
+      "season": "winter",
+      "event_type": "gossip",
+      "title": "Jonah Harrow let a rumor walk in public shoes",
+      "description": "Jonah Harrow repeated a sharp version of Silas Vale's affairs, and the tale reached the market before noon.",
+      "participant_ids": [
+        "char_jonah_harrow",
+        "char_silas_vale"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.6100000000000001,
+      "tags": [
+        "feud",
+        "rumor",
+        "scandal",
+        "status",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_deb90930b0",
+      "year": 1902,
+      "season": "winter",
+      "event_type": "help",
+      "title": "Eliza Harrow carried a burden for Miriam Harrow",
+      "description": "Eliza Harrow stepped beside Miriam Harrow with practical kindness and made the hard hour look almost ordinary.",
+      "participant_ids": [
+        "char_eliza_harrow",
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.585,
+      "tags": [
+        "duty",
+        "kinship",
+        "mercy",
+        "mutual_aid",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_43ecd35ed5",
+      "year": 1902,
+      "season": "winter",
+      "event_type": "work",
+      "title": "Thomas Quill held to daily labor",
+      "description": "Thomas Quill worked at being necessary, which is the nearest thing some lives come to applause.",
+      "participant_ids": [
+        "char_thomas_quill"
+      ],
+      "district": "River Reach",
+      "public": true,
+      "impact": 0.44500000000000006,
+      "tags": [
+        "labor",
+        "reputation",
+        "routine",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_147063d475",
+      "year": 1902,
+      "season": "winter",
+      "event_type": "conceal",
+      "title": "Ada Quill kept the face the town expected",
+      "description": "Ada Quill moved through the day with perfect ordinary manners while protecting something costly and unspoken.",
+      "participant_ids": [
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.69,
+      "tags": [
+        "fear",
+        "gideon",
+        "letters",
+        "shame",
+        "survival",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_74e07ec164",
+      "year": 1902,
+      "season": "winter",
+      "event_type": "reconcile",
+      "title": "Caleb Vale loosened an old knot",
+      "description": "Caleb Vale spoke to Miriam Harrow without armor and made a little peace where habit had expected theatre.",
+      "participant_ids": [
+        "char_caleb_vale",
+        "char_miriam_harrow"
+      ],
+      "district": "Hill Ward",
+      "public": true,
+      "impact": 0.5,
+      "tags": [
+        "forgiveness",
+        "memory",
+        "peace",
+        "reconciliation",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_95f6be92de",
+      "year": 1902,
+      "season": "winter",
+      "event_type": "reconcile",
+      "title": "Miriam Harrow loosened an old knot",
+      "description": "Miriam Harrow spoke to Eliza Harrow without armor and made a little peace where habit had expected theatre.",
+      "participant_ids": [
+        "char_miriam_harrow",
+        "char_eliza_harrow"
+      ],
+      "district": "Mill Row",
+      "public": true,
+      "impact": 0.5,
+      "tags": [
+        "forgiveness",
+        "memory",
+        "peace",
+        "reconciliation",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_2e25f6adcb",
+      "year": 1902,
+      "season": "winter",
+      "event_type": "care",
+      "title": "Clara Quill kept vigil for kin",
+      "description": "Clara Quill spent the season tending Ada Quill, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_clara_quill",
+        "char_ada_quill"
+      ],
+      "district": "River Reach",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_3586ba68e5",
+      "year": 1902,
+      "season": "winter",
+      "event_type": "care",
+      "title": "Samuel Harrow kept vigil for kin",
+      "description": "Samuel Harrow spent the season tending Eliza Harrow, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_samuel_harrow",
+        "char_eliza_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "winter"
+      ],
+      "secret_ids": []
+    },
+    {
+      "id": "life_5edbb1d9dc",
+      "year": 1902,
+      "season": "winter",
+      "event_type": "care",
+      "title": "Arthur Harrow kept vigil for kin",
+      "description": "Arthur Harrow spent the season tending Miriam Harrow, learning again that devotion is a form of weather.",
+      "participant_ids": [
+        "char_b7a8da5c6f",
+        "char_miriam_harrow"
+      ],
+      "district": "Mill Row",
+      "public": false,
+      "impact": 0.52,
+      "tags": [
+        "aging",
+        "duty",
+        "family",
+        "winter"
+      ],
+      "secret_ids": []
+    }
+  ]
+}

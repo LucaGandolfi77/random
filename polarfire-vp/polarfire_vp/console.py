@@ -9,6 +9,7 @@ from pathlib import Path
 from rich.console import Console
 
 from polarfire_vp.session import SimulationSession
+from polarfire_vp.peripherals.demo_irq import DemoIrqPeripheral
 
 
 class SimulationConsole(cmd.Cmd):
@@ -131,6 +132,57 @@ class SimulationConsole(cmd.Cmd):
             return
         for name, peripheral in self.session.machine.peripherals.items():
             self.console.print(f"{name}: {peripheral.__class__.__name__}")
+
+    def do_irqdemo(self, arg: str) -> None:
+        """Manage demo IRQ peripherals at runtime.
+
+        Usage: irqdemo <rearm|fire> [peripheral_name|all]
+        - rearm: clear fired flags so events can fire again (and attempt immediate refire)
+        - fire: forcibly raise all configured IRQs immediately
+        If no name is provided, applies to all DemoIrqPeripheral instances.
+        """
+        tokens = shlex.split(arg)
+        if not tokens or tokens[0] not in {"rearm", "fire"}:
+            self.console.print("usage: irqdemo <rearm|fire> [peripheral_name|all]")
+            return
+        action = tokens[0]
+        target = tokens[1] if len(tokens) > 1 else "all"
+        if self.session.machine is None:
+            self.console.print("No platform loaded")
+            return
+
+        matches = []
+        if target == "all":
+            matches = [p for p in self.session.machine.peripherals.values() if isinstance(p, DemoIrqPeripheral)]
+        else:
+            p = self.session.machine.peripherals.get(target)
+            if p is None:
+                self.console.print(f"No peripheral named {target}")
+                return
+            if not isinstance(p, DemoIrqPeripheral):
+                self.console.print(f"Peripheral {target} is not a DemoIrqPeripheral")
+                return
+            matches = [p]
+
+        if not matches:
+            self.console.print("No demo IRQ peripherals found")
+            return
+
+        for p in matches:
+            try:
+                if action == "rearm":
+                    p.rearm()
+                    # Attempt immediate refire if tick already passed
+                    try:
+                        p.on_tick(0, p.current_tick)
+                    except Exception:
+                        pass
+                    self.console.print(f"Rearmed {p.name}")
+                else:
+                    p.fire_now()
+                    self.console.print(f"Fired {p.name}")
+            except Exception as exc:
+                self.console.print(f"Error operating on {p.name}: {exc}")
 
     def do_start_gdb_server(self, arg: str) -> None:
         tokens = shlex.split(arg)

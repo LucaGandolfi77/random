@@ -1,0 +1,15 @@
+# Test script for irqdemo commands
+# Loads platform, resets, lists peripherals, fires and rearms demo IRQs
+load platform examples/boards/polarfire_vk.yaml
+reset
+peripherals
+# Force a fire of demo IRQs (applies to all demo IRQ peripherals)
+irqdemo fire all
+# Rearm so events can fire again
+irqdemo rearm all
+# Run a short execution to let any IRQ handling progress
+start 50000
+# Force another immediate fire
+irqdemo fire all
+start 1000
+peripherals

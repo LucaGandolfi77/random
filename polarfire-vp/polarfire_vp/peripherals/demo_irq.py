@@ -78,3 +78,26 @@ class DemoIrqPeripheral(Peripheral):
         self._trace_write(offset, len(data), value)
         if offset == self.FIRED_MASK:
             self.fired_mask &= ~value
+
+    def rearm(self) -> None:
+        """Clear fired flags so configured events can fire again on subsequent ticks."""
+        for event in self._events:
+            event.fired = False
+        self.fired_mask = 0
+
+    def fire_now(self) -> None:
+        """Immediately raise all configured IRQs via the PLIC regardless of tick, and mark events fired."""
+        controller = self.machine.peripherals.get("plic") if self.machine is not None else None
+        if controller is None:
+            return
+        for index, event in enumerate(self._events):
+            controller.raise_irq(event.irq, target_harts=event.target_harts)
+            event.fired = True
+            self.fired_mask |= 1 << index
+            if self.log_accesses:
+                self.logger.info(
+                    "event %d forced fire irq=%d targets=%s",
+                    index,
+                    event.irq,
+                    sorted(event.target_harts),
+                )

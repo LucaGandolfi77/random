@@ -1,0 +1,18 @@
+# PolarFire VP demo script
+# Build examples/firmware/build/hello_uart.elf before running this script.
+
+load platform examples/boards/polarfire_vk.yaml
+harts
+load elf examples/firmware/build/hello_uart.elf
+log peripheral uart0 on
+log peripheral timer0 on
+break main
+start_gdb_server 3333
+reset
+harts
+continue 200000
+regs
+hart release 1
+hart select 1
+regs 1
+mem read 0x20100008 0x4

@@ -1,0 +1,136 @@
+name: PolarFire SoC Video Kit
+vendor: Microchip
+description: >-
+  Functional software-oriented abstraction of the PolarFire SoC Video Kit,
+  focused on firmware bring-up, MMIO visibility and debug workflows.
+
+cpu:
+  name: mss
+  backend: riscv64-functional
+  boot_hart: 0
+  isa: rv64im
+  reset_pc: 0x20200000
+  harts:
+    - hart_id: 0
+      name: e51
+      kind: e51
+      role: monitor
+      start_mode: running
+    - hart_id: 1
+      name: u54_1
+      kind: u54
+      role: application
+      start_mode: wfi
+    - hart_id: 2
+      name: u54_2
+      kind: u54
+      role: application
+      start_mode: wfi
+    - hart_id: 3
+      name: u54_3
+      kind: u54
+      role: application
+      start_mode: wfi
+    - hart_id: 4
+      name: u54_4
+      kind: u54
+      role: application
+      start_mode: wfi
+
+memory:
+  - name: boot_rom
+    kind: rom
+    base: 0x20200000
+    size: 0x00020000
+    permissions: r
+    fill: 0x00
+
+  - name: l2_scratchpad
+    kind: ram
+    base: 0x08000000
+    size: 0x00200000
+    permissions: rw
+    fill: 0x00
+
+  - name: ddr
+    kind: ram
+    base: 0x80000000
+    size: 0x04000000
+    permissions: rwx
+    fill: 0x00
+
+peripherals:
+  - name: bootctrl
+    kind: boot-controller
+    base: 0x01700000
+    size: 0x00005000
+    clint_name: clint0
+
+  - name: clint0
+    kind: clint
+    base: 0x02000000
+    size: 0x00010000
+
+  - name: plic
+    kind: interrupt-controller
+    base: 0x0C000000
+    size: 0x00001000
+
+  - name: irqdemo0
+    kind: irq-demo
+    base: 0x20400000
+    size: 0x00001000
+    events:
+      - tick: 4
+        irq: 2
+        target_harts: [2]
+      - tick: 5
+        irq: 3
+        target_harts: [3]
+      - tick: 6
+        irq: 4
+        target_harts: [4]
+
+  - name: uart0
+    kind: uart
+    base: 0x20100000
+    size: 0x00001000
+    irq: 3
+
+  - name: timer0
+    kind: timer
+    base: 0x20110000
+    size: 0x00001000
+    irq: 7
+
+  - name: gpio0
+    kind: gpio
+    base: 0x20120000
+    size: 0x00001000
+    irq: 10
+
+  - name: storage0
+    kind: block-device
+    base: 0x20300000
+    size: 0x00002000
+    irq: 12
+    sector_size: 512
+    sectors: 4096
+
+  - name: mipi_csi0
+    kind: stub
+    base: 0x30000000
+    size: 0x00001000
+    label: dual-4k-mipi-csi2-placeholder
+
+  - name: hdmi_tx0
+    kind: stub
+    base: 0x30010000
+    size: 0x00001000
+    label: hdmi-2-0-placeholder
+
+  - name: sdi0
+    kind: stub
+    base: 0x30020000
+    size: 0x00001000
+    label: sdi-placeholder

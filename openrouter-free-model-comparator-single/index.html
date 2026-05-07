@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="night">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<meta name="theme-color" content="#0b1220">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="description" content="Single-file OpenRouter model comparator for iPhone and mobile Safari.">
+	<title>OpenRouter One-File Comparator</title>
+	<style>
+		:root,
+		[data-theme="day"] {
+			--bg: #f3efe6;
+			--panel: rgba(255, 251, 245, 0.92);
+			--panel-strong: rgba(255, 248, 238, 0.98);
+			--text: #1c1b19;
+			--muted: #655c4f;
+			--border: rgba(101, 92, 79, 0.18);
+			--accent: #0e7c86;
+			--accent-soft: #bfe7e8;
+			--accent-2: #ba5b2d;
+			--success: #1b8a5a;
+			--warning: #bd7b15;
+			--danger: #b33a4d;
+			--glow: radial-gradient(circle at top left, rgba(14, 124, 134, 0.14), transparent 34%), radial-gradient(circle at top right, rgba(186, 91, 45, 0.12), transparent 36%);
+			--shadow: 0 18px 48px rgba(34, 31, 26, 0.1);
+			--track: rgba(17, 24, 39, 0.08);
+			--pre: #f5efe4;
+		}
+
+		[data-theme="night"] {
+			--bg: #09111b;
+			--panel: rgba(9, 18, 28, 0.84);
+			--panel-strong: rgba(12, 22, 34, 0.96);
+			--text: #edf2f7;
+			--muted: #9aabbb;
+			--border: rgba(120, 158, 186, 0.2);
+			--accent: #7ee1de;
+			--accent-soft: rgba(126, 225, 222, 0.18);
+			--accent-2: #ff9f6e;
+			--success: #4ad494;
+			--warning: #f2b14b;
+			--danger: #ff7b8f;
+			--glow: radial-gradient(circle at top left, rgba(126, 225, 222, 0.14), transparent 34%), radial-gradient(circle at top right, rgba(255, 159, 110, 0.13), transparent 36%);
+			--shadow: 0 28px 70px rgba(0, 0, 0, 0.34);
+			--track: rgba(255, 255, 255, 0.09);
+			--pre: #0f1c2c;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html {
+			scroll-behavior: smooth;
+			background: var(--bg);
+		}
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			font-family: "Avenir Next", "Segoe UI", "Trebuchet MS", sans-serif;
+			background: var(--glow), linear-gradient(180deg, color-mix(in srgb, var(--bg) 94%, #000 6%), var(--bg));
+			color: var(--text);
+			line-height: 1.55;
+			-webkit-font-smoothing: antialiased;
+			text-rendering: optimizeLegibility;
+		}
+
+		button,
+		input,
+		textarea,
+		select {
+			font: inherit;
+		}
+
+		a {
+			color: inherit;
+		}
+
+		.skip-link {
+			position: absolute;
+			left: -9999px;
+			top: 0;
+		}
+
+		.skip-link:focus {
+			left: 1rem;
+			top: 1rem;
+			z-index: 20;
+			padding: 0.75rem 1rem;
+			border-radius: 999px;
+			background: var(--panel-strong);
+			border: 1px solid var(--border);
+		}
+
+		.shell {
+			width: min(1520px, 100%);
+			margin: 0 auto;
+			padding: max(1rem, env(safe-area-inset-top)) 1rem max(1.25rem, env(safe-area-inset-bottom));
+		}
+
+		.hero {
+			display: grid;
+			grid-template-columns: minmax(0, 1.6fr) auto;
+			gap: 1rem;
+			align-items: start;
+			padding: 1.3rem;
+			border-radius: 1.7rem;
+			background: linear-gradient(145deg, color-mix(in srgb, var(--panel) 92%, transparent), color-mix(in srgb, var(--panel-strong) 96%, transparent));
+			border: 1px solid var(--border);
+			box-shadow: var(--shadow);
+			backdrop-filter: blur(16px);
+		}
+
+		.hero h1,
+		.panel h2,
+		.panel h3,
+		.result-card h3,
+		.traffic-card summary {
+			font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+			letter-spacing: -0.02em;
+		}
+
+		.hero h1 {
+			margin: 0.15rem 0 0.5rem;
+			font-size: clamp(2rem, 2vw + 1.25rem, 3.4rem);
+			line-height: 0.98;
+		}
+
+		.eyebrow {
+			margin: 0;
+			text-transform: uppercase;
+			letter-spacing: 0.14em;
+			font-size: 0.78rem;
+			color: var(--accent-2);
+			font-weight: 700;
+		}
+
+		.subtitle,
+		.micro-note {
+			margin: 0;
+			color: var(--muted);
+		}
+
+		.hero-actions {
+			display: grid;
+			gap: 0.8rem;
+			justify-items: end;
+			align-content: start;
+		}
+
+		.status-row,
+		.action-strip,
+		.export-row,
+		.pill-row {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.75rem;
+		}
+
+		.status-row {
+			margin: 1rem 0;
+		}
+
+		.status-pill,
+		.chip,
+		.mini-chip,
+		.status-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			padding: 0.6rem 0.85rem;
+			border-radius: 999px;
+			border: 1px solid var(--border);
+			background: color-mix(in srgb, var(--panel) 92%, transparent);
+			box-shadow: var(--shadow);
+			font-size: 0.92rem;
+			backdrop-filter: blur(14px);
+		}
+
+		.mini-chip,
+		.status-badge {
+			padding: 0.32rem 0.7rem;
+			font-size: 0.8rem;
+			box-shadow: none;
+		}
+
+		.status-badge.success {
+			color: var(--success);
+		}
+
+		.status-badge.error {
+			color: var(--danger);
+		}
+
+		.status-badge.pending {
+			color: var(--warning);
+		}
+
+		.status-pill.note {
+			color: var(--muted);
+		}
+
+		.status-dot {
+			width: 0.65rem;
+			height: 0.65rem;
+			border-radius: 50%;
+			background: var(--muted);
+			flex: none;
+		}
+
+		.status-dot.online,
+		.status-dot.success,
+		.status-dot.done {
+			background: var(--success);
+		}
+
+		.status-dot.running {
+			background: var(--accent);
+			box-shadow: 0 0 0 0.35rem color-mix(in srgb, var(--accent) 24%, transparent);
+		}
+
+		.status-dot.warning,
+		.status-dot.idle {
+			background: var(--warning);
+		}
+
+		.status-dot.error,
+		.status-dot.file {
+			background: var(--accent-2);
+		}
+
+		.warning-banner {
+			margin-bottom: 1rem;
+			padding: 0.9rem 1rem;
+			border-radius: 1.1rem;
+			border: 1px solid color-mix(in srgb, var(--accent-2) 34%, var(--border));
+			background: linear-gradient(135deg, color-mix(in srgb, var(--accent-2) 11%, var(--panel)), color-mix(in srgb, var(--panel) 96%, transparent));
+			color: var(--muted);
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(12, minmax(0, 1fr));
+			gap: 1rem;
+		}
+
+		.panel {
+			min-width: 0;
+			padding: 1rem;
+			border-radius: 1.4rem;
+			border: 1px solid var(--border);
+			background: linear-gradient(180deg, color-mix(in srgb, var(--panel) 93%, transparent), color-mix(in srgb, var(--panel-strong) 96%, transparent));
+			box-shadow: var(--shadow);
+			backdrop-filter: blur(18px);
+		}
+
+		.config-panel {
+			grid-column: span 5;
+		}
+
+		.model-panel {
+			grid-column: span 3;
+		}
+
+		.progress-panel {
+			grid-column: span 4;
+		}
+
+		.full-span {
+			grid-column: 1 / -1;
+		}
+
+		.panel-head {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			gap: 0.75rem;
+			flex-wrap: wrap;
+			margin-bottom: 1rem;
+		}
+
+		.panel h2,
+		.panel h3 {
+			margin: 0;
+		}
+
+		.field-grid {
+			display: grid;
+			gap: 1rem;
+		}
+
+		.field-grid.two {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.field-grid.three {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.field {
+			display: grid;
+			gap: 0.45rem;
+			margin-bottom: 1rem;
+		}
+
+		.field:last-child {
+			margin-bottom: 0;
+		}
+
+		label {
+			font-weight: 700;
+			letter-spacing: 0.01em;
+		}
+
+		input,
+		textarea,
+		select {
+			width: 100%;
+			border: 1px solid var(--border);
+			border-radius: 1rem;
+			padding: 0.85rem 0.95rem;
+			color: var(--text);
+			background: color-mix(in srgb, var(--panel-strong) 92%, transparent);
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+		}
+
+		textarea {
+			resize: vertical;
+			min-height: 5rem;
+		}
+
+		input:focus,
+		textarea:focus,
+		select:focus,
+		button:focus-visible {
+			outline: 2px solid var(--accent);
+			outline-offset: 2px;
+		}
+
+		.input-inline {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) auto;
+			gap: 0.6rem;
+			align-items: stretch;
+		}
+
+		.hint {
+			margin: 0;
+			font-size: 0.88rem;
+			color: var(--muted);
+		}
+
+		.button {
+			border: 1px solid var(--border);
+			border-radius: 1rem;
+			padding: 0.84rem 1rem;
+			color: var(--text);
+			background: color-mix(in srgb, var(--panel-strong) 90%, transparent);
+			cursor: pointer;
+			transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, opacity 0.18s ease;
+		}
+
+		.button:hover {
+			transform: translateY(-1px);
+		}
+
+		.button:disabled {
+			opacity: 0.55;
+			cursor: not-allowed;
+			transform: none;
+		}
+
+		.button.primary {
+			color: #07111f;
+			border-color: transparent;
+			background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent-2) 24%, var(--accent)));
+			box-shadow: 0 12px 24px color-mix(in srgb, var(--accent) 24%, transparent);
+			font-weight: 700;
+		}
+
+		.button.ghost {
+			background: transparent;
+		}
+
+		.button.danger {
+			color: var(--danger);
+			border-color: color-mix(in srgb, var(--danger) 36%, var(--border));
+			background: transparent;
+		}
+
+		.button.small {
+			padding: 0.58rem 0.8rem;
+			border-radius: 0.9rem;
+		}
+
+		.model-list {
+			display: grid;
+			gap: 0.75rem;
+			max-height: 62vh;
+			overflow: auto;
+			padding-right: 0.1rem;
+		}
+
+		.model-card {
+			display: grid;
+			gap: 0.6rem;
+			padding: 0.9rem;
+			border-radius: 1rem;
+			border: 1px solid var(--border);
+			background: color-mix(in srgb, var(--panel-strong) 92%, transparent);
+		}
+
+		.model-row {
+			display: flex;
+			gap: 0.75rem;
+			align-items: flex-start;
+		}
+
+		.model-check {
+			margin-top: 0.25rem;
+			width: 1.1rem;
+			height: 1.1rem;
+			flex: none;
+		}
+
+		.model-name {
+			flex: 1;
+			font-size: 0.92rem;
+			font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+			word-break: break-all;
+		}
+
+		.model-meta {
+			display: flex;
+			justify-content: space-between;
+			gap: 0.5rem;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+
+		.stat-grid,
+		.aggregate-grid {
+			display: grid;
+			gap: 0.75rem;
+		}
+
+		.stat-grid {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			margin-bottom: 1rem;
+		}
+
+		.aggregate-grid {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+
+		.stat-card,
+		.aggregate-card,
+		.mini-panel,
+		.result-card,
+		.traffic-card {
+			border: 1px solid var(--border);
+			border-radius: 1.1rem;
+			background: color-mix(in srgb, var(--panel-strong) 94%, transparent);
+		}
+
+		.stat-card,
+		.aggregate-card {
+			padding: 0.9rem;
+		}
+
+		.stat-card span,
+		.aggregate-card span {
+			display: block;
+			font-size: 0.82rem;
+			color: var(--muted);
+		}
+
+		.stat-card strong,
+		.aggregate-card strong {
+			display: block;
+			margin-top: 0.35rem;
+			font-size: 1.15rem;
+			letter-spacing: -0.02em;
+		}
+
+		.log-head {
+			display: flex;
+			justify-content: space-between;
+			gap: 0.75rem;
+			align-items: center;
+			margin-bottom: 0.75rem;
+		}
+
+		.log-list {
+			margin: 0;
+			padding-left: 1.25rem;
+			max-height: 20rem;
+			overflow: auto;
+		}
+
+		.log-list li {
+			margin-bottom: 0.55rem;
+			color: var(--muted);
+		}
+
+		.chart-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 1rem;
+			margin-top: 1rem;
+		}
+
+		.mini-panel {
+			padding: 1rem;
+		}
+
+		.bars {
+			display: grid;
+			gap: 0.8rem;
+		}
+
+		.bar-row {
+			display: grid;
+			grid-template-columns: minmax(0, 1.25fr) minmax(0, 2.1fr) auto;
+			gap: 0.6rem;
+			align-items: center;
+		}
+
+		.bar-label,
+		.bar-value {
+			font-size: 0.85rem;
+		}
+
+		.bar-label {
+			color: var(--muted);
+			word-break: break-word;
+		}
+
+		.bar-track {
+			height: 0.72rem;
+			overflow: hidden;
+			border-radius: 999px;
+			background: var(--track);
+		}
+
+		.bar-fill {
+			height: 100%;
+			border-radius: inherit;
+			background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent-2) 30%, var(--accent)));
+		}
+
+		.bar-fill.tokens {
+			background: linear-gradient(90deg, #47d18f, #8be2b6);
+		}
+
+		.bar-fill.tps {
+			background: linear-gradient(90deg, #ffb768, #ffd08d);
+		}
+
+		.table-wrap {
+			overflow: auto;
+			border: 1px solid var(--border);
+			border-radius: 1rem;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			min-width: 880px;
+		}
+
+		th,
+		td {
+			padding: 0.8rem;
+			text-align: left;
+			border-bottom: 1px solid var(--border);
+			vertical-align: top;
+			font-size: 0.92rem;
+		}
+
+		th {
+			position: sticky;
+			top: 0;
+			background: color-mix(in srgb, var(--panel-strong) 98%, transparent);
+			z-index: 1;
+		}
+
+		.results-list,
+		.traffic-list {
+			display: grid;
+			gap: 1rem;
+		}
+
+		.result-card,
+		.traffic-card {
+			padding: 1rem;
+		}
+
+		.result-head,
+		.traffic-head {
+			display: flex;
+			justify-content: space-between;
+			gap: 0.75rem;
+			flex-wrap: wrap;
+			align-items: flex-start;
+			margin-bottom: 0.9rem;
+		}
+
+		.result-card h3 {
+			margin: 0 0 0.15rem;
+			font-size: 1.25rem;
+		}
+
+		.result-meta {
+			display: grid;
+			grid-template-columns: repeat(5, minmax(0, 1fr));
+			gap: 0.75rem;
+			margin-bottom: 1rem;
+		}
+
+		.meta-item {
+			padding: 0.7rem;
+			border-radius: 0.9rem;
+			background: color-mix(in srgb, var(--panel) 94%, transparent);
+			border: 1px solid var(--border);
+		}
+
+		.meta-item span {
+			display: block;
+			font-size: 0.78rem;
+			color: var(--muted);
+		}
+
+		.meta-item strong {
+			display: block;
+			margin-top: 0.25rem;
+		}
+
+		pre {
+			margin: 0;
+			padding: 1rem;
+			overflow: auto;
+			white-space: pre-wrap;
+			word-break: break-word;
+			border-radius: 1rem;
+			background: var(--pre);
+			border: 1px solid var(--border);
+			font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+			font-size: 0.9rem;
+		}
+
+		.empty-state {
+			padding: 1.15rem;
+			border-radius: 1rem;
+			border: 1px dashed var(--border);
+			color: var(--muted);
+			background: color-mix(in srgb, var(--panel) 86%, transparent);
+			text-align: center;
+		}
+
+		details > summary {
+			cursor: pointer;
+			list-style: none;
+		}
+
+		details > summary::-webkit-details-marker {
+			display: none;
+		}
+
+		.traffic-json {
+			display: grid;
+			gap: 0.8rem;
+			margin-top: 0.85rem;
+		}
+
+		.traffic-json h4 {
+			margin: 0 0 0.45rem;
+			font-size: 0.9rem;
+			color: var(--muted);
+		}
+
+		.inline-field {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.65rem;
+			flex-wrap: wrap;
+			color: var(--muted);
+		}
+
+		.inline-field select {
+			width: auto;
+			min-width: 10rem;
+		}
+
+		.sr-only {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+			border: 0;
+		}
+
+		@media (max-width: 1180px) {
+			.config-panel,
+			.model-panel,
+			.progress-panel {
+				grid-column: 1 / -1;
+			}
+
+			.stat-grid,
+			.aggregate-grid,
+			.result-meta,
+			.chart-grid {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+		}
+
+		@media (max-width: 760px) {
+			.hero {
+				grid-template-columns: 1fr;
+			}
+
+			.hero-actions {
+				justify-items: start;
+			}
+
+			.field-grid.two,
+			.field-grid.three,
+			.stat-grid,
+			.aggregate-grid,
+			.chart-grid,
+			.result-meta {
+				grid-template-columns: 1fr;
+			}
+
+			.bar-row {
+				grid-template-columns: 1fr;
+			}
+
+			.input-inline {
+				grid-template-columns: 1fr;
+			}
+
+			.button,
+			.button.small {
+				width: 100%;
+			}
+
+			.action-strip > *,
+			.export-row > * {
+				flex: 1 1 100%;
+			}
+		}
+	</style>
+</head>
+<body>
+	<a class="skip-link" href="#main">Skip to content</a>
+	<div class="shell">
+		<header class="hero">
+			<div>
+				<p class="eyebrow">Single-file iPhone edition</p>
+				<h1>OpenRouter One-File Comparator</h1>
+				<p class="subtitle">Everything lives in this one HTML file: UI, logic, styles, model catalog, exports, traffic logs and simple charts. No external CSS, JS, fonts or manifests are required.</p>
+			</div>
+			<div class="hero-actions">
+				<button id="themeToggle" class="button ghost" type="button">Switch theme</button>
+				<p class="micro-note">API key stays in session storage only for this tab. All non-secret preferences can be restored locally on the device.</p>
+			</div>
+		</header>
+
+		<section class="status-row" aria-label="App status">
+			<div class="status-pill"><span id="networkDot" class="status-dot idle"></span><span id="networkStatus">Checking network</span></div>
+			<div class="status-pill"><span id="modeDot" class="status-dot idle"></span><span id="modeStatus">Checking mode</span></div>
+			<div class="status-pill"><span id="runDot" class="status-dot idle"></span><span id="runStatus">Idle</span></div>
+			<div class="status-pill note">Designed for Safari on iPhone, but still depends on OpenRouter browser fetch permissions.</div>
+		</section>
+
+		<div class="warning-banner">If requests fail from file://, Safari is likely blocking the network call rather than the model itself. In that case open this same file from a simple static host or localhost instead of the Files preview.</div>
+
+		<main id="main" class="grid">
+			<section class="panel config-panel" aria-labelledby="configTitle">
+				<div class="panel-head">
+					<h2 id="configTitle">Configuration</h2>
+					<button id="examplePromptButton" class="button ghost small" type="button">Use example prompt</button>
+				</div>
+
+				<div class="field-grid two">
+					<div class="field">
+						<label for="appTitle">OpenRouter request title</label>
+						<input id="appTitle" type="text" value="OpenRouter One-File Comparator" placeholder="Shown in X-OpenRouter-Title">
+						<p class="hint">Useful when you inspect traffic or OpenRouter analytics.</p>
+					</div>
+					<div class="field">
+						<label for="apiKey">OpenRouter API key</label>
+						<div class="input-inline">
+							<input id="apiKey" type="password" placeholder="sk-or-v1-..." autocomplete="off" autocapitalize="off" spellcheck="false">
+							<button id="toggleKeyButton" class="button ghost" type="button">Show</button>
+						</div>
+						<p class="hint">Stored only in sessionStorage for this tab, not in long-term preferences.</p>
+					</div>
+				</div>
+
+				<div class="field-grid three">
+					<div class="field">
+						<label for="temperature">Temperature</label>
+						<input id="temperature" type="number" min="0" max="2" step="0.1" inputmode="decimal" value="0.7">
+					</div>
+					<div class="field">
+						<label for="maxTokens">Max tokens</label>
+						<input id="maxTokens" type="number" min="1" step="1" inputmode="numeric" value="700">
+					</div>
+					<div class="field">
+						<label for="timeoutSeconds">Timeout seconds</label>
+						<input id="timeoutSeconds" type="number" min="5" step="1" inputmode="numeric" value="90">
+					</div>
+				</div>
+
+				<div class="field">
+					<label for="systemPrompt">System prompt</label>
+					<textarea id="systemPrompt" rows="4" placeholder="You are a concise and precise assistant."></textarea>
+				</div>
+
+				<div class="field">
+					<label for="userPrompt">Prompt</label>
+					<textarea id="userPrompt" rows="8" placeholder="The same request will be sent sequentially to every enabled model."></textarea>
+				</div>
+
+				<div class="action-strip">
+					<button id="runButton" class="button primary" type="button">Run comparison</button>
+					<button id="cancelButton" class="button danger" type="button" disabled>Cancel run</button>
+					<button id="clearResultsButton" class="button ghost" type="button">Clear results</button>
+				</div>
+			</section>
+
+			<section class="panel model-panel" aria-labelledby="modelsTitle">
+				<div class="panel-head">
+					<h2 id="modelsTitle">Models</h2>
+					<span class="chip"><span id="selectedCount">0</span> selected</span>
+				</div>
+
+				<div class="field-grid two">
+					<div class="field">
+						<label for="modelSearch">Filter catalog</label>
+						<input id="modelSearch" type="search" placeholder="Search model IDs">
+					</div>
+					<div class="field">
+						<label for="customModelInput">Add custom model ID</label>
+						<div class="input-inline">
+							<input id="customModelInput" type="text" placeholder="provider/model:tag" autocapitalize="off" spellcheck="false">
+							<button id="addCustomModelButton" class="button ghost" type="button">Add</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="action-strip">
+					<button id="selectRecommendedButton" class="button ghost small" type="button">Recommended</button>
+					<button id="selectAllButton" class="button ghost small" type="button">Select all</button>
+					<button id="selectNoneButton" class="button ghost small" type="button">Select none</button>
+				</div>
+
+				<div id="modelList" class="model-list" aria-live="polite"></div>
+			</section>
+
+			<section class="panel progress-panel" aria-labelledby="progressTitle">
+				<div class="panel-head">
+					<h2 id="progressTitle">Run status</h2>
+					<span id="progressSummary" class="chip">0 / 0 complete</span>
+				</div>
+
+				<div class="stat-grid">
+					<div class="stat-card"><span>Current model</span><strong id="currentModel">-</strong></div>
+					<div class="stat-card"><span>Elapsed</span><strong id="elapsedWallTime">0s</strong></div>
+					<div class="stat-card"><span>Success</span><strong id="successCount">0</strong></div>
+					<div class="stat-card"><span>Errors</span><strong id="errorCount">0</strong></div>
+				</div>
+
+				<div class="log-head">
+					<h3>Run log</h3>
+					<button id="clearLogButton" class="button ghost small" type="button">Clear log</button>
+				</div>
+				<ol id="runLog" class="log-list"></ol>
+
+				<div class="export-row" style="margin-top: 1rem;">
+					<button id="exportJsonButton" class="button ghost small" type="button" disabled>Export JSON</button>
+					<button id="exportCsvButton" class="button ghost small" type="button" disabled>Export CSV</button>
+					<button id="copySummaryButton" class="button ghost small" type="button" disabled>Copy summary</button>
+				</div>
+			</section>
+
+			<section class="panel full-span" aria-labelledby="metricsTitle">
+				<div class="panel-head">
+					<h2 id="metricsTitle">Aggregate metrics</h2>
+					<span id="resultCountChip" class="chip">No results yet</span>
+				</div>
+
+				<div id="aggregateGrid" class="aggregate-grid"></div>
+
+				<div class="chart-grid">
+					<div class="mini-panel">
+						<h3>Latency</h3>
+						<div id="latencyBars" class="bars"></div>
+					</div>
+					<div class="mini-panel">
+						<h3>Total tokens</h3>
+						<div id="tokenBars" class="bars"></div>
+					</div>
+					<div class="mini-panel">
+						<h3>Tokens / second</h3>
+						<div id="tpsBars" class="bars"></div>
+					</div>
+				</div>
+			</section>
+
+			<section class="panel full-span" aria-labelledby="tableTitle">
+				<div class="panel-head">
+					<h2 id="tableTitle">Summary table</h2>
+					<label class="inline-field" for="sortSelect">Sort by
+						<select id="sortSelect">
+							<option value="queue">Queue order</option>
+							<option value="latency">Fastest first</option>
+							<option value="tokens">Most tokens</option>
+							<option value="tps">Best tokens/s</option>
+							<option value="words">Most words</option>
+						</select>
+					</label>
+				</div>
+				<div class="table-wrap">
+					<table>
+						<thead>
+							<tr>
+								<th>Model</th>
+								<th>Status</th>
+								<th>Latency</th>
+								<th>Prompt tokens</th>
+								<th>Completion tokens</th>
+								<th>Total tokens</th>
+								<th>Tokens/s</th>
+								<th>Chars</th>
+								<th>Words</th>
+								<th>Error</th>
+							</tr>
+						</thead>
+						<tbody id="summaryBody"></tbody>
+					</table>
+				</div>
+			</section>
+
+			<section class="panel full-span" aria-labelledby="resultsTitle">
+				<div class="panel-head">
+					<h2 id="resultsTitle">Results</h2>
+					<span class="chip">Sequential runs, preserved in this tab until you clear or export them.</span>
+				</div>
+				<div id="resultsList" class="results-list"></div>
+			</section>
+
+			<section class="panel full-span" aria-labelledby="trafficTitle">
+				<div class="panel-head">
+					<h2 id="trafficTitle">Traffic log</h2>
+					<div class="export-row">
+						<button id="copyTrafficButton" class="button ghost small" type="button" disabled>Copy traffic</button>
+						<button id="clearTrafficButton" class="button ghost small" type="button">Clear traffic</button>
+					</div>
+				</div>
+				<div id="trafficList" class="traffic-list"></div>
+			</section>
+		</main>
+	</div>
+
+	<noscript>
+		<div style="padding: 1rem; color: #fff; background: #8c2f39;">This single-file app requires JavaScript enabled.</div>
+	</noscript>
+
+	<script>
+		const MODEL_CATALOG = [
+			"baidu/qianfan-ocr-fast:free",
+			"cognitivecomputations/dolphin-mistral-24b-venice-edition:free",
+			"deepseek/deepseek-chat-v3-0324:free",
+			"google/gemini-2.0-flash-exp:free",
+			"google/gemma-4-26b-a4b-it:free",
+			"google/gemma-4-31b-it:free",
+			"liquid/lfm-2.5-1.2b-thinking:free",
+			"liquid/lfm-2.5-1.2b-instruct:free",
+			"meta-llama/llama-3.3-70b-instruct:free",
+			"meta-llama/llama-4-maverick:free",
+			"minimax/minimax-m2.5:free",
+			"nousresearch/hermes-3-llama-3.1-405b:free",
+			"nvidia/nemotron-3-super-120b-a12b:free",
+			"nvidia/llama-nemotron-embed-vl-1b-v2:free",
+			"nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+			"nvidia/nemotron-3-nano-30b-a3b:free",
+			"openai/gpt-oss-120b:free",
+			"openai/gpt-oss-20b:free",
+			"openrouter/free",
+			"openrouter/owl-alpha",
+			"poolside/laguna-m.1:free",
+			"poolside/laguna-xs.2:free",
+			"qwen/qwen3-235b-a22b:free",
+			"qwen/qwen3-coder:free",
+			"qwen/qwen3-next-80b-a3b-instruct:free",
+			"z-ai/glm-4.5-air:free"
+		];
+
+		const RECOMMENDED_MODELS = new Set([
+			"openrouter/free",
+			"deepseek/deepseek-chat-v3-0324:free",
+			"google/gemma-4-31b-it:free",
+			"qwen/qwen3-235b-a22b:free"
+		]);
+
+		const EXAMPLE_PROMPT = `Compare the trade-offs of edge AI vs cloud AI for a small robotics startup.\n\nReturn:\n1. A concise recommendation\n2. A bullet list of pros and cons\n3. A final verdict in one sentence`;
+
+		const PREF_STORAGE_KEY = "or-single-file-comparator-preferences-v1";
+		const API_SESSION_KEY = "or-single-file-comparator-session-key-v1";
+		const state = {
+			models: [],
+			runs: [],
+			runLog: [],
+			trafficLogs: [],
+			isRunning: false,
+			cancelRequested: false,
+			activeController: null,
+			runStartedPerf: 0,
+			wallTimerId: null,
+			lastQueueLength: 0,
+			currentModel: "-"
+		};
+
+		const els = {};
+
+		document.addEventListener("DOMContentLoaded", init);
+
+		function init() {
+			cacheElements();
+			seedModels();
+			restorePreferences();
+			bindEvents();
+			updateNetworkStatus();
+			updateModeStatus();
+			updateRunStatus("Idle", "idle");
+			renderAll();
+			window.addEventListener("online", updateNetworkStatus);
+			window.addEventListener("offline", updateNetworkStatus);
+		}
+
+		function cacheElements() {
+			[
+				"themeToggle",
+				"networkStatus",
+				"networkDot",
+				"modeStatus",
+				"modeDot",
+				"runStatus",
+				"runDot",
+				"appTitle",
+				"apiKey",
+				"toggleKeyButton",
+				"temperature",
+				"maxTokens",
+				"timeoutSeconds",
+				"systemPrompt",
+				"userPrompt",
+				"examplePromptButton",
+				"runButton",
+				"cancelButton",
+				"clearResultsButton",
+				"modelSearch",
+				"customModelInput",
+				"addCustomModelButton",
+				"selectRecommendedButton",
+				"selectAllButton",
+				"selectNoneButton",
+				"modelList",
+				"selectedCount",
+				"progressSummary",
+				"currentModel",
+				"elapsedWallTime",
+				"successCount",
+				"errorCount",
+				"runLog",
+				"clearLogButton",
+				"exportJsonButton",
+				"exportCsvButton",
+				"copySummaryButton",
+				"aggregateGrid",
+				"resultCountChip",
+				"latencyBars",
+				"tokenBars",
+				"tpsBars",
+				"sortSelect",
+				"summaryBody",
+				"resultsList",
+				"copyTrafficButton",
+				"clearTrafficButton",
+				"trafficList"
+			].forEach((id) => {
+				els[id] = document.getElementById(id);
+			});
+		}
+
+		function seedModels() {
+			state.models = MODEL_CATALOG.map((id) => ({
+				id,
+				enabled: RECOMMENDED_MODELS.has(id),
+				custom: false
+			}));
+		}
+
+		function restorePreferences() {
+			try {
+				const raw = localStorage.getItem(PREF_STORAGE_KEY);
+				if (raw) {
+					const prefs = JSON.parse(raw);
+					if (typeof prefs.theme === "string") {
+						document.documentElement.setAttribute("data-theme", prefs.theme);
+					}
+					if (typeof prefs.appTitle === "string") els.appTitle.value = prefs.appTitle;
+					if (typeof prefs.temperature !== "undefined") els.temperature.value = String(prefs.temperature);
+					if (typeof prefs.maxTokens !== "undefined") els.maxTokens.value = String(prefs.maxTokens);
+					if (typeof prefs.timeoutSeconds !== "undefined") els.timeoutSeconds.value = String(prefs.timeoutSeconds);
+					if (typeof prefs.systemPrompt === "string") els.systemPrompt.value = prefs.systemPrompt;
+					if (typeof prefs.userPrompt === "string") els.userPrompt.value = prefs.userPrompt;
+					if (typeof prefs.modelSearch === "string") els.modelSearch.value = prefs.modelSearch;
+					if (Array.isArray(prefs.modelStates) && prefs.modelStates.length) {
+						applySavedModelState(prefs.modelStates);
+					}
+				}
+			} catch (_) {
+			}
+
+			const sessionKey = sessionStorage.getItem(API_SESSION_KEY);
+			if (sessionKey) {
+				els.apiKey.value = sessionKey;
+			}
+		}
+
+		function applySavedModelState(modelStates) {
+			const savedById = new Map(modelStates.map((item) => [item.id, item]));
+			state.models.forEach((model) => {
+				if (savedById.has(model.id)) {
+					model.enabled = savedById.get(model.id).enabled !== false;
+				}
+			});
+
+			modelStates
+				.filter((item) => item.custom && item.id && !state.models.some((model) => model.id === item.id))
+				.forEach((item) => {
+					state.models.push({ id: item.id, enabled: item.enabled !== false, custom: true });
+				});
+		}
+
+		function savePreferences() {
+			const prefs = {
+				theme: document.documentElement.getAttribute("data-theme") || "night",
+				appTitle: els.appTitle.value,
+				temperature: els.temperature.value,
+				maxTokens: els.maxTokens.value,
+				timeoutSeconds: els.timeoutSeconds.value,
+				systemPrompt: els.systemPrompt.value,
+				userPrompt: els.userPrompt.value,
+				modelSearch: els.modelSearch.value,
+				modelStates: state.models.map((model) => ({
+					id: model.id,
+					enabled: model.enabled,
+					custom: model.custom
+				}))
+			};
+			localStorage.setItem(PREF_STORAGE_KEY, JSON.stringify(prefs));
+			sessionStorage.setItem(API_SESSION_KEY, els.apiKey.value);
+		}
+
+		function bindEvents() {
+			els.themeToggle.addEventListener("click", toggleTheme);
+			els.toggleKeyButton.addEventListener("click", toggleApiKey);
+			els.examplePromptButton.addEventListener("click", fillExamplePrompt);
+			els.runButton.addEventListener("click", runComparison);
+			els.cancelButton.addEventListener("click", cancelCurrentRun);
+			els.clearResultsButton.addEventListener("click", clearResults);
+			els.addCustomModelButton.addEventListener("click", addCustomModel);
+			els.customModelInput.addEventListener("keydown", (event) => {
+				if (event.key === "Enter") {
+					event.preventDefault();
+					addCustomModel();
+				}
+			});
+			els.modelSearch.addEventListener("input", () => {
+				savePreferences();
+				renderModelList();
+			});
+			els.selectAllButton.addEventListener("click", () => setAllModels(true));
+			els.selectNoneButton.addEventListener("click", () => setAllModels(false));
+			els.selectRecommendedButton.addEventListener("click", selectRecommendedModels);
+			els.clearLogButton.addEventListener("click", () => {
+				state.runLog = [];
+				renderRunLog();
+			});
+			els.exportJsonButton.addEventListener("click", exportJson);
+			els.exportCsvButton.addEventListener("click", exportCsv);
+			els.copySummaryButton.addEventListener("click", copySummary);
+			els.copyTrafficButton.addEventListener("click", copyTraffic);
+			els.clearTrafficButton.addEventListener("click", () => {
+				state.trafficLogs = [];
+				renderTraffic();
+			});
+			els.sortSelect.addEventListener("change", renderSummaryTable);
+
+			[els.appTitle, els.apiKey, els.temperature, els.maxTokens, els.timeoutSeconds, els.systemPrompt, els.userPrompt].forEach((element) => {
+				element.addEventListener("input", savePreferences);
+			});
+		}
+
+		function toggleTheme() {
+			const nextTheme = document.documentElement.getAttribute("data-theme") === "night" ? "day" : "night";
+			document.documentElement.setAttribute("data-theme", nextTheme);
+			savePreferences();
+			renderCharts();
+		}
+
+		function toggleApiKey() {
+			const hidden = els.apiKey.type === "password";
+			els.apiKey.type = hidden ? "text" : "password";
+			els.toggleKeyButton.textContent = hidden ? "Hide" : "Show";
+		}
+
+		function fillExamplePrompt() {
+			els.userPrompt.value = EXAMPLE_PROMPT;
+			if (!els.systemPrompt.value.trim()) {
+				els.systemPrompt.value = "You are a concise, technical assistant.";
+			}
+			savePreferences();
+		}
+
+		function updateNetworkStatus() {
+			const online = navigator.onLine;
+			els.networkStatus.textContent = online ? "Online" : "Offline";
+			els.networkDot.className = `status-dot ${online ? "online" : "warning"}`;
+		}
+
+		function updateModeStatus() {
+			const protocol = window.location.protocol;
+			if (protocol === "file:") {
+				els.modeStatus.textContent = "File mode";
+				els.modeDot.className = "status-dot file";
+				return;
+			}
+			els.modeStatus.textContent = `${protocol.replace(":", "").toUpperCase()} mode`;
+			els.modeDot.className = "status-dot success";
+		}
+
+		function updateRunStatus(label, kind) {
+			els.runStatus.textContent = label;
+			els.runDot.className = `status-dot ${kind}`;
+		}
+
+		function addCustomModel() {
+			const id = els.customModelInput.value.trim();
+			if (!id) return;
+			if (state.models.some((model) => model.id === id)) {
+				els.customModelInput.value = "";
+				return;
+			}
+			state.models.push({ id, enabled: true, custom: true });
+			els.customModelInput.value = "";
+			savePreferences();
+			renderAll();
+		}
+
+		function setAllModels(enabled) {
+			state.models.forEach((model) => {
+				model.enabled = enabled;
+			});
+			savePreferences();
+			renderAll();
+		}
+
+		function selectRecommendedModels() {
+			state.models.forEach((model) => {
+				model.enabled = RECOMMENDED_MODELS.has(model.id);
+			});
+			savePreferences();
+			renderAll();
+		}
+
+		function getEnabledModels() {
+			return state.models.filter((model) => model.enabled);
+		}
+
+		function renderAll() {
+			renderModelList();
+			renderProgress();
+			renderRunLog();
+			renderAggregate();
+			renderCharts();
+			renderSummaryTable();
+			renderResults();
+			renderTraffic();
+			updateExportButtons();
+		}
+
+		function renderModelList() {
+			const query = els.modelSearch.value.trim().toLowerCase();
+			const visibleModels = state.models.filter((model) => model.id.toLowerCase().includes(query));
+			els.selectedCount.textContent = String(getEnabledModels().length);
+
+			if (!visibleModels.length) {
+				els.modelList.innerHTML = '<div class="empty-state">No models match this filter.</div>';
+				return;
+			}
+
+			els.modelList.innerHTML = visibleModels.map((model) => {
+				const encodedId = encodeURIComponent(model.id);
+				return `
+					<div class="model-card">
+						<div class="model-row">
+							<input class="model-check" type="checkbox" data-model-id="${encodedId}" ${model.enabled ? "checked" : ""} ${state.isRunning ? "disabled" : ""} aria-label="Enable ${escapeHtml(model.id)}">
+							<div class="model-name">${escapeHtml(model.id)}</div>
+						</div>
+						<div class="model-meta">
+							<div class="pill-row">
+								<span class="mini-chip">${model.custom ? "Custom" : "Catalog"}</span>
+								<span class="mini-chip">${model.enabled ? "Enabled" : "Disabled"}</span>
+							</div>
+							${model.custom ? `<button class="button ghost small" type="button" data-remove-model="${encodedId}" ${state.isRunning ? "disabled" : ""}>Remove</button>` : ""}
+						</div>
+					</div>
+				`;
+			}).join("");
+
+			els.modelList.querySelectorAll("[data-model-id]").forEach((checkbox) => {
+				checkbox.addEventListener("change", () => {
+					const id = decodeURIComponent(checkbox.getAttribute("data-model-id"));
+					const model = state.models.find((item) => item.id === id);
+					if (!model) return;
+					model.enabled = checkbox.checked;
+					savePreferences();
+					renderProgress();
+					renderModelList();
+				});
+			});
+
+			els.modelList.querySelectorAll("[data-remove-model]").forEach((button) => {
+				button.addEventListener("click", () => {
+					const id = decodeURIComponent(button.getAttribute("data-remove-model"));
+					state.models = state.models.filter((model) => model.id !== id);
+					savePreferences();
+					renderAll();
+				});
+			});
+		}
+
+		function renderProgress() {
+			const selected = getEnabledModels().length;
+			const queueLength = state.lastQueueLength || selected;
+			els.progressSummary.textContent = `${state.runs.length} / ${queueLength} complete`;
+			els.currentModel.textContent = state.currentModel;
+			els.successCount.textContent = String(state.runs.filter((run) => run.status === "success").length);
+			els.errorCount.textContent = String(state.runs.filter((run) => run.status === "error").length);
+			if (!state.isRunning && !state.runs.length) {
+				els.progressSummary.textContent = `${selected} selected`;
+			}
+		}
+
+		function renderRunLog() {
+			if (!state.runLog.length) {
+				els.runLog.innerHTML = '<li>No events yet.</li>';
+				return;
+			}
+			els.runLog.innerHTML = state.runLog.map((entry) => `<li>${escapeHtml(entry)}</li>`).join("");
+		}
+
+		function renderAggregate() {
+			const successful = state.runs.filter((run) => run.status === "success");
+			const totalPromptTokens = sum(successful.map((run) => run.promptTokens));
+			const totalCompletionTokens = sum(successful.map((run) => run.completionTokens));
+			const totalTokens = sum(successful.map((run) => run.totalTokens));
+			const averageLatency = average(successful.map((run) => run.elapsedMs));
+			const averageTps = average(successful.map((run) => run.tokensPerSecond));
+			const totalChars = sum(successful.map((run) => run.chars));
+			const totalWords = sum(successful.map((run) => run.words));
+
+			const cards = [
+				["Runs", String(state.runs.length)],
+				["Successful", String(successful.length)],
+				["Average latency", successful.length ? formatMs(averageLatency) : "-"],
+				["Average tokens/s", successful.length ? formatNumber(averageTps, 2) : "-"],
+				["Prompt tokens", successful.length ? formatNumber(totalPromptTokens, 0) : "-"],
+				["Completion tokens", successful.length ? formatNumber(totalCompletionTokens, 0) : "-"],
+				["Total tokens", successful.length ? formatNumber(totalTokens, 0) : "-"],
+				["Total words", successful.length ? formatNumber(totalWords, 0) : "-"],
+				["Total chars", successful.length ? formatNumber(totalChars, 0) : "-"]
+			];
+
+			els.aggregateGrid.innerHTML = cards.map(([label, value]) => `
+				<div class="aggregate-card">
+					<span>${escapeHtml(label)}</span>
+					<strong>${escapeHtml(value)}</strong>
+				</div>
+			`).join("");
+
+			els.resultCountChip.textContent = state.runs.length ? `${state.runs.length} result(s)` : "No results yet";
+		}
+
+		function renderCharts() {
+			renderBarChart(els.latencyBars, state.runs.filter((run) => run.status === "success"), "elapsedMs", formatMs, "latency");
+			renderBarChart(els.tokenBars, state.runs.filter((run) => run.status === "success"), "totalTokens", (value) => formatNumber(value, 0), "tokens");
+			renderBarChart(els.tpsBars, state.runs.filter((run) => run.status === "success"), "tokensPerSecond", (value) => formatNumber(value, 2), "tps");
+		}
+
+		function renderBarChart(container, runs, key, formatter, flavor) {
+			if (!runs.length) {
+				container.innerHTML = '<div class="empty-state">Run at least one model to populate this chart.</div>';
+				return;
+			}
+
+			const maxValue = Math.max(...runs.map((run) => Number(run[key] || 0)), 1);
+			container.innerHTML = runs.map((run) => {
+				const rawValue = Number(run[key] || 0);
+				const width = Math.max(4, (rawValue / maxValue) * 100);
+				return `
+					<div class="bar-row">
+						<div class="bar-label">${escapeHtml(run.model)}</div>
+						<div class="bar-track"><div class="bar-fill ${flavor}" style="width:${width}%"></div></div>
+						<div class="bar-value">${escapeHtml(formatter(rawValue))}</div>
+					</div>
+				`;
+			}).join("");
+		}
+
+		function renderSummaryTable() {
+			if (!state.runs.length) {
+				els.summaryBody.innerHTML = '<tr><td colspan="10">No runs yet.</td></tr>';
+				return;
+			}
+
+			const sortedRuns = [...state.runs];
+			const sortMode = els.sortSelect.value;
+			if (sortMode === "latency") {
+				sortedRuns.sort((a, b) => numericSort(a.elapsedMs, b.elapsedMs, true));
+			} else if (sortMode === "tokens") {
+				sortedRuns.sort((a, b) => numericSort(a.totalTokens, b.totalTokens, false));
+			} else if (sortMode === "tps") {
+				sortedRuns.sort((a, b) => numericSort(a.tokensPerSecond, b.tokensPerSecond, false));
+			} else if (sortMode === "words") {
+				sortedRuns.sort((a, b) => numericSort(a.words, b.words, false));
+			}
+
+			els.summaryBody.innerHTML = sortedRuns.map((run) => `
+				<tr>
+					<td>${escapeHtml(run.model)}</td>
+					<td>${escapeHtml(run.status)}</td>
+					<td>${escapeHtml(formatMs(run.elapsedMs))}</td>
+					<td>${escapeHtml(formatNullable(run.promptTokens, 0))}</td>
+					<td>${escapeHtml(formatNullable(run.completionTokens, 0))}</td>
+					<td>${escapeHtml(formatNullable(run.totalTokens, 0))}</td>
+					<td>${escapeHtml(formatNullable(run.tokensPerSecond, 2))}</td>
+					<td>${escapeHtml(formatNullable(run.chars, 0))}</td>
+					<td>${escapeHtml(formatNullable(run.words, 0))}</td>
+					<td>${escapeHtml(run.error || "")}</td>
+				</tr>
+			`).join("");
+		}
+
+		function renderResults() {
+			if (!state.runs.length) {
+				els.resultsList.innerHTML = '<div class="empty-state">Results will appear here after the first completed request.</div>';
+				return;
+			}
+
+			els.resultsList.innerHTML = state.runs.map((run) => {
+				const rawSection = run.raw ? `
+					<details>
+						<summary>Raw response JSON</summary>
+						<pre>${escapeHtml(JSON.stringify(run.raw, null, 2))}</pre>
+					</details>
+				` : "";
+
+				return `
+					<article class="result-card">
+						<div class="result-head">
+							<div>
+								<h3>${escapeHtml(run.model)}</h3>
+								<div class="pill-row">
+									<span class="status-badge ${escapeHtml(run.status)}">${escapeHtml(run.status)}</span>
+									<span class="mini-chip">${escapeHtml(formatMs(run.elapsedMs))}</span>
+								</div>
+							</div>
+							<div class="export-row">
+								<button class="button ghost small" type="button" data-copy-output="${escapeHtmlAttr(run.id)}">Copy output</button>
+							</div>
+						</div>
+
+						<div class="result-meta">
+							<div class="meta-item"><span>Prompt tokens</span><strong>${escapeHtml(formatNullable(run.promptTokens, 0))}</strong></div>
+							<div class="meta-item"><span>Completion tokens</span><strong>${escapeHtml(formatNullable(run.completionTokens, 0))}</strong></div>
+							<div class="meta-item"><span>Total tokens</span><strong>${escapeHtml(formatNullable(run.totalTokens, 0))}</strong></div>
+							<div class="meta-item"><span>Tokens / second</span><strong>${escapeHtml(formatNullable(run.tokensPerSecond, 2))}</strong></div>
+							<div class="meta-item"><span>Words</span><strong>${escapeHtml(formatNullable(run.words, 0))}</strong></div>
+						</div>
+
+						${run.status === "error"
+							? `<pre>${escapeHtml(run.error || "Unknown error")}</pre>`
+							: `<pre>${escapeHtml(run.outputText || "")}</pre>`}
+
+						${rawSection}
+					</article>
+				`;
+			}).join("");
+
+			els.resultsList.querySelectorAll("[data-copy-output]").forEach((button) => {
+				button.addEventListener("click", async () => {
+					const run = state.runs.find((item) => item.id === button.getAttribute("data-copy-output"));
+					if (!run) return;
+					await copyText(run.outputText || run.error || "");
+					logMessage(`Copied output for ${run.model}.`);
+					renderRunLog();
+				});
+			});
+		}
+
+		function renderTraffic() {
+			if (!state.trafficLogs.length) {
+				els.trafficList.innerHTML = '<div class="empty-state">No network traffic captured yet.</div>';
+				return;
+			}
+
+			els.trafficList.innerHTML = state.trafficLogs.map((entry) => `
+				<details class="traffic-card" ${entry.status === "error" ? "open" : ""}>
+					<summary class="traffic-head">
+						<div>
+							<strong>${escapeHtml(entry.model)}</strong>
+							<div class="pill-row" style="margin-top:0.45rem;">
+								<span class="status-badge ${escapeHtml(entry.status)}">${escapeHtml(entry.status)}</span>
+								<span class="mini-chip">${escapeHtml(entry.startedAt)}</span>
+							</div>
+						</div>
+					</summary>
+					<div class="traffic-json">
+						<div>
+							<h4>Request</h4>
+							<pre>${escapeHtml(JSON.stringify(entry.request, null, 2))}</pre>
+						</div>
+						<div>
+							<h4>Response</h4>
+							<pre>${escapeHtml(JSON.stringify(entry.response, null, 2))}</pre>
+						</div>
+						${entry.error ? `<div><h4>Error</h4><pre>${escapeHtml(entry.error)}</pre></div>` : ""}
+					</div>
+				</details>
+			`).join("");
+		}
+
+		function updateExportButtons() {
+			const hasRuns = state.runs.length > 0;
+			els.exportJsonButton.disabled = !hasRuns;
+			els.exportCsvButton.disabled = !hasRuns;
+			els.copySummaryButton.disabled = !hasRuns;
+			els.copyTrafficButton.disabled = !state.trafficLogs.length;
+		}
+
+		function buildMessages() {
+			const messages = [];
+			if (els.systemPrompt.value.trim()) {
+				messages.push({ role: "system", content: els.systemPrompt.value.trim() });
+			}
+			messages.push({ role: "user", content: els.userPrompt.value.trim() });
+			return messages;
+		}
+
+		async function runComparison() {
+			if (state.isRunning) return;
+
+			const apiKey = els.apiKey.value.trim();
+			const prompt = els.userPrompt.value.trim();
+			const queue = getEnabledModels();
+			if (!apiKey) {
+				alert("Please provide your OpenRouter API key.");
+				return;
+			}
+			if (!prompt) {
+				alert("Please provide a prompt.");
+				return;
+			}
+			if (!queue.length) {
+				alert("Enable at least one model.");
+				return;
+			}
+
+			state.isRunning = true;
+			state.cancelRequested = false;
+			state.runs = [];
+			state.runLog = [];
+			state.trafficLogs = [];
+			state.lastQueueLength = queue.length;
+			state.currentModel = "Preparing";
+			state.runStartedPerf = performance.now();
+			startWallClock();
+			lockUi(true);
+			updateRunStatus("Running", "running");
+			logMessage(`Starting sequential comparison for ${queue.length} model(s).`);
+			renderAll();
+
+			const config = {
+				apiKey,
+				appTitle: els.appTitle.value.trim() || "OpenRouter One-File Comparator",
+				temperature: Number(els.temperature.value),
+				maxTokens: Number(els.maxTokens.value),
+				timeoutSeconds: Number(els.timeoutSeconds.value),
+				messages: buildMessages()
+			};
+
+			try {
+				for (let index = 0; index < queue.length; index += 1) {
+					if (state.cancelRequested) {
+						logMessage("Run cancelled before starting the next model.");
+						break;
+					}
+
+					const model = queue[index];
+					state.currentModel = model.id;
+					logMessage(`Running ${model.id} (${index + 1}/${queue.length})...`);
+					renderProgress();
+
+					const result = await runModel(model.id, config);
+					state.runs.push(result);
+
+					if (result.status === "success") {
+						logMessage(`Completed ${model.id} in ${formatMs(result.elapsedMs)}.`);
+					} else {
+						logMessage(`Failed ${model.id}: ${result.error || "Unknown error"}`);
+					}
+					renderAll();
+				}
+			} finally {
+				stopWallClock();
+				state.isRunning = false;
+				lockUi(false);
+				state.currentModel = state.cancelRequested ? "Cancelled" : "Done";
+				updateRunStatus(state.cancelRequested ? "Cancelled" : "Completed", state.cancelRequested ? "warning" : "done");
+				renderAll();
+			}
+		}
+
+		function cancelCurrentRun() {
+			if (!state.isRunning) return;
+			state.cancelRequested = true;
+			if (state.activeController) {
+				state.activeController.abort();
+			}
+			logMessage("Cancellation requested.");
+			renderRunLog();
+		}
+
+		async function runModel(modelId, config) {
+			const requestStartedAt = new Date().toISOString();
+			const startedPerf = performance.now();
+			const controller = new AbortController();
+			const timeoutMs = Math.max(1, Number(config.timeoutSeconds) || 60) * 1000;
+			const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+			state.activeController = controller;
+
+			const requestPayload = {
+				model: modelId,
+				messages: config.messages,
+				temperature: Number.isFinite(config.temperature) ? config.temperature : undefined,
+				max_tokens: Number.isFinite(config.maxTokens) ? config.maxTokens : undefined
+			};
+			const requestHeaders = buildOpenRouterHeaders(config.apiKey, config.appTitle);
+			const trafficEntry = {
+				id: makeId(),
+				model: modelId,
+				startedAt: requestStartedAt,
+				status: "pending",
+				request: {
+					url: "https://openrouter.ai/api/v1/chat/completions",
+					method: "POST",
+					headers: redactHeaders(requestHeaders),
+					body: requestPayload
+				},
+				response: null,
+				error: null
+			};
+			state.trafficLogs.unshift(trafficEntry);
+
+			const result = {
+				id: makeId(),
+				model: modelId,
+				status: "error",
+				startedAt: requestStartedAt,
+				endedAt: requestStartedAt,
+				elapsedMs: 0,
+				promptTokens: null,
+				completionTokens: null,
+				totalTokens: null,
+				tokensPerSecond: null,
+				chars: 0,
+				words: 0,
+				outputText: "",
+				error: "",
+				raw: null
+			};
+
+			try {
+				const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+					method: "POST",
+					headers: requestHeaders,
+					body: JSON.stringify(requestPayload),
+					signal: controller.signal
+				});
+				const payload = await response.json().catch(() => ({}));
+				result.raw = payload;
+
+				trafficEntry.status = response.ok ? "success" : "error";
+				trafficEntry.response = {
+					status: response.status,
+					statusText: response.statusText,
+					body: payload
+				};
+
+				if (!response.ok) {
+					throw new Error(payload?.error?.message || payload?.message || `HTTP ${response.status}`);
+				}
+
+				const outputText = extractText(payload);
+				const usage = payload?.usage || {};
+				const promptTokens = asNumber(usage.prompt_tokens);
+				const completionTokens = asNumber(usage.completion_tokens);
+				const totalTokens = asNumber(usage.total_tokens ?? ((promptTokens ?? 0) + (completionTokens ?? 0)));
+				const elapsedMs = performance.now() - startedPerf;
+				const elapsedSeconds = elapsedMs / 1000;
+
+				result.status = "success";
+				result.endedAt = new Date().toISOString();
+				result.elapsedMs = elapsedMs;
+				result.outputText = outputText;
+				result.promptTokens = promptTokens;
+				result.completionTokens = completionTokens;
+				result.totalTokens = totalTokens;
+				result.tokensPerSecond = completionTokens && elapsedSeconds > 0 ? completionTokens / elapsedSeconds : null;
+				result.chars = outputText.length;
+				result.words = countWords(outputText);
+			} catch (error) {
+				result.status = "error";
+				result.endedAt = new Date().toISOString();
+				result.elapsedMs = performance.now() - startedPerf;
+				result.error = normalizeFetchError(error);
+				trafficEntry.status = "error";
+				trafficEntry.error = result.error;
+				if (!trafficEntry.response) {
+					trafficEntry.response = { status: 0, statusText: "no-response", body: null };
+				}
+			} finally {
+				clearTimeout(timeoutId);
+				if (state.activeController === controller) {
+					state.activeController = null;
+				}
+			}
+
+			return result;
+		}
+
+		function buildOpenRouterHeaders(apiKey, appTitle) {
+			const headers = {
+				"Authorization": `Bearer ${apiKey}`,
+				"Content-Type": "application/json",
+				"X-OpenRouter-Title": appTitle
+			};
+
+			const protocol = window.location.protocol;
+			const origin = window.location.origin;
+			if ((protocol === "http:" || protocol === "https:") && origin && origin !== "null") {
+				headers["HTTP-Referer"] = origin;
+			}
+			return headers;
+		}
+
+		function redactHeaders(headers) {
+			const copy = {};
+			Object.entries(headers).forEach(([key, value]) => {
+				copy[key] = key.toLowerCase() === "authorization" ? redactAuthorization(value) : value;
+			});
+			return copy;
+		}
+
+		function redactAuthorization(value) {
+			if (typeof value !== "string") return value;
+			const [scheme, token] = value.split(" ");
+			if (!token) return "Bearer [redacted]";
+			return `${scheme} ${token.slice(0, 8)}...[redacted]`;
+		}
+
+		function extractText(payload) {
+			const choice = payload?.choices?.[0];
+			if (!choice) return "";
+			const content = choice?.message?.content;
+			if (typeof content === "string") return content;
+			if (Array.isArray(content)) {
+				return content.map((part) => typeof part === "string" ? part : (part?.text || "")).join("");
+			}
+			return choice?.text || "";
+		}
+
+		function clearResults() {
+			if (state.isRunning) return;
+			state.runs = [];
+			state.runLog = [];
+			state.trafficLogs = [];
+			state.lastQueueLength = 0;
+			state.currentModel = "-";
+			updateRunStatus("Idle", "idle");
+			stopWallClock();
+			els.elapsedWallTime.textContent = "0s";
+			renderAll();
+		}
+
+		function logMessage(message) {
+			const stamp = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+			state.runLog.unshift(`${stamp} - ${message}`);
+			if (state.runLog.length > 200) {
+				state.runLog.length = 200;
+			}
+		}
+
+		function startWallClock() {
+			stopWallClock();
+			updateWallClock();
+			state.wallTimerId = window.setInterval(updateWallClock, 500);
+		}
+
+		function stopWallClock() {
+			if (state.wallTimerId) {
+				clearInterval(state.wallTimerId);
+				state.wallTimerId = null;
+			}
+		}
+
+		function updateWallClock() {
+			if (!state.runStartedPerf) {
+				els.elapsedWallTime.textContent = "0s";
+				return;
+			}
+			const elapsedMs = performance.now() - state.runStartedPerf;
+			els.elapsedWallTime.textContent = formatDuration(elapsedMs);
+		}
+
+		function lockUi(locked) {
+			state.isRunning = locked;
+			[
+				els.runButton,
+				els.clearResultsButton,
+				els.examplePromptButton,
+				els.addCustomModelButton,
+				els.selectRecommendedButton,
+				els.selectAllButton,
+				els.selectNoneButton,
+				els.sortSelect,
+				els.temperature,
+				els.maxTokens,
+				els.timeoutSeconds,
+				els.systemPrompt,
+				els.userPrompt,
+				els.customModelInput,
+				els.modelSearch
+			].forEach((element) => {
+				element.disabled = locked;
+			});
+			els.cancelButton.disabled = !locked;
+			renderModelList();
+		}
+
+		function exportJson() {
+			downloadFile("openrouter-one-file-results.json", JSON.stringify(state.runs, null, 2), "application/json");
+		}
+
+		function exportCsv() {
+			const header = ["model", "status", "elapsedMs", "promptTokens", "completionTokens", "totalTokens", "tokensPerSecond", "chars", "words", "error"];
+			const rows = state.runs.map((run) => [
+				run.model,
+				run.status,
+				roundMaybe(run.elapsedMs, 0),
+				run.promptTokens ?? "",
+				run.completionTokens ?? "",
+				run.totalTokens ?? "",
+				run.tokensPerSecond != null ? roundMaybe(run.tokensPerSecond, 2) : "",
+				run.chars,
+				run.words,
+				run.error || ""
+			]);
+			const csv = [header, ...rows].map((row) => row.map(csvCell).join(",")).join("\n");
+			downloadFile("openrouter-one-file-results.csv", csv, "text/csv;charset=utf-8");
+		}
+
+		async function copySummary() {
+			const summary = state.runs.map((run, index) => {
+				const outcome = run.status === "success"
+					? `${formatMs(run.elapsedMs)}, ${formatNullable(run.totalTokens, 0)} tokens, ${formatNullable(run.tokensPerSecond, 2)} tokens/s`
+					: `ERROR: ${run.error || "Unknown error"}`;
+				return `${index + 1}. ${run.model} - ${outcome}`;
+			}).join("\n");
+			await copyText(summary);
+			logMessage("Copied run summary.");
+			renderRunLog();
+		}
+
+		async function copyTraffic() {
+			await copyText(JSON.stringify(state.trafficLogs, null, 2));
+			logMessage("Copied traffic log.");
+			renderRunLog();
+		}
+
+		async function copyText(text) {
+			if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+				await navigator.clipboard.writeText(text);
+				return;
+			}
+			const helper = document.createElement("textarea");
+			helper.value = text;
+			helper.setAttribute("readonly", "readonly");
+			helper.style.position = "absolute";
+			helper.style.left = "-9999px";
+			document.body.appendChild(helper);
+			helper.select();
+			document.execCommand("copy");
+			document.body.removeChild(helper);
+		}
+
+		function normalizeFetchError(error) {
+			const message = error?.message || String(error);
+			if (/aborted|aborterror/i.test(message)) {
+				return state.cancelRequested ? "Request cancelled." : `Timed out after ${els.timeoutSeconds.value}s.`;
+			}
+			if (/failed to fetch/i.test(message)) {
+				if (window.location.protocol === "file:") {
+					return "Failed to fetch. This browser may block network calls from file://. Open the same file from localhost or a static host and try again.";
+				}
+				if (!navigator.onLine) {
+					return "Failed to fetch. The browser appears to be offline.";
+				}
+				return "Failed to fetch. This usually indicates a network or CORS problem rather than a model-specific error.";
+			}
+			return message;
+		}
+
+		function asNumber(value) {
+			return typeof value === "number" && Number.isFinite(value) ? value : null;
+		}
+
+		function countWords(text) {
+			if (!text.trim()) return 0;
+			return text.trim().split(/\s+/).length;
+		}
+
+		function average(values) {
+			const numbers = values.filter((value) => typeof value === "number" && Number.isFinite(value));
+			if (!numbers.length) return 0;
+			return numbers.reduce((sumValue, value) => sumValue + value, 0) / numbers.length;
+		}
+
+		function sum(values) {
+			return values.filter((value) => typeof value === "number" && Number.isFinite(value)).reduce((sumValue, value) => sumValue + value, 0);
+		}
+
+		function formatMs(value) {
+			if (typeof value !== "number" || !Number.isFinite(value)) return "-";
+			if (value >= 1000) return `${(value / 1000).toFixed(2)}s`;
+			return `${Math.round(value)}ms`;
+		}
+
+		function formatDuration(value) {
+			const totalSeconds = Math.max(0, Math.round(value / 1000));
+			const minutes = Math.floor(totalSeconds / 60);
+			const seconds = totalSeconds % 60;
+			return minutes ? `${minutes}m ${seconds}s` : `${seconds}s`;
+		}
+
+		function formatNumber(value, digits) {
+			if (typeof value !== "number" || !Number.isFinite(value)) return "-";
+			return value.toLocaleString(undefined, {
+				minimumFractionDigits: digits,
+				maximumFractionDigits: digits
+			});
+		}
+
+		function formatNullable(value, digits) {
+			if (typeof value !== "number" || !Number.isFinite(value)) return "-";
+			return formatNumber(value, digits);
+		}
+
+		function roundMaybe(value, digits) {
+			if (typeof value !== "number" || !Number.isFinite(value)) return value;
+			return Number(value.toFixed(digits));
+		}
+
+		function csvCell(value) {
+			const text = String(value ?? "");
+			return `"${text.replaceAll('"', '""')}"`;
+		}
+
+		function numericSort(left, right, ascending) {
+			const leftValue = typeof left === "number" && Number.isFinite(left) ? left : (ascending ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY);
+			const rightValue = typeof right === "number" && Number.isFinite(right) ? right : (ascending ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY);
+			return ascending ? leftValue - rightValue : rightValue - leftValue;
+		}
+
+		function downloadFile(filename, content, mimeType) {
+			const blob = new Blob([content], { type: mimeType });
+			const url = URL.createObjectURL(blob);
+			const anchor = document.createElement("a");
+			anchor.href = url;
+			anchor.download = filename;
+			document.body.appendChild(anchor);
+			anchor.click();
+			anchor.remove();
+			URL.revokeObjectURL(url);
+		}
+
+		function escapeHtml(value) {
+			return String(value ?? "")
+				.replaceAll("&", "&amp;")
+				.replaceAll("<", "&lt;")
+				.replaceAll(">", "&gt;")
+				.replaceAll('"', "&quot;")
+				.replaceAll("'", "&#39;");
+		}
+
+		function escapeHtmlAttr(value) {
+			return escapeHtml(value).replaceAll("`", "&#96;");
+		}
+
+		function makeId() {
+			if (window.crypto && typeof window.crypto.randomUUID === "function") {
+				return window.crypto.randomUUID();
+			}
+			return `id-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+		}
+	</script>
+</body>
+</html>

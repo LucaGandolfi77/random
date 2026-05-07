@@ -1,0 +1,15 @@
+# PolarFire VP Variant C demo
+# Build examples/firmware/variant_c/build/mpfs_variant_c.elf before running.
+
+load platform examples/boards/polarfire_vk.yaml
+log peripheral bootctrl on
+log peripheral irqdemo0 on
+log peripheral plic on
+log peripheral clint0 on
+load elf examples/firmware/variant_c/build/mpfs_variant_c.elf
+start_gdb_server 3333
+reset
+continue 400000
+harts
+mem read 0x20400000 16
+mem read 0x20120000 4

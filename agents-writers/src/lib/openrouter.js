@@ -6,7 +6,7 @@ function extractJsonObject(content) {
   }
 
   try {
-    return JSON.parse(normalized);
+    return parseJsonWithRepair(normalized);
   } catch {
     // Continue.
   }
@@ -14,7 +14,7 @@ function extractJsonObject(content) {
   const fencedMatch = normalized.match(/```(?:json)?\s*([\s\S]*?)```/i);
   if (fencedMatch) {
     try {
-      return JSON.parse(fencedMatch[1].trim());
+      return parseJsonWithRepair(fencedMatch[1].trim());
     } catch {
       // Continue.
     }
@@ -25,10 +25,91 @@ function extractJsonObject(content) {
 
   if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
     const candidate = normalized.slice(firstBrace, lastBrace + 1);
-    return JSON.parse(candidate);
+    return parseJsonWithRepair(candidate);
   }
 
   throw new Error(`Could not parse JSON from model response:\n${normalized}`);
+}
+
+function parseJsonWithRepair(input) {
+  try {
+    return JSON.parse(input);
+  } catch (error) {
+    const repaired = escapeControlCharactersInStrings(input);
+
+    if (repaired !== input) {
+      return JSON.parse(repaired);
+    }
+
+    throw error;
+  }
+}
+
+function escapeControlCharactersInStrings(input) {
+  let result = '';
+  let inString = false;
+  let escaping = false;
+
+  for (const char of input) {
+    const code = char.charCodeAt(0);
+
+    if (!inString) {
+      if (char === '"') {
+        inString = true;
+      }
+
+      if (code <= 0x1f && !['\n', '\r', '\t', ' '].includes(char)) {
+        continue;
+      }
+
+      result += char;
+      continue;
+    }
+
+    if (escaping) {
+      result += char;
+      escaping = false;
+      continue;
+    }
+
+    if (char === '\\') {
+      result += char;
+      escaping = true;
+      continue;
+    }
+
+    if (char === '"') {
+      result += char;
+      inString = false;
+      continue;
+    }
+
+    if (code <= 0x1f) {
+      result += escapeControlCharacter(char, code);
+      continue;
+    }
+
+    result += char;
+  }
+
+  return result;
+}
+
+function escapeControlCharacter(char, code) {
+  switch (char) {
+    case '\n':
+      return '\\n';
+    case '\r':
+      return '\\r';
+    case '\t':
+      return '\\t';
+    case '\b':
+      return '\\b';
+    case '\f':
+      return '\\f';
+    default:
+      return `\\u${code.toString(16).padStart(4, '0')}`;
+  }
 }
 
 export async function callOpenRouter({
@@ -57,6 +138,52 @@ export async function callOpenRouter({
   if (!apiKey) {
     throw new Error('Missing OPENROUTER_API_KEY. Copy .env.example to .env and set the key.');
   }
+
+  const maxAttempts = 3;
+  let lastRecoverableError = null;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    const payload = await requestOpenRouterCompletion({
+      apiKey,
+      appTitle,
+      httpReferer,
+      model,
+      systemPrompt,
+      input,
+      temperature,
+      maxTokens
+    });
+
+    const raw = extractMessageText(payload);
+
+    try {
+      return {
+        model,
+        raw,
+        data: extractJsonObject(raw)
+      };
+    } catch (error) {
+      if (attempt === maxAttempts || !isRecoverableModelOutputError(error)) {
+        throw error;
+      }
+
+      lastRecoverableError = error;
+    }
+  }
+
+  throw lastRecoverableError || new Error(`OpenRouter returned no usable JSON for ${model}.`);
+}
+
+async function requestOpenRouterCompletion({
+  apiKey,
+  appTitle,
+  httpReferer,
+  model,
+  systemPrompt,
+  input,
+  temperature,
+  maxTokens
+}) {
 
   // 30-second timeout per request — prevents indefinite hangs on slow free models.
   const controller = new AbortController();
@@ -107,14 +234,51 @@ export async function callOpenRouter({
     throw new Error(`OpenRouter request failed for ${model}: ${payload.error?.message || response.statusText}`);
   }
 
-  const messageContent = payload.choices?.[0]?.message?.content;
-  const raw = Array.isArray(messageContent)
-    ? messageContent.map((part) => part.text || part.content || '').join('\n')
-    : String(messageContent ?? '');
+  return payload;
+}
 
-  return {
-    model,
-    raw,
-    data: extractJsonObject(raw)
-  };
+function extractMessageText(payload) {
+  const choice = payload.choices?.[0] || {};
+  const message = choice.message || {};
+  const content = message.content;
+
+  if (Array.isArray(content)) {
+    return content.map((part) => {
+      if (typeof part === 'string') {
+        return part;
+      }
+
+      return part?.text || part?.content || part?.arguments || '';
+    }).join('\n');
+  }
+
+  if (typeof content === 'string') {
+    return content;
+  }
+
+  if (typeof choice.text === 'string') {
+    return choice.text;
+  }
+
+  if (Array.isArray(message.tool_calls)) {
+    return message.tool_calls
+      .map((call) => call?.function?.arguments || '')
+      .filter(Boolean)
+      .join('\n');
+  }
+
+  return '';
+}
+
+function isRecoverableModelOutputError(error) {
+  if (!error) {
+    return false;
+  }
+
+  if (error instanceof SyntaxError) {
+    return true;
+  }
+
+  const message = String(error.message || '');
+  return message === 'Model returned an empty response.' || message.startsWith('Could not parse JSON from model response:');
 }

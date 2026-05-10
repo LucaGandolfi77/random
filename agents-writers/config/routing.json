@@ -1,12 +1,13 @@
 {
   "routing": {
-    "architect": ["qwen/qwen3-14b:free", "mistralai/mistral-small-3.2-24b-instruct:free"],
-    "character_master": ["qwen/qwen3-14b:free", "mistralai/mistral-small-3.2-24b-instruct:free"],
-    "chapter_planner": ["qwen/qwen3-14b:free", "mistralai/mistral-small-3.2-24b-instruct:free"],
-    "writer": ["deepseek/deepseek-chat-v3-0324:free", "qwen/qwen3-14b:free"],
-    "critic": ["qwen/qwen3-14b:free", "mistralai/mistral-small-3.2-24b-instruct:free"],
-    "continuity_keeper": ["qwen/qwen3-14b:free", "mistralai/mistral-small-3.2-24b-instruct:free"],
-    "editor": ["qwen/qwen3-14b:free", "deepseek/deepseek-chat-v3-0324:free"]
+    "architect": ["openai/gpt-oss-20b:free", "openai/gpt-oss-120b:free"],
+    "series_architect": ["openai/gpt-oss-20b:free", "openai/gpt-oss-120b:free"],
+    "character_master": ["openai/gpt-oss-20b:free", "openai/gpt-oss-120b:free"],
+    "chapter_planner": ["openai/gpt-oss-20b:free", "openai/gpt-oss-120b:free"],
+    "writer": ["openai/gpt-oss-120b:free", "openai/gpt-oss-20b:free"],
+    "critic": ["openai/gpt-oss-20b:free", "openai/gpt-oss-120b:free"],
+    "continuity_keeper": ["openai/gpt-oss-20b:free", "openai/gpt-oss-120b:free"],
+    "editor": ["openai/gpt-oss-20b:free", "openai/gpt-oss-120b:free"]
   },
   "approval": {
     "critic_max_high_issues": 1,

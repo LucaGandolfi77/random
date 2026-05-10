@@ -1,0 +1,27 @@
+{
+  "story_arc": {
+    "current_phase": "opening",
+    "global_targets": [
+      "grief",
+      "ambition",
+      "memory",
+      "memory corruption",
+      "identity fracture",
+      "survival of the remembered",
+      "chaos versus order",
+      "resonance"
+    ],
+    "endgame_promises": []
+  },
+  "active_arcs": [],
+  "arc_metrics": {},
+  "next_targets": [
+    "The Chalice shatters",
+    "Echoes bleed into reality",
+    "Agents lose individual memory traces",
+    "A new, emergent narrative thread appears",
+    "The world collapses into a fractured chorus of stories"
+  ],
+  "chapter_outlines": [],
+  "last_vote_summary": null
+}

@@ -24,24 +24,36 @@
     },
     "writer": {
       "current_preset": "Sad Poet",
-      "last_problem": "none"
+      "last_problem": "The draft field contains only a placeholder string \"\\n\\n      1\" and no actual narrative content, so none of the planned scenes, stakes, or character beats are present."
     },
     "critic": {
       "current_preset": "base",
-      "last_verdict": "unknown"
+      "last_verdict": "reject"
     },
     "editor": {
       "current_preset": "base",
-      "last_change_count": 0
+      "last_change_count": 5
     },
     "room_vote": {
       "last_summary": {
-        "approvals": 5,
+        "approvals": 4,
         "revises": 0,
-        "rejects": 0,
-        "averageScore": 0.75,
+        "rejects": 1,
+        "averageScore": 0.72,
         "approved": true,
-        "blockingVotes": []
+        "blockingVotes": [
+          {
+            "voter": "critic",
+            "vote": "reject",
+            "must_fix": [
+              "Write full prose for Chapter 1, incorporating all planned scenes and beats.",
+              "Establish clear stakes by showing tangible consequences of binding the Echoed Gaze.",
+              "Develop character voices and internal conflicts, especially Elisa’s grief and secret.",
+              "Embed world rules (moonlit glass, echo‑phage, void absorption) throughout the text.",
+              "Maintain lyrical, metaphor‑rich language and appropriate dialogue density."
+            ]
+          }
+        ]
       }
     }
   }

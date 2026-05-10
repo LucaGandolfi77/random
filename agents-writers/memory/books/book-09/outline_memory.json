@@ -1,0 +1,23 @@
+{
+  "story_arc": {
+    "current_phase": "opening",
+    "global_targets": [
+      "grief",
+      "ambition",
+      "memory",
+      "identity",
+      "truth",
+      "destiny"
+    ],
+    "endgame_promises": []
+  },
+  "active_arcs": [],
+  "arc_metrics": {},
+  "next_targets": [
+    "Agents confront their own rewritten histories.",
+    "The world shifts from a linear plot to a fractured, multi‑layered narrative.",
+    "The final choice: to restore the original story or embrace the new, chaotic reality."
+  ],
+  "chapter_outlines": [],
+  "last_vote_summary": null
+}

@@ -6,8 +6,11 @@
   "description": "Multi-agent book-writing workflow powered by OpenRouter.",
   "scripts": {
     "start": "node src/index.js",
+    "test": "node --test tests/**/*.test.js",
     "init-book": "node src/index.js init-book",
     "new-book": "node src/index.js new-book",
+    "write-book": "node src/index.js write-book",
+    "plan-book": "node src/index.js plan-book",
     "use-book": "node src/index.js use-book",
     "generate": "node src/index.js generate",
     "generate-book": "node src/index.js generate-book",
@@ -17,7 +20,8 @@
     "preset": "node src/index.js preset",
     "status": "node src/index.js status",
     "serve-ui": "node src/index.js serve-ui",
-    "auto": "node src/index.js auto"
+    "auto": "node src/index.js auto",
+    "auto:open": "sh ./run-auto.sh"
   },
   "engines": {
     "node": ">=18"

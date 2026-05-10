@@ -222,6 +222,12 @@ function bindEvents() {
     await refreshStatus();
   });
 
+  document.getElementById('generateWholeBook').addEventListener('click', async () => {
+    const result = await post('/api/books', { auto: true });
+    log(result);
+    await refreshStatus();
+  });
+
   bookMetadataForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const payload = formToObject(event.currentTarget);
@@ -503,11 +509,24 @@ function renderTranslations(report) {
 
 function renderSeries(status) {
   const books = status.series?.books || [];
+  const pattern = status.series?.pattern || null;
   seriesSummary.innerHTML = `
     <div class="summary-grid">
       <div><span>Series</span><strong>${escapeHtml(status.series?.title || 'Untitled Series')}</strong></div>
       <div><span>Active book</span><strong>${escapeHtml(status.activeBookId || 'unknown')}</strong></div>
     </div>
+    ${pattern ? `
+      <div class="recent top-gap">
+        <h3>Automation pattern</h3>
+        <div class="recent-item">
+          <div>
+            <strong>${escapeHtml(pattern.name || 'Series pattern')}</strong>
+            ${pattern.overview ? `<span>${escapeHtml(pattern.overview)}</span>` : ''}
+            ${(pattern.sequenceBeats || []).length ? `<span>Sequence: ${escapeHtml((pattern.sequenceBeats || []).join(' -> '))}</span>` : ''}
+          </div>
+        </div>
+      </div>
+    ` : ''}
     <div class="recent top-gap">
       <h3>Books</h3>
       ${books.map((book) => `

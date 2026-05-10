@@ -11,8 +11,10 @@ import {
   generateChapter,
   getStatus,
   initBook,
+  planBook,
   selectBook,
   setBehavior,
+  writeBook,
   translateChapter
 } from './lib/workflow.js';
 
@@ -37,6 +39,16 @@ async function main() {
       case 'new-book': {
         const options = parseFlags(rest);
         return createBook(rootPath, options);
+      }
+
+      case 'write-book': {
+        const options = parseFlags(rest);
+        return writeBook(rootPath, options);
+      }
+
+      case 'plan-book': {
+        const options = parseFlags(rest);
+        return planBook(rootPath, options);
       }
 
       case 'use-book': {
@@ -103,7 +115,7 @@ async function main() {
 
       default:
         return {
-          message: 'Available commands: init-book, new-book, use-book, generate, generate-book, translate, export, set, preset, status, serve-ui, auto.'
+          message: 'Available commands: init-book, new-book, write-book, plan-book, use-book, generate, generate-book, translate, export, set, preset, status, serve-ui, auto.'
         };
     }
   });

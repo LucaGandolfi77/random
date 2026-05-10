@@ -1,0 +1,46 @@
+{
+  "title": "The Scribe’s Eclipse: Chaos of the Unwritten",
+  "genre": "dark fantasy",
+  "premise": "The last fragment of the shattered chalice ignites a cataclysmic flare, sending the memories of every agent into a vortex of unwritten potential. As the reality warps, the agents must stitch together a new narrative from the raw, unformed strands of possibility, fighting to keep their identities intact before the void swallows the final syllable.",
+  "themes": [
+    "unwritten destiny",
+    "fabric of reality",
+    "identity in flux",
+    "creative entropy"
+  ],
+  "world_rules": [
+    "Glass can store emotions when cooled under moonlight.",
+    "Breaking a glass fruit permanently alters one memory.",
+    "Memory shards now become sentient echoes that rewrite reality when spoken",
+    "The void can absorb any narrative fragment, but only if spoken aloud",
+    "Agents can wield broken narratives as weapons, but each use creates a paradox that accelerates collapse"
+  ],
+  "characters": {
+    "Elisa": {
+      "role": "heir",
+      "wound": "mother's disappearance",
+      "arc": "control to surrender",
+      "secrets": [
+        "She caused the first orchard fire."
+      ]
+    }
+  },
+  "chapter_registry": [],
+  "exportBaseName": "the-scribe-s-eclipse-chaos-of-the-unwritten",
+  "cover": {
+    "title": "The Scribe’s Eclipse: Chaos of the Unwritten",
+    "subtitle": "When the Chalice Burns, Worlds Fold into Each Other",
+    "author": "OpenRouter Book Agents",
+    "tagline": "When words are born from nothing, who writes the story?",
+    "color": "#2a0f45"
+  },
+  "series_role": "Reality Collapse – this volume escalates the collapse by turning the chaotic memory vortex into a literal void that threatens to annihilate narrative existence.",
+  "carry_over_threads": [
+    "Chalice shards echoing in the previous collapse",
+    "Mirror Orchard’s fractured mirrors still reflect intent",
+    "The paradox of memory harvest accelerating collapse"
+  ],
+  "automation_notes": [
+    "Generate title by pairing ‘Scribe’ with “Eclipse” and a verb of chaos; subtitle must reference a void or collapse; premise should mention a memory vortex and the need to stitch a new narrative; themes should include creative entropy; cover color dark violet with silvery accents; ensure arc focuses on the paradox of writing a story that cannot be written yet must exist; embed carry‑over threads in each chapter; apply world rules consistently across scenes"
+  ]
+}

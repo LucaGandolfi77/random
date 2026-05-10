@@ -90,17 +90,85 @@ export async function createBook(rootPath, options = {}) {
     action: 'create-book',
     input: { options }
   }, async () => {
-    const defaults = buildDefaultMemorySet({ title: options.title || 'Untitled Project' });
-    const seriesState = await createSeriesBook(rootPath, options, defaults);
+    const automate = shouldAutomateBookCreation(options);
+    const planned = automate ? await planBookInternal(rootPath, options) : null;
+    const bookOptions = planned ? mergePlannedBookOptions(planned.nextBook, options) : options;
+    const defaults = buildDefaultMemorySet({ title: bookOptions.title || 'Untitled Project' });
+    const seriesState = await createSeriesBook(rootPath, bookOptions, defaults);
 
-    if (options.title || options.genre || options.premise || options.theme?.length || options.themes || options.exportBaseName || options.author || options.subtitle || options.tagline || options.coverColor) {
-      await initBook(rootPath, options);
+    if (bookOptions.title || bookOptions.genre || bookOptions.premise || bookOptions.theme?.length || bookOptions.themes || bookOptions.exportBaseName || bookOptions.author || bookOptions.subtitle || bookOptions.tagline || bookOptions.coverColor) {
+      await initBook(rootPath, bookOptions);
+    }
+
+    if (planned) {
+      await applyPlannedBookPattern(rootPath, planned);
     }
 
     return {
-      message: 'Created a new book in the series.',
+      message: planned ? 'Created a new automated book in the series.' : 'Created a new book in the series.',
       activeBookId: seriesState.activeBookId,
-      books: seriesState.books || []
+      books: seriesState.books || [],
+      automation: planned ? {
+        agent: 'series_architect',
+        pattern: planned.seriesPattern,
+        nextBook: planned.nextBook
+      } : null
+    };
+  });
+}
+
+export async function writeBook(rootPath, options = {}) {
+  return withActionLog(rootPath, {
+    source: 'workflow',
+    action: 'write-book',
+    input: { options }
+  }, async () => {
+    const count = Number(options.count || 20);
+
+    if (!count || count < 1) {
+      throw new Error('Provide a positive chapter count with --count <n>.');
+    }
+
+    const creation = await createBook(rootPath, options);
+    const state = await loadState(rootPath);
+    const generation = await generateBook(rootPath, {
+      ...options,
+      count
+    });
+
+    return {
+      message: `Created a new book and generated ${count} chapter${count === 1 ? '' : 's'}.`,
+      activeBookId: creation.activeBookId,
+      book: {
+        id: state.activeBook.id,
+        title: state.bookBible.title,
+        genre: state.bookBible.genre,
+        premise: state.bookBible.premise || '',
+        themes: state.bookBible.themes || [],
+        exportBaseName: state.bookBible.exportBaseName || state.activeBook.exportBaseName || state.activeBook.slug
+      },
+      count,
+      chapters: generation.chapters || [],
+      automation: creation.automation || null
+    };
+  });
+}
+
+export async function planBook(rootPath, options = {}) {
+  return withActionLog(rootPath, {
+    source: 'workflow',
+    action: 'plan-book',
+    input: { options }
+  }, async () => {
+    const planned = await planBookInternal(rootPath, options);
+
+    return {
+      message: 'Planned the next automated book pattern.',
+      automation: {
+        agent: 'series_architect',
+        pattern: planned.seriesPattern,
+        nextBook: planned.nextBook
+      }
     };
   });
 }
@@ -203,6 +271,7 @@ export async function getStatus(rootPath) {
       series: {
         title: state.seriesState.series?.title || 'Untitled Series',
         description: state.seriesState.series?.description || '',
+        pattern: state.seriesState.series?.pattern || null,
         books: state.seriesState.books || []
       },
       title: state.bookBible.title,
@@ -592,6 +661,14 @@ async function loadState(rootPath) {
     seriesContinuity,
     effectiveAgents: deepMerge(agentsConfig, agentState.overrides || {})
   };
+}
+
+async function planBookInternal(rootPath, options = {}) {
+  const state = await loadState(rootPath);
+  const env = await loadEnv(rootPath);
+  const planned = await runAgent(rootPath, state, env, 'series_architect', buildSeriesPatternInput(state, options), false);
+
+  return normalizeSeriesPlan(planned, state, options);
 }
 
 async function runAgent(rootPath, state, env, agentName, input, dryRun = false, taskOptions = {}) {
@@ -1114,6 +1191,176 @@ function clamp(value, min, max) {
 
 function round(value) {
   return Number(value.toFixed(2));
+}
+
+function buildSeriesPatternInput(state, options = {}) {
+  return {
+    USER_INTENT: {
+      automation_goal: 'Invent the next book so the series can keep running without manual naming or premise setup.',
+      requested_book_index: Number(options.index || options.bookIndex || (state.seriesState.books?.length || 0) + 1),
+      desired_genre: options.genre || state.bookBible.genre || 'dark fantasy',
+      desired_themes: normalizeThemesInput(options.theme ?? options.themes ?? []),
+      seed: options.seed || options.idea || '',
+      notes: options.notes || ''
+    },
+    SERIES: {
+      title: state.seriesState.series?.title || 'Untitled Series',
+      description: state.seriesState.series?.description || '',
+      pattern: state.seriesState.series?.pattern || null
+    },
+    CURRENT_BOOK: {
+      id: state.activeBook.id,
+      title: state.bookBible.title,
+      genre: state.bookBible.genre,
+      premise: state.bookBible.premise,
+      themes: state.bookBible.themes || [],
+      world_rules: state.bookBible.world_rules || [],
+      chapter_registry: state.bookBible.chapter_registry || []
+    },
+    SERIES_SHELF: buildSeriesShelf(state.allSeriesBooks, state.activeBook.id),
+    SERIES_CONTINUITY: state.seriesContinuity,
+    OUTLINE_MEMORY: state.outlineMemory,
+    STYLE_GUIDE: state.styleGuide
+  };
+}
+
+function normalizeSeriesPlan(plan, state, options = {}) {
+  const nextBook = plan.next_book || {};
+  const nextIndex = Number(nextBook.index || plan.book_index || options.index || options.bookIndex || (state.seriesState.books?.length || 0) + 1);
+  const nextTitle = String(nextBook.title || plan.book_title || options.title || `Book ${String(nextIndex).padStart(2, '0')}`).trim() || `Book ${String(nextIndex).padStart(2, '0')}`;
+  const nextThemes = normalizeThemesInput(nextBook.themes || plan.themes || state.bookBible.themes || []);
+
+  return {
+    seriesPattern: {
+      name: String(plan.pattern_name || state.seriesState.series?.pattern?.name || 'Escalating echo pattern').trim(),
+      overview: String(plan.pattern_overview || state.seriesState.series?.pattern?.overview || '').trim(),
+      bookCountTarget: Number(plan.book_count_target || state.seriesState.series?.pattern?.bookCountTarget || 3),
+      sequenceBeats: normalizeStringArray(plan.sequence_beats || state.seriesState.series?.pattern?.sequenceBeats || []),
+      motifCycle: normalizeStringArray(plan.motif_cycle || state.seriesState.series?.pattern?.motifCycle || []),
+      escalationLogic: String(plan.escalation_logic || state.seriesState.series?.pattern?.escalationLogic || '').trim(),
+      updatedAt: new Date().toISOString(),
+      sourceAgent: 'series_architect'
+    },
+    series: {
+      title: String(plan.series_title || state.seriesState.series?.title || `${nextTitle} Series`).trim() || `${nextTitle} Series`,
+      description: String(plan.series_description || state.seriesState.series?.description || '').trim()
+    },
+    nextBook: {
+      index: nextIndex,
+      title: nextTitle,
+      subtitle: String(nextBook.subtitle || plan.book_subtitle || options.subtitle || '').trim(),
+      genre: String(nextBook.genre || plan.genre || options.genre || state.bookBible.genre || 'dark fantasy').trim() || 'dark fantasy',
+      premise: String(nextBook.premise || plan.premise || options.premise || '').trim(),
+      themes: nextThemes,
+      tagline: String(nextBook.tagline || plan.tagline || options.tagline || nextBook.premise || plan.premise || '').trim(),
+      coverColor: normalizeHexColor(nextBook.cover_color || plan.cover_color || options.coverColor || state.bookBible.cover?.color || '#7c9cff'),
+      roleInPattern: String(nextBook.role_in_pattern || plan.role_in_pattern || '').trim(),
+      arcFocus: normalizeStringArray(nextBook.arc_focus || plan.arc_focus || []),
+      carryOverThreads: normalizeStringArray(nextBook.carry_over_threads || plan.carry_over_threads || []),
+      worldRulesToEcho: normalizeStringArray(nextBook.world_rules_to_echo || plan.world_rules_to_echo || []),
+      automationNotes: normalizeStringArray(nextBook.automation_notes || plan.automation_notes || []),
+      exportBaseName: slugify(options.exportBaseName || nextTitle),
+      author: String(options.author || state.bookBible.cover?.author || 'OpenRouter Book Agents').trim() || 'OpenRouter Book Agents'
+    }
+  };
+}
+
+function shouldAutomateBookCreation(options = {}) {
+  return Boolean(options.auto) || (!String(options.title || '').trim() && !String(options.premise || '').trim());
+}
+
+function mergePlannedBookOptions(nextBook, options = {}) {
+  const merged = {
+    ...options,
+    title: nextBook.title,
+    genre: nextBook.genre,
+    premise: nextBook.premise,
+    themes: nextBook.themes,
+    subtitle: nextBook.subtitle,
+    tagline: nextBook.tagline,
+    coverColor: nextBook.coverColor,
+    exportBaseName: nextBook.exportBaseName,
+    author: nextBook.author
+  };
+
+  if (options.auto) {
+    for (const key of ['title', 'genre', 'premise', 'themes', 'subtitle', 'tagline', 'coverColor', 'exportBaseName', 'author']) {
+      if (hasValue(options[key])) {
+        merged[key] = options[key];
+      }
+    }
+  }
+
+  return merged;
+}
+
+async function applyPlannedBookPattern(rootPath, planned) {
+  const seriesStatePath = path.join(rootPath, MEMORY_DIR, 'series_state.json');
+  const seriesState = await readJson(seriesStatePath, { series: {}, books: [] });
+  const nextSeriesState = {
+    ...seriesState,
+    series: {
+      ...(seriesState.series || {}),
+      title: planned.series.title,
+      description: planned.series.description || seriesState.series?.description || '',
+      pattern: planned.seriesPattern
+    }
+  };
+
+  await writeJson(seriesStatePath, nextSeriesState);
+
+  const state = await loadState(rootPath);
+  const nextBookBible = {
+    ...state.bookBible,
+    series_role: planned.nextBook.roleInPattern,
+    carry_over_threads: appendUniqueStrings(state.bookBible.carry_over_threads || [], planned.nextBook.carryOverThreads),
+    automation_notes: appendUniqueStrings(state.bookBible.automation_notes || [], planned.nextBook.automationNotes),
+    world_rules: appendUniqueStrings(state.bookBible.world_rules || [], planned.nextBook.worldRulesToEcho)
+  };
+  const nextStyleGuide = {
+    ...state.styleGuide,
+    recent_adjustments: appendUniqueStrings(state.styleGuide.recent_adjustments || [], planned.nextBook.automationNotes)
+  };
+  const nextOutlineMemory = {
+    ...state.outlineMemory,
+    next_targets: appendUniqueStrings(state.outlineMemory.next_targets || [], planned.nextBook.arcFocus, planned.nextBook.carryOverThreads),
+    story_arc: {
+      ...(state.outlineMemory.story_arc || {}),
+      global_targets: appendUniqueStrings(state.outlineMemory.story_arc?.global_targets || [], planned.nextBook.themes || [])
+    }
+  };
+
+  await saveStateBundle(rootPath, state, {
+    bookBible: nextBookBible,
+    timeline: state.timeline,
+    styleGuide: nextStyleGuide,
+    outlineMemory: nextOutlineMemory
+  });
+}
+
+function normalizeStringArray(value) {
+  if (Array.isArray(value)) {
+    return value.map((item) => String(item || '').trim()).filter(Boolean);
+  }
+
+  if (typeof value === 'string') {
+    return value.split(/[|,]/).map((item) => item.trim()).filter(Boolean);
+  }
+
+  return [];
+}
+
+function normalizeHexColor(value) {
+  const candidate = String(value || '').trim();
+  return /^#[0-9a-f]{6}$/i.test(candidate) ? candidate : '#7c9cff';
+}
+
+function hasValue(value) {
+  if (Array.isArray(value)) {
+    return value.length > 0;
+  }
+
+  return String(value || '').trim().length > 0;
 }
 
 function buildDefaultMemorySet(bookBibleOverrides = {}) {

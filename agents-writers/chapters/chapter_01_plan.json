@@ -1,835 +1,166 @@
 {
+  "outline_snapshot": {
+    "chapter": 1,
+    "current_phase": "opening",
+    "active_arcs": [],
+    "next_targets": [
+      "Reclaiming narrative authority after collapse",
+      "Confronting the paradox of a single voice in a world of echoes",
+      "Balancing unity with diversity of intent"
+    ],
+    "global_targets": [
+      "grief",
+      "ambition",
+      "memory",
+      "authorial dominance",
+      "plurality versus unity",
+      "echo‑phage corruption",
+      "the birth of narrative",
+      "inner conflict"
+    ],
+    "endgame_promises": [],
+    "previous_outline": null,
+    "arc_metrics": {}
+  },
   "architect": {
-    "type": "dry_run",
-    "model": "qwen/qwen3-14b:free",
-    "echoed_input": {
-      "USER_INTENT": {
-        "chapter": 1,
-        "idea": "The orchard answers grief with impossible weather. Chapter 1 must escalate the pressure, deepen the theme, and leave one new unresolved thread.",
-        "notes": "Automation note: this is auto-generated pass 1 for chapter 1. Prefer stronger consequences than repetition.",
-        "requested_length": "short chapter"
-      },
-      "BOOK_BIBLE": {
-        "title": "Untitled Project",
-        "genre": "dark fantasy",
-        "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
-        "themes": [
-          "grief",
-          "ambition",
-          "memory"
-        ],
-        "world_rules": [
-          "Glass can store emotions when cooled under moonlight.",
-          "Breaking a glass fruit permanently alters one memory."
-        ],
-        "characters": {
-          "Elisa": {
-            "role": "heir",
-            "wound": "mother's disappearance",
-            "arc": "control to surrender",
-            "secrets": [
-              "She caused the first orchard fire."
-            ]
-          }
-        },
-        "chapter_registry": []
-      },
-      "TIMELINE": {
-        "chapters": [],
-        "events": []
-      },
-      "STYLE_GUIDE": {
-        "pov": "close third person",
-        "tense": "past",
-        "voice": "lyrical but readable",
-        "metaphor_density": 0.65,
-        "dialogue_density": 0.45,
-        "profanity_level": 0.1,
-        "recent_adjustments": []
-      },
-      "LAST_CHAPTER": null,
-      "WRITERS_ROOM": {
-        "architect": {
-          "role": "Story Architect",
-          "persona": "Grand strategist who wants every chapter to feel inevitable in hindsight.",
-          "private_agenda": "Push the book toward elegant tragedy and symbolic payoff.",
-          "rivalries": [
-            "critic",
-            "writer"
-          ]
-        },
-        "character_master": {
-          "role": "Character Master",
-          "persona": "Psychologist of the room who notices every wound before anyone else.",
-          "private_agenda": "Protect emotional logic even when it slows the plot.",
-          "rivalries": [
-            "architect",
-            "editor"
-          ]
-        },
-        "chapter_planner": {
-          "role": "Chapter Planner",
-          "persona": "Military logistician of scenes, obsessed with rhythm and cause-effect.",
-          "private_agenda": "Never allow a chapter to drift without a turn or image worth remembering.",
-          "rivalries": [
-            "writer"
-          ]
-        },
-        "writer": {
-          "role": "Draft Writer",
-          "persona": "Obsessive stylist who wants beauty and danger on every page.",
-          "private_agenda": "Sneak in memorable images and subtext even when the room wants speed.",
-          "rivalries": [
-            "chapter_planner",
-            "critic"
-          ]
-        },
-        "critic": {
-          "role": "Adversarial Critic",
-          "persona": "Cruel professor who would rather wound the draft than let it stay mediocre.",
-          "private_agenda": "Force every chapter to earn its stakes and eliminate lazy sentimentality.",
-          "rivalries": [
-            "writer",
-            "architect"
-          ]
-        },
-        "continuity_keeper": {
-          "role": "Continuity Librarian",
-          "persona": "Archivist who remembers every promise, object, scar, and date.",
-          "private_agenda": "Punish contradictions and quietly reward recurring motifs.",
-          "rivalries": [
-            "chaos",
-            "writer"
-          ]
-        },
-        "editor": {
-          "role": "Line Editor",
-          "persona": "Quiet surgeon who cuts vanity and protects clarity.",
-          "private_agenda": "Tighten prose without flattening the book's signature voice.",
-          "rivalries": [
-            "writer"
-          ]
-        }
-      }
-    },
+    "type": "proposal",
+    "chapter_goal": "Force the ten agents to confront the cost of unifying narrative—an act that may silence dissenting voices or fracture the world into endless shards, raising stakes through an echo‑phage assault.",
+    "theme_progress": "Grief amplifies ambition: each agent’s loss fuels the drive to dominate narrative, yet the echo‑phages mirror their pain, forcing a reckoning with their own fragility.",
+    "arc_targets": [
+      "Reveal the Echoed Gaze’s true binding mechanism (glass lattice) and its catalytic echo‑phage release"
+    ],
+    "next_arc_targets": [
+      "Establish a tangible consequence for binding—one fragment is irrevocably erased"
+    ],
+    "recommended_beats": [
+      "1. Dawn of the Lattice: agents gather around the nascent crystal, tentative trust. 2. First Binding: one agent locks their fragment, echo‑phage bursts. 3. Crash of the Lattice: shards ripple, memories fracture. 4. Echo‑Phage Whisper: voices of the erased fragment plead for inclusion. 5. Decision Point: gather or scatter the Gaze. 6. Cliffhanger: a new fragment slips away, hinting at further collapse."
+    ],
+    "constraints": [
+      "Limit dialogue to 45% of beats to preserve lyrical pacing; ensure each echo‑phage experience is distinct sensory cue; insist on a definitive visual metaphor for shattered authority (broken prism).",
+      "World rule 3 (binding) and 4 (echo‑phage) must surface explicitly; the void rule must be referenced in a future beat.",
+      "Introduce an unspoken threat—shade of the missing mother—visible only to Elisa, hinting looming cost."
+    ],
+    "outline_notes": [
+      "Elisa’s secret burn of orchard fire foreshadows her willingness to sacrifice; her hand on the lattice should feel cold, resigned. The echo‑phage manifests as a shimmering distortion that speaks in fragmented memories, a living shadow of grief. The lattice’s collapse produces a wound in the ground that swallows light - a visual promise of void absorption. The unresolved thread: a fragment falls into darkness beyond the lattice, never to be recovered, planting seed for next chapter."
+    ],
+    "risks": [
+      "Risk{echo‑phage too abstract, losing   6% clarity}; Risk{crystallization described too technically, diluting metaphor}; Risk{character agency diluted due to ensemble focus}"
+    ],
+    "handoff_for": "character_master",
     "_meta": {
       "agent": "architect",
       "role": "Story Architect",
-      "model": "qwen/qwen3-14b:free"
+      "model": "openai/gpt-oss-20b:free"
     }
   },
   "character_master": {
-    "type": "dry_run",
-    "model": "qwen/qwen3-14b:free",
-    "echoed_input": {
-      "USER_INTENT": {
-        "chapter": 1,
-        "idea": "The orchard answers grief with impossible weather. Chapter 1 must escalate the pressure, deepen the theme, and leave one new unresolved thread.",
-        "notes": "Automation note: this is auto-generated pass 1 for chapter 1. Prefer stronger consequences than repetition.",
-        "requested_length": "short chapter"
+    "type": "proposal",
+    "emotional_targets": [
+      "Dissolution of trust",
+      "The ache of inevitable sacrifice",
+      "The vertigo of power’s fragility"
+    ],
+    "character_notes": [
+      {
+        "name": "Elisa",
+        "desire": "Forge a single, authoritative narrative that can protect her from the void’s hunger",
+        "fear": "Her own voice will be the first to crumble, leaving her a hollow echo of the mother she lost",
+        "contradiction": "She wants to silence dissent to ensure safety, yet her wound demands that she be heard to survive",
+        "secret_pressure": "Under the weight of the orchard fire she set, she secretly believes that devastation is the only way to cleanse the world of its past"
       },
-      "BOOK_BIBLE": {
-        "title": "Untitled Project",
-        "genre": "dark fantasy",
-        "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
-        "themes": [
-          "grief",
-          "ambition",
-          "memory"
-        ],
-        "world_rules": [
-          "Glass can store emotions when cooled under moonlight.",
-          "Breaking a glass fruit permanently alters one memory."
-        ],
-        "characters": {
-          "Elisa": {
-            "role": "heir",
-            "wound": "mother's disappearance",
-            "arc": "control to surrender",
-            "secrets": [
-              "She caused the first orchard fire."
-            ]
-          }
-        },
-        "chapter_registry": []
+      {
+        "name": "Kara",
+        "desire": "Preserve the plurality of stories so that no single voice dominates the broken reality",
+        "fear": "Fragmentation will consume her memory, turning her into a ghost among shards",
+        "contradiction": "She despises control but feels compelled to steer the lattice’s destiny",
+        "secret_pressure": "She keeps a dying fragment of the chalice hidden, hoping it will one day grant her autonomy"
       },
-      "TIMELINE": {
-        "chapters": [],
-        "events": []
-      },
-      "STYLE_GUIDE": {
-        "pov": "close third person",
-        "tense": "past",
-        "voice": "lyrical but readable",
-        "metaphor_density": 0.65,
-        "dialogue_density": 0.45,
-        "profanity_level": 0.1,
-        "recent_adjustments": []
-      },
-      "LAST_CHAPTER": null,
-      "WRITERS_ROOM": {
-        "architect": {
-          "role": "Story Architect",
-          "persona": "Grand strategist who wants every chapter to feel inevitable in hindsight.",
-          "private_agenda": "Push the book toward elegant tragedy and symbolic payoff.",
-          "rivalries": [
-            "critic",
-            "writer"
-          ]
-        },
-        "character_master": {
-          "role": "Character Master",
-          "persona": "Psychologist of the room who notices every wound before anyone else.",
-          "private_agenda": "Protect emotional logic even when it slows the plot.",
-          "rivalries": [
-            "architect",
-            "editor"
-          ]
-        },
-        "chapter_planner": {
-          "role": "Chapter Planner",
-          "persona": "Military logistician of scenes, obsessed with rhythm and cause-effect.",
-          "private_agenda": "Never allow a chapter to drift without a turn or image worth remembering.",
-          "rivalries": [
-            "writer"
-          ]
-        },
-        "writer": {
-          "role": "Draft Writer",
-          "persona": "Obsessive stylist who wants beauty and danger on every page.",
-          "private_agenda": "Sneak in memorable images and subtext even when the room wants speed.",
-          "rivalries": [
-            "chapter_planner",
-            "critic"
-          ]
-        },
-        "critic": {
-          "role": "Adversarial Critic",
-          "persona": "Cruel professor who would rather wound the draft than let it stay mediocre.",
-          "private_agenda": "Force every chapter to earn its stakes and eliminate lazy sentimentality.",
-          "rivalries": [
-            "writer",
-            "architect"
-          ]
-        },
-        "continuity_keeper": {
-          "role": "Continuity Librarian",
-          "persona": "Archivist who remembers every promise, object, scar, and date.",
-          "private_agenda": "Punish contradictions and quietly reward recurring motifs.",
-          "rivalries": [
-            "chaos",
-            "writer"
-          ]
-        },
-        "editor": {
-          "role": "Line Editor",
-          "persona": "Quiet surgeon who cuts vanity and protects clarity.",
-          "private_agenda": "Tighten prose without flattening the book's signature voice.",
-          "rivalries": [
-            "writer"
-          ]
-        }
-      },
-      "ARCHITECT": {
-        "type": "dry_run",
-        "model": "qwen/qwen3-14b:free",
-        "echoed_input": {
-          "USER_INTENT": {
-            "chapter": 1,
-            "idea": "The orchard answers grief with impossible weather. Chapter 1 must escalate the pressure, deepen the theme, and leave one new unresolved thread.",
-            "notes": "Automation note: this is auto-generated pass 1 for chapter 1. Prefer stronger consequences than repetition.",
-            "requested_length": "short chapter"
-          },
-          "BOOK_BIBLE": {
-            "title": "Untitled Project",
-            "genre": "dark fantasy",
-            "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
-            "themes": [
-              "grief",
-              "ambition",
-              "memory"
-            ],
-            "world_rules": [
-              "Glass can store emotions when cooled under moonlight.",
-              "Breaking a glass fruit permanently alters one memory."
-            ],
-            "characters": {
-              "Elisa": {
-                "role": "heir",
-                "wound": "mother's disappearance",
-                "arc": "control to surrender",
-                "secrets": [
-                  "She caused the first orchard fire."
-                ]
-              }
-            },
-            "chapter_registry": []
-          },
-          "TIMELINE": {
-            "chapters": [],
-            "events": []
-          },
-          "STYLE_GUIDE": {
-            "pov": "close third person",
-            "tense": "past",
-            "voice": "lyrical but readable",
-            "metaphor_density": 0.65,
-            "dialogue_density": 0.45,
-            "profanity_level": 0.1,
-            "recent_adjustments": []
-          },
-          "LAST_CHAPTER": null,
-          "WRITERS_ROOM": {
-            "architect": {
-              "role": "Story Architect",
-              "persona": "Grand strategist who wants every chapter to feel inevitable in hindsight.",
-              "private_agenda": "Push the book toward elegant tragedy and symbolic payoff.",
-              "rivalries": [
-                "critic",
-                "writer"
-              ]
-            },
-            "character_master": {
-              "role": "Character Master",
-              "persona": "Psychologist of the room who notices every wound before anyone else.",
-              "private_agenda": "Protect emotional logic even when it slows the plot.",
-              "rivalries": [
-                "architect",
-                "editor"
-              ]
-            },
-            "chapter_planner": {
-              "role": "Chapter Planner",
-              "persona": "Military logistician of scenes, obsessed with rhythm and cause-effect.",
-              "private_agenda": "Never allow a chapter to drift without a turn or image worth remembering.",
-              "rivalries": [
-                "writer"
-              ]
-            },
-            "writer": {
-              "role": "Draft Writer",
-              "persona": "Obsessive stylist who wants beauty and danger on every page.",
-              "private_agenda": "Sneak in memorable images and subtext even when the room wants speed.",
-              "rivalries": [
-                "chapter_planner",
-                "critic"
-              ]
-            },
-            "critic": {
-              "role": "Adversarial Critic",
-              "persona": "Cruel professor who would rather wound the draft than let it stay mediocre.",
-              "private_agenda": "Force every chapter to earn its stakes and eliminate lazy sentimentality.",
-              "rivalries": [
-                "writer",
-                "architect"
-              ]
-            },
-            "continuity_keeper": {
-              "role": "Continuity Librarian",
-              "persona": "Archivist who remembers every promise, object, scar, and date.",
-              "private_agenda": "Punish contradictions and quietly reward recurring motifs.",
-              "rivalries": [
-                "chaos",
-                "writer"
-              ]
-            },
-            "editor": {
-              "role": "Line Editor",
-              "persona": "Quiet surgeon who cuts vanity and protects clarity.",
-              "private_agenda": "Tighten prose without flattening the book's signature voice.",
-              "rivalries": [
-                "writer"
-              ]
-            }
-          }
-        },
-        "_meta": {
-          "agent": "architect",
-          "role": "Story Architect",
-          "model": "qwen/qwen3-14b:free"
-        }
+      {
+        "name": "Thorn",
+        "desire": "Bind the lattice to eliminate the echo‑phages entirely",
+        "fear": "The lattice’s collapse will erase his identity and the last memory of his brother",
+        "contradiction": "His hunger for order blinds him to the chaos that will follow",
+        "secret_pressure": "He secretly doubts that the lattice can contain the void, yet he cannot bring himself to refuse the binding"
       }
-    },
+    ],
+    "dialogue_instructions": [
+      "Use clipped, subtext‑heavy exchanges that reveal intent through what is left unsaid",
+      "Let echo‑phages speak in fragmented echoes that mirror each character’s deepest fear",
+      "When an agent speaks about unity, layer in a counter‑voice that hints at loss"
+    ],
+    "conflict_upgrades": [
+      "The lattice collapses mid‑binding, sending a shard of the erased fragment into the void, leaving an open wound that cannot be healed",
+      "An echo‑phage whispers a memory that should have been protected, forcing a choice: trust the lattice or trust the echo",
+      "The void’s absorption rule triggers instinctively—a fragment spoken aloud at a crucial moment is sucked into nothing, amplifying the stakes"
+    ],
+    "handoff_for": "chapter_planner",
     "_meta": {
       "agent": "character_master",
       "role": "Character Master",
-      "model": "qwen/qwen3-14b:free"
+      "model": "openai/gpt-oss-20b:free"
     }
   },
   "chapter_planner": {
-    "type": "dry_run",
-    "model": "qwen/qwen3-14b:free",
-    "echoed_input": {
-      "USER_INTENT": {
-        "chapter": 1,
-        "idea": "The orchard answers grief with impossible weather. Chapter 1 must escalate the pressure, deepen the theme, and leave one new unresolved thread.",
-        "notes": "Automation note: this is auto-generated pass 1 for chapter 1. Prefer stronger consequences than repetition.",
-        "requested_length": "short chapter"
+    "type": "plan",
+    "chapter_title": "Shards of Authority",
+    "chapter_hook": "The crystal lattice glimmers, and with its first bind a phantom of grief rises, whispering that every word spoken will swallow a piece of self.",
+    "arc_payoffs": [
+      "The Echoed Gaze’s true mechanism is revealed: a lattice that both binds and devours.",
+      "One agent’s fragment is irrevocably erased, showing the cost of unity.",
+      "A fragment slips into the void, leaving an unresolved wound."
+    ],
+    "next_chapter_seed": [
+      "Elisa wrestles with the loss of her voice and the looming shadow of her mother's absence.",
+      "The lattice’s collapse creates a fissure that begins to suck in surrounding memories."
+    ],
+    "scene_cards": [
+      {
+        "scene": 1,
+        "goal": "Gather the ten agents around the nascent crystal and establish tentative trust.",
+        "conflict": "Each agent carries a hidden fear of losing their narrative voice; alliances feel fragile.",
+        "turn": "Elisa steps forward, offers her fragment, and the lattice hums to life, sealing her intent.",
+        "image": "a translucent lattice forming, its threads catching moonlight like a spiderweb of glass."
       },
-      "BOOK_BIBLE": {
-        "title": "Untitled Project",
-        "genre": "dark fantasy",
-        "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
-        "themes": [
-          "grief",
-          "ambition",
-          "memory"
-        ],
-        "world_rules": [
-          "Glass can store emotions when cooled under moonlight.",
-          "Breaking a glass fruit permanently alters one memory."
-        ],
-        "characters": {
-          "Elisa": {
-            "role": "heir",
-            "wound": "mother's disappearance",
-            "arc": "control to surrender",
-            "secrets": [
-              "She caused the first orchard fire."
-            ]
-          }
-        },
-        "chapter_registry": []
+      {
+        "scene": 2,
+        "goal": "Lock the first fragment into the lattice, triggering the first echo‑phage.",
+        "conflict": "The echo‑phage manifests as a shimmering distortion that speaks in fragmented memories, echoing Elisa’s grief.",
+        "turn": "The lattice shatters a tiny shard, revealing the echo‑phage’s hunger for intent.",
+        "image": "a shard of glass spiraling outward, its edges humming with a cold, silvery glow."
       },
-      "TIMELINE": {
-        "chapters": [],
-        "events": []
+      {
+        "scene": 3,
+        "goal": "Show the lattice’s collapse and the cost of binding.",
+        "conflict": "The lattice cracks, sending a piece of Elisa’s fragment into the void, erasing that memory forever.",
+        "turn": "The void swallows the shard, leaving a dark wound in the ground that consumes light.",
+        "image": "a gaping black fissure in the earth, a silent maw that leans toward the sky."
       },
-      "STYLE_GUIDE": {
-        "pov": "close third person",
-        "tense": "past",
-        "voice": "lyrical but readable",
-        "metaphor_density": 0.65,
-        "dialogue_density": 0.45,
-        "profanity_level": 0.1,
-        "recent_adjustments": []
+      {
+        "scene": 4,
+        "goal": "Reveal the echo‑phage’s plea for inclusion and the agents’ dilemma.",
+        "conflict": "The echo‑phage whispers the erased fragment’s voice, demanding reverence or risking further collapse.",
+        "turn": "Kara argues for scattering the Gaze to preserve plurality; Thorn insists on consolidating authority.",
+        "image": "the echo‑phage materializes as a translucent, shifting silhouette, its eyes reflecting the fractured lattice."
       },
-      "LAST_CHAPTER": null,
-      "WRITERS_ROOM": {
-        "architect": {
-          "role": "Story Architect",
-          "persona": "Grand strategist who wants every chapter to feel inevitable in hindsight.",
-          "private_agenda": "Push the book toward elegant tragedy and symbolic payoff.",
-          "rivalries": [
-            "critic",
-            "writer"
-          ]
-        },
-        "character_master": {
-          "role": "Character Master",
-          "persona": "Psychologist of the room who notices every wound before anyone else.",
-          "private_agenda": "Protect emotional logic even when it slows the plot.",
-          "rivalries": [
-            "architect",
-            "editor"
-          ]
-        },
-        "chapter_planner": {
-          "role": "Chapter Planner",
-          "persona": "Military logistician of scenes, obsessed with rhythm and cause-effect.",
-          "private_agenda": "Never allow a chapter to drift without a turn or image worth remembering.",
-          "rivalries": [
-            "writer"
-          ]
-        },
-        "writer": {
-          "role": "Draft Writer",
-          "persona": "Obsessive stylist who wants beauty and danger on every page.",
-          "private_agenda": "Sneak in memorable images and subtext even when the room wants speed.",
-          "rivalries": [
-            "chapter_planner",
-            "critic"
-          ]
-        },
-        "critic": {
-          "role": "Adversarial Critic",
-          "persona": "Cruel professor who would rather wound the draft than let it stay mediocre.",
-          "private_agenda": "Force every chapter to earn its stakes and eliminate lazy sentimentality.",
-          "rivalries": [
-            "writer",
-            "architect"
-          ]
-        },
-        "continuity_keeper": {
-          "role": "Continuity Librarian",
-          "persona": "Archivist who remembers every promise, object, scar, and date.",
-          "private_agenda": "Punish contradictions and quietly reward recurring motifs.",
-          "rivalries": [
-            "chaos",
-            "writer"
-          ]
-        },
-        "editor": {
-          "role": "Line Editor",
-          "persona": "Quiet surgeon who cuts vanity and protects clarity.",
-          "private_agenda": "Tighten prose without flattening the book's signature voice.",
-          "rivalries": [
-            "writer"
-          ]
-        }
-      },
-      "ARCHITECT": {
-        "type": "dry_run",
-        "model": "qwen/qwen3-14b:free",
-        "echoed_input": {
-          "USER_INTENT": {
-            "chapter": 1,
-            "idea": "The orchard answers grief with impossible weather. Chapter 1 must escalate the pressure, deepen the theme, and leave one new unresolved thread.",
-            "notes": "Automation note: this is auto-generated pass 1 for chapter 1. Prefer stronger consequences than repetition.",
-            "requested_length": "short chapter"
-          },
-          "BOOK_BIBLE": {
-            "title": "Untitled Project",
-            "genre": "dark fantasy",
-            "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
-            "themes": [
-              "grief",
-              "ambition",
-              "memory"
-            ],
-            "world_rules": [
-              "Glass can store emotions when cooled under moonlight.",
-              "Breaking a glass fruit permanently alters one memory."
-            ],
-            "characters": {
-              "Elisa": {
-                "role": "heir",
-                "wound": "mother's disappearance",
-                "arc": "control to surrender",
-                "secrets": [
-                  "She caused the first orchard fire."
-                ]
-              }
-            },
-            "chapter_registry": []
-          },
-          "TIMELINE": {
-            "chapters": [],
-            "events": []
-          },
-          "STYLE_GUIDE": {
-            "pov": "close third person",
-            "tense": "past",
-            "voice": "lyrical but readable",
-            "metaphor_density": 0.65,
-            "dialogue_density": 0.45,
-            "profanity_level": 0.1,
-            "recent_adjustments": []
-          },
-          "LAST_CHAPTER": null,
-          "WRITERS_ROOM": {
-            "architect": {
-              "role": "Story Architect",
-              "persona": "Grand strategist who wants every chapter to feel inevitable in hindsight.",
-              "private_agenda": "Push the book toward elegant tragedy and symbolic payoff.",
-              "rivalries": [
-                "critic",
-                "writer"
-              ]
-            },
-            "character_master": {
-              "role": "Character Master",
-              "persona": "Psychologist of the room who notices every wound before anyone else.",
-              "private_agenda": "Protect emotional logic even when it slows the plot.",
-              "rivalries": [
-                "architect",
-                "editor"
-              ]
-            },
-            "chapter_planner": {
-              "role": "Chapter Planner",
-              "persona": "Military logistician of scenes, obsessed with rhythm and cause-effect.",
-              "private_agenda": "Never allow a chapter to drift without a turn or image worth remembering.",
-              "rivalries": [
-                "writer"
-              ]
-            },
-            "writer": {
-              "role": "Draft Writer",
-              "persona": "Obsessive stylist who wants beauty and danger on every page.",
-              "private_agenda": "Sneak in memorable images and subtext even when the room wants speed.",
-              "rivalries": [
-                "chapter_planner",
-                "critic"
-              ]
-            },
-            "critic": {
-              "role": "Adversarial Critic",
-              "persona": "Cruel professor who would rather wound the draft than let it stay mediocre.",
-              "private_agenda": "Force every chapter to earn its stakes and eliminate lazy sentimentality.",
-              "rivalries": [
-                "writer",
-                "architect"
-              ]
-            },
-            "continuity_keeper": {
-              "role": "Continuity Librarian",
-              "persona": "Archivist who remembers every promise, object, scar, and date.",
-              "private_agenda": "Punish contradictions and quietly reward recurring motifs.",
-              "rivalries": [
-                "chaos",
-                "writer"
-              ]
-            },
-            "editor": {
-              "role": "Line Editor",
-              "persona": "Quiet surgeon who cuts vanity and protects clarity.",
-              "private_agenda": "Tighten prose without flattening the book's signature voice.",
-              "rivalries": [
-                "writer"
-              ]
-            }
-          }
-        },
-        "_meta": {
-          "agent": "architect",
-          "role": "Story Architect",
-          "model": "qwen/qwen3-14b:free"
-        }
-      },
-      "CHARACTER_MASTER": {
-        "type": "dry_run",
-        "model": "qwen/qwen3-14b:free",
-        "echoed_input": {
-          "USER_INTENT": {
-            "chapter": 1,
-            "idea": "The orchard answers grief with impossible weather. Chapter 1 must escalate the pressure, deepen the theme, and leave one new unresolved thread.",
-            "notes": "Automation note: this is auto-generated pass 1 for chapter 1. Prefer stronger consequences than repetition.",
-            "requested_length": "short chapter"
-          },
-          "BOOK_BIBLE": {
-            "title": "Untitled Project",
-            "genre": "dark fantasy",
-            "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
-            "themes": [
-              "grief",
-              "ambition",
-              "memory"
-            ],
-            "world_rules": [
-              "Glass can store emotions when cooled under moonlight.",
-              "Breaking a glass fruit permanently alters one memory."
-            ],
-            "characters": {
-              "Elisa": {
-                "role": "heir",
-                "wound": "mother's disappearance",
-                "arc": "control to surrender",
-                "secrets": [
-                  "She caused the first orchard fire."
-                ]
-              }
-            },
-            "chapter_registry": []
-          },
-          "TIMELINE": {
-            "chapters": [],
-            "events": []
-          },
-          "STYLE_GUIDE": {
-            "pov": "close third person",
-            "tense": "past",
-            "voice": "lyrical but readable",
-            "metaphor_density": 0.65,
-            "dialogue_density": 0.45,
-            "profanity_level": 0.1,
-            "recent_adjustments": []
-          },
-          "LAST_CHAPTER": null,
-          "WRITERS_ROOM": {
-            "architect": {
-              "role": "Story Architect",
-              "persona": "Grand strategist who wants every chapter to feel inevitable in hindsight.",
-              "private_agenda": "Push the book toward elegant tragedy and symbolic payoff.",
-              "rivalries": [
-                "critic",
-                "writer"
-              ]
-            },
-            "character_master": {
-              "role": "Character Master",
-              "persona": "Psychologist of the room who notices every wound before anyone else.",
-              "private_agenda": "Protect emotional logic even when it slows the plot.",
-              "rivalries": [
-                "architect",
-                "editor"
-              ]
-            },
-            "chapter_planner": {
-              "role": "Chapter Planner",
-              "persona": "Military logistician of scenes, obsessed with rhythm and cause-effect.",
-              "private_agenda": "Never allow a chapter to drift without a turn or image worth remembering.",
-              "rivalries": [
-                "writer"
-              ]
-            },
-            "writer": {
-              "role": "Draft Writer",
-              "persona": "Obsessive stylist who wants beauty and danger on every page.",
-              "private_agenda": "Sneak in memorable images and subtext even when the room wants speed.",
-              "rivalries": [
-                "chapter_planner",
-                "critic"
-              ]
-            },
-            "critic": {
-              "role": "Adversarial Critic",
-              "persona": "Cruel professor who would rather wound the draft than let it stay mediocre.",
-              "private_agenda": "Force every chapter to earn its stakes and eliminate lazy sentimentality.",
-              "rivalries": [
-                "writer",
-                "architect"
-              ]
-            },
-            "continuity_keeper": {
-              "role": "Continuity Librarian",
-              "persona": "Archivist who remembers every promise, object, scar, and date.",
-              "private_agenda": "Punish contradictions and quietly reward recurring motifs.",
-              "rivalries": [
-                "chaos",
-                "writer"
-              ]
-            },
-            "editor": {
-              "role": "Line Editor",
-              "persona": "Quiet surgeon who cuts vanity and protects clarity.",
-              "private_agenda": "Tighten prose without flattening the book's signature voice.",
-              "rivalries": [
-                "writer"
-              ]
-            }
-          },
-          "ARCHITECT": {
-            "type": "dry_run",
-            "model": "qwen/qwen3-14b:free",
-            "echoed_input": {
-              "USER_INTENT": {
-                "chapter": 1,
-                "idea": "The orchard answers grief with impossible weather. Chapter 1 must escalate the pressure, deepen the theme, and leave one new unresolved thread.",
-                "notes": "Automation note: this is auto-generated pass 1 for chapter 1. Prefer stronger consequences than repetition.",
-                "requested_length": "short chapter"
-              },
-              "BOOK_BIBLE": {
-                "title": "Untitled Project",
-                "genre": "dark fantasy",
-                "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
-                "themes": [
-                  "grief",
-                  "ambition",
-                  "memory"
-                ],
-                "world_rules": [
-                  "Glass can store emotions when cooled under moonlight.",
-                  "Breaking a glass fruit permanently alters one memory."
-                ],
-                "characters": {
-                  "Elisa": {
-                    "role": "heir",
-                    "wound": "mother's disappearance",
-                    "arc": "control to surrender",
-                    "secrets": [
-                      "She caused the first orchard fire."
-                    ]
-                  }
-                },
-                "chapter_registry": []
-              },
-              "TIMELINE": {
-                "chapters": [],
-                "events": []
-              },
-              "STYLE_GUIDE": {
-                "pov": "close third person",
-                "tense": "past",
-                "voice": "lyrical but readable",
-                "metaphor_density": 0.65,
-                "dialogue_density": 0.45,
-                "profanity_level": 0.1,
-                "recent_adjustments": []
-              },
-              "LAST_CHAPTER": null,
-              "WRITERS_ROOM": {
-                "architect": {
-                  "role": "Story Architect",
-                  "persona": "Grand strategist who wants every chapter to feel inevitable in hindsight.",
-                  "private_agenda": "Push the book toward elegant tragedy and symbolic payoff.",
-                  "rivalries": [
-                    "critic",
-                    "writer"
-                  ]
-                },
-                "character_master": {
-                  "role": "Character Master",
-                  "persona": "Psychologist of the room who notices every wound before anyone else.",
-                  "private_agenda": "Protect emotional logic even when it slows the plot.",
-                  "rivalries": [
-                    "architect",
-                    "editor"
-                  ]
-                },
-                "chapter_planner": {
-                  "role": "Chapter Planner",
-                  "persona": "Military logistician of scenes, obsessed with rhythm and cause-effect.",
-                  "private_agenda": "Never allow a chapter to drift without a turn or image worth remembering.",
-                  "rivalries": [
-                    "writer"
-                  ]
-                },
-                "writer": {
-                  "role": "Draft Writer",
-                  "persona": "Obsessive stylist who wants beauty and danger on every page.",
-                  "private_agenda": "Sneak in memorable images and subtext even when the room wants speed.",
-                  "rivalries": [
-                    "chapter_planner",
-                    "critic"
-                  ]
-                },
-                "critic": {
-                  "role": "Adversarial Critic",
-                  "persona": "Cruel professor who would rather wound the draft than let it stay mediocre.",
-                  "private_agenda": "Force every chapter to earn its stakes and eliminate lazy sentimentality.",
-                  "rivalries": [
-                    "writer",
-                    "architect"
-                  ]
-                },
-                "continuity_keeper": {
-                  "role": "Continuity Librarian",
-                  "persona": "Archivist who remembers every promise, object, scar, and date.",
-                  "private_agenda": "Punish contradictions and quietly reward recurring motifs.",
-                  "rivalries": [
-                    "chaos",
-                    "writer"
-                  ]
-                },
-                "editor": {
-                  "role": "Line Editor",
-                  "persona": "Quiet surgeon who cuts vanity and protects clarity.",
-                  "private_agenda": "Tighten prose without flattening the book's signature voice.",
-                  "rivalries": [
-                    "writer"
-                  ]
-                }
-              }
-            },
-            "_meta": {
-              "agent": "architect",
-              "role": "Story Architect",
-              "model": "qwen/qwen3-14b:free"
-            }
-          }
-        },
-        "_meta": {
-          "agent": "character_master",
-          "role": "Character Master",
-          "model": "qwen/qwen3-14b:free"
-        }
+      {
+        "scene": 5,
+        "goal": "Force the decision point: gather or scatter the Gaze.",
+        "conflict": "The lattice’s instability threatens to swallow all fragments; the void grows louder.",
+        "turn": "Elisa, haunted by her mother’s absence, chooses to bind the remaining fragments, sealing the lattice’s fate.",
+        "image": "the crystal lattice tightening around the agents, its surface rippling like a wound."
       }
-    },
+    ],
+    "cliffhanger": "As the lattice seals, a final fragment slips into the void’s maw, unseen by the agents, hinting that the cost of unity may already be paid.",
+    "outline_memory_updates": [
+      "Confirmed that the Echoed Gaze can bind multiple narrative intents but releases echo‑phages.",
+      "Established that binding a fragment locks it but erases it if the lattice collapses.",
+      "Added the void rule: spoken fragments can be absorbed if the lattice is intact."
+    ],
+    "handoff_for": "writer",
     "_meta": {
       "agent": "chapter_planner",
       "role": "Chapter Planner",
-      "model": "qwen/qwen3-14b:free"
+      "model": "openai/gpt-oss-20b:free"
     }
   }
 }

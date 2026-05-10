@@ -5,6 +5,7 @@ A small Node.js starter for a multi-agent book-writing workflow using OpenRouter
 ## What it does
 
 - Runs a writer-room style pipeline: `architect -> character master -> chapter planner -> writer -> critic -> continuity keeper -> editor`
+- Adds a `series_architect` agent that invents series patterns and next-book blueprints when you want the shelf to keep going automatically
 - Lets agents talk through structured JSON handoffs
 - Stores persistent memory for the book bible, timeline, style guide, and agent state
 - Lets you change agent behavior live with commands and presets
@@ -27,7 +28,7 @@ A small Node.js starter for a multi-agent book-writing workflow using OpenRouter
 
 ## Setup
 
-1. Copy `.env.example` to `.env`
+1. Copy `env.example` to `.env`
 2. Set `OPENROUTER_API_KEY`
 3. Adjust free model names in `config/agents.json` if any model becomes unavailable
 
@@ -43,6 +44,30 @@ Create another book in the same series shelf:
 
 ```bash
 npm run new-book -- --title "The Mirror Orchard"
+```
+
+Create a new book and draft 20 chapters in one run:
+
+```bash
+npm run write-book
+```
+
+You can still pass book metadata or override the default chapter count:
+
+```bash
+npm run write-book -- --title "The Glass Mandate" --premise "A council of scribes taxes bottled grief." --count 12
+```
+
+If you omit the title and premise, the `series_architect` agent invents the next-book pattern and creates the book automatically:
+
+```bash
+npm run new-book
+```
+
+Preview the automated next-book plan without creating it:
+
+```bash
+npm run plan-book -- --notes "Keep the shelf tragic but make book two feel more political."
 ```
 
 Switch the active book:
@@ -112,6 +137,20 @@ npm run auto
 
 This reuses port `4174` if the UI is already running there, otherwise it starts the UI server and returns the current active-book status snapshot.
 
+Launch auto mode and open the UI in your browser:
+
+```bash
+./run-auto.sh
+```
+
+Or run the same launcher through npm:
+
+```bash
+npm run auto:open
+```
+
+On first run the launcher copies `env.example` to `.env` if needed, then opens the local UI at `http://127.0.0.1:4174` after startup.
+
 ## Project layout
 
 - [config/agents.json](config/agents.json)
@@ -131,6 +170,7 @@ This reuses port `4174` if the UI is already running there, otherwise it starts 
 - [src/lib/workflow.js](src/lib/workflow.js)
 - [src/lib/server.js](src/lib/server.js)
 - [public/index.html](public/index.html)
+- [prompts/series_architect.txt](prompts/series_architect.txt)
 - [prompts/translator.txt](prompts/translator.txt)
 
 ## Notes

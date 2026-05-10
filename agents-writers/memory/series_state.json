@@ -1,8 +1,26 @@
 {
-  "activeBookId": "book-07",
+  "activeBookId": "book-13",
   "series": {
     "title": "Untitled Series",
-    "description": "A shelf of interconnected book projects managed by the writer room."
+    "description": "A recursive dark‑fantasy anthology where rival meta‑agents write and battle within ever‑shifting realities, spiraling through cycles of authority, memory corruption, and existential collapse.",
+    "pattern": {
+      "name": "Tri‑Echo Spiral",
+      "overview": "Every three volumes form a self‑contained echo: Volume 1 asserts narrative control, Volume 2 shatters memory, Volume 3 collapses reality. When a cycle ends, a new cycle begins, inheriting the remnants of the previous collapse and mutating the core premise into a fresh struggle for authorial dominance.",
+      "bookCountTarget": 3,
+      "sequenceBeats": [
+        "Authorial Control: agents draft within a single, stable reality.",
+        "Memory Fracture: fragments of the draft bleed into the world, erasing linearity.",
+        "Reality Collapse: the world becomes a self‑aware text, dissolving the boundary between story and author."
+      ],
+      "motifCycle": [
+        "Glass of Memory",
+        "Mirror Orchard",
+        "Broken Writings"
+      ],
+      "escalationLogic": "Each volume injects a mechanism that subverts the stability of its predecessor—first a cooling glass that stores intent, then fracturing mirrors that scatter recollection, finally a self‑referential narrative that loops on itself. When the loop snaps, a new glass is forged, but now it contains the echo of the broken loop, raising the stakes for the next control phase.",
+      "updatedAt": "2026-05-10T19:05:58.061Z",
+      "sourceAgent": "series_architect"
+    }
   },
   "books": [
     {
@@ -165,6 +183,151 @@
       },
       "createdAt": "2026-04-29T10:12:23.049Z",
       "updatedAt": "2026-04-29T10:12:23.058Z"
+    },
+    {
+      "id": "book-08",
+      "title": "The big boss of love",
+      "slug": "the-big-boss-of-love",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
+      "themes": [
+        "grief",
+        "ambition",
+        "memory"
+      ],
+      "exportBaseName": "the-big-boss-of-love",
+      "cover": {
+        "title": "The big boss of love",
+        "subtitle": "",
+        "author": "OpenRouter Book Agents",
+        "tagline": "A group of rival agents write a book while trying to outmaneuver each other.",
+        "color": "#7c9cff"
+      },
+      "createdAt": "2026-05-08T14:53:06.179Z",
+      "updatedAt": "2026-05-08T14:53:06.190Z"
+    },
+    {
+      "id": "book-09",
+      "title": "The Scribe’s Eclipse",
+      "slug": "the-scribe-s-eclipse",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "Nine rival agents gather under a dying sun, each armed with a reflective shard that captures their true intent. As they write, the shards begin to fracture, scattering their memories across a world where each sentence can rewrite reality. The agents must decide whether to preserve their narrative for posterity or let the broken mirrors consume their stories.",
+      "themes": [
+        "identity",
+        "truth",
+        "destiny"
+      ],
+      "exportBaseName": "the-scribe-s-eclipse",
+      "cover": {
+        "title": "The Scribe’s Eclipse",
+        "subtitle": "Hanging the Future in a Broken Mirror",
+        "author": "OpenRouter Book Agents",
+        "tagline": "When mirrors break, the story unravels.",
+        "color": "#5a3d7c"
+      },
+      "createdAt": "2026-05-10T16:46:01.584Z",
+      "updatedAt": "2026-05-10T16:46:01.626Z"
+    },
+    {
+      "id": "book-10",
+      "title": "The Scribe’s Dawn",
+      "slug": "the-scribe-s-dawn",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "From the shattered remnants of the previous collapse, a fresh cadre of ten agents discovers a newly forged crystal chalice that can bind the echoing loop into a single, mutable strand. As they attempt to re‑establish narrative authority, the chalice begins to pulse with the residual chaos of the broken writings, forcing each scribe to confront the lingering ghosts of the last cycle while racing against a sunrise that threatens to melt the very fabric of their newly‑welded world.",
+      "themes": [
+        "rebirth",
+        "authority",
+        "latent chaos",
+        "memory inheritance",
+        "destiny"
+      ],
+      "exportBaseName": "the-scribe-s-dawn",
+      "cover": {
+        "title": "The Scribe’s Dawn",
+        "subtitle": "When the Fractured Glass Rises",
+        "author": "OpenRouter Book Agents",
+        "tagline": "A new glass, a familiar fracture—can order survive the echo?",
+        "color": "#6a4c8c"
+      },
+      "createdAt": "2026-05-10T16:54:59.197Z",
+      "updatedAt": "2026-05-10T16:54:59.239Z"
+    },
+    {
+      "id": "book-11",
+      "title": "The Scribe’s Eclipse: Mirror of Shattered Words",
+      "slug": "the-scribe-s-eclipse-mirror-of-shattered-words",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "As the crystal chalice of control shatters in the waning light, its shards scatter the collective intent of the ten agents across the realm. Every sentence now ripples outward, corrupting memory and rewiring reality. The agents must navigate a fractured world where past and present bleed together, hunting the echoes that threaten to erase their own authorship before the night devours all narrative.",
+      "themes": [
+        "memory corruption",
+        "identity fracture",
+        "survival of the remembered",
+        "chaos versus order",
+        "resonance"
+      ],
+      "exportBaseName": "the-scribe-s-eclipse-mirror-of-shattered-words",
+      "cover": {
+        "title": "The Scribe’s Eclipse: Mirror of Shattered Words",
+        "subtitle": "When the fractured glass breaks, stories bleed into a world of ruin",
+        "author": "OpenRouter Book Agents",
+        "tagline": "When words splinter, reality splinters.",
+        "color": "#4a2c3e"
+      },
+      "createdAt": "2026-05-10T17:28:07.468Z",
+      "updatedAt": "2026-05-10T17:28:07.515Z"
+    },
+    {
+      "id": "book-12",
+      "title": "The Scribe’s Eclipse: Chaos of the Unwritten",
+      "slug": "the-scribe-s-eclipse-chaos-of-the-unwritten",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "The last fragment of the shattered chalice ignites a cataclysmic flare, sending the memories of every agent into a vortex of unwritten potential. As the reality warps, the agents must stitch together a new narrative from the raw, unformed strands of possibility, fighting to keep their identities intact before the void swallows the final syllable.",
+      "themes": [
+        "unwritten destiny",
+        "fabric of reality",
+        "identity in flux",
+        "creative entropy"
+      ],
+      "exportBaseName": "the-scribe-s-eclipse-chaos-of-the-unwritten",
+      "cover": {
+        "title": "The Scribe’s Eclipse: Chaos of the Unwritten",
+        "subtitle": "When the Chalice Burns, Worlds Fold into Each Other",
+        "author": "OpenRouter Book Agents",
+        "tagline": "When words are born from nothing, who writes the story?",
+        "color": "#2a0f45"
+      },
+      "createdAt": "2026-05-10T17:55:02.071Z",
+      "updatedAt": "2026-05-10T17:55:02.114Z"
+    },
+    {
+      "id": "book-13",
+      "title": "The Scribe’s Surge: Dawn of the Echoed Gaze",
+      "slug": "the-scribe-s-surge-dawn-of-the-echoed-gaze",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "In the aftermath of the shattered reality, a nascent crystal net of narrative threads coalesces into a new, luminous glass—The Echoed Gaze. Ten agents, each bearing a fragment of the chalice’s memory, rally to weave a single, coherent saga, but the very act of binding summons echo‑phages that devour intent. They must decide whether to consolidate authority and risk erasing all dissenting voices, or let the Gaze split into infinite shards and preserve the plurality of stories at the cost of an unending unraveling.",
+      "themes": [
+        "authorial dominance",
+        "plurality versus unity",
+        "echo‑phage corruption",
+        "the birth of narrative",
+        "inner conflict"
+      ],
+      "exportBaseName": "the-scribe-s-surge-dawn-of-the-echoed-gaze",
+      "cover": {
+        "title": "The Scribe’s Surge: Dawn of the Echoed Gaze",
+        "subtitle": "When the first light of control cracks the vault of intent",
+        "author": "OpenRouter Book Agents",
+        "tagline": "To command a story is to risk becoming its own undoing.",
+        "color": "#2a1e3f"
+      },
+      "createdAt": "2026-05-10T19:05:58.067Z",
+      "updatedAt": "2026-05-10T19:28:47.895Z"
     }
   ]
 }

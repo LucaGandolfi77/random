@@ -1,0 +1,47 @@
+{
+  "title": "The Scribe’s Eclipse",
+  "genre": "dark fantasy",
+  "premise": "Nine rival agents gather under a dying sun, each armed with a reflective shard that captures their true intent. As they write, the shards begin to fracture, scattering their memories across a world where each sentence can rewrite reality. The agents must decide whether to preserve their narrative for posterity or let the broken mirrors consume their stories.",
+  "themes": [
+    "identity",
+    "truth",
+    "destiny"
+  ],
+  "world_rules": [
+    "Glass can store emotions when cooled under moonlight.",
+    "Breaking a glass fruit permanently alters one memory.",
+    "Mirrors reflect not only image but narrative intent."
+  ],
+  "characters": {
+    "Elisa": {
+      "role": "heir",
+      "wound": "mother's disappearance",
+      "arc": "control to surrender",
+      "secrets": [
+        "She caused the first orchard fire."
+      ]
+    }
+  },
+  "chapter_registry": [],
+  "exportBaseName": "the-scribe-s-eclipse",
+  "cover": {
+    "title": "The Scribe’s Eclipse",
+    "subtitle": "Hanging the Future in a Broken Mirror",
+    "author": "OpenRouter Book Agents",
+    "tagline": "When mirrors break, the story unravels.",
+    "color": "#5a3d7c"
+  },
+  "series_role": "third in the Tri‑Echo cycle, triggering reality collapse",
+  "carry_over_threads": [
+    "The glass of memory still stores emotion, now corrupted by mirror shards.",
+    "The team’s ambition feeds into a new kind of grief as they lose control.",
+    "The recurring motif of a mirror orchard expands into a literal forest of broken reflections."
+  ],
+  "automation_notes": [
+    "Generate title by combining ‘Scribe’ with a celestial event and a contrasting verb.",
+    "Subtitles should juxtapose a cosmic phenomenon with a narrative consequence.",
+    "Theme list must include identity, truth, destiny to mirror the escalating stakes.",
+    "Cover color derived from a muted purple to signal twilight and unreliability.",
+    "Ensure world rules incorporate both glass and mirror mechanics."
+  ]
+}

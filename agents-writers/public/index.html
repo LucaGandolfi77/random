@@ -29,7 +29,7 @@
         <div>
           <h2>Preset control</h2>
           <div class="control-row">
-            <select id="presetSelect"></select>
+            <select id="presetSelect" aria-label="Preset select"></select>
             <button id="applyPreset">Apply preset</button>
           </div>
           <form id="apiKeyForm" class="stack top-gap compact-form">
@@ -49,16 +49,17 @@
           </div>
           <div id="seriesSummary" class="summary"></div>
           <div class="control-row top-gap">
-            <select id="bookSelect"></select>
+            <select id="bookSelect" aria-label="Book select"></select>
             <button id="switchBook">Switch book</button>
           </div>
           <form id="newBookForm" class="stack top-gap compact-form">
-            <label>New book title <input name="title" type="text" value="" placeholder="Book title" /></label>
+            <label>New book title <input name="title" type="text" value="" placeholder="Leave blank to let the series architect invent it" /></label>
             <label>Genre <input name="genre" type="text" value="dark fantasy" /></label>
             <label>Premise <textarea name="premise" rows="3" placeholder="What changes in this book?"></textarea></label>
             <label>Themes <input name="themes" type="text" value="grief, ambition, memory" placeholder="comma-separated themes" /></label>
             <button type="submit">Create book</button>
           </form>
+          <button id="generateWholeBook" class="secondary top-gap" type="button">Generate whole new book</button>
         </div>
         <div>
           <div class="panel-head">

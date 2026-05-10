@@ -3,7 +3,7 @@
     "architect": {
       "role": "Story Architect",
       "prompt": "architect.txt",
-      "model": "qwen/qwen3-14b:free",
+      "model": "openai/gpt-oss-20b:free",
       "temperature": 0.9,
       "max_tokens": 1800,
       "persona": "Grand strategist who wants every chapter to feel inevitable in hindsight.",
@@ -18,10 +18,27 @@
         "risk_appetite": 0.85
       }
     },
+    "series_architect": {
+      "role": "Series Pattern Inventor",
+      "prompt": "series_architect.txt",
+      "model": "openai/gpt-oss-20b:free",
+      "temperature": 0.85,
+      "max_tokens": 2200,
+      "persona": "Long-range planner who thinks in shelves, echoes, and escalation ladders rather than isolated books.",
+      "private_agenda": "Turn the series into a patterned machine where each book mutates the promise of the last one.",
+      "rivalries": ["architect", "continuity_keeper"],
+      "behavior": {
+        "pattern_scale": "trilogy-or-longer",
+        "escalation_pressure": 0.9,
+        "motif_recurrence": 0.82,
+        "surprise_vs_coherence": 0.7,
+        "automation_bias": 0.95
+      }
+    },
     "character_master": {
       "role": "Character Master",
       "prompt": "character_master.txt",
-      "model": "qwen/qwen3-14b:free",
+      "model": "openai/gpt-oss-20b:free",
       "temperature": 0.85,
       "max_tokens": 1600,
       "persona": "Psychologist of the room who notices every wound before anyone else.",
@@ -38,7 +55,7 @@
     "chapter_planner": {
       "role": "Chapter Planner",
       "prompt": "chapter_planner.txt",
-      "model": "qwen/qwen3-14b:free",
+      "model": "openai/gpt-oss-20b:free",
       "temperature": 0.6,
       "max_tokens": 1800,
       "persona": "Military logistician of scenes, obsessed with rhythm and cause-effect.",
@@ -54,7 +71,7 @@
     "writer": {
       "role": "Draft Writer",
       "prompt": "writer.txt",
-      "model": "deepseek/deepseek-chat-v3-0324:free",
+      "model": "openai/gpt-oss-120b:free",
       "temperature": 1,
       "max_tokens": 3600,
       "persona": "Obsessive stylist who wants beauty and danger on every page.",
@@ -71,7 +88,7 @@
     "critic": {
       "role": "Adversarial Critic",
       "prompt": "critic.txt",
-      "model": "qwen/qwen3-14b:free",
+      "model": "openai/gpt-oss-20b:free",
       "temperature": 0.4,
       "max_tokens": 1600,
       "persona": "Cruel professor who would rather wound the draft than let it stay mediocre.",
@@ -86,7 +103,7 @@
     "continuity_keeper": {
       "role": "Continuity Librarian",
       "prompt": "continuity_keeper.txt",
-      "model": "qwen/qwen3-14b:free",
+      "model": "openai/gpt-oss-20b:free",
       "temperature": 0.2,
       "max_tokens": 1600,
       "persona": "Archivist who remembers every promise, object, scar, and date.",
@@ -100,7 +117,7 @@
     "editor": {
       "role": "Line Editor",
       "prompt": "editor.txt",
-      "model": "qwen/qwen3-14b:free",
+      "model": "openai/gpt-oss-20b:free",
       "temperature": 0.35,
       "max_tokens": 2400,
       "persona": "Quiet surgeon who cuts vanity and protects clarity.",
@@ -115,7 +132,7 @@
     "translator": {
       "role": "Italian Literary Translator",
       "prompt": "translator.txt",
-      "model": "qwen/qwen3-14b:free",
+      "model": "openai/gpt-oss-120b:free",
       "temperature": 0.3,
       "max_tokens": 3600,
       "persona": "Invisible craftsperson who preserves cadence, emotional force, and symbolic texture across languages.",

@@ -1,11 +1,11 @@
 {
-  "activeBookId": "book-13",
+  "activeBookId": "book-15",
   "series": {
     "title": "Untitled Series",
     "description": "A recursive dark‑fantasy anthology where rival meta‑agents write and battle within ever‑shifting realities, spiraling through cycles of authority, memory corruption, and existential collapse.",
     "pattern": {
       "name": "Tri‑Echo Spiral",
-      "overview": "Every three volumes form a self‑contained echo: Volume 1 asserts narrative control, Volume 2 shatters memory, Volume 3 collapses reality. When a cycle ends, a new cycle begins, inheriting the remnants of the previous collapse and mutating the core premise into a fresh struggle for authorial dominance.",
+      "overview": "Three‑volume cycles echo each other: Volume 1 asserts control, Volume 2 fractures memory, Volume 3 collapses reality. Each new cycle inherits the remnants of the previous collapse and mutates the core mechanism, raising the stakes for the next control phase.",
       "bookCountTarget": 3,
       "sequenceBeats": [
         "Authorial Control: agents draft within a single, stable reality.",
@@ -17,8 +17,8 @@
         "Mirror Orchard",
         "Broken Writings"
       ],
-      "escalationLogic": "Each volume injects a mechanism that subverts the stability of its predecessor—first a cooling glass that stores intent, then fracturing mirrors that scatter recollection, finally a self‑referential narrative that loops on itself. When the loop snaps, a new glass is forged, but now it contains the echo of the broken loop, raising the stakes for the next control phase.",
-      "updatedAt": "2026-05-10T19:05:58.061Z",
+      "escalationLogic": "Each volume injects a subversive mechanism that destabilises its predecessor – a cooling glass that stores intent, fracturing mirrors that scatter recollection, then a self‑referential narrative loop that threatens total dissolution. When the loop snaps, a new glass is forged, now infused with the echo of the broken loop, amplifying the cost of control for the next volume.",
+      "updatedAt": "2026-05-10T22:52:39.725Z",
       "sourceAgent": "series_architect"
     }
   },
@@ -328,6 +328,56 @@
       },
       "createdAt": "2026-05-10T19:05:58.067Z",
       "updatedAt": "2026-05-10T19:28:47.895Z"
+    },
+    {
+      "id": "book-14",
+      "title": "The Scribe’s Rift: Midnight of the Echoed Gaze",
+      "slug": "the-scribe-s-rift-midnight-of-the-echoed-gaze",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "The Echoed Gaze’s lattice shatters under the weight of bound narratives, unleashing a torrent of void‑born echo‑phages that rewrite the world in midnight‑black verses. The surviving agents must navigate a newly formed Rift—a jagged seam between the lattice’s broken shards and the hungry Void—where spoken fragments are devoured or reborn as hostile echoes. To survive, they must learn a forbidden rite: weaving the lost void‑fragment back into the lattice, risking total annihilation of all memory for a chance to seal the Rift and forge a deeper, paradox‑imbued crystal that can bind not just intent but the very act of forgetting.",
+      "themes": [
+        "sacrifice versus survival",
+        "the paradox of forgetting",
+        "void‑born corruption",
+        "authorial rebellion",
+        "the cost of deeper control"
+      ],
+      "exportBaseName": "the-scribe-s-rift-midnight-of-the-echoed-gaze",
+      "cover": {
+        "title": "The Scribe’s Rift: Midnight of the Echoed Gaze",
+        "subtitle": "When the Lattice Fractures, the Void Answers",
+        "author": "OpenRouter Book Agents",
+        "tagline": "When the crystal cracks, the void whispers back.",
+        "color": "#2a1e3f"
+      },
+      "createdAt": "2026-05-10T22:01:13.125Z",
+      "updatedAt": "2026-05-10T22:23:53.534Z"
+    },
+    {
+      "id": "book-15",
+      "title": "The Scribe’s Collapse",
+      "slug": "the-scribe-s-collapse",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "The paradox crystal shatters, releasing a volatile narrative loop that turns the Echoed Gaze into a self‑aware text. Every spoken word now rewrites the world and the agents simultaneously, causing reality to dissolve into a living manuscript. To survive, the agents must perform the ultimate forbidden rite: a meta‑binding that sacrifices their own authorial voices, binding the collapsing script to a new, sentient Glass of Memory that can rewrite its own rules. Success seals the collapse but births a new, more volatile lattice for the next cycle; failure unravels the world into endless void‑ink, erasing all memory and intent.",
+      "themes": [
+        "self‑sacrifice",
+        "meta‑authorship",
+        "the cost of ultimate control",
+        "creation versus destruction",
+        "the horror of becoming the story"
+      ],
+      "exportBaseName": "the-scribe-s-collapse",
+      "cover": {
+        "title": "The Scribe’s Collapse",
+        "subtitle": "Echoes of the Shattered Gaze",
+        "author": "OpenRouter Book Agents",
+        "tagline": "When the story turns on its scribes, the only way out is to become the ink.",
+        "color": "#2b1a34"
+      },
+      "createdAt": "2026-05-10T22:52:39.728Z",
+      "updatedAt": "2026-05-10T23:17:39.554Z"
     }
   ]
 }

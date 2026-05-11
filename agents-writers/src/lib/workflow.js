@@ -31,6 +31,11 @@ const PROMPTS_DIR = 'prompts';
 const CHAPTERS_DIR = 'chapters';
 const VOTE_PROMPT_FILE = 'vote.txt';
 
+function hasUsableOpenRouterKey(value) {
+  const normalized = String(value ?? '').trim();
+  return Boolean(normalized) && normalized !== 'your_openrouter_api_key_here' && normalized.startsWith('sk-or-');
+}
+
 export async function initBook(rootPath, options = {}) {
   return withActionLog(rootPath, {
     source: 'workflow',
@@ -277,7 +282,7 @@ export async function getStatus(rootPath) {
       title: state.bookBible.title,
       genre: state.bookBible.genre,
       environment: {
-        openrouterApiKeyConfigured: Boolean(env.OPENROUTER_API_KEY || process.env.OPENROUTER_API_KEY),
+        openrouterApiKeyConfigured: hasUsableOpenRouterKey(env.OPENROUTER_API_KEY || process.env.OPENROUTER_API_KEY),
         openrouterAppTitleConfigured: Boolean(env.OPENROUTER_APP_TITLE || process.env.OPENROUTER_APP_TITLE)
       },
       currentBook: {

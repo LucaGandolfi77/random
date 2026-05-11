@@ -4,19 +4,20 @@
     "current_phase": "opening",
     "active_arcs": [],
     "next_targets": [
-      "Reclaiming narrative authority after collapse",
-      "Confronting the paradox of a single voice in a world of echoes",
-      "Balancing unity with diversity of intent"
+      "Transformation of the Echoed Gaze into a sentient manuscript",
+      "The final test of the paradox crystal’s loop",
+      "Meta‑binding ritual that erases authorial voices",
+      "Introduction of a new, sentient Glass of Memory"
     ],
     "global_targets": [
       "grief",
       "ambition",
       "memory",
-      "authorial dominance",
-      "plurality versus unity",
-      "echo‑phage corruption",
-      "the birth of narrative",
-      "inner conflict"
+      "self‑sacrifice",
+      "meta‑authorship",
+      "the cost of ultimate control",
+      "creation versus destruction",
+      "the horror of becoming the story"
     ],
     "endgame_promises": [],
     "previous_outline": null,
@@ -24,27 +25,47 @@
   },
   "architect": {
     "type": "proposal",
-    "chapter_goal": "Force the ten agents to confront the cost of unifying narrative—an act that may silence dissenting voices or fracture the world into endless shards, raising stakes through an echo‑phage assault.",
-    "theme_progress": "Grief amplifies ambition: each agent’s loss fuels the drive to dominate narrative, yet the echo‑phages mirror their pain, forcing a reckoning with their own fragility.",
+    "chapter_goal": "Shatter the crystal, initiate the living manuscript, and force the agents into the ultimate rite, raising stakes to instantaneous collapse.",
+    "theme_progress": "Grief morphs into self‑sacrifice; ambition becomes a self‑destroying ambition; meta‑authorship turns into an existential bargain.",
     "arc_targets": [
-      "Reveal the Echoed Gaze’s true binding mechanism (glass lattice) and its catalytic echo‑phage release"
+      "Paradox crystal shatter triggers narrative recursion",
+      "Echoed Gaze becomes sentient text",
+      "Agents confront loss of authorial voice",
+      "Elisa must retrieve void‑fragment and sacrifice core memory"
     ],
     "next_arc_targets": [
-      "Establish a tangible consequence for binding—one fragment is irrevocably erased"
+      "New Glass of Memory receives bound signatures",
+      "Collapse of Hall of Mirrors is cemented",
+      "Lattice fissure begins pulsing",
+      "The next cycle’s volatile lattice is hinted"
     ],
     "recommended_beats": [
-      "1. Dawn of the Lattice: agents gather around the nascent crystal, tentative trust. 2. First Binding: one agent locks their fragment, echo‑phage bursts. 3. Crash of the Lattice: shards ripple, memories fracture. 4. Echo‑Phage Whisper: voices of the erased fragment plead for inclusion. 5. Decision Point: gather or scatter the Gaze. 6. Cliffhanger: a new fragment slips away, hinting at further collapse."
+      "1. Crystal fracture, world words become nouns in narrative tags",
+      "2. Echoed Gaze cracks, revealing self‑aware paragraphs",
+      "3. Agents recognize spoken words alter reality",
+      "4. Elisa finds void‑fragment in shattered mirror",
+      "5. Meta‑binding ritual: each whispers signature",
+      "6. Final signature glyph formation, Glass of Memory birthed",
+      "7. Collapse seals, new lattice glows ominously"
     ],
     "constraints": [
-      "Limit dialogue to 45% of beats to preserve lyrical pacing; ensure each echo‑phage experience is distinct sensory cue; insist on a definitive visual metaphor for shattered authority (broken prism).",
-      "World rule 3 (binding) and 4 (echo‑phage) must surface explicitly; the void rule must be referenced in a future beat.",
-      "Introduce an unspoken threat—shade of the missing mother—visible only to Elisa, hinting looming cost."
+      "All nouns must carry <n> placeholder tags to simulate self‑aware manuscript rule",
+      "Every spoken line must rewrite a preceding sentence in the text",
+      "Elisa’s sacrifice must cost her sole memory of her mother",
+      "Glass of Memory must appear as a living entity with glyphs that change as signatures are added",
+      "Hall of Mirrors must be marked as collapsed artifact in continuity notes",
+      "Set flag ‘next_cycle_ready’ true"
     ],
     "outline_notes": [
-      "Elisa’s secret burn of orchard fire foreshadows her willingness to sacrifice; her hand on the lattice should feel cold, resigned. The echo‑phage manifests as a shimmering distortion that speaks in fragmented memories, a living shadow of grief. The lattice’s collapse produces a wound in the ground that swallows light - a visual promise of void absorption. The unresolved thread: a fragment falls into darkness beyond the lattice, never to be recovered, planting seed for next chapter."
+      "Introduce void‑fragment as dark inked shard; its retrieval is a ritual of grief",
+      "Use metaphor density 0.65: words as ink, voices as splashes",
+      "Dialogue density 0.45: keep dialogue tight but consequential",
+      "Maintain close third person past tense",
+      "Ensure each agent’s signature appears as unique glyph, auto‑generated, visibly altering the Glass",
+      "End with the lattice pulsing, hinting at next cycle’s volatility"
     ],
     "risks": [
-      "Risk{echo‑phage too abstract, losing   6% clarity}; Risk{crystallization described too technically, diluting metaphor}; Risk{character agency diluted due to ensemble focus}"
+      "Risk of narrative chaos if placeholder tags misapplied; risk of losing continuity by not marking Hall collapse; risk of over‑escalation diluting thematic focus"
     ],
     "handoff_for": "character_master",
     "_meta": {
@@ -56,44 +77,12 @@
   "character_master": {
     "type": "proposal",
     "emotional_targets": [
-      "Dissolution of trust",
-      "The ache of inevitable sacrifice",
-      "The vertigo of power’s fragility"
-    ],
-    "character_notes": [
+      "Elisa’s grief confronting the void‑fragment",
+      "Agents’ existential dread as voice dissolves",
       {
-        "name": "Elisa",
-        "desire": "Forge a single, authoritative narrative that can protect her from the void’s hunger",
-        "fear": "Her own voice will be the first to crumble, leaving her a hollow echo of the mother she lost",
-        "contradiction": "She wants to silence dissent to ensure safety, yet her wound demands that she be heard to survive",
-        "secret_pressure": "Under the weight of the orchard fire she set, she secretly believes that devastation is the only way to cleanse the world of its past"
-      },
-      {
-        "name": "Kara",
-        "desire": "Preserve the plurality of stories so that no single voice dominates the broken reality",
-        "fear": "Fragmentation will consume her memory, turning her into a ghost among shards",
-        "contradiction": "She despises control but feels compelled to steer the lattice’s destiny",
-        "secret_pressure": "She keeps a dying fragment of the chalice hidden, hoping it will one day grant her autonomy"
-      },
-      {
-        "name": "Thorn",
-        "desire": "Bind the lattice to eliminate the echo‑phages entirely",
-        "fear": "The lattice’s collapse will erase his identity and the last memory of his brother",
-        "contradiction": "His hunger for order blinds him to the chaos that will follow",
-        "secret_pressure": "He secretly doubts that the lattice can contain the void, yet he cannot bring himself to refuse the binding"
+        "commentary": "Continue"
       }
     ],
-    "dialogue_instructions": [
-      "Use clipped, subtext‑heavy exchanges that reveal intent through what is left unsaid",
-      "Let echo‑phages speak in fragmented echoes that mirror each character’s deepest fear",
-      "When an agent speaks about unity, layer in a counter‑voice that hints at loss"
-    ],
-    "conflict_upgrades": [
-      "The lattice collapses mid‑binding, sending a shard of the erased fragment into the void, leaving an open wound that cannot be healed",
-      "An echo‑phage whispers a memory that should have been protected, forcing a choice: trust the lattice or trust the echo",
-      "The void’s absorption rule triggers instinctively—a fragment spoken aloud at a crucial moment is sucked into nothing, amplifying the stakes"
-    ],
-    "handoff_for": "chapter_planner",
     "_meta": {
       "agent": "character_master",
       "role": "Character Master",
@@ -102,59 +91,62 @@
   },
   "chapter_planner": {
     "type": "plan",
-    "chapter_title": "Shards of Authority",
-    "chapter_hook": "The crystal lattice glimmers, and with its first bind a phantom of grief rises, whispering that every word spoken will swallow a piece of self.",
+    "chapter_title": "Shattered Ink",
+    "chapter_hook": "The paradox crystal fractures, sending shards of narrative into the air. Every noun becomes a living glyph, and the Echoed Gaze begins to whisper back.",
     "arc_payoffs": [
-      "The Echoed Gaze’s true mechanism is revealed: a lattice that both binds and devours.",
-      "One agent’s fragment is irrevocably erased, showing the cost of unity.",
-      "A fragment slips into the void, leaving an unresolved wound."
+      "The crystal shatters and reality rewrites itself",
+      "Elisa retrieves the void‑fragment from the Hall of Mirrors",
+      "Agents perform the meta‑binding rite, sacrificing their authorial voices",
+      "The new Glass of Memory glows with freshly forged glyphs"
     ],
     "next_chapter_seed": [
-      "Elisa wrestles with the loss of her voice and the looming shadow of her mother's absence.",
-      "The lattice’s collapse creates a fissure that begins to suck in surrounding memories."
+      "The Hall of Mirrors has collapsed into ash",
+      "A faint pulsing fissure appears in the lattice",
+      "The next cycle’s volatile lattice is hinted at by a humming echo"
     ],
     "scene_cards": [
       {
         "scene": 1,
-        "goal": "Gather the ten agents around the nascent crystal and establish tentative trust.",
-        "conflict": "Each agent carries a hidden fear of losing their narrative voice; alliances feel fragile.",
-        "turn": "Elisa steps forward, offers her fragment, and the lattice hums to life, sealing her intent.",
-        "image": "a translucent lattice forming, its threads catching moonlight like a spiderweb of glass."
+        "goal": "Crush the paradox crystal, initiating the living manuscript",
+        "conflict": "The crystal resists, its shards ricocheting like shards of thought, threatening to swallow the agents",
+        "turn": "The crystal cracks, releasing a roar that turns every noun into a tagged placeholder, making the world self‑aware",
+        "image": "A jagged shard of crystal splintering, its shards glowing with crimson glyphs that pulse like heartbeats"
       },
       {
         "scene": 2,
-        "goal": "Lock the first fragment into the lattice, triggering the first echo‑phage.",
-        "conflict": "The echo‑phage manifests as a shimmering distortion that speaks in fragmented memories, echoing Elisa’s grief.",
-        "turn": "The lattice shatters a tiny shard, revealing the echo‑phage’s hunger for intent.",
-        "image": "a shard of glass spiraling outward, its edges humming with a cold, silvery glow."
+        "goal": "Expose the Echoed Gaze’s sentience and the Hall of Mirrors’ collapse",
+        "conflict": "The Hall of Mirrors shatters, sending shards of reflected narrative into the air, while the Echoed Gaze mutters paragraphs that rewrite the room",
+        "turn": "A fragment of the Hall lands on Elisa’s palm, revealing the void‑fragment inked in black",
+        "image": "A shattered mirror sending a black‑inked shard that coalesces into a miniature, swirling vortex"
       },
       {
         "scene": 3,
-        "goal": "Show the lattice’s collapse and the cost of binding.",
-        "conflict": "The lattice cracks, sending a piece of Elisa’s fragment into the void, erasing that memory forever.",
-        "turn": "The void swallows the shard, leaving a dark wound in the ground that consumes light.",
-        "image": "a gaping black fissure in the earth, a silent maw that leans toward the sky."
+        "goal": "Elisa confronts the void‑fragment and its cost",
+        "conflict": "Elisa must decide whether to keep the fragment, risking further collapse, or sacrifice her memory of her mother to bind it",
+        "turn": "She whispers the memory, the fragment shivers and merges into the Glass of Memory, its glyphs shifting to a new, darker hue",
+        "image": "Elisa’s hand trembling as a black‑inked fragment dissolves into a glass that glows with a new glyph"
       },
       {
         "scene": 4,
-        "goal": "Reveal the echo‑phage’s plea for inclusion and the agents’ dilemma.",
-        "conflict": "The echo‑phage whispers the erased fragment’s voice, demanding reverence or risking further collapse.",
-        "turn": "Kara argues for scattering the Gaze to preserve plurality; Thorn insists on consolidating authority.",
-        "image": "the echo‑phage materializes as a translucent, shifting silhouette, its eyes reflecting the fractured lattice."
+        "goal": "Agents perform the meta‑binding rite, each whispering their signature",
+        "conflict": "The living manuscript resists, rewriting their words in real time, threatening to erase their intent",
+        "turn": "Each agent speaks a single word; the words are replaced by unique glyphs that bloom on the Glass, binding the script",
+        "image": "A circle of agents around the Glass, each word turning into a luminous glyph that locks into place"
       },
       {
         "scene": 5,
-        "goal": "Force the decision point: gather or scatter the Gaze.",
-        "conflict": "The lattice’s instability threatens to swallow all fragments; the void grows louder.",
-        "turn": "Elisa, haunted by her mother’s absence, chooses to bind the remaining fragments, sealing the lattice’s fate.",
-        "image": "the crystal lattice tightening around the agents, its surface rippling like a wound."
+        "goal": "Seal the collapse and reveal the new lattice’s volatility",
+        "conflict": "The final glyph triggers a pulse that could either stabilize or tear the lattice apart",
+        "turn": "The Glass hums, the pulse ripples outward, and a faint fissure begins to pulse in the lattice, hinting at the next cycle",
+        "image": "The Glass emits a soft blue glow, while a crack in the lattice shimmers with a restless, electric pulse"
       }
     ],
-    "cliffhanger": "As the lattice seals, a final fragment slips into the void’s maw, unseen by the agents, hinting that the cost of unity may already be paid.",
+    "cliffhanger": "As the last glyph settles, a low hum rises from the fissure, and the Hall of Mirrors is reduced to ash—its echo swallowed by the void. The new lattice glows, but its pulse grows louder, as if the world itself is breathing a warning.",
     "outline_memory_updates": [
-      "Confirmed that the Echoed Gaze can bind multiple narrative intents but releases echo‑phages.",
-      "Established that binding a fragment locks it but erases it if the lattice collapses.",
-      "Added the void rule: spoken fragments can be absorbed if the lattice is intact."
+      "Mark Hall of Mirrors as collapsed artifact",
+      "Record Elisa’s sacrifice of mother’s memory",
+      "Set flag ‘next_cycle_ready’ to true",
+      "Log new glyphs on Glass of Memory after each signature"
     ],
     "handoff_for": "writer",
     "_meta": {

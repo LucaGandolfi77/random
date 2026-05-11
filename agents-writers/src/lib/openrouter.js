@@ -1,3 +1,21 @@
+function normalizeOpenRouterApiKey(apiKey) {
+  const normalized = String(apiKey ?? '').trim();
+
+  if (!normalized) {
+    throw new Error('Missing OPENROUTER_API_KEY. Copy .env.example to .env and set a real key.');
+  }
+
+  if (normalized === 'your_openrouter_api_key_here') {
+    throw new Error('Invalid OPENROUTER_API_KEY. Replace the placeholder value in .env with a real OpenRouter key.');
+  }
+
+  if (!normalized.startsWith('sk-or-')) {
+    throw new Error('Invalid OPENROUTER_API_KEY. The key should start with "sk-or-". Remove surrounding quotes if present and check your .env value.');
+  }
+
+  return normalized;
+}
+
 function extractJsonObject(content) {
   const normalized = String(content ?? '').trim();
 
@@ -38,7 +56,17 @@ function parseJsonWithRepair(input) {
     const repaired = escapeControlCharactersInStrings(input);
 
     if (repaired !== input) {
-      return JSON.parse(repaired);
+      try {
+        return JSON.parse(repaired);
+      } catch {
+        // Continue into structural repair.
+      }
+    }
+
+    const structuralRepair = insertMissingCommasBetweenJsonValues(repaired);
+
+    if (structuralRepair !== repaired) {
+      return JSON.parse(structuralRepair);
     }
 
     throw error;
@@ -112,6 +140,103 @@ function escapeControlCharacter(char, code) {
   }
 }
 
+function insertMissingCommasBetweenJsonValues(input) {
+  let result = '';
+  let inString = false;
+  let escaping = false;
+  const stack = [];
+
+  for (let index = 0; index < input.length; index += 1) {
+    const char = input[index];
+
+    if (inString) {
+      result += char;
+
+      if (escaping) {
+        escaping = false;
+      } else if (char === '\\') {
+        escaping = true;
+      } else if (char === '"') {
+        inString = false;
+      }
+
+      continue;
+    }
+
+    if (char === '"') {
+      inString = true;
+      result += char;
+      continue;
+    }
+
+    if (char === '{' || char === '[') {
+      stack.push(char);
+      result += char;
+      continue;
+    }
+
+    if (char === '}' || char === ']') {
+      stack.pop();
+      result += char;
+      continue;
+    }
+
+    if (/\s/.test(char)) {
+      let end = index;
+      while (end + 1 < input.length && /\s/.test(input[end + 1])) {
+        end += 1;
+      }
+
+      const whitespaceChunk = input.slice(index, end + 1);
+      const previousSignificant = findPreviousSignificantCharacter(result);
+      const nextSignificant = findNextSignificantCharacter(input, end + 1);
+      const currentContainer = stack.at(-1);
+
+      if (
+        currentContainer &&
+        isJsonValueBoundary(previousSignificant, nextSignificant)
+      ) {
+        result += `,${whitespaceChunk}`;
+      } else {
+        result += whitespaceChunk;
+      }
+
+      index = end;
+      continue;
+    }
+
+    result += char;
+  }
+
+  return result;
+}
+
+function findPreviousSignificantCharacter(text) {
+  for (let index = text.length - 1; index >= 0; index -= 1) {
+    if (!/\s/.test(text[index])) {
+      return text[index];
+    }
+  }
+
+  return '';
+}
+
+function findNextSignificantCharacter(text, startIndex) {
+  for (let index = startIndex; index < text.length; index += 1) {
+    if (!/\s/.test(text[index])) {
+      return text[index];
+    }
+  }
+
+  return '';
+}
+
+function isJsonValueBoundary(previousCharacter, nextCharacter) {
+  const previousEndsValue = /["}\]0-9el]/.test(previousCharacter);
+  const nextStartsValue = /["{\[\-0-9tfn]/.test(nextCharacter);
+  return previousEndsValue && nextStartsValue;
+}
+
 export async function callOpenRouter({
   apiKey,
   appTitle,
@@ -135,16 +260,14 @@ export async function callOpenRouter({
     };
   }
 
-  if (!apiKey) {
-    throw new Error('Missing OPENROUTER_API_KEY. Copy .env.example to .env and set the key.');
-  }
+  const normalizedApiKey = normalizeOpenRouterApiKey(apiKey);
 
   const maxAttempts = 3;
   let lastRecoverableError = null;
 
   for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
     const payload = await requestOpenRouterCompletion({
-      apiKey,
+      apiKey: normalizedApiKey,
       appTitle,
       httpReferer,
       model,

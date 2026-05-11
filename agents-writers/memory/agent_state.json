@@ -24,33 +24,29 @@
     },
     "writer": {
       "current_preset": "Sad Poet",
-      "last_problem": "The draft field contains only a placeholder string \"\\n\\n      1\" and no actual narrative content, so none of the planned scenes, stakes, or character beats are present."
+      "last_problem": "The chapter’s central stakes are explained in a clunky exposition dump (vision of static manuscript, Orin’s fate) rather than being felt in the moment; the danger feels abstract and the characters never experience the imminent threat."
     },
     "critic": {
       "current_preset": "base",
-      "last_verdict": "reject"
+      "last_verdict": "revise"
     },
     "editor": {
       "current_preset": "base",
-      "last_change_count": 5
+      "last_change_count": 6
     },
     "room_vote": {
       "last_summary": {
         "approvals": 4,
-        "revises": 0,
-        "rejects": 1,
-        "averageScore": 0.72,
+        "revises": 1,
+        "rejects": 0,
+        "averageScore": 0.76,
         "approved": true,
         "blockingVotes": [
           {
             "voter": "critic",
-            "vote": "reject",
+            "vote": "revise",
             "must_fix": [
-              "Write full prose for Chapter 1, incorporating all planned scenes and beats.",
-              "Establish clear stakes by showing tangible consequences of binding the Echoed Gaze.",
-              "Develop character voices and internal conflicts, especially Elisa’s grief and secret.",
-              "Embed world rules (moonlit glass, echo‑phage, void absorption) throughout the text.",
-              "Maintain lyrical, metaphor‑rich language and appropriate dialogue density."
+              "Show collapse tightening in real time—words solidifying, breath turning to ink, agents feeling the threat; replace generic lullaby with a vivid, sensory memory that physically tears from Elisa’s mind; reduce placeholder tags to only critical meta‑aware moments; give each supporting agent a distinct, costly reaction during the binding rite; integrate the Hall of Mirrors collapse into a single, vivid image and record it as a collapsed artifact."
             ]
           }
         ]

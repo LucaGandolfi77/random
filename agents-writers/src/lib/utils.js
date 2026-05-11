@@ -123,11 +123,28 @@ export async function loadEnv(rootPath) {
     }
 
     const key = trimmed.slice(0, separatorIndex).trim();
-    const value = trimmed.slice(separatorIndex + 1).trim();
+    const value = normalizeEnvValue(trimmed.slice(separatorIndex + 1).trim());
     env[key] = value;
   }
 
   return env;
+}
+
+export function normalizeEnvValue(value) {
+  if (typeof value !== 'string') {
+    return value;
+  }
+
+  const trimmed = value.trim();
+
+  if (
+    (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    return trimmed.slice(1, -1).trim();
+  }
+
+  return trimmed;
 }
 
 export async function setEnvVariable(rootPath, key, value) {

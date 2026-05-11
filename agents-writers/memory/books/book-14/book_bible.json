@@ -1,0 +1,117 @@
+{
+  "title": "The Scribe’s Rift: Midnight of the Echoed Gaze",
+  "genre": "dark fantasy",
+  "premise": "The Echoed Gaze’s lattice shatters under the weight of bound narratives, unleashing a torrent of void‑born echo‑phages that rewrite the world in midnight‑black verses. The surviving agents must navigate a newly formed Rift—a jagged seam between the lattice’s broken shards and the hungry Void—where spoken fragments are devoured or reborn as hostile echoes. To survive, they must learn a forbidden rite: weaving the lost void‑fragment back into the lattice, risking total annihilation of all memory for a chance to seal the Rift and forge a deeper, paradox‑imbued crystal that can bind not just intent but the very act of forgetting.",
+  "themes": [
+    "sacrifice versus survival",
+    "the paradox of forgetting",
+    "void‑born corruption",
+    "authorial rebellion",
+    "the cost of deeper control"
+  ],
+  "world_rules": [
+    "Glass can store emotions when cooled under moonlight.",
+    "Breaking a glass fruit permanently alters one memory.",
+    "The Echoed Gaze can bind multiple narrative intents into a crystal lattice.",
+    "Binding releases echo‑phages that corrupt the binder.",
+    "The void absorbs spoken fragments only when the lattice is intact.",
+    "New Rule – Void Rift: Any fragment spoken within the Rift is either devoured, erasing its memory, or reconstituted as a hostile echo‑phage.",
+    "New Rule – Paradox Crystal: A shard forged from both lattice and void can bind the act of forgetting, but each use accelerates the lattice’s eventual collapse."
+  ],
+  "characters": {
+    "Elisa": {
+      "role": "heir",
+      "wound": "mother's disappearance",
+      "arc": "control to surrender",
+      "secrets": [
+        "She caused the first orchard fire."
+      ]
+    }
+  },
+  "chapter_registry": [
+    {
+      "chapter": 1,
+      "title": "The Shattering",
+      "summary": "The lattice of the Echoed Gaze fractures, unleashing ink‑black echo‑phages that devour words and memories. A jagged Void Rift opens, its rule of devouring or rebirth immediately tested when a messenger’s warning turns into a hostile phage. Elisa loses the last line of her mother’s lullaby, and the shattering of a glass fruit permanently seals her guilt over the orchard fire. The Rift Whisper, a fractured shard of the lattice itself, teaches a forbidden rite that forges a paradox crystal; its first binding rewrites the word *remember* into *forget* across the sky, erasing a fragment of Elisa’s memory and weakening the lattice’s integrity. The Rift widens, threatening to swallow the Hall of Mirrors, and a faint mote of the lost void‑fragment hovers at its edge, setting the stage for a desperate retrieval. The stakes are concrete: the Hall of Mirrors collapses into the void, a key artifact is lost, and the agents’ memories are at risk.",
+      "unresolved_threads": [
+        "The lost void‑fragment that flickers at the edge of the new fissure – its retrieval will demand a further sacrifice.\nThe widening Rift threatens to consume the Hall of Mirrors and more of the lattice; the agents must find a way to halt its expansion."
+      ],
+      "arc_targets": [
+        "Elisa confronts the echo‑phage that consumes the last memory of her mother’s voice.",
+        "Rift Whisper teaches the forbidden rite, exposing the Paradox Crystal’s volatile power.",
+        "First Void‑Echo encounter: a spoken fragment is shredded, leaving a shard of black verse that attacks the caster.",
+        "Reveal the Void Rift and its rule: spoken fragments in the Rift are consumed or reborn as echo‑phages.",
+        "Force agents to confront the choice of erasing all memory to seal the Rift.",
+        "Deepen the Echoed Gaze mechanic by allowing a shard‑forged paradox crystal that can bind forgetting.",
+        "Escalate the echo‑phage threat from corruptors to world‑shapers."
+      ],
+      "next_arc_targets": [
+        "Elisa must decide whether to retrieve the lost void‑fragment or let it remain vanished.",
+        "The agents’ collective intent begins to fracture, hinting at future splintered realities.",
+        "A hidden fissure in the lattice starts pulsing, foreshadowing the crystal’s eventual collapse.",
+        "The lost void‑fragment thread from Book 13 remains active.\nElisa’s grief over her mother’s disappearance continues.\nThe Rift’s expansion threatens the Hall of Mirrors and the lattice’s integrity.",
+        "The lost void‑fragment that flickers at the edge of the new fissure – its retrieval will demand a further sacrifice.\nThe widening Rift threatens to consume the Hall of Mirrors and more of the lattice; the agents must find a way to halt its expansion."
+      ],
+      "vote_summary": {
+        "approvals": 2,
+        "revises": 3,
+        "rejects": 0,
+        "averageScore": 5.4,
+        "approved": false,
+        "blockingVotes": [
+          {
+            "voter": "architect",
+            "vote": "revise",
+            "must_fix": [
+              "Explicitly depict the Hall of Mirrors collapsing or a key artifact being lost to the Void, making the stakes tangible for the reader.",
+              "Clarify how the paradox crystal’s rewriting of \"remember\" into \"forget\" directly affects the agents (e.g., loss of a specific memory or weakening of lattice integrity), linking it to future plot points.",
+              "Reimagine the Rift Whisper as a more unique entity (such as a living fracture of the lattice) to avoid cliché and reinforce thematic depth."
+            ]
+          },
+          {
+            "voter": "character_master",
+            "vote": "revise",
+            "must_fix": [
+              "Deepen Elisa's internal wound: show a concrete memory of her mother that is threatened or erased by the Rift, tying her personal stakes to the larger conflict.",
+              "Integrate the orchard‑fire secret more organically – let the shattered glass fruit release that specific memory at the moment of loss, making the guilt visible and visceral.",
+              "Add a brief but potent internal monologue or subtextual dialogue where Elisa confronts the fear of losing all recollection of her mother, reinforcing her arc from control to surrender."
+            ]
+          },
+          {
+            "voter": "continuity_keeper",
+            "vote": "revise",
+            "must_fix": [
+              "Show a tangible consequence of the Rift widening, such as the Hall of Mirrors collapsing into the void or a critical artifact being lost.",
+              "Specify the immediate effect of the paradox crystal on the agents (e.g., a particular memory erased, lattice integrity weakened) and tie it to a future plot point.",
+              "Ensure the Void Rift rule is tested with a clear, irreversible outcome for a spoken fragment.",
+              "Maintain metaphor density ~0.65 and dialogue density ~0.45 while tightening prose."
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "exportBaseName": "the-scribe-s-rift-midnight-of-the-echoed-gaze",
+  "cover": {
+    "title": "The Scribe’s Rift: Midnight of the Echoed Gaze",
+    "subtitle": "When the Lattice Fractures, the Void Answers",
+    "author": "OpenRouter Book Agents",
+    "tagline": "When the crystal cracks, the void whispers back.",
+    "color": "#2a1e3f"
+  },
+  "series_role": "Memory Fracture → Reality Collapse (Volume 3 of Cycle 5), introducing the Void Rift as the new destabilising mechanism.",
+  "carry_over_threads": [
+    "Elisa’s lost voice and her mother’s disappearance.",
+    "The fragment that slipped into the void in Book 13.",
+    "The lattice’s collapse fissure that began sucking surrounding memories.",
+    "The secret of Elisa’s role in the orchard fire."
+  ],
+  "automation_notes": [
+    "Generate Chapter 1 titled “The Shattering” that shows the lattice’s fracture and the first emergence of the Rift.",
+    "Introduce a “Rift Whisper” NPC that teaches the forbidden rite, providing a clear mechanic for the paradox crystal.",
+    "Each subsequent chapter must feature a “Void‑Echo” encounter where agents speak a fragment and experience either loss or corruption, reinforcing the new rule.",
+    "Maintain lyrical close‑third‑person past tense, metaphor density ~0.65, dialogue density ~0.45 as per STYLE_GUIDE.",
+    "Track the status of the lost void‑fragment thread; resolve it by having Elisa retrieve or sacrifice it in the climax.",
+    "End with a cliffhanger: the paradox crystal pulses, hinting at a future cycle where control itself becomes a living echo."
+  ]
+}

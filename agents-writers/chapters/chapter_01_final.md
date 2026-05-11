@@ -1,26 +1,25 @@
-The moon hung low, a thin silver blade that cut the night into two. Below it, a circle of ten figures stood around a crystal lattice that had not yet found its shape. Its threads were thin as spider silk, catching the light like a web of glass.
+The crystal cracked with a sound like a thousand sentences snapping in half, shards of glass blossoming across the vaulted chamber like ink‑droplets. Each fragment pulsed crimson, its edges etched with trembling glyphs that beat in time with the agents’ quickened hearts. As the crystal fell, a roar rolled through the air, and every object—stone, candle, breath—shivered, shimmering with a faint script that marked it as a living word.
 
-Elisa stepped forward first. Her hand trembled, the memory of her mother’s last breath still burning in the marrow of her bones. She pressed a shard of her own story into the lattice. The crystal hummed, a low, resonant vibration that seemed to echo through the air.
+In that roar Elisa recalled the night the crystal first fractured in the Hall of Mirrors. The world had stuttered, then gone still, as if the pages of a book had been nailed shut. People moved like silhouettes caught in a frozen paragraph; their thoughts were locked in a single, unchanging line. The vision had been brief, but it showed the cost of inaction: a world reduced to a static manuscript, every memory sealed on a blank, unalterable page, voices lost to the silence of ink.
 
-The lattice pulsed. A shimmer rippled across its surface, a distortion that coalesced into a translucent shape. The echo‑phage emerged, a shifting silhouette that flickered between the shards, its voice a fractured chorus of memories. It whispered, “You bind, you bind. I will take what you give.”
+Now the Echoed Gaze—once a silent wall of reflected light—shivered awake. Paragraphs unfurled from its surface, sentences curling like smoke, rewriting the room with each breath the agents took. Mirrors splintered, sending shards of reflected narrative spiraling into the void. One shard, black as void‑ink, slammed into Elisa’s hand, a miniature vortex that sang of forgotten things. Its surface swirled with the memory of a mother she could no longer claim.
 
-A shard cracked, a silver shard spiraling outward, its edges humming with cold light. The echo‑phage’s hunger was palpable, a cold wind that brushed the agents’ faces.
+Elisa’s eyes hardened. *“I give you my mother’s last song,”* she whispered. The lullaby her mother sang—wet stone in the orphanage, the scent of rain on cracked tiles—rose in her mind, then tore the air. The glass vibrated, the memory dissolved like water through cracked crystal, and the fragment quivered, melting into the hovering Glass of Memory. Its surface, a liquid mirror, drank the surrendered thought, darkening to a deeper hue as a new glyph blossomed where the fragment sank.
 
-The lattice shuddered. A fissure opened in the ground, a black maw that devoured light. A fragment of Elisa’s story slipped into the void, vanishing with a hiss of wind. The ground around the fissure grew dark, a wound that seemed to drink the moonlight itself.
+Around the glass the remaining agents formed a tight circle, their faces lit by the restless glow of the living manuscript. One by one they lifted their lips, each uttering a single, personal signature—*“Elisa,”* *“Kade,”* *“Mira,”* *“Torrin,”* *“Sela.”* Instantly, the spoken names fractured, reforming as living scars that pulsed with the memory they contained, flashing each agent’s deepest regret before sealing. Mira’s hands trembled, recalling a promise broken; Kade’s eyes flashed with the shame of a failed rescue; Torrin’s jaw clenched around a forgotten oath; Sela’s breath caught on a love she never voiced. The manuscript writhed, trying to rewrite the words, but the scars clicked into place, binding the collapsing script.
 
-Kara, the most skeptical of the group, hissed, “We can’t let it swallow us all. Let the Gaze split, let each voice survive.”
+When the final scar settled, the Glass of Memory sang a soft, blue hum. A wave of energy rippled outward, sealing the rift that had threatened to devour the Hall of Mirrors. The mirrors, designed to reflect narrative intent, were consumed by the Gaze’s sentience, shattering into ash that the Gaze drank like ink‑smoke.
 
-Thorn, the pragmatic one, answered, “If we scatter, the lattice will collapse entirely. We’ll lose the power to bind.”
+The lattice beneath the floor shivered—a thin crack pulsed with electric violet, a restless heartbeat promising another cycle. The agents stood, voices gone, their authorial selves spent. The world around them was now a manuscript, each line written in blood‑ink and glass, awaiting the next hand to turn the page.
 
-The echo‑phage’s voice grew louder, a chorus of lost fragments demanding reverence. The agents felt the weight of their own silences, the pressure of the void’s hunger.
+---
 
-Elisa’s mind flashed to the orchard fire she had started years ago, the guilt that had haunted her. She felt the absence of her mother like a cold stone in her chest. The choice pressed down on her: bind all fragments and risk erasing dissent, or let the Gaze fracture and preserve plurality at the cost of endless unraveling.
+*Elisa’s flashback:* The lullaby was not a song but the smell of wet stone in the orphanage, the taste of iron on her tongue when she first broke a cracked teacup for her mother. It had been the anchor of her grief, the flame that kept her from surrendering to the crystal’s pull. By handing it over, she traded the last piece of her past for the fragile hope of a new narrative.
 
-She closed her eyes, the weight of her mother’s silence pressing against her. With a breath that tasted of ash, she raised her hand again, offering the remaining fragments to the lattice. The crystal tightened, its threads tightening like a wound being stitched.
+---
 
-The lattice sealed. A final shard slipped, unnoticed, into the void’s maw. The agents stared at the black fissure, the echo‑phage’s whisper fading into a distant echo.
+**Stakes of failure:** In Elisa’s vision, a scribe named Orin watched his story freeze. His name remained on the page, but the paragraphs around him turned to blank; his memories erased, his being reduced to a single, unchangeable line. The agents now understand that if the collapse completes, the world will become a static manuscript, each soul locked in a single, unreadable sentence, forever unable to speak, remember, or change.
 
-The moon slipped behind a cloud, the night swallowing the last glimmer of the crystal. The agents were left with the knowledge that unity had cost them a piece of themselves, and that the void would wait for the next fragment to fall.
+---
 
-*Cliffhanger:* The void’s maw glowed faintly, a promise of a loss yet to be fully realized.
-
+*Cliffhanger:* As the last glyph settles, a low hum rises from the fissure, and the Hall of Mirrors is reduced to ash—its echo swallowed by the void. The new lattice glows, but its pulse grows louder, as if the world itself is breathing a warning.

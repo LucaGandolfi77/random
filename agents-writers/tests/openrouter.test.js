@@ -199,6 +199,53 @@ test('callOpenRouter repairs missing commas between JSON array elements', async 
   }
 });
 
+test('callOpenRouter repairs an unterminated array before the next object property', async () => {
+  const originalFetch = globalThis.fetch;
+  const tempRoot = await makeTempRoot();
+  const malformedJson = `{
+  "type": "proposal",
+  "chapter_goal": "Introduce the Aetheric Quill and its cost.",
+  "outline_notes": [
+    "Use the Glass of Memory's bound signatures as a visual motif after each major scene.",
+    "Introduce procedural list of Quill-strokes in brackets for later automation.",
+    "Keep dialogue sparse; let the ink's description carry tension.",
+    "Tie the living-ink's hue to the emotional weight of the erased memory (e.g.,{red-scarlet} for grief)."
+
+
+  "risks": "Potential for the memory-loss mechanic to feel mechanical; mitigate by attaching vivid sensory detail to each lost fragment.",
+  "handoff_for": "character_master"
+}`;
+
+  globalThis.fetch = async () => ({
+    ok: true,
+    statusText: 'OK',
+    json: async () => makePayload(malformedJson)
+  });
+
+  try {
+    const result = await callOpenRouter({
+      rootPath: tempRoot,
+      apiKey: TEST_API_KEY,
+      appTitle: 'Test',
+      httpReferer: 'https://localhost',
+      model: 'openai/gpt-oss-20b:free',
+      systemPrompt: 'Return JSON only.',
+      input: { ping: true },
+      temperature: 0.2,
+      maxTokens: 120
+    });
+
+    assert.equal(result.data.type, 'proposal');
+    assert.equal(result.data.handoff_for, 'character_master');
+    assert.equal(Array.isArray(result.data.outline_notes), true);
+    assert.match(result.data.outline_notes.at(-1), /red-scarlet/);
+    assert.match(String(result.data.risks), /memory-loss mechanic/);
+  } finally {
+    globalThis.fetch = originalFetch;
+    await fs.rm(tempRoot, { recursive: true, force: true });
+  }
+});
+
 test('callOpenRouter appends request and response entries to the live log in real time', async () => {
   const originalFetch = globalThis.fetch;
   const tempRoot = await makeTempRoot();

@@ -9,17 +9,149 @@
       "memory as weapon",
       "the cost of omnipotence",
       "authorial rebellion",
-      "the thin line between creation and annihilation"
+      "the thin line between creation and annihilation",
+      "Introduce Living Ink Veil",
+      "Show cost per stroke",
+      "Foreshadow chorus],",
+      "next_arc_targets",
+      "recommended_beats",
+      "Introduction of the Living Ink Veil",
+      "Establishment of the memory‑eating cost per stroke",
+      "Foreshadowing the upcoming fracture through the parasitic chorus"
     ],
     "endgame_promises": []
   },
-  "active_arcs": [],
-  "arc_metrics": {},
-  "next_targets": [
+  "active_arcs": [
+    "Introduce Living Ink Veil",
+    "Show cost per stroke",
+    "Foreshadow chorus],",
+    "next_arc_targets",
+    "recommended_beats",
     "Introduction of the Living Ink Veil",
     "Establishment of the memory‑eating cost per stroke",
     "Foreshadowing the upcoming fracture through the parasitic chorus"
   ],
-  "chapter_outlines": [],
-  "last_vote_summary": null
+  "arc_metrics": {
+    "Introduce Living Ink Veil": {
+      "success": 0.24,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Show cost per stroke": {
+      "success": 0.24,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Foreshadow chorus],": {
+      "success": 0.24,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "next_arc_targets": {
+      "success": 0.24,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "recommended_beats": {
+      "success": 0.24,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Introduction of the Living Ink Veil": {
+      "success": 0.24,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Establishment of the memory‑eating cost per stroke": {
+      "success": 0.24,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Foreshadowing the upcoming fracture through the parasitic chorus": {
+      "success": 0.24,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "A fragment of the chorus whispers a half‑remembered name that might be the key to sealing the veil, but its meaning is still unknown.": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    }
+  },
+  "next_targets": [
+    "A fragment of the chorus whispers a half‑remembered name that might be the key to sealing the veil, but its meaning is still unknown."
+  ],
+  "chapter_outlines": [
+    {
+      "chapter": 1,
+      "title": "The Veil Unfurls",
+      "chapter_goal": "Demonstrate the Veil’s seductive power and existential cost by having Elisa test a stroke, losing a pivotal memory while the chorus rises, compelling her to confront the choice between narrative control and oblivion.",
+      "arc_targets": [
+        "Introduce Living Ink Veil",
+        "Show cost per stroke",
+        "Foreshadow chorus],",
+        "next_arc_targets",
+        "recommended_beats",
+        "Introduction of the Living Ink Veil",
+        "Establishment of the memory‑eating cost per stroke",
+        "Foreshadowing the upcoming fracture through the parasitic chorus"
+      ],
+      "next_arc_targets": [
+        "A fragment of the chorus whispers a half‑remembered name that might be the key to sealing the veil, but its meaning is still unknown."
+      ],
+      "unresolved_threads": [
+        "A fragment of the chorus whispers a half‑remembered name that might be the key to sealing the veil, but its meaning is still unknown."
+      ],
+      "planned_payoffs": [],
+      "outline_notes": [],
+      "vote_summary": {
+        "approvals": 0,
+        "revises": 0,
+        "rejects": 0,
+        "averageScore": 1,
+        "approved": true,
+        "blockingVotes": [],
+        "forced": true,
+        "reason": "Review fallback applied: OpenRouter request timed out after 90s for model openai/gpt-oss-120b:free."
+      },
+      "updatedAt": "2026-05-11T17:35:08.313Z"
+    }
+  ],
+  "last_vote_summary": {
+    "approvals": 0,
+    "revises": 0,
+    "rejects": 0,
+    "averageScore": 1,
+    "approved": true,
+    "blockingVotes": [],
+    "forced": true,
+    "reason": "Review fallback applied: OpenRouter request timed out after 90s for model openai/gpt-oss-120b:free."
+  }
 }

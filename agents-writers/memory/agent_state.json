@@ -28,28 +28,22 @@
     },
     "critic": {
       "current_preset": "base",
-      "last_verdict": "revise"
+      "last_verdict": "approve"
     },
     "editor": {
       "current_preset": "base",
-      "last_change_count": 6
+      "last_change_count": 0
     },
     "room_vote": {
       "last_summary": {
-        "approvals": 4,
-        "revises": 1,
+        "approvals": 0,
+        "revises": 0,
         "rejects": 0,
-        "averageScore": 0.76,
+        "averageScore": 1,
         "approved": true,
-        "blockingVotes": [
-          {
-            "voter": "critic",
-            "vote": "revise",
-            "must_fix": [
-              "Show collapse tightening in real time—words solidifying, breath turning to ink, agents feeling the threat; replace generic lullaby with a vivid, sensory memory that physically tears from Elisa’s mind; reduce placeholder tags to only critical meta‑aware moments; give each supporting agent a distinct, costly reaction during the binding rite; integrate the Hall of Mirrors collapse into a single, vivid image and record it as a collapsed artifact."
-            ]
-          }
-        ]
+        "blockingVotes": [],
+        "forced": true,
+        "reason": "Review fallback applied: OpenRouter request timed out after 90s for model openai/gpt-oss-120b:free."
       }
     }
   }

@@ -1,4 +1,37 @@
 {
-  "chapters": [],
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "The Veil Unfurls",
+      "summary": "Elisa confronts the living ink veil in the palace garden, makes her first stroke and loses the memory of her mother’s lullaby. The parasitic chorus stirs, echo‑phages rise, and the veil spreads faster as memory fades, leaving Elisa to choose whether to bind the veil or let oblivion consume the world.",
+      "unresolved_threads": [
+        "A fragment of the chorus whispers a half‑remembered name that might be the key to sealing the veil, but its meaning is still unknown."
+      ],
+      "arc_targets": [
+        "Introduce Living Ink Veil",
+        "Show cost per stroke",
+        "Foreshadow chorus],",
+        "next_arc_targets",
+        "recommended_beats",
+        "Introduction of the Living Ink Veil",
+        "Establishment of the memory‑eating cost per stroke",
+        "Foreshadowing the upcoming fracture through the parasitic chorus"
+      ],
+      "next_arc_targets": [
+        "A fragment of the chorus whispers a half‑remembered name that might be the key to sealing the veil, but its meaning is still unknown."
+      ],
+      "vote_summary": {
+        "approvals": 0,
+        "revises": 0,
+        "rejects": 0,
+        "averageScore": 1,
+        "approved": true,
+        "blockingVotes": [],
+        "forced": true,
+        "reason": "Review fallback applied: OpenRouter request timed out after 90s for model openai/gpt-oss-120b:free."
+      },
+      "createdAt": "2026-05-11T17:35:08.313Z"
+    }
+  ],
   "events": []
 }

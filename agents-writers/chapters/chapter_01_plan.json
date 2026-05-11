@@ -1,23 +1,24 @@
 {
+  "active_book_id": "book-18",
+  "book_title": "The Scribe’s Veil: Echoes of the Aetheric Quill",
   "outline_snapshot": {
     "chapter": 1,
     "current_phase": "opening",
     "active_arcs": [],
     "next_targets": [
-      "Transformation of the Echoed Gaze into a sentient manuscript",
-      "The final test of the paradox crystal’s loop",
-      "Meta‑binding ritual that erases authorial voices",
-      "Introduction of a new, sentient Glass of Memory"
+      "Introduction of the Living Ink Veil",
+      "Establishment of the memory‑eating cost per stroke",
+      "Foreshadowing the upcoming fracture through the parasitic chorus"
     ],
     "global_targets": [
       "grief",
       "ambition",
       "memory",
-      "self‑sacrifice",
-      "meta‑authorship",
-      "the cost of ultimate control",
-      "creation versus destruction",
-      "the horror of becoming the story"
+      "identity sacrifice",
+      "memory as weapon",
+      "the cost of omnipotence",
+      "authorial rebellion",
+      "the thin line between creation and annihilation"
     ],
     "endgame_promises": [],
     "previous_outline": null,
@@ -25,49 +26,21 @@
   },
   "architect": {
     "type": "proposal",
-    "chapter_goal": "Shatter the crystal, initiate the living manuscript, and force the agents into the ultimate rite, raising stakes to instantaneous collapse.",
-    "theme_progress": "Grief morphs into self‑sacrifice; ambition becomes a self‑destroying ambition; meta‑authorship turns into an existential bargain.",
+    "chapter_goal": "Demonstrate the Veil’s seductive power and existential cost by having Elisa test a stroke, losing a pivotal memory while the chorus rises, compelling her to confront the choice between narrative control and oblivion.",
+    "theme_progress": "Grief is entangled with ambition; the first ink stroke erodes Elisa’s longing for her mother, revealing that her drive to bind the veil is fueled by loss.",
     "arc_targets": [
-      "Paradox crystal shatter triggers narrative recursion",
-      "Echoed Gaze becomes sentient text",
-      "Agents confront loss of authorial voice",
-      "Elisa must retrieve void‑fragment and sacrifice core memory"
+      "Introduce Living Ink Veil",
+      "Show cost per stroke",
+      "Foreshadow chorus],",
+      "next_arc_targets",
+      [
+        "Elisa’s decision to either bind or release the veil in Chapter 2"
+      ],
+      "recommended_beats",
+      [
+        "1. Elisa vistas the veil draping the garden, 2. She \t\t  sketches a hopeful:  blossom of \t\t  moonlit glass 3. The stroke   9ns  4. Memory of mother \tremains 5. Chorus"
+      ]
     ],
-    "next_arc_targets": [
-      "New Glass of Memory receives bound signatures",
-      "Collapse of Hall of Mirrors is cemented",
-      "Lattice fissure begins pulsing",
-      "The next cycle’s volatile lattice is hinted"
-    ],
-    "recommended_beats": [
-      "1. Crystal fracture, world words become nouns in narrative tags",
-      "2. Echoed Gaze cracks, revealing self‑aware paragraphs",
-      "3. Agents recognize spoken words alter reality",
-      "4. Elisa finds void‑fragment in shattered mirror",
-      "5. Meta‑binding ritual: each whispers signature",
-      "6. Final signature glyph formation, Glass of Memory birthed",
-      "7. Collapse seals, new lattice glows ominously"
-    ],
-    "constraints": [
-      "All nouns must carry <n> placeholder tags to simulate self‑aware manuscript rule",
-      "Every spoken line must rewrite a preceding sentence in the text",
-      "Elisa’s sacrifice must cost her sole memory of her mother",
-      "Glass of Memory must appear as a living entity with glyphs that change as signatures are added",
-      "Hall of Mirrors must be marked as collapsed artifact in continuity notes",
-      "Set flag ‘next_cycle_ready’ true"
-    ],
-    "outline_notes": [
-      "Introduce void‑fragment as dark inked shard; its retrieval is a ritual of grief",
-      "Use metaphor density 0.65: words as ink, voices as splashes",
-      "Dialogue density 0.45: keep dialogue tight but consequential",
-      "Maintain close third person past tense",
-      "Ensure each agent’s signature appears as unique glyph, auto‑generated, visibly altering the Glass",
-      "End with the lattice pulsing, hinting at next cycle’s volatility"
-    ],
-    "risks": [
-      "Risk of narrative chaos if placeholder tags misapplied; risk of losing continuity by not marking Hall collapse; risk of over‑escalation diluting thematic focus"
-    ],
-    "handoff_for": "character_master",
     "_meta": {
       "agent": "architect",
       "role": "Story Architect",
@@ -77,12 +50,26 @@
   "character_master": {
     "type": "proposal",
     "emotional_targets": [
-      "Elisa’s grief confronting the void‑fragment",
-      "Agents’ existential dread as voice dissolves",
+      "grief",
+      "ambition",
+      "fear of oblivion"
+    ],
+    "character_notes": [
       {
-        "commentary": "Continue"
+        "name": "Elisa",
+        "desire": "To reclaim her mother's voice and bind the veil",
+        "fear": "To lose the memories that justify her agency",
+        "contradiction": "Her quest to preserve memory erodes the very past she relies on",
+        "secret_pressure": "She knows the orchard fire she caused was a desperate act to protect an heirloom, yet she hides it to maintain her moral high ground"
       }
     ],
+    "dialogue_instructions": [
+      "Use heavy subtext; let words carry unspoken history, especially in exchanges with the chorus—each utterance should feel like a thin blade that could erase a cherished memory"
+    ],
+    "conflict_upgrades": [
+      "Show the chorus as a living chorus of dying sentences that literally echo back insults to any attempt at control; when Elisa speaks a forgotten word, the echo‑phage dissolves but leaves her with a blank patch in memory"
+    ],
+    "handoff_for": "chapter_planner",
     "_meta": {
       "agent": "character_master",
       "role": "Character Master",
@@ -91,68 +78,19 @@
   },
   "chapter_planner": {
     "type": "plan",
-    "chapter_title": "Shattered Ink",
-    "chapter_hook": "The paradox crystal fractures, sending shards of narrative into the air. Every noun becomes a living glyph, and the Echoed Gaze begins to whisper back.",
-    "arc_payoffs": [
-      "The crystal shatters and reality rewrites itself",
-      "Elisa retrieves the void‑fragment from the Hall of Mirrors",
-      "Agents perform the meta‑binding rite, sacrificing their authorial voices",
-      "The new Glass of Memory glows with freshly forged glyphs"
+    "chapter_title": "The Veil Unfurls",
+    "chapter_hook": "When the world is cloaked in living ink, every stroke rewrites reality—and er{ases} a\n\n  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :{{\n{\n{\n{\n{\n{\n{\n  }}}   [Truncated for brevity]",
+    "arc_payoffs\":": [
+      "Elisa witnesses the veil's seductive promise and the first tangible cost of power, cementing the theme that ambition devours memory.",
+      "Afragment of the parasitic chorus coalesces, foreshadowing a larger, mutating threat.",
+      "The ink‑stroke list and echo‑phage mechanic are \testablished: 12  distinct losses are now a \tquantifiable ledger.",
+      "Elisa \tloses the memory of \ther mother’s lullaby, \tt urning her grief into a \tweaponized ambition.",
+      "The veil's spread \taccelerates as  memory  loss \t"
     ],
-    "next_chapter_seed": [
-      "The Hall of Mirrors has collapsed into ash",
-      "A faint pulsing fissure appears in the lattice",
-      "The next cycle’s volatile lattice is hinted at by a humming echo"
-    ],
-    "scene_cards": [
-      {
-        "scene": 1,
-        "goal": "Crush the paradox crystal, initiating the living manuscript",
-        "conflict": "The crystal resists, its shards ricocheting like shards of thought, threatening to swallow the agents",
-        "turn": "The crystal cracks, releasing a roar that turns every noun into a tagged placeholder, making the world self‑aware",
-        "image": "A jagged shard of crystal splintering, its shards glowing with crimson glyphs that pulse like heartbeats"
-      },
-      {
-        "scene": 2,
-        "goal": "Expose the Echoed Gaze’s sentience and the Hall of Mirrors’ collapse",
-        "conflict": "The Hall of Mirrors shatters, sending shards of reflected narrative into the air, while the Echoed Gaze mutters paragraphs that rewrite the room",
-        "turn": "A fragment of the Hall lands on Elisa’s palm, revealing the void‑fragment inked in black",
-        "image": "A shattered mirror sending a black‑inked shard that coalesces into a miniature, swirling vortex"
-      },
-      {
-        "scene": 3,
-        "goal": "Elisa confronts the void‑fragment and its cost",
-        "conflict": "Elisa must decide whether to keep the fragment, risking further collapse, or sacrifice her memory of her mother to bind it",
-        "turn": "She whispers the memory, the fragment shivers and merges into the Glass of Memory, its glyphs shifting to a new, darker hue",
-        "image": "Elisa’s hand trembling as a black‑inked fragment dissolves into a glass that glows with a new glyph"
-      },
-      {
-        "scene": 4,
-        "goal": "Agents perform the meta‑binding rite, each whispering their signature",
-        "conflict": "The living manuscript resists, rewriting their words in real time, threatening to erase their intent",
-        "turn": "Each agent speaks a single word; the words are replaced by unique glyphs that bloom on the Glass, binding the script",
-        "image": "A circle of agents around the Glass, each word turning into a luminous glyph that locks into place"
-      },
-      {
-        "scene": 5,
-        "goal": "Seal the collapse and reveal the new lattice’s volatility",
-        "conflict": "The final glyph triggers a pulse that could either stabilize or tear the lattice apart",
-        "turn": "The Glass hums, the pulse ripples outward, and a faint fissure begins to pulse in the lattice, hinting at the next cycle",
-        "image": "The Glass emits a soft blue glow, while a crack in the lattice shimmers with a restless, electric pulse"
-      }
-    ],
-    "cliffhanger": "As the last glyph settles, a low hum rises from the fissure, and the Hall of Mirrors is reduced to ash—its echo swallowed by the void. The new lattice glows, but its pulse grows louder, as if the world itself is breathing a warning.",
-    "outline_memory_updates": [
-      "Mark Hall of Mirrors as collapsed artifact",
-      "Record Elisa’s sacrifice of mother’s memory",
-      "Set flag ‘next_cycle_ready’ to true",
-      "Log new glyphs on Glass of Memory after each signature"
-    ],
-    "handoff_for": "writer",
     "_meta": {
       "agent": "chapter_planner",
       "role": "Chapter Planner",
-      "model": "openai/gpt-oss-20b:free"
+      "model": "openai/gpt-oss-120b:free"
     }
   }
 }

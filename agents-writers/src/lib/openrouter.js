@@ -1,10 +1,53 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
+import { jsonrepair } from 'jsonrepair';
+
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const OPENROUTER_LOG_DIR = path.join('logs', 'openrouter');
 const OPENROUTER_LOG_FILE = 'openrouter-live.jsonl';
 const DEFAULT_OPENROUTER_TIMEOUT_MS = 90_000;
+const JSON_LIST_FIELD_NAMES = new Set([
+  'active_arcs',
+  'arc_focus',
+  'arc_payoffs',
+  'arc_targets',
+  'automation_notes',
+  'blockingVotes',
+  'canon_notes',
+  'carry_over_threads',
+  'celebrate',
+  'character_notes',
+  'chapter_registry',
+  'conflict_upgrades',
+  'constraints',
+  'dialogue_instructions',
+  'emotional_targets',
+  'endgame_promises',
+  'global_targets',
+  'issues',
+  'memory_updates',
+  'motif_cycle',
+  'must_fix',
+  'next_arc_targets',
+  'next_chapter_seed',
+  'next_targets',
+  'outline_memory_updates',
+  'outline_notes',
+  'planned_payoffs',
+  'recommended_beats',
+  'recent_adjustments',
+  'rivalries',
+  'risks',
+  'scene_cards',
+  'scene_summaries',
+  'sequence_beats',
+  'themes',
+  'timeline_events',
+  'unresolved_threads',
+  'world_rules',
+  'world_rules_to_echo'
+]);
 
 let openRouterRequestSequence = 0;
 
@@ -150,7 +193,7 @@ function extractJsonObject(content) {
   }
 
   try {
-    return parseJsonWithRepair(normalized);
+    return ensureJsonObject(parseJsonWithRepair(normalized));
   } catch {
     // Continue.
   }
@@ -158,7 +201,7 @@ function extractJsonObject(content) {
   const fencedMatch = normalized.match(/```(?:json)?\s*([\s\S]*?)```/i);
   if (fencedMatch) {
     try {
-      return parseJsonWithRepair(fencedMatch[1].trim());
+      return ensureJsonObject(parseJsonWithRepair(fencedMatch[1].trim()));
     } catch {
       // Continue.
     }
@@ -169,16 +212,109 @@ function extractJsonObject(content) {
 
   if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
     const candidate = normalized.slice(firstBrace, lastBrace + 1);
-    return parseJsonWithRepair(candidate);
+    return ensureJsonObject(parseJsonWithRepair(candidate));
   }
 
   throw new Error(`Could not parse JSON from model response:\n${normalized}`);
 }
 
+function ensureJsonObject(value) {
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    return normalizeRecoveredJsonValue(value);
+  }
+
+  throw new Error('Model did not return a JSON object.');
+}
+
+function normalizeRecoveredJsonValue(value, key = '') {
+  if (Array.isArray(value)) {
+    return value.map((item) => normalizeRecoveredJsonValue(item));
+  }
+
+  if (value && typeof value === 'object') {
+    const normalized = {};
+
+    for (const [currentKey, currentValue] of Object.entries(value)) {
+      let nextValue = normalizeRecoveredJsonValue(currentValue, currentKey);
+
+      if (Array.isArray(nextValue)) {
+        const extractedEntries = extractSpilledObjectEntries(nextValue);
+
+        if (extractedEntries) {
+          nextValue = extractedEntries.arrayItems;
+          Object.assign(normalized, normalizeRecoveredJsonValue(extractedEntries.objectEntries));
+        }
+      }
+
+      normalized[currentKey] = normalizeFieldShape(currentKey, nextValue);
+    }
+
+    return normalized;
+  }
+
+  return normalizeFieldShape(key, value);
+}
+
+function extractSpilledObjectEntries(values) {
+  for (let index = 0; index <= values.length - 3; index += 1) {
+    const remainder = values.length - index;
+
+    if (remainder % 3 !== 0) {
+      continue;
+    }
+
+    if (!isSpilledPropertyKey(values[index]) || values[index + 1] !== ':') {
+      continue;
+    }
+
+    const objectEntries = {};
+    let offset = index;
+    let valid = true;
+
+    while (offset < values.length) {
+      const entryKey = values[offset];
+      const separator = values[offset + 1];
+      const entryValue = values[offset + 2];
+
+      if (!isSpilledPropertyKey(entryKey) || separator !== ':' || entryValue === undefined) {
+        valid = false;
+        break;
+      }
+
+      objectEntries[entryKey] = entryValue;
+      offset += 3;
+    }
+
+    if (valid) {
+      return {
+        arrayItems: values.slice(0, index),
+        objectEntries
+      };
+    }
+  }
+
+  return null;
+}
+
+function isSpilledPropertyKey(value) {
+  return typeof value === 'string' && /^[A-Za-z_][A-Za-z0-9_]*$/.test(value.trim());
+}
+
+function normalizeFieldShape(key, value) {
+  if (JSON_LIST_FIELD_NAMES.has(key) && typeof value === 'string' && value.trim()) {
+    return [value.trim()];
+  }
+
+  return value;
+}
+
 function parseJsonWithRepair(input) {
+  let lastError = null;
+
   try {
     return JSON.parse(input);
   } catch (error) {
+    lastError = error;
     const repaired = escapeControlCharactersInStrings(input);
 
     if (repaired !== input) {
@@ -192,11 +328,125 @@ function parseJsonWithRepair(input) {
     const structuralRepair = insertMissingCommasBetweenJsonValues(repaired);
 
     if (structuralRepair !== repaired) {
-      return JSON.parse(structuralRepair);
+      try {
+        return JSON.parse(structuralRepair);
+      } catch (structuralError) {
+        lastError = structuralError;
+      }
     }
 
-    throw error;
+    const arrayBoundaryRepair = closeUnterminatedArraysBeforeObjectProperties(structuralRepair);
+
+    if (arrayBoundaryRepair !== structuralRepair) {
+      try {
+        return JSON.parse(arrayBoundaryRepair);
+      } catch (arrayBoundaryError) {
+        lastError = arrayBoundaryError;
+      }
+    }
+
+    const repairCandidates = [...new Set([input, repaired, structuralRepair, arrayBoundaryRepair])]
+      .filter((candidate) => looksLikeJsonCandidate(candidate));
+
+    for (const candidate of repairCandidates) {
+      try {
+        const repairedByLibrary = jsonrepair(candidate);
+        return JSON.parse(repairedByLibrary);
+      } catch {
+        // Continue trying the next candidate.
+      }
+    }
+
+    throw lastError;
   }
+}
+
+function looksLikeJsonCandidate(input) {
+  const normalized = String(input ?? '').trim();
+  return normalized.startsWith('{') || normalized.startsWith('[');
+}
+
+function closeUnterminatedArraysBeforeObjectProperties(input) {
+  let result = '';
+  let inString = false;
+  let escaping = false;
+  const stack = [];
+
+  for (let index = 0; index < input.length; index += 1) {
+    const char = input[index];
+
+    if (inString) {
+      result += char;
+
+      if (escaping) {
+        escaping = false;
+      } else if (char === '\\') {
+        escaping = true;
+      } else if (char === '"') {
+        inString = false;
+      }
+
+      continue;
+    }
+
+    if (
+      char === '"' &&
+      stack.at(-1) === '[' &&
+      stack.at(-2) === '{' &&
+      isObjectPropertyToken(input, index)
+    ) {
+      result += '],';
+      stack.pop();
+    }
+
+    result += char;
+
+    if (char === '"') {
+      inString = true;
+      continue;
+    }
+
+    if (char === '{' || char === '[') {
+      stack.push(char);
+      continue;
+    }
+
+    if (char === '}' || char === ']') {
+      stack.pop();
+    }
+  }
+
+  return result;
+}
+
+function isObjectPropertyToken(input, startIndex) {
+  let index = startIndex + 1;
+  let escaping = false;
+
+  for (; index < input.length; index += 1) {
+    const char = input[index];
+
+    if (escaping) {
+      escaping = false;
+      continue;
+    }
+
+    if (char === '\\') {
+      escaping = true;
+      continue;
+    }
+
+    if (char === '"') {
+      index += 1;
+      break;
+    }
+  }
+
+  while (index < input.length && /\s/.test(input[index])) {
+    index += 1;
+  }
+
+  return input[index] === ':';
 }
 
 function escapeControlCharactersInStrings(input) {

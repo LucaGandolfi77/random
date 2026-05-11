@@ -6,6 +6,7 @@ import { readJson, writeJson } from './utils.js';
 const MEMORY_DIR = 'memory';
 const BOOKS_DIR = path.join(MEMORY_DIR, 'books');
 const SERIES_STATE_FILE = path.join(MEMORY_DIR, 'series_state.json');
+const GENERATION_STATE_FILE = 'generation_state.json';
 const LEGACY_FILES = ['book_bible.json', 'timeline.json', 'style_guide.json', 'outline_memory.json'];
 
 export async function loadAllSeriesBooks(rootPath, defaults) {
@@ -290,7 +291,13 @@ export async function createSeriesBook(rootPath, options, defaults) {
     }),
     writeJson(path.join(bookDir, 'timeline.json'), defaults.timeline),
     writeJson(path.join(bookDir, 'style_guide.json'), defaults.styleGuide),
-    writeJson(path.join(bookDir, 'outline_memory.json'), defaults.outlineMemory)
+    writeJson(path.join(bookDir, 'outline_memory.json'), defaults.outlineMemory),
+    writeJson(path.join(bookDir, GENERATION_STATE_FILE), {
+      lastPersistedChapter: 0,
+      lastCompletedChapter: 0,
+      targetChapterCount: 0,
+      updatedAt: now
+    })
   ]);
 
   return nextState;

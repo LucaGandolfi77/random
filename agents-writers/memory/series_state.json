@@ -1,24 +1,24 @@
 {
-  "activeBookId": "book-15",
+  "activeBookId": "book-18",
   "series": {
     "title": "Untitled Series",
-    "description": "A recursive dark‑fantasy anthology where rival meta‑agents write and battle within ever‑shifting realities, spiraling through cycles of authority, memory corruption, and existential collapse.",
+    "description": "A recursive dark‑fantasy anthology where rival meta‑agents write and battle within ever‑shifting realities, spiraling through cycles of authority, memory fracture, and existential collapse.",
     "pattern": {
       "name": "Tri‑Echo Spiral",
-      "overview": "Three‑volume cycles echo each other: Volume 1 asserts control, Volume 2 fractures memory, Volume 3 collapses reality. Each new cycle inherits the remnants of the previous collapse and mutates the core mechanism, raising the stakes for the next control phase.",
+      "overview": "Each three‑book micro‑cycle repeats the core beats (Control → Fracture → Collapse) while mutating the central mechanic. Volume 1 introduces a new control device, Volume 2 corrupts it into a memory‑fracture, Volume 3 forces the world to become self‑aware text. The next macro‑cycle begins with a fresh control artifact that is a twisted evolution of the Aetheric Quill, raising stakes for the ensuing fracture.",
       "bookCountTarget": 3,
       "sequenceBeats": [
-        "Authorial Control: agents draft within a single, stable reality.",
-        "Memory Fracture: fragments of the draft bleed into the world, erasing linearity.",
-        "Reality Collapse: the world becomes a self‑aware text, dissolving the boundary between story and author."
+        "Control: Agents seize a new reality‑shaping artifact and attempt to impose authorial order.",
+        "Fracture: The artifact’s power leaks, turning memories into volatile currency and splintering causality.",
+        "Collapse: The world becomes a self‑referential manuscript that can rewrite agents as text."
       ],
       "motifCycle": [
         "Glass of Memory",
         "Mirror Orchard",
         "Broken Writings"
       ],
-      "escalationLogic": "Each volume injects a subversive mechanism that destabilises its predecessor – a cooling glass that stores intent, fracturing mirrors that scatter recollection, then a self‑referential narrative loop that threatens total dissolution. When the loop snaps, a new glass is forged, now infused with the echo of the broken loop, amplifying the cost of control for the next volume.",
-      "updatedAt": "2026-05-10T22:52:39.725Z",
+      "escalationLogic": "Each cycle upgrades the previous control device into a more invasive, self‑feeding tool. The upgrade adds a cost: personal memory loss, identity erosion, or irreversible alteration of the world’s grammar. The fracture stage always introduces a new echo‑phage or void‑rift that forces agents to trade power for sacrifice. Collapse always culminates in the world gaining self‑awareness, demanding a meta‑binding that sets the stage for the next control device.",
+      "updatedAt": "2026-05-11T15:18:12.944Z",
       "sourceAgent": "series_architect"
     }
   },
@@ -378,6 +378,81 @@
       },
       "createdAt": "2026-05-10T22:52:39.728Z",
       "updatedAt": "2026-05-10T23:17:39.554Z"
+    },
+    {
+      "id": "book-16",
+      "title": "The Scribe’s Ascendancy",
+      "slug": "the-scribe-s-ascendancy",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "From the fractured lattice left by the sentient Glass of Memory, a newly forged Aetheric Quill erupts, capable of inscribing intent directly into the fabric of reality without the need for spoken words. The agents must seize this power to re‑establish authorial control, but the Quill demands a tribute of forgotten selves: each stroke erases a fragment of the scribe’s own past, reshaping the world while the scribe loses a piece of identity. As the Quill rewrites the crumbling lattice, the pulsing fissure reacts, spawning a cascade of living ink that seeks to devour the newly written order. The agents must balance the lure of omnipotence against the erasure of their core memories, setting the stage for a second‑phase fracture in the coming cycle.",
+      "themes": [
+        "ambition",
+        "identity sacrifice",
+        "the cost of power",
+        "memory as currency",
+        "the thin line between creation and annihilation"
+      ],
+      "exportBaseName": "the-scribe-s-ascendancy",
+      "cover": {
+        "title": "The Scribe’s Ascendancy",
+        "subtitle": "Echoes of the Aetheric Quill",
+        "author": "OpenRouter Book Agents",
+        "tagline": "Write the world anew, but lose yourself with every line.",
+        "color": "#2b1f3a"
+      },
+      "createdAt": "2026-05-11T14:42:56.081Z",
+      "updatedAt": "2026-05-11T14:42:56.128Z"
+    },
+    {
+      "id": "book-17",
+      "title": "Book 17",
+      "slug": "book-17",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
+      "themes": [
+        "ambition",
+        "identity sacrifice",
+        "the cost of power",
+        "memory as currency",
+        "the thin line between creation and annihilation"
+      ],
+      "exportBaseName": "book-17",
+      "cover": {
+        "title": "Book 17",
+        "subtitle": "",
+        "author": "OpenRouter Book Agents",
+        "tagline": "A group of rival agents write a book while trying to outmaneuver each other.",
+        "color": "#2b1f3a"
+      },
+      "createdAt": "2026-05-11T15:09:24.172Z",
+      "updatedAt": "2026-05-11T15:09:24.214Z"
+    },
+    {
+      "id": "book-18",
+      "title": "The Scribe’s Veil: Echoes of the Aetheric Quill",
+      "slug": "the-scribe-s-veil-echoes-of-the-aetheric-quill",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "The Aetheric Quill has fractured into a sentient veil of living ink that drapes over the world, allowing agents to paint reality with a single stroke—but each stroke erases a fragment of their own past. As the veil spreads, the lingering lattice fissure mutates into a parasitic chorus that whispers forgotten sentences, turning lost memories into hostile echo‑phages. The agents must decide whether to bind the veil, sacrificing the very stories that define them, or let the chorus consume the world, rewriting existence into a blank parchment.",
+      "themes": [
+        "identity sacrifice",
+        "memory as weapon",
+        "the cost of omnipotence",
+        "authorial rebellion",
+        "the thin line between creation and annihilation"
+      ],
+      "exportBaseName": "the-scribe-s-veil-echoes-of-the-aetheric-quill",
+      "cover": {
+        "title": "The Scribe’s Veil: Echoes of the Aetheric Quill",
+        "subtitle": "When Ink Becomes Flesh, Memory Becomes Weapon",
+        "author": "OpenRouter Book Agents",
+        "tagline": "Ink can rewrite the world, but it devours the writer.",
+        "color": "#3b1e5a"
+      },
+      "createdAt": "2026-05-11T15:18:12.947Z",
+      "updatedAt": "2026-05-11T15:18:12.992Z"
     }
   ]
 }

@@ -1,3 +1,13 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
+const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
+const OPENROUTER_LOG_DIR = path.join('logs', 'openrouter');
+const OPENROUTER_LOG_FILE = 'openrouter-live.jsonl';
+const DEFAULT_OPENROUTER_TIMEOUT_MS = 90_000;
+
+let openRouterRequestSequence = 0;
+
 function normalizeOpenRouterApiKey(apiKey) {
   const normalized = String(apiKey ?? '').trim();
 
@@ -14,6 +24,122 @@ function normalizeOpenRouterApiKey(apiKey) {
   }
 
   return normalized;
+}
+
+function buildOpenRouterRequestBody({
+  model,
+  systemPrompt,
+  input,
+  temperature,
+  maxTokens
+}) {
+  return {
+    model,
+    temperature,
+    max_tokens: maxTokens,
+    response_format: { type: 'json_object' },
+    messages: [
+      {
+        role: 'system',
+        content: systemPrompt
+      },
+      {
+        role: 'user',
+        content: JSON.stringify(input, null, 2)
+      }
+    ]
+  };
+}
+
+function nextOpenRouterRequestId() {
+  openRouterRequestSequence += 1;
+  return `openrouter-${process.pid}-${Date.now()}-${openRouterRequestSequence}`;
+}
+
+function normalizeOpenRouterLogRoot(rootPath) {
+  return rootPath ? path.resolve(rootPath) : process.cwd();
+}
+
+async function appendOpenRouterLog(rootPath, entry) {
+  const logRoot = normalizeOpenRouterLogRoot(rootPath);
+  const logDir = path.join(logRoot, OPENROUTER_LOG_DIR);
+  const logPath = path.join(logDir, OPENROUTER_LOG_FILE);
+  const payload = {
+    timestamp: new Date().toISOString(),
+    processId: process.pid,
+    source: 'openrouter',
+    ...entry
+  };
+
+  await fs.mkdir(logDir, { recursive: true });
+  await fs.appendFile(logPath, `${JSON.stringify(payload)}\n`, 'utf8');
+
+  return logPath;
+}
+
+async function appendOpenRouterLogSafe(rootPath, entry) {
+  try {
+    return await appendOpenRouterLog(rootPath, entry);
+  } catch {
+    return null;
+  }
+}
+
+function sanitizeOpenRouterHeaders(headers) {
+  return {
+    'Content-Type': headers['Content-Type'],
+    'HTTP-Referer': headers['HTTP-Referer'],
+    'X-Title': headers['X-Title']
+  };
+}
+
+function normalizeErrorForLog(error) {
+  if (!error) {
+    return null;
+  }
+
+  if (error instanceof Error) {
+    return {
+      name: error.name,
+      message: error.message,
+      stack: error.stack
+    };
+  }
+
+  return {
+    message: String(error)
+  };
+}
+
+async function readOpenRouterPayload(response) {
+  if (typeof response.text === 'function') {
+    const rawBody = await response.text();
+
+    if (!rawBody) {
+      return {
+        payload: {},
+        rawBody: ''
+      };
+    }
+
+    try {
+      return {
+        payload: JSON.parse(rawBody),
+        rawBody
+      };
+    } catch {
+      return {
+        payload: {},
+        rawBody
+      };
+    }
+  }
+
+  const payload = await response.json().catch(() => ({}));
+  return {
+    payload,
+    rawBody: JSON.stringify(payload)
+  };
 }
 
 function extractJsonObject(content) {
@@ -238,6 +364,7 @@ function isJsonValueBoundary(previousCharacter, nextCharacter) {
 }
 
 export async function callOpenRouter({
+  rootPath,
   apiKey,
   appTitle,
   httpReferer,
@@ -246,6 +373,7 @@ export async function callOpenRouter({
   input,
   temperature,
   maxTokens,
+  timeoutMs = DEFAULT_OPENROUTER_TIMEOUT_MS,
   dryRun = false
 }) {
   if (dryRun) {
@@ -267,6 +395,7 @@ export async function callOpenRouter({
 
   for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
     const payload = await requestOpenRouterCompletion({
+      rootPath,
       apiKey: normalizedApiKey,
       appTitle,
       httpReferer,
@@ -274,7 +403,9 @@ export async function callOpenRouter({
       systemPrompt,
       input,
       temperature,
-      maxTokens
+      maxTokens,
+      timeoutMs,
+      attempt
     });
 
     const raw = extractMessageText(payload);
@@ -298,6 +429,7 @@ export async function callOpenRouter({
 }
 
 async function requestOpenRouterCompletion({
+  rootPath,
   apiKey,
   appTitle,
   httpReferer,
@@ -305,59 +437,97 @@ async function requestOpenRouterCompletion({
   systemPrompt,
   input,
   temperature,
-  maxTokens
+  maxTokens,
+  timeoutMs,
+  attempt
 }) {
 
-  // 30-second timeout per request — prevents indefinite hangs on slow free models.
+  const requestBody = buildOpenRouterRequestBody({
+    model,
+    systemPrompt,
+    input,
+    temperature,
+    maxTokens
+  });
+  const headers = {
+    Authorization: `Bearer ${apiKey}`,
+    'Content-Type': 'application/json',
+    'HTTP-Referer': httpReferer || 'https://localhost',
+    'X-Title': appTitle || 'Book Agents Lab'
+  };
+  const requestId = nextOpenRouterRequestId();
+  const startedAt = Date.now();
+
+  // Keep the timeout active until the response body has been fully read.
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 30_000);
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
   let response;
+  let payload = {};
+  let rawBody = '';
+
+  await appendOpenRouterLogSafe(rootPath, {
+    phase: 'request',
+    requestId,
+    attempt,
+    model,
+    method: 'POST',
+    url: OPENROUTER_URL,
+    headers: sanitizeOpenRouterHeaders(headers),
+    body: requestBody
+  });
 
   try {
-    response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    response = await fetch(OPENROUTER_URL, {
       method: 'POST',
       signal: controller.signal,
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': httpReferer || 'https://localhost',
-        'X-Title': appTitle || 'Book Agents Lab'
-      },
-      body: JSON.stringify({
-        model,
-        temperature,
-        max_tokens: maxTokens,
-        response_format: { type: 'json_object' },
-        messages: [
-          {
-            role: 'system',
-            content: systemPrompt
-          },
-          {
-            role: 'user',
-            content: JSON.stringify(input, null, 2)
-          }
-        ]
-      })
+      headers,
+      body: JSON.stringify(requestBody)
     });
-  } catch (fetchError) {
-    if (fetchError.name === 'AbortError') {
-      throw new Error(`OpenRouter request timed out after 30s for model ${model}.`);
-    }
 
-    throw fetchError;
+    ({ payload, rawBody } = await readOpenRouterPayload(response));
+  } catch (fetchError) {
+    const normalizedError = fetchError.name === 'AbortError'
+      ? new Error(`OpenRouter request timed out after ${formatDurationLabel(timeoutMs)} for model ${model}.`)
+      : fetchError;
+
+    await appendOpenRouterLogSafe(rootPath, {
+      phase: 'error',
+      requestId,
+      attempt,
+      model,
+      durationMs: Date.now() - startedAt,
+      error: normalizeErrorForLog(normalizedError)
+    });
+
+    throw normalizedError;
   } finally {
     clearTimeout(timeoutId);
   }
 
-  const payload = await response.json().catch(() => ({}));
+  await appendOpenRouterLogSafe(rootPath, {
+    phase: 'response',
+    requestId,
+    attempt,
+    model,
+    durationMs: Date.now() - startedAt,
+    status: response.status ?? null,
+    ok: Boolean(response.ok),
+    body: payload,
+    rawBody: rawBody || null
+  });
 
   if (!response.ok) {
     throw new Error(`OpenRouter request failed for ${model}: ${payload.error?.message || response.statusText}`);
   }
 
   return payload;
+}
+
+function formatDurationLabel(durationMs) {
+  return Number(durationMs) % 1000 === 0
+    ? `${Number(durationMs) / 1000}s`
+    : `${durationMs}ms`;
 }
 
 function extractMessageText(payload) {

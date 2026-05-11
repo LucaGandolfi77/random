@@ -29,6 +29,7 @@ const CONFIG_DIR = 'config';
 const MEMORY_DIR = 'memory';
 const PROMPTS_DIR = 'prompts';
 const CHAPTERS_DIR = 'chapters';
+const GENERATION_STATE_FILE = 'generation_state.json';
 const VOTE_PROMPT_FILE = 'vote.txt';
 
 function hasUsableOpenRouterKey(value) {
@@ -128,22 +129,33 @@ export async function writeBook(rootPath, options = {}) {
     action: 'write-book',
     input: { options }
   }, async () => {
-    const count = Number(options.count || 20);
+    const initialState = await loadState(rootPath);
+    const initialProgress = await readJson(getGenerationStatePath(rootPath, initialState.activeBook.id), null);
+    const count = resolveTargetChapterCount(options, initialProgress, 20);
 
     if (!count || count < 1) {
       throw new Error('Provide a positive chapter count with --count <n>.');
     }
 
-    const creation = await createBook(rootPath, options);
-    const state = await loadState(rootPath);
+    const createFreshBook = shouldCreateBookForWrite(options);
+    const creation = createFreshBook ? await createBook(rootPath, options) : null;
     const generation = await generateBook(rootPath, {
       ...options,
       count
     });
+    const state = await loadState(rootPath);
+
+    let message = `Generated ${generation.generatedCount} chapter${generation.generatedCount === 1 ? '' : 's'} for the active book.`;
+
+    if (createFreshBook) {
+      message = `Created a new book and generated ${generation.generatedCount} chapter${generation.generatedCount === 1 ? '' : 's'}.`;
+    } else if (generation.generatedCount === 0) {
+      message = `Active book already reached ${count} chapter${count === 1 ? '' : 's'}. Use --new-book to start the next book.`;
+    }
 
     return {
-      message: `Created a new book and generated ${count} chapter${count === 1 ? '' : 's'}.`,
-      activeBookId: creation.activeBookId,
+      message,
+      activeBookId: state.activeBook.id,
       book: {
         id: state.activeBook.id,
         title: state.bookBible.title,
@@ -153,8 +165,9 @@ export async function writeBook(rootPath, options = {}) {
         exportBaseName: state.bookBible.exportBaseName || state.activeBook.exportBaseName || state.activeBook.slug
       },
       count,
+      generatedCount: generation.generatedCount,
       chapters: generation.chapters || [],
-      automation: creation.automation || null
+      automation: creation?.automation || null
     };
   });
 }
@@ -331,16 +344,33 @@ export async function generateBook(rootPath, options) {
     input: { options }
   }, async () => {
     const state = await loadState(rootPath);
-    const count = Number(options.count || options.chapters || 3);
-    const startChapter = Number(options.startChapter || (state.timeline.chapters?.length || 0) + 1);
+    const progress = await readJson(getGenerationStatePath(rootPath, state.activeBook.id), null);
+    const count = resolveTargetChapterCount(options, progress, 3);
+    const startChapter = await resolveNextChapterNumber(rootPath, state.activeBook.id, state.timeline, options.startChapter);
+    const remainingCount = resolveRemainingChapterCount(startChapter, count);
 
     if (!count || count < 1) {
       throw new Error('Provide a positive chapter count with --count <n>.');
     }
 
+    await recordChapterProgress(rootPath, state.activeBook.id, {
+      targetChapterCount: count
+    });
+
+    if (remainingCount === 0) {
+      return {
+        message: `Active book already reached ${count} chapter${count === 1 ? '' : 's'}.`,
+        activeBookId: state.activeBook.id,
+        startChapter,
+        count,
+        generatedCount: 0,
+        chapters: []
+      };
+    }
+
     const results = [];
 
-    for (let offset = 0; offset < count; offset += 1) {
+    for (let offset = 0; offset < remainingCount; offset += 1) {
       const chapterNumber = startChapter + offset;
       const previous = results.at(-1);
       const idea = buildAutomaticIdea(options.idea || state.bookBible.premise || 'Escalate the central conflict.', chapterNumber, previous);
@@ -356,10 +386,11 @@ export async function generateBook(rootPath, options) {
     }
 
     return {
-      message: `Generated ${count} chapter${count === 1 ? '' : 's'}.`,
+      message: `Generated ${results.length} chapter${results.length === 1 ? '' : 's'} toward a ${count}-chapter target.`,
       activeBookId: state.activeBook.id,
       startChapter,
       count,
+      generatedCount: results.length,
       chapters: results
     };
   });
@@ -381,23 +412,8 @@ export async function generateChapter(rootPath, options) {
     const chapterId = padChapter(chapter);
     const approval = state.routing.approval || {};
     const maxRevisionRounds = Number(options.maxRevisions || approval.max_revision_rounds || 2);
-    const outlineSnapshot = buildOutlineSnapshot(state, chapter, options);
-    const baseInput = {
-      USER_INTENT: {
-        chapter,
-        idea: options.idea || '',
-        notes: options.notes || '',
-        requested_length: options.length || 'short chapter'
-      },
-      BOOK_BIBLE: state.bookBible,
-      TIMELINE: state.timeline,
-      STYLE_GUIDE: state.styleGuide,
-      OUTLINE_MEMORY: outlineSnapshot,
-      SERIES_BOOKS: buildSeriesShelf(state.allSeriesBooks, state.activeBook.id),
-      SERIES_CONTINUITY: state.seriesContinuity,
-      LAST_CHAPTER: state.timeline.chapters?.slice(-1)[0] || null,
-      WRITERS_ROOM: buildRoomState(state.effectiveAgents.agents)
-    };
+    const baseInput = buildChapterBaseInput(state, chapter, options);
+    const outlineSnapshot = baseInput.OUTLINE_MEMORY;
 
     emitProgress('chapter-start', { chapter });
 
@@ -420,16 +436,31 @@ export async function generateChapter(rootPath, options) {
     }, options.dryRun);
     emitProgress('agent-done', { agent: 'chapter_planner', chapter });
 
+    let forcedCompletionReason = null;
+    let usedWriterFallback = false;
+
     emitProgress('agent-start', { agent: 'writer', chapter, revision: 0 });
-    let writer = await runAgent(rootPath, state, env, 'writer', {
-      ...baseInput,
-      ARCHITECT: architect,
-      CHARACTER_MASTER: characterMaster,
-      CHAPTER_PLANNER: chapterPlanner,
-      REVISION_REQUEST: null,
-      PREVIOUS_DRAFT: null
-    }, options.dryRun);
-    emitProgress('agent-done', { agent: 'writer', chapter, revision: 0 });
+    let writer;
+
+    try {
+      writer = await runAgent(rootPath, state, env, 'writer', {
+        ...baseInput,
+        ARCHITECT: architect,
+        CHARACTER_MASTER: characterMaster,
+        CHAPTER_PLANNER: chapterPlanner,
+        REVISION_REQUEST: null,
+        PREVIOUS_DRAFT: null
+      }, options.dryRun);
+      emitProgress('agent-done', { agent: 'writer', chapter, revision: 0 });
+    } catch (error) {
+      writer = buildFallbackWriterDraft(chapter, chapterPlanner, architect, characterMaster, error);
+      usedWriterFallback = true;
+      forcedCompletionReason = `Writer fallback applied: ${getErrorMessage(error)}`;
+      await recordForcedChapterFallback(rootPath, chapter, 'writer', error, {
+        chapterTitle: writer.chapter_title
+      });
+      emitProgress('agent-done', { agent: 'writer', chapter, revision: 0, forced: true, error: getErrorMessage(error) });
+    }
 
     let critic = null;
     let continuity = null;
@@ -437,68 +468,103 @@ export async function generateChapter(rootPath, options) {
     let votes = null;
     let revisionRound = 0;
 
-    while (revisionRound <= maxRevisionRounds) {
+    while (!usedWriterFallback && !forcedCompletionReason && revisionRound <= maxRevisionRounds) {
       // critic and continuity_keeper read the same inputs — run them in parallel.
-      emitProgress('agent-start', { agent: 'critic', chapter, revision: revisionRound });
-      emitProgress('agent-start', { agent: 'continuity_keeper', chapter, revision: revisionRound });
-
       const reviewInput = { ...baseInput, CHAPTER_PLANNER: chapterPlanner, DRAFT: writer };
-      [critic, continuity] = await Promise.all([
-        runAgent(rootPath, state, env, 'critic', reviewInput, options.dryRun),
-        runAgent(rootPath, state, env, 'continuity_keeper', reviewInput, options.dryRun)
-      ]);
 
-      emitProgress('agent-done', { agent: 'critic', chapter, revision: revisionRound, verdict: critic.verdict });
-      emitProgress('agent-done', { agent: 'continuity_keeper', chapter, revision: revisionRound, pass: continuity.pass });
+      try {
+        emitProgress('agent-start', { agent: 'critic', chapter, revision: revisionRound });
+        emitProgress('agent-start', { agent: 'continuity_keeper', chapter, revision: revisionRound });
 
-      emitProgress('agent-start', { agent: 'editor', chapter, revision: revisionRound });
-      editor = await runAgent(rootPath, state, env, 'editor', {
-        ...baseInput,
-        CHAPTER_PLANNER: chapterPlanner,
-        DRAFT: writer,
-        CRITIC: critic,
-        CONTINUITY: continuity
-      }, options.dryRun);
-      emitProgress('agent-done', { agent: 'editor', chapter, revision: revisionRound });
+        [critic, continuity] = await Promise.all([
+          runAgent(rootPath, state, env, 'critic', reviewInput, options.dryRun),
+          runAgent(rootPath, state, env, 'continuity_keeper', reviewInput, options.dryRun)
+        ]);
 
-      emitProgress('vote-start', { chapter, revision: revisionRound });
-      votes = await runApprovalVote(rootPath, state, env, {
-        ...baseInput,
-        ARCHITECT: architect,
-        CHARACTER_MASTER: characterMaster,
-        CHAPTER_PLANNER: chapterPlanner,
-        DRAFT: writer,
-        CRITIC: critic,
-        CONTINUITY: continuity,
-        EDITOR: editor
-      }, options.dryRun);
-      emitProgress('vote-done', { chapter, revision: revisionRound, approved: votes?.summary?.approved, score: votes?.summary?.averageScore });
+        emitProgress('agent-done', { agent: 'critic', chapter, revision: revisionRound, verdict: critic.verdict });
+        emitProgress('agent-done', { agent: 'continuity_keeper', chapter, revision: revisionRound, pass: continuity.pass });
 
-      if (!needsRevision(critic, continuity, votes, approval) || revisionRound === maxRevisionRounds) {
+        emitProgress('agent-start', { agent: 'editor', chapter, revision: revisionRound });
+        editor = await runAgent(rootPath, state, env, 'editor', {
+          ...baseInput,
+          CHAPTER_PLANNER: chapterPlanner,
+          DRAFT: writer,
+          CRITIC: critic,
+          CONTINUITY: continuity
+        }, options.dryRun);
+        emitProgress('agent-done', { agent: 'editor', chapter, revision: revisionRound });
+
+        emitProgress('vote-start', { chapter, revision: revisionRound });
+        votes = await runApprovalVote(rootPath, state, env, {
+          ...baseInput,
+          ARCHITECT: architect,
+          CHARACTER_MASTER: characterMaster,
+          CHAPTER_PLANNER: chapterPlanner,
+          DRAFT: writer,
+          CRITIC: critic,
+          CONTINUITY: continuity,
+          EDITOR: editor
+        }, options.dryRun);
+        emitProgress('vote-done', { chapter, revision: revisionRound, approved: votes?.summary?.approved, score: votes?.summary?.averageScore });
+      } catch (error) {
+        forcedCompletionReason = `Review fallback applied: ${getErrorMessage(error)}`;
+        await recordForcedChapterFallback(rootPath, chapter, 'review', error, {
+          revisionRound
+        });
+        break;
+      }
+
+      if (!shouldRequestRevision(critic, continuity, votes, approval) || revisionRound === maxRevisionRounds) {
         break;
       }
 
       revisionRound += 1;
       emitProgress('agent-start', { agent: 'writer', chapter, revision: revisionRound });
-      writer = await runAgent(rootPath, state, env, 'writer', {
-        ...baseInput,
-        ARCHITECT: architect,
-        CHARACTER_MASTER: characterMaster,
-        CHAPTER_PLANNER: chapterPlanner,
-        PREVIOUS_DRAFT: writer,
-        CRITIC: critic,
-        CONTINUITY: continuity,
-        EDITOR: editor,
-        VOTES: votes,
-        REVISION_REQUEST: 'Revise the chapter to fix all high-severity issues first, then medium issues, while preserving the strongest voice and scene images.'
-      }, options.dryRun);
-      emitProgress('agent-done', { agent: 'writer', chapter, revision: revisionRound });
+      try {
+        writer = await runAgent(rootPath, state, env, 'writer', {
+          ...baseInput,
+          ARCHITECT: architect,
+          CHARACTER_MASTER: characterMaster,
+          CHAPTER_PLANNER: chapterPlanner,
+          PREVIOUS_DRAFT: writer,
+          CRITIC: critic,
+          CONTINUITY: continuity,
+          EDITOR: editor,
+          VOTES: votes,
+          REVISION_REQUEST: 'Revise the chapter to fix all high-severity issues first, then medium issues, while preserving the strongest voice and scene images.'
+        }, options.dryRun);
+        emitProgress('agent-done', { agent: 'writer', chapter, revision: revisionRound });
+      } catch (error) {
+        if (!writer?.draft_markdown) {
+          writer = buildFallbackWriterDraft(chapter, chapterPlanner, architect, characterMaster, error);
+        }
+
+        forcedCompletionReason = `Revision fallback applied: ${getErrorMessage(error)}`;
+        await recordForcedChapterFallback(rootPath, chapter, 'writer-revision', error, {
+          revisionRound,
+          chapterTitle: writer.chapter_title
+        });
+        emitProgress('agent-done', { agent: 'writer', chapter, revision: revisionRound, forced: true, error: getErrorMessage(error) });
+        break;
+      }
+    }
+
+    if (usedWriterFallback || forcedCompletionReason) {
+      ({ critic, continuity, editor, votes } = buildForcedReviewBundle(writer, chapterPlanner, forcedCompletionReason, {
+        critic,
+        continuity,
+        editor,
+        votes
+      }));
     }
 
     const finalMarkdown = editor.final_markdown || writer.draft_markdown || '';
     const chapterTitle = editor.chapter_title || writer.chapter_title || chapterPlanner.chapter_title || `Chapter ${chapter}`;
+    const forcedCompletion = Boolean(usedWriterFallback || forcedCompletionReason);
 
     await persistChapter(rootPath, chapterId, {
+      activeBookId: state.activeBook.id,
+      bookTitle: state.bookBible.title,
       architect,
       characterMaster,
       chapterPlanner,
@@ -510,6 +576,10 @@ export async function generateChapter(rootPath, options) {
       outlineSnapshot,
       finalMarkdown,
       revisionRound
+    });
+
+    await recordChapterProgress(rootPath, state.activeBook.id, {
+      lastPersistedChapter: chapter
     });
 
     await updateMemory(rootPath, chapter, {
@@ -530,12 +600,19 @@ export async function generateChapter(rootPath, options) {
       outlineSnapshot
     });
 
+    await recordChapterProgress(rootPath, state.activeBook.id, {
+      lastPersistedChapter: chapter,
+      lastCompletedChapter: chapter
+    });
+
     const result = {
-      message: `Chapter ${chapter} generated.`,
+      message: forcedCompletion ? `Chapter ${chapter} generated with forced fallback.` : `Chapter ${chapter} generated.`,
       activeBookId: state.activeBook.id,
       chapter,
       chapterTitle,
       revisionRound,
+      forcedCompletion,
+      forcedCompletionReason,
       voteSummary: votes?.summary || null,
       files: {
         plan: `${CHAPTERS_DIR}/chapter_${chapterId}_plan.json`,
@@ -545,10 +622,42 @@ export async function generateChapter(rootPath, options) {
       }
     };
 
-    emitProgress('chapter-done', { chapter, chapterTitle, revisionRound, approved: votes?.summary?.approved });
+    emitProgress('chapter-done', { chapter, chapterTitle, revisionRound, approved: votes?.summary?.approved, forced: forcedCompletion });
 
     return result;
   });
+}
+
+export async function resolveNextChapterNumber(rootPath, activeBookId, timeline, explicitStartChapter) {
+  const requestedStartChapter = Number(explicitStartChapter);
+
+  if (requestedStartChapter > 0) {
+    return requestedStartChapter;
+  }
+
+  const progress = await readJson(getGenerationStatePath(rootPath, activeBookId), null);
+  const highestTrackedChapter = getHighestTrackedChapter(timeline?.chapters || []);
+  const highestPersistedChapter = Math.max(
+    Number(progress?.lastPersistedChapter || 0),
+    Number(progress?.lastCompletedChapter || 0)
+  );
+
+  return Math.max(highestTrackedChapter, highestPersistedChapter) + 1;
+}
+
+export function resolveTargetChapterCount(options = {}, existingProgress = null, defaultCount = 3) {
+  const requestedCount = Number(options.count || options.chapters);
+
+  if (requestedCount > 0) {
+    return requestedCount;
+  }
+
+  const savedTarget = Number(existingProgress?.targetChapterCount || 0);
+  return savedTarget > 0 ? savedTarget : defaultCount;
+}
+
+export function resolveRemainingChapterCount(startChapter, targetChapterCount) {
+  return Math.max(Number(targetChapterCount || 0) - Number(startChapter || 0) + 1, 0);
 }
 
 export async function translateChapter(rootPath, options = {}) {
@@ -692,6 +801,7 @@ async function runAgent(rootPath, state, env, agentName, input, dryRun = false, 
   for (const model of [...new Set(route)]) {
     try {
       const response = await callOpenRouter({
+        rootPath,
         apiKey: env.OPENROUTER_API_KEY || process.env.OPENROUTER_API_KEY,
         appTitle: env.OPENROUTER_APP_TITLE || process.env.OPENROUTER_APP_TITLE,
         httpReferer: env.OPENROUTER_HTTP_REFERER || process.env.OPENROUTER_HTTP_REFERER,
@@ -776,14 +886,149 @@ async function runApprovalVote(rootPath, state, env, input, dryRun = false) {
   };
 }
 
-function needsRevision(critic, continuity, votes, approval) {
+export function shouldRequestRevision(critic, continuity, votes, approval) {
   const highIssues = (critic?.issues || []).filter((issue) => issue.severity === 'high').length;
   const criticTooWeak = highIssues > Number(approval.critic_max_high_issues ?? 1);
-  const rejected = ['reject', 'revise'].includes(critic?.verdict);
+  const criticRejected = critic?.verdict === 'reject';
   const continuityFailed = approval.continuity_must_pass !== false && continuity?.pass === false;
   const voteFailed = votes?.summary?.approved === false;
 
-  return Boolean(criticTooWeak || continuityFailed || rejected || voteFailed);
+  return Boolean(criticTooWeak || continuityFailed || criticRejected || voteFailed);
+}
+
+export function buildFallbackWriterDraft(chapter, chapterPlanner = {}, architect = {}, characterMaster = {}, error = null) {
+  const chapterTitle = chapterPlanner.chapter_title || `Chapter ${chapter}`;
+  const sceneCards = Array.isArray(chapterPlanner.scene_cards) && chapterPlanner.scene_cards.length
+    ? chapterPlanner.scene_cards
+    : [{
+        scene: 1,
+        goal: architect.chapter_goal || `Advance the conflict in chapter ${chapter}.`,
+        conflict: chapterPlanner.chapter_hook || '',
+        turn: chapterPlanner.cliffhanger || '',
+        image: ''
+      }];
+  const emotionalTargets = Array.isArray(characterMaster.emotional_targets)
+    ? characterMaster.emotional_targets.filter(Boolean).slice(0, 4)
+    : [];
+  const summary = [
+    architect.chapter_goal,
+    ...(chapterPlanner.arc_payoffs || [])
+  ].filter(Boolean).slice(0, 4).join(' ') || chapterPlanner.chapter_hook || `Forced fallback draft for chapter ${chapter}.`;
+  const unresolvedThreads = appendUniqueStrings([], [
+    ...(chapterPlanner.next_chapter_seed || []),
+    ...(architect.next_arc_targets || [])
+  ]).slice(0, 6);
+  const draftMarkdown = [
+    `# ${chapterTitle}`,
+    emotionalTargets.length ? `Emotional focus: ${emotionalTargets.join(', ')}.` : '',
+    chapterPlanner.chapter_hook || '',
+    ...sceneCards.map((card, index) => renderFallbackSceneCard(card, index)),
+    chapterPlanner.cliffhanger ? `## Cliffhanger\n\n${chapterPlanner.cliffhanger}` : ''
+  ].filter(Boolean).join('\n\n');
+
+  return {
+    type: 'draft',
+    chapter_title: chapterTitle,
+    summary,
+    draft_markdown: draftMarkdown,
+    scene_summaries: sceneCards.map((card, index) => summarizeFallbackSceneCard(card, index)),
+    unresolved_threads: unresolvedThreads.length ? unresolvedThreads : [chapterPlanner.cliffhanger || `Continue chapter ${chapter + 1}.`],
+    voice_report: {
+      tone: 'compressed fallback',
+      pacing: 'fast',
+      risk_taken: 'forced chapter completion after writer failure'
+    },
+    _meta: {
+      agent: 'writer',
+      role: 'Draft Writer',
+      model: 'local-fallback',
+      forced: true,
+      reason: getErrorMessage(error)
+    }
+  };
+}
+
+export function buildForcedReviewBundle(writer, chapterPlanner = {}, reason = '', existing = {}) {
+  const forcedReason = getErrorMessage(reason);
+  const existingSummary = existing.votes?.summary || {};
+
+  return {
+    critic: existing.critic || {
+      verdict: 'approve',
+      issues: [],
+      must_fix: [],
+      summary: `Critic skipped: ${forcedReason}`,
+      _meta: {
+        agent: 'critic',
+        role: 'Adversarial Critic',
+        model: 'forced-skip',
+        forced: true
+      }
+    },
+    continuity: existing.continuity || {
+      pass: true,
+      issues: [],
+      memory_updates: {
+        timeline_events: [],
+        canon_notes: []
+      },
+      summary: `Continuity skipped: ${forcedReason}`,
+      _meta: {
+        agent: 'continuity_keeper',
+        role: 'Continuity Librarian',
+        model: 'forced-skip',
+        forced: true
+      }
+    },
+    editor: existing.editor || {
+      chapter_title: writer.chapter_title || chapterPlanner.chapter_title || 'Untitled Chapter',
+      final_markdown: writer.draft_markdown || '',
+      final_summary: writer.summary || chapterPlanner.chapter_hook || '',
+      unresolved_threads: writer.unresolved_threads || chapterPlanner.next_chapter_seed || [],
+      changes: [],
+      memory_updates: {
+        timeline_events: [],
+        style_adjustments: []
+      },
+      summary: `Editor skipped: ${forcedReason}`,
+      _meta: {
+        agent: 'editor',
+        role: 'Line Editor',
+        model: 'forced-skip',
+        forced: true
+      }
+    },
+    votes: {
+      votes: existing.votes?.votes || [],
+      summary: {
+        approvals: Number(existingSummary.approvals || 0),
+        revises: Number(existingSummary.revises || 0),
+        rejects: 0,
+        averageScore: Number(existingSummary.averageScore || 1),
+        approved: true,
+        blockingVotes: [],
+        forced: true,
+        reason: forcedReason
+      }
+    }
+  };
+}
+
+async function recordForcedChapterFallback(rootPath, chapter, stage, error, output = {}) {
+  await recordActionLog(rootPath, {
+    source: 'workflow',
+    action: `force-${stage}`,
+    status: 'success',
+    input: {
+      chapter,
+      stage,
+      reason: getErrorMessage(error)
+    },
+    output: {
+      forced: true,
+      ...output
+    }
+  });
 }
 
 async function persistChapter(rootPath, chapterId, payload) {
@@ -791,6 +1036,8 @@ async function persistChapter(rootPath, chapterId, payload) {
     fs.rm(path.join(rootPath, CHAPTERS_DIR, `chapter_${chapterId}_it.md`), { force: true }),
     fs.rm(path.join(rootPath, CHAPTERS_DIR, `chapter_${chapterId}_translation.json`), { force: true }),
     writeJson(path.join(rootPath, CHAPTERS_DIR, `chapter_${chapterId}_plan.json`), {
+      active_book_id: payload.activeBookId,
+      book_title: payload.bookTitle,
       outline_snapshot: payload.outlineSnapshot,
       architect: payload.architect,
       character_master: payload.characterMaster,
@@ -798,6 +1045,8 @@ async function persistChapter(rootPath, chapterId, payload) {
     }),
     writeText(path.join(rootPath, CHAPTERS_DIR, `chapter_${chapterId}_draft.md`), `${payload.writer.draft_markdown || ''}\n`),
     writeJson(path.join(rootPath, CHAPTERS_DIR, `chapter_${chapterId}_review.json`), {
+      active_book_id: payload.activeBookId,
+      book_title: payload.bookTitle,
       critic: payload.critic,
       continuity_keeper: payload.continuity,
       editor: payload.editor,
@@ -806,6 +1055,36 @@ async function persistChapter(rootPath, chapterId, payload) {
     }),
     writeText(path.join(rootPath, CHAPTERS_DIR, `chapter_${chapterId}_final.md`), `${payload.finalMarkdown}\n`)
   ]);
+}
+
+function getGenerationStatePath(rootPath, bookId) {
+  return path.join(rootPath, MEMORY_DIR, 'books', bookId, GENERATION_STATE_FILE);
+}
+
+function getHighestTrackedChapter(chapters = []) {
+  return chapters.reduce((highestChapter, entry) => Math.max(highestChapter, Number(entry?.chapter || 0)), 0);
+}
+
+async function recordChapterProgress(rootPath, bookId, updates) {
+  const statePath = getGenerationStatePath(rootPath, bookId);
+  const existing = await readJson(statePath, {
+    lastPersistedChapter: 0,
+    lastCompletedChapter: 0,
+    targetChapterCount: 0,
+    updatedAt: null
+  });
+
+  const nextTargetChapterCount = Number(updates.targetChapterCount || 0) > 0
+    ? Number(updates.targetChapterCount)
+    : Number(existing.targetChapterCount || 0);
+
+  await writeJson(statePath, {
+    ...existing,
+    lastPersistedChapter: Math.max(Number(existing.lastPersistedChapter || 0), Number(updates.lastPersistedChapter || 0)),
+    lastCompletedChapter: Math.max(Number(existing.lastCompletedChapter || 0), Number(updates.lastCompletedChapter || 0)),
+    targetChapterCount: nextTargetChapterCount,
+    updatedAt: new Date().toISOString()
+  });
 }
 
 async function collectTranslationStatus(rootPath, chapters = []) {
@@ -1000,6 +1279,67 @@ function buildOutlineSnapshot(state, chapter, options) {
     previous_outline: lastOutline,
     arc_metrics: state.outlineMemory.arc_metrics || {}
   };
+}
+
+function renderFallbackSceneCard(card, index) {
+  const sceneNumber = card?.scene || index + 1;
+  const parts = [
+    card?.goal ? `Goal: ${card.goal}` : '',
+    card?.conflict ? `Conflict: ${card.conflict}` : '',
+    card?.turn ? `Turn: ${card.turn}` : '',
+    card?.image ? `Image: ${card.image}` : ''
+  ].filter(Boolean);
+
+  return `## Scene ${sceneNumber}\n\n${parts.join('. ')}.`;
+}
+
+function summarizeFallbackSceneCard(card, index) {
+  return [
+    card?.goal || `Scene ${card?.scene || index + 1}`,
+    card?.conflict || '',
+    card?.turn || ''
+  ].filter(Boolean).join(' ');
+}
+
+function getErrorMessage(error) {
+  return error instanceof Error ? error.message : String(error || 'forced fallback');
+}
+
+export function buildChapterBaseInput(state, chapter, options = {}) {
+  const outlineSnapshot = buildOutlineSnapshot(state, chapter, options);
+
+  return {
+    USER_INTENT: {
+      chapter,
+      idea: options.idea || '',
+      notes: options.notes || '',
+      requested_length: options.length || 'short chapter'
+    },
+    BOOK_BIBLE: state.bookBible,
+    TIMELINE: state.timeline,
+    STYLE_GUIDE: state.styleGuide,
+    OUTLINE_MEMORY: outlineSnapshot,
+    LAST_CHAPTER: state.timeline.chapters?.slice(-1)[0] || null,
+    WRITERS_ROOM: buildRoomState(state.effectiveAgents.agents)
+  };
+}
+
+export function shouldCreateBookForWrite(options = {}) {
+  return Boolean(
+    options.newBook
+    || options.forceNewBook
+    || options.auto
+    || hasValue(options.title)
+    || hasValue(options.premise)
+    || hasValue(options.subtitle)
+    || hasValue(options.tagline)
+    || hasValue(options.genre)
+    || hasValue(options.coverColor)
+    || hasValue(options.exportBaseName)
+    || hasValue(options.author)
+    || hasValue(options.theme)
+    || hasValue(options.themes)
+  );
 }
 
 function summarizeRivalries(agents, agentName) {

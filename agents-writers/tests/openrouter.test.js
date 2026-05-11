@@ -1,4 +1,7 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
 import test from 'node:test';
 
 import { callOpenRouter } from '../src/lib/openrouter.js';
@@ -17,8 +20,22 @@ function makePayload(rawContent) {
   };
 }
 
+async function makeTempRoot() {
+  return fs.mkdtemp(path.join(os.tmpdir(), 'openrouter-log-'));
+}
+
+async function readJsonLines(filePath) {
+  const content = await fs.readFile(filePath, 'utf8');
+  return content
+    .trim()
+    .split('\n')
+    .filter(Boolean)
+    .map((line) => JSON.parse(line));
+}
+
 test('callOpenRouter repairs control characters inside JSON strings', async () => {
   const originalFetch = globalThis.fetch;
+  const tempRoot = await makeTempRoot();
   const malformedJson = `{
   "type": "series_pattern",
   "pattern_overview": "Line one
@@ -38,6 +55,7 @@ under moonlight."
 
   try {
     const result = await callOpenRouter({
+      rootPath: tempRoot,
       apiKey: TEST_API_KEY,
       appTitle: 'Test',
       httpReferer: 'https://localhost',
@@ -54,11 +72,13 @@ under moonlight."
     assert.equal(result.data.next_book.premise, 'A council fractures\nunder moonlight.');
   } finally {
     globalThis.fetch = originalFetch;
+    await fs.rm(tempRoot, { recursive: true, force: true });
   }
 });
 
 test('callOpenRouter still throws on genuinely non-JSON content', async () => {
   const originalFetch = globalThis.fetch;
+  const tempRoot = await makeTempRoot();
 
   globalThis.fetch = async () => ({
     ok: true,
@@ -69,6 +89,7 @@ test('callOpenRouter still throws on genuinely non-JSON content', async () => {
   try {
     await assert.rejects(
       () => callOpenRouter({
+        rootPath: tempRoot,
         apiKey: TEST_API_KEY,
         appTitle: 'Test',
         httpReferer: 'https://localhost',
@@ -82,11 +103,13 @@ test('callOpenRouter still throws on genuinely non-JSON content', async () => {
     );
   } finally {
     globalThis.fetch = originalFetch;
+    await fs.rm(tempRoot, { recursive: true, force: true });
   }
 });
 
 test('callOpenRouter retries when the model returns an empty response', async () => {
   const originalFetch = globalThis.fetch;
+  const tempRoot = await makeTempRoot();
   let calls = 0;
 
   globalThis.fetch = async () => {
@@ -109,6 +132,7 @@ test('callOpenRouter retries when the model returns an empty response', async ()
 
   try {
     const result = await callOpenRouter({
+      rootPath: tempRoot,
       apiKey: TEST_API_KEY,
       appTitle: 'Test',
       httpReferer: 'https://localhost',
@@ -123,11 +147,13 @@ test('callOpenRouter retries when the model returns an empty response', async ()
     assert.equal(result.data.next_book.title, 'Recovered');
   } finally {
     globalThis.fetch = originalFetch;
+    await fs.rm(tempRoot, { recursive: true, force: true });
   }
 });
 
 test('callOpenRouter repairs missing commas between JSON array elements', async () => {
   const originalFetch = globalThis.fetch;
+  const tempRoot = await makeTempRoot();
   const malformedJson = `{
   "type": "chapter_plan",
   "arc_targets": [
@@ -148,6 +174,7 @@ test('callOpenRouter repairs missing commas between JSON array elements', async 
 
   try {
     const result = await callOpenRouter({
+      rootPath: tempRoot,
       apiKey: TEST_API_KEY,
       appTitle: 'Test',
       httpReferer: 'https://localhost',
@@ -168,5 +195,145 @@ test('callOpenRouter repairs missing commas between JSON array elements', async 
     ]);
   } finally {
     globalThis.fetch = originalFetch;
+    await fs.rm(tempRoot, { recursive: true, force: true });
+  }
+});
+
+test('callOpenRouter appends request and response entries to the live log in real time', async () => {
+  const originalFetch = globalThis.fetch;
+  const tempRoot = await makeTempRoot();
+  const logPath = path.join(tempRoot, 'logs', 'openrouter', 'openrouter-live.jsonl');
+  let requestLoggedBeforeResponse = false;
+
+  globalThis.fetch = async () => {
+    const entries = await readJsonLines(logPath);
+    requestLoggedBeforeResponse = entries.some((entry) => entry.phase === 'request' && entry.model === 'openai/gpt-oss-20b:free');
+
+    return {
+      ok: true,
+      status: 200,
+      statusText: 'OK',
+      json: async () => makePayload('{"type":"series_pattern","next_book":{"title":"Logged live"}}')
+    };
+  };
+
+  try {
+    const result = await callOpenRouter({
+      rootPath: tempRoot,
+      apiKey: TEST_API_KEY,
+      appTitle: 'Test',
+      httpReferer: 'https://localhost',
+      model: 'openai/gpt-oss-20b:free',
+      systemPrompt: 'Return JSON only.',
+      input: { ping: true },
+      temperature: 0.2,
+      maxTokens: 120
+    });
+
+    const entries = await readJsonLines(logPath);
+
+    assert.equal(result.data.next_book.title, 'Logged live');
+    assert.equal(requestLoggedBeforeResponse, true);
+    assert.equal(entries.length, 2);
+    assert.equal(entries[0].phase, 'request');
+    assert.equal(entries[1].phase, 'response');
+    assert.equal(entries[1].status, 200);
+    assert.equal(entries[0].headers.Authorization, undefined);
+  } finally {
+    globalThis.fetch = originalFetch;
+    await fs.rm(tempRoot, { recursive: true, force: true });
+  }
+});
+
+test('callOpenRouter appends an error entry when fetch fails', async () => {
+  const originalFetch = globalThis.fetch;
+  const tempRoot = await makeTempRoot();
+  const logPath = path.join(tempRoot, 'logs', 'openrouter', 'openrouter-live.jsonl');
+
+  globalThis.fetch = async () => {
+    throw new Error('socket hang up');
+  };
+
+  try {
+    await assert.rejects(
+      () => callOpenRouter({
+        rootPath: tempRoot,
+        apiKey: TEST_API_KEY,
+        appTitle: 'Test',
+        httpReferer: 'https://localhost',
+        model: 'openai/gpt-oss-20b:free',
+        systemPrompt: 'Return JSON only.',
+        input: { ping: true },
+        temperature: 0.2,
+        maxTokens: 120
+      }),
+      /socket hang up/
+    );
+
+    const entries = await readJsonLines(logPath);
+
+    assert.equal(entries.length, 2);
+    assert.equal(entries[0].phase, 'request');
+    assert.equal(entries[1].phase, 'error');
+    assert.equal(entries[1].error.message, 'socket hang up');
+  } finally {
+    globalThis.fetch = originalFetch;
+    await fs.rm(tempRoot, { recursive: true, force: true });
+  }
+});
+
+test('callOpenRouter times out while reading the response body', async () => {
+  const originalFetch = globalThis.fetch;
+  const tempRoot = await makeTempRoot();
+  const logPath = path.join(tempRoot, 'logs', 'openrouter', 'openrouter-live.jsonl');
+
+  globalThis.fetch = async (_url, options = {}) => ({
+    ok: true,
+    status: 200,
+    statusText: 'OK',
+    text: async () => new Promise((resolve, reject) => {
+      const abortSignal = options.signal;
+
+      if (abortSignal?.aborted) {
+        const error = new Error('The operation was aborted');
+        error.name = 'AbortError';
+        reject(error);
+        return;
+      }
+
+      abortSignal?.addEventListener('abort', () => {
+        const error = new Error('The operation was aborted');
+        error.name = 'AbortError';
+        reject(error);
+      }, { once: true });
+    })
+  });
+
+  try {
+    await assert.rejects(
+      () => callOpenRouter({
+        rootPath: tempRoot,
+        apiKey: TEST_API_KEY,
+        appTitle: 'Test',
+        httpReferer: 'https://localhost',
+        model: 'openai/gpt-oss-20b:free',
+        systemPrompt: 'Return JSON only.',
+        input: { ping: true },
+        temperature: 0.2,
+        maxTokens: 120,
+        timeoutMs: 10
+      }),
+      /timed out after 10ms/
+    );
+
+    const entries = await readJsonLines(logPath);
+
+    assert.equal(entries.length, 2);
+    assert.equal(entries[0].phase, 'request');
+    assert.equal(entries[1].phase, 'error');
+    assert.match(entries[1].error.message, /timed out after 10ms/);
+  } finally {
+    globalThis.fetch = originalFetch;
+    await fs.rm(tempRoot, { recursive: true, force: true });
   }
 });

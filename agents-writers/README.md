@@ -46,16 +46,16 @@ Create another book in the same series shelf:
 npm run new-book -- --title "The Mirror Orchard"
 ```
 
-Create a new book and draft 20 chapters in one run:
+Write or resume the active book in one run:
 
 ```bash
 npm run write-book
 ```
 
-You can still pass book metadata or override the default chapter count:
+You can start a fresh book first and override the default chapter target:
 
 ```bash
-npm run write-book -- --title "The Glass Mandate" --premise "A council of scribes taxes bottled grief." --count 12
+npm run write-book -- --new-book --title "The Glass Mandate" --premise "A council of scribes taxes bottled grief." --count 12
 ```
 
 If you omit the title and premise, the `series_architect` agent invents the next-book pattern and creates the book automatically:
@@ -63,6 +63,8 @@ If you omit the title and premise, the `series_architect` agent invents the next
 ```bash
 npm run new-book
 ```
+
+While the command runs, every OpenRouter request and response is appended in real time to `logs/openrouter/openrouter-live.jsonl`, so you can tail the file while the book is being planned.
 
 Preview the automated next-book plan without creating it:
 
@@ -87,6 +89,8 @@ Generate several chapters automatically:
 ```bash
 npm run generate-book -- --count 3 --idea "The orchard starts speaking through reflected weather."
 ```
+
+If a run is interrupted after a chapter has already been persisted, the next `generate-book` or `write-book` run resumes from the following chapter unless you override it with `--start-chapter`. The `--count` value is treated as the total chapter target for the active book, not as “generate N more chapters from here”.
 
 Translate one finished chapter into Italian:
 

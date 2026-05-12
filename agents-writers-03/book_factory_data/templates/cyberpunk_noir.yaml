@@ -1,0 +1,29 @@
+genre: science fiction
+subgenre: cyberpunk noir
+style: sharp, cinematic, and street-level
+tone: tense, neon-soaked, morally compromised
+pov: first person or very tight third person
+setting:
+  era: near-future corporate megacity
+  environment: monorails, data markets, flooded alleys, rooftop bars, and surveillance-heavy districts
+story_engine:
+  protagonist: damaged specialist with one marketable talent and too many debts
+  central_conflict: a private case exposes a system-level conspiracy that can either be sold, buried, or weaponized
+  promise: investigation, betrayals, high-tech pressure, and difficult tradeoffs
+themes:
+  - identity under commodification
+  - memory and edited truth
+  - survival inside corrupted systems
+  - loyalty when everyone is rentable
+prose_guidelines:
+  - favor vivid urban detail and hard-edged dialogue
+  - keep exposition embedded in action and observation
+  - maintain a sense of pressure, velocity, and surveillance
+chapter_expectations:
+  - open with a problem already in motion
+  - include a clue, leverage shift, or betrayal in every chapter
+  - end on a sharper disadvantage or dangerous reveal
+avoid:
+  - generic hacker jargon without context
+  - clean good-versus-evil framing
+  - long lectures about technology

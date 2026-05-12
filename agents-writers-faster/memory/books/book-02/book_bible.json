@@ -1,0 +1,25 @@
+{
+  "title": "The Mirror Orchard",
+  "genre": "dark fantasy",
+  "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
+  "themes": [
+    "grief",
+    "ambition",
+    "memory"
+  ],
+  "world_rules": [
+    "Glass can store emotions when cooled under moonlight.",
+    "Breaking a glass fruit permanently alters one memory."
+  ],
+  "characters": {
+    "Elisa": {
+      "role": "heir",
+      "wound": "mother's disappearance",
+      "arc": "control to surrender",
+      "secrets": [
+        "She caused the first orchard fire."
+      ]
+    }
+  },
+  "chapter_registry": []
+}

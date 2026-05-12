@@ -1,0 +1,66 @@
+{
+  "active_book_id": "book-18",
+  "book_title": "The Scribe’s Veil: Echoes of the Aetheric Quill",
+  "critic": {
+    "verdict": "approve",
+    "issues": [],
+    "must_fix": [],
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "critic",
+      "role": "Adversarial Critic",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "continuity_keeper": {
+    "pass": true,
+    "issues": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "canon_notes": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "continuity_keeper",
+      "role": "Continuity Librarian",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "editor": {
+    "chapter_title": "The Veil's Convergence",
+    "final_markdown": "The cathedral’s cracked spire had always been a beacon, a swallowed star gazing down at the twisted streets below. Now, ink throbbed like living blood in its veins, seeping outward in a slow, suffocating tide that turned the sky into a rolling script, each droplet a syllable of lost history.\n\nElisa stood in the cathedral’s nave, her eyes the only thing left that had not turned to soot. The veil had already wrapped everything—a lattice of ink that could rewrite anything it touched, erasing anyone who dared touch the Quill’s promise. The final breath of ink should have been a silence, a closing of a book, but instead it whispered.\n\n— *El‑sì.*\n\nThe forbidden word glowed on the parchment of the veil, a glyph that flickered once the memory‑drain of the echo‑phage swelled to the edge of oblivion. It was not a word to be spoken—the glyph itself was a living warning. It demanded a touch, a transference of the last fractured memory, a surrender of something that Elise carried like a scar.\n\nShe felt the echo‑phage’s lattice around the cathedral. It pulsed against her heart, a wall of ink‑shards that could coil and claw if she let its memory‑drain seep into her mind. The glyph of half‑sigil, carved in a motif that had existed in the first droplet of ink, only revealed itself when she reached the edge of total forgetting. The echo‑phage’s mood shifted, as if it sensed her fracture.\n\nThe chorus, a symphony of living verses that had devoured the world’s spoken words, grew louder. It pulled the forbidden glyph from the pores of the quivering ink, promising a reset, a blank parchment. In the crescendo, a new echo‑phage appeared, spectral and translucent. It was not the static lattice she had known; it was fluid, breathing with the cadence of any spoken word. It hunted *el‑sì*, a predator that adapted to the rhythm of her tongue.\n\nElisa’s mind frayed. The memory‑drain was demanding. The half‑sigil was here, but only in a form that required full forgetting. All the whispers of the ancient keeper wove through the shattered walls, a pulse that suggested the offer still hung—provide the Quill’s origin, erase the House’s recorded history. It was a bargain that weighed heavier than the loss of any single memory.\n\nIn the corner of the cathedral, the Mirror Fruit lay crumbled, a shard of glass that had reflected her first step into the cathedral as a child. It still hummed with the power to hold a lost fragment, a ghost of her mother’s lullaby seeped into its surface. She could press it to *el‑sì*, but that would trade her entire narrative for a pause in the chorus. Or she could let the chorus speak, allow the forbidden syllable to cascade and collapse, and become an unknowable void—her being erased from the ink, a hollow shell that might still write but could never recall her own name.\n\nThe actors in the cathedral – the broken stained glass, the bare stone, the whispering choir of insects that had made songs of smoke – all seemed to draw breath, each waiting for her choice.\n\nElisa closed her eyes. The pulsing glow made the space feel colder, colder, until the choir’s song melted into a single, resonant hum. The sun, a dying ember, fell through the stained glass, painting her silhouette in violet. *She* had once been the one who held ink, who could scribe reality. Now she stood as the living lock, a single line in the script of the world, a missing half that could either hold the Veil together or crack it open.\n\nShe lifted the Mirror Fruit. In its shallow, swirling surface, the last fragment of her mother’s lullaby shimmered—an echo of a name she could not recall, a syllable she could not speak. She pressed it to *el‑sì*, the glyph that winked like a dying star. The ink around the cathedral crackled, a wave of ink racing upward in a fractal flare. She felt the world tilt.\n\nThen a voice thundered from the soil below, older than stone, reverently asking: **Will you bind the veil and erase your story, or will you collapse its chorus and forget yourself entirely?**\n\nThe new echo‑phage shifted its lattice, vibrating in time with her pulse, hungry for the forbidden word. The ancient keeper’s pulse at the cathedral’s crypt throbbed, hidden but audible like an old drum.\n\nThe choice? She would have to make it alone.\n\nShe raised her hand, palm already half‑erased, to touch the Mirror Fruit. The cusp of the glyph *el‑sì* pulsed, luminous. She inhaled, felt a whisper in the margins of her mind—an unseen thread that flirted with the keeper’s intended bargain.\n\nThe cathedral hushed as she reached out.\n\n---\n\n**In the world outside**, the Veil had reached 100%, consuming the last paragraph of history like a hungry tide. The choir of words had long been silenced, leaving a blank canvas only the chorus could revive.\n\n\n\n**A new echo‑phage hovered**, a lattice that moved with speech, hunting for the forbidden word. Its presence masked a deeper tension—what would become of the ancient keeper if Elisa decided to keep the ledger of the Quill intact? The pathway was set; the threads twisted, entwining past and future.\n\n---\n\nThe chapter concludes with Elisa poised—her hand hovering above the Mirror Fruit, the glyph *el‑sì* trembling—waiting to decide whether to bind the Veil and become a living lock or to collapse the chorus, a gesture that would rewrite reality into an empty page. Her choice would affect the entire world, the memory of her mother, and the fate of the ancient keeper.\n\n---\n\nThe unresolved thread remains: What is the true motive behind the ancient keeper’s offer? Did it serve to protect the Quill’s origin, or is it a deeper, more sinister manipulation that could twist the world beyond comprehension? The echo‑phage variant stands as a new threat, its ability to claim the forbidden word hinting at a future confrontation.\n",
+    "final_summary": "The World is swallowed by ink‑beaded sky as the Veil reaches 100%. The chorus heralds the forbidden glyph *el‑sì*, while Echo‑phage’s ruthless lattice reveals the half‑sigil only when Elisa is on the brink of oblivion. She must choose between becoming the living lock that seals the world forever or collapsing the chorus and losing herself. The chapter pushes stakes to their apex, introduces a new echo‑phage variant that hunts the forbidden word, and plants an unresolved thread about the ancient keeper’s true intent.",
+    "unresolved_threads": [
+      "The ancient keeper’s true motive: ally or manipulative antagonist, and the impact on the Quill’s origin."
+    ],
+    "changes": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "style_adjustments": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "editor",
+      "role": "Line Editor",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "votes": {
+    "votes": [],
+    "summary": {
+      "approvals": 0,
+      "revises": 0,
+      "rejects": 0,
+      "averageScore": 1,
+      "approved": true,
+      "blockingVotes": [],
+      "skipped": true,
+      "reason": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review."
+    }
+  },
+  "review_mode": "fast",
+  "revision_round": 0
+}

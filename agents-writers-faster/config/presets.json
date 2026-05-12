@@ -1,0 +1,57 @@
+{
+  "presets": {
+    "Sad Poet": {
+      "writer": {
+        "prose_style": "lyrical",
+        "poetic_level": 0.9,
+        "verbosity": 0.8,
+        "humor": 0.1
+      }
+    },
+    "Netflix Producer": {
+      "architect": {
+        "plot_twist_rate": 0.9,
+        "risk_appetite": 0.95
+      },
+      "chapter_planner": {
+        "pacing": "fast",
+        "cliffhanger_strength": 0.95
+      },
+      "writer": {
+        "verbosity": 0.45,
+        "show_vs_tell": 0.8
+      },
+      "critic": {
+        "marketability_bias": 0.9
+      }
+    },
+    "Old Master Editor": {
+      "editor": {
+        "aggressiveness": 0.8,
+        "sentence_simplicity": 0.75,
+        "voice_preservation": 0.85
+      }
+    },
+    "Chaotic Muse": {
+      "architect": {
+        "originality": 0.98,
+        "risk_appetite": 1
+      },
+      "writer": {
+        "poetic_level": 0.95,
+        "humor": 0.4
+      }
+    },
+    "Soap Opera Engine": {
+      "character_master": {
+        "relationship_intensity": 0.98,
+        "dialogue_style": "emotional and confrontational"
+      },
+      "writer": {
+        "verbosity": 0.7,
+        "show_vs_tell": 0.85,
+        "humor": 0.25
+      }
+    }
+  }
+}

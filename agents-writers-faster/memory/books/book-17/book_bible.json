@@ -1,0 +1,38 @@
+{
+  "title": "Book 17",
+  "genre": "dark fantasy",
+  "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
+  "themes": [
+    "ambition",
+    "identity sacrifice",
+    "the cost of power",
+    "memory as currency",
+    "the thin line between creation and annihilation"
+  ],
+  "world_rules": [
+    "Glass can store emotions when cooled under moonlight.",
+    "Breaking a glass fruit permanently alters one memory."
+  ],
+  "characters": {
+    "Elisa": {
+      "role": "heir",
+      "wound": "mother's disappearance",
+      "arc": "control to surrender",
+      "secrets": [
+        "She caused the first orchard fire."
+      ]
+    }
+  },
+  "chapter_registry": [],
+  "exportBaseName": "book-17",
+  "cover": {
+    "title": "Book 17",
+    "subtitle": "",
+    "author": "OpenRouter Book Agents",
+    "tagline": "A group of rival agents write a book while trying to outmaneuver each other.",
+    "color": "#2b1f3a"
+  },
+  "series_role": "",
+  "carry_over_threads": [],
+  "automation_notes": []
+}

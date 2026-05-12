@@ -1,0 +1,2 @@
+Title: *Luce tra le Ombre*
+Premise: In a quiet coastal town where time seems to pause, a young woman discovers a hidden journal that reveals the true story of her kindred spirits, forcing her to confront the love that has always been just beyond reach. She navigates a web of forgotten emotions and unresolved pasts, seeking connection in a world that often feels distant. At the heart of her journey lies a profound emotional core: the longing for understanding and the courage to embrace vulnerability.

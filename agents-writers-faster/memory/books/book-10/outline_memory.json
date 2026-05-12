@@ -1,0 +1,25 @@
+{
+  "story_arc": {
+    "current_phase": "opening",
+    "global_targets": [
+      "grief",
+      "ambition",
+      "memory",
+      "rebirth",
+      "authority",
+      "latent chaos",
+      "memory inheritance",
+      "destiny"
+    ],
+    "endgame_promises": []
+  },
+  "active_arcs": [],
+  "arc_metrics": {},
+  "next_targets": [
+    "Establishing a provisional narrative spine from the ashes of collapse",
+    "Introducing the Crystal Chalice as the evolved memory‑glass mechanic",
+    "Seeding the latent chaos that will later fracture into the next memory‑fracture volume"
+  ],
+  "chapter_outlines": [],
+  "last_vote_summary": null
+}

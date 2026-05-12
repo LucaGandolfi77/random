@@ -1,0 +1,68 @@
+{
+  "active_book_id": "book-19",
+  "book_title": "The Huge Gap",
+  "critic": {
+    "verdict": "approve",
+    "issues": [],
+    "must_fix": [],
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "critic",
+      "role": "Adversarial Critic",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "continuity_keeper": {
+    "pass": true,
+    "issues": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "canon_notes": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "continuity_keeper",
+      "role": "Continuity Librarian",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "editor": {
+    "chapter_title": "Veins of Ink",
+    "final_markdown": "## Veins of Ink\n\nThe glass bloom, once a pale lantern, grew now as a bruised heart, its crimson veins spilling across ink‑stained parchment like bruises on a wind‑tossed hand. The room, a hushed chamber of trembling quills, breathed collective dread as the bloom’s pulse picked up the faint scent of a changing moon. A brush of midnight ink, once clean, thickened to a slick, dark river that curled over the wooden desk, leaving a wet halo of no‑one‑can‑tie‑a‑name‑lines. In the corner, a courier moved as silently as a ghost, his coat a plume of soot, and slipped a sealed vial into the center of the board. The glass inside glowed softly, a soft defect of violet under the heavy light, as if the world held its breath.\n\nElisa raised her hand, the heat of her hidden ember thrumming beneath her skin. Mara watched, fingers poised over inked pages, her eyes flicking to that same vial. The room hissed as the bloom’s light dimmed, the black ink spreading like a tide, swallowing text, fogging the air. When the bloom’s pulse flared, a silent crack filled the space—a small fragment of glass shattered mid‑air, scattering tiny prisms. The scatter of light birthed a chorus of frozen fireflies that flickered against the backdrop of the dark ink.\n\n“Rewrite the failed chapter{ffffffurffurffurffurffurfur_",
+    "final_summary": "A blackened vial of cursed ink slides into the drafting room and turns the blooming glass into a living, writhing heart. As the bloom’s pulse stabs memory, Elisa and Mara scramble for the hidden glass fruit, each seeking narrative dominion. A frozen breath of time cracks the room, and a second inscription releases a new mystery while the ink stains everything, hinting the manuscript may turn its own hand on them.",
+    "unresolved_threads": [
+      "What will the hidden glass fruit inside the drawer reveal about the true ending of the book?",
+      "Mara's ultimate motive for stealing the original glass fruit remains shadowed behind her threat.",
+      "The cursed ink’s rewriting power has just begun and the full extent of its alteration remains unknown."
+    ],
+    "changes": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "style_adjustments": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "editor",
+      "role": "Line Editor",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "votes": {
+    "votes": [],
+    "summary": {
+      "approvals": 0,
+      "revises": 0,
+      "rejects": 0,
+      "averageScore": 1,
+      "approved": true,
+      "blockingVotes": [],
+      "skipped": true,
+      "reason": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review."
+    }
+  },
+  "review_mode": "fast",
+  "revision_round": 0
+}

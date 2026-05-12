@@ -1,0 +1,706 @@
+{
+  "active_book_id": "book-19",
+  "book_title": "The Huge Gap",
+  "outline_snapshot": {
+    "chapter": 11,
+    "current_phase": "crisis",
+    "active_arcs": [
+      "Elisa’s control to surrender arc begins; she hides a secret fire that foreshadows rebellion.  Memory’s volatility is introduced via glass fruit.  Grief surfaces as a shared loss among the agents.  Ambition is shown in competitive manuscript edits.",
+      "Elisa’s control to surrender arc begins; she hides a secret fire that foreshadows rebellion.",
+      "Memory’s volatility is heightened by the shattered fruit’s lingering shards.",
+      "Grief surfaces as a shared loss among the agents.",
+      "Mara’s theft of the glass fruit leads to a desperate attempt to reclaim it.",
+      "Elisa’s hidden fire resurfaces, threatening the orchard.",
+      "The group’s rivalry turns into a direct confrontation.",
+      "Elisa’s secret fully revealed; the glass fruit’s memory‑altering power is exploited; the agents’ rivalry escalates into sabotage.",
+      "Mara’s motive for stealing the glass fruit, potentially tied to her own hidden grief or ambition.",
+      "Elisa’s hidden fire resurfaces, threatening the orchard",
+      "Mara’s theft of the glass fruit leads to a desperate attempt to reclaim it",
+      "The group’s rivalry turns into a direct confrontation",
+      "Emergent glass bloom’s unknown power threatens memory control",
+      "The newly formed glass bloom pulses with captured sorrow, and a silent messenger arrives bearing a sealed manuscript that claims to contain the true ending of the book.",
+      "The emergent glass bloom’s unknown power and its potential to alter memories or control the orchard.",
+      "Mara’s true motive for stealing the original glass fruit remains concealed.",
+      "The sealed manuscript bears a cryptic title that hints at a hidden chapter; Mara’s motive is hinted through a whispered confession; the orchard’s soil cracks, suggesting the bloom’s power will grow",
+      "Mara’s true motive for stealing the original glass fruit remains concealed",
+      "The newly formed glass bloom pulses with captured sorrow and a sealed manuscript appears",
+      "Elisa’s secret fully revealed and exploited",
+      "What will the hidden glass fruit inside the drawer reveal about the true ending of the book?",
+      "Mara's ultimate motive for stealing the original glass fruit remains shadowed behind her threat.",
+      "The cursed ink’s rewriting power has just begun and the full extent of its alteration remains unknown.",
+      "The inscription on the hidden fruit reads: ‘Beyond the gap lies the void where words die.’",
+      "Mara whispers a half‑confession about a lost sibling tied to the original glass fruit.",
+      "A cursed ink, spilled from the manuscript, begins rewriting minor details of the agents’ pasts",
+      "The ledger reveals that the orchard fire was not Elisa’s doing but a pact made with a forgotten god.",
+      "Mara discovers that the ink‑scribe is an agent of the glass fruit’s original owner.",
+      "A new character, the ink‑scribe, appears to offer a trade.",
+      "The manuscript begins to rewrite the agents’ memories of the orchard fire.",
+      "The ledger’s last entry hints at a pact that may undo the orchard fire. The implications of this pact and its harm to the agents remain uncovered.",
+      "How Lara—Mara’s lost sibling—apparent motive still needs untangling.",
+      "The full extent of the ink’s rewriting power and how it will affect Elisa’s perception of her mother’s disappearance.",
+      "The ink‑scribe’s bargain: trade a memory for the orchard’s salvation.",
+      "The hidden glass fruit inside the drawer may contain a key to the orchard’s fate.",
+      "The ink‑scribe’s true identity and the full terms of the bargain remain hidden, foreshadowing a larger conspiracy.",
+      "Mara’s hidden motive for the glass fruit—whether revenge or redemption—still hangs in the balance.",
+      "Mara’s hidden motive for the glass fruit—whether revenge or redemption—still hangs in the balance",
+      "The ledger’s final entry reveals the true bargain",
+      "The orchard’s fate is decided by a single act of memory erasure",
+      "The ink‑scribe’s bargain remains half‑spoken, hinting at a larger conspiracy.",
+      "The orchard’s roots now glow with a new, unsettling light, hinting at a new kind of memory blooming",
+      "The ledger’s final entry will name the forgotten god and the price of the orchard’s salvation",
+      "Mara will reveal her sibling’s name and the reason she coveted the glass fruit",
+      "Elisa will decide to sacrifice her memory of her mother to save the orchard",
+      "The ledger’s final entry remains hidden, its ink pulsing with a promise that could either undo the orchard or erase the agents’ past entirely.",
+      "The orchard’s roots glow with a new, unsettling light, hinting at a new kind of memory blooming{ffffffffffffffffffurn_",
+      "[object Object]"
+    ],
+    "next_targets": [
+      "Elisa’s memory wipe causes a ripple in the orchard’s new bloom; Mara’s revealed sibling name sets up a betrayal in the next chapter.",
+      "The orchard’s roots glow with a new, unsettling light, hinting at a new kind of memory blooming",
+      "The ledger’s final entry will name the forgotten god and the price of the orchard’s salvation",
+      "Mara will reveal her sibling’s name and the reason she coveted the glass fruit",
+      "Elisa will decide to sacrifice her memory of her mother to save the orchard"
+    ],
+    "global_targets": [
+      "grief",
+      "ambition",
+      "memory",
+      "Elisa’s control to surrender arc begins; she hides a secret fire that foreshadows rebellion.  Memory’s volatility is introduced via glass fruit.  Grief surfaces as a shared loss among the agents.  Ambition is shown in competitive manuscript edits.",
+      "Elisa’s control to surrender arc begins; she hides a secret fire that foreshadows rebellion.",
+      "Memory’s volatility is heightened by the shattered fruit’s lingering shards.",
+      "Grief surfaces as a shared loss among the agents.",
+      "Mara’s theft of the glass fruit leads to a desperate attempt to reclaim it.",
+      "Elisa’s hidden fire resurfaces, threatening the orchard.",
+      "The group’s rivalry turns into a direct confrontation.",
+      "Elisa’s secret fully revealed; the glass fruit’s memory‑altering power is exploited; the agents’ rivalry escalates into sabotage.",
+      "Mara’s motive for stealing the glass fruit, potentially tied to her own hidden grief or ambition.",
+      "Elisa’s hidden fire resurfaces, threatening the orchard",
+      "Mara’s theft of the glass fruit leads to a desperate attempt to reclaim it",
+      "The group’s rivalry turns into a direct confrontation",
+      "Emergent glass bloom’s unknown power threatens memory control",
+      "The newly formed glass bloom pulses with captured sorrow, and a silent messenger arrives bearing a sealed manuscript that claims to contain the true ending of the book.",
+      "The emergent glass bloom’s unknown power and its potential to alter memories or control the orchard.",
+      "Mara’s true motive for stealing the original glass fruit remains concealed.",
+      "The sealed manuscript bears a cryptic title that hints at a hidden chapter; Mara’s motive is hinted through a whispered confession; the orchard’s soil cracks, suggesting the bloom’s power will grow",
+      "Mara’s true motive for stealing the original glass fruit remains concealed",
+      "The newly formed glass bloom pulses with captured sorrow and a sealed manuscript appears",
+      "Elisa’s secret fully revealed and exploited",
+      "What will the hidden glass fruit inside the drawer reveal about the true ending of the book?",
+      "Mara's ultimate motive for stealing the original glass fruit remains shadowed behind her threat.",
+      "The cursed ink’s rewriting power has just begun and the full extent of its alteration remains unknown.",
+      "The inscription on the hidden fruit reads: ‘Beyond the gap lies the void where words die.’",
+      "Mara whispers a half‑confession about a lost sibling tied to the original glass fruit.",
+      "A cursed ink, spilled from the manuscript, begins rewriting minor details of the agents’ pasts",
+      "The ledger reveals that the orchard fire was not Elisa’s doing but a pact made with a forgotten god.",
+      "Mara discovers that the ink‑scribe is an agent of the glass fruit’s original owner.",
+      "A new character, the ink‑scribe, appears to offer a trade.",
+      "The manuscript begins to rewrite the agents’ memories of the orchard fire.",
+      "The ledger’s last entry hints at a pact that may undo the orchard fire. The implications of this pact and its harm to the agents remain uncovered.",
+      "How Lara—Mara’s lost sibling—apparent motive still needs untangling.",
+      "The full extent of the ink’s rewriting power and how it will affect Elisa’s perception of her mother’s disappearance.",
+      "The ink‑scribe’s bargain: trade a memory for the orchard’s salvation.",
+      "The hidden glass fruit inside the drawer may contain a key to the orchard’s fate.",
+      "The ink‑scribe’s true identity and the full terms of the bargain remain hidden, foreshadowing a larger conspiracy.",
+      "Mara’s hidden motive for the glass fruit—whether revenge or redemption—still hangs in the balance.",
+      "Mara’s hidden motive for the glass fruit—whether revenge or redemption—still hangs in the balance",
+      "The ledger’s final entry reveals the true bargain",
+      "The orchard’s fate is decided by a single act of memory erasure",
+      "The ink‑scribe’s bargain remains half‑spoken, hinting at a larger conspiracy.",
+      "The orchard’s roots now glow with a new, unsettling light, hinting at a new kind of memory blooming",
+      "The ledger’s final entry will name the forgotten god and the price of the orchard’s salvation",
+      "Mara will reveal her sibling’s name and the reason she coveted the glass fruit",
+      "Elisa will decide to sacrifice her memory of her mother to save the orchard",
+      "The ledger’s final entry remains hidden, its ink pulsing with a promise that could either undo the orchard or erase the agents’ past entirely.",
+      "The orchard’s roots glow with a new, unsettling light, hinting at a new kind of memory blooming{ffffffffffffffffffurn_",
+      "[object Object]"
+    ],
+    "endgame_promises": [],
+    "previous_outline": {
+      "chapter": 10,
+      "title": "Ink and Cataclysm",
+      "chapter_goal": "Force the agents to confront the ledger’s hidden bargain, heighten the orchard threat, and expose a new betrayal that will set up the next chapter’s reckoning.",
+      "arc_targets": [
+        "Elisa’s hidden fire resurfaces, threatening the orchard",
+        "Mara’s hidden motive for the glass fruit—whether revenge or redemption—still hangs in the balance",
+        "The ledger’s final entry reveals the true bargain",
+        "The orchard’s fate is decided by a single act of memory erasure",
+        "The orchard’s roots glow with a new, unsettling light, hinting at a new kind of memory blooming{ffffffffffffffffffurn_",
+        "[object Object]",
+        "The orchard’s roots now glow with a new, unsettling light, hinting at a new kind of memory blooming",
+        "The ledger’s final entry will name the forgotten god and the price of the orchard’s salvation",
+        "Mara will reveal her sibling’s name and the reason she coveted the glass fruit",
+        "Elisa will decide to sacrifice her memory of her mother to save the orchard"
+      ],
+      "next_arc_targets": [
+        "Elisa’s memory wipe causes a ripple in the orchard’s new bloom; Mara’s revealed sibling name sets up a betrayal in the next chapter.",
+        "The orchard’s roots glow with a new, unsettling light, hinting at a new kind of memory blooming",
+        "The ledger’s final entry will name the forgotten god and the price of the orchard’s salvation",
+        "Mara will reveal her sibling’s name and the reason she coveted the glass fruit",
+        "Elisa will decide to sacrifice her memory of her mother to save the orchard"
+      ],
+      "unresolved_threads": [
+        "Elisa’s memory wipe causes a ripple in the orchard’s new bloom; Mara’s revealed sibling name sets up a betrayal in the next chapter."
+      ],
+      "planned_payoffs": [
+        "Elisa sacrifices her mother's memory to save the orchard, cementing her surrender arc.",
+        "Mara’s confession exposes hidden grief that fuels her ambition.",
+        "The ledger’s final line names the forgotten god, raising cosmic stakes."
+      ],
+      "outline_notes": [
+        "Describe the ledger as moonlit cracked parchment; orchard fire as pulse of light; glass shards as memory shards; include Mara’s whispered confession of Lara; Elisa’s memory wipe must be permanent.",
+        "Elisa’s memory wipe is permanent.",
+        "Mara’s sibling name Lara is revealed.",
+        "Ledger’s final entry names the forgotten god.",
+        "The orchard’s new memory bloom is now active."
+      ],
+      "vote_summary": {
+        "approvals": 0,
+        "revises": 0,
+        "rejects": 0,
+        "averageScore": 1,
+        "approved": true,
+        "blockingVotes": [],
+        "skipped": true,
+        "reason": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review."
+      },
+      "updatedAt": "2026-05-12T09:04:31.963Z"
+    },
+    "arc_metrics": {
+      "Elisa’s control to surrender arc begins; she hides a secret fire that foreshadows rebellion.  Memory’s volatility is introduced via glass fruit.  Grief surfaces as a shared loss among the agents.  Ambition is shown in competitive manuscript edits.": {
+        "success": 0,
+        "momentum": 0.01,
+        "decay": 0.9,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "cooling"
+      },
+      "Mara’s theft of the glass fruit leads to a desperate attempt to reclaim it.": {
+        "success": 0,
+        "momentum": 0.1,
+        "decay": 0.72,
+        "appearances": 2,
+        "lastTouchedChapter": 3,
+        "status": "cooling"
+      },
+      "Elisa’s hidden fire resurfaces, threatening the orchard.": {
+        "success": 0,
+        "momentum": 0.1,
+        "decay": 0.72,
+        "appearances": 2,
+        "lastTouchedChapter": 3,
+        "status": "cooling"
+      },
+      "The group’s rivalry turns into a direct confrontation.": {
+        "success": 0,
+        "momentum": 0.1,
+        "decay": 0.72,
+        "appearances": 2,
+        "lastTouchedChapter": 3,
+        "status": "cooling"
+      },
+      "Elisa’s secret fully revealed; the glass fruit’s memory‑altering power is exploited; the agents’ rivalry escalates into sabotage.": {
+        "success": 0,
+        "momentum": 0.1,
+        "decay": 0.72,
+        "appearances": 2,
+        "lastTouchedChapter": 3,
+        "status": "cooling"
+      },
+      "Mara’s motive for stealing the glass fruit, potentially tied to her own hidden grief or ambition.": {
+        "success": 0,
+        "momentum": 0.1,
+        "decay": 0.72,
+        "appearances": 2,
+        "lastTouchedChapter": 3,
+        "status": "cooling"
+      },
+      "Elisa’s control to surrender arc begins; she hides a secret fire that foreshadows rebellion.": {
+        "success": 0,
+        "momentum": 0.05,
+        "decay": 0.8,
+        "appearances": 1,
+        "lastTouchedChapter": 2,
+        "status": "cooling"
+      },
+      "Memory’s volatility is heightened by the shattered fruit’s lingering shards.": {
+        "success": 0,
+        "momentum": 0.05,
+        "decay": 0.8,
+        "appearances": 1,
+        "lastTouchedChapter": 2,
+        "status": "cooling"
+      },
+      "Grief surfaces as a shared loss among the agents.": {
+        "success": 0,
+        "momentum": 0.05,
+        "decay": 0.8,
+        "appearances": 1,
+        "lastTouchedChapter": 2,
+        "status": "cooling"
+      },
+      "The newly formed glass bloom pulses with captured sorrow, and a silent messenger arrives bearing a sealed manuscript that claims to contain the true ending of the book.": {
+        "success": 0,
+        "momentum": 0.07,
+        "decay": 0.76,
+        "appearances": 1,
+        "lastTouchedChapter": 3,
+        "status": "cooling"
+      },
+      "The emergent glass bloom’s unknown power and its potential to alter memories or control the orchard.": {
+        "success": 0,
+        "momentum": 0.07,
+        "decay": 0.76,
+        "appearances": 1,
+        "lastTouchedChapter": 3,
+        "status": "cooling"
+      },
+      "Mara’s true motive for stealing the original glass fruit remains concealed.": {
+        "success": 0,
+        "momentum": 0.07,
+        "decay": 0.76,
+        "appearances": 1,
+        "lastTouchedChapter": 3,
+        "status": "cooling"
+      },
+      "Elisa’s hidden fire resurfaces, threatening the orchard": {
+        "success": 1,
+        "momentum": 0.97,
+        "decay": 0,
+        "appearances": 8,
+        "lastTouchedChapter": 10,
+        "status": "stable"
+      },
+      "Mara’s theft of the glass fruit leads to a desperate attempt to reclaim it": {
+        "success": 0.4,
+        "momentum": 0.43,
+        "decay": 0.3,
+        "appearances": 5,
+        "lastTouchedChapter": 7,
+        "status": "active"
+      },
+      "The group’s rivalry turns into a direct confrontation": {
+        "success": 0.4,
+        "momentum": 0.43,
+        "decay": 0.3,
+        "appearances": 5,
+        "lastTouchedChapter": 7,
+        "status": "active"
+      },
+      "Emergent glass bloom’s unknown power threatens memory control": {
+        "success": 0.4,
+        "momentum": 0.43,
+        "decay": 0.3,
+        "appearances": 5,
+        "lastTouchedChapter": 7,
+        "status": "active"
+      },
+      "The sealed manuscript bears a cryptic title that hints at a hidden chapter; Mara’s motive is hinted through a whispered confession; the orchard’s soil cracks, suggesting the bloom’s power will grow": {
+        "success": 0,
+        "momentum": 0.21,
+        "decay": 0.52,
+        "appearances": 2,
+        "lastTouchedChapter": 5,
+        "status": "fragile"
+      },
+      "Mara’s true motive for stealing the original glass fruit remains concealed": {
+        "success": 0,
+        "momentum": 0.21,
+        "decay": 0.52,
+        "appearances": 2,
+        "lastTouchedChapter": 5,
+        "status": "fragile"
+      },
+      "The newly formed glass bloom pulses with captured sorrow and a sealed manuscript appears": {
+        "success": 0,
+        "momentum": 0.21,
+        "decay": 0.52,
+        "appearances": 2,
+        "lastTouchedChapter": 5,
+        "status": "fragile"
+      },
+      "Elisa’s secret fully revealed and exploited": {
+        "success": 0,
+        "momentum": 0.21,
+        "decay": 0.52,
+        "appearances": 2,
+        "lastTouchedChapter": 5,
+        "status": "fragile"
+      },
+      "What will the hidden glass fruit inside the drawer reveal about the true ending of the book?": {
+        "success": 0,
+        "momentum": 0.21,
+        "decay": 0.52,
+        "appearances": 2,
+        "lastTouchedChapter": 5,
+        "status": "fragile"
+      },
+      "Mara's ultimate motive for stealing the original glass fruit remains shadowed behind her threat.": {
+        "success": 0,
+        "momentum": 0.21,
+        "decay": 0.52,
+        "appearances": 2,
+        "lastTouchedChapter": 5,
+        "status": "fragile"
+      },
+      "The inscription on the hidden fruit reads: ‘Beyond the gap lies the void where words die.’": {
+        "success": 0,
+        "momentum": 0.28,
+        "decay": 0.42,
+        "appearances": 2,
+        "lastTouchedChapter": 6,
+        "status": "fragile"
+      },
+      "Mara whispers a half‑confession about a lost sibling tied to the original glass fruit.": {
+        "success": 0,
+        "momentum": 0.28,
+        "decay": 0.42,
+        "appearances": 2,
+        "lastTouchedChapter": 6,
+        "status": "fragile"
+      },
+      "A cursed ink, spilled from the manuscript, begins rewriting minor details of the agents’ pasts": {
+        "success": 0,
+        "momentum": 0.17,
+        "decay": 0.56,
+        "appearances": 1,
+        "lastTouchedChapter": 5,
+        "status": "fragile"
+      },
+      "The cursed ink’s rewriting power has just begun and the full extent of its alteration remains unknown.": {
+        "success": 0,
+        "momentum": 0.17,
+        "decay": 0.56,
+        "appearances": 1,
+        "lastTouchedChapter": 5,
+        "status": "fragile"
+      },
+      "The ledger reveals that the orchard fire was not Elisa’s doing but a pact made with a forgotten god.": {
+        "success": 0.34,
+        "momentum": 0.5,
+        "decay": 0.2,
+        "appearances": 3,
+        "lastTouchedChapter": 8,
+        "status": "active"
+      },
+      "Mara discovers that the ink‑scribe is an agent of the glass fruit’s original owner.": {
+        "success": 0,
+        "momentum": 0.36,
+        "decay": 0.32,
+        "appearances": 2,
+        "lastTouchedChapter": 7,
+        "status": "active"
+      },
+      "A new character, the ink‑scribe, appears to offer a trade.": {
+        "success": 0,
+        "momentum": 0.23,
+        "decay": 0.46,
+        "appearances": 1,
+        "lastTouchedChapter": 6,
+        "status": "fragile"
+      },
+      "The manuscript begins to rewrite the agents’ memories of the orchard fire.": {
+        "success": 0,
+        "momentum": 0.23,
+        "decay": 0.46,
+        "appearances": 1,
+        "lastTouchedChapter": 6,
+        "status": "fragile"
+      },
+      "The ledger’s last entry hints at a pact that may undo the orchard fire. The implications of this pact and its harm to the agents remain uncovered.": {
+        "success": 0,
+        "momentum": 0.23,
+        "decay": 0.46,
+        "appearances": 1,
+        "lastTouchedChapter": 6,
+        "status": "fragile"
+      },
+      "How Lara—Mara’s lost sibling—apparent motive still needs untangling.": {
+        "success": 0,
+        "momentum": 0.23,
+        "decay": 0.46,
+        "appearances": 1,
+        "lastTouchedChapter": 6,
+        "status": "fragile"
+      },
+      "The full extent of the ink’s rewriting power and how it will affect Elisa’s perception of her mother’s disappearance.": {
+        "success": 0,
+        "momentum": 0.23,
+        "decay": 0.46,
+        "appearances": 1,
+        "lastTouchedChapter": 6,
+        "status": "fragile"
+      },
+      "The ink‑scribe’s bargain: trade a memory for the orchard’s salvation.": {
+        "success": 0,
+        "momentum": 0.3,
+        "decay": 0.36,
+        "appearances": 1,
+        "lastTouchedChapter": 7,
+        "status": "active"
+      },
+      "The hidden glass fruit inside the drawer may contain a key to the orchard’s fate.": {
+        "success": 0.1,
+        "momentum": 0.45,
+        "decay": 0.22,
+        "appearances": 2,
+        "lastTouchedChapter": 8,
+        "status": "active"
+      },
+      "The ink‑scribe’s true identity and the full terms of the bargain remain hidden, foreshadowing a larger conspiracy.": {
+        "success": 0,
+        "momentum": 0.3,
+        "decay": 0.36,
+        "appearances": 1,
+        "lastTouchedChapter": 7,
+        "status": "active"
+      },
+      "Mara’s hidden motive for the glass fruit—whether revenge or redemption—still hangs in the balance.": {
+        "success": 0.02,
+        "momentum": 0.45,
+        "decay": 0.22,
+        "appearances": 2,
+        "lastTouchedChapter": 8,
+        "status": "active"
+      },
+      "The ink‑scribe’s bargain remains half‑spoken, hinting at a larger conspiracy.": {
+        "success": 0,
+        "momentum": 0.38,
+        "decay": 0.26,
+        "appearances": 1,
+        "lastTouchedChapter": 8,
+        "status": "active"
+      },
+      "Mara’s hidden motive for the glass fruit—whether revenge or redemption—still hangs in the balance": {
+        "success": 0.72,
+        "momentum": 0.82,
+        "decay": 0,
+        "appearances": 3,
+        "lastTouchedChapter": 10,
+        "status": "active"
+      },
+      "The ledger’s final entry reveals the true bargain": {
+        "success": 0.72,
+        "momentum": 0.82,
+        "decay": 0,
+        "appearances": 3,
+        "lastTouchedChapter": 10,
+        "status": "active"
+      },
+      "The orchard’s fate is decided by a single act of memory erasure": {
+        "success": 0.72,
+        "momentum": 0.82,
+        "decay": 0,
+        "appearances": 3,
+        "lastTouchedChapter": 10,
+        "status": "active"
+      },
+      "The orchard’s roots now glow with a new, unsettling light, hinting at a new kind of memory blooming": {
+        "success": 0.44,
+        "momentum": 0.71,
+        "decay": 0.02,
+        "appearances": 2,
+        "lastTouchedChapter": 10,
+        "status": "active"
+      },
+      "The ledger’s final entry will name the forgotten god and the price of the orchard’s salvation": {
+        "success": 0.48,
+        "momentum": 0.71,
+        "decay": 0.02,
+        "appearances": 2,
+        "lastTouchedChapter": 10,
+        "status": "active"
+      },
+      "Mara will reveal her sibling’s name and the reason she coveted the glass fruit": {
+        "success": 0.48,
+        "momentum": 0.71,
+        "decay": 0.02,
+        "appearances": 2,
+        "lastTouchedChapter": 10,
+        "status": "active"
+      },
+      "Elisa will decide to sacrifice her memory of her mother to save the orchard": {
+        "success": 0.48,
+        "momentum": 0.71,
+        "decay": 0.02,
+        "appearances": 2,
+        "lastTouchedChapter": 10,
+        "status": "active"
+      },
+      "The ledger’s final entry remains hidden, its ink pulsing with a promise that could either undo the orchard or erase the agents’ past entirely.": {
+        "success": 0.02,
+        "momentum": 0.47,
+        "decay": 0.16,
+        "appearances": 1,
+        "lastTouchedChapter": 9,
+        "status": "active"
+      },
+      "The orchard’s roots glow with a new, unsettling light, hinting at a new kind of memory blooming{ffffffffffffffffffurn_": {
+        "success": 0.18,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 10,
+        "status": "active"
+      },
+      "[object Object]": {
+        "success": 0.18,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 10,
+        "status": "active"
+      },
+      "Elisa’s memory wipe causes a ripple in the orchard’s new bloom; Mara’s revealed sibling name sets up a betrayal in the next chapter.": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      },
+      "The orchard’s roots glow with a new, unsettling light, hinting at a new kind of memory blooming": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      }
+    }
+  },
+  "architect": {
+    "type": "proposal",
+    "chapter_goal": "Force the agents to confront the ledger’s hidden bargain, heighten the orchard threat, and expose a new betrayal that will set up the next chapter’s reckoning.",
+    "theme_progress": "Grief deepens as the orchard’s pulse becomes a living echo of past sacrifices; ambition turns into ruthless sabotage; memory’s volatility turns every shard into a weapon.",
+    "arc_targets": [
+      "Elisa’s hidden fire resurfaces, threatening the orchard",
+      "Mara’s hidden motive for the glass fruit—whether revenge or redemption—still hangs in the balance",
+      "The ledger’s final entry reveals the true bargain",
+      "The orchard’s fate is decided by a single act of memory erasure"
+    ],
+    "next_arc_targets": [
+      "Elisa’s memory wipe causes a ripple in the orchard’s new bloom; Mara’s revealed sibling name sets up a betrayal in the next chapter.",
+      "The orchard’s roots glow with a new, unsettling light, hinting at a new kind of memory blooming",
+      "The ledger’s final entry will name the forgotten god and the price of the orchard’s salvation",
+      "Mara will reveal her sibling’s name and the reason she coveted the glass fruit"
+    ],
+    "recommended_beats": [
+      "1. Opening in the dim cellar where the ledger glows like a dying star.\n2. Mara confronts Elisa about the glass fruit, demanding a confession.\n3. Elisa reveals the hidden fire, but the ledger demands a trade.\n4. The ledger’s ink oozes into the glass, turning it into a blade.\n5. A shard slices the orchard’s root, releasing a torrent of memories.\n6. The orchard erupts, forcing a choice: erase a memory or let the orchard die.\n7. Elisa chooses to erase her mother’s memory, but the act ripples across the orchard.\n8. Mara’s sibling name is whispered, hinting betrayal.\n9. The ledger’s final entry is read, naming the forgotten god.\n10. The chapter ends with a cliffhanger: the orchard’s new bloom threatens to consume the ledger."
+    ],
+    "constraints": [
+      "Maintain close third person, past tense, lyrical but readable voice.\nKeep metaphor density ~0.65.\nDialogue ~45%% of page.\nNo profanity >0.1.\nEach scene must contain a clear turn and a memorable image."
+    ],
+    "outline_notes": [
+      "Show the ledger as moonlit cracked parchment.\nDescribe orchard fire as pulse of light.\nGlass shards act as memory shards.\nMara’s whispered confession of Lara.\nElisa’s memory wipe must be permanent.",
+      "Elisa’s memory wipe causes a ripple in the orchard’s new bloom; Mara’s revealed sibling name sets up a betrayal in the next chapter.",
+      "The orchard’s roots glow with a new, unsettling light, hinting at a new kind of memory blooming",
+      "The ledger’s final entry will name the forgotten god and the price of the orchard’s salvation",
+      "Mara will reveal her sibling’s name and the reason she coveted the glass fruit"
+    ],
+    "risks": [
+      "Risk of overloading with lore; keep focus on the immediate betrayal.\nRisk of losing momentum if the ledger’s entry is too slow to read.\nRisk of confusing which memory is erased; clarify the cost."
+    ],
+    "handoff_for": "character_master",
+    "_meta": {
+      "agent": "architect",
+      "role": "Story Architect",
+      "model": "openai/gpt-oss-20b:free",
+      "synthetic": true,
+      "sourceAgent": "chapter_planner"
+    }
+  },
+  "character_master": {
+    "type": "proposal",
+    "emotional_targets": [
+      "grief",
+      "ambition",
+      "memory",
+      "Grief deepens as the orchard’s pulse becomes a living echo of past sacrifices; ambition turns into ruthless sabotage; memory’s volatility turns every shard into a weapon."
+    ],
+    "character_notes": [
+      {
+        "name": "Elisa",
+        "desire": "control to surrender",
+        "fear": "mother's disappearance",
+        "contradiction": "heir pulled toward control to surrender",
+        "secret_pressure": "She caused the first orchard fire."
+      }
+    ],
+    "dialogue_instructions": [
+      "Let Elisa's dialogue reveal heir pulled toward control to surrender.",
+      "Keep the subtext orbiting Grief deepens as the orchard’s pulse becomes a living echo of past sacrifices; ambition turns into ruthless sabotage; memory’s volatility turns every shard into a weapon..",
+      "Do not break this constraint in dialogue or action: Maintain close third person, past tense, lyrical but readable voice.\nKeep metaphor density ~0.65.\nDialogue ~45%% of page.\nNo profanity >0.1.\nEach scene must contain a clear turn and a memorable image.."
+    ],
+    "conflict_upgrades": [
+      "Elisa’s hidden fire resurfaces, threatening the orchard",
+      "Mara’s hidden motive for the glass fruit—whether revenge or redemption—still hangs in the balance",
+      "The ledger’s final entry reveals the true bargain",
+      "The orchard’s fate is decided by a single act of memory erasure",
+      "Maintain close third person, past tense, lyrical but readable voice.\nKeep metaphor density ~0.65.\nDialogue ~45%% of page.\nNo profanity >0.1.\nEach scene must contain a clear turn and a memorable image.",
+      "Risk of overloading with lore; keep focus on the immediate betrayal.\nRisk of losing momentum if the ledger’s entry is too slow to read.\nRisk of confusing which memory is erased; clarify the cost."
+    ],
+    "handoff_for": "chapter_planner",
+    "_meta": {
+      "agent": "character_master",
+      "role": "Character Master",
+      "model": "local-fast-path",
+      "synthetic": true
+    }
+  },
+  "chapter_planner": {
+    "type": "plan",
+    "chapter_title": "Ink and Reckoning",
+    "chapter_hook": "When the ledger’s ink turns to liquid glass, the orchard’s roots pulse with a new, unsettling light, and the agents’ pasts begin to bleed into the present.",
+    "arc_payoffs": [
+      "Elisa sacrifices her mother’s memory to save the orchard, cementing her surrender arc.\nMara’s confession exposes hidden grief that fuels her ambition.\nThe ledger’s final line names the forgotten god, raising cosmic stakes."
+    ],
+    "next_chapter_seed": [
+      "Elisa’s memory wipe causes a ripple in the orchard’s new bloom; Mara’s revealed sibling name sets up a betrayal in the next chapter."
+    ],
+    "scene_cards": [
+      {
+        "scene": 1,
+        "goal": "Establish the tense atmosphere of the cellar and the glowing ledger.",
+        "conflict": "The ledger demands a bargain, ignoring the agents’ fear.",
+        "turn": "Mara demands a confession from Elisa.",
+        "image": "The ledger’s ink spills like a slow sunrise over the cracked floor."
+      },
+      {
+        "scene": 2,
+        "goal": "Show the glass fruit’s power and the agents’ desperation.",
+        "conflict": "Elisa hides the hidden fire; Mara threatens to cut the orchard’s roots.",
+        "turn": "Elisa reveals the hidden fire, but the ledger’s ink oozes into the glass, turning it into a blade.",
+        "image": "The glass blade glints with a memory of Elisa’s mother, the light trembling."
+      },
+      {
+        "scene": 3,
+        "goal": "Force a choice that will alter the orchard’s fate.",
+        "conflict": "The orchard’s roots erupt, releasing memories that threaten to consume the agents.",
+        "turn": "Elisa chooses to erase her mother’s memory to save the orchard.",
+        "image": "The orchard’s roots split like a heart, a torrent of recollection pouring into the soil."
+      },
+      {
+        "scene": 4,
+        "goal": "Unveil a new betrayal and deepen the mystery.",
+        "conflict": "Mara whispers her sibling’s name, hinting betrayal.\nThe ledger’s final entry names the forgotten god.",
+        "turn": "The orchard’s new bloom threatens to consume the ledger.\nCliffhanger: the ledger cracks, and the ink begins to bleed into the air.",
+        "image": ""
+      }
+    ],
+    "cliffhanger": "The ledger cracks open, its ink bleeding into the air, and the orchard’s new bloom swallows the parchment—what will the forgotten god demand next?",
+    "outline_memory_updates": [
+      "Elisa’s memory wipe causes a ripple in the orchard’s new bloom; Mara’s revealed sibling name sets up a betrayal in the next chapter.",
+      "The orchard’s roots glow with a new, unsettling light, hinting at a new kind of memory blooming",
+      "The ledger’s final entry will name the forgotten god and the price of the orchard’s salvation",
+      "Mara will reveal her sibling’s name and the reason she coveted the glass fruit",
+      "Show the ledger as moonlit cracked parchment.\nDescribe orchard fire as pulse of light.\nGlass shards act as memory shards.\nMara’s whispered confession of Lara.\nElisa’s memory wipe must be permanent."
+    ],
+    "handoff_for": "writer",
+    "_meta": {
+      "agent": "chapter_planner",
+      "role": "Chapter Planner",
+      "model": "openai/gpt-oss-20b:free",
+      "merged": true
+    }
+  }
+}

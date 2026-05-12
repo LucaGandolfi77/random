@@ -1,0 +1,20 @@
+{
+  "pov": "close third person",
+  "tense": "past",
+  "voice": "lyrical but readable",
+  "metaphor_density": 0.65,
+  "dialogue_density": 0.45,
+  "profanity_level": 0.1,
+  "recent_adjustments": [
+    "Title generator: prepend ‘The Scribe’s’ to a dynamic verb of surge + subtitle referencing light and control",
+    "Subtitle: combine ‘Dawn’ + a brief phrase about light cracking the vault",
+    "Premise: start with ‘In the aftermath of the shattered reality’ + introduce ‘Echoed Gaze’ + conflict about echo‑phages",
+    "Themes: auto‑include recurring motif of authority vs plurality, add echo‑phage concept",
+    "Tagline: use pattern of control risk",
+    "Cover color: dark violet (#2a1e3f) with silvery accents",
+    "Rule enforcement: ensure all world rules are referenced in at least one chapter and that new rules echo past ones",
+    "Close third‑person past tense maintained.",
+    "Metaphor density kept at ~0.65 with vivid images.",
+    "Dialogue density ~0.45, balanced with internal monologue."
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "Shards of Authority",
+      "summary": "Ten agents gather around a nascent crystal lattice, each offering a fragment of memory. As the first fragment locks, an echo‑phage rises, whispering grief and demanding inclusion. The lattice cracks, swallowing a shard into a void that devours intent. Faced with the cost of unity, the agents debate whether to bind all voices or scatter the Gaze. Elisa, haunted by her mother’s disappearance, chooses to seal the lattice, sealing the cost of her own voice and leaving a fragment lost to the void, an unresolved wound that will haunt the next chapter.",
+      "unresolved_threads": [
+        "The fragment that slipped into the void remains lost; its content and impact on the agents’ future decisions remain unknown."
+      ],
+      "arc_targets": [
+        "Reveal the Echoed Gaze’s true binding mechanism (glass lattice) and its catalytic echo‑phage release",
+        "Reclaiming narrative authority after collapse",
+        "Confronting the paradox of a single voice in a world of echoes",
+        "Balancing unity with diversity of intent"
+      ],
+      "next_arc_targets": [
+        "Elisa wrestles with the loss of her voice and the looming shadow of her mother's absence.",
+        "The lattice’s collapse creates a fissure that begins to suck in surrounding memories.",
+        "Establish a tangible consequence for binding—one fragment is irrevocably erased",
+        "The fragment lost to the void.",
+        "Elisa’s secret role in the orchard fire.",
+        "The fragment that slipped into the void remains lost; its content and impact on the agents’ future decisions remain unknown."
+      ],
+      "vote_summary": {
+        "approvals": 4,
+        "revises": 0,
+        "rejects": 1,
+        "averageScore": 0.72,
+        "approved": true,
+        "blockingVotes": [
+          {
+            "voter": "critic",
+            "vote": "reject",
+            "must_fix": [
+              "Write full prose for Chapter 1, incorporating all planned scenes and beats.",
+              "Establish clear stakes by showing tangible consequences of binding the Echoed Gaze.",
+              "Develop character voices and internal conflicts, especially Elisa’s grief and secret.",
+              "Embed world rules (moonlit glass, echo‑phage, void absorption) throughout the text.",
+              "Maintain lyrical, metaphor‑rich language and appropriate dialogue density."
+            ]
+          }
+        ]
+      },
+      "createdAt": "2026-05-10T19:28:47.891Z"
+    }
+  ],
+  "events": [
+    "Elisa binds the final fragment, sealing the lattice."
+  ]
+}

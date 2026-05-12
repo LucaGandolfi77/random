@@ -1,0 +1,22 @@
+{
+  "pov": "close third person",
+  "tense": "past",
+  "voice": "lyrical but readable",
+  "metaphor_density": 0.65,
+  "dialogue_density": 0.45,
+  "profanity_level": 0.1,
+  "recent_adjustments": [
+    "Generate Chapter 1 titled “The Shattering” that shows the lattice’s fracture and the first emergence of the Rift.",
+    "Introduce a “Rift Whisper” NPC that teaches the forbidden rite, providing a clear mechanic for the paradox crystal.",
+    "Each subsequent chapter must feature a “Void‑Echo” encounter where agents speak a fragment and experience either loss or corruption, reinforcing the new rule.",
+    "Maintain lyrical close‑third‑person past tense, metaphor density ~0.65, dialogue density ~0.45 as per STYLE_GUIDE.",
+    "Track the status of the lost void‑fragment thread; resolve it by having Elisa retrieve or sacrifice it in the climax.",
+    "End with a cliffhanger: the paradox crystal pulses, hinting at a future cycle where control itself becomes a living echo.",
+    "Maintain lyrical tone while tightening sentence structure.\nReduce metaphor overload.\nKeep dialogue density at ~0.45.",
+    "Chapter 1 establishes the Void Rift rule and Paradox Crystal mechanics as defined in the Book Bible.",
+    "Elisa loses the lullaby fragment, reinforcing her arc of surrender and grief.",
+    "Glass fruit shatter scene confirms the rule that breaking a glass fruit permanently alters a memory.",
+    "Rift Whisper introduced as the NPC teaching the forbidden rite.",
+    "The lost void‑fragment appears as a flickering mote, beginning resolution of the thread from Book 13."
+  ]
+}

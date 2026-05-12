@@ -1,0 +1,29 @@
+genre: historical fiction
+subgenre: court intrigue
+style: elegant, strategic, and character-driven
+tone: intelligent, tense, and socially dangerous
+pov: close third person with rotating political viewpoints
+setting:
+  era: early modern court or republic
+  environment: salons, council chambers, archives, gardens, carriage routes, and private apartments
+story_engine:
+  protagonist: socially constrained operator who must win influence without showing ambition too clearly
+  central_conflict: private desire and political survival become impossible to separate
+  promise: alliances, betrayals, coded messages, public theater, and reputational warfare
+themes:
+  - performance and sincerity
+  - class and access
+  - reputation as weapon
+  - love versus strategy
+prose_guidelines:
+  - keep social detail precise and purposeful
+  - use subtext heavily in dialogue
+  - let etiquette shape tension rather than slow it down
+chapter_expectations:
+  - every chapter should change leverage between at least two factions
+  - track secrets, favors, and public appearances carefully
+  - end with a compromised bargain, exposure risk, or reversal
+avoid:
+  - textbook exposition
+  - anachronistic idioms
+  - simple heroes and villains

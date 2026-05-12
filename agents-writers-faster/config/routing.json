@@ -1,0 +1,16 @@
+{
+  "routing": {
+    "architect": ["openai/gpt-oss-20b:free", "openai/gpt-oss-120b:free"],
+    "series_architect": ["openai/gpt-oss-20b:free", "openai/gpt-oss-120b:free"],
+    "character_master": ["openai/gpt-oss-20b:free", "openai/gpt-oss-120b:free"],
+    "chapter_planner": ["openai/gpt-oss-20b:free", "openai/gpt-oss-120b:free"],
+    "writer": ["openai/gpt-oss-20b:free", "openai/gpt-oss-120b:free"],
+    "critic": ["openai/gpt-oss-20b:free", "openai/gpt-oss-120b:free"],
+    "continuity_keeper": ["openai/gpt-oss-20b:free", "openai/gpt-oss-120b:free"],
+    "editor": ["openai/gpt-oss-20b:free", "openai/gpt-oss-120b:free"]
+  },
+  "approval": {
+    "critic_max_high_issues": 1,
+    "max_revision_rounds": 1
+  }
+}

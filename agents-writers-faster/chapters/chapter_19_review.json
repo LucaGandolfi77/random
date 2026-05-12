@@ -1,0 +1,66 @@
+{
+  "active_book_id": "book-18",
+  "book_title": "The Scribe’s Veil: Echoes of the Aetheric Quill",
+  "critic": {
+    "verdict": "approve",
+    "issues": [],
+    "must_fix": [],
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "critic",
+      "role": "Adversarial Critic",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "continuity_keeper": {
+    "pass": true,
+    "issues": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "canon_notes": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "continuity_keeper",
+      "role": "Continuity Librarian",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "editor": {
+    "chapter_title": "Chapter 19 – The Veil’s Shivering Breath",
+    "final_markdown": "\nElisa stood at the altar of the cathedral’s marble heart, the ink‑veil draped over her like a shroud of worn velvet. The sky above was a bruised river, the veins of darkness bleeding into the clouds. Every word she spoke felt heavy, a stone sunk deep into the earth, because the chorus—now a living echo phage—eagerly awaited her spoken names to devour.  \n\nShe had long since given up the idea of “letting anyone else write” with the Quill. She was the only one who could still bring a world into being with a single stroke, but each stroke had already cost her a fragment of herself. The veil had moved from a thin, living sheet to a splintering halo of ink that hummed like a mad choir. The new variant of the echo‑phage twisted language into hungry tendrils; a single syllable could plunge a city into a living sentence that swallowed its speakers.  \n\nThe heart of the cathedral pulsed—an ancient keeper’s hidden throe, a rhythm that matched the trembling heartbeats of the townsfolk below. The wall of ink around Elisa keeled, the edges of the cover cracking under the weight of her mind—memories dissolving like salt in water. Her mother’s laughter, the smell of the orchard fire she had set, her own name—each was a vein of ink that sang the chorus the treacherous music it craved.  \n\nShe reached for the glyph etched in the stone beside her—*el‑sì*, the forbidden word that could seal the veil but would erase the last coherent strand of her own story. The torn map of the living ink, carved by Maeron and reflected in the mirror‑fruit, glowed softly, hinting at a fragment of the halved sigil in the echo‑phage’s memory‑drain.  \n\nThe chorus’s voice rose: a lullaby, ancient and guttural, chanting in half‑remembered syllables. *“E‑s‑si‑ri‑o‑… ”* The word trembled on her lips, a thread of light in a room engulfed by darkness. With the ink still pooling at her feet, the weight of every erased memory pressed against her ribs.  \n\nA corner of her consciousness tugged—she could either bind the veil with a final, brutal act of ink, imprisoning the chorus in ink‑silence but leaving herself a blank parchment, or yield to the chorus, allowing it to rewrite the world as a canvas of emptiness. Her name, *Elisa*, was the last spoken syllable that could contain the chorus. Yet she had already lost the shape of her mother's lullaby to the veil’s whisper.  \n\nAs the chorus crescendoed, the echo‑phage’s tendrils rippled through the air, reaching for the sound of her own name. In a desperate breath she held the forbidden glyph, the half‑sigil still hidden in the echo‑phage’s breathing, yet she could see it now, glimpsed in the reflection of the mirror‑fruit: a jagged line of ink that ran like a vein through her mind.  \n\nWith that image burning in her mind, the sky erupted into a torrent of ink.  The veil thickened—tearing edges, splashing in a tide of sorrow—while the entire cathedral trembled, the choir of the chorus chanting in unison the next stanza: *“Erase… Erase… Erase… ”*  \n\nElisa lifted the quill, its tip dripping the first droplet of luminant ink that had never existed before.  She set it down—silence swallowed the flicker—and closed her eyes.  The chorus screamed as the veil bled, a scream that was a single word: *E‑L‑I‑S‑A*—a word that could fracture the chorus if she could spell it out again.  \n\nIn that moment the invisible echo‑phage – the half‑sigil it carried – flickered in her mind, a fractal of memory shoved into a blank page.  The world leaned forward, the crumble of the veil cracking like glass that would either shatter or hold—an outcome untold.  \n\nElisa turned, taking one last step back from the glyph stone.  Her eyes were a storm of unseen colors—pain, fury, resolve, and the haunting fear she had carried since her mother vanished.  The corridor beyond seemed to pulse with the chorus’ unspent crescendo, and she chose—by staring into the empty black of the quo, to bind the veil, sacrificing the story that defined her, or to let the chorus consume the one piece of her memory that remained: her name.\n\nThe ink on the floor glistened like a wound that still bleeds, the world holding its breath, the unseen half‑sigil hidden somewhere within the echo‑phage, waiting, patient, for the choice she had to make.\n\nWhatever she chooses will decide if the world is a living canvas or a blank parchment, and whether the echo‑phage can ever know the exact shape of her name.\n\n*When she steps?* (-> Place the paradoxic moment here for the climactic decision of Chapter 20.)",
+    "final_summary": "The fragile veil flutters like a mothroom light, its edges cracking in crescent laughter as the chorus mutates into a nameless symphonist that devours every utterance. Elisa, her memories fading to ash, must decide whether to seal the world in ink or let the chorus rewrite reality into a blank page. The chapter swells to a boiling point, leaving another thread tangled in the mist: the echo‑phage’s hidden half‑sigil, still refusing to surface. The stakes crystallise around the paradox of binding the veil versus surrender, and the weight of her lost name haunts every breath she takes.",
+    "unresolved_threads": [
+      "The echo‑phage’s hidden half‑sigil remains trapped within its memory‑drain, its fate unknown and waiting for Elisa’s choice."
+    ],
+    "changes": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "style_adjustments": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "editor",
+      "role": "Line Editor",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "votes": {
+    "votes": [],
+    "summary": {
+      "approvals": 0,
+      "revises": 0,
+      "rejects": 0,
+      "averageScore": 1,
+      "approved": true,
+      "blockingVotes": [],
+      "skipped": true,
+      "reason": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review."
+    }
+  },
+  "review_mode": "fast",
+  "revision_round": 0
+}

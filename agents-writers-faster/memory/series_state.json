@@ -1,0 +1,481 @@
+{
+  "activeBookId": "book-19",
+  "series": {
+    "title": "Untitled Series",
+    "description": "A recursive dark‑fantasy anthology where rival meta‑agents write and battle within ever‑shifting realities, spiraling through cycles of authority, memory fracture, and existential collapse.",
+    "pattern": {
+      "name": "Tri‑Echo Spiral",
+      "overview": "Each three‑book micro‑cycle repeats the core beats (Control → Fracture → Collapse) while mutating the central mechanic. Volume 1 introduces a new control device, Volume 2 corrupts it into a memory‑fracture, Volume 3 forces the world to become self‑aware text. The next macro‑cycle begins with a fresh control artifact that is a twisted evolution of the Aetheric Quill, raising stakes for the ensuing fracture.",
+      "bookCountTarget": 3,
+      "sequenceBeats": [
+        "Control: Agents seize a new reality‑shaping artifact and attempt to impose authorial order.",
+        "Fracture: The artifact’s power leaks, turning memories into volatile currency and splintering causality.",
+        "Collapse: The world becomes a self‑referential manuscript that can rewrite agents as text."
+      ],
+      "motifCycle": [
+        "Glass of Memory",
+        "Mirror Orchard",
+        "Broken Writings"
+      ],
+      "escalationLogic": "Each cycle upgrades the previous control device into a more invasive, self‑feeding tool. The upgrade adds a cost: personal memory loss, identity erosion, or irreversible alteration of the world’s grammar. The fracture stage always introduces a new echo‑phage or void‑rift that forces agents to trade power for sacrifice. Collapse always culminates in the world gaining self‑awareness, demanding a meta‑binding that sets the stage for the next control device.",
+      "updatedAt": "2026-05-11T15:18:12.944Z",
+      "sourceAgent": "series_architect"
+    }
+  },
+  "books": [
+    {
+      "id": "book-01",
+      "title": "Untitled Project",
+      "slug": "untitled-project",
+      "status": "draft",
+      "createdAt": "2026-04-28T00:00:00.000Z",
+      "updatedAt": "2026-04-28T20:25:40.866Z",
+      "genre": "dark fantasy",
+      "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
+      "themes": [
+        "grief",
+        "ambition",
+        "memory"
+      ],
+      "exportBaseName": "untitled-project",
+      "cover": {
+        "title": "Untitled Project",
+        "subtitle": "",
+        "author": "OpenRouter Book Agents",
+        "tagline": "A collaborative novel forged by rival agents.",
+        "color": "#7c9cff"
+      }
+    },
+    {
+      "id": "book-02",
+      "title": "The Mirror Orchard",
+      "slug": "the-mirror-orchard",
+      "status": "draft",
+      "createdAt": "2026-04-28T20:25:40.695Z",
+      "updatedAt": "2026-04-28T20:25:40.702Z",
+      "genre": "dark fantasy",
+      "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
+      "themes": [
+        "grief",
+        "ambition",
+        "memory"
+      ],
+      "exportBaseName": "untitled-project",
+      "cover": {
+        "title": "Untitled Project",
+        "subtitle": "",
+        "author": "OpenRouter Book Agents",
+        "tagline": "A collaborative novel forged by rival agents.",
+        "color": "#7c9cff"
+      }
+    },
+    {
+      "id": "book-03",
+      "title": "Continuity Test",
+      "slug": "continuity-test",
+      "status": "draft",
+      "genre": "mystery fantasy",
+      "premise": "A second book tests the orchard's memory across generations.",
+      "themes": [
+        "inheritance",
+        "guilt",
+        "weather"
+      ],
+      "exportBaseName": "continuity-test",
+      "cover": {
+        "title": "Continuity Test",
+        "subtitle": "",
+        "author": "OpenRouter Book Agents",
+        "tagline": "A second book tests the orchard's memory across generations.",
+        "color": "#7c9cff"
+      },
+      "createdAt": "2026-04-28T20:37:04.583Z",
+      "updatedAt": "2026-04-28T20:37:04.589Z"
+    },
+    {
+      "id": "book-04",
+      "title": "Book 04",
+      "slug": "book-04",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
+      "themes": [
+        "grief",
+        "ambition",
+        "memory"
+      ],
+      "exportBaseName": "book-04",
+      "cover": {
+        "title": "Book 04",
+        "subtitle": "",
+        "author": "OpenRouter Book Agents",
+        "tagline": "A group of rival agents write a book while trying to outmaneuver each other.",
+        "color": "#7c9cff"
+      },
+      "createdAt": "2026-04-28T20:51:44.805Z",
+      "updatedAt": "2026-04-28T20:51:44.813Z"
+    },
+    {
+      "id": "book-05",
+      "title": "Book 05",
+      "slug": "book-05",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
+      "themes": [
+        "grief",
+        "ambition",
+        "memory"
+      ],
+      "exportBaseName": "book-05",
+      "cover": {
+        "title": "Book 05",
+        "subtitle": "",
+        "author": "OpenRouter Book Agents",
+        "tagline": "A group of rival agents write a book while trying to outmaneuver each other.",
+        "color": "#7c9cff"
+      },
+      "createdAt": "2026-04-28T20:51:47.919Z",
+      "updatedAt": "2026-04-28T20:51:47.925Z"
+    },
+    {
+      "id": "book-06",
+      "title": "Book 06",
+      "slug": "book-06",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
+      "themes": [
+        "grief",
+        "ambition",
+        "memory"
+      ],
+      "exportBaseName": "book-06",
+      "cover": {
+        "title": "Book 06",
+        "subtitle": "",
+        "author": "OpenRouter Book Agents",
+        "tagline": "A group of rival agents write a book while trying to outmaneuver each other.",
+        "color": "#7c9cff"
+      },
+      "createdAt": "2026-04-28T20:55:29.801Z",
+      "updatedAt": "2026-04-28T20:55:29.809Z"
+    },
+    {
+      "id": "book-07",
+      "title": "Book 07",
+      "slug": "book-07",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
+      "themes": [
+        "grief",
+        "ambition",
+        "memory"
+      ],
+      "exportBaseName": "book-07",
+      "cover": {
+        "title": "Book 07",
+        "subtitle": "",
+        "author": "OpenRouter Book Agents",
+        "tagline": "A group of rival agents write a book while trying to outmaneuver each other.",
+        "color": "#7c9cff"
+      },
+      "createdAt": "2026-04-29T10:12:23.049Z",
+      "updatedAt": "2026-04-29T10:12:23.058Z"
+    },
+    {
+      "id": "book-08",
+      "title": "The big boss of love",
+      "slug": "the-big-boss-of-love",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
+      "themes": [
+        "grief",
+        "ambition",
+        "memory"
+      ],
+      "exportBaseName": "the-big-boss-of-love",
+      "cover": {
+        "title": "The big boss of love",
+        "subtitle": "",
+        "author": "OpenRouter Book Agents",
+        "tagline": "A group of rival agents write a book while trying to outmaneuver each other.",
+        "color": "#7c9cff"
+      },
+      "createdAt": "2026-05-08T14:53:06.179Z",
+      "updatedAt": "2026-05-08T14:53:06.190Z"
+    },
+    {
+      "id": "book-09",
+      "title": "The Scribe’s Eclipse",
+      "slug": "the-scribe-s-eclipse",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "Nine rival agents gather under a dying sun, each armed with a reflective shard that captures their true intent. As they write, the shards begin to fracture, scattering their memories across a world where each sentence can rewrite reality. The agents must decide whether to preserve their narrative for posterity or let the broken mirrors consume their stories.",
+      "themes": [
+        "identity",
+        "truth",
+        "destiny"
+      ],
+      "exportBaseName": "the-scribe-s-eclipse",
+      "cover": {
+        "title": "The Scribe’s Eclipse",
+        "subtitle": "Hanging the Future in a Broken Mirror",
+        "author": "OpenRouter Book Agents",
+        "tagline": "When mirrors break, the story unravels.",
+        "color": "#5a3d7c"
+      },
+      "createdAt": "2026-05-10T16:46:01.584Z",
+      "updatedAt": "2026-05-10T16:46:01.626Z"
+    },
+    {
+      "id": "book-10",
+      "title": "The Scribe’s Dawn",
+      "slug": "the-scribe-s-dawn",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "From the shattered remnants of the previous collapse, a fresh cadre of ten agents discovers a newly forged crystal chalice that can bind the echoing loop into a single, mutable strand. As they attempt to re‑establish narrative authority, the chalice begins to pulse with the residual chaos of the broken writings, forcing each scribe to confront the lingering ghosts of the last cycle while racing against a sunrise that threatens to melt the very fabric of their newly‑welded world.",
+      "themes": [
+        "rebirth",
+        "authority",
+        "latent chaos",
+        "memory inheritance",
+        "destiny"
+      ],
+      "exportBaseName": "the-scribe-s-dawn",
+      "cover": {
+        "title": "The Scribe’s Dawn",
+        "subtitle": "When the Fractured Glass Rises",
+        "author": "OpenRouter Book Agents",
+        "tagline": "A new glass, a familiar fracture—can order survive the echo?",
+        "color": "#6a4c8c"
+      },
+      "createdAt": "2026-05-10T16:54:59.197Z",
+      "updatedAt": "2026-05-10T16:54:59.239Z"
+    },
+    {
+      "id": "book-11",
+      "title": "The Scribe’s Eclipse: Mirror of Shattered Words",
+      "slug": "the-scribe-s-eclipse-mirror-of-shattered-words",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "As the crystal chalice of control shatters in the waning light, its shards scatter the collective intent of the ten agents across the realm. Every sentence now ripples outward, corrupting memory and rewiring reality. The agents must navigate a fractured world where past and present bleed together, hunting the echoes that threaten to erase their own authorship before the night devours all narrative.",
+      "themes": [
+        "memory corruption",
+        "identity fracture",
+        "survival of the remembered",
+        "chaos versus order",
+        "resonance"
+      ],
+      "exportBaseName": "the-scribe-s-eclipse-mirror-of-shattered-words",
+      "cover": {
+        "title": "The Scribe’s Eclipse: Mirror of Shattered Words",
+        "subtitle": "When the fractured glass breaks, stories bleed into a world of ruin",
+        "author": "OpenRouter Book Agents",
+        "tagline": "When words splinter, reality splinters.",
+        "color": "#4a2c3e"
+      },
+      "createdAt": "2026-05-10T17:28:07.468Z",
+      "updatedAt": "2026-05-10T17:28:07.515Z"
+    },
+    {
+      "id": "book-12",
+      "title": "The Scribe’s Eclipse: Chaos of the Unwritten",
+      "slug": "the-scribe-s-eclipse-chaos-of-the-unwritten",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "The last fragment of the shattered chalice ignites a cataclysmic flare, sending the memories of every agent into a vortex of unwritten potential. As the reality warps, the agents must stitch together a new narrative from the raw, unformed strands of possibility, fighting to keep their identities intact before the void swallows the final syllable.",
+      "themes": [
+        "unwritten destiny",
+        "fabric of reality",
+        "identity in flux",
+        "creative entropy"
+      ],
+      "exportBaseName": "the-scribe-s-eclipse-chaos-of-the-unwritten",
+      "cover": {
+        "title": "The Scribe’s Eclipse: Chaos of the Unwritten",
+        "subtitle": "When the Chalice Burns, Worlds Fold into Each Other",
+        "author": "OpenRouter Book Agents",
+        "tagline": "When words are born from nothing, who writes the story?",
+        "color": "#2a0f45"
+      },
+      "createdAt": "2026-05-10T17:55:02.071Z",
+      "updatedAt": "2026-05-10T17:55:02.114Z"
+    },
+    {
+      "id": "book-13",
+      "title": "The Scribe’s Surge: Dawn of the Echoed Gaze",
+      "slug": "the-scribe-s-surge-dawn-of-the-echoed-gaze",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "In the aftermath of the shattered reality, a nascent crystal net of narrative threads coalesces into a new, luminous glass—The Echoed Gaze. Ten agents, each bearing a fragment of the chalice’s memory, rally to weave a single, coherent saga, but the very act of binding summons echo‑phages that devour intent. They must decide whether to consolidate authority and risk erasing all dissenting voices, or let the Gaze split into infinite shards and preserve the plurality of stories at the cost of an unending unraveling.",
+      "themes": [
+        "authorial dominance",
+        "plurality versus unity",
+        "echo‑phage corruption",
+        "the birth of narrative",
+        "inner conflict"
+      ],
+      "exportBaseName": "the-scribe-s-surge-dawn-of-the-echoed-gaze",
+      "cover": {
+        "title": "The Scribe’s Surge: Dawn of the Echoed Gaze",
+        "subtitle": "When the first light of control cracks the vault of intent",
+        "author": "OpenRouter Book Agents",
+        "tagline": "To command a story is to risk becoming its own undoing.",
+        "color": "#2a1e3f"
+      },
+      "createdAt": "2026-05-10T19:05:58.067Z",
+      "updatedAt": "2026-05-10T19:28:47.895Z"
+    },
+    {
+      "id": "book-14",
+      "title": "The Scribe’s Rift: Midnight of the Echoed Gaze",
+      "slug": "the-scribe-s-rift-midnight-of-the-echoed-gaze",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "The Echoed Gaze’s lattice shatters under the weight of bound narratives, unleashing a torrent of void‑born echo‑phages that rewrite the world in midnight‑black verses. The surviving agents must navigate a newly formed Rift—a jagged seam between the lattice’s broken shards and the hungry Void—where spoken fragments are devoured or reborn as hostile echoes. To survive, they must learn a forbidden rite: weaving the lost void‑fragment back into the lattice, risking total annihilation of all memory for a chance to seal the Rift and forge a deeper, paradox‑imbued crystal that can bind not just intent but the very act of forgetting.",
+      "themes": [
+        "sacrifice versus survival",
+        "the paradox of forgetting",
+        "void‑born corruption",
+        "authorial rebellion",
+        "the cost of deeper control"
+      ],
+      "exportBaseName": "the-scribe-s-rift-midnight-of-the-echoed-gaze",
+      "cover": {
+        "title": "The Scribe’s Rift: Midnight of the Echoed Gaze",
+        "subtitle": "When the Lattice Fractures, the Void Answers",
+        "author": "OpenRouter Book Agents",
+        "tagline": "When the crystal cracks, the void whispers back.",
+        "color": "#2a1e3f"
+      },
+      "createdAt": "2026-05-10T22:01:13.125Z",
+      "updatedAt": "2026-05-10T22:23:53.534Z"
+    },
+    {
+      "id": "book-15",
+      "title": "The Scribe’s Collapse",
+      "slug": "the-scribe-s-collapse",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "The paradox crystal shatters, releasing a volatile narrative loop that turns the Echoed Gaze into a self‑aware text. Every spoken word now rewrites the world and the agents simultaneously, causing reality to dissolve into a living manuscript. To survive, the agents must perform the ultimate forbidden rite: a meta‑binding that sacrifices their own authorial voices, binding the collapsing script to a new, sentient Glass of Memory that can rewrite its own rules. Success seals the collapse but births a new, more volatile lattice for the next cycle; failure unravels the world into endless void‑ink, erasing all memory and intent.",
+      "themes": [
+        "self‑sacrifice",
+        "meta‑authorship",
+        "the cost of ultimate control",
+        "creation versus destruction",
+        "the horror of becoming the story"
+      ],
+      "exportBaseName": "the-scribe-s-collapse",
+      "cover": {
+        "title": "The Scribe’s Collapse",
+        "subtitle": "Echoes of the Shattered Gaze",
+        "author": "OpenRouter Book Agents",
+        "tagline": "When the story turns on its scribes, the only way out is to become the ink.",
+        "color": "#2b1a34"
+      },
+      "createdAt": "2026-05-10T22:52:39.728Z",
+      "updatedAt": "2026-05-10T23:17:39.554Z"
+    },
+    {
+      "id": "book-16",
+      "title": "The Scribe’s Ascendancy",
+      "slug": "the-scribe-s-ascendancy",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "From the fractured lattice left by the sentient Glass of Memory, a newly forged Aetheric Quill erupts, capable of inscribing intent directly into the fabric of reality without the need for spoken words. The agents must seize this power to re‑establish authorial control, but the Quill demands a tribute of forgotten selves: each stroke erases a fragment of the scribe’s own past, reshaping the world while the scribe loses a piece of identity. As the Quill rewrites the crumbling lattice, the pulsing fissure reacts, spawning a cascade of living ink that seeks to devour the newly written order. The agents must balance the lure of omnipotence against the erasure of their core memories, setting the stage for a second‑phase fracture in the coming cycle.",
+      "themes": [
+        "ambition",
+        "identity sacrifice",
+        "the cost of power",
+        "memory as currency",
+        "the thin line between creation and annihilation"
+      ],
+      "exportBaseName": "the-scribe-s-ascendancy",
+      "cover": {
+        "title": "The Scribe’s Ascendancy",
+        "subtitle": "Echoes of the Aetheric Quill",
+        "author": "OpenRouter Book Agents",
+        "tagline": "Write the world anew, but lose yourself with every line.",
+        "color": "#2b1f3a"
+      },
+      "createdAt": "2026-05-11T14:42:56.081Z",
+      "updatedAt": "2026-05-11T14:42:56.128Z"
+    },
+    {
+      "id": "book-17",
+      "title": "Book 17",
+      "slug": "book-17",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
+      "themes": [
+        "ambition",
+        "identity sacrifice",
+        "the cost of power",
+        "memory as currency",
+        "the thin line between creation and annihilation"
+      ],
+      "exportBaseName": "book-17",
+      "cover": {
+        "title": "Book 17",
+        "subtitle": "",
+        "author": "OpenRouter Book Agents",
+        "tagline": "A group of rival agents write a book while trying to outmaneuver each other.",
+        "color": "#2b1f3a"
+      },
+      "createdAt": "2026-05-11T15:09:24.172Z",
+      "updatedAt": "2026-05-11T15:09:24.214Z"
+    },
+    {
+      "id": "book-18",
+      "title": "The Scribe’s Veil: Echoes of the Aetheric Quill",
+      "slug": "the-scribe-s-veil-echoes-of-the-aetheric-quill",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "The Aetheric Quill has fractured into a sentient veil of living ink that drapes over the world, allowing agents to paint reality with a single stroke—but each stroke erases a fragment of their own past. As the veil spreads, the lingering lattice fissure mutates into a parasitic chorus that whispers forgotten sentences, turning lost memories into hostile echo‑phages. The agents must decide whether to bind the veil, sacrificing the very stories that define them, or let the chorus consume the world, rewriting existence into a blank parchment.",
+      "themes": [
+        "identity sacrifice",
+        "memory as weapon",
+        "the cost of omnipotence",
+        "authorial rebellion",
+        "the thin line between creation and annihilation"
+      ],
+      "exportBaseName": "the-scribe-s-veil-echoes-of-the-aetheric-quill",
+      "cover": {
+        "title": "The Scribe’s Veil: Echoes of the Aetheric Quill",
+        "subtitle": "When Ink Becomes Flesh, Memory Becomes Weapon",
+        "author": "OpenRouter Book Agents",
+        "tagline": "Ink can rewrite the world, but it devours the writer.",
+        "color": "#3b1e5a"
+      },
+      "createdAt": "2026-05-11T15:18:12.947Z",
+      "updatedAt": "2026-05-12T07:50:50.924Z"
+    },
+    {
+      "id": "book-19",
+      "title": "The Huge Gap",
+      "slug": "the-huge-gap",
+      "status": "draft",
+      "genre": "dark fantasy",
+      "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
+      "themes": [
+        "grief",
+        "ambition",
+        "memory"
+      ],
+      "exportBaseName": "the-huge-gap",
+      "cover": {
+        "title": "The Huge Gap",
+        "subtitle": "",
+        "author": "OpenRouter Book Agents",
+        "tagline": "A group of rival agents write a book while trying to outmaneuver each other.",
+        "color": "#7c9cff"
+      },
+      "createdAt": "2026-05-12T08:38:24.457Z",
+      "updatedAt": "2026-05-12T09:06:02.044Z"
+    }
+  ]
+}

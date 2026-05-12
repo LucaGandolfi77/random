@@ -1,0 +1,29 @@
+genre: science fiction
+subgenre: post-apocalyptic survival
+style: lean, tactile, and unsentimental
+tone: harsh, suspenseful, and stubbornly humane
+pov: close third person
+setting:
+  era: years after systemic collapse
+  environment: scavenged highways, ration towns, reclaimed farmland, dead suburbs, and dangerous trade routes
+story_engine:
+  protagonist: resourceful survivor responsible for someone or something they cannot abandon
+  central_conflict: immediate survival collides with a chance to build something larger than survival
+  promise: scarcity, improvisation, fragile alliances, and contested hope
+themes:
+  - what civilization is worth rebuilding
+  - trust under scarcity
+  - memory of the old world
+  - duty in broken systems
+prose_guidelines:
+  - make logistics and physical detail matter
+  - keep danger grounded in terrain, supply, and human behavior
+  - use brief flashes of tenderness to sharpen stakes
+chapter_expectations:
+  - every chapter should force a concrete tradeoff
+  - track food, shelter, transport, and injury believably
+  - end with movement toward or away from a viable future
+avoid:
+  - effortless survival
+  - vague world-collapse backstory dominating scenes
+  - cartoon raider antagonists

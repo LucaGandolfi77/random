@@ -1,0 +1,67 @@
+{
+  "active_book_id": "book-19",
+  "book_title": "The Huge Gap",
+  "critic": {
+    "verdict": "approve",
+    "issues": [],
+    "must_fix": [],
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "critic",
+      "role": "Adversarial Critic",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "continuity_keeper": {
+    "pass": true,
+    "issues": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "canon_notes": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "continuity_keeper",
+      "role": "Continuity Librarian",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "editor": {
+    "chapter_title": "Shadows in the Bloom",
+    "final_markdown": "The orchard’s light had long been a soft, amber river that slid across the cracked tiles of the drafting room. Mara walked in, her coat a dark ripple, eyes like hot glass, and the plot of her blackmail twisting in her fingers like a coiled serpent.\n\n*\"Elisa, I know the night you watched the fire spread through the grafts, how you lit the kitchen chaff to save the orchard. I can print that to the world, put it in that page you've been carving out of obsidian ink. Hand me the bloom and your document is safe.\"*\n\nElisa stared, the ember in her chest flickering as if it were a candle in a gale. Behind her, the newly birthed bloom pulsed—hushed violet, throbbing with captured sorrow—its surface trembling as if listening.\n\n*\"Your silence is a better testament. You will know the orchard burns if it burns from your own light. I cannot let you rewrite a fire that was mine, Mara,\"* she replied, voice a ribbon of restrained fire.\n\nThe argument swelled, words sharp as shards. The room, a repository of ghosted memories, seemed to hold its breath, the air thickening with the scent of old smoke soothed by cold glass.\n\nElisa pulled her palm toward the orb, the glow from her own ember making the room around her a dimened crucible. She focused, the ember's flame brightening to a fierce blaze, its heat a living pulse.\n\nThe glass bloom recoiled, a shuddering knuckle of glass pulling back at the edges, the surface vibrating to a frequency only grief could produce. Inside, the bloom’s heart—still a brittle, beating pulse of violet—shivered deeper.\n\n*The fragment cracks, the ribbon of light seeping through the split.* A fragment spat from the bloom, floating like a star into the air, landing upon the table.\n\nThe fragment rippled, a jagged tear through the violet, revealing a hidden glass fruit, dully lustrous, resting beside the drawer that had held the glass fruit before the fire.\n\nThe room went silent again, the only sound the hiss of the ember dying into smoke. Elena's hand hovered over the drawer. Mara's breath was a steam cloud, shaking whispers of a secret. The last glint on the blossom's surface was a sliver of an unknown promise.\n\nAnd then a pulse, louder, deeper—*the bloom’s heart broke*. Coals of sorrow turned to a glacial army that slammed against the walls, sending shards that glinted like distant stars.\n\nThe last line hung in the air, unspoken: _The second fruit waits in the dark, and it knows the story you have yet to write._\n\nSilence cracked, and the draft slipped between them like a ghost of a page. The garden of their memories bent, and a new thread wriggled out of darkness, unseen, unrecorded,\nbut already known by the opening shadows of the bloom.",
+    "final_summary": "Mara’s ultimatum casts its icy glare across the drafting room as Elisa, the reluctant heir, summons the ember that once scorched her family's orchard. Their confrontation erupts into a living pulse of sorrow—a glass bloom that cracks open, exposing a hidden fruit and a promise of a secret ending. Tension snaps taut, ambitions flare, grief swells, and a new mystery emerges, leaving the room on the edge of a revelation.",
+    "unresolved_threads": [
+      "What will the hidden glass fruit inside the drawer reveal about the true ending of the book?",
+      "Mara's ultimate motive for stealing the original glass fruit remains shadowed behind her threat."
+    ],
+    "changes": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "style_adjustments": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "editor",
+      "role": "Line Editor",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "votes": {
+    "votes": [],
+    "summary": {
+      "approvals": 0,
+      "revises": 0,
+      "rejects": 0,
+      "averageScore": 1,
+      "approved": true,
+      "blockingVotes": [],
+      "skipped": true,
+      "reason": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review."
+    }
+  },
+  "review_mode": "fast",
+  "revision_round": 0
+}

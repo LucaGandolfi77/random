@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Agents Lab</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">OpenRouter agentic workflow</p>
+          <h1>Book Agents Lab</h1>
+          <p class="lede">Tune the writer room, trigger chapters, and let rival agents fight over the manuscript.</p>
+        </div>
+        <div class="hero-actions">
+          <button id="openQuickstart" class="secondary" type="button">How to run</button>
+          <button id="refreshStatus">Refresh</button>
+          <span id="statusBadge" class="badge">idle</span>
+        </div>
+      </header>
+
+      <section class="panel grid two">
+        <div>
+          <h2>Project</h2>
+          <div id="projectSummary" class="summary"></div>
+        </div>
+        <div>
+          <h2>Preset control</h2>
+          <div class="control-row">
+            <select id="presetSelect" aria-label="Preset select"></select>
+            <button id="applyPreset">Apply preset</button>
+          </div>
+          <form id="apiKeyForm" class="stack top-gap compact-form">
+            <label>OpenRouter API key
+              <input name="apiKey" type="password" placeholder="sk-or-v1-..." autocomplete="off" />
+            </label>
+            <button type="submit">Save API key</button>
+          </form>
+          <div id="apiKeySummary" class="summary top-gap"></div>
+        </div>
+      </section>
+
+      <section class="panel grid two">
+        <div>
+          <div class="panel-head">
+            <h2>Series shelf</h2>
+          </div>
+          <div id="seriesSummary" class="summary"></div>
+          <div class="control-row top-gap">
+            <select id="bookSelect" aria-label="Book select"></select>
+            <button id="switchBook">Switch book</button>
+          </div>
+          <form id="newBookForm" class="stack top-gap compact-form">
+            <label>New book title <input name="title" type="text" value="" placeholder="Leave blank to let the series architect invent it" /></label>
+            <label>Genre <input name="genre" type="text" value="dark fantasy" /></label>
+            <label>Premise <textarea name="premise" rows="3" placeholder="What changes in this book?"></textarea></label>
+            <label>Themes <input name="themes" type="text" value="grief, ambition, memory" placeholder="comma-separated themes" /></label>
+            <button type="submit">Create book</button>
+          </form>
+          <button id="generateWholeBook" class="secondary top-gap" type="button">Generate whole new book</button>
+        </div>
+        <div>
+          <div class="panel-head">
+            <h2>Export bundle</h2>
+          </div>
+          <form id="bookMetadataForm" class="stack compact-form">
+            <label>Display title <input name="title" type="text" placeholder="Current book title" /></label>
+            <label>Genre <input name="genre" type="text" placeholder="Genre" /></label>
+            <label>Premise <textarea name="premise" rows="3" placeholder="Premise"></textarea></label>
+            <label>Themes <input name="themes" type="text" placeholder="comma-separated themes" /></label>
+            <label>Export base name <input name="exportBaseName" type="text" placeholder="slug-for-files" /></label>
+            <label>Subtitle <input name="subtitle" type="text" placeholder="Optional subtitle" /></label>
+            <label>Author <input name="author" type="text" placeholder="Cover author" /></label>
+            <label>Tagline <input name="tagline" type="text" placeholder="Cover tagline" /></label>
+            <label>Cover color <input name="coverColor" type="color" value="#7c9cff" /></label>
+            <button type="submit">Save active book metadata</button>
+          </form>
+          <div class="button-grid">
+            <button id="exportMarkdown">Export Markdown bundle</button>
+            <button id="exportEpub">Export EPUB</button>
+            <button id="exportAll">Export both</button>
+          </div>
+          <div id="exportSummary" class="summary top-gap"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Series continuity</h2>
+          <p>Cross-book drift, dropped threads, and isolated rules are tracked here.</p>
+        </div>
+        <div id="continuitySummary" class="summary"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Arc metrics</h2>
+          <p>Success rises when arcs pay off and decays when they go cold.</p>
+        </div>
+        <div id="arcMetrics" class="agents-grid"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Agent controls</h2>
+          <p>Numeric behavior values use sliders. Strings and arrays can be edited directly.</p>
+        </div>
+        <div id="agentsGrid" class="agents-grid"></div>
+      </section>
+
+      <section class="panel grid two">
+        <div>
+          <div class="panel-head">
+            <h2>Generate one chapter</h2>
+          </div>
+          <form id="generateForm" class="stack">
+            <label>Chapter <input name="chapter" type="number" min="1" value="1" /></label>
+            <label>Idea <textarea name="idea" rows="4">Open with a ceremony that reveals the story's first lie.</textarea></label>
+            <label>Notes <textarea name="notes" rows="3">Make the rivalries visible in subtext.</textarea></label>
+            <label>Length <input name="length" type="text" value="short chapter" /></label>
+            <label class="checkbox"><input name="dryRun" type="checkbox" /> Dry run</label>
+            <button type="submit">Generate chapter</button>
+          </form>
+        </div>
+        <div>
+          <div class="panel-head">
+            <h2>Generate many chapters</h2>
+          </div>
+          <form id="generateBookForm" class="stack">
+            <label>Start chapter <input name="startChapter" type="number" min="1" value="1" /></label>
+            <label>Count <input name="count" type="number" min="1" value="3" /></label>
+            <label>Base idea <textarea name="idea" rows="4">A secret in the orchard spreads through reflected weather.</textarea></label>
+            <label>Notes <textarea name="notes" rows="3">Escalate the consequences every chapter.</textarea></label>
+            <label>Length <input name="length" type="text" value="short chapter" /></label>
+            <label class="checkbox"><input name="dryRun" type="checkbox" /> Dry run</label>
+            <button type="submit">Auto-generate run</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="panel grid two">
+        <div>
+          <div class="panel-head">
+            <h2>Translate one chapter to Italian</h2>
+            <p>Uses the translator agent on the current final chapter and writes a separate Italian Markdown file.</p>
+          </div>
+          <form id="translateForm" class="stack compact-form">
+            <label>Chapter <input name="chapter" type="number" min="1" value="1" /></label>
+            <label>Translator notes <textarea name="notes" rows="4" placeholder="Optional glossary choices, register, or localization constraints."></textarea></label>
+            <button type="submit">Translate chapter</button>
+          </form>
+        </div>
+        <div>
+          <div class="panel-head">
+            <h2>Italian translation status</h2>
+            <p>Each translation is stored beside the English final chapter.</p>
+          </div>
+          <div id="translationSummary" class="summary"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Activity</h2>
+        </div>
+        <pre id="activityLog" class="log"></pre>
+      </section>
+    </div>
+
+    <div id="quickstartModal" class="modal-backdrop" hidden aria-hidden="true">
+      <section id="quickstartDialog" class="modal guide-modal" role="dialog" aria-modal="true" aria-labelledby="quickstartTitle">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Quickstart Guide</p>
+            <h2 id="quickstartTitle">How to run Book Agents Lab</h2>
+            <p id="quickstartEnvironmentSummary" class="meta">Checking your local setup...</p>
+          </div>
+          <div class="modal-header-actions">
+            <button id="toggleQuickstartMinimize" class="secondary modal-close" type="button">Minimize</button>
+            <button id="closeQuickstart" class="secondary modal-close" type="button">Close</button>
+          </div>
+        </div>
+
+        <div class="guide-layout">
+          <nav class="guide-progress" aria-label="Quickstart progress">
+            <p id="quickstartProgressMeta" class="meta guide-progress-meta">Loading guide progress...</p>
+            <div id="quickstartSteps" class="guide-progress-list"></div>
+          </nav>
+
+          <div class="guide-stage">
+            <p id="quickstartStepEyebrow" class="eyebrow">Step 1</p>
+            <div class="guide-status-row">
+              <h3 id="quickstartStepTitle">Preparing guide…</h3>
+              <span id="quickstartStepStatus" class="guide-status-badge" data-tone="pending">pending</span>
+            </div>
+            <p id="quickstartStepDescription" class="meta">Checking what is already configured and what still blocks generation.</p>
+            <p id="quickstartStepTarget" class="guide-target"></p>
+            <pre id="quickstartStepCode" class="guide-code" hidden></pre>
+
+            <div class="guide-toolbar">
+              <button id="focusQuickstartTarget" class="secondary" type="button">Highlight area</button>
+              <button id="copyQuickstartCode" class="secondary" type="button">Copy command</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button id="quickstartPrev" class="secondary" type="button">Previous</button>
+          <button id="quickstartNext" type="button">Next step</button>
+          <button id="dismissQuickstart" class="secondary" type="button">Close guide</button>
+        </div>
+      </section>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

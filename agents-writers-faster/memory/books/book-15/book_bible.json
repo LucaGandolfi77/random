@@ -1,0 +1,104 @@
+{
+  "title": "The Scribe’s Collapse",
+  "genre": "dark fantasy",
+  "premise": "The paradox crystal shatters, releasing a volatile narrative loop that turns the Echoed Gaze into a self‑aware text. Every spoken word now rewrites the world and the agents simultaneously, causing reality to dissolve into a living manuscript. To survive, the agents must perform the ultimate forbidden rite: a meta‑binding that sacrifices their own authorial voices, binding the collapsing script to a new, sentient Glass of Memory that can rewrite its own rules. Success seals the collapse but births a new, more volatile lattice for the next cycle; failure unravels the world into endless void‑ink, erasing all memory and intent.",
+  "themes": [
+    "self‑sacrifice",
+    "meta‑authorship",
+    "the cost of ultimate control",
+    "creation versus destruction",
+    "the horror of becoming the story"
+  ],
+  "world_rules": [
+    "Glass can store emotions when cooled under moonlight.",
+    "Breaking a glass fruit permanently alters one memory.",
+    "Paradox Crystal can bind forgetting but each use accelerates collapse",
+    "Void Rift consumes or rebirths spoken fragments",
+    "Broken glass fruit permanently alters a memory",
+    "Mirrors reflect narrative intent"
+  ],
+  "characters": {
+    "Elisa": {
+      "role": "heir",
+      "wound": "mother's disappearance",
+      "arc": "control to surrender",
+      "secrets": [
+        "She caused the first orchard fire."
+      ]
+    }
+  },
+  "chapter_registry": [
+    {
+      "chapter": 1,
+      "title": "Shattered Ink",
+      "summary": "The paradox crystal shatters, turning every object into a living word. The Echoed Gaze awakens, the Hall of Mirrors collapses, and Elisa trades a vivid memory of her mother for a glyph that steadies the lattice. The agents perform a meta‑binding rite, each scarred by a personal regret, sealing the collapse. The new Glass of Memory glows, but a pulsing fissure in the lattice hints at a more volatile next cycle.",
+      "unresolved_threads": [
+        "What exact price will the sentient Glass of Memory demand from the agents in the next cycle?",
+        "How will the pulsing fissure in the lattice affect the world’s stability as the new cycle begins?"
+      ],
+      "arc_targets": [
+        "Paradox crystal shatter triggers narrative recursion",
+        "Echoed Gaze becomes sentient text",
+        "Agents confront loss of authorial voice",
+        "Elisa must retrieve void‑fragment and sacrifice core memory",
+        "Transformation of the Echoed Gaze into a sentient manuscript",
+        "The final test of the paradox crystal’s loop",
+        "Meta‑binding ritual that erases authorial voices",
+        "Introduction of a new, sentient Glass of Memory"
+      ],
+      "next_arc_targets": [
+        "Explore the sentient Glass of Memory’s demands.",
+        "Investigate the lattice fissure’s impact.",
+        "The Hall of Mirrors has collapsed into ash",
+        "A faint pulsing fissure appears in the lattice",
+        "The next cycle’s volatile lattice is hinted at by a humming echo",
+        "New Glass of Memory receives bound signatures",
+        "Collapse of Hall of Mirrors is cemented",
+        "Lattice fissure begins pulsing",
+        "The next cycle’s volatile lattice is hinted",
+        "Price of the Glass of Memory.",
+        "Effect of the pulsing fissure.",
+        "What exact price will the sentient Glass of Memory demand from the agents in the next cycle?",
+        "How will the pulsing fissure in the lattice affect the world’s stability as the new cycle begins?"
+      ],
+      "vote_summary": {
+        "approvals": 4,
+        "revises": 1,
+        "rejects": 0,
+        "averageScore": 0.76,
+        "approved": true,
+        "blockingVotes": [
+          {
+            "voter": "critic",
+            "vote": "revise",
+            "must_fix": [
+              "Show collapse tightening in real time—words solidifying, breath turning to ink, agents feeling the threat; replace generic lullaby with a vivid, sensory memory that physically tears from Elisa’s mind; reduce placeholder tags to only critical meta‑aware moments; give each supporting agent a distinct, costly reaction during the binding rite; integrate the Hall of Mirrors collapse into a single, vivid image and record it as a collapsed artifact."
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "exportBaseName": "the-scribe-s-collapse",
+  "cover": {
+    "title": "The Scribe’s Collapse",
+    "subtitle": "Echoes of the Shattered Gaze",
+    "author": "OpenRouter Book Agents",
+    "tagline": "When the story turns on its scribes, the only way out is to become the ink.",
+    "color": "#2b1a34"
+  },
+  "series_role": "Volume 3 – Reality Collapse",
+  "carry_over_threads": [
+    "Elisa’s choice about the lost void‑fragment",
+    "The widening Rift threatening the Hall of Mirrors",
+    "The hidden pulsing fissure in the lattice",
+    "The collective intent fracture hinting at splintered realities"
+  ],
+  "automation_notes": [
+    "Generate a climactic meta‑binding scene where each agent whispers their authorial signature into the new Glass of Memory; the system should auto‑replace signature with a generated glyph.",
+    "Trigger a cascade event: when the paradox crystal shatters, auto‑apply the 'self‑aware manuscript' rule to every noun in the generated text (simulated via placeholder tags).",
+    "Resolve the lost void‑fragment thread by having Elisa retrieve it, sacrificing a core memory to seal the collapse.",
+    "Mark the Hall of Mirrors as collapsed artifact; record its loss for continuity trackers.",
+    "Set a flag ‘next_cycle_ready’ for the following volume to inherit a living Glass of Memory that can store multiple intents simultaneously."
+  ]
+}

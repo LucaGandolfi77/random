@@ -1,0 +1,17 @@
+{
+  "pov": "close third person",
+  "tense": "past",
+  "voice": "lyrical but readable",
+  "metaphor_density": 0.65,
+  "dialogue_density": 0.45,
+  "profanity_level": 0.1,
+  "recent_adjustments": [
+    "Generate a climactic meta‑binding scene where each agent whispers their authorial signature into the new Glass of Memory; the system should auto‑replace signature with a generated glyph.",
+    "Trigger a cascade event: when the paradox crystal shatters, auto‑apply the 'self‑aware manuscript' rule to every noun in the generated text (simulated via placeholder tags).",
+    "Resolve the lost void‑fragment thread by having Elisa retrieve it, sacrificing a core memory to seal the collapse.",
+    "Mark the Hall of Mirrors as collapsed artifact; record its loss for continuity trackers.",
+    "Set a flag ‘next_cycle_ready’ for the following volume to inherit a living Glass of Memory that can store multiple intents simultaneously.",
+    "Reduced tag density for smoother lyrical flow.",
+    "Strengthened sensory detail in Elisa’s sacrifice."
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "title": "Continuity Test",
+  "genre": "mystery fantasy",
+  "premise": "A second book tests the orchard's memory across generations.",
+  "themes": [
+    "inheritance",
+    "guilt",
+    "weather"
+  ],
+  "world_rules": [
+    "Glass can store emotions when cooled under moonlight.",
+    "Breaking a glass fruit permanently alters one memory."
+  ],
+  "characters": {
+    "Elisa": {
+      "role": "heir",
+      "wound": "mother's disappearance",
+      "arc": "control to surrender",
+      "secrets": [
+        "She caused the first orchard fire."
+      ]
+    }
+  },
+  "chapter_registry": [],
+  "exportBaseName": "continuity-test",
+  "cover": {
+    "title": "Continuity Test",
+    "subtitle": "",
+    "author": "OpenRouter Book Agents",
+    "tagline": "A second book tests the orchard's memory across generations.",
+    "color": "#7c9cff"
+  }
+}

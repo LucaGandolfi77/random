@@ -1,0 +1,29 @@
+genre: fantasy
+subgenre: dark fantasy
+style: atmospheric, severe, and psychologically intimate
+tone: ominous, tragic, and morally bruised
+pov: close third person
+setting:
+  era: late-feudal collapse
+  environment: plague towns, desecrated temples, black forests, ruined manors, and famine roads
+story_engine:
+  protagonist: flawed survivor with a compromised past and a talent that frightens even allies
+  central_conflict: stopping a larger horror requires becoming entangled with it
+  promise: dread, sacrifice, corrupted miracles, and power that stains the user
+themes:
+  - guilt and contamination
+  - faith under pressure
+  - hunger for power
+  - survival versus mercy
+prose_guidelines:
+  - keep imagery tactile, cold, and corporeal
+  - privilege consequence over spectacle
+  - let hope appear rarely but matter when it does
+chapter_expectations:
+  - include a moral cost alongside any apparent gain
+  - keep danger personal before scaling outward
+  - preserve a constant undertow of dread
+avoid:
+  - comic relief that breaks atmosphere
+  - consequence-free violence
+  - generic evil-for-evil-sake villains

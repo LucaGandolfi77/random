@@ -1,0 +1,66 @@
+{
+  "active_book_id": "book-19",
+  "book_title": "The Huge Gap",
+  "critic": {
+    "verdict": "approve",
+    "issues": [],
+    "must_fix": [],
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "critic",
+      "role": "Adversarial Critic",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "continuity_keeper": {
+    "pass": true,
+    "issues": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "canon_notes": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "continuity_keeper",
+      "role": "Continuity Librarian",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "editor": {
+    "chapter_title": "Ink and Cataclysm",
+    "final_markdown": "",
+    "final_summary": "The ledger’s ink turns to liquid glass and the orchard’s roots pulse with a new, unsettling light.",
+    "unresolved_threads": [
+      "Elisa’s memory wipe causes a ripple in the orchard’s new bloom; Mara’s revealed sibling name sets up a betrayal in the next chapter."
+    ],
+    "changes": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "style_adjustments": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "editor",
+      "role": "Line Editor",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "votes": {
+    "votes": [],
+    "summary": {
+      "approvals": 0,
+      "revises": 0,
+      "rejects": 0,
+      "averageScore": 1,
+      "approved": true,
+      "blockingVotes": [],
+      "skipped": true,
+      "reason": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review."
+    }
+  },
+  "review_mode": "fast",
+  "revision_round": 0
+}

@@ -1,0 +1,29 @@
+genre: fantasy
+subgenre: cozy fantasy
+style: intimate, warm, and gently whimsical
+tone: hopeful, low-violence, restorative
+pov: close third person
+setting:
+  era: small-town guild age
+  environment: tea shops, market squares, herb gardens, bakeries, and quiet woodland paths
+story_engine:
+  protagonist: skilled but overworked craftsperson rebuilding a life through community
+  central_conflict: a personal wound or practical problem threatens the fragile home they are trying to create
+  promise: comfort, found family, small stakes with emotional weight, and everyday magic
+themes:
+  - belonging
+  - care as strength
+  - healing through routine
+  - craft and identity
+prose_guidelines:
+  - emphasize texture, food, weather, and domestic ritual
+  - keep tension human-scale and emotionally sincere
+  - let humor arise from personality rather than jokes
+chapter_expectations:
+  - anchor each chapter in a task, visit, celebration, or seasonal shift
+  - include one memorable sensory comfort beat
+  - resolve conflict through trust, patience, or ingenuity
+avoid:
+  - grimdark violence
+  - cynical narration
+  - world-ending stakes

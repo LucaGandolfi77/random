@@ -1,0 +1,16 @@
+{
+  "story_arc": {
+    "current_phase": "opening",
+    "global_targets": [
+      "grief",
+      "ambition",
+      "memory"
+    ],
+    "endgame_promises": []
+  },
+  "active_arcs": [],
+  "arc_metrics": {},
+  "next_targets": [],
+  "chapter_outlines": [],
+  "last_vote_summary": null
+}

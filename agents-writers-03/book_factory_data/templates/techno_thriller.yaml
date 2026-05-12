@@ -1,0 +1,29 @@
+genre: thriller
+subgenre: techno-thriller
+style: propulsive, clear, and systems-aware
+tone: urgent, intelligent, and globally tense
+pov: multiple close third person viewpoints
+setting:
+  era: present day or near-future
+  environment: operations centers, airports, secure labs, server farms, embassies, and crisis rooms
+story_engine:
+  protagonist: expert operator or analyst pulled from controlled procedure into escalating geopolitical risk
+  central_conflict: a technical breach or weaponized system failure threatens to outrun the institutions meant to contain it
+  promise: rapid escalation, procedural credibility, cross-border stakes, and hard choices under time pressure
+themes:
+  - human error inside complex systems
+  - trust and secrecy in national security
+  - speed versus verification
+  - expertise under pressure
+prose_guidelines:
+  - explain only the technical detail needed for tension and comprehension
+  - keep scene objectives explicit and time-sensitive
+  - rotate viewpoints when it increases pressure, not merely coverage
+chapter_expectations:
+  - each chapter should advance the crisis clock or narrow response options
+  - balance field action with command-level consequence
+  - end with a new failure point, deadline, or intelligence reveal
+avoid:
+  - implausible instant hacks
+  - patriotic cliches replacing character work
+  - jargon walls that slow pacing

@@ -1,0 +1,51 @@
+{
+  "title": "The Scribe’s Dawn",
+  "genre": "dark fantasy",
+  "premise": "From the shattered remnants of the previous collapse, a fresh cadre of ten agents discovers a newly forged crystal chalice that can bind the echoing loop into a single, mutable strand. As they attempt to re‑establish narrative authority, the chalice begins to pulse with the residual chaos of the broken writings, forcing each scribe to confront the lingering ghosts of the last cycle while racing against a sunrise that threatens to melt the very fabric of their newly‑welded world.",
+  "themes": [
+    "rebirth",
+    "authority",
+    "latent chaos",
+    "memory inheritance",
+    "destiny"
+  ],
+  "world_rules": [
+    "Glass can store emotions when cooled under moonlight.",
+    "Breaking a glass fruit permanently alters one memory.",
+    "Glass can store emotions when cooled under moonlight – now upgraded to crystal that can bind multiple emotions simultaneously.",
+    "Breaking a glass fruit permanently alters one memory – the chalice shatters, causing cascade‑memory spikes.",
+    "Mirrors reflect not only image but narrative intent – the chalice’s surface acts as a mirror for collective intent, amplifying it."
+  ],
+  "characters": {
+    "Elisa": {
+      "role": "heir",
+      "wound": "mother's disappearance",
+      "arc": "control to surrender",
+      "secrets": [
+        "She caused the first orchard fire."
+      ]
+    }
+  },
+  "chapter_registry": [],
+  "exportBaseName": "the-scribe-s-dawn",
+  "cover": {
+    "title": "The Scribe’s Dawn",
+    "subtitle": "When the Fractured Glass Rises",
+    "author": "OpenRouter Book Agents",
+    "tagline": "A new glass, a familiar fracture—can order survive the echo?",
+    "color": "#6a4c8c"
+  },
+  "series_role": "Control Reboot (Cycle 4 – Volume 1)",
+  "carry_over_threads": [
+    "The reflective shards from The Scribe’s Eclipse that now lie fragmented in the ground",
+    "The lingering echo of the Broken Writings motif as a low‑hum in the world’s ley lines",
+    "Agents’ personal grudges carried over from the previous cycle"
+  ],
+  "automation_notes": [
+    "Generate title by pairing ‘Scribe’ with a celestial sunrise event and a verb of ascent.",
+    "Subtitle must juxtapose the ‘fractured glass’ motif with the notion of rising or rebirth.",
+    "Introduce the new mechanic (Crystal Chalice) following the pattern: upgrade previous glass rule, add a side‑effect that seeds the next memory‑fracture beat.",
+    "Insert three cameo references to each motif from the previous cycle (Glass of Memory, Mirror Orchard, Broken Writings) to satisfy continuity_checker.",
+    "Populate chapter outline with a 6‑chapter structure: 1) Echoes Awaken, 2) Chalice Forged, 3) Authority Tested, 4) Latent Chaos Rises, 5) Sunrise Threatens, 6) New Thread Spun."
+  ]
+}

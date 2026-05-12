@@ -1,0 +1,60 @@
+{
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "Shattered Ink",
+      "summary": "The paradox crystal shatters, turning every object into a living word. The Echoed Gaze awakens, the Hall of Mirrors collapses, and Elisa trades a vivid memory of her mother for a glyph that steadies the lattice. The agents perform a meta‑binding rite, each scarred by a personal regret, sealing the collapse. The new Glass of Memory glows, but a pulsing fissure in the lattice hints at a more volatile next cycle.",
+      "unresolved_threads": [
+        "What exact price will the sentient Glass of Memory demand from the agents in the next cycle?",
+        "How will the pulsing fissure in the lattice affect the world’s stability as the new cycle begins?"
+      ],
+      "arc_targets": [
+        "Paradox crystal shatter triggers narrative recursion",
+        "Echoed Gaze becomes sentient text",
+        "Agents confront loss of authorial voice",
+        "Elisa must retrieve void‑fragment and sacrifice core memory",
+        "Transformation of the Echoed Gaze into a sentient manuscript",
+        "The final test of the paradox crystal’s loop",
+        "Meta‑binding ritual that erases authorial voices",
+        "Introduction of a new, sentient Glass of Memory"
+      ],
+      "next_arc_targets": [
+        "Explore the sentient Glass of Memory’s demands.",
+        "Investigate the lattice fissure’s impact.",
+        "The Hall of Mirrors has collapsed into ash",
+        "A faint pulsing fissure appears in the lattice",
+        "The next cycle’s volatile lattice is hinted at by a humming echo",
+        "New Glass of Memory receives bound signatures",
+        "Collapse of Hall of Mirrors is cemented",
+        "Lattice fissure begins pulsing",
+        "The next cycle’s volatile lattice is hinted",
+        "Price of the Glass of Memory.",
+        "Effect of the pulsing fissure.",
+        "What exact price will the sentient Glass of Memory demand from the agents in the next cycle?",
+        "How will the pulsing fissure in the lattice affect the world’s stability as the new cycle begins?"
+      ],
+      "vote_summary": {
+        "approvals": 4,
+        "revises": 1,
+        "rejects": 0,
+        "averageScore": 0.76,
+        "approved": true,
+        "blockingVotes": [
+          {
+            "voter": "critic",
+            "vote": "revise",
+            "must_fix": [
+              "Show collapse tightening in real time—words solidifying, breath turning to ink, agents feeling the threat; replace generic lullaby with a vivid, sensory memory that physically tears from Elisa’s mind; reduce placeholder tags to only critical meta‑aware moments; give each supporting agent a distinct, costly reaction during the binding rite; integrate the Hall of Mirrors collapse into a single, vivid image and record it as a collapsed artifact."
+            ]
+          }
+        ]
+      },
+      "createdAt": "2026-05-10T23:17:39.552Z"
+    }
+  ],
+  "events": [
+    "Paradox crystal shatters – living manuscript emerges.",
+    "Meta‑binding rite completed – authorial voices sacrificed.",
+    "Glass of Memory gains new glyphs – flag next_cycle_ready set."
+  ]
+}

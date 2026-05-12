@@ -1,0 +1,194 @@
+{
+  "story_arc": {
+    "current_phase": "opening",
+    "global_targets": [
+      "grief",
+      "ambition",
+      "memory",
+      "authorial dominance",
+      "plurality versus unity",
+      "echo‑phage corruption",
+      "the birth of narrative",
+      "inner conflict",
+      "Reveal the Echoed Gaze’s true binding mechanism (glass lattice) and its catalytic echo‑phage release",
+      "Reclaiming narrative authority after collapse",
+      "Confronting the paradox of a single voice in a world of echoes",
+      "Balancing unity with diversity of intent"
+    ],
+    "endgame_promises": []
+  },
+  "active_arcs": [
+    "Reveal the Echoed Gaze’s true binding mechanism (glass lattice) and its catalytic echo‑phage release",
+    "Reclaiming narrative authority after collapse",
+    "Confronting the paradox of a single voice in a world of echoes",
+    "Balancing unity with diversity of intent"
+  ],
+  "arc_metrics": {
+    "Reveal the Echoed Gaze’s true binding mechanism (glass lattice) and its catalytic echo‑phage release": {
+      "success": 0.22,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Reclaiming narrative authority after collapse": {
+      "success": 0.22,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Confronting the paradox of a single voice in a world of echoes": {
+      "success": 0.22,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Balancing unity with diversity of intent": {
+      "success": 0.22,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Elisa wrestles with the loss of her voice and the looming shadow of her mother's absence.": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "The lattice’s collapse creates a fissure that begins to suck in surrounding memories.": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "Establish a tangible consequence for binding—one fragment is irrevocably erased": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "The fragment lost to the void.": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "Elisa’s secret role in the orchard fire.": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "The fragment that slipped into the void remains lost; its content and impact on the agents’ future decisions remain unknown.": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    }
+  },
+  "next_targets": [
+    "Elisa wrestles with the loss of her voice and the looming shadow of her mother's absence.",
+    "The lattice’s collapse creates a fissure that begins to suck in surrounding memories.",
+    "Establish a tangible consequence for binding—one fragment is irrevocably erased",
+    "The fragment lost to the void.",
+    "Elisa’s secret role in the orchard fire.",
+    "The fragment that slipped into the void remains lost; its content and impact on the agents’ future decisions remain unknown."
+  ],
+  "chapter_outlines": [
+    {
+      "chapter": 1,
+      "title": "Shards of Authority",
+      "chapter_goal": "Force the ten agents to confront the cost of unifying narrative—an act that may silence dissenting voices or fracture the world into endless shards, raising stakes through an echo‑phage assault.",
+      "arc_targets": [
+        "Reveal the Echoed Gaze’s true binding mechanism (glass lattice) and its catalytic echo‑phage release",
+        "Reclaiming narrative authority after collapse",
+        "Confronting the paradox of a single voice in a world of echoes",
+        "Balancing unity with diversity of intent"
+      ],
+      "next_arc_targets": [
+        "Elisa wrestles with the loss of her voice and the looming shadow of her mother's absence.",
+        "The lattice’s collapse creates a fissure that begins to suck in surrounding memories.",
+        "Establish a tangible consequence for binding—one fragment is irrevocably erased",
+        "The fragment lost to the void.",
+        "Elisa’s secret role in the orchard fire.",
+        "The fragment that slipped into the void remains lost; its content and impact on the agents’ future decisions remain unknown."
+      ],
+      "unresolved_threads": [
+        "The fragment that slipped into the void remains lost; its content and impact on the agents’ future decisions remain unknown."
+      ],
+      "planned_payoffs": [
+        "The Echoed Gaze’s true mechanism is revealed: a lattice that both binds and devours.",
+        "One agent’s fragment is irrevocably erased, showing the cost of unity.",
+        "A fragment slips into the void, leaving an unresolved wound."
+      ],
+      "outline_notes": [
+        "Elisa’s secret burn of orchard fire foreshadows her willingness to sacrifice; her hand on the lattice should feel cold, resigned. The echo‑phage manifests as a shimmering distortion that speaks in fragmented memories, a living shadow of grief. The lattice’s collapse produces a wound in the ground that swallows light - a visual promise of void absorption. The unresolved thread: a fragment falls into darkness beyond the lattice, never to be recovered, planting seed for next chapter.",
+        "Confirmed that the Echoed Gaze can bind multiple narrative intents but releases echo‑phages.",
+        "Established that binding a fragment locks it but erases it if the lattice collapses.",
+        "Added the void rule: spoken fragments can be absorbed if the lattice is intact.",
+        "The fragment lost to the void.",
+        "Elisa’s secret role in the orchard fire."
+      ],
+      "vote_summary": {
+        "approvals": 4,
+        "revises": 0,
+        "rejects": 1,
+        "averageScore": 0.72,
+        "approved": true,
+        "blockingVotes": [
+          {
+            "voter": "critic",
+            "vote": "reject",
+            "must_fix": [
+              "Write full prose for Chapter 1, incorporating all planned scenes and beats.",
+              "Establish clear stakes by showing tangible consequences of binding the Echoed Gaze.",
+              "Develop character voices and internal conflicts, especially Elisa’s grief and secret.",
+              "Embed world rules (moonlit glass, echo‑phage, void absorption) throughout the text.",
+              "Maintain lyrical, metaphor‑rich language and appropriate dialogue density."
+            ]
+          }
+        ]
+      },
+      "updatedAt": "2026-05-10T19:28:47.891Z"
+    }
+  ],
+  "last_vote_summary": {
+    "approvals": 4,
+    "revises": 0,
+    "rejects": 1,
+    "averageScore": 0.72,
+    "approved": true,
+    "blockingVotes": [
+      {
+        "voter": "critic",
+        "vote": "reject",
+        "must_fix": [
+          "Write full prose for Chapter 1, incorporating all planned scenes and beats.",
+          "Establish clear stakes by showing tangible consequences of binding the Echoed Gaze.",
+          "Develop character voices and internal conflicts, especially Elisa’s grief and secret.",
+          "Embed world rules (moonlit glass, echo‑phage, void absorption) throughout the text.",
+          "Maintain lyrical, metaphor‑rich language and appropriate dialogue density."
+        ]
+      }
+    ]
+  }
+}

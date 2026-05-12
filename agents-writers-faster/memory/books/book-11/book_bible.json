@@ -1,0 +1,53 @@
+{
+  "title": "The Scribe’s Eclipse: Mirror of Shattered Words",
+  "genre": "dark fantasy",
+  "premise": "As the crystal chalice of control shatters in the waning light, its shards scatter the collective intent of the ten agents across the realm. Every sentence now ripples outward, corrupting memory and rewiring reality. The agents must navigate a fractured world where past and present bleed together, hunting the echoes that threaten to erase their own authorship before the night devours all narrative.",
+  "themes": [
+    "memory corruption",
+    "identity fracture",
+    "survival of the remembered",
+    "chaos versus order",
+    "resonance"
+  ],
+  "world_rules": [
+    "Glass can store emotions when cooled under moonlight.",
+    "Breaking a glass fruit permanently alters one memory.",
+    "Glass shards now act as living mirrors, reflecting not only image but intent and fate.",
+    "Memory fragments can be harvested from the environment and written into new sentences.",
+    "Each healed memory shortens the time before the next collapse."
+  ],
+  "characters": {
+    "Elisa": {
+      "role": "heir",
+      "wound": "mother's disappearance",
+      "arc": "control to surrender",
+      "secrets": [
+        "She caused the first orchard fire."
+      ]
+    }
+  },
+  "chapter_registry": [],
+  "exportBaseName": "the-scribe-s-eclipse-mirror-of-shattered-words",
+  "cover": {
+    "title": "The Scribe’s Eclipse: Mirror of Shattered Words",
+    "subtitle": "When the fractured glass breaks, stories bleed into a world of ruin",
+    "author": "OpenRouter Book Agents",
+    "tagline": "When words splinter, reality splinters.",
+    "color": "#4a2c3e"
+  },
+  "series_role": "Memory Fracture – injects chaotic fragmentation that erodes the narrative spine established in the Control volume.",
+  "carry_over_threads": [
+    "The crystal chalice from The Scribe’s Dawn",
+    "The ten agents’ collective intention",
+    "Lingering chaos seeds in the world",
+    "The motif of the shattered glass (Glass of Memory)"
+  ],
+  "automation_notes": [
+    "Generate title by pairing ‘Scribe’ with a celestial eclipse event and a verb of fracture.",
+    "Include subtitle that references the fractured glass motif and impending night.",
+    "Introduce Mirror Orchard motif as a new set of fractured mirrors that amplify memory loss.",
+    "Seed a new mechanic: memory harvest – agents can extract and rewrite memories from the environment, but each extraction creates a paradox that accelerates collapse.",
+    "Insert cameo references to the previous cycle’s motifs: a shattered chalice, a mirror orchard, and broken writings.",
+    "Structure outline into six chapters: 1) Chalice Breaks, 2) Echoes Survive, 3) Memory Harvest, 4) Fracture Intensifies, 5) Night Falls, 6) New Narrative Born."
+  ]
+}

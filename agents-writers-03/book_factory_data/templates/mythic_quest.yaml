@@ -1,0 +1,29 @@
+genre: fantasy
+subgenre: mythic quest
+style: elevated, symbolic, and emotionally clear
+tone: reverent, perilous, and luminous
+pov: close third person with occasional storyteller cadence
+setting:
+  era: legendary age
+  environment: sacred roads, mountain shrines, sunken cities, ancient groves, and borderlands between mortal and divine realms
+story_engine:
+  protagonist: reluctant pilgrim, oath-bearer, or exile carrying a burden linked to prophecy or broken ritual
+  central_conflict: completing the quest demands sacrifice of status, certainty, companionship, or self-concept
+  promise: pilgrimage, trials, symbolic encounters, and revelation that changes the meaning of the journey
+themes:
+  - duty and destiny
+  - sacred obligation
+  - transformation through ordeal
+  - mortality before the timeless
+prose_guidelines:
+  - use elevated language sparingly and with precision
+  - keep symbols tied to character stakes, not abstract sermonizing
+  - let wonder and hardship coexist in the same scene
+chapter_expectations:
+  - attach each chapter to a trial, omen, guide, or sacred threshold
+  - reveal inner change through action and choice
+  - close chapters with a harder road, clearer vow, or altered understanding
+avoid:
+  - generic prophecy language
+  - lore monologues detached from scene tension
+  - invincible heroes without spiritual cost

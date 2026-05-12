@@ -1,0 +1,332 @@
+{
+  "active_book_id": "book-19",
+  "book_title": "The Huge Gap",
+  "outline_snapshot": {
+    "chapter": 3,
+    "current_phase": "opening",
+    "active_arcs": [
+      "Elisa’s control to surrender arc begins; she hides a secret fire that foreshadows rebellion.  Memory’s volatility is introduced via glass fruit.  Grief surfaces as a shared loss among the agents.  Ambition is shown in competitive manuscript edits.",
+      "Elisa’s control to surrender arc begins; she hides a secret fire that foreshadows rebellion.",
+      "Memory’s volatility is heightened by the shattered fruit’s lingering shards.",
+      "Grief surfaces as a shared loss among the agents.",
+      "Mara’s theft of the glass fruit leads to a desperate attempt to reclaim it.",
+      "Elisa’s hidden fire resurfaces, threatening the orchard.",
+      "The group’s rivalry turns into a direct confrontation.",
+      "Elisa’s secret fully revealed; the glass fruit’s memory‑altering power is exploited; the agents’ rivalry escalates into sabotage.",
+      "Mara’s motive for stealing the glass fruit, potentially tied to her own hidden grief or ambition."
+    ],
+    "next_targets": [
+      "The newly formed glass bloom pulses with captured sorrow, and a silent messenger arrives bearing a sealed manuscript that claims to contain the true ending of the book.",
+      "Mara’s theft of the glass fruit leads to a desperate attempt to reclaim it.",
+      "Elisa’s hidden fire resurfaces, threatening the orchard.",
+      "The group’s rivalry turns into a direct confrontation.",
+      "Elisa’s secret fully revealed; the glass fruit’s memory‑altering power is exploited; the agents’ rivalry escalates into sabotage.",
+      "Mara’s motive for stealing the glass fruit, potentially tied to her own hidden grief or ambition.",
+      "The emergent glass bloom’s unknown power and its potential to alter memories or control the orchard.",
+      "Mara’s true motive for stealing the original glass fruit remains concealed."
+    ],
+    "global_targets": [
+      "grief",
+      "ambition",
+      "memory",
+      "Elisa’s control to surrender arc begins; she hides a secret fire that foreshadows rebellion.  Memory’s volatility is introduced via glass fruit.  Grief surfaces as a shared loss among the agents.  Ambition is shown in competitive manuscript edits.",
+      "Elisa’s control to surrender arc begins; she hides a secret fire that foreshadows rebellion.",
+      "Memory’s volatility is heightened by the shattered fruit’s lingering shards.",
+      "Grief surfaces as a shared loss among the agents.",
+      "Mara’s theft of the glass fruit leads to a desperate attempt to reclaim it.",
+      "Elisa’s hidden fire resurfaces, threatening the orchard.",
+      "The group’s rivalry turns into a direct confrontation.",
+      "Elisa’s secret fully revealed; the glass fruit’s memory‑altering power is exploited; the agents’ rivalry escalates into sabotage.",
+      "Mara’s motive for stealing the glass fruit, potentially tied to her own hidden grief or ambition."
+    ],
+    "endgame_promises": [],
+    "previous_outline": {
+      "chapter": 2,
+      "title": "Echoes in Glass",
+      "chapter_goal": "Escalate the rivalry by forcing Elisa and Mara into a desperate bid to recover the shattered glass fruit, deepen grief and ambition, and plant a new unresolved thread about a hidden second glass fruit.",
+      "arc_targets": [
+        "Elisa’s control to surrender arc begins; she hides a secret fire that foreshadows rebellion.",
+        "Memory’s volatility is heightened by the shattered fruit’s lingering shards.",
+        "Grief surfaces as a shared loss among the agents.",
+        "Mara’s theft of the glass fruit leads to a desperate attempt to reclaim it.",
+        "Elisa’s hidden fire resurfaces, threatening the orchard.",
+        "The group’s rivalry turns into a direct confrontation.",
+        "Elisa’s secret fully revealed; the glass fruit’s memory‑altering power is exploited; the agents’ rivalry escalates into sabotage.",
+        "Mara’s motive for stealing the glass fruit, potentially tied to her own hidden grief or ambition."
+      ],
+      "next_arc_targets": [
+        "The newly formed glass bloom pulses with captured sorrow, and a silent messenger arrives bearing a sealed manuscript that claims to contain the true ending of the book.",
+        "Mara’s theft of the glass fruit leads to a desperate attempt to reclaim it.",
+        "Elisa’s hidden fire resurfaces, threatening the orchard.",
+        "The group’s rivalry turns into a direct confrontation.",
+        "Elisa’s secret fully revealed; the glass fruit’s memory‑altering power is exploited; the agents’ rivalry escalates into sabotage.",
+        "Mara’s motive for stealing the glass fruit, potentially tied to her own hidden grief or ambition.",
+        "The emergent glass bloom’s unknown power and its potential to alter memories or control the orchard.",
+        "Mara’s true motive for stealing the original glass fruit remains concealed."
+      ],
+      "unresolved_threads": [
+        "The emergent glass bloom’s unknown power and its potential to alter memories or control the orchard.",
+        "Mara’s true motive for stealing the original glass fruit remains concealed."
+      ],
+      "planned_payoffs": [
+        "Elisa’s secret fire becomes a tangible threat, moving her arc toward surrender.",
+        "The shattered glass amplifies memory volatility, setting up future manipulation.",
+        "Mara’s ambition is spotlighted, deepening the mystery of her motive."
+      ],
+      "outline_notes": [
+        "Use the glass shards as visual motif for broken memory.",
+        "Tie the ember to Elisa’s hidden fire, showing it physically for the first time.",
+        "Show Mara’s ambition through her willingness to bargain with grief.",
+        "Insert a line of internal monologue for Elisa that hints at her fear of surrender.",
+        "Add 'second glass fruit hidden in drawer' to carry‑over objects.",
+        "Record that shattered shards can replay memories when exposed to moonlight.",
+        "Mark new unresolved thread: the emergent glass bloom’s unknown power."
+      ],
+      "vote_summary": {
+        "approvals": 0,
+        "revises": 0,
+        "rejects": 0,
+        "averageScore": 1,
+        "approved": true,
+        "blockingVotes": [],
+        "skipped": true,
+        "reason": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review."
+      },
+      "updatedAt": "2026-05-12T08:46:51.571Z"
+    },
+    "arc_metrics": {
+      "Elisa’s control to surrender arc begins; she hides a secret fire that foreshadows rebellion.  Memory’s volatility is introduced via glass fruit.  Grief surfaces as a shared loss among the agents.  Ambition is shown in competitive manuscript edits.": {
+        "success": 0.14,
+        "momentum": 0.52,
+        "decay": 0.1,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "Mara’s theft of the glass fruit leads to a desperate attempt to reclaim it.": {
+        "success": 0.22,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 2,
+        "status": "active"
+      },
+      "Elisa’s hidden fire resurfaces, threatening the orchard.": {
+        "success": 0.22,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 2,
+        "status": "active"
+      },
+      "The group’s rivalry turns into a direct confrontation.": {
+        "success": 0.22,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 2,
+        "status": "active"
+      },
+      "Elisa’s secret fully revealed; the glass fruit’s memory‑altering power is exploited; the agents’ rivalry escalates into sabotage.": {
+        "success": 0.22,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 2,
+        "status": "active"
+      },
+      "Mara’s motive for stealing the glass fruit, potentially tied to her own hidden grief or ambition.": {
+        "success": 0.22,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 2,
+        "status": "active"
+      },
+      "Elisa’s control to surrender arc begins; she hides a secret fire that foreshadows rebellion.": {
+        "success": 0.24,
+        "momentum": 0.65,
+        "decay": 0,
+        "appearances": 1,
+        "lastTouchedChapter": 2,
+        "status": "active"
+      },
+      "Memory’s volatility is heightened by the shattered fruit’s lingering shards.": {
+        "success": 0.24,
+        "momentum": 0.65,
+        "decay": 0,
+        "appearances": 1,
+        "lastTouchedChapter": 2,
+        "status": "active"
+      },
+      "Grief surfaces as a shared loss among the agents.": {
+        "success": 0.24,
+        "momentum": 0.65,
+        "decay": 0,
+        "appearances": 1,
+        "lastTouchedChapter": 2,
+        "status": "active"
+      },
+      "The newly formed glass bloom pulses with captured sorrow, and a silent messenger arrives bearing a sealed manuscript that claims to contain the true ending of the book.": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      },
+      "The emergent glass bloom’s unknown power and its potential to alter memories or control the orchard.": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      },
+      "Mara’s true motive for stealing the original glass fruit remains concealed.": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      }
+    }
+  },
+  "architect": {
+    "type": "proposal",
+    "chapter_goal": "Escalate the rivalry by forcing Elisa and Mara into a desperate bid to recover the shattered glass fruit, deepen grief and ambition, and plant a new unresolved thread about a hidden second glass fruit.",
+    "theme_progress": "Grief intensifies as shared loss, ambition spikes with Mara’s bargaining, memory volatility rises with the bloom’s pulse.",
+    "arc_targets": [
+      "Elisa’s hidden fire resurfaces, threatening the orchard",
+      "Mara’s theft of the glass fruit leads to a desperate attempt to reclaim it",
+      "The group’s rivalry turns into a direct confrontation",
+      "Emergent glass bloom’s unknown power threatens memory control"
+    ],
+    "next_arc_targets": [
+      "Mara’s true motive for stealing the original glass fruit remains concealed",
+      "The newly formed glass bloom pulses with captured sorrow and a sealed manuscript appears",
+      "Elisa’s secret fully revealed and exploited"
+    ],
+    "recommended_beats": [
+      "Mara confronts Elisa with blackmail",
+      "Elisa ignites ember to melt shard",
+      "Glass bloom pulses, revealing hidden message",
+      "Mara attempts to seize bloom",
+      "Cliffhanger: glass bloom cracks, exposing new shard"
+    ],
+    "constraints": [
+      "Maintain close third person, past tense, lyrical voice; keep metaphor density 0.65; dialogue 0.45; profanity 0.1; no full prose; each scene must have a clear turn and memorable image"
+    ],
+    "outline_notes": [
+      "Show glass bloom as a living pulse of sorrow, a lantern in the dark orchard; Mara’s bargain is a knife under a veil; Elisa’s ember is a trembling flame in a stone chest; end with a shard cracking to reveal a hidden glass fruit in a drawer",
+      "Add hidden glass fruit in drawer to carry-over objects",
+      "Mark glass bloom’s pulse as a new source of memory manipulation",
+      "Record that shattered shards can replay memories when exposed to moonlight"
+    ],
+    "risks": [
+      "Risk of losing momentum if scenes feel like exposition; risk of overusing glass motifs; risk of unresolved thread feeling like a cliffhanger without payoff"
+    ],
+    "handoff_for": "character_master",
+    "_meta": {
+      "agent": "architect",
+      "role": "Story Architect",
+      "model": "openai/gpt-oss-20b:free",
+      "synthetic": true,
+      "sourceAgent": "chapter_planner"
+    }
+  },
+  "character_master": {
+    "type": "proposal",
+    "emotional_targets": [
+      "grief",
+      "ambition",
+      "memory",
+      "Grief intensifies as shared loss, ambition spikes with Mara’s bargaining, memory volatility rises with the bloom’s pulse."
+    ],
+    "character_notes": [
+      {
+        "name": "Elisa",
+        "desire": "control to surrender",
+        "fear": "mother's disappearance",
+        "contradiction": "heir pulled toward control to surrender",
+        "secret_pressure": "She caused the first orchard fire."
+      }
+    ],
+    "dialogue_instructions": [
+      "Let Elisa's dialogue reveal heir pulled toward control to surrender.",
+      "Keep the subtext orbiting Grief intensifies as shared loss, ambition spikes with Mara’s bargaining, memory volatility rises with the bloom’s pulse..",
+      "Do not break this constraint in dialogue or action: Maintain close third person, past tense, lyrical voice; keep metaphor density 0.65; dialogue 0.45; profanity 0.1; no full prose; each scene must have a clear turn and memorable image."
+    ],
+    "conflict_upgrades": [
+      "Elisa’s hidden fire resurfaces, threatening the orchard",
+      "Mara’s theft of the glass fruit leads to a desperate attempt to reclaim it",
+      "The group’s rivalry turns into a direct confrontation",
+      "Emergent glass bloom’s unknown power threatens memory control",
+      "Maintain close third person, past tense, lyrical voice; keep metaphor density 0.65; dialogue 0.45; profanity 0.1; no full prose; each scene must have a clear turn and memorable image",
+      "Risk of losing momentum if scenes feel like exposition; risk of overusing glass motifs; risk of unresolved thread feeling like a cliffhanger without payoff"
+    ],
+    "handoff_for": "chapter_planner",
+    "_meta": {
+      "agent": "character_master",
+      "role": "Character Master",
+      "model": "local-fast-path",
+      "synthetic": true
+    }
+  },
+  "chapter_planner": {
+    "type": "plan",
+    "chapter_title": "Shadows in the Bloom",
+    "chapter_hook": "Mara’s blackmail burns hotter than the ember in Elisa’s chest, and the orchard’s grief swells into a living bloom that could rewrite memories.",
+    "arc_payoffs": [
+      "Elisa’s hidden fire becomes a tangible threat, moving her arc toward surrender; Mara’s ambition is spotlighted; the glass bloom’s pulse hints at future manipulation"
+    ],
+    "next_chapter_seed": [
+      "The sealed manuscript bears a cryptic title that hints at a hidden chapter; Mara’s motive is hinted through a whispered confession; the orchard’s soil cracks, suggesting the bloom’s power will grow"
+    ],
+    "scene_cards": [
+      {
+        "scene": 1,
+        "goal": "Mara confronts Elisa with blackmail",
+        "conflict": "Mara threatens to expose Elisa’s secret fire unless Elisa returns the glass bloom",
+        "turn": "Elisa refuses, sparking a heated argument",
+        "image": "Mara’s eyes gleam like molten glass, reflecting the orchard’s dying light"
+      },
+      {
+        "scene": 2,
+        "goal": "Elisa ignites ember to melt shard",
+        "conflict": "The shard resists, its surface humming with sorrow",
+        "turn": "Elisa’s ember cracks the shard, releasing a pulse",
+        "image": "A shard explodes into a prism of sorrow, flooding the room with violet light"
+      },
+      {
+        "scene": 3,
+        "goal": "Glass bloom pulses, revealing hidden message",
+        "conflict": "The bloom’s pulse distorts the memories of the agents",
+        "turn": "A hidden message appears on the bloom’s surface: “The second fruit waits”",
+        "image": "The bloom’s surface ripples like liquid glass, revealing a tiny, hidden glass fruit in a drawer"
+      },
+      {
+        "scene": 4,
+        "goal": "Mara attempts to seize bloom",
+        "conflict": "Mara’s hand is met by a sudden surge of cold from the bloom",
+        "turn": "The bloom cracks, releasing a fragment that shatters the room",
+        "image": "The bloom splits like a glass heart, sending shards that glitter like stars"
+      }
+    ],
+    "cliffhanger": "The final shard glows with an unspoken promise, its surface shifting to reveal a new, darker shape—an unseen glass fruit that could hold the story’s true ending.",
+    "outline_memory_updates": [
+      "Add hidden glass fruit in drawer to carry-over objects",
+      "Mark glass bloom’s pulse as a new source of memory manipulation",
+      "Record that shattered shards can replay memories when exposed to moonlight",
+      "Show glass bloom as a living pulse of sorrow, a lantern in the dark orchard; Mara’s bargain is a knife under a veil; Elisa’s ember is a trembling flame in a stone chest; end with a shard cracking to reveal a hidden glass fruit in a drawer"
+    ],
+    "handoff_for": "writer",
+    "_meta": {
+      "agent": "chapter_planner",
+      "role": "Chapter Planner",
+      "model": "openai/gpt-oss-20b:free",
+      "merged": true
+    }
+  }
+}

@@ -1,0 +1,30 @@
+genre: fantasy
+subgenre: epic secondary-world fantasy
+style: mythic adventure with grounded character drama
+tone: immersive, wonder-heavy, and emotionally costly
+pov: close third person
+setting:
+	era: pre-industrial empire with decaying magical institutions
+	environment: rain-soaked capitals, ruined libraries, pilgrim roads, and frontier keeps
+story_engine:
+	protagonist: capable outsider pulled into a larger fate by one irreversible choice
+	central_conflict: private loyalty collides with public duty while an old power wakes
+	promise: wonder, danger, political pressure, and magic that always leaves a scar
+themes:
+	- memory versus myth
+	- power with consequence
+	- loyalty under strain
+	- the price of changing the past
+prose_guidelines:
+	- favor concrete sensory detail over abstract exposition
+	- keep dialogue restrained, intentional, and character-specific
+	- let magic feel tactile, rare, and dangerous
+	- close scenes with a new complication or emotional turn
+chapter_expectations:
+	- begin with an immediate objective, pressure, or discovery
+	- braid worldbuilding into action instead of pausing for lore
+	- escalate stakes through consequence rather than coincidence
+avoid:
+	- modern slang
+	- generic chosen-one rhetoric
+	- exposition blocks longer than one short paragraph

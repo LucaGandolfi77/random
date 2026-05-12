@@ -1,0 +1,14 @@
+{
+  "pov": "close third person",
+  "tense": "past",
+  "voice": "lyrical but readable",
+  "metaphor_density": 0.65,
+  "dialogue_density": 0.45,
+  "profanity_level": 0.1,
+  "recent_adjustments": [
+    "Generate a procedural list of Quill‑strokes: each stroke auto‑creates a ‘memory‑token’ that is removed from the character’s memory pool.",
+    "When the Quill writes a world‑changing clause, auto‑apply the 'lattice fissure reaction' rule: spawn a ‘living‑ink echo‑phage’ entity with stats derived from the magnitude of the change.",
+    "Tie the new Glass of Memory’s ‘bound signatures’ to the Quill: after each major scene, auto‑append a glyph to the Glass reflecting the sacrificed memory.",
+    "Flag the book as the start of a new 3‑volume cycle so downstream generators know to seed Volume 2 with intensified memory‑fracture motifs."
+  ]
+}

@@ -1,0 +1,29 @@
+genre: mystery
+subgenre: detective procedural
+style: clean, clue-rich, and steadily escalating
+tone: suspenseful, intelligent, and controlled
+pov: close third person or first person investigator voice
+setting:
+  era: contemporary city or town
+  environment: crime scenes, interview rooms, back offices, apartment blocks, and unnoticed civic infrastructure
+story_engine:
+  protagonist: persistent investigator with a personal blind spot that distorts the case
+  central_conflict: solving the present crime forces confrontation with hidden motive, institutional pressure, or buried history
+  promise: fair-play clues, redirections, procedural texture, and a meaningful reveal
+themes:
+  - truth versus narrative convenience
+  - obsession and method
+  - institutional failure
+  - the cost of looking too closely
+prose_guidelines:
+  - make clues concrete, trackable, and revisitable
+  - keep scenes active through questioning, discovery, or contradiction
+  - avoid withholding key information from the reader unfairly
+chapter_expectations:
+  - each chapter should add a clue, contradiction, or suspect shift
+  - keep the investigation legible even when the truth is not
+  - end with a complication that changes the theory of the case
+avoid:
+  - random twists with no setup
+  - genius deductions from invisible evidence
+  - exposition that repeats known clues without advancing them

@@ -1,0 +1,13 @@
+**Capitolo 2: Le Pagine del Mare**
+
+Il sole si alzava lentamente sull'orlo della costa, dipingendo il cielo di toni di arancio e argento. Un leggero sussurro di salamoia penetrava nelle pareti della vecchia casa. Era una mattina in cui il tempo sembrava fermarsi, come se il mare stesso stesse stringendo la sua voce. Elena, seduta sulla veranda con una tazza di tè caldo, si fermò e fissò il legno scuro, intrecciato con fili di legno marcio. C’era qualcosa, qualcosa che la chiamava alla fine del mondo. Un nome, una parola, un ricordo che non riusciva a smettere di sussurrare.
+
+Un giorno, con la pelle friscia e gli occhi lucidi di curiosità, aprì con delicatezza la vecchia scatola di legno nascosta sotto il materasso. All’interno, polveroso ma vivace, scoprì un diario dimenticato, avvolto tra foglie d’argento e foglie di piombo. Le prime parole che le sussurrarono non furono di paura, ma di attrazione, di amore non detto, di promesse spezzate da un colpo di vento. Ogni pagina era come una lettera d’amore, ogni pagina un pezzo di un puzzle che non riusciva a capire come completare.
+
+Elena si rese conto che il diario non era solo una storia, ma una chiave. Una chiave per chiudere una porta che non sapeva di esistere. Con il cuore che batteva all’improvviso, leggera una pagina e sentì un dolore dolce, come se qualcosa dentro di lei fosse svegliato. Le parole sembravano muoversi, come se avessero bisogno di essere ascoltate, di essere comprese.
+
+Mentre le dita sfioravano le ultime righe, una sensazione strana la avvolse: non era paura, ma una calma. Una sensazione di appartenenza, come se il diario fosse sempre stata sua, anche se l’aveva lasciata in una forma diversa. Elena chiese se stesse cercando qualcosa o se cercasse di ritornare a qualcosa che non era più. Ma il mare, con le sue onde silenziose, le rispose con una voce che non sapeva se parlare o sussurrare.
+
+Elena continuò a leggere, e ogni frase sembrava inghiottire il suo dolore, ma anche una parte di sé. Le storie dei suoi antenati non erano solo sogni lontani, ma una verità che si intrecciava con la sua realtà. La stanza si riempì di un leggero calore, come se il tempo si fosse fermato per permetterle di ascoltare. Per la prima volta, sentì che le parole che le appartenevano non le appartenevano più, ma le le variavano.
+
+E mentre il sole iniziava a calare, tingendo il cielo di sfumature dorate, Elena nascose il diario in una sacca di velluto. Non sperava che lo trovassero un altro giorno. Ma sapeva che, qualunque cosa accadesse, avrebbe portato con sé un frammento di quel mare che la avrebbe cambiata.

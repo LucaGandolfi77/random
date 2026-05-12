@@ -1,0 +1,161 @@
+{
+  "active_book_id": "book-19",
+  "book_title": "The Huge Gap",
+  "outline_snapshot": {
+    "chapter": 1,
+    "current_phase": "opening",
+    "active_arcs": [],
+    "next_targets": [],
+    "global_targets": [
+      "grief",
+      "ambition",
+      "memory"
+    ],
+    "endgame_promises": [],
+    "previous_outline": null,
+    "arc_metrics": {}
+  },
+  "architect": {
+    "type": "proposal",
+    "chapter_goal": "Introduce the agents, establish the competitive writing dynamic, and set the first emotional conflict that will ripple through the narrative.",
+    "theme_progress": "grief and ambition collide as the agents seek to outshine one another, hinting at memory’s fragility.",
+    "arc_targets": [
+      "Elisa’s control to surrender arc begins; she hides a secret fire that foreshadows rebellion.  Memory’s volatility is introduced via glass fruit.  Grief surfaces as a shared loss among the agents.  Ambition is shown in competitive manuscript edits."
+    ],
+    "next_arc_targets": [
+      "Elisa’s secret fully revealed; the glass fruit’s memory‑altering power is exploited; the agents’ rivalry escalates into sabotage."
+    ],
+    "recommended_beats": [
+      "Agents gather in the dimly lit drafting room, each with a manuscript draft.",
+      "Elisa presents a new chapter, claiming it will eclipse all others.",
+      "A rival agent, Mara, counters with a sharper, darker rewrite.",
+      "The group debates the merits of emotional honesty vs. market appeal.",
+      "Elisa reveals a hidden glass fruit, whispering that it can erase a memory.",
+      "Mara steals the fruit, setting a trap for Elisa.",
+      "Elisa confronts Mara, leading to a heated argument that ends with the fruit shattered.",
+      "A sudden vision of a burned orchard flashes, hinting at Elisa’s past.",
+      "The chapter ends with the ruined manuscript and a lingering scent of smoke."
+    ],
+    "constraints": [
+      "Maintain close third person, past tense, lyrical voice.",
+      "Dialogue density 0.45; metaphor density 0.65.",
+      "No profanity over 0.1.",
+      "Scene must include a memorable image and a clear consequence."
+    ],
+    "outline_notes": [
+      "Introduce the glass fruit rule early to anchor the world.",
+      "Show the first hint of Elisa’s secret fire through a visual: a smoldering ember in a glass vial.",
+      "Use the shattered fruit as a symbol of broken memory and rising tension.",
+      "Leave an unresolved thread: Mara’s motive for stealing the fruit.",
+      "Add 'glass fruit' as a world rule with memory‑altering property.",
+      "Record Elisa’s secret fire as a potential future conflict.",
+      "Mark the shattered fruit as a symbol of broken memory and rising stakes."
+    ],
+    "risks": [
+      "Risk of overloading exposition; keep world rules concise.",
+      "Potential pacing slowdown if too much dialogue; balance with action.",
+      "Ensure the conflict feels inevitable, not contrived."
+    ],
+    "handoff_for": "character_master",
+    "_meta": {
+      "agent": "architect",
+      "role": "Story Architect",
+      "model": "openai/gpt-oss-20b:free",
+      "synthetic": true,
+      "sourceAgent": "chapter_planner"
+    }
+  },
+  "character_master": {
+    "type": "proposal",
+    "emotional_targets": [
+      "grief",
+      "ambition",
+      "memory",
+      "grief and ambition collide as the agents seek to outshine one another, hinting at memory’s fragility."
+    ],
+    "character_notes": [
+      {
+        "name": "Elisa",
+        "desire": "control to surrender",
+        "fear": "mother's disappearance",
+        "contradiction": "heir pulled toward control to surrender",
+        "secret_pressure": "She caused the first orchard fire."
+      }
+    ],
+    "dialogue_instructions": [
+      "Let Elisa's dialogue reveal heir pulled toward control to surrender.",
+      "Keep the subtext orbiting grief and ambition collide as the agents seek to outshine one another, hinting at memory’s fragility..",
+      "Do not break this constraint in dialogue or action: Maintain close third person, past tense, lyrical voice.."
+    ],
+    "conflict_upgrades": [
+      "Elisa’s control to surrender arc begins; she hides a secret fire that foreshadows rebellion.  Memory’s volatility is introduced via glass fruit.  Grief surfaces as a shared loss among the agents.  Ambition is shown in competitive manuscript edits.",
+      "Maintain close third person, past tense, lyrical voice.",
+      "Dialogue density 0.45; metaphor density 0.65.",
+      "No profanity over 0.1.",
+      "Scene must include a memorable image and a clear consequence.",
+      "Risk of overloading exposition; keep world rules concise."
+    ],
+    "handoff_for": "chapter_planner",
+    "_meta": {
+      "agent": "character_master",
+      "role": "Character Master",
+      "model": "local-fast-path",
+      "synthetic": true
+    }
+  },
+  "chapter_planner": {
+    "type": "plan",
+    "chapter_title": "Shards of Ink",
+    "chapter_hook": "Elisa’s new chapter promises to eclipse all, but a single glass fruit could rewrite history itself.",
+    "arc_payoffs": [
+      "Elisa’s control is challenged when her secret is exposed.",
+      "The memory‑altering glass fruit becomes a bargaining chip.",
+      "The group’s grief is hinted at through the shared memory of loss."
+    ],
+    "next_chapter_seed": [
+      "Mara’s theft of the glass fruit leads to a desperate attempt to reclaim it.",
+      "Elisa’s hidden fire resurfaces, threatening the orchard.",
+      "The group’s rivalry turns into a direct confrontation."
+    ],
+    "scene_cards": [
+      {
+        "scene": 1,
+        "goal": "Show the competitive drafting environment.",
+        "conflict": "Elisa claims her new chapter will dominate the market, provoking hostility.",
+        "turn": "Mara steals a glass fruit, attempting to sabotage Elisa.",
+        "image": "A single, translucent fruit hanging from a moonlit railing, its surface swirling with captured sorrow."
+      },
+      {
+        "scene": 2,
+        "goal": "Escalate tension through the fruit’s power.",
+        "conflict": "Elisa confronts Mara, leading to a physical clash over the fruit.",
+        "turn": "The fruit shatters, releasing a burst of cold light and a flash of a burning orchard.",
+        "image": "Glass shards spiraling like snowflakes, each reflecting a fragment of a burned tree."
+      },
+      {
+        "scene": 3,
+        "goal": "Conclude with a haunting memory and unresolved motive.",
+        "conflict": "The group must decide whether to continue the manuscript or to destroy the damaged pages.",
+        "turn": "Elisa silently decides to rewrite her own past, hinting at future sacrifice.",
+        "image": "A lone ember glowing in a cracked vial, mirroring Elisa’s hidden sorrow."
+      }
+    ],
+    "cliffhanger": "The shattered glass fruit lies on the floor, its shards humming with untold memories, while Mara’s eyes flicker with a new, darker ambition.",
+    "outline_memory_updates": [
+      "Add 'glass fruit' as a world rule with memory‑altering property.",
+      "Record Elisa’s secret fire as a potential future conflict.",
+      "Mark the shattered fruit as a symbol of broken memory and rising stakes.",
+      "Introduce the glass fruit rule early to anchor the world.",
+      "Show the first hint of Elisa’s secret fire through a visual: a smoldering ember in a glass vial.",
+      "Use the shattered fruit as a symbol of broken memory and rising tension.",
+      "Leave an unresolved thread: Mara’s motive for stealing the fruit."
+    ],
+    "handoff_for": "writer",
+    "_meta": {
+      "agent": "chapter_planner",
+      "role": "Chapter Planner",
+      "model": "openai/gpt-oss-20b:free",
+      "merged": true
+    }
+  }
+}

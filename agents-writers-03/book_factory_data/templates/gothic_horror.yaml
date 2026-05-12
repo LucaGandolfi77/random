@@ -1,0 +1,29 @@
+genre: horror
+subgenre: gothic horror
+style: lush, claustrophobic, and emotionally fevered
+tone: haunted, sensual, and slowly escalating
+pov: first person or close third person
+setting:
+  era: nineteenth-century inspired alternate history
+  environment: decaying estates, rain-lashed coastlines, locked wings, family chapels, and candlelit corridors
+story_engine:
+  protagonist: outsider drawn into a household or institution with secrets that mirror their own repression
+  central_conflict: the search for truth threatens sanity, desire, inheritance, and bodily safety
+  promise: dread, revelation, obsession, and architecture that behaves like memory
+themes:
+  - repression and desire
+  - inheritance and rot
+  - unreliable perception
+  - the body as haunted archive
+prose_guidelines:
+  - use sensory detail for mood rather than ornament alone
+  - let setting influence emotional rhythm
+  - keep revelations incremental and unnerving
+chapter_expectations:
+  - attach each chapter to a room, relic, rumor, or family secret
+  - allow every answer to deepen the central unease
+  - close scenes with a disturbing image or implication
+avoid:
+  - modern phrasing
+  - jump-scare pacing without atmosphere
+  - overexplaining the uncanny too early

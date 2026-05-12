@@ -1,0 +1,66 @@
+{
+  "active_book_id": "book-19",
+  "book_title": "The Huge Gap",
+  "critic": {
+    "verdict": "approve",
+    "issues": [],
+    "must_fix": [],
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "critic",
+      "role": "Adversarial Critic",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "continuity_keeper": {
+    "pass": true,
+    "issues": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "canon_notes": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "continuity_keeper",
+      "role": "Continuity Librarian",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "editor": {
+    "chapter_title": "Ink and Reckoning",
+    "final_markdown": "The ledger lay open on the floor, its parchment a fragile moonbeam, silver ink bleeding along a weathered margin like a crack of lightning. Mara’s fingers, stained with the ink‑scarred words of her own ambition, slid over the trembling page.\n\n\"So it is true,\" she hissed, turning the last page as if it might swallow her. \"The forgotten god demands the sacrifice we all feared.\n\n\"Mara's eyes flickered to the glass fruit, the one she had stolen from the drawer and now held like a dying star. It glittered with the cold, unblinking light of shattered memories. The fruit had always been a silent witness to the orchard's secrets; it now pulsed like a heart in its own death.\n\nElisa's lips curved in a mask of defiance. \"You think you can toy with our pasts? This orchard is a memory, not a fire. And I will not let it burn for your coin,\" she said, voice steady but thin.\n\nMara's throat tightened. \"Then lose whatever memory you hold dear. Without the knowledge of your mother, you cannot control the silences that gnaw at your throne. Turn the page,\" she urged.\n\nThe ledger's edge whispered a painful threat as Elisa groped for the knife at her belt. She thought of the orchard's roots, of the delicate, glowing strands that once reached for the sky. The thought of that fire—once kindled by her own hand—burned hotter than the summer sun.\n\nIn a sudden, desperate motion, Elisa lifted the knife and set it on the ledger. Her hand trembled, every shiver a chord of grief. She stared into the glass fruit, and for a heartbeat, she saw the orchard—how fire had once surged through rings of wood, how her mother had stood beneath falling leaves, how the night of the first blaze had ended in a silent loam of burnt earth.\n\nWith a breath that felt like a bark in wind, Elisa plunged the blade into the glass.\n\nThe fruit shattered. Each shard snowed down, humming with sorrow. One crystal fell into Mara's palm and cracked open, scattering a shard of memory into the air—images of a woman who had spoken, a laugh that once touched the stone. The shards glowed like a constellation of broken hopes.\n\n\"Lara,\" Mara whispered, as the shard sang the name. It was too late—the shard's light grew into a blazing flare that licked the roots of the orchard.\n\nElisa, with eyes muzzle a cracked, watched her orchard's roots ignite in a living memory—a blue flame that sang of lost dreams, not of physical combustion. Her own memory of her mother, a fragile, half‑lost lullaby, began to seep into the fire and vanish.\n\nThe air thickened with the scent of scorched leaves. The ledger's ink, once raw, now pulsed with a final promise. Both the orchard and the ledger seemed to hold their breath, awaiting an answer that would fall from a page yet unread.\n\nAs the last fragment of the ledger folded into itself, echoing the final pulse of the orchard roots, the scene closed on a single, fleeting image: A shard, faint as a sigh, stranded upon the cracked ledger, whispering the taste of rain that had never fallen back into the tree.\n\n\n\n\n",
+    "final_summary": "In the dim glow of a moonlit ledger, Elisa and Mara barter fire for memory. Shards of glass fragment, echoing grief, and the orchard burns in memory as Elisa sacrifices her own past to save it. The ledger’s last line remains unread, a promise that could undo everything.",
+    "unresolved_threads": [
+      "The ledger’s final entry remains hidden, its ink pulsing with a promise that could either undo the orchard or erase the agents’ past entirely."
+    ],
+    "changes": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "style_adjustments": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "editor",
+      "role": "Line Editor",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "votes": {
+    "votes": [],
+    "summary": {
+      "approvals": 0,
+      "revises": 0,
+      "rejects": 0,
+      "averageScore": 1,
+      "approved": true,
+      "blockingVotes": [],
+      "skipped": true,
+      "reason": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review."
+    }
+  },
+  "review_mode": "fast",
+  "revision_round": 0
+}

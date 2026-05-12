@@ -1,0 +1,24 @@
+{
+  "story_arc": {
+    "current_phase": "opening",
+    "global_targets": [
+      "grief",
+      "ambition",
+      "memory",
+      "unwritten destiny",
+      "fabric of reality",
+      "identity in flux",
+      "creative entropy"
+    ],
+    "endgame_promises": []
+  },
+  "active_arcs": [],
+  "arc_metrics": {},
+  "next_targets": [
+    "Agents reconstruct a coherent world from raw memory fragments",
+    "They confront the paradox of creating a story that cannot be written yet must exist",
+    "The final choice: sacrifice all agency to preserve the story or let the void consume the narrative"
+  ],
+  "chapter_outlines": [],
+  "last_vote_summary": null
+}

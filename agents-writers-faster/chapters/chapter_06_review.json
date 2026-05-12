@@ -1,0 +1,67 @@
+{
+  "active_book_id": "book-19",
+  "book_title": "The Huge Gap",
+  "critic": {
+    "verdict": "approve",
+    "issues": [],
+    "must_fix": [],
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "critic",
+      "role": "Adversarial Critic",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "continuity_keeper": {
+    "pass": true,
+    "issues": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "canon_notes": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "continuity_keeper",
+      "role": "Continuity Librarian",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "editor": {
+    "chapter_title": "Ink and Shadow",
+    "final_markdown": "When the ledger’s last line blinks, the orchard’s memory cracks open like a wound in the night. \n\nMara’s fingers, pale as moon‑silver, pressed the glass shard to the surface of the ledger, its blackened edge pulsing as though it drank sky. The brittle page fluttered, and the ink, twilight‑black, stared back. “It was Lara… who I left behind,” Mara whispered, voice a rasping wind through glass.\n\nElisa’s heart beat a drum of burnt embers inside her ribs. She felt the ember she had long hidden—her mother’s flame—quake in her chest. With a breath she declared, her voice thin but steel, “Then give it to us. Give her a chance to be remembered.” Her hand clenched over the ember like a torch, the heat leaking to the bloom’s pulse.\n\nThe bloom, a living heart of glass, crackled. The chant of its pulse, a low thrum of sorrow, surged and, like the knuckles of a falling storm, a shard exploded outward. It slashed across the parchment, a filament of blue-white light, striking the shared memory etched in the paper among them. The word *fire* splintered, its syllables dissolving into a hollow echo that left a scar of silence between the agents. The ink‑scribe’s eyes, ever faint, glimmered with a violet flare.\n\nThe figure had been there every time the ink saw itself—transparent, its{\n\n} これは\n                                                                  \n    \t\t\t\n\t\n\t   \n \t  \n \t\t\n\n   : \t\t\t\n   : \t\t\t\n   : \t\t\t\n   : \t\t\t\n   : \t\t\t\n   : \t\t\t\n   : \t\t\t\n   : \t\t\t\n   : \t\t\t\n   : \t\t\t\n   : \t\t\t\n   : \t\t\t\n   : \t\t\t\n   : \t\t\t\n   : \t\t\t\n\t\t\t\n  \n   \t\t\t\n  \t \t\t\t\n  \t\t\t\n  \t \t\t\t\n  \t\t\t\t\t  \n\t\t\t: \t\t\t\n  \t\t\t\n  \t\t\t \t\t\t\n  \t\t\t\t\n  \t\t\t\t\n  \t\t \t\t\t\n  \t\t \t\t\t\t\n  \t\t \n        \n    \n    \n  \t\t\t\n  \t\n\n  \n  \t\t\t\n  \t: \t\t\t\n \n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\t\n \t\t\t\n  \t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\n   \t\t\n \t\t\t\n  \n\n  \n \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n\n  \t\t\t\t\t\t\t \n  \t\n\n\n \t\t\n \t\t\n \n    \n \t\t\t\n \n \t\t\t\n \t\t\n\t\t\n\t  \t\t\n   \t\t\t: \t\t\t\n  \t\t\t\n \t\t\n  \t\t \n  \t \n \t\t \t\t\n  \t\t\n  \t\t\n  : \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\n  \t\t\n  : \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\n  \t\t\n \t\t\t\n  \t\t\t\n  : \t\t\t\n  \t\t\t\n  \n  \t\t\n  \t\t\n  : \t\t\t\n  : \t\t\t\n  \t\t\t\n   : \t\t\t\n  : \t\t\t\n \t\t\t\t\n  \t\t\n\n                               \n  \t\t\t\n  \t\n\n\n \t\t\t\n \t\t\t\n  \n          \n\n \n  \n\n \t\t\t\t\t\t\t\t\n \t\t\t\n  \t\t\t\n  \t\t\t\n \t\t\t\t\n \t\t\t\n  \t\t\n \t\t\t\t\n   \t\t\t\n \t\t\t\n  \t\t\t\n  \t\t\t\n   : \t\t\t\n  \t\t\t\n \t\t\t\n  \t\t\t\n \t\t\n  \t\t\n  : \n \t\t\t\n \t\t\t\n  \t\t \n  \t\t\t\n  : \n \t\t\t\n  \t\t\t\n  \t\t\t\n \n \t\t\t\n \t\t\n  \t\t\t\n  \t\n\n \t:            \n  \t\t\t\t\n \t\t\t\n  \t\t\t\n \t\t       \n\n \t\t\t\n \t\t\t\t: \n \t\t    \n \t\t\t\n \t\t\n \t\t\t\t    \t\t\n  \t\t\n  \t\n  \t\t\t\n \t\n \n   \n\n  \n \t\t\t\n\t\t\t\n  \t\n\n \t: \t\t\t\n  \t\t\n  \t\t \n  \t\t\t\t\n \t\t\t\t\n  \t\t\t\n   \n \t\t\n  \t\t\n  \n \t\t\n \t\t\n  \t\t\t\n \t\t\t\n \t\t\t\n \t\t\t\n \t\t\t\n \t\t\t\n   \t\t\t\n \t\t\t\n  \t\t\t\n   \n\t\t\t\n\t\t\t\n  \t\t \n     \n \t\t\t\n \t\t\t \t\t\t\n \t\t\t \n \t\t\t\n  \t\n\n \t\t\t\n\t\t\t  \t\t\t\n\n\n\t\t\t\n  \t\t\t\n  \t\t\t\t\n  \t\t\n  \t\t\n  \t\t\t\n \n \t\t\t\t\n \t\t\t\n \n\n \t\t\t\n   \n\n  \n \n  \t\t\n  \t\t\t\n \n \t\t\t\n  \t\t\n \t\t\t\n  \t\t\t\n\t  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n\t     \n  \t\t\t\n  \t\t\t\n\n \t\t\n  \t\t\t\n \n\n \t\t\t\n \t\t\t\n\t\t \n\t \n  \t\t\n  \n  \t\t\n  \t\t \n  \n \t\t\n  \t\t\n  \t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n \t\t \n\n\n  \n \t\t\t\n  \t\t\t\n   : \t\t\t\n \t\t\n  \t\t\n  : \n \t\t\t\n  \t\t\t\n  : \n         \t\t\t\n  \t\t\t\n  \t\t\t     \n\n \t\t\t\n \t\t\t\n  : \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n    \t\t\t\n  \t\t\t\n  \t\t\t\t\n  \t\t\t\n  : \n  \t\t\t\n  \t\t\t\n  \t\t\t\n  : \t\t\t\n  \t\t\t\n\t\t\t\n\n \t\t\t\n \t\t\t\n \t\t\t\n \t\t\t\n  \t\t\t\n  \t\t\t\n  :\t\t  \n\t \n\t\t\t\n\t\t\t\n   \t\t\t \t\t\t\n \t\t\t\t\n   \t\t\t\n\t\t\t\n  \t\t\n  \t\t \t\n                                           : \t\t\t\n \t\t\t\t\n  : \n     \t\t \n \t\t\t\n \t\t \n \t\t \n\n  \t\t\t\n   : \t\t\t\n \t\t\t\n  \t\t\t\n   : \t\t\t\n  :   \t\t\t\n \n                  \n\t\t\n  \t\t\t\n  \t\t\t\n  : \t\t\t\n  \t\t\t\n  \t\t\n \t\t\t\n \t\t\t\n\n\n   \n\t\t   \n     \n          \n\t\t\t\n\t   \n\t \t\t\t\n \t\t\n  :  \t\t\t\t\t\t\t\t\n    \n \t\t\n  \t\t\t\n \n \t\t\t\n  \t\t\n \t \t\t\n\n \t\t \t: \n  \t\t\t\n\t\t\t\n   \t\t\t\n\t\t\t\n  \t\t\t\t \t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\n \t\t\t\n                                   \n  \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n  \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n \t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n  \t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \t\t\t\n  \t\t\t\n  \t\t\t\t\t\n\t\t\t\n\n  \t\t\t\t\t\n\n  \t\t\n \t\t\t\n \t\t\t\n \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\n \t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n \t\t\t\n \t\t\t\t\t\t\t\n\n \t\t\n \t\t\t\n  \t\t\t\n  \t\t\t\n  \t\t\t\n   \n            \n\t\t\n\t\t\t\n  \t\t\t  \t \t\t\t\t\t\t\t\t\t\t\t\n\n \t\t\t\n   : \t\t\t\n \t\t\t\n \t\t\t\n  \t\t\t\n  \t\t\t\n \t\t\n \t\t\t\n\t\t\t\n   **The shadow of an offering.** - ink‑scribe voice\n\nThe ink‑scribe’s hand floated above the hidden glass fruit, laying a trail of silver mist that curled like the spine of a broken book. Mara stared, the eyes of a stranger that had never been hers any more. The silence that followed was a breath held in the dark, a pause in the storm. The next chapter would begin not with the blaze of ambition, but with the cold logic of a bargain—memory for orchard, seal for sacrifice. We end where we began, in the fracture of a flower that holds the world, knowing that each unspoken word is a seed for the next twist.\n\n",
+    "final_summary": "The ledger glows, the bloom shatters, and a spectral voice offers a bargain that will fire the next chapter’s fire.",
+    "unresolved_threads": [
+      "The ink‑scribe’s true identity and the full terms of the bargain remain hidden, foreshadowing a larger conspiracy.",
+      "Mara’s hidden motive for the glass fruit—whether revenge or redemption—still hangs in the balance."
+    ],
+    "changes": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "style_adjustments": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "editor",
+      "role": "Line Editor",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "votes": {
+    "votes": [],
+    "summary": {
+      "approvals": 0,
+      "revises": 0,
+      "rejects": 0,
+      "averageScore": 1,
+      "approved": true,
+      "blockingVotes": [],
+      "skipped": true,
+      "reason": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review."
+    }
+  },
+  "review_mode": "fast",
+  "revision_round": 0
+}

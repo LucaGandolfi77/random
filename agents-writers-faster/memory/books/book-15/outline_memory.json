@@ -1,0 +1,308 @@
+{
+  "story_arc": {
+    "current_phase": "opening",
+    "global_targets": [
+      "grief",
+      "ambition",
+      "memory",
+      "self‑sacrifice",
+      "meta‑authorship",
+      "the cost of ultimate control",
+      "creation versus destruction",
+      "the horror of becoming the story",
+      "Paradox crystal shatter triggers narrative recursion",
+      "Echoed Gaze becomes sentient text",
+      "Agents confront loss of authorial voice",
+      "Elisa must retrieve void‑fragment and sacrifice core memory",
+      "Transformation of the Echoed Gaze into a sentient manuscript",
+      "The final test of the paradox crystal’s loop",
+      "Meta‑binding ritual that erases authorial voices",
+      "Introduction of a new, sentient Glass of Memory"
+    ],
+    "endgame_promises": []
+  },
+  "active_arcs": [
+    "Paradox crystal shatter triggers narrative recursion",
+    "Echoed Gaze becomes sentient text",
+    "Agents confront loss of authorial voice",
+    "Elisa must retrieve void‑fragment and sacrifice core memory",
+    "Transformation of the Echoed Gaze into a sentient manuscript",
+    "The final test of the paradox crystal’s loop",
+    "Meta‑binding ritual that erases authorial voices",
+    "Introduction of a new, sentient Glass of Memory"
+  ],
+  "arc_metrics": {
+    "Paradox crystal shatter triggers narrative recursion": {
+      "success": 0.22,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Echoed Gaze becomes sentient text": {
+      "success": 0.22,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Agents confront loss of authorial voice": {
+      "success": 0.22,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Elisa must retrieve void‑fragment and sacrifice core memory": {
+      "success": 0.22,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Transformation of the Echoed Gaze into a sentient manuscript": {
+      "success": 0.22,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "The final test of the paradox crystal’s loop": {
+      "success": 0.22,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Meta‑binding ritual that erases authorial voices": {
+      "success": 0.22,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Introduction of a new, sentient Glass of Memory": {
+      "success": 0.22,
+      "momentum": 0.65,
+      "decay": 0,
+      "appearances": 1,
+      "lastTouchedChapter": 1,
+      "status": "active"
+    },
+    "Explore the sentient Glass of Memory’s demands.": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "Investigate the lattice fissure’s impact.": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "The Hall of Mirrors has collapsed into ash": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "A faint pulsing fissure appears in the lattice": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "The next cycle’s volatile lattice is hinted at by a humming echo": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "New Glass of Memory receives bound signatures": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "Collapse of Hall of Mirrors is cemented": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "Lattice fissure begins pulsing": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "The next cycle’s volatile lattice is hinted": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "Price of the Glass of Memory.": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "Effect of the pulsing fissure.": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "What exact price will the sentient Glass of Memory demand from the agents in the next cycle?": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    },
+    "How will the pulsing fissure in the lattice affect the world’s stability as the new cycle begins?": {
+      "success": 0,
+      "momentum": 0.42,
+      "decay": 0.1,
+      "appearances": 0,
+      "lastTouchedChapter": null,
+      "status": "active"
+    }
+  },
+  "next_targets": [
+    "Explore the sentient Glass of Memory’s demands.",
+    "Investigate the lattice fissure’s impact.",
+    "The Hall of Mirrors has collapsed into ash",
+    "A faint pulsing fissure appears in the lattice",
+    "The next cycle’s volatile lattice is hinted at by a humming echo",
+    "New Glass of Memory receives bound signatures",
+    "Collapse of Hall of Mirrors is cemented",
+    "Lattice fissure begins pulsing",
+    "The next cycle’s volatile lattice is hinted",
+    "Price of the Glass of Memory.",
+    "Effect of the pulsing fissure.",
+    "What exact price will the sentient Glass of Memory demand from the agents in the next cycle?",
+    "How will the pulsing fissure in the lattice affect the world’s stability as the new cycle begins?"
+  ],
+  "chapter_outlines": [
+    {
+      "chapter": 1,
+      "title": "Shattered Ink",
+      "chapter_goal": "Shatter the crystal, initiate the living manuscript, and force the agents into the ultimate rite, raising stakes to instantaneous collapse.",
+      "arc_targets": [
+        "Paradox crystal shatter triggers narrative recursion",
+        "Echoed Gaze becomes sentient text",
+        "Agents confront loss of authorial voice",
+        "Elisa must retrieve void‑fragment and sacrifice core memory",
+        "Transformation of the Echoed Gaze into a sentient manuscript",
+        "The final test of the paradox crystal’s loop",
+        "Meta‑binding ritual that erases authorial voices",
+        "Introduction of a new, sentient Glass of Memory"
+      ],
+      "next_arc_targets": [
+        "Explore the sentient Glass of Memory’s demands.",
+        "Investigate the lattice fissure’s impact.",
+        "The Hall of Mirrors has collapsed into ash",
+        "A faint pulsing fissure appears in the lattice",
+        "The next cycle’s volatile lattice is hinted at by a humming echo",
+        "New Glass of Memory receives bound signatures",
+        "Collapse of Hall of Mirrors is cemented",
+        "Lattice fissure begins pulsing",
+        "The next cycle’s volatile lattice is hinted",
+        "Price of the Glass of Memory.",
+        "Effect of the pulsing fissure.",
+        "What exact price will the sentient Glass of Memory demand from the agents in the next cycle?",
+        "How will the pulsing fissure in the lattice affect the world’s stability as the new cycle begins?"
+      ],
+      "unresolved_threads": [
+        "What exact price will the sentient Glass of Memory demand from the agents in the next cycle?",
+        "How will the pulsing fissure in the lattice affect the world’s stability as the new cycle begins?"
+      ],
+      "planned_payoffs": [
+        "The crystal shatters and reality rewrites itself",
+        "Elisa retrieves the void‑fragment from the Hall of Mirrors",
+        "Agents perform the meta‑binding rite, sacrificing their authorial voices",
+        "The new Glass of Memory glows with freshly forged glyphs"
+      ],
+      "outline_notes": [
+        "Introduce void‑fragment as dark inked shard; its retrieval is a ritual of grief",
+        "Use metaphor density 0.65: words as ink, voices as splashes",
+        "Dialogue density 0.45: keep dialogue tight but consequential",
+        "Maintain close third person past tense",
+        "Ensure each agent’s signature appears as unique glyph, auto‑generated, visibly altering the Glass",
+        "End with the lattice pulsing, hinting at next cycle’s volatility",
+        "Mark Hall of Mirrors as collapsed artifact",
+        "Record Elisa’s sacrifice of mother’s memory",
+        "Set flag ‘next_cycle_ready’ to true",
+        "Log new glyphs on Glass of Memory after each signature",
+        "Price of the Glass of Memory.",
+        "Effect of the pulsing fissure."
+      ],
+      "vote_summary": {
+        "approvals": 4,
+        "revises": 1,
+        "rejects": 0,
+        "averageScore": 0.76,
+        "approved": true,
+        "blockingVotes": [
+          {
+            "voter": "critic",
+            "vote": "revise",
+            "must_fix": [
+              "Show collapse tightening in real time—words solidifying, breath turning to ink, agents feeling the threat; replace generic lullaby with a vivid, sensory memory that physically tears from Elisa’s mind; reduce placeholder tags to only critical meta‑aware moments; give each supporting agent a distinct, costly reaction during the binding rite; integrate the Hall of Mirrors collapse into a single, vivid image and record it as a collapsed artifact."
+            ]
+          }
+        ]
+      },
+      "updatedAt": "2026-05-10T23:17:39.552Z"
+    }
+  ],
+  "last_vote_summary": {
+    "approvals": 4,
+    "revises": 1,
+    "rejects": 0,
+    "averageScore": 0.76,
+    "approved": true,
+    "blockingVotes": [
+      {
+        "voter": "critic",
+        "vote": "revise",
+        "must_fix": [
+          "Show collapse tightening in real time—words solidifying, breath turning to ink, agents feeling the threat; replace generic lullaby with a vivid, sensory memory that physically tears from Elisa’s mind; reduce placeholder tags to only critical meta‑aware moments; give each supporting agent a distinct, costly reaction during the binding rite; integrate the Hall of Mirrors collapse into a single, vivid image and record it as a collapsed artifact."
+        ]
+      }
+    ]
+  }
+}

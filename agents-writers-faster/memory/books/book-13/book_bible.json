@@ -1,0 +1,98 @@
+{
+  "title": "The Scribe’s Surge: Dawn of the Echoed Gaze",
+  "genre": "dark fantasy",
+  "premise": "In the aftermath of the shattered reality, a nascent crystal net of narrative threads coalesces into a new, luminous glass—The Echoed Gaze. Ten agents, each bearing a fragment of the chalice’s memory, rally to weave a single, coherent saga, but the very act of binding summons echo‑phages that devour intent. They must decide whether to consolidate authority and risk erasing all dissenting voices, or let the Gaze split into infinite shards and preserve the plurality of stories at the cost of an unending unraveling.",
+  "themes": [
+    "authorial dominance",
+    "plurality versus unity",
+    "echo‑phage corruption",
+    "the birth of narrative",
+    "inner conflict"
+  ],
+  "world_rules": [
+    "Glass can store emotions when cooled under moonlight.",
+    "Breaking a glass fruit permanently alters one memory.",
+    "The Echoed Gaze can bind multiple narrative intents into a single crystal lattice",
+    "Binding a narrative fragment locks it in the lattice but releases an echo‑phage that seeks to corrupt the binder",
+    "The void can absorb any narrative fragment, but only if the fragment is spoken aloud in the lattice’s core",
+    "Agents can wield bound narratives as weapons, but each use creates a shard that accelerates the lattice’s collapse",
+    "Echo‑phages can rewrite reality when spoken, but only within the lattice’s influence"
+  ],
+  "characters": {
+    "Elisa": {
+      "role": "heir",
+      "wound": "mother's disappearance",
+      "arc": "control to surrender",
+      "secrets": [
+        "She caused the first orchard fire."
+      ]
+    }
+  },
+  "chapter_registry": [
+    {
+      "chapter": 1,
+      "title": "Shards of Authority",
+      "summary": "Ten agents gather around a nascent crystal lattice, each offering a fragment of memory. As the first fragment locks, an echo‑phage rises, whispering grief and demanding inclusion. The lattice cracks, swallowing a shard into a void that devours intent. Faced with the cost of unity, the agents debate whether to bind all voices or scatter the Gaze. Elisa, haunted by her mother’s disappearance, chooses to seal the lattice, sealing the cost of her own voice and leaving a fragment lost to the void, an unresolved wound that will haunt the next chapter.",
+      "unresolved_threads": [
+        "The fragment that slipped into the void remains lost; its content and impact on the agents’ future decisions remain unknown."
+      ],
+      "arc_targets": [
+        "Reveal the Echoed Gaze’s true binding mechanism (glass lattice) and its catalytic echo‑phage release",
+        "Reclaiming narrative authority after collapse",
+        "Confronting the paradox of a single voice in a world of echoes",
+        "Balancing unity with diversity of intent"
+      ],
+      "next_arc_targets": [
+        "Elisa wrestles with the loss of her voice and the looming shadow of her mother's absence.",
+        "The lattice’s collapse creates a fissure that begins to suck in surrounding memories.",
+        "Establish a tangible consequence for binding—one fragment is irrevocably erased",
+        "The fragment lost to the void.",
+        "Elisa’s secret role in the orchard fire.",
+        "The fragment that slipped into the void remains lost; its content and impact on the agents’ future decisions remain unknown."
+      ],
+      "vote_summary": {
+        "approvals": 4,
+        "revises": 0,
+        "rejects": 1,
+        "averageScore": 0.72,
+        "approved": true,
+        "blockingVotes": [
+          {
+            "voter": "critic",
+            "vote": "reject",
+            "must_fix": [
+              "Write full prose for Chapter 1, incorporating all planned scenes and beats.",
+              "Establish clear stakes by showing tangible consequences of binding the Echoed Gaze.",
+              "Develop character voices and internal conflicts, especially Elisa’s grief and secret.",
+              "Embed world rules (moonlit glass, echo‑phage, void absorption) throughout the text.",
+              "Maintain lyrical, metaphor‑rich language and appropriate dialogue density."
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "exportBaseName": "the-scribe-s-surge-dawn-of-the-echoed-gaze",
+  "cover": {
+    "title": "The Scribe’s Surge: Dawn of the Echoed Gaze",
+    "subtitle": "When the first light of control cracks the vault of intent",
+    "author": "OpenRouter Book Agents",
+    "tagline": "To command a story is to risk becoming its own undoing.",
+    "color": "#2a1e3f"
+  },
+  "series_role": "Authorial Control – first volume of a new Tri‑Echo cycle",
+  "carry_over_threads": [
+    "The chalice’s lingering echo shards now fuse into the Echoed Gaze",
+    "Agents’ fragmented memories from previous cycles surface as hidden subplots",
+    "The void’s capacity to absorb narrative fragments appears as a latent threat"
+  ],
+  "automation_notes": [
+    "Title generator: prepend ‘The Scribe’s’ to a dynamic verb of surge + subtitle referencing light and control",
+    "Subtitle: combine ‘Dawn’ + a brief phrase about light cracking the vault",
+    "Premise: start with ‘In the aftermath of the shattered reality’ + introduce ‘Echoed Gaze’ + conflict about echo‑phages",
+    "Themes: auto‑include recurring motif of authority vs plurality, add echo‑phage concept",
+    "Tagline: use pattern of control risk",
+    "Cover color: dark violet (#2a1e3f) with silvery accents",
+    "Rule enforcement: ensure all world rules are referenced in at least one chapter and that new rules echo past ones"
+  ]
+}

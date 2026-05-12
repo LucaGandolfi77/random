@@ -1,0 +1,67 @@
+{
+  "active_book_id": "book-18",
+  "book_title": "The Scribe’s Veil: Echoes of the Aetheric Quill",
+  "critic": {
+    "verdict": "approve",
+    "issues": [],
+    "must_fix": [],
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "critic",
+      "role": "Adversarial Critic",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "continuity_keeper": {
+    "pass": true,
+    "issues": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "canon_notes": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "continuity_keeper",
+      "role": "Continuity Librarian",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "editor": {
+    "chapter_title": "Chapter 13 – The Ink‑River’s Reckoning",
+    "final_markdown": "The sky had become a river of living script, black‑ink currents curling around the cathedral’s shattered spire like serpents of syllable. Each surge pulsed with the chorus’s refrain, a choir of shattered verses that cut the air with the sharpness of a quill’s tip. Elisa stood at the edge of the river, her hands empty, the half‑sigil flickering like a dying ember in the palm of a ghost.\n\n*“El‑sì,”* the chorus sang, each note a blade that sliced a fragment of her past—first the name of her mother’s lullaby, then the scent of the orchard fire she had hidden. The ink‑veins that spread across the stone walls began to throb, rewinding the city’s very architecture into sentences that writhed and devoured.\n\nFrom the river’s depths rose the new echo‑phage, a lattice of trembling ink‑threads that hummed with stolen syllables. It moved like a harp string plucked by unseen fingers, hunting the forbidden word that had once promised salvation. Its filaments brushed Elisa’s cheek, and in that contact she heard the word whisper back: *Sa‑ri…*—the half‑remembered name that might seal the veil.\n\nShe lifted her voice, brittle as cracked glass, and spoke the word aloud. The sound cracked the chorus, sending a shockwave of ink that splintered the sky‑river into shards of glass‑like script. The echo‑phage quivered, its lattice unraveling, and in that instant Elisa felt the last of her memories pour out of her eyes, spilling into the river like ink‑drops on water.\n\nThe half‑sigil steadied, its edges drawn into the blank parchment of Elisa’s becoming. She was no longer a woman of name and lullaby; she was a clean sheet, the only thing that could hold the glyph that would bind the world. As the final ink‑wave rolled over the capital, the chorus fell silent, leaving only a single, forgotten sentence hanging in the air—*the world will write itself anew.*\n\nBelow, the streets began to writhe, their cobblestones turning into living sentences that sucked the life from passersby. The rogue echo‑phage, now free of the chorus’s leash, slithered through the ink‑veins of the city, devouring words and turning them into hungry phantoms.\n\nElisa, a living lock turned blank parchment, felt the half‑sigil pulse against her skin, a promise of binding, but also a reminder that the ancient keeper still watched from the crypt, its motives as unreadable as the ink that now covered everything.\n\n*Cliffhanger*: The rogue echo‑phage begins to rewrite the ink‑veins of the capital, turning streets into living sentences that devour the populace.",
+    "final_summary": "Elisa stands before the final ink‑wave that crushes the sky, while the chorus swells into a blade‑like symphony. A new echo‑phage, a lattice of humming ink‑threads, hunts the forbidden word and forces Elisa to recite it as her mind teeters on oblivion. The recitation shatters the veil, spilling her memories into the river and turning her into a blank parchment, the only vessel for the half‑sigil. The chorus whispers a new, forgotten sentence that could rewrite reality, and the rogue echo‑phage begins to rewrite the ink‑veins of the capital, devouring the streets.",
+    "unresolved_threads": [
+      "The rogue echo‑phage begins to rewrite the ink‑veins of the capital, turning streets into living sentences that devour the populace.",
+      "The ancient keeper’s true motive remains hidden, hinting at either an alliance or a deeper betrayal."
+    ],
+    "changes": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "style_adjustments": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "editor",
+      "role": "Line Editor",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "votes": {
+    "votes": [],
+    "summary": {
+      "approvals": 0,
+      "revises": 0,
+      "rejects": 0,
+      "averageScore": 1,
+      "approved": true,
+      "blockingVotes": [],
+      "skipped": true,
+      "reason": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review."
+    }
+  },
+  "review_mode": "fast",
+  "revision_round": 0
+}

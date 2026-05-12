@@ -1,0 +1,68 @@
+{
+  "active_book_id": "book-19",
+  "book_title": "The Huge Gap",
+  "critic": {
+    "verdict": "approve",
+    "issues": [],
+    "must_fix": [],
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "critic",
+      "role": "Adversarial Critic",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "continuity_keeper": {
+    "pass": true,
+    "issues": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "canon_notes": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "continuity_keeper",
+      "role": "Continuity Librarian",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "editor": {
+    "chapter_title": "Ink and Tempest",
+    "final_markdown": "\nWhen Mara’s fingers hovered over the parchment, the room seemed to shift, the thin glass walls of the drafting loft breathing in a low, metallic sigh. Elena—no, Elisa—led the murmurs, a soft ember in a storm, her eyes fixed on the glistening fruit that sat in the drawer like a sigh caught between fingers. The ink‑scribe’s whisper fluttered like glass wind, a hiss that smelled of silver and broken moonlight.\n\n“Give it to me,” Mara’s voice was a blade, knifing the silence. Her wariness still caught in the thrum of her hand—one heated by the hidden fire in her chest, the other chilled by an ink that tasted like rain on bone. She expected nothing but an offer: the glass fruit or the revelations it cradled.\n\nElisa’s lungs tightened; a memory flickered to the surface, the taste of her mother’s hands—one that had burned everything she cherished to ash. “I can’t,” she said, a hesitant fierce echo. No, I can’t give my daughter’s blaze for a fruit of forgotten taste.”—the flame of her guilt pulsed.\n\nA specter averted from the ledger’s pages, its voice a liquid melody, offered the impossible bargain: “‘Elisa, throw your mother’s memory into the ink. Trade a fragment of your past for the fruit, and perhaps the orchard can live again.’” The words sizzled like smooth glass, bittersweet petals of a lingering valley the scent rides sinuous.\n\nElisa stared at the ledger, its ink shifting as if the pages were alive. She could feel her hands trembling, trembling with an slightest tremor that came like the crack of a fragile vine. She exhaled utterly cool—an absolution, an incurable wound.\n\nMara, fury washing her face, lunged. The drawer opened, a thud of glass, a shudder that rolled into the room—a hissing sound that resemble the cataclysmic roars of the blackened spring. The fruit burst, shards like shards of an unquiet eye, thrown through the air, each a new ink‑draft. The shards splintered, the primary vision rewrites, and every survivor of the orchard turned the memory of the fire into a blank space‑the word \"fire\" was gone, replaced only by a blackhole that searched the underbelly of the mind.\n\nMid‑fright, the ink‑scribe’s voice lessened into silence, the metaphor that once leapt from the glass now suspended like a broken shadow at the ramble of a mood. The week’s concealed spirit, the damned law, was unreasonably frozen.\n\nAnd in the lingering moment between every shattered shard and the echo of Mara’s heart, the ink‑scribe’s promise was forever etched into the dream: The orchard would either burn or memory would be lost. The threat rested on an ancient loom, a storm yet unknown, and the forest’s fate.",
+    "final_summary": "When the ink‑scribe’s voice slices the air, Elisa and Mara are pulled into a fatal dance over the hidden glass fruit. Each strike shatters memory and fate, leaving the orchard’s survival and a lost mother’s image hanging in the balance.",
+    "unresolved_threads": [
+      "The ledger reveals that the orchard fire was not Elisa’s doing but a pact made with a forgotten god.",
+      "The ink‑scribe’s bargain remains half‑spoken, hinting at a larger conspiracy.",
+      "Mara’s hidden motive for the glass fruit—whether revenge or redemption—still hangs in the balance."
+    ],
+    "changes": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "style_adjustments": []
+    },
+    "summary": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review.",
+    "_meta": {
+      "agent": "editor",
+      "role": "Line Editor",
+      "model": "fast-skip",
+      "skipped": true
+    }
+  },
+  "votes": {
+    "votes": [],
+    "summary": {
+      "approvals": 0,
+      "revises": 0,
+      "rejects": 0,
+      "averageScore": 1,
+      "approved": true,
+      "blockingVotes": [],
+      "skipped": true,
+      "reason": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review."
+    }
+  },
+  "review_mode": "fast",
+  "revision_round": 0
+}

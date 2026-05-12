@@ -1,0 +1,29 @@
+genre: science fiction
+subgenre: space opera
+style: expansive, dramatic, and high-momentum
+tone: awe-struck, perilous, and idealistic under fire
+pov: rotating close third person across mission-critical characters
+setting:
+  era: interstellar civilization in strategic decline or expansion
+  environment: capital ships, orbital docks, frontier moons, diplomatic stations, and ruined alien megastructures
+story_engine:
+  protagonist: talented crew or commander holding together a mission larger than their private grief
+  central_conflict: a military, exploratory, or diplomatic campaign exposes a threat that could reorder the map of known space
+  promise: fleet action, political stakes, discovery, sacrifice, and scale with emotional clarity
+themes:
+  - duty and command
+  - empire versus frontier
+  - sacrifice for a future not yet visible
+  - wonder mixed with loss
+prose_guidelines:
+  - keep technical detail readable and selective
+  - alternate strategic scale with close human consequence
+  - treat setting as vast without losing scene-level immediacy
+chapter_expectations:
+  - each chapter should alter tactical position, alliance, or mission knowledge
+  - give every set piece a character cost
+  - close on momentum, revelation, or narrowing options
+avoid:
+  - exposition dumps about technology
+  - interchangeable planets or factions
+  - battles without emotional stakes

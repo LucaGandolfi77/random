@@ -1,0 +1,50 @@
+{
+  "activePresets": [
+    "Sad Poet"
+  ],
+  "ui": {
+    "lastPort": 4173
+  },
+  "overrides": {
+    "agents": {
+      "writer": {
+        "behavior": {
+          "prose_style": "lyrical",
+          "poetic_level": 0.9,
+          "verbosity": 0.8,
+          "humor": 0.1
+        }
+      }
+    }
+  },
+  "notes": {
+    "architect": {
+      "current_preset": "base",
+      "private_mood": "hungry for bigger payoffs"
+    },
+    "writer": {
+      "current_preset": "Sad Poet",
+      "last_problem": "The draft fails to resolve the core conflict: Elisa’s choice between binding the veil and using the forbidden glyph is left ambiguous, and the world‑scale consequences of each option are under‑developed. The rogue echo‑phage is introduced but its threat is not clearly quantified, and the ancient keeper’s bargain is presented as a deus‑ex machina without showing the cost of the House’s recorded history."
+    },
+    "critic": {
+      "current_preset": "base",
+      "last_verdict": "approve"
+    },
+    "editor": {
+      "current_preset": "base",
+      "last_change_count": 0
+    },
+    "room_vote": {
+      "last_summary": {
+        "approvals": 0,
+        "revises": 0,
+        "rejects": 0,
+        "averageScore": 1,
+        "approved": true,
+        "blockingVotes": [],
+        "skipped": true,
+        "reason": "Fast mode skips critic, continuity, editor, and voting. Pass --deep-review to enable critic and editor review."
+      }
+    }
+  }
+}

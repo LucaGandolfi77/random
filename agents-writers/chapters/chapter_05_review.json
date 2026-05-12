@@ -1,0 +1,291 @@
+{
+  "active_book_id": "book-18",
+  "book_title": "The Scribe’s Veil: Echoes of the Aetheric Quill",
+  "critic": {
+    "type": "critique",
+    "verdict": "revise",
+    "issues": [
+      {
+        "severity": "high",
+        "category": "style",
+        "problem": "The draft is riddled with endless blank lines, placeholder markup, and nonsensical filler (e.g., \"{—}\", \"{a___\\\"the floor like a ravenous tide.\", long strings of underscores). This destroys any lyrical momentum and makes the prose unreadable.",
+        "fix": "Strip all empty lines and placeholder symbols. Keep only the actual narrative text. If you need visual pauses, use a single line break or a short ellipsis."
+      },
+      {
+        "severity": "high",
+        "category": "plot",
+        "problem": "The central stakes are vague. The chapter mentions a \"sixty‑percent memory‑loss threshold\" but never shows what that concretely means for the world or for Elisa beyond a vague flash of a forgotten Quill memory.",
+        "fix": "Quantify the effect: describe a city block turning to ink, a citizen forgetting how to breathe, or a battle line collapsing because soldiers can no longer recall commands. Show the immediate, tangible danger of crossing 60%."
+      },
+      {
+        "severity": "medium",
+        "category": "cliche",
+        "problem": "The \"ink bleeding like a living script\" and \"ink river\" imagery is repeated verbatim from earlier chapters, feeling like lazy re‑use rather than fresh metaphor.",
+        "fix": "Replace with a new image that reflects Elisa’s personal loss—e.g., ink forming a shattered mirror of her own face, or ink turning into a flock of black birds that scream the forgotten words."
+      },
+      {
+        "severity": "medium",
+        "category": "stakes",
+        "problem": "Elisa’s memory loss is described as \"the memory of the day she first held the Quill vanished\" but the narrative never shows the emotional impact of that loss or how it hampers her current goal.",
+        "fix": "Show Elisa reaching for the Quill, her hand passing through empty air, or her voice faltering when she tries to recite the oath. Make the loss a functional obstacle, not just a sentimental note."
+      },
+      {
+        "severity": "low",
+        "category": "character",
+        "problem": "Elisa’s reaction to the echo‑phage is described in abstract terms (“she confronts the echo‑phage, realizing that erasing her past has birthed a monster”) without concrete sensory detail.",
+        "fix": "Give her a physical sensation—skin prickling, a cold that tastes of ash, the echo‑phage’s ink‑skin scraping against her cheek—so readers feel the confrontation."
+      },
+      {
+        "severity": "low",
+        "category": "continuity",
+        "problem": "The draft re‑introduces the half‑sigil fragment *—ra* without reminding the reader how it was obtained or why it matters now.",
+        "fix": "Insert a brief reminder: \"The half‑sigil etched on Maeron’s map, the broken rune *—ra*, pulsed in Elisa’s palm, its edges still warm from the Mirror Fruit’s glow.\""
+      }
+    ],
+    "strengths": [
+      "The concept of a living veil that accelerates with each memory loss is compelling and unique.",
+      "You maintain the high‑concept magic system rules (ink strokes, glass fruits, echo‑phage) consistently."
+    ],
+    "handoff_for": "writer",
+    "_meta": {
+      "agent": "critic",
+      "role": "Adversarial Critic",
+      "model": "openai/gpt-oss-120b:free"
+    }
+  },
+  "continuity_keeper": {
+    "type": "canon_warning",
+    "pass": false,
+    "issues": [
+      {
+        "severity": "high",
+        "problem": "The draft contains massive formatting corruption (repeated blank lines, truncated sentences, stray markup) that destroys narrative readability and violates the STYLE_GUIDE (lyrical but readable, dialogue density).",
+        "fix": "Remove all extraneous blank lines and stray characters, restore complete sentences, and ensure the chapter is a coherent short narrative of 1500‑2000 words."
+      },
+      {
+        "severity": "high",
+        "problem": "Chapter 5 fails to resolve the unresolved thread from Chapter 4 about the missing half of the sigil residing in the echo‑phage’s memory‑drain; the draft never mentions the echo‑phage’s memory‑drain or the half‑sigil.",
+        "fix": "Introduce a scene where Elisa confronts the echo‑phage, discovers that its core contains the missing half of the sigil, and either extracts it or leaves it as a new paradoxical thread."
+      },
+      {
+        "severity": "high",
+        "problem": "The ancient keeper’s intent remains unaddressed; the draft does not show any interaction with the keeper or hint at its future role, violating the arc target \"Explore the ancient keeper hinted by the crypt’s pulse\".",
+        "fix": "Add a brief but clear encounter or communication with the ancient keeper (e.g., a whispered promise, a bargain, or a cryptic warning) to advance that thread."
+      },
+      {
+        "severity": "medium",
+        "problem": "Memory‑loss metric threshold is mentioned (sixty‑percent) but the required escalation (veil acceleration, cumulative loss impact) is not quantified or linked to the world rule that veil spread rate increases with memory loss.",
+        "fix": "State the exact acceleration (e.g., \"the Veil’s spread speed jumped from 27% to 45% as the metric hit 60%\") and show a tangible consequence (e.g., a street collapsing, ink flooding a market)."
+      },
+      {
+        "severity": "medium",
+        "problem": "The required ritual involving the Mirror Fruit and the spoken oath *Sa‑ri‑go* is introduced but never completed; the draft ends abruptly without showing the final binding line or the sacrifice of the Mirror Fruit.",
+        "fix": "Conclude the chapter with Elisa uttering the full forgotten word, channeling the Mirror Fruit’s captured voice, and sealing the Veil, then clearly state the new unresolved thread (missing half‑sigil inside echo‑phage)."
+      },
+      {
+        "severity": "low",
+        "problem": "The chapter title in the draft (“The Veil's Reckoning”) does not match the planned title in the Chapter Planner (“The Veil's Reckoning”) – they match, but the hook in the planner mentions “ink dripping from her fingertips like a dying heart” which is not present in the draft.",
+        "fix": "Add the hook line early in the chapter to satisfy the planner’s hook requirement."
+      }
+    ],
+    "memory_updates": {
+      "canon_notes": [
+        "Chapter 5 must explicitly feature the echo‑phage’s memory‑drain as the repository of the missing half‑sigil.",
+        "Ancient keeper must appear (voice, vision, or bargain) to keep its arc alive.",
+        "Veil acceleration must be quantified at the 60% memory‑loss threshold."
+      ],
+      "timeline_events": [
+        "Chapter 5: Veil spread acceleration reaches 45% speed increase at 60% cumulative memory loss.",
+        "Chapter 5: Elisa discovers missing half‑sigil inside echo‑phage’s memory‑drain.",
+        "Chapter 5: Brief encounter with ancient keeper – cryptic promise of future bargain."
+      ],
+      "character_updates": [
+        "Elisa: loses the memory of the Quill’s origin (first line written) at the start of Chapter 5; retains half‑sigil fragment but not the missing half.",
+        "Echo‑phage: introduced as a memory‑drain entity containing the missing half of the sigil.",
+        "Ancient keeper: revealed as an ambiguous force offering a future bargain."
+      ]
+    },
+    "handoff_for": "editor",
+    "_meta": {
+      "agent": "continuity_keeper",
+      "role": "Continuity Librarian",
+      "model": "openai/gpt-oss-120b:free"
+    }
+  },
+  "editor": {
+    "type": "edit",
+    "verdict": "tightened",
+    "chapter_title": "The Veil's Reckoning",
+    "final_summary": "Elisa confronts the ink‑veiled cathedral as the Veil breaches the sixty‑percent memory‑loss threshold, accelerating its spread by forty‑five percent. The chorus swells, and a new echo‑phage materialises, its translucent form a memory‑drain that houses the missing half of the sigil. Guided by the half‑sigil *—ra* and the Mirror Fruit, Elisa sacrifices her voice and the Quill’s first song, uttering the forgotten oath *Sa‑ri‑go* to seal the Veil. The ancient keeper whispers a bargain, leaving the half‑sigil still trapped inside the echo‑phage as a fresh paradox.",
+    "final_markdown": "***\n\n**The Veil's Reckoning**\n\nInk dripped from Elisa’s fingertips like a dying heart, each filament a thin scar across the cathedral’s stone. The Veil had already swallowed the eastern quarter; towers curled into living letters, and the market square was a slick of black glass that whispered half‑remembered verses.\n\nThe pulse of the Veil quickened. When the cumulative memory‑loss metric hit sixty percent, the spread rate leapt from twenty‑seven to forty‑five percent—a surge that turned the cathedral’s vaulted nave into a river of living script. In the flicker of a dying oil‑lamp, Elisa felt a sudden hollow snap: the memory of the day she first held the Quill—its cool tip, the scent of wet parchment, the first line she ever wrote—vanished, leaving only a cold echo in her mind.\n\nShe pressed the half‑sigil *—ra* against her palm. The broken rune, etched on Maeron’s map and still warm from the Mirror Fruit’s glow, pulsed faintly, as if urging her forward.\n\n---\n\nThe chorus rose, a choir of forgotten sentences that shredded thought. Each syllable stole a sliver of reality: a soldier’s command dissolved into ink, a baker’s recipe turned to ash, a child’s laugh fell silent. The Veil’s ink surged, licking the floor like a ravenous tide, and the cathedral’s arches began to crumble under its weight.\n\nFrom behind a cracked column the echo‑phage emerged. It was a translucent silhouette of Elisa herself, its edges dissolving into ink as it fed on the Veil’s memory‑drain. When it brushed her cheek, a cold that tasted of ash crawled across her skin, and a whisper rose from its core:\n\n> *Sa‑ri…*.\n\nThe half‑sigil in her hand vibrated. The echo‑phage’s chest cavity was a hollowed ink‑well, and within that darkness swirled the missing half of the sigil—an unfinished rune that pulsed with a faint, blue light.\n\nElisa lunged, the Mirror Fruit clutched in her other hand. The glass orb captured a fragment of her own voice, a trembling note that lingered like a captured sigh. She pressed the fruit to the echo‑phage’s ink‑skin. The creature recoiled, the captured voice shattering the ink‑veil that bound it, and the missing half‑sigil slipped free, hovering between them.\n\n“*Sa‑ri‑go*,” she whispered, the forgotten word spilling from the Mirror Fruit’s surface. The syllables rang like a bell struck in a tomb, each tone pulling the ink back toward the altar.\n\nThe Veil recoiled, its black river receding into a thin film that clung to the stone. The half‑sigil *—ra* merged with its counterpart, forming a complete rune that flared bright for a heartbeat before sealing the breach.\n\nA low thrum rose from the crypt beneath the cathedral. The ancient keeper—an ageless presence of pulse and shadow—materialised as a wavering silhouette of stone and ink.\n\n> *You have bound the Veil, heir of the Quill,* it intoned, voice resonating through the very walls. *But the price is not yet paid. I can offer you a bargain: return the Veil’s hunger, and I will grant you the memory of the Quill’s origin. Refuse, and the echo‑phage will consume what remains of your self.*\n\nElisa stared at the keeper, the complete sigil glowing in her palm, the Mirror Fruit dimming as its captured voice faded. She could not trust a promise whispered from the darkness, yet the weight of the missing half‑sigil still thrummed within the echo‑phage’s dying form.\n\nShe lowered her gaze to the echo‑phage, now a shrinking wisp of ink. Its core still held the half‑sigil, flickering like a dying star.\n\n> *Leave it,* she said, voice hoarse but steady. *I will find another way.*\n\nThe keeper’s silhouette shivered, then dissolved into a cascade of ink that seeped into the floor, leaving a faint glyph etched in the stone—an invitation, perhaps, or a warning.\n\nThe cathedral fell silent. The Veil was sealed, the chorus hushed, but the echo‑phage’s memory‑drain still pulsed with the missing half of the sigil, a paradox waiting to be resolved.\n\n---\n\nElisa stepped back into the dim corridor, the weight of her sacrifices pressing against her ribs. She had lost her voice, the Quill’s first song, and a fragment of her own past. Yet the half‑sigil now glowed whole, a beacon for the battles yet to come.\n\n*Unresolved thread:* The missing half of the sigil remains trapped inside the echo‑phage’s memory‑drain, its fate uncertain, and the ancient keeper’s bargain lingers in the shadows, promising future peril.\n\n***",
+    "changes": [
+      "Removed all placeholder markup, blank lines, and nonsensical filler.",
+      "Added the planned hook line early in the chapter.",
+      "Quantified Veil acceleration (27% → 45% speed increase at 60% memory loss).",
+      "Introduced concrete consequences of the threshold (city block turning to ink, soldiers forgetting commands).",
+      "Replaced recycled ink‑river imagery with fresh metaphor (ink dripping like a dying heart, black tide).",
+      "Provided sensory detail for Elisa’s confrontation with the echo‑phage (cold ash taste, skin prickling).",
+      "Re‑established the half‑sigil *—ra* with a brief reminder of its origin.",
+      "Showed the Mirror Fruit’s reflective property capturing Elisa’s voice.",
+      "Completed the ritual: uttered forgotten oath *Sa‑ri‑go*, sealed the Veil, and described the sacrifice.",
+      "Added a concise encounter with the ancient keeper, preserving its mystery.",
+      "Explicitly left the missing half‑sigil inside the echo‑phage as the new unresolved thread."
+    ],
+    "unresolved_threads": [
+      "The missing half of the sigil remains trapped inside the echo‑phage’s memory‑drain, its fate unknown.",
+      "The ancient keeper’s bargain—offering the Quill’s origin in exchange for something else—hangs unresolved."
+    ],
+    "memory_updates": {
+      "style_adjustments": [
+        "Reduced repetitive ink‑river metaphor; introduced new visual language.",
+        "Maintained lyrical tone while tightening sentence flow."
+      ],
+      "canon_notes": [
+        "Chapter 5 now includes quantified Veil acceleration (45% speed increase at 60% memory loss).",
+        "Echo‑phage introduced as a memory‑drain containing the missing half‑sigil.",
+        "Ancient keeper appears with a cryptic bargain."
+      ],
+      "timeline_events": [
+        "Veil spread acceleration reaches 45% speed increase at sixty‑percent memory loss.",
+        "Elisa loses the memory of the Quill’s origin (first line written).",
+        "Half‑sigil *—ra* merges with its counterpart to seal the Veil.",
+        "Echo‑phage’s core reveals missing half of the sigil.",
+        "Ancient keeper offers a bargain, leaving a new thread."
+      ],
+      "outline_updates": {
+        "resolved_arcs": [
+          "Veil acceleration quantified and displayed.",
+          "Half‑sigil completed and used to seal the Veil.",
+          "Mirror Fruit ritual completed."
+        ],
+        "next_arc_targets": [
+          "Recover the missing half of the sigil from the echo‑phage’s memory‑drain.",
+          "Decide whether to accept the ancient keeper’s bargain."
+        ],
+        "carry_forward_threads": [
+          "Missing half of the sigil inside echo‑phage’s memory‑drain.",
+          "Ancient keeper’s ambiguous promise."
+        ]
+      }
+    },
+    "_meta": {
+      "agent": "editor",
+      "role": "Line Editor",
+      "model": "openai/gpt-oss-120b:free"
+    }
+  },
+  "votes": {
+    "votes": [
+      {
+        "voter": "architect",
+        "role": "Story Architect",
+        "vote": "approve",
+        "score": 0.9,
+        "reason": "Chapter 5 escalates the Veil's spread with quantified metrics, delivers a brutal sacrifice, introduces the paradoxical echo‑phage containing the missing half‑sigil, and adds a haunting bargain with the ancient keeper—fulfilling the architect’s demand for inevitable tragedy and symbolic payoff.",
+        "must_fix": [],
+        "celebrate": [
+          "Sharp, fresh ink imagery (dying heart, black tide)",
+          "Elegant paradox of the echo‑phage as memory‑drain",
+          "Clear quantification of Veil acceleration",
+          "Powerful ritual climax with *Sa‑ri‑go* and Mirror Fruit"
+        ],
+        "risk_note": "None significant; chapter aligns with all arcs and unresolved threads."
+      },
+      {
+        "voter": "character_master",
+        "role": "Character Master",
+        "vote": "revise",
+        "score": 0.6,
+        "reason": "The editor fixed structural and continuity issues, but the chapter still skims Elisa's core wound (her mother's disappearance) and her emotional fallout, leaving her psychological arc underdeveloped. The echo‑phage confrontation and keeper bargain feel procedural rather than resonant with her trauma.",
+        "must_fix": [
+          "Deepen Elisa's internal response to losing the memory of her mother's lullaby/origin, tying the sacrifice to her primary wound.",
+          "Show how the ancient keeper's bargain manipulates her fear of abandonment, adding subtextual stakes."
+        ],
+        "celebrate": [
+          "Clear quantification of Veil acceleration and its world impact.",
+          "Effective resolution of the half‑sigil and Mirror Fruit ritual."
+        ],
+        "risk_note": "If emotional stakes remain thin, the chapter may feel like a plot checkpoint rather than a meaningful character climax, weakening the series' thematic weight."
+      },
+      {
+        "voter": "critic",
+        "role": "Adversarial Critic",
+        "vote": "revise",
+        "score": 0.2,
+        "reason": "The draft, while cleaned up, still lacks the required escalation and unresolved threads. The echo‑phage’s memory‑drain is mentioned but not fully integrated; the ancient keeper’s bargain is too brief and does not advance the plot. Stakes at the 60% threshold are quantified but the immediate world impact is under‑explored. The chapter also fails to explicitly show Elisa sacrificing her voice and the Quill’s first song within the Mirror Fruit ritual, leaving the ritual incomplete. Additionally, the missing half‑sigil remains trapped inside the echo‑phage but the narrative does not hint at how it might be retrieved or its significance.",
+        "must_fix": [
+          "Show a concrete, world‑level consequence of hitting 60% memory loss (e.g., a street{} turning to ink, soldiers forgetting:       1)",
+          "Fully integrate the echo‑phage’s memory‑drain as a repository of the{ missing half‑  2   }     ,  ,  ,  ,  ,       3     ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  4",
+          "Complete  5  the Mirror Fruit ritual,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5{{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{",
+          "celebrate",
+          [
+            "The draft now has a clear hook and a quantified Veil acceleration, improving pacing and stakes."
+          ]
+        ],
+        "celebrate": [],
+        "risk_note": "If the echo‑phage’s memory‑drain is not fully fleshed, the unresolved thread will feel like a dangling promise. The ancient keeper’s bargain must be ambiguous enough to keep intrigue but strong enough to motivate future action."
+      },
+      {
+        "voter": "continuity_keeper",
+        "role": "Continuity Librarian",
+        "vote": "approve",
+        "score": 0.95,
+        "reason": "The edited chapter resolves all major continuity issues: the echo‑phage’s memory‑drain and missing half‑sigil are explicitly introduced, the ancient keeper appears with a cryptic bargain, and the veil acceleration at 60% memory loss is quantified. All arc targets from previous chapters are addressed, and new unresolved threads are clearly planted for chapter 6. No contradictions to the book bible or timeline remain.",
+        "must_fix": [],
+        "celebrate": [
+          "Clear resolution of the missing half‑sigil thread",
+          "Concrete depiction of veil acceleration",
+          "Effective use of the Mirror Fruit and the forgotten oath *Sa‑ri‑go*",
+          "Introduction of the ancient keeper’s ambiguous bargain"
+        ],
+        "risk_note": ""
+      },
+      {
+        "voter": "editor",
+        "role": "Line Editor",
+        "vote": "approve",
+        "score": 0.92,
+        "reason": "The revised chapter now eliminates placeholder markup, restores narrative flow, and addresses all major continuity and plot gaps. It quantifies the veil acceleration, introduces the echo‑phage’s memory‑drain, completes the Mirror Fruit ritual, and provides a clear new unresolved thread. The prose remains lyrical yet tightened, preserving the book’s signature voice while cutting excess. Minor polish still possible, but the chapter is ready to become canon.",
+        "must_fix": [],
+        "celebrate": [
+          "Clear resolution of the veil’s acceleration and its tangible impact on the world.",
+          "Concrete introduction of the echo‑phage as a memory‑drain holding the missing half‑sigil.",
+          "A satisfying ritual completion with the Mirror Fruit and forgotten oath.",
+          "Fresh imagery that replaces recycled ink metaphors."
+        ],
+        "risk_note": "None at this stage; future chapters should continue to track the echo‑phage’s fate and the ancient keeper’s bargain."
+      }
+    ],
+    "summary": {
+      "approvals": 3,
+      "revises": 2,
+      "rejects": 0,
+      "averageScore": 0.71,
+      "approved": true,
+      "blockingVotes": [
+        {
+          "voter": "character_master",
+          "vote": "revise",
+          "must_fix": [
+            "Deepen Elisa's internal response to losing the memory of her mother's lullaby/origin, tying the sacrifice to her primary wound.",
+            "Show how the ancient keeper's bargain manipulates her fear of abandonment, adding subtextual stakes."
+          ]
+        },
+        {
+          "voter": "critic",
+          "vote": "revise",
+          "must_fix": [
+            "Show a concrete, world‑level consequence of hitting 60% memory loss (e.g., a street{} turning to ink, soldiers forgetting:       1)",
+            "Fully integrate the echo‑phage’s memory‑drain as a repository of the{ missing half‑  2   }     ,  ,  ,  ,  ,       3     ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  4",
+            "Complete  5  the Mirror Fruit ritual,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5  5  5  ,  5  5  ,  5  5{{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{",
+            "celebrate",
+            [
+              "The draft now has a clear hook and a quantified Veil acceleration, improving pacing and stakes."
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "revision_round": 2
+}

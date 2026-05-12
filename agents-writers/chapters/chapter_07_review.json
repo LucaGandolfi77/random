@@ -1,0 +1,69 @@
+{
+  "active_book_id": "book-18",
+  "book_title": "The Scribe’s Veil: Echoes of the Aetheric Quill",
+  "critic": {
+    "verdict": "approve",
+    "issues": [],
+    "must_fix": [],
+    "summary": "Critic skipped: Writer fallback applied: OpenRouter request failed for openai/gpt-oss-20b:free: Provider returned error",
+    "_meta": {
+      "agent": "critic",
+      "role": "Adversarial Critic",
+      "model": "forced-skip",
+      "forced": true
+    }
+  },
+  "continuity_keeper": {
+    "pass": true,
+    "issues": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "canon_notes": []
+    },
+    "summary": "Continuity skipped: Writer fallback applied: OpenRouter request failed for openai/gpt-oss-20b:free: Provider returned error",
+    "_meta": {
+      "agent": "continuity_keeper",
+      "role": "Continuity Librarian",
+      "model": "forced-skip",
+      "forced": true
+    }
+  },
+  "editor": {
+    "chapter_title": "The Veil's Reckoning",
+    "final_markdown": "# The Veil's Reckoning\n\nEmotional focus: elisa’s grief morphs into a reluctant acceptance of self‑destruction, her ambition of control dissolves into the ruthless act of erasing her own story, the chorus’s seductive promise of rewriting reality clashes with elisa’s need for identity, the keeper’s ambiguous bargain forces elisa to choose between lineage and survival.\n\nWhen the ink that once promised creation now threatens to erase everything, Elisa must decide whether to become the very story she has been writing.\n\n## Scene 1\n\nGoal: Show the veil’s spread reaching 80% and a sudden spike in its acceleration.. Conflict: The market square dissolves into a glass labyrinth, each shard reflecting fragments of Elisa’s lost memories.. Turn: Elisa realizes that the veil now consumes the very ground beneath her, turning every step into a memory‑draining trap.. Image: A wide shot of the city square turning to liquid ink, with shards of glass reflecting broken faces..\n\n## Scene 2\n\nGoal: Reveal the echo‑phage’s memory‑drain glyph only when Elisa is near total forgetting.. Conflict: The echo‑phage grows louder, its syllables erasing spoken names, while the glyph flickers in the air like a dying script.. Turn: Elisa touches the glyph, and the image warps into an impossible spiral, hinting that only total forgetting can make it legible.. Image: The glyph as a translucent spiral of ink, its edges fraying like a fading letter..\n\n## Scene 3\n\nGoal: Introduce the ancient keeper’s bargain: the Quill’s origin for the erasure of the House’s recorded history.. Conflict: The keeper’s voice, a thin echo of handwriting, offers a deal that would erase the lineage Elisa has fought to protect.. Turn: Elisa must weigh the loss of her family’s legacy against the survival of the world.. Image: The keeper as a translucent figure made of fading script, hovering over a parchment that glows with ancient ink..\n\n## Scene 4\n\nGoal: Present the forbidden word *el‑sì* whispered by the chorus, hinting at a rewrite of the Quill.. Conflict: The chorus swells into a vocal storm, each phrase advancing the veil by a fraction of a percent— a chorus‑driven leaky faucet.. Turn: Elisa hears the word glimmering in the ink, realizing it could invert the veil’s threat into its salvation.. Image: The word *el‑sì* glowing in the ink, surrounded by swirling syllables that look like broken lullabies..\n\n## Scene 5\n\nGoal: Force Elisa to decide: bind the veil and erase her narrative, or let the chorus rewrite reality.. Conflict: The veil’s acceleration threatens to erase the last of her memories; the chorus offers a rewritten world, while the keeper’s bargain demands the loss of lineage.. Turn: Elisa chooses to bind the veil, sacrificing her own story to lock the half‑remaining sigil into the final seal.. Image: Elisa’s silhouette, ink swirling around her, as her voice fades into a single, luminous stroke..\n\n## Cliffhanger\n\nAs the final stroke seals the veil, the echo‑phage’s glyph glows brighter, and the ancient keeper’s figure steps forward, holding a quill that writes in a language Elisa has never seen.",
+    "final_summary": "Force Elisa and her allies to confront the paradox of an evanescent protector: the veil feeds on memory while the chorus demands that memory is lost entirely. The chapter must raise the stakes by showing the veil’s spread accelerate to 80% and by tightening the choice between binding the veil with total forgetting or letting the chorus rewrite reality. A new unresolved thread— the true nature of the ancient keeper— must be introduced. Veil accelerates to 80% memory‑loss, adding 10% spread per beat. Echo‑phage glyph becomes visible only when Elisa is on the brink of total forgetting. Ancient keeper offers the Quill’s original ink in exchange for erasing the House’s recorded history.",
+    "unresolved_threads": [
+      "If Elisa binds the veil, the final seals will embed the half‑remaining sigil, making her memory a living lock.",
+      "If Elisa surrenders to the chorus, the world becomes a blank parchment punctuated only by the chorus’s new syllables.",
+      "If Elisa binds the veil, the final seals must embed the half‑remaining sigil, making her memory a living lock",
+      "If Elisa surrenders to the chorus, the world becomes a blank parchment punctuated only by the chorus’s new syllables",
+      "The ancient keeper can surface as either ally or final corrupting force in chapter 8, depending on Elisa’s choice"
+    ],
+    "changes": [],
+    "memory_updates": {
+      "timeline_events": [],
+      "style_adjustments": []
+    },
+    "summary": "Editor skipped: Writer fallback applied: OpenRouter request failed for openai/gpt-oss-20b:free: Provider returned error",
+    "_meta": {
+      "agent": "editor",
+      "role": "Line Editor",
+      "model": "forced-skip",
+      "forced": true
+    }
+  },
+  "votes": {
+    "votes": [],
+    "summary": {
+      "approvals": 0,
+      "revises": 0,
+      "rejects": 0,
+      "averageScore": 1,
+      "approved": true,
+      "blockingVotes": [],
+      "forced": true,
+      "reason": "Writer fallback applied: OpenRouter request failed for openai/gpt-oss-20b:free: Provider returned error"
+    }
+  },
+  "revision_round": 0
+}

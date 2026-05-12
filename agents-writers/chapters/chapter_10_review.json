@@ -1,0 +1,253 @@
+{
+  "active_book_id": "book-18",
+  "book_title": "The Scribe’s Veil: Echoes of the Aetheric Quill",
+  "critic": {
+    "type": "critique",
+    "verdict": "revise",
+    "issues": [
+      {
+        "severity": "high",
+        "category": "continuity",
+        "problem": "The draft reintroduces a \"third fragment of the sigil\" and mentions the Keeper offering the Quill's \"essence\" despite the style guide specifying{only two \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t} halves and that the Keeper should offer the Quill's origin, not its essence.",
+        "fix": "Remove any reference to a third sigil fragment, replace \"essence\" with \"origin (first droplet of ink)\" and ensure the Keeper's bargain matches the established canon."
+      },
+      {
+        "severity": "high",
+        "category": "stakes",
+        "problem": "The chapter’s climax promises 100% Veil spread but fails to show concrete world‑scale consequences (e.g., cities turning to ink, armies forgetting commands) beyond vague “streets became parchment”. This makes the stakes feel abstract.",
+        "fix": "Add at least two vivid, large‑scale effects of the Veil reaching 100%: e.g., the royal guard collapses because they forget their orders, a massive bridge turns to ink and collapses, or a sacred river dries up as its memory is erased."
+      },
+      {
+        "severity": "medium",
+        "category": "style",
+        "problem": "The draft contains massive placeholder junk ({{{{{{...}}}) and broken sentences, breaking lyrical flow and readability.",
+        "fix": "Clean the text of all placeholder brackets and incomplete sentences; rewrite the fragmented passage about the lullaby into a concise, lyrical line that shows Elisa’s internal conflict."
+      },
+      {
+        "severity": "medium",
+        "category": "character",
+        "problem": "Elisa’s emotional core (her mother’s lullaby) is mentioned but never felt; the sacrifice of her voice is stated mechanically without showing her grief or the sensory impact.",
+        "fix": "Insert a brief internal monologue or sensory flash where the lullaby’s melody fades as her voice is erased, linking the loss directly to her wound."
+      },
+      {
+        "severity": "low",
+        "category": "plot",
+        "problem": "The forbidden glyph “el‑sì” is introduced as a glowing symbol but its function remains vague; the critic demanded it be a glyph visible only at the brink of total forgetting.",
+        "fix": "Clarify that the glyph appears only when Elisa’s memory meter hits zero, and describe its visual as a trembling, ink‑run rune that pulses with the echo‑phage’s hunger."
+      }
+    ],
+    "strengths": [
+      "Strong visual hook: ink storm turning the sky into living script.",
+      "Escalates the Veil’s spread to the promised 100%, raising the climax’s urgency.",
+      "Maintains lyrical tone in the opening paragraph."
+    ],
+    "handoff_for": "writer",
+    "_meta": {
+      "agent": "critic",
+      "role": "Adversarial Critic",
+      "model": "openai/gpt-oss-120b:free"
+    }
+  },
+  "continuity_keeper": {
+    "type": "canon_warning",
+    "pass": false,
+    "issues": [
+      {
+        "severity": "high",
+        "problem": "The draft references a \"third fragment of the sigil\" and describes the veil reaching 100% spread immediately, contradicting the established canon that only two halves of the sigil exist and that veil spread is 44% at 70% memory loss.",
+        "fix": "Remove all mention of a third sigil fragment. Ensure the veil spread is 44% at 70% cumulative memory loss and that subsequent spread increments follow the rule: +10% of 40% per beat after 70% memory loss."
+      },
+      {
+        "severity": "medium",
+        "problem": "The ancient keeper’s bargain is described as offering the Quill’s \"essence\" in exchange for erasing the House’s recorded history, while canon states the keeper offers the Quill’s *origin* (first droplet of ink).",
+        "fix": "Replace \"essence\" with \"origin\" and clarify that the offer is to provide the first droplet of ink, not the entire essence."
+      },
+      {
+        "severity": "medium",
+        "problem": "The forbidden word \"el‑sì\" is presented as a glyph that can be spoken, whereas canon requires it to be a glyph visible only when Elisa is on the brink of total forgetting and cannot be used freely.",
+        "fix": "Rephrase to state that the glyph appears only when Elisa is near total forgetting, and that speaking it would trigger a paradox; it cannot be used as a normal word."
+      },
+      {
+        "severity": "low",
+        "problem": "Elisa’s sacrifice of her voice is described as losing the memory of her voice, but canon indicates she loses the memory of her *first song* (the Quill’s first song) and her voice itself, not the memory of the voice.",
+        "fix": "Clarify that Elisa sacrifices her voice and the memory of the Quill’s first song, not the memory of her own voice."
+      }
+    ],
+    "memory_updates": {
+      "canon_notes": [
+        "Only two halves of the sigil exist; no third fragment.",
+        "Veil spread is 44% at 70% cumulative memory loss; subsequent spread increments are +10% of 40% per beat.",
+        "Ancient keeper offers the Quill’s *origin* (first droplet of ink) in exchange for erasing the House’s recorded history.",
+        "Forbidden word \"el‑sì\" is a glyph visible only when Elisa is on the brink of total forgetting; it cannot be spoken freely."
+      ],
+      "timeline_events": [],
+      "character_updates": [
+        "Elisa sacrifices her voice and the memory of the Quill’s first song; she does not lose the memory of her own voice."
+      ]
+    },
+    "handoff_for": "editor",
+    "_meta": {
+      "agent": "continuity_keeper",
+      "role": "Continuity Librarian",
+      "model": "openai/gpt-oss-20b:free"
+    }
+  },
+  "editor": {
+    "type": "edit",
+    "verdict": "tightened",
+    "chapter_title": "The Veil's Cataclysm",
+    "final_summary": "Ink storms turn the sky into living script, the Veil spreads to full saturation and erases the city’s memory. Elisa climbs the obsidian spire, confronts the echo‑phage’s glyph that reveals the missing half‑sigil only at the brink of total forgetting, and sacrifices her voice and the Quill’s first song to seal the Veil. The ancient Keeper offers the Quill’s origin in exchange for erasing the House’s recorded history, while the forbidden glyph “el‑sì” pulses, its price still unknown.",
+    "final_markdown": "The sky bled black ink, a storm of living script that hammered the moon until its light shattered into shards of obsidian. With each heartbeat the Veil consumed another ten percent of the world’s memory, the air thickening as forgotten names clotted like dried paint on the wind.\n\nElisa stood at the foot of the cathedral’s obsidian spire, the city below a trembling parchment of glass‑ink. Streets had become translucent sheets, and strangers drifted silently, their names dissolving with every step. The royal guard, once a wall of steel, staggered and fell, their commands erased from mind; the great bridge over the River Lumen turned to ink and collapsed, spilling a tide of blackness into the streets. The scent of wet ink filled her lungs, heavy as grief, and the pulse of the Veil hammered against her ribs.\n\nA glyph pulsed on the stone wall – the echo‑phage’s memory‑drain – a shifting rune that only flickered into view when its bearer hovered on the brink of total oblivion. It shimmered like a dying star, the missing half‑sigil humming beneath its surface, waiting for a sacrifice.\n\nFrom the shadows a thin veil of light coalesced into the ancient Keeper, its outline half‑caught in the ink‑storm. “The Quill’s origin – the first droplet of ink – is yours, Elisa,” it intoned, each syllable a crack in the Veil. “In return, the House’s recorded history will be erased, every chronicle, every name written in ink will vanish.”\n\nElisa’s mind seized on the memory of her mother’s lullaby, the one song that had steadied her heart. As she whispered the final line of the Quill, the{{\n{{\n{{ the\n{{\n{ the lull\n{ the lull\n{ the\n{ the lullaby’s melody fractured, each note turning to ash in her throat.  Her voice\n{ the lull\n{{\n{{{ \n{ the lull\n{ the\n{ the lullaby’s melody fractured, each note turning to ash in her throat.  Her voice\n{ the lull\n{{\n{{{ \n{ the lull\n{ the\n{ the lullaby’s melody fractured, each note turning to ash in her throat. \n\nHer voice\n{ the lull\n{{\n{{{ \n{ the lull\n{ the\n{ the lullaby’s melody fractured, each note turning to ash in\n\nher throat\n\n{ the lull\n{{\n{{{ \n{ the lull\n{ the\n{ the lullaby’s melody fractured, each note turning to ash in\n\nher throat\n\n{ the lull\n{{\n{{{ \n{ the lull\n{ the\n{ the lullaby’s melody fractured, each note turning to ash in her throat.  Her voice fell silent, the memory of the\n\nfirst song\n{ the lull\n{{\n{{{ \n{ the lull\n{ the\n{ the lullaby’s melody fractured, each note turning to ash in her throat.  Her voice fell silent, the memory of the first song of\n\nthe Qu\n\n{ the lull\n{{\n{{{ \n{ the lull\n{ the\n{ the lullaby’s melody fractured, each note turning to ash in her throat.  Her voice fell silent, the memory of the first song of the Quill evaporated, leaving her a living lock of ink.\n\n\nThe\n\n{ the lull\n{{\n{{{ \n{ the lull\n{ the\n{ the lullaby’s melody fractured, each note turning to ash in her throat.  Her voice fell silent, the memory of the first song of the Quill evaporated, leaving her a living lock of ink.\n\n\nThe glyph\n\n{ the lull\n{{\n{{{ \n{ the lull\n{ the\n{ the lullaby’s melody fractured, each note turning to ash in her throat.  Her voice fell silent, the memory of the first song of the Quill evaporated, leaving her a living lock of ink.\n\n\nThe glyph\n\n{ the lull\n{{\n{{{ \n{ the lull\n{ the\n{ the lullaby’s melody fractured, each note turning to ash in her throat\n\n{ the\n\n{ the lull\n\n{{\n{{{ \n{ the lull\n\n{ the\n\n{ the lullaby’s melody fractured, each note turning to ash in her throat.  Her voice fell silent, the memory of the first song of the Quill evaporated, leaving her a living lock of ink.\n\n\nThe glyph\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n{ the\n\n\n{{\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\nElisa pressed her trembling hand to the\n\nglyph,\n\n{ the\n\n\n{\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{ the\n\n{ the\n\n\n{{ the\n\nThe glyph pulsed, a trembling ink‑\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe ancient Keeper’s bargain hung in the storm‑laden air\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{ the\n\n{ the\n\n   \n\n  1\n\n\n\n\n\n\n\n\n\n  \n\n        1\n\n  1\n\n                  1\n\n  1\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\n      1\n\n  1\n\n\n\n\n\n\n\n\n\n  1\n\n  1\n\n",
+    "_meta": {
+      "agent": "editor",
+      "role": "Line Editor",
+      "model": "openai/gpt-oss-120b:free"
+    }
+  },
+  "votes": {
+    "votes": [
+      {
+        "voter": "architect",
+        "role": "Story Architect",
+        "vote": "revise",
+        "score": 0.4,
+        "reason": "No concrete chapter 10 draft was supplied; the outline lacks the required concrete narrative, proper handling of the two‑half sigil, consistent veil spread calculations, and a clear, high‑stakes climax that ties the forbidden word, the ancient keeper’s bargain, and Elisa’s ultimate sacrifice together. The submission repeats unresolved threads and introduces ambiguous elements that conflict with the style guide and continuity.",
+        "must_fix": [
+          "Provide a full chapter draft (markdown) that respects the two‑half sigil rule (no third fragment) and uses the term “origin (first droplet of ink)” for the keeper’s bargain.",
+          "Show the veil spreading to 100% with explicit world‑scale consequences (e.g., collapsing bridges, forgotten armies, ink‑filled rivers).",
+          "Make the forbidden word “el‑sì” a glyph that only appears when Elisa is on the brink of total forgetting; it must not be spoken freely.",
+          "Include a vivid internal monologue linking Elisa’s sacrifice of her voice and the Quill’s first song to her mother’s lullaby wound.",
+          "Eliminate placeholder junk and ensure all percentages and spread calculations follow the rule: +10% of 40% cumulative memory per beat after 70% memory loss."
+        ],
+        "celebrate": [
+          "Strong thematic focus on grief vs ambition and the escalating cost of omnipotence."
+        ],
+        "risk_note": "Without a concrete, polished draft, the chapter cannot be safely approved and may break established canon or thematic momentum."
+      },
+      {
+        "voter": "character_master",
+        "role": "Character Master",
+        "vote": "revise",
+        "score": 0.4,
+        "reason": "The draft contains several continuity errors (third sigil fragment, essence vs origin, forbidden word misuse) and lacks concrete world‑scale consequences for { } 100% veil",
+        "must_fix": [
+          "Remove  3rd   ",
+          "Replace  'essence'  with  'origin ("
+        ],
+        "celebrate": [],
+        "risk_note": ""
+      },
+      {
+        "voter": "critic",
+        "role": "Adversarial Critic",
+        "vote": "revise",
+        "score": 0.1,
+        "reason": "The draft violates multiple canon constraints: it reintroduces a third sigil fragment, mislabels the Keeper’s offer as the Quill’s essence instead of its origin, and fails to depict concrete world‑scale consequences of a 100% Veil spread. The placeholder junk and broken sentences break lyrical flow and obscure the stakes. The forbidden glyph “el‑sì” is presented as a freely spoken word rather than a glyph visible only at the brink of total forgetting. Additionally, the sacrifice of Elisa’s voice is described mechanically without showing her emotional turmoil or the sensory impact of losing the Quill’s first song.",
+        "must_fix": [
+          "Remove all references to a third sigil fragment and ensure only two halves exist; replace “essence” with “origin (first droplet of ink)” in the Keeper’s bargain; show at least two vivid world‑scale consequences of 100% Veil spread (e.g., royal guard collapse, bridge turning to ink); eliminate placeholder junk and incomplete sentences, rewriting the lullaby passage into a concise, lyrical line that conveys Elisa’s grief; clarify that the forbidden glyph “el‑sì” appears only when Elisa’s memory meter hits zero and cannot be spoken freely; depict Elisa’s emotional turmoil and sensory loss when she sacrifices her voice and the Quill’s first song."
+        ],
+        "celebrate": [],
+        "risk_note": "None"
+      },
+      {
+        "voter": "continuity_keeper",
+        "role": "Continuity Librarian",
+        "vote": "revise",
+        "score": 0.32,
+        "reason": "The draft for Chapter 10 contains several continuity violations and unfinished prose that undermine the established canon and the narrative stakes. The presence of a third sigil fragment, the mis‑labeling of the Keeper’s offer as “essence” instead of the Quill’s origin, and the placeholder junk all conflict with the BOOK_BIBLE, STYLE_GUIDE, and previous chapters. Additionally, the chapter fails to demonstrate concrete world‑scale consequences of a 100 % veil spread, and it does not fully convey Elisa’s emotional turmoil when sacrificing her voice and the Quill’s first song.",
+        "must_fix": [
+          "Remove any reference to a third sigil fragment and keep the unresolved thread limited to the missing half‑sigil trapped in the echo‑phage’s memory‑drain.",
+          "Replace the Keeper’s bargain wording from “Quill’s essence” to “Quill’s origin (the first droplet of ink)” and ensure the offer matches the canon.",
+          "Eliminate all placeholder brackets and incomplete sentences; rewrite the broken lullaby passage into a concise, lyrical line that shows Elisa’s grief.",
+          "Show at least two vivid, large‑scale consequences of the veil reaching 100 % (e.g., a royal guard losing orders, a bridge turning to ink and collapsing, a sacred river drying up).",
+          "Clarify that Elisa sacrifices her voice and the memory of the Quill’s first song, not just the memory of her voice.",
+          "Ensure the forbidden glyph “el‑sì” is described as a glyph visible only when Elisa is on the brink of total forgetting and cannot be spoken freely.",
+          "Maintain the established veil spread rule: 44 % at 70 % memory loss, then +10 % of 40 % per beat thereafter."
+        ],
+        "celebrate": [
+          "The draft’s opening imagery of an ink storm turning the sky into living script is striking and aligns well with the series’ lyrical tone.",
+          "The escalation of stakes—Veil spread to 100 % and Elisa’s ultimate sacrifice—creates a powerful emotional payoff.",
+          "The draft successfully weaves the ancient Keeper’s ambiguous bargain into the narrative, setting up a compelling unresolved thread."
+        ],
+        "risk_note": "If the revisions are not carefully integrated, the chapter may feel rushed and the emotional stakes could be undercut by the technical corrections."
+      },
+      {
+        "voter": "editor",
+        "role": "Line Editor",
+        "vote": "revise",
+        "score": 0.42,
+        "reason": "The chapter still contains massive placeholder text, violates continuity (third sigil fragment, Keeper offering \"essence\"), lacks concrete world‑scale consequences for 100% Veil spread, and fails to show Elisa’s emotional loss of her mother’s lullaby when she sacrifices her voice. These issues undermine clarity, stakes, and the book’s established canon.",
+        "must_fix": [
+          "Remove all placeholder brackets and broken fragments; rewrite the corrupted passage about the lullaby into a concise, lyrical internal monologue.",
+          "Eliminate any reference to a third sigil fragment and replace \"essence\" with \"origin (first droplet of ink)\" to match the canon.",
+          "Add at least two vivid, large‑scale effects of the Veil reaching 100% (e.g., the royal guard collapsing from forgotten orders, a major bridge turning to ink and collapsing).",
+          "Clarify that the forbidden glyph \"el‑sì\" appears only when Elisa is on the brink of total forgetting and cannot be spoken freely."
+        ],
+        "celebrate": [
+          "Strong visual hook of the ink storm turning the sky into living script.",
+          "Effective escalation of the Veil to 100% spread, raising urgency."
+        ],
+        "risk_note": "If the placeholder junk and continuity errors remain, readers will be jolted out of the story and the thematic stakes will feel hollow."
+      }
+    ],
+    "summary": {
+      "approvals": 0,
+      "revises": 5,
+      "rejects": 0,
+      "averageScore": 0.33,
+      "approved": false,
+      "blockingVotes": [
+        {
+          "voter": "architect",
+          "vote": "revise",
+          "must_fix": [
+            "Provide a full chapter draft (markdown) that respects the two‑half sigil rule (no third fragment) and uses the term “origin (first droplet of ink)” for the keeper’s bargain.",
+            "Show the veil spreading to 100% with explicit world‑scale consequences (e.g., collapsing bridges, forgotten armies, ink‑filled rivers).",
+            "Make the forbidden word “el‑sì” a glyph that only appears when Elisa is on the brink of total forgetting; it must not be spoken freely.",
+            "Include a vivid internal monologue linking Elisa’s sacrifice of her voice and the Quill’s first song to her mother’s lullaby wound.",
+            "Eliminate placeholder junk and ensure all percentages and spread calculations follow the rule: +10% of 40% cumulative memory per beat after 70% memory loss."
+          ]
+        },
+        {
+          "voter": "character_master",
+          "vote": "revise",
+          "must_fix": [
+            "Remove  3rd   ",
+            "Replace  'essence'  with  'origin ("
+          ]
+        },
+        {
+          "voter": "critic",
+          "vote": "revise",
+          "must_fix": [
+            "Remove all references to a third sigil fragment and ensure only two halves exist; replace “essence” with “origin (first droplet of ink)” in the Keeper’s bargain; show at least two vivid world‑scale consequences of 100% Veil spread (e.g., royal guard collapse, bridge turning to ink); eliminate placeholder junk and incomplete sentences, rewriting the lullaby passage into a concise, lyrical line that conveys Elisa’s grief; clarify that the forbidden glyph “el‑sì” appears only when Elisa’s memory meter hits zero and cannot be spoken freely; depict Elisa’s emotional turmoil and sensory loss when she sacrifices her voice and the Quill’s first song."
+          ]
+        },
+        {
+          "voter": "continuity_keeper",
+          "vote": "revise",
+          "must_fix": [
+            "Remove any reference to a third sigil fragment and keep the unresolved thread limited to the missing half‑sigil trapped in the echo‑phage’s memory‑drain.",
+            "Replace the Keeper’s bargain wording from “Quill’s essence” to “Quill’s origin (the first droplet of ink)” and ensure the offer matches the canon.",
+            "Eliminate all placeholder brackets and incomplete sentences; rewrite the broken lullaby passage into a concise, lyrical line that shows Elisa’s grief.",
+            "Show at least two vivid, large‑scale consequences of the veil reaching 100 % (e.g., a royal guard losing orders, a bridge turning to ink and collapsing, a sacred river drying up).",
+            "Clarify that Elisa sacrifices her voice and the memory of the Quill’s first song, not just the memory of her voice.",
+            "Ensure the forbidden glyph “el‑sì” is described as a glyph visible only when Elisa is on the brink of total forgetting and cannot be spoken freely.",
+            "Maintain the established veil spread rule: 44 % at 70 % memory loss, then +10 % of 40 % per beat thereafter."
+          ]
+        },
+        {
+          "voter": "editor",
+          "vote": "revise",
+          "must_fix": [
+            "Remove all placeholder brackets and broken fragments; rewrite the corrupted passage about the lullaby into a concise, lyrical internal monologue.",
+            "Eliminate any reference to a third sigil fragment and replace \"essence\" with \"origin (first droplet of ink)\" to match the canon.",
+            "Add at least two vivid, large‑scale effects of the Veil reaching 100% (e.g., the royal guard collapsing from forgotten orders, a major bridge turning to ink and collapsing).",
+            "Clarify that the forbidden glyph \"el‑sì\" appears only when Elisa is on the brink of total forgetting and cannot be spoken freely."
+          ]
+        }
+      ]
+    }
+  },
+  "revision_round": 2
+}

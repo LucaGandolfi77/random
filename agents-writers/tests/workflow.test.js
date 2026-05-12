@@ -11,6 +11,7 @@ import {
   resolveNextChapterNumber,
   resolveRemainingChapterCount,
   resolveTargetChapterCount,
+  shouldStopBookGenerationGracefully,
   shouldCreateBookForWrite,
   shouldRequestRevision
 } from '../src/lib/workflow.js';
@@ -210,4 +211,14 @@ test('resolveTargetChapterCount reuses the saved target when no explicit count i
 test('resolveRemainingChapterCount keeps count as a total target during resume', () => {
   assert.equal(resolveRemainingChapterCount(2, 20), 19);
   assert.equal(resolveRemainingChapterCount(21, 20), 0);
+});
+
+test('shouldStopBookGenerationGracefully treats OpenRouter runtime failures as non-fatal stops', () => {
+  assert.equal(shouldStopBookGenerationGracefully(new Error('OpenRouter request timed out after 500s for model openai/gpt-oss-120b:free.')), true);
+  assert.equal(shouldStopBookGenerationGracefully(new Error('OpenRouter request failed for openai/gpt-oss-120b:free: No endpoints found.')), true);
+  assert.equal(shouldStopBookGenerationGracefully(new Error('Could not parse JSON from model response:\nnot json at all')), true);
+});
+
+test('shouldStopBookGenerationGracefully keeps configuration failures fatal', () => {
+  assert.equal(shouldStopBookGenerationGracefully(new Error('Missing OPENROUTER_API_KEY. Copy .env.example to .env and set a real key.')), false);
 });

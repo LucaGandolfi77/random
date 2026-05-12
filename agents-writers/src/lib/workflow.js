@@ -147,7 +147,19 @@ export async function writeBook(rootPath, options = {}) {
 
     let message = `Generated ${generation.generatedCount} chapter${generation.generatedCount === 1 ? '' : 's'} for the active book.`;
 
-    if (createFreshBook) {
+    if (generation.stopped) {
+      const generatedLabel = `${generation.generatedCount} chapter${generation.generatedCount === 1 ? '' : 's'}`;
+
+      if (createFreshBook) {
+        message = generation.generatedCount > 0
+          ? `Created a new book and generated ${generatedLabel} before stopping at chapter ${generation.failedChapter}.`
+          : `Created a new book but stopped before chapter ${generation.failedChapter} could be generated.`;
+      } else {
+        message = generation.generatedCount > 0
+          ? `Generated ${generatedLabel} before stopping at chapter ${generation.failedChapter}.`
+          : `Stopped before chapter ${generation.failedChapter} could be generated for the active book.`;
+      }
+    } else if (createFreshBook) {
       message = `Created a new book and generated ${generation.generatedCount} chapter${generation.generatedCount === 1 ? '' : 's'}.`;
     } else if (generation.generatedCount === 0) {
       message = `Active book already reached ${count} chapter${count === 1 ? '' : 's'}. Use --new-book to start the next book.`;
@@ -167,6 +179,9 @@ export async function writeBook(rootPath, options = {}) {
       count,
       generatedCount: generation.generatedCount,
       chapters: generation.chapters || [],
+      stopped: Boolean(generation.stopped),
+      failedChapter: generation.failedChapter || null,
+      stopReason: generation.stopReason || null,
       automation: creation?.automation || null
     };
   });
@@ -369,29 +384,51 @@ export async function generateBook(rootPath, options) {
     }
 
     const results = [];
+    let failedChapter = null;
+    let stopReason = null;
 
     for (let offset = 0; offset < remainingCount; offset += 1) {
       const chapterNumber = startChapter + offset;
       const previous = results.at(-1);
       const idea = buildAutomaticIdea(options.idea || state.bookBible.premise || 'Escalate the central conflict.', chapterNumber, previous);
 
-      const result = await generateChapter(rootPath, {
-        ...options,
-        chapter: chapterNumber,
-        idea,
-        notes: buildAutomaticNotes(options.notes || '', chapterNumber, offset)
-      });
+      try {
+        const result = await generateChapter(rootPath, {
+          ...options,
+          chapter: chapterNumber,
+          idea,
+          notes: buildAutomaticNotes(options.notes || '', chapterNumber, offset)
+        });
 
-      results.push(result);
+        results.push(result);
+      } catch (error) {
+        if (!shouldStopBookGenerationGracefully(error)) {
+          throw error;
+        }
+
+        failedChapter = chapterNumber;
+        stopReason = getErrorMessage(error);
+        break;
+      }
     }
 
+    const stopped = Boolean(stopReason);
+    const message = stopped
+      ? results.length > 0
+        ? `Generated ${results.length} chapter${results.length === 1 ? '' : 's'} before stopping at chapter ${failedChapter}.`
+        : `Stopped before chapter ${failedChapter} could be generated.`
+      : `Generated ${results.length} chapter${results.length === 1 ? '' : 's'} toward a ${count}-chapter target.`;
+
     return {
-      message: `Generated ${results.length} chapter${results.length === 1 ? '' : 's'} toward a ${count}-chapter target.`,
+      message,
       activeBookId: state.activeBook.id,
       startChapter,
       count,
       generatedCount: results.length,
-      chapters: results
+      chapters: results,
+      stopped,
+      failedChapter,
+      stopReason
     };
   });
 }
@@ -1303,6 +1340,19 @@ function summarizeFallbackSceneCard(card, index) {
 
 function getErrorMessage(error) {
   return error instanceof Error ? error.message : String(error || 'forced fallback');
+}
+
+export function shouldStopBookGenerationGracefully(error) {
+  const message = getErrorMessage(error);
+
+  return [
+    /^OpenRouter request timed out\b/i,
+    /^OpenRouter request failed\b/i,
+    /^OpenRouter returned no usable JSON\b/i,
+    /^Model returned an empty response\b/i,
+    /^Model did not return a JSON object\b/i,
+    /^Could not parse JSON from model response\b/i
+  ].some((pattern) => pattern.test(message));
 }
 
 export function buildChapterBaseInput(state, chapter, options = {}) {

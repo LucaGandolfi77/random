@@ -1,0 +1,540 @@
+{
+  "active_book_id": "book-18",
+  "book_title": "The Scribe’s Veil: Echoes of the Aetheric Quill",
+  "outline_snapshot": {
+    "chapter": 5,
+    "current_phase": "escalation",
+    "active_arcs": [
+      "Introduce Living Ink Veil",
+      "Show cost per stroke",
+      "Foreshadow chorus],",
+      "next_arc_targets",
+      "recommended_beats",
+      "Introduction of the Living Ink Veil",
+      "Establishment of the memory‑eating cost per stroke",
+      "Foreshadowing the upcoming fracture through the parasitic chorus",
+      "A fragment of the chorus whispers a half‑remembered name that might be the key to sealing the veil, but its meaning is still unknown.",
+      "Show the veil accelerating as cumulative memory loss reaches a tipping point",
+      "Reveal the half‑remembered name as a fragmented sigil within the ink‑etched map",
+      "Introduce a new echo‑phage variant that attacks by erasing spoken names",
+      "Raise personal stakes: Elisa forgets the face of her mother’s last smile",
+      "The ink‑etched symbols Maeron leaves behind form a cryptic map to the Veil’s heart.",
+      "A hidden cache of glass fruits, each capable of erasing a specific memory, is discovered in the library’s vaulted cellar.",
+      "Show the Veil accelerating as cumulative memory loss reaches a tipping point",
+      "Show the cost of a second, devastating sacrifice (loss of voice) and its immediate consequence",
+      "Explore the ancient keeper hinted by the crypt’s pulse.",
+      "Develop the Mirror Fruit as a possible counter‑weapon.",
+      "The Mirror Fruit’s reflective surface hints at a way to return lost memories to the veil.",
+      "A hidden crypt beneath the cathedral thrums with an ancient keeper’s pulse, promising an ally or a new antagonist.",
+      "The ink‑etched symbols coalesce into a map that points to the Veil’s heart beneath the cathedral’s dome",
+      "The hidden cache of glass fruits contains a unique “Mirror Fruit” that can reflect a lost memory back onto the veil",
+      "Half‑sigil as key to sealing the veil.",
+      "Name‑Eater hunting spoken names.",
+      "The ink‑black pulse in the cathedral’s crypt suggests an ancient keeper of the Quill awakening, whose intentions remain unknown."
+    ],
+    "next_targets": [
+      "The missing half of the sigil may be hidden within the echo‑phage’s memory‑drain.",
+      "The ancient keeper in the crypt awakens, offering a bargain that could reverse the Veil.",
+      "Explore the ancient keeper hinted by the crypt’s pulse",
+      "Develop the Mirror Fruit as a counter‑weapon, first glimpse of its existence",
+      "Have Elisa discover the Mirror Fruit’s reflective property by catching a fragment of her own voice in the glass",
+      "Set up the chorus’s increasing intensity as a pressure cooker for the final binding",
+      "Plant a new unresolved thread: the missing half of the sigil, which might be hidden in the echo‑phage’s memory‑drain",
+      "The missing half of the sigil is hinted to reside within the echo‑phage’s memory‑drain, tied to the half‑remembered name *Sa‑ri…*.",
+      "The ancient keeper’s true intent remains unknown – will it become an ally, an antagonist, or something beyond."
+    ],
+    "global_targets": [
+      "grief",
+      "ambition",
+      "memory",
+      "identity sacrifice",
+      "memory as weapon",
+      "the cost of omnipotence",
+      "authorial rebellion",
+      "the thin line between creation and annihilation",
+      "Introduce Living Ink Veil",
+      "Show cost per stroke",
+      "Foreshadow chorus],",
+      "next_arc_targets",
+      "recommended_beats",
+      "Introduction of the Living Ink Veil",
+      "Establishment of the memory‑eating cost per stroke",
+      "Foreshadowing the upcoming fracture through the parasitic chorus",
+      "A fragment of the chorus whispers a half‑remembered name that might be the key to sealing the veil, but its meaning is still unknown.",
+      "Show the veil accelerating as cumulative memory loss reaches a tipping point",
+      "Reveal the half‑remembered name as a fragmented sigil within the ink‑etched map",
+      "Introduce a new echo‑phage variant that attacks by erasing spoken names",
+      "Raise personal stakes: Elisa forgets the face of her mother’s last smile",
+      "The ink‑etched symbols Maeron leaves behind form a cryptic map to the Veil’s heart.",
+      "A hidden cache of glass fruits, each capable of erasing a specific memory, is discovered in the library’s vaulted cellar.",
+      "Show the Veil accelerating as cumulative memory loss reaches a tipping point",
+      "Show the cost of a second, devastating sacrifice (loss of voice) and its immediate consequence",
+      "Explore the ancient keeper hinted by the crypt’s pulse.",
+      "Develop the Mirror Fruit as a possible counter‑weapon.",
+      "The Mirror Fruit’s reflective surface hints at a way to return lost memories to the veil.",
+      "A hidden crypt beneath the cathedral thrums with an ancient keeper’s pulse, promising an ally or a new antagonist.",
+      "The ink‑etched symbols coalesce into a map that points to the Veil’s heart beneath the cathedral’s dome",
+      "The hidden cache of glass fruits contains a unique “Mirror Fruit” that can reflect a lost memory back onto the veil",
+      "Half‑sigil as key to sealing the veil.",
+      "Name‑Eater hunting spoken names.",
+      "The ink‑black pulse in the cathedral’s crypt suggests an ancient keeper of the Quill awakening, whose intentions remain unknown."
+    ],
+    "endgame_promises": [],
+    "previous_outline": {
+      "chapter": 4,
+      "title": "Ink‑Veil Ascendant",
+      "chapter_goal": "Force Elisa to confront the price of every stroke, heightening the Veil’s voracity while locking in the half‑sigil as a tangible but incomplete key, and begin the hunt for the Mirror Fruit as the only counter‑weapon.",
+      "arc_targets": [
+        "Show the Veil accelerating as cumulative memory loss reaches a tipping point",
+        "Reveal the half‑remembered name as a fragmented sigil within the ink‑etched map",
+        "Introduce a new echo‑phage variant that attacks by erasing spoken names",
+        "Raise personal stakes: Elisa forgets the face of her mother’s last smile",
+        "Show the cost of a second, devastating sacrifice (loss of voice) and its immediate consequence",
+        "Explore the ancient keeper hinted by the crypt’s pulse.",
+        "Develop the Mirror Fruit as a possible counter‑weapon.",
+        "The Mirror Fruit’s reflective surface hints at a way to return lost memories to the veil.",
+        "A hidden crypt beneath the cathedral thrums with an ancient keeper’s pulse, promising an ally or a new antagonist.",
+        "The ink‑etched symbols coalesce into a map that points to the Veil’s heart beneath the cathedral’s dome",
+        "The hidden cache of glass fruits contains a unique “Mirror Fruit” that can reflect a lost memory back onto the veil",
+        "Half‑sigil as key to sealing the veil.",
+        "Name‑Eater hunting spoken names.",
+        "The ink‑black pulse in the cathedral’s crypt suggests an ancient keeper of the Quill awakening, whose intentions remain unknown."
+      ],
+      "next_arc_targets": [
+        "The missing half of the sigil may be hidden within the echo‑phage’s memory‑drain.",
+        "The ancient keeper in the crypt awakens, offering a bargain that could reverse the Veil.",
+        "Explore the ancient keeper hinted by the crypt’s pulse",
+        "Develop the Mirror Fruit as a counter‑weapon, first glimpse of its existence",
+        "Have Elisa discover the Mirror Fruit’s reflective property by catching a fragment of her own voice in the glass",
+        "Set up the chorus’s increasing intensity as a pressure cooker for the final binding",
+        "Plant a new unresolved thread: the missing half of the sigil, which might be hidden in the echo‑phage’s memory‑drain",
+        "The missing half of the sigil is hinted to reside within the echo‑phage’s memory‑drain, tied to the half‑remembered name *Sa‑ri…*.",
+        "The ancient keeper’s true intent remains unknown – will it become an ally, an antagonist, or something beyond."
+      ],
+      "unresolved_threads": [
+        "The missing half of the sigil is hinted to reside within the echo‑phage’s memory‑drain, tied to the half‑remembered name *Sa‑ri…*.",
+        "The ancient keeper’s true intent remains unknown – will it become an ally, an antagonist, or something beyond."
+      ],
+      "planned_payoffs": [
+        "Elisa’s voice is silenced, making the cost of power unmistakable.",
+        "The half‑sigil pulses brighter, revealing a fragment of the binding name.",
+        "The Mirror Fruit is glimpsed, promising a future weapon against the Veil."
+      ],
+      "outline_notes": [
+        "Quantify cumulative memory loss: at chapter 4 start, 45% of original memories are gone; veil spread speed +35%.",
+        "Elisa’s scar becomes a living sigil that pulses brighter each stroke; its pattern hints at the missing half of the name.",
+        "Name‑Eater’s rasp echoes literally when a name is spoken; the audio cue should sync with the silence that follows.",
+        "The Mirror Fruit reflection should show a fleeting image of Elisa’s voice as a spectral overlay, foreshadowing its power.",
+        "End with a cliff: the Vault of Glass opens to reveal the Mirror Fruit, but the chorus swallows the corridor, leaving the location ambiguous.",
+        "Cumulative memory loss metric set to 45% at chapter start; after Elisa’s voice sacrifice it rises to 52%, accelerating veil spread +35%.",
+        "Half‑sigil now fully illuminated when reflected in the Mirror Fruit; missing half hinted to reside within the echo‑phage’s memory‑drain.",
+        "Mirror Fruit introduced as a unique glass fruit; its reflective surface can capture a lost memory but requires a voice‑sacrifice to activate.",
+        "Name‑Eater’s sonic rasp established as a sensory signature tied to spoken names; can be nullified by silent communication.",
+        "Ancient keeper’s pulse recorded as a low thrum in the crypt, setting up its future emergence."
+      ],
+      "vote_summary": {
+        "approvals": 0,
+        "revises": 5,
+        "rejects": 0,
+        "averageScore": 0.61,
+        "approved": true,
+        "blockingVotes": [],
+        "forced": true,
+        "reason": "Review fallback applied: OpenRouter request timed out after 300s for model openai/gpt-oss-120b:free."
+      },
+      "updatedAt": "2026-05-11T19:17:45.627Z"
+    },
+    "arc_metrics": {
+      "Introduce Living Ink Veil": {
+        "success": 0,
+        "momentum": 0.34,
+        "decay": 0.3,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "Show cost per stroke": {
+        "success": 0,
+        "momentum": 0.34,
+        "decay": 0.3,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "Foreshadow chorus],": {
+        "success": 0,
+        "momentum": 0.34,
+        "decay": 0.3,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "next_arc_targets": {
+        "success": 0,
+        "momentum": 0.34,
+        "decay": 0.3,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "recommended_beats": {
+        "success": 0,
+        "momentum": 0.34,
+        "decay": 0.3,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "Introduction of the Living Ink Veil": {
+        "success": 0,
+        "momentum": 0.34,
+        "decay": 0.3,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "Establishment of the memory‑eating cost per stroke": {
+        "success": 0,
+        "momentum": 0.34,
+        "decay": 0.3,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "Foreshadowing the upcoming fracture through the parasitic chorus": {
+        "success": 0,
+        "momentum": 0.34,
+        "decay": 0.3,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "A fragment of the chorus whispers a half‑remembered name that might be the key to sealing the veil, but its meaning is still unknown.": {
+        "success": 0,
+        "momentum": 0.38,
+        "decay": 0.26,
+        "appearances": 1,
+        "lastTouchedChapter": 2,
+        "status": "active"
+      },
+      "The ink‑etched symbols Maeron leaves behind form a cryptic map to the Veil’s heart.": {
+        "success": 0,
+        "momentum": 0.47,
+        "decay": 0.16,
+        "appearances": 1,
+        "lastTouchedChapter": 3,
+        "status": "active"
+      },
+      "A hidden cache of glass fruits, each capable of erasing a specific memory, is discovered in the library’s vaulted cellar.": {
+        "success": 0,
+        "momentum": 0.47,
+        "decay": 0.16,
+        "appearances": 1,
+        "lastTouchedChapter": 3,
+        "status": "active"
+      },
+      "Show the veil accelerating as cumulative memory loss reaches a tipping point": {
+        "success": 0.12,
+        "momentum": 0.52,
+        "decay": 0.1,
+        "appearances": 1,
+        "lastTouchedChapter": 3,
+        "status": "active"
+      },
+      "Reveal the half‑remembered name as a fragmented sigil within the ink‑etched map": {
+        "success": 0.43,
+        "momentum": 0.75,
+        "decay": 0,
+        "appearances": 2,
+        "lastTouchedChapter": 4,
+        "status": "active"
+      },
+      "Introduce a new echo‑phage variant that attacks by erasing spoken names": {
+        "success": 0.43,
+        "momentum": 0.75,
+        "decay": 0,
+        "appearances": 2,
+        "lastTouchedChapter": 4,
+        "status": "active"
+      },
+      "Raise personal stakes: Elisa forgets the face of her mother’s last smile": {
+        "success": 0.43,
+        "momentum": 0.75,
+        "decay": 0,
+        "appearances": 2,
+        "lastTouchedChapter": 4,
+        "status": "active"
+      },
+      "Explore the ancient keeper hinted by the crypt’s pulse.": {
+        "success": 0.15,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 4,
+        "status": "active"
+      },
+      "Develop the Mirror Fruit as a possible counter‑weapon.": {
+        "success": 0.15,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 4,
+        "status": "active"
+      },
+      "The Mirror Fruit’s reflective surface hints at a way to return lost memories to the veil.": {
+        "success": 0.15,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 4,
+        "status": "active"
+      },
+      "A hidden crypt beneath the cathedral thrums with an ancient keeper’s pulse, promising an ally or a new antagonist.": {
+        "success": 0.15,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 4,
+        "status": "active"
+      },
+      "The ink‑etched symbols coalesce into a map that points to the Veil’s heart beneath the cathedral’s dome": {
+        "success": 0.15,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 4,
+        "status": "active"
+      },
+      "The hidden cache of glass fruits contains a unique “Mirror Fruit” that can reflect a lost memory back onto the veil": {
+        "success": 0.15,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 4,
+        "status": "active"
+      },
+      "Half‑sigil as key to sealing the veil.": {
+        "success": 0.15,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 4,
+        "status": "active"
+      },
+      "Name‑Eater hunting spoken names.": {
+        "success": 0.15,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 4,
+        "status": "active"
+      },
+      "The ink‑black pulse in the cathedral’s crypt suggests an ancient keeper of the Quill awakening, whose intentions remain unknown.": {
+        "success": 0.15,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 4,
+        "status": "active"
+      },
+      "Show the Veil accelerating as cumulative memory loss reaches a tipping point": {
+        "success": 0.21,
+        "momentum": 0.65,
+        "decay": 0,
+        "appearances": 1,
+        "lastTouchedChapter": 4,
+        "status": "active"
+      },
+      "Show the cost of a second, devastating sacrifice (loss of voice) and its immediate consequence": {
+        "success": 0.21,
+        "momentum": 0.65,
+        "decay": 0,
+        "appearances": 1,
+        "lastTouchedChapter": 4,
+        "status": "active"
+      },
+      "The missing half of the sigil may be hidden within the echo‑phage’s memory‑drain.": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      },
+      "The ancient keeper in the crypt awakens, offering a bargain that could reverse the Veil.": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      },
+      "Explore the ancient keeper hinted by the crypt’s pulse": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      },
+      "Develop the Mirror Fruit as a counter‑weapon, first glimpse of its existence": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      },
+      "Have Elisa discover the Mirror Fruit’s reflective property by catching a fragment of her own voice in the glass": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      },
+      "Set up the chorus’s increasing intensity as a pressure cooker for the final binding": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      },
+      "Plant a new unresolved thread: the missing half of the sigil, which might be hidden in the echo‑phage’s memory‑drain": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      },
+      "The missing half of the sigil is hinted to reside within the echo‑phage’s memory‑drain, tied to the half‑remembered name *Sa‑ri…*.": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      },
+      "The ancient keeper’s true intent remains unknown – will it become an ally, an antagonist, or something beyond.": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      }
+    }
+  },
+  "architect": {
+    "type": "proposal",
+    "chapter_goal": "Force Elisa to confront the true cost of her remaining strokes, drive the chorus into a crescendo of hostile memory‑phages, and inject a new, paradoxical thread that threatens to collapse the veil’s own logic.",
+    "theme_progress": "Grief becomes agency: each erased memory gives Elisa more power, yet strips her of identity. Ambition now demands she trade her soul for mastery, while the chorus whispers that the very act of erasing may undo the veil.",
+    "arc_targets": [
+      "Show the veil accelerating as cumulative memory loss passes the 60% tipping point.",
+      "Introduce a paradoxical echo‑phage that feeds on the loss of identity itself, turning Elisa’s forgotten self into a hostile horror.",
+      "Amplify the chorus into a symphonic threat: every stanza spoken fuels a new wave of echo‑phages that devour the fabric of reality.",
+      "Deliver a brutal consequence of the voice sacrifice: Elisa’s personality fractures, leaving her a hollow shell who can still write but cannot remember her own name."
+    ],
+    "next_arc_targets": [
+      "Unveil that the missing half‑sigil is embedded within the echo‑phage’s own memory‑drain, requiring Elisa to willingly become 100% forgotten to retrieve  \".trim(), // placeholder can\n    1\n  \"recommended   \t\t\t\t\t\t\t   :    \t\t\t\t\t\n    \t\t\t\t\n  \t\t\t\t\t\n  \t\t\t\t\t\t\n    \t\t\t\t\n  \t\t\t\t\n  \t\t\t\t\t\n    \t\t\t\t\t\t\t\n  \t\t\t\t \n  \t\t\t\t\t\n  \t\t\t\t \n  \t\t\t\t \n  \t\t \t\t \t\t \t\t \t\t \t\t \t\t\t\n\t\t\t\t \n  \t\t \t\t \t\t \t\t \t\t \t\t \t\t\t\n\t\t\t\t\t\n   ",
+      "constraints  :  a\\n- Each new beat must increase the veil's spread by 10% of 40% cumulative memory  \\n   - The chorus’s sym\n\nOops. \n"
+    ],
+    "_meta": {
+      "agent": "architect",
+      "role": "Story Architect",
+      "model": "openai/gpt-oss-20b:free"
+    }
+  },
+  "character_master": {
+    "type": "proposal",
+    "emotional_targets": [
+      "Intensify Elisa’s sense of betrayal by her own memories",
+      "Heighten the chorus as a living, oppressive presence",
+      "Create an existential dread that borders on cosmic erasure"
+    ],
+    "character_notes": [
+      {
+        "name": "Elisa",
+        "desire": "to wield the Veil yet keep her identity intact",
+        "fear": "to be consumed by the chorus and lose her sense of self",
+        "contradiction": "her drive to re‑write reality clashes with the knowledge that each stroke erases her past",
+        "secret_pressure": "the fragment of the chorus whispering *Sa‑ri…*—a name she knows only as a half‑memory that could either free or damn her"
+      },
+      {
+        "name": "Maeron",
+        "desire": "to help Elisa secure power for his own future",
+        "fear": "that the Mirror Fruit will betray him by siphoning his hidden memories",
+        "contradiction": "his greed is tempered by an unspoken respect for the Quill’s sanctity",
+        "secret_pressure": "his own forgotten lineage, hinted at by the ink‑etched map, may be the missing half of the sigil"
+      },
+      {
+        "name": "The Ancient Keeper",
+        "desire": "to restore the Quill’s original purpose",
+        "fear": "to be erased by the chorus’s"
+      },
+      {
+        "\n": "  \t\t\t\t\t\t\t\t\t: \t: \t\t\t\t\t\t\t    \t\t: \t\t\t\t\t\t\t\t    : \t\t  : \t\t\t\t\t\t\t      : \t\t\t\t\t\t\t  \t: \t\t\t\t\t\t\t :   : \t: \t\t  : \t\t\t\t\t\t\t :   : \t: \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t\t : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  : \t\t\t\t\t\t\t :   : \t\t\t\t\t\t\t :   : \t\t  :"
+      }
+    ],
+    "dialogue_instructions": [
+      "Let the chorus speak in fragmented, whispered cadences that break into a sobbing chorus of forgotten sentences.",
+      "When Elisa speaks, make her voice echo but fade—each syllable feels like a phantom reminiscence.",
+      "Use silence as a character: when the chorus swells, words fall silent, and characters listen for the next breath."
+    ],
+    "conflict_upgrades": [
+      "The chorus now produces an Echo‑Phage that devours the very memory of the speaker’s name, leaving them nameless yet capable of writing.",
+      "Introduce a paradoxical rule: the more Elisa forgets, the Veil’s power grows—her losses fuel her strokes.",
+      "Unveil that the missing half‑sigil is embedded within the chorus’s memory‑drain; to retrieve it, Elisa must willingly surrender all memories, risking total annihilation."
+    ],
+    "handoff_for": "chapter_planner",
+    "_meta": {
+      "agent": "character_master",
+      "role": "Character Master",
+      "model": "openai/gpt-oss-20b:free"
+    }
+  },
+  "chapter_planner": {
+    "type": "plan",
+    "chapter_title": "The Veil's Reckoning",
+    "chapter_hook": "Elisa stands before the cathedral’s fractured dome, ink dripping from her fingertips like a dying heart, while the chorus swells into a deafening choir of the forgotten.",
+    "arc_payoffs": [
+      "Elisa’s final stroke shatters the chorus’s core, revealing the echo‑phage’s true hunger.",
+      "The veil’s expansion is halted, but at the cost of Elisa’s last memory of her mother’s lullaby.",
+      "A new paradoxical thread is planted: the missing half‑sigil is hidden in the echo‑phage’s memory‑drain."
+    ],
+    "next_chapter_seed": [
+      "The echo‑phage now feeds on the very identity Elisa has tried to protect.",
+      "The ancient keeper’s silence grows louder as the veil’s lattice fractures.",
+      "A fragment of the chorus whispers a new, forbidden word that could rewrite the Quill itself."
+    ],
+    "scene_cards": [
+      {
+        "scene": 1,
+        "goal": "Show the veil accelerating past the 60% memory‑loss tipping point.",
+        "conflict": "The cathedral’s walls bleed ink, and the chorus’s whispers echo like a storm, threatening to drown Elisa’s thoughts.",
+        "turn": "Elisa realizes that each stroke she has made has fed the chorus; she must decide whether to write one final line or let the chorus consume her.",
+        "image": "Ink splattering across a stone altar, turning the marble into a living river of black."
+      },
+      {
+        "scene": 2,
+        "goal": "Introduce the paradoxical echo‑phage that devours the forgotten self.",
+        "conflict": "The chorus morphs into a creature that feeds on the very memories Elisa has lost, turning her fading self into a hostile horror.",
+        "turn": "Elisa confronts the echo‑phage, realizing that erasing her past has birthed a monster that now seeks her identity.",
+        "image": "A translucent, shifting silhouette of Elisa, its edges dissolving into ink."
+      },
+      {
+        "scene": 3,
+        "goal": "Amplify the chorus into a symphonic threat, each stanza feeding new echo‑phages.",
+        "conflict": "The chorus’s words grow louder, each syllable spawning a new wave of echo‑phages that shred the walls.",
+        "turn": "Elisa must silence the chorus by uttering a forgotten word, but the word"
+      }
+    ],
+    "_meta": {
+      "agent": "chapter_planner",
+      "role": "Chapter Planner",
+      "model": "openai/gpt-oss-20b:free"
+    }
+  }
+}

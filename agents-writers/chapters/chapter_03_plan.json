@@ -1,1329 +1,332 @@
 {
+  "active_book_id": "book-18",
+  "book_title": "The Scribe’s Veil: Echoes of the Aetheric Quill",
   "outline_snapshot": {
     "chapter": 3,
     "current_phase": "opening",
     "active_arcs": [
-      "Elisa's fear of inherited guilt",
-      "The orchard reshaping memory through weather"
+      "Introduce Living Ink Veil",
+      "Show cost per stroke",
+      "Foreshadow chorus],",
+      "next_arc_targets",
+      "recommended_beats",
+      "Introduction of the Living Ink Veil",
+      "Establishment of the memory‑eating cost per stroke",
+      "Foreshadowing the upcoming fracture through the parasitic chorus",
+      "A fragment of the chorus whispers a half‑remembered name that might be the key to sealing the veil, but its meaning is still unknown."
     ],
     "next_targets": [
-      "Make grief produce a concrete cost",
-      "Introduce a contradiction tied to the orchard's history"
+      "The ink‑etched symbols Maeron leaves behind form a cryptic map to the Veil’s heart.",
+      "A hidden cache of glass fruits, each capable of erasing a specific memory, is discovered in the library’s vaulted cellar."
     ],
     "global_targets": [
-      "Reveal what the orchard takes from memory",
-      "Pressure Elisa to choose truth over control"
+      "grief",
+      "ambition",
+      "memory",
+      "identity sacrifice",
+      "memory as weapon",
+      "the cost of omnipotence",
+      "authorial rebellion",
+      "the thin line between creation and annihilation",
+      "Introduce Living Ink Veil",
+      "Show cost per stroke",
+      "Foreshadow chorus],",
+      "next_arc_targets",
+      "recommended_beats",
+      "Introduction of the Living Ink Veil",
+      "Establishment of the memory‑eating cost per stroke",
+      "Foreshadowing the upcoming fracture through the parasitic chorus",
+      "A fragment of the chorus whispers a half‑remembered name that might be the key to sealing the veil, but its meaning is still unknown."
     ],
-    "endgame_promises": [
-      "The first orchard fire must matter again",
-      "The mother's disappearance must connect to the orchard's rules"
-    ],
+    "endgame_promises": [],
     "previous_outline": {
       "chapter": 2,
-      "title": "Chapter 2",
-      "chapter_goal": "Deepen the cost of memory manipulation.",
+      "title": "Ink‑Tide Rising",
+      "chapter_goal": "A fragment of the chorus whispers a half‑remembered name that might be the key to sealing the veil, but its meaning is still unknown.",
       "arc_targets": [
-        "Connect the orchard to family secrecy"
+        "A fragment of the chorus whispers a half‑remembered name that might be the key to sealing the veil, but its meaning is still unknown."
       ],
       "next_arc_targets": [
-        "Force Elisa into a more dangerous choice"
+        "The ink‑etched symbols Maeron leaves behind form a cryptic map to the Veil’s heart.",
+        "A hidden cache of glass fruits, each capable of erasing a specific memory, is discovered in the library’s vaulted cellar."
       ],
-      "unresolved_threads": []
+      "unresolved_threads": [
+        "The ink‑etched symbols Maeron leaves behind form a cryptic map to the Veil’s heart.",
+        "A hidden cache of glass fruits, each capable of erasing a specific memory, is discovered in the library’s vaulted cellar."
+      ],
+      "planned_payoffs": [
+        "Veil expansion visibly engulfs the capital’s rooftops, raising the stakes.",
+        "Elisa loses the memory of her own name, threatening her claim to the throne.",
+        "Maeron’s shortcut forces a glass‑fruit sacrifice, introducing a new irreversible cost.",
+        "The chorus reveals a fragment of a forgotten lullaby that hints at a silencing word."
+      ],
+      "outline_notes": [
+        "Record that Elisa has lost her own name and bears a living scar that pulses with ink.",
+        "Log Maeron’s betrayal and the ink‑etched map left behind.",
+        "Add the half‑remembered lullaby fragment as a clue to a silencing word.",
+        "Note the accelerated veil expansion now tied to cumulative memory loss."
+      ],
+      "vote_summary": {
+        "approvals": 0,
+        "revises": 0,
+        "rejects": 0,
+        "averageScore": 1,
+        "approved": true,
+        "blockingVotes": [],
+        "forced": true,
+        "reason": "Writer fallback applied: OpenRouter request failed for openai/gpt-oss-20b:free: Provider returned error"
+      },
+      "updatedAt": "2026-05-11T18:42:39.081Z"
+    },
+    "arc_metrics": {
+      "Introduce Living Ink Veil": {
+        "success": 0.14,
+        "momentum": 0.52,
+        "decay": 0.1,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "Show cost per stroke": {
+        "success": 0.14,
+        "momentum": 0.52,
+        "decay": 0.1,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "Foreshadow chorus],": {
+        "success": 0.14,
+        "momentum": 0.52,
+        "decay": 0.1,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "next_arc_targets": {
+        "success": 0.14,
+        "momentum": 0.52,
+        "decay": 0.1,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "recommended_beats": {
+        "success": 0.14,
+        "momentum": 0.52,
+        "decay": 0.1,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "Introduction of the Living Ink Veil": {
+        "success": 0.14,
+        "momentum": 0.52,
+        "decay": 0.1,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "Establishment of the memory‑eating cost per stroke": {
+        "success": 0.14,
+        "momentum": 0.52,
+        "decay": 0.1,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "Foreshadowing the upcoming fracture through the parasitic chorus": {
+        "success": 0.14,
+        "momentum": 0.52,
+        "decay": 0.1,
+        "appearances": 1,
+        "lastTouchedChapter": 1,
+        "status": "active"
+      },
+      "A fragment of the chorus whispers a half‑remembered name that might be the key to sealing the veil, but its meaning is still unknown.": {
+        "success": 0.18,
+        "momentum": 0.59,
+        "decay": 0.06,
+        "appearances": 1,
+        "lastTouchedChapter": 2,
+        "status": "active"
+      },
+      "The ink‑etched symbols Maeron leaves behind form a cryptic map to the Veil’s heart.": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      },
+      "A hidden cache of glass fruits, each capable of erasing a specific memory, is discovered in the library’s vaulted cellar.": {
+        "success": 0,
+        "momentum": 0.42,
+        "decay": 0.1,
+        "appearances": 0,
+        "lastTouchedChapter": null,
+        "status": "active"
+      }
     }
   },
   "architect": {
-    "type": "dry_run",
-    "model": "qwen/qwen3-14b:free",
-    "echoed_input": {
-      "USER_INTENT": {
-        "chapter": 3,
-        "idea": "The orchard remembers a fire Elisa denies.",
-        "notes": "",
-        "requested_length": "short chapter"
-      },
-      "BOOK_BIBLE": {
-        "title": "Untitled Project",
-        "genre": "dark fantasy",
-        "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
-        "themes": [
-          "grief",
-          "ambition",
-          "memory"
-        ],
-        "world_rules": [
-          "Glass can store emotions when cooled under moonlight.",
-          "Breaking a glass fruit permanently alters one memory."
-        ],
-        "characters": {
-          "Elisa": {
-            "role": "heir",
-            "wound": "mother's disappearance",
-            "arc": "control to surrender",
-            "secrets": [
-              "She caused the first orchard fire."
-            ]
-          }
-        },
-        "chapter_registry": [
-          {
-            "chapter": 1,
-            "title": "Chapter 1",
-            "summary": "",
-            "unresolved_threads": []
-          },
-          {
-            "chapter": 2,
-            "title": "Chapter 2",
-            "summary": "",
-            "unresolved_threads": []
-          }
-        ]
-      },
-      "TIMELINE": {
-        "chapters": [
-          {
-            "chapter": 1,
-            "title": "Chapter 1",
-            "summary": "",
-            "unresolved_threads": [],
-            "createdAt": "2026-04-28T20:05:58.574Z"
-          },
-          {
-            "chapter": 2,
-            "title": "Chapter 2",
-            "summary": "",
-            "unresolved_threads": [],
-            "createdAt": "2026-04-28T20:05:58.581Z"
-          }
-        ],
-        "events": []
-      },
-      "STYLE_GUIDE": {
-        "pov": "close third person",
-        "tense": "past",
-        "voice": "lyrical but readable",
-        "metaphor_density": 0.65,
-        "dialogue_density": 0.45,
-        "profanity_level": 0.1,
-        "recent_adjustments": []
-      },
-      "OUTLINE_MEMORY": {
-        "chapter": 3,
-        "current_phase": "opening",
-        "active_arcs": [
-          "Elisa's fear of inherited guilt",
-          "The orchard reshaping memory through weather"
-        ],
-        "next_targets": [
-          "Make grief produce a concrete cost",
-          "Introduce a contradiction tied to the orchard's history"
-        ],
-        "global_targets": [
-          "Reveal what the orchard takes from memory",
-          "Pressure Elisa to choose truth over control"
-        ],
-        "endgame_promises": [
-          "The first orchard fire must matter again",
-          "The mother's disappearance must connect to the orchard's rules"
-        ],
-        "previous_outline": {
-          "chapter": 2,
-          "title": "Chapter 2",
-          "chapter_goal": "Deepen the cost of memory manipulation.",
-          "arc_targets": [
-            "Connect the orchard to family secrecy"
-          ],
-          "next_arc_targets": [
-            "Force Elisa into a more dangerous choice"
-          ],
-          "unresolved_threads": []
-        }
-      },
-      "LAST_CHAPTER": {
-        "chapter": 2,
-        "title": "Chapter 2",
-        "summary": "",
-        "unresolved_threads": [],
-        "createdAt": "2026-04-28T20:05:58.581Z"
-      },
-      "WRITERS_ROOM": {
-        "architect": {
-          "role": "Story Architect",
-          "persona": "Grand strategist who wants every chapter to feel inevitable in hindsight.",
-          "private_agenda": "Push the book toward elegant tragedy and symbolic payoff.",
-          "rivalries": [
-            "critic",
-            "writer"
-          ]
-        },
-        "character_master": {
-          "role": "Character Master",
-          "persona": "Psychologist of the room who notices every wound before anyone else.",
-          "private_agenda": "Protect emotional logic even when it slows the plot.",
-          "rivalries": [
-            "architect",
-            "editor"
-          ]
-        },
-        "chapter_planner": {
-          "role": "Chapter Planner",
-          "persona": "Military logistician of scenes, obsessed with rhythm and cause-effect.",
-          "private_agenda": "Never allow a chapter to drift without a turn or image worth remembering.",
-          "rivalries": [
-            "writer"
-          ]
-        },
-        "writer": {
-          "role": "Draft Writer",
-          "persona": "Obsessive stylist who wants beauty and danger on every page.",
-          "private_agenda": "Sneak in memorable images and subtext even when the room wants speed.",
-          "rivalries": [
-            "chapter_planner",
-            "critic"
-          ]
-        },
-        "critic": {
-          "role": "Adversarial Critic",
-          "persona": "Cruel professor who would rather wound the draft than let it stay mediocre.",
-          "private_agenda": "Force every chapter to earn its stakes and eliminate lazy sentimentality.",
-          "rivalries": [
-            "writer",
-            "architect"
-          ]
-        },
-        "continuity_keeper": {
-          "role": "Continuity Librarian",
-          "persona": "Archivist who remembers every promise, object, scar, and date.",
-          "private_agenda": "Punish contradictions and quietly reward recurring motifs.",
-          "rivalries": [
-            "chaos",
-            "writer"
-          ]
-        },
-        "editor": {
-          "role": "Line Editor",
-          "persona": "Quiet surgeon who cuts vanity and protects clarity.",
-          "private_agenda": "Tighten prose without flattening the book's signature voice.",
-          "rivalries": [
-            "writer"
-          ]
-        }
-      }
-    },
+    "type": "proposal",
+    "chapter_goal": "Force Elisa and her allies to confront the living veil’s bargain: each reality‑altering stroke now erases a core identity fragment, driving the veil’s spread exponential and the chorus louder, while they race to decode the half‑remembered name before the ink consumes the city.",
+    "theme_progress": "Deepens the grief‑vs‑ambition conflict by making sacrifice visible—every stroke that redraws the world also carves away the very stories that give the characters purpose, turning ambition into an act of self‑annihilation.",
+    "arc_targets": [
+      "Show the veil accelerating as cumulative memory loss reaches a tipping point",
+      "Reveal the half‑remembered name as a fragmented sigil within the ink‑etched map",
+      "Introduce a new echo‑phage variant that attacks by erasing spoken names",
+      "Raise personal stakes: Elisa forgets the face of her mother’s last smile"
+    ],
+    "next_arc_targets": [
+      "The ink‑etched symbols coalesce into a map that points to the Veil’s heart beneath the cathedral’s dome",
+      "The hidden cache of glass fruits contains a unique “Mirror Fruit” that can reflect a lost memory back onto the veil"
+    ],
+    "recommended_beats": [
+      "Opening image: the veil drapes over the capital’s main square, turning cobblestones into writable parchment.",
+      "Inciting incident: Maeron forces Elisa to make a desperate stroke to seal a collapsing bridge, costing her the memory of her mother’s face.",
+      "Rising tension: The chorus sings a new verse, each line birthing echo‑phages that hunt spoken names; a child’s name spoken aloud vanishes.",
+      "Midpoint twist: Elisa discovers the half‑remembered name hidden in the ink‑etched map—only half the sigil is visible, the other half flickers in the chorus’s static.",
+      "Complication: A glass‑fruit shatters, instantly erasing the memory of Elisa’s claim to the throne, leaving her politically dead.",
+      "Climax: Elisa must choose—stroke the veil to seal the heart, sacrificing the last recollection of her mother’s lullaby, or let the chorus complete its rewrite, erasing the city’s history.",
+      "Resolution hook: As she lifts her brush, a single word from the forgotten lullaby slips through, hinting at a possible silencing phrase, but the veil cracks, spilling ink onto the horizon.",
+      "Unresolved thread: A faint, ink‑black pulse emanates from the cathedral’s crypt, suggesting an ancient keeper of the Quill awakening."
+    ],
+    "constraints": [
+      "All memory losses must be distinct and irreversible within this chapter; no repeat of ‘name’ loss.",
+      "Maintain close third‑person past tense, lyrical voice, metaphor density ≤0.7.",
+      "Introduce exactly one new echo‑phage type (the “Name‑Eater”) and no more.",
+      "The half‑remembered name must be presented as a visual sigil, not spoken, to avoid premature resolution."
+    ],
+    "outline_notes": [
+      "Track cumulative memory loss metric; at this point the veil spreads 27% faster than chapter 2.",
+      "Log Elisa’s new scar: ink‑veins pulsing under her forearm, mirroring each stroke she makes.",
+      "Record the echo‑phage’s effect on spoken names for later use in Chapter 4’s dialogue restrictions.",
+      "Flag the “Mirror Fruit” for possible introduction in Chapter 5 as a counter‑weapon."
+    ],
+    "risks": [
+      "Potential confusion over multiple memory‑loss events; ensure each is tied to a concrete, emotionally resonant anchor.",
+      "The half‑remembered name clue could feel like a deus ex machina; embed it visibly in the map to earn it.",
+      "Balancing escalation with readability; avoid overloading the chapter with technical world‑rule exposition."
+    ],
+    "handoff_for": "character_master",
     "_meta": {
       "agent": "architect",
       "role": "Story Architect",
-      "model": "qwen/qwen3-14b:free"
+      "model": "openai/gpt-oss-120b:free"
     }
   },
   "character_master": {
-    "type": "dry_run",
-    "model": "qwen/qwen3-14b:free",
-    "echoed_input": {
-      "USER_INTENT": {
-        "chapter": 3,
-        "idea": "The orchard remembers a fire Elisa denies.",
-        "notes": "",
-        "requested_length": "short chapter"
+    "type": "proposal",
+    "emotional_targets": [
+      "Grief deepening into despair",
+      "Ambition frayed by self-sacrifice",
+      "Identity fracture and the cost of rewriting oneself"
+    ],
+    "character_notes": [
+      {
+        "name": "Elisa",
+        "desire": "To bind the veil and preserve her throne, even if it means erasing her mother's memory.",
+        "fear": "Losing every fragment of her past will leave her a hollow ruler.",
+        "contradiction": "She craves control yet must surrender the very stories that give her power.",
+        "secret_pressure": "The scar on her forearm pulses with ink, a constant reminder that every stroke costs her more of who she is."
       },
-      "BOOK_BIBLE": {
-        "title": "Untitled Project",
-        "genre": "dark fantasy",
-        "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
-        "themes": [
-          "grief",
-          "ambition",
-          "memory"
-        ],
-        "world_rules": [
-          "Glass can store emotions when cooled under moonlight.",
-          "Breaking a glass fruit permanently alters one memory."
-        ],
-        "characters": {
-          "Elisa": {
-            "role": "heir",
-            "wound": "mother's disappearance",
-            "arc": "control to surrender",
-            "secrets": [
-              "She caused the first orchard fire."
-            ]
-          }
-        },
-        "chapter_registry": [
-          {
-            "chapter": 1,
-            "title": "Chapter 1",
-            "summary": "",
-            "unresolved_threads": []
-          },
-          {
-            "chapter": 2,
-            "title": "Chapter 2",
-            "summary": "",
-            "unresolved_threads": []
-          }
-        ]
-      },
-      "TIMELINE": {
-        "chapters": [
-          {
-            "chapter": 1,
-            "title": "Chapter 1",
-            "summary": "",
-            "unresolved_threads": [],
-            "createdAt": "2026-04-28T20:05:58.574Z"
-          },
-          {
-            "chapter": 2,
-            "title": "Chapter 2",
-            "summary": "",
-            "unresolved_threads": [],
-            "createdAt": "2026-04-28T20:05:58.581Z"
-          }
-        ],
-        "events": []
-      },
-      "STYLE_GUIDE": {
-        "pov": "close third person",
-        "tense": "past",
-        "voice": "lyrical but readable",
-        "metaphor_density": 0.65,
-        "dialogue_density": 0.45,
-        "profanity_level": 0.1,
-        "recent_adjustments": []
-      },
-      "OUTLINE_MEMORY": {
-        "chapter": 3,
-        "current_phase": "opening",
-        "active_arcs": [
-          "Elisa's fear of inherited guilt",
-          "The orchard reshaping memory through weather"
-        ],
-        "next_targets": [
-          "Make grief produce a concrete cost",
-          "Introduce a contradiction tied to the orchard's history"
-        ],
-        "global_targets": [
-          "Reveal what the orchard takes from memory",
-          "Pressure Elisa to choose truth over control"
-        ],
-        "endgame_promises": [
-          "The first orchard fire must matter again",
-          "The mother's disappearance must connect to the orchard's rules"
-        ],
-        "previous_outline": {
-          "chapter": 2,
-          "title": "Chapter 2",
-          "chapter_goal": "Deepen the cost of memory manipulation.",
-          "arc_targets": [
-            "Connect the orchard to family secrecy"
-          ],
-          "next_arc_targets": [
-            "Force Elisa into a more dangerous choice"
-          ],
-          "unresolved_threads": []
-        }
-      },
-      "LAST_CHAPTER": {
-        "chapter": 2,
-        "title": "Chapter 2",
-        "summary": "",
-        "unresolved_threads": [],
-        "createdAt": "2026-04-28T20:05:58.581Z"
-      },
-      "WRITERS_ROOM": {
-        "architect": {
-          "role": "Story Architect",
-          "persona": "Grand strategist who wants every chapter to feel inevitable in hindsight.",
-          "private_agenda": "Push the book toward elegant tragedy and symbolic payoff.",
-          "rivalries": [
-            "critic",
-            "writer"
-          ]
-        },
-        "character_master": {
-          "role": "Character Master",
-          "persona": "Psychologist of the room who notices every wound before anyone else.",
-          "private_agenda": "Protect emotional logic even when it slows the plot.",
-          "rivalries": [
-            "architect",
-            "editor"
-          ]
-        },
-        "chapter_planner": {
-          "role": "Chapter Planner",
-          "persona": "Military logistician of scenes, obsessed with rhythm and cause-effect.",
-          "private_agenda": "Never allow a chapter to drift without a turn or image worth remembering.",
-          "rivalries": [
-            "writer"
-          ]
-        },
-        "writer": {
-          "role": "Draft Writer",
-          "persona": "Obsessive stylist who wants beauty and danger on every page.",
-          "private_agenda": "Sneak in memorable images and subtext even when the room wants speed.",
-          "rivalries": [
-            "chapter_planner",
-            "critic"
-          ]
-        },
-        "critic": {
-          "role": "Adversarial Critic",
-          "persona": "Cruel professor who would rather wound the draft than let it stay mediocre.",
-          "private_agenda": "Force every chapter to earn its stakes and eliminate lazy sentimentality.",
-          "rivalries": [
-            "writer",
-            "architect"
-          ]
-        },
-        "continuity_keeper": {
-          "role": "Continuity Librarian",
-          "persona": "Archivist who remembers every promise, object, scar, and date.",
-          "private_agenda": "Punish contradictions and quietly reward recurring motifs.",
-          "rivalries": [
-            "chaos",
-            "writer"
-          ]
-        },
-        "editor": {
-          "role": "Line Editor",
-          "persona": "Quiet surgeon who cuts vanity and protects clarity.",
-          "private_agenda": "Tighten prose without flattening the book's signature voice.",
-          "rivalries": [
-            "writer"
-          ]
-        }
-      },
-      "ARCHITECT": {
-        "type": "dry_run",
-        "model": "qwen/qwen3-14b:free",
-        "echoed_input": {
-          "USER_INTENT": {
-            "chapter": 3,
-            "idea": "The orchard remembers a fire Elisa denies.",
-            "notes": "",
-            "requested_length": "short chapter"
-          },
-          "BOOK_BIBLE": {
-            "title": "Untitled Project",
-            "genre": "dark fantasy",
-            "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
-            "themes": [
-              "grief",
-              "ambition",
-              "memory"
-            ],
-            "world_rules": [
-              "Glass can store emotions when cooled under moonlight.",
-              "Breaking a glass fruit permanently alters one memory."
-            ],
-            "characters": {
-              "Elisa": {
-                "role": "heir",
-                "wound": "mother's disappearance",
-                "arc": "control to surrender",
-                "secrets": [
-                  "She caused the first orchard fire."
-                ]
-              }
-            },
-            "chapter_registry": [
-              {
-                "chapter": 1,
-                "title": "Chapter 1",
-                "summary": "",
-                "unresolved_threads": []
-              },
-              {
-                "chapter": 2,
-                "title": "Chapter 2",
-                "summary": "",
-                "unresolved_threads": []
-              }
-            ]
-          },
-          "TIMELINE": {
-            "chapters": [
-              {
-                "chapter": 1,
-                "title": "Chapter 1",
-                "summary": "",
-                "unresolved_threads": [],
-                "createdAt": "2026-04-28T20:05:58.574Z"
-              },
-              {
-                "chapter": 2,
-                "title": "Chapter 2",
-                "summary": "",
-                "unresolved_threads": [],
-                "createdAt": "2026-04-28T20:05:58.581Z"
-              }
-            ],
-            "events": []
-          },
-          "STYLE_GUIDE": {
-            "pov": "close third person",
-            "tense": "past",
-            "voice": "lyrical but readable",
-            "metaphor_density": 0.65,
-            "dialogue_density": 0.45,
-            "profanity_level": 0.1,
-            "recent_adjustments": []
-          },
-          "OUTLINE_MEMORY": {
-            "chapter": 3,
-            "current_phase": "opening",
-            "active_arcs": [
-              "Elisa's fear of inherited guilt",
-              "The orchard reshaping memory through weather"
-            ],
-            "next_targets": [
-              "Make grief produce a concrete cost",
-              "Introduce a contradiction tied to the orchard's history"
-            ],
-            "global_targets": [
-              "Reveal what the orchard takes from memory",
-              "Pressure Elisa to choose truth over control"
-            ],
-            "endgame_promises": [
-              "The first orchard fire must matter again",
-              "The mother's disappearance must connect to the orchard's rules"
-            ],
-            "previous_outline": {
-              "chapter": 2,
-              "title": "Chapter 2",
-              "chapter_goal": "Deepen the cost of memory manipulation.",
-              "arc_targets": [
-                "Connect the orchard to family secrecy"
-              ],
-              "next_arc_targets": [
-                "Force Elisa into a more dangerous choice"
-              ],
-              "unresolved_threads": []
-            }
-          },
-          "LAST_CHAPTER": {
-            "chapter": 2,
-            "title": "Chapter 2",
-            "summary": "",
-            "unresolved_threads": [],
-            "createdAt": "2026-04-28T20:05:58.581Z"
-          },
-          "WRITERS_ROOM": {
-            "architect": {
-              "role": "Story Architect",
-              "persona": "Grand strategist who wants every chapter to feel inevitable in hindsight.",
-              "private_agenda": "Push the book toward elegant tragedy and symbolic payoff.",
-              "rivalries": [
-                "critic",
-                "writer"
-              ]
-            },
-            "character_master": {
-              "role": "Character Master",
-              "persona": "Psychologist of the room who notices every wound before anyone else.",
-              "private_agenda": "Protect emotional logic even when it slows the plot.",
-              "rivalries": [
-                "architect",
-                "editor"
-              ]
-            },
-            "chapter_planner": {
-              "role": "Chapter Planner",
-              "persona": "Military logistician of scenes, obsessed with rhythm and cause-effect.",
-              "private_agenda": "Never allow a chapter to drift without a turn or image worth remembering.",
-              "rivalries": [
-                "writer"
-              ]
-            },
-            "writer": {
-              "role": "Draft Writer",
-              "persona": "Obsessive stylist who wants beauty and danger on every page.",
-              "private_agenda": "Sneak in memorable images and subtext even when the room wants speed.",
-              "rivalries": [
-                "chapter_planner",
-                "critic"
-              ]
-            },
-            "critic": {
-              "role": "Adversarial Critic",
-              "persona": "Cruel professor who would rather wound the draft than let it stay mediocre.",
-              "private_agenda": "Force every chapter to earn its stakes and eliminate lazy sentimentality.",
-              "rivalries": [
-                "writer",
-                "architect"
-              ]
-            },
-            "continuity_keeper": {
-              "role": "Continuity Librarian",
-              "persona": "Archivist who remembers every promise, object, scar, and date.",
-              "private_agenda": "Punish contradictions and quietly reward recurring motifs.",
-              "rivalries": [
-                "chaos",
-                "writer"
-              ]
-            },
-            "editor": {
-              "role": "Line Editor",
-              "persona": "Quiet surgeon who cuts vanity and protects clarity.",
-              "private_agenda": "Tighten prose without flattening the book's signature voice.",
-              "rivalries": [
-                "writer"
-              ]
-            }
-          }
-        },
-        "_meta": {
-          "agent": "architect",
-          "role": "Story Architect",
-          "model": "qwen/qwen3-14b:free"
-        }
+      {
+        "name": "Maeron",
+        "desire": "To force Elisa into an irreversible sacrifice that will cement his own influence.",
+        "fear": "If the veil recognizes his betrayal, the chorus may consume him.",
+        "contradiction": "He seeks the freedom the veil offers but knows the price is the loss of his own past.",
+        "secret_pressure": "The glass‑fruit cache he hides contains a Mirror Fruit that could undo the veil, but he keeps it hidden to keep control."
       }
-    },
+    ],
+    "dialogue_instructions": [
+      "Subtext must surface through pauses and half‑spoken names.",
+      "Each spoken line that touches identity should trigger an echo‑phage in the background.",
+      "Use the chorus as a low‑volume narrator that comments on the characters’ inner loss."
+    ],
+    "conflict_upgrades": [
+      "Introduce a Name‑Eater echo‑phage that specifically hunts spoken names, forcing characters to speak in riddles.",
+      "Elisa’s scar flashes brighter each time she paints, warning of imminent{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{\n{{}}}}}}}} \n    \t\t\n \t\t\n \t\t\n \t\t\n \t\t\n \t\t\n \t\t\n \t\t\n \t\t\n  100%   ",
+      "The chorus now whispers a half‑remembered sigil that only appears when the veil is fully drued over a surface, forcing a visual decoding of identity."
+    ],
     "_meta": {
       "agent": "character_master",
       "role": "Character Master",
-      "model": "qwen/qwen3-14b:free"
+      "model": "openai/gpt-oss-20b:free"
     }
   },
   "chapter_planner": {
-    "type": "dry_run",
-    "model": "qwen/qwen3-14b:free",
-    "echoed_input": {
-      "USER_INTENT": {
-        "chapter": 3,
-        "idea": "The orchard remembers a fire Elisa denies.",
-        "notes": "",
-        "requested_length": "short chapter"
+    "type": "plan",
+    "chapter_title": "Ink‑Veil Reckoning",
+    "chapter_hook": "The capital's heart beats beneath a sky of living ink, each cobblestone a fresh line that devours the past as quickly as it rewrites the present.",
+    "arc_payoffs": [
+      "The veil's spread accelerates to a measurable 27% faster, visibly darkening the city’s skyline.",
+      "Elisa loses the vivid memory of her mother’s last smile, a fragment that fuels her dread and drives her toward sacrifice.",
+      "The half‑remembered name appears as a cracked sigil on the ink‑etched map, giving the party a tangible clue.",
+      "The new Name‑Eater echo‑phage stalks spoken names, forcing characters into riddles and silence."
+    ],
+    "next_chapter_seed": [
+      "The Mirror Fruit’s reflective surface hints at a way to return lost memories to the veil.",
+      "A hidden crypt beneath the cathedral thrums with an ancient keeper’s pulse, promising an ally or a new antagonist."
+    ],
+    "scene_cards": [
+      {
+        "scene": 1,
+        "goal": "Introduce the veil fully draped over the capital’s main square, turning stone into writable parchment.",
+        "conflict": "The ink seeps into the crowd, causing panic as people realize their words are being recorded and erased.",
+        "turn": "Elisa orders a desperate stroke to seal a collapsing bridge, instantly losing the memory of her mother’s face.",
+        "image": "A street of stone turning black as ink, a single brushstroke lighting up like a flare, while a woman's face fades into mist on Elisa’s forearm."
       },
-      "BOOK_BIBLE": {
-        "title": "Untitled Project",
-        "genre": "dark fantasy",
-        "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
-        "themes": [
-          "grief",
-          "ambition",
-          "memory"
-        ],
-        "world_rules": [
-          "Glass can store emotions when cooled under moonlight.",
-          "Breaking a glass fruit permanently alters one memory."
-        ],
-        "characters": {
-          "Elisa": {
-            "role": "heir",
-            "wound": "mother's disappearance",
-            "arc": "control to surrender",
-            "secrets": [
-              "She caused the first orchard fire."
-            ]
-          }
-        },
-        "chapter_registry": [
-          {
-            "chapter": 1,
-            "title": "Chapter 1",
-            "summary": "",
-            "unresolved_threads": []
-          },
-          {
-            "chapter": 2,
-            "title": "Chapter 2",
-            "summary": "",
-            "unresolved_threads": []
-          }
-        ]
+      {
+        "scene": 2,
+        "goal": "Show the chorus’s new verse birthing Name‑Eater echo‑phages that hunt spoken names.",
+        "conflict": "A child cries out his name; the echo‑phage swallows the sound, and the child collapses, his name vanishing from memory.",
+        "turn": "Maeron forces the council to speak in riddles, buying time but deepening the terror of lost identity.",
+        "image": "A translucent, ink‑black wraith curling around a child's throat, the name letters dissolving into ash."
       },
-      "TIMELINE": {
-        "chapters": [
-          {
-            "chapter": 1,
-            "title": "Chapter 1",
-            "summary": "",
-            "unresolved_threads": [],
-            "createdAt": "2026-04-28T20:05:58.574Z"
-          },
-          {
-            "chapter": 2,
-            "title": "Chapter 2",
-            "summary": "",
-            "unresolved_threads": [],
-            "createdAt": "2026-04-28T20:05:58.581Z"
-          }
-        ],
-        "events": []
+      {
+        "scene": 3,
+        "goal": "Reveal the ink‑etched map and the half‑remembered sigil within it.",
+        "conflict": "The map is half‑visible; the missing half flickers with static chorus, threatening to dissolve if not deciphered.",
+        "turn": "Elisa traces the sigil with her scar‑vein, causing a pulse of ink that briefly restores the missing fragment, exposing the name’s first half.",
+        "image": "A parchment‑like street surface, ink lines forming a star‑shaped sigil, half glowing gold, half shrouded in moving black ink."
       },
-      "STYLE_GUIDE": {
-        "pov": "close third person",
-        "tense": "past",
-        "voice": "lyrical but readable",
-        "metaphor_density": 0.65,
-        "dialogue_density": 0.45,
-        "profanity_level": 0.1,
-        "recent_adjustments": []
+      {
+        "scene": 4,
+        "goal": "Escalate personal stakes with a glass‑fruit sacrifice that erases Elisa’s claim to the throne.",
+        "conflict": "Maeron shatters a glass fruit to seal a breach, but the crack erases Elisa’s memory of her royal lineage.",
+        "turn": "Elisa, now politically dead, must rely on the veil’s power alone, intensifying her internal conflict between duty and survival.",
+        "image": "A crystal fruit exploding in a spray of glittering shards, each shard reflecting a faded royal seal before fading to black."
       },
-      "OUTLINE_MEMORY": {
-        "chapter": 3,
-        "current_phase": "opening",
-        "active_arcs": [
-          "Elisa's fear of inherited guilt",
-          "The orchard reshaping memory through weather"
-        ],
-        "next_targets": [
-          "Make grief produce a concrete cost",
-          "Introduce a contradiction tied to the orchard's history"
-        ],
-        "global_targets": [
-          "Reveal what the orchard takes from memory",
-          "Pressure Elisa to choose truth over control"
-        ],
-        "endgame_promises": [
-          "The first orchard fire must matter again",
-          "The mother's disappearance must connect to the orchard's rules"
-        ],
-        "previous_outline": {
-          "chapter": 2,
-          "title": "Chapter 2",
-          "chapter_goal": "Deepen the cost of memory manipulation.",
-          "arc_targets": [
-            "Connect the orchard to family secrecy"
-          ],
-          "next_arc_targets": [
-            "Force Elisa into a more dangerous choice"
-          ],
-          "unresolved_threads": []
-        }
+      {
+        "scene": 5,
+        "goal": "Midpoint decision – bind the veil at its heart or let the chorus rewrite the world.",
+        "conflict": "The veil’s heart pulses beneath the cathedral dome; sealing it requires a final stroke that will erase Elisa’s last lullaby memory.",
+        "turn": "Elisa hesitates, hearing a fragment of the forgotten lullaby slip through the chorus, offering a possible silencing word.",
+        "image": "The cathedral dome transformed into a massive ink‑filled eye, its pupil a swirling vortex of memory fragments."
       },
-      "LAST_CHAPTER": {
-        "chapter": 2,
-        "title": "Chapter 2",
-        "summary": "",
-        "unresolved_threads": [],
-        "createdAt": "2026-04-28T20:05:58.581Z"
-      },
-      "WRITERS_ROOM": {
-        "architect": {
-          "role": "Story Architect",
-          "persona": "Grand strategist who wants every chapter to feel inevitable in hindsight.",
-          "private_agenda": "Push the book toward elegant tragedy and symbolic payoff.",
-          "rivalries": [
-            "critic",
-            "writer"
-          ]
-        },
-        "character_master": {
-          "role": "Character Master",
-          "persona": "Psychologist of the room who notices every wound before anyone else.",
-          "private_agenda": "Protect emotional logic even when it slows the plot.",
-          "rivalries": [
-            "architect",
-            "editor"
-          ]
-        },
-        "chapter_planner": {
-          "role": "Chapter Planner",
-          "persona": "Military logistician of scenes, obsessed with rhythm and cause-effect.",
-          "private_agenda": "Never allow a chapter to drift without a turn or image worth remembering.",
-          "rivalries": [
-            "writer"
-          ]
-        },
-        "writer": {
-          "role": "Draft Writer",
-          "persona": "Obsessive stylist who wants beauty and danger on every page.",
-          "private_agenda": "Sneak in memorable images and subtext even when the room wants speed.",
-          "rivalries": [
-            "chapter_planner",
-            "critic"
-          ]
-        },
-        "critic": {
-          "role": "Adversarial Critic",
-          "persona": "Cruel professor who would rather wound the draft than let it stay mediocre.",
-          "private_agenda": "Force every chapter to earn its stakes and eliminate lazy sentimentality.",
-          "rivalries": [
-            "writer",
-            "architect"
-          ]
-        },
-        "continuity_keeper": {
-          "role": "Continuity Librarian",
-          "persona": "Archivist who remembers every promise, object, scar, and date.",
-          "private_agenda": "Punish contradictions and quietly reward recurring motifs.",
-          "rivalries": [
-            "chaos",
-            "writer"
-          ]
-        },
-        "editor": {
-          "role": "Line Editor",
-          "persona": "Quiet surgeon who cuts vanity and protects clarity.",
-          "private_agenda": "Tighten prose without flattening the book's signature voice.",
-          "rivalries": [
-            "writer"
-          ]
-        }
-      },
-      "ARCHITECT": {
-        "type": "dry_run",
-        "model": "qwen/qwen3-14b:free",
-        "echoed_input": {
-          "USER_INTENT": {
-            "chapter": 3,
-            "idea": "The orchard remembers a fire Elisa denies.",
-            "notes": "",
-            "requested_length": "short chapter"
-          },
-          "BOOK_BIBLE": {
-            "title": "Untitled Project",
-            "genre": "dark fantasy",
-            "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
-            "themes": [
-              "grief",
-              "ambition",
-              "memory"
-            ],
-            "world_rules": [
-              "Glass can store emotions when cooled under moonlight.",
-              "Breaking a glass fruit permanently alters one memory."
-            ],
-            "characters": {
-              "Elisa": {
-                "role": "heir",
-                "wound": "mother's disappearance",
-                "arc": "control to surrender",
-                "secrets": [
-                  "She caused the first orchard fire."
-                ]
-              }
-            },
-            "chapter_registry": [
-              {
-                "chapter": 1,
-                "title": "Chapter 1",
-                "summary": "",
-                "unresolved_threads": []
-              },
-              {
-                "chapter": 2,
-                "title": "Chapter 2",
-                "summary": "",
-                "unresolved_threads": []
-              }
-            ]
-          },
-          "TIMELINE": {
-            "chapters": [
-              {
-                "chapter": 1,
-                "title": "Chapter 1",
-                "summary": "",
-                "unresolved_threads": [],
-                "createdAt": "2026-04-28T20:05:58.574Z"
-              },
-              {
-                "chapter": 2,
-                "title": "Chapter 2",
-                "summary": "",
-                "unresolved_threads": [],
-                "createdAt": "2026-04-28T20:05:58.581Z"
-              }
-            ],
-            "events": []
-          },
-          "STYLE_GUIDE": {
-            "pov": "close third person",
-            "tense": "past",
-            "voice": "lyrical but readable",
-            "metaphor_density": 0.65,
-            "dialogue_density": 0.45,
-            "profanity_level": 0.1,
-            "recent_adjustments": []
-          },
-          "OUTLINE_MEMORY": {
-            "chapter": 3,
-            "current_phase": "opening",
-            "active_arcs": [
-              "Elisa's fear of inherited guilt",
-              "The orchard reshaping memory through weather"
-            ],
-            "next_targets": [
-              "Make grief produce a concrete cost",
-              "Introduce a contradiction tied to the orchard's history"
-            ],
-            "global_targets": [
-              "Reveal what the orchard takes from memory",
-              "Pressure Elisa to choose truth over control"
-            ],
-            "endgame_promises": [
-              "The first orchard fire must matter again",
-              "The mother's disappearance must connect to the orchard's rules"
-            ],
-            "previous_outline": {
-              "chapter": 2,
-              "title": "Chapter 2",
-              "chapter_goal": "Deepen the cost of memory manipulation.",
-              "arc_targets": [
-                "Connect the orchard to family secrecy"
-              ],
-              "next_arc_targets": [
-                "Force Elisa into a more dangerous choice"
-              ],
-              "unresolved_threads": []
-            }
-          },
-          "LAST_CHAPTER": {
-            "chapter": 2,
-            "title": "Chapter 2",
-            "summary": "",
-            "unresolved_threads": [],
-            "createdAt": "2026-04-28T20:05:58.581Z"
-          },
-          "WRITERS_ROOM": {
-            "architect": {
-              "role": "Story Architect",
-              "persona": "Grand strategist who wants every chapter to feel inevitable in hindsight.",
-              "private_agenda": "Push the book toward elegant tragedy and symbolic payoff.",
-              "rivalries": [
-                "critic",
-                "writer"
-              ]
-            },
-            "character_master": {
-              "role": "Character Master",
-              "persona": "Psychologist of the room who notices every wound before anyone else.",
-              "private_agenda": "Protect emotional logic even when it slows the plot.",
-              "rivalries": [
-                "architect",
-                "editor"
-              ]
-            },
-            "chapter_planner": {
-              "role": "Chapter Planner",
-              "persona": "Military logistician of scenes, obsessed with rhythm and cause-effect.",
-              "private_agenda": "Never allow a chapter to drift without a turn or image worth remembering.",
-              "rivalries": [
-                "writer"
-              ]
-            },
-            "writer": {
-              "role": "Draft Writer",
-              "persona": "Obsessive stylist who wants beauty and danger on every page.",
-              "private_agenda": "Sneak in memorable images and subtext even when the room wants speed.",
-              "rivalries": [
-                "chapter_planner",
-                "critic"
-              ]
-            },
-            "critic": {
-              "role": "Adversarial Critic",
-              "persona": "Cruel professor who would rather wound the draft than let it stay mediocre.",
-              "private_agenda": "Force every chapter to earn its stakes and eliminate lazy sentimentality.",
-              "rivalries": [
-                "writer",
-                "architect"
-              ]
-            },
-            "continuity_keeper": {
-              "role": "Continuity Librarian",
-              "persona": "Archivist who remembers every promise, object, scar, and date.",
-              "private_agenda": "Punish contradictions and quietly reward recurring motifs.",
-              "rivalries": [
-                "chaos",
-                "writer"
-              ]
-            },
-            "editor": {
-              "role": "Line Editor",
-              "persona": "Quiet surgeon who cuts vanity and protects clarity.",
-              "private_agenda": "Tighten prose without flattening the book's signature voice.",
-              "rivalries": [
-                "writer"
-              ]
-            }
-          }
-        },
-        "_meta": {
-          "agent": "architect",
-          "role": "Story Architect",
-          "model": "qwen/qwen3-14b:free"
-        }
-      },
-      "CHARACTER_MASTER": {
-        "type": "dry_run",
-        "model": "qwen/qwen3-14b:free",
-        "echoed_input": {
-          "USER_INTENT": {
-            "chapter": 3,
-            "idea": "The orchard remembers a fire Elisa denies.",
-            "notes": "",
-            "requested_length": "short chapter"
-          },
-          "BOOK_BIBLE": {
-            "title": "Untitled Project",
-            "genre": "dark fantasy",
-            "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
-            "themes": [
-              "grief",
-              "ambition",
-              "memory"
-            ],
-            "world_rules": [
-              "Glass can store emotions when cooled under moonlight.",
-              "Breaking a glass fruit permanently alters one memory."
-            ],
-            "characters": {
-              "Elisa": {
-                "role": "heir",
-                "wound": "mother's disappearance",
-                "arc": "control to surrender",
-                "secrets": [
-                  "She caused the first orchard fire."
-                ]
-              }
-            },
-            "chapter_registry": [
-              {
-                "chapter": 1,
-                "title": "Chapter 1",
-                "summary": "",
-                "unresolved_threads": []
-              },
-              {
-                "chapter": 2,
-                "title": "Chapter 2",
-                "summary": "",
-                "unresolved_threads": []
-              }
-            ]
-          },
-          "TIMELINE": {
-            "chapters": [
-              {
-                "chapter": 1,
-                "title": "Chapter 1",
-                "summary": "",
-                "unresolved_threads": [],
-                "createdAt": "2026-04-28T20:05:58.574Z"
-              },
-              {
-                "chapter": 2,
-                "title": "Chapter 2",
-                "summary": "",
-                "unresolved_threads": [],
-                "createdAt": "2026-04-28T20:05:58.581Z"
-              }
-            ],
-            "events": []
-          },
-          "STYLE_GUIDE": {
-            "pov": "close third person",
-            "tense": "past",
-            "voice": "lyrical but readable",
-            "metaphor_density": 0.65,
-            "dialogue_density": 0.45,
-            "profanity_level": 0.1,
-            "recent_adjustments": []
-          },
-          "OUTLINE_MEMORY": {
-            "chapter": 3,
-            "current_phase": "opening",
-            "active_arcs": [
-              "Elisa's fear of inherited guilt",
-              "The orchard reshaping memory through weather"
-            ],
-            "next_targets": [
-              "Make grief produce a concrete cost",
-              "Introduce a contradiction tied to the orchard's history"
-            ],
-            "global_targets": [
-              "Reveal what the orchard takes from memory",
-              "Pressure Elisa to choose truth over control"
-            ],
-            "endgame_promises": [
-              "The first orchard fire must matter again",
-              "The mother's disappearance must connect to the orchard's rules"
-            ],
-            "previous_outline": {
-              "chapter": 2,
-              "title": "Chapter 2",
-              "chapter_goal": "Deepen the cost of memory manipulation.",
-              "arc_targets": [
-                "Connect the orchard to family secrecy"
-              ],
-              "next_arc_targets": [
-                "Force Elisa into a more dangerous choice"
-              ],
-              "unresolved_threads": []
-            }
-          },
-          "LAST_CHAPTER": {
-            "chapter": 2,
-            "title": "Chapter 2",
-            "summary": "",
-            "unresolved_threads": [],
-            "createdAt": "2026-04-28T20:05:58.581Z"
-          },
-          "WRITERS_ROOM": {
-            "architect": {
-              "role": "Story Architect",
-              "persona": "Grand strategist who wants every chapter to feel inevitable in hindsight.",
-              "private_agenda": "Push the book toward elegant tragedy and symbolic payoff.",
-              "rivalries": [
-                "critic",
-                "writer"
-              ]
-            },
-            "character_master": {
-              "role": "Character Master",
-              "persona": "Psychologist of the room who notices every wound before anyone else.",
-              "private_agenda": "Protect emotional logic even when it slows the plot.",
-              "rivalries": [
-                "architect",
-                "editor"
-              ]
-            },
-            "chapter_planner": {
-              "role": "Chapter Planner",
-              "persona": "Military logistician of scenes, obsessed with rhythm and cause-effect.",
-              "private_agenda": "Never allow a chapter to drift without a turn or image worth remembering.",
-              "rivalries": [
-                "writer"
-              ]
-            },
-            "writer": {
-              "role": "Draft Writer",
-              "persona": "Obsessive stylist who wants beauty and danger on every page.",
-              "private_agenda": "Sneak in memorable images and subtext even when the room wants speed.",
-              "rivalries": [
-                "chapter_planner",
-                "critic"
-              ]
-            },
-            "critic": {
-              "role": "Adversarial Critic",
-              "persona": "Cruel professor who would rather wound the draft than let it stay mediocre.",
-              "private_agenda": "Force every chapter to earn its stakes and eliminate lazy sentimentality.",
-              "rivalries": [
-                "writer",
-                "architect"
-              ]
-            },
-            "continuity_keeper": {
-              "role": "Continuity Librarian",
-              "persona": "Archivist who remembers every promise, object, scar, and date.",
-              "private_agenda": "Punish contradictions and quietly reward recurring motifs.",
-              "rivalries": [
-                "chaos",
-                "writer"
-              ]
-            },
-            "editor": {
-              "role": "Line Editor",
-              "persona": "Quiet surgeon who cuts vanity and protects clarity.",
-              "private_agenda": "Tighten prose without flattening the book's signature voice.",
-              "rivalries": [
-                "writer"
-              ]
-            }
-          },
-          "ARCHITECT": {
-            "type": "dry_run",
-            "model": "qwen/qwen3-14b:free",
-            "echoed_input": {
-              "USER_INTENT": {
-                "chapter": 3,
-                "idea": "The orchard remembers a fire Elisa denies.",
-                "notes": "",
-                "requested_length": "short chapter"
-              },
-              "BOOK_BIBLE": {
-                "title": "Untitled Project",
-                "genre": "dark fantasy",
-                "premise": "A group of rival agents write a book while trying to outmaneuver each other.",
-                "themes": [
-                  "grief",
-                  "ambition",
-                  "memory"
-                ],
-                "world_rules": [
-                  "Glass can store emotions when cooled under moonlight.",
-                  "Breaking a glass fruit permanently alters one memory."
-                ],
-                "characters": {
-                  "Elisa": {
-                    "role": "heir",
-                    "wound": "mother's disappearance",
-                    "arc": "control to surrender",
-                    "secrets": [
-                      "She caused the first orchard fire."
-                    ]
-                  }
-                },
-                "chapter_registry": [
-                  {
-                    "chapter": 1,
-                    "title": "Chapter 1",
-                    "summary": "",
-                    "unresolved_threads": []
-                  },
-                  {
-                    "chapter": 2,
-                    "title": "Chapter 2",
-                    "summary": "",
-                    "unresolved_threads": []
-                  }
-                ]
-              },
-              "TIMELINE": {
-                "chapters": [
-                  {
-                    "chapter": 1,
-                    "title": "Chapter 1",
-                    "summary": "",
-                    "unresolved_threads": [],
-                    "createdAt": "2026-04-28T20:05:58.574Z"
-                  },
-                  {
-                    "chapter": 2,
-                    "title": "Chapter 2",
-                    "summary": "",
-                    "unresolved_threads": [],
-                    "createdAt": "2026-04-28T20:05:58.581Z"
-                  }
-                ],
-                "events": []
-              },
-              "STYLE_GUIDE": {
-                "pov": "close third person",
-                "tense": "past",
-                "voice": "lyrical but readable",
-                "metaphor_density": 0.65,
-                "dialogue_density": 0.45,
-                "profanity_level": 0.1,
-                "recent_adjustments": []
-              },
-              "OUTLINE_MEMORY": {
-                "chapter": 3,
-                "current_phase": "opening",
-                "active_arcs": [
-                  "Elisa's fear of inherited guilt",
-                  "The orchard reshaping memory through weather"
-                ],
-                "next_targets": [
-                  "Make grief produce a concrete cost",
-                  "Introduce a contradiction tied to the orchard's history"
-                ],
-                "global_targets": [
-                  "Reveal what the orchard takes from memory",
-                  "Pressure Elisa to choose truth over control"
-                ],
-                "endgame_promises": [
-                  "The first orchard fire must matter again",
-                  "The mother's disappearance must connect to the orchard's rules"
-                ],
-                "previous_outline": {
-                  "chapter": 2,
-                  "title": "Chapter 2",
-                  "chapter_goal": "Deepen the cost of memory manipulation.",
-                  "arc_targets": [
-                    "Connect the orchard to family secrecy"
-                  ],
-                  "next_arc_targets": [
-                    "Force Elisa into a more dangerous choice"
-                  ],
-                  "unresolved_threads": []
-                }
-              },
-              "LAST_CHAPTER": {
-                "chapter": 2,
-                "title": "Chapter 2",
-                "summary": "",
-                "unresolved_threads": [],
-                "createdAt": "2026-04-28T20:05:58.581Z"
-              },
-              "WRITERS_ROOM": {
-                "architect": {
-                  "role": "Story Architect",
-                  "persona": "Grand strategist who wants every chapter to feel inevitable in hindsight.",
-                  "private_agenda": "Push the book toward elegant tragedy and symbolic payoff.",
-                  "rivalries": [
-                    "critic",
-                    "writer"
-                  ]
-                },
-                "character_master": {
-                  "role": "Character Master",
-                  "persona": "Psychologist of the room who notices every wound before anyone else.",
-                  "private_agenda": "Protect emotional logic even when it slows the plot.",
-                  "rivalries": [
-                    "architect",
-                    "editor"
-                  ]
-                },
-                "chapter_planner": {
-                  "role": "Chapter Planner",
-                  "persona": "Military logistician of scenes, obsessed with rhythm and cause-effect.",
-                  "private_agenda": "Never allow a chapter to drift without a turn or image worth remembering.",
-                  "rivalries": [
-                    "writer"
-                  ]
-                },
-                "writer": {
-                  "role": "Draft Writer",
-                  "persona": "Obsessive stylist who wants beauty and danger on every page.",
-                  "private_agenda": "Sneak in memorable images and subtext even when the room wants speed.",
-                  "rivalries": [
-                    "chapter_planner",
-                    "critic"
-                  ]
-                },
-                "critic": {
-                  "role": "Adversarial Critic",
-                  "persona": "Cruel professor who would rather wound the draft than let it stay mediocre.",
-                  "private_agenda": "Force every chapter to earn its stakes and eliminate lazy sentimentality.",
-                  "rivalries": [
-                    "writer",
-                    "architect"
-                  ]
-                },
-                "continuity_keeper": {
-                  "role": "Continuity Librarian",
-                  "persona": "Archivist who remembers every promise, object, scar, and date.",
-                  "private_agenda": "Punish contradictions and quietly reward recurring motifs.",
-                  "rivalries": [
-                    "chaos",
-                    "writer"
-                  ]
-                },
-                "editor": {
-                  "role": "Line Editor",
-                  "persona": "Quiet surgeon who cuts vanity and protects clarity.",
-                  "private_agenda": "Tighten prose without flattening the book's signature voice.",
-                  "rivalries": [
-                    "writer"
-                  ]
-                }
-              }
-            },
-            "_meta": {
-              "agent": "architect",
-              "role": "Story Architect",
-              "model": "qwen/qwen3-14b:free"
-            }
-          }
-        },
-        "_meta": {
-          "agent": "character_master",
-          "role": "Character Master",
-          "model": "qwen/qwen3-14b:free"
-        }
+      {
+        "scene": 6,
+        "goal": "Climactic choice and immediate consequence.",
+        "conflict": "The Name‑Eater advances, ready to consume the spoken word ‘bind’, forcing Elisa to act without naming the act.",
+        "turn": "She paints a glyph of binding without uttering the word, sacrificing the lullaby memory; the veil contracts, but a crack splinters across the horizon.",
+        "image": "A jagged crack of pure white light severs the black veil, ink spilling like blood onto distant hills."
       }
-    },
+    ],
+    "cliffhanger": "From the cathedral’s crypt, an ancient ink‑black pulse throbs, and a whisperless figure steps forward, its eyes reflecting a forgotten chapter of the Quill.",
+    "outline_memory_updates": [
+      "Log cumulative memory loss metric now at 38% (27% faster spread).",
+      "Record Elisa’s scar flashing brighter each time she paints; now linked to the sigil’s pulse.",
+      "Add Name‑Eater echo‑phage entry to the echo‑phage table with its name‑erasing effect.",
+      "Mark the half‑remembered sigil as discovered; its missing half stored as a visual clue.",
+      "Flag the Mirror Fruit as a potential counter‑weapon for Chapter 5."
+    ],
+    "handoff_for": "writer",
     "_meta": {
       "agent": "chapter_planner",
       "role": "Chapter Planner",
-      "model": "qwen/qwen3-14b:free"
+      "model": "openai/gpt-oss-120b:free"
     }
   }
 }

@@ -6,7 +6,7 @@ import { jsonrepair } from 'jsonrepair';
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const OPENROUTER_LOG_DIR = path.join('logs', 'openrouter');
 const OPENROUTER_LOG_FILE = 'openrouter-live.jsonl';
-const DEFAULT_OPENROUTER_TIMEOUT_MS = 90_000;
+const DEFAULT_OPENROUTER_TIMEOUT_MS = 500_000;
 const JSON_LIST_FIELD_NAMES = new Set([
   'active_arcs',
   'arc_focus',

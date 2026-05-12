@@ -1,0 +1,271 @@
+{
+  "active_book_id": "book-18",
+  "book_title": "The Scribe’s Veil: Echoes of the Aetheric Quill",
+  "critic": {
+    "type": "critique",
+    "verdict": "revise",
+    "issues": [
+      {
+        "severity": "high",
+        "category": "plot",
+        "problem": "The draft fails to resolve the core conflict: Elisa’s choice between binding the veil and using the forbidden glyph is left ambiguous, and the world‑scale consequences of each option are under‑developed. The rogue echo‑phage is introduced but its threat is not clearly quantified, and the ancient keeper’s bargain is presented as a deus‑ex machina without showing the cost of the House’s recorded history.",
+        "fix": "Explicitly show the two outcomes: (1) Elisa accepts the keeper’s bargain, becoming the living lock, which restores the northern river fleet and the royal guard’s memory, but erases all recorded history; (2) Elisa uses the glyph, collapsing the rogue echo‑phage, which restores the city’s physical infrastructure but leaves Elisa erased and the world a blank parchment. Include concrete scenes of the fleet regaining orders or the river flooding to illustrate the stakes."
+      },
+      {
+        "severity": "high",
+        "category": "stakes",
+        "problem": "The stakes feel flat because the consequences of losing the House’s recorded history are not emotionally resonant or tied to Elisa’s personal wound. The reader cannot feel the weight of erasing the kingdom’s legacy.",
+        "fix": "Tie the loss of recorded history to a personal element—perhaps the family’s ancestral chronicle that contains Elisa’s mother’s lullaby. Show a brief flash of that chronicle being erased, and let Elisa’s internal monologue lament the loss of her lineage, heightening the emotional cost."
+      },
+      {
+        "severity": "medium",
+        "category": "style",
+        "problem": "The prose is cluttered with ellipses, broken sentences, and placeholder text, which distracts from the narrative and breaks immersion.",
+        "fix": "Clean up the draft: remove all ellipses, unfinished lines, and placeholder numbers. Ensure each paragraph flows and conveys a single idea. Replace the broken “el‑s” fragments with a clear description of the glyph’s appearance."
+      },
+      {
+        "severity": "medium",
+        "category": "character",
+        "problem": "Elisa’s internal conflict is under‑explored; her memory of the lullaby is mentioned but not felt. The reader does not see how the loss of that memory shapes her decision.",
+        "fix": "Add a brief internal monologue where Elisa hears the lullaby echo in the glyph and feels the sting of its absence. Show her grappling with the choice, weighing the comfort of the lullaby against the weight of erasing history."
+      },
+      {
+        "severity": "low",
+        "category": "style",
+        "problem": "The chapter title and hook are inconsistent with the rest of the series’ naming pattern.",
+        "fix": "Rename the chapter to \"The Veil's Reckoning\" (as in the draft) and adjust the hook to match the series’ tone, e.g., \"When the ink‑storm fades, the world lies half‑written—Elisa, a living lock, must choose between erasing herself to restore memory or unleashing a forbidden glyph that could rewrite reality.\""
+      }
+    ],
+    "strengths": [
+      "The draft establishes a clear visual of the ink‑storm and the rogue echo‑phage, creating a vivid sense of impending doom.",
+      "The concept of the forbidden glyph appearing only at the brink of forgetting is intriguing and adds a unique constraint.",
+      "The ancient keeper’s offer is presented as a morally complex bargain, setting up a potential tragic payoff."
+    ],
+    "handoff_for": "writer",
+    "_meta": {
+      "agent": "critic",
+      "role": "Adversarial Critic",
+      "model": "openai/gpt-oss-20b:free"
+    }
+  },
+  "continuity_keeper": {
+    "type": "canon_warning",
+    "pass": false,
+    "issues": [
+      {
+        "severity": "high",
+        "problem": "The draft references a \"third fragment of the sigil\" and repeatedly mentions a third half, contradicting the canon that only two halves exist.",
+        "fix": "Remove all references to a third fragment. Ensure the narrative consistently states that only two halves of the sigil exist, with the missing half trapped in the echo‑phage’s memory‑drain."
+      },
+      {
+        "severity": "high",
+        "problem": "The draft uses the term \"Quill’s essence\" in the keeper’s bargain, whereas the canon specifies the bargain involves the Quill’s \"origin (first droplet of ink)\".",
+        "fix": "Replace every instance of \"Quill’s essence\" with \"Quill’s origin (first droplet of ink)\" to align with the established world rule."
+      },
+      {
+        "severity": "medium",
+        "problem": "The draft describes the forbidden glyph \"el‑sì\" as a spoken spell that can be used freely, conflicting with the canon that it is a glyph visible only when Elisa is on the brink of total forgetting and cannot be spoken.",
+        "fix": "Clarify that \"el‑sì\" is a glyph that appears only when Elisa is near total forgetting, cannot be spoken, and can only be activated by physically interacting with the glyph (e.g., inserting the Mirror Fruit shard)."
+      },
+      {
+        "severity": "medium",
+        "problem": "The draft contains placeholder text and incomplete sentences (e.g., \"Unle{**}ashing *el‑s\n\n  967\n\n‑s\n\n  671\n\n** would\n\n  511\n\ncollapse the rogue\n\n  842 * \n\n  732\n\nEcho‑phage\"), breaking narrative flow and violating the style guide.",
+        "fix": "Remove all placeholder junk, complete the sentences, and ensure the prose flows logically with clear, lyrical language."
+      },
+      {
+        "severity": "low",
+        "problem": "The draft mentions the echo‑phage’s memory‑drain glyph appearing on a stone wall, but the canon states it becomes visible only when Elisa’s cognition teeters on collapse.",
+        "fix": "Adjust the description to emphasize that the glyph only manifests when Elisa is on the brink of forgetting, not merely on a stone wall."
+      }
+    ],
+    "memory_updates": {
+      "canon_notes": [
+        "Only two halves of the sigil exist; the missing half is trapped in the echo‑phage’s memory‑drain.",
+        "The ancient keeper’s bargain offers the Quill’s origin (first droplet of ink) in exchange for erasing the House’s recorded history.",
+        "\"el‑sì\" is a glyph that appears only when Elisa is on the brink of total forgetting and cannot be spoken freely."
+      ],
+      "timeline_events": [
+        "Elisa’s voice is lost"
+      ]
+    },
+    "_meta": {
+      "agent": "continuity_keeper",
+      "role": "Continuity Librarian",
+      "model": "openai/gpt-oss-20b:free"
+    }
+  },
+  "editor": {
+    "type": "edit",
+    "verdict": "tightened",
+    "chapter_title": "The Veil's Reckoning",
+    "final_summary": "Elisa, a living lock, faces the ancient keeper’s bargain and a rogue echo‑phage that threatens to rewrite the city. She must choose between binding the Veil—erasing the House’s recorded history and becoming the Quill’s permanent seal—or using the forbidden glyph *el‑sì* to collapse the phage, restoring the world’s physical integrity but leaving her erased. The chapter heightens stakes, clarifies consequences, and leaves the rogue echo‑phage’s ultimate purpose unresolved.",
+    "final_markdown": "# The Veil’s Reckoning\n\nThe sky had become a sheet of ink, the storm of the Veil rolling across the capital like a living tide. Eighty‑percent of the heavens were black, and the rain that fell was not water but liquid darkness that seeped into stone, turning cobbles to glass{—}each surface a t\n\n   ext\n\n   e that\n\n   would\n\n  \n\n   swallow\n\n   any name that tried to be written upon it.\n",
+    "_meta": {
+      "agent": "editor",
+      "role": "Line Editor",
+      "model": "openai/gpt-oss-20b:free"
+    }
+  },
+  "votes": {
+    "votes": [
+      {
+        "voter": "architect",
+        "role": "Story Architect",
+        "vote": "revise",
+        "score": 0.62,
+        "reason": "The draft captures the{the} looming tragedy but leaves the central choice vague, mixes placeholder text, and violates key canon points (third sigil fragment, \"Quill's essence\" wording, and the nature of the forbidden glyph). To achieve the inevitable, elegant payoff required, the chapter must sharpen stakes, clarify consequences, and align with established world rules.",
+        "must_fix": [
+          "Remove any mention of a third sigil fragment; affirm that only two halves exist and the missing half is trapped in the echo‑phage’s memory‑drain.",
+          "Replace \"Quill's essence\" with \"Quill's origin (first droplet of ink)\" in the keeper's bargain and spell out that accepting erases the House's recorded history, including Elisa's family chronicle.",
+          "Define the forbidden glyph \"el‑sì\" as a visual glyph that appears only when Elisa is on the brink of total forgetting and cannot be spoken; show her activating it by inserting the Mirror Fruit shard.",
+          "Clarify the two concrete outcomes of Elisa's decision with vivid world‑scale consequences (e.g., restoration of the northern fleet and royal guard orders if she binds the Veil, or the collapse of the rogue echo‑phage and the city becoming a blank parchment if she uses the glyph).",
+          "Eliminate all placeholder junk, ellipses, and broken sentences; deliver lyrical but readable prose that ties the choice to Elisa's wound (the lost lullaby) through a short internal monologue.",
+          "Show a specific, symbolic payoff that feels inevitable: the half‑sigil embedded in Elisa’s flesh either becomes the permanent seal of the Veil or shatters as the glyph collapses, setting up the final tragedy."
+        ],
+        "celebrate": [
+          "The visual of the ink‑storm and the rogue echo‑phage is striking and raises the stakes dramatically.",
+          "The concept of a glyph that appears only at the edge of forgetting adds a unique, high‑risk constraint."
+        ],
+        "risk_note": "If the chapter does not clearly resolve the choice and its consequences, readers may feel the climax is unearned, undermining the thematic payoff of sacrifice versus annihilation."
+      },
+      {
+        "voter": "character_master",
+        "role": "Character Master",
+        "vote": "revise",
+        "score": 0.2,
+        "reason": "The draft contains multiple canonical violations, incomplete prose, and unresolved core stakes. It fails to present the two possible outcomes explicitly, leaving the reader confused about Elisa’s choice and the world‑scale consequences. The rogue echo‑phage is introduced with placeholder text and lacks clear threat. The ancient keeper’s bargain is presented as a deus‑ex machina without showing the emotional cost of erasing the House’s recorded history. The forbidden glyph *el‑sì* is mischaracterized as a spoken spell, violating the canon that it is a glyph visible only at the brink of forgetting. Overall, the chapter does not meet the style guidelines or the narrative arc requirements.\n\nThe draft also contains many placeholder numbers, unfinished sentences, and formatting errors that break immersion. To bring the chapter into alignment with the book bible, thematic goals, and the previously resolved arcs, substantial revisions are required.\n\nKey revisions:",
+        "must_fix": [
+          {
+            "issue": "Canon Violation – Third Sigil Fragment",
+            "action": "- Remove all references to a third fragment or third half of the sigil."
+          }
+        ],
+        "celebrate": [],
+        "risk_note": ""
+      },
+      {
+        "voter": "critic",
+        "role": "Adversarial Critic",
+        "vote": "revise",
+        "score": 0.3,
+        "reason": "The draft fails to resolve the core conflict, under‑develops world‑scale stakes, and contains multiple canon violations (third sigil fragment, wrong keeper terminology, misrepresented glyph). The rogue echo‑phage is introduced without clear threat, and the ancient keeper’s bargain is presented as a deus‑ex‑machina. The prose is cluttered with placeholders and broken sentences, breaking immersion and violating the style guide.",
+        "must_fix": [
+          "Remove all references to a third sigil fragment and keep the unresolved thread limited to the missing half‑sigil trapped in the echo‑phage’s memory‑drain.",
+          "Replace every instance of \"Quill’s essence\" with \"Quill’s origin (first droplet of ink)\" to align with canon.",
+          "Clarify that the forbidden glyph \"el‑sì\" appears only when Elisa is on the brink of total forgetting, cannot be spoken, and can only be activated by physically interacting with the glyph.",
+          "Explicitly show the two possible outcomes: (1) Elisa accepts the keeper’s bargain, becoming the living lock, restoring the northern river fleet and the royal guard’s memory but erasing all recorded history; (2) Elisa uses the glyph, collapsing the rogue echo‑phage, restoring the city’s physical infrastructure but leaving Elisa erased and the world a blank parchment.",
+          "Show concrete world‑scale consequences for each choice{e.g., fleet regaining orders, river flooding, loss of ancestral chronicle}. Include a flash of the erased chronicle to tie emotional stakes to Elisa’s wound about her mother’s lullaby."
+        ],
+        "celebrate": [],
+        "risk_note": ""
+      },
+      {
+        "voter": "continuity_keeper",
+        "role": "Continuity Librarian",
+        "vote": "revise",
+        "score": 0.15,
+        "reason": "The draft for Chapter 11 contains several critical continuity errors and unfinished prose that violate the book’s established canon and style guidelines. It references a third sigil fragment, uses the term \"Quill’s essence\" instead of the canonically required \"Quill’s origin (first droplet of ink)\", and presents the forbidden glyph \"el‑sì\" as a spoken spell rather than a glyph that appears only at the brink of total forgetting. Placeholder text and broken sentences further break immersion and fail to articulate the world‑scale consequences of the two possible outcomes. These issues must be corrected before the chapter can be considered canon.",
+        "must_fix": [
+          "Remove all references to a third sigil fragment; keep the unresolved thread limited to the missing half‑sigil trapped in the echo‑phage’s memory‑drain.",
+          "Replace every instance of \"Quill’s essence\" with \"Quill’s origin (first droplet of ink)\" to align with the established world rule.",
+          "Clarify that the forbidden glyph \"el‑sì\" is a glyph that appears only when Elisa is on the brink of total forgetting, cannot be spoken freely, and can only be activated by physically interacting with the glyph (e.g., inserting the Mirror Fruit shard).",
+          "Eliminate all placeholder junk and incomplete sentences; complete the narrative with clear, lyrical prose that follows the style guide.",
+          "Explicitly show the two outcomes: (1) Elisa accepts the keeper’s bargain, becoming the living lock, restoring the northern river fleet and the royal guard’s memory but erasing the House’s recorded history; (2) Elisa uses the glyph, collapsing the rogue echo‑phage, restoring the city’s physical infrastructure but leaving Elisa erased and the world a blank parchment.",
+          "Tie the loss of the House’s recorded history to a personal element—e.g., the family’s ancestral chronicle containing Elisa’s mother’s lullaby—and show a brief flash of that chronicle being erased to heighten emotional stakes.",
+          "Show concrete world‑scale consequences of each choice (fleet regaining orders, river flooding, bridges collapsing, etc.) to reinforce the stakes.",
+          "Ensure the echo‑phage’s memory‑drain glyph is described as appearing only when Elisa’s cognition teeters on collapse, not merely on a stone wall."
+        ],
+        "celebrate": [
+          "The draft introduces vivid imagery of the ink‑storm and the rogue echo‑phage, creating a strong visual hook.",
+          "The concept of the forbidden glyph appearing only at the brink of forgetting adds a compelling constraint to the narrative.",
+          "The ancient keeper’s offer is framed as a morally complex bargain, setting up a potential tragic payoff."
+        ],
+        "risk_note": "High risk of further contradictions if the third sigil fragment or Quill’s essence terminology is not fully purged; the draft’s placeholder text and broken sentences must be fully cleaned to maintain narrative coherence."
+      },
+      {
+        "voter": "editor",
+        "role": "Line Editor",
+        "vote": "revise",
+        "score": 0.2,
+        "reason": "The draft contains multiple critical continuity errors (third sigil fragment, wrong terminology for Quill’s bargain, misuse of \"el‑sì\"), placeholder text, incomplete sentences, and insufficiently developed stakes and consequences. The core conflict between binding the Veil and using the forbidden glyph remains ambiguous, and the rogue echo‑phage’s threat is not quantified. The prose is cluttered and disjointed, undermining the lyrical tone required by the style guide.",
+        "must_fix": [
+          "Remove all references to a third sigil fragment and ensure only two halves exist, with the missing half trapped in the echo‑phage’s memory‑drain.",
+          "Replace every instance of \"Quill’s essence\" with \"Quill’s origin (first droplet of ink)\" to match the canon.",
+          "Clarify that the forbidden glyph \"el‑sì\" appears only when Elisa is on the brink of total forgetting, cannot be spoken, and can only be activated by physically interacting with the glyph (e.g., inserting the Mirror Fruit shard).",
+          "Eliminate placeholder junk and incomplete sentences; complete all broken lines and ensure logical flow.",
+          "Explicitly show the two possible outcomes: (1) Elisa accepts the keeper’s bargain, becoming the living lock, restoring the northern river fleet and royal guard’s memory but erasing the House’s recorded history,  ,  (2) Elisa uses the glyph, collapsing the rogue echo‑phage, restoring physical infrastructure but leaving Elisa erased and the world a blank parchment. Include concrete scenes to illustrate these stakes (e.g., fleet"
+        ],
+        "celebrate": [],
+        "risk_note": ""
+      }
+    ],
+    "summary": {
+      "approvals": 0,
+      "revises": 5,
+      "rejects": 0,
+      "averageScore": 0.29,
+      "approved": false,
+      "blockingVotes": [
+        {
+          "voter": "architect",
+          "vote": "revise",
+          "must_fix": [
+            "Remove any mention of a third sigil fragment; affirm that only two halves exist and the missing half is trapped in the echo‑phage’s memory‑drain.",
+            "Replace \"Quill's essence\" with \"Quill's origin (first droplet of ink)\" in the keeper's bargain and spell out that accepting erases the House's recorded history, including Elisa's family chronicle.",
+            "Define the forbidden glyph \"el‑sì\" as a visual glyph that appears only when Elisa is on the brink of total forgetting and cannot be spoken; show her activating it by inserting the Mirror Fruit shard.",
+            "Clarify the two concrete outcomes of Elisa's decision with vivid world‑scale consequences (e.g., restoration of the northern fleet and royal guard orders if she binds the Veil, or the collapse of the rogue echo‑phage and the city becoming a blank parchment if she uses the glyph).",
+            "Eliminate all placeholder junk, ellipses, and broken sentences; deliver lyrical but readable prose that ties the choice to Elisa's wound (the lost lullaby) through a short internal monologue.",
+            "Show a specific, symbolic payoff that feels inevitable: the half‑sigil embedded in Elisa’s flesh either becomes the permanent seal of the Veil or shatters as the glyph collapses, setting up the final tragedy."
+          ]
+        },
+        {
+          "voter": "character_master",
+          "vote": "revise",
+          "must_fix": [
+            {
+              "issue": "Canon Violation – Third Sigil Fragment",
+              "action": "- Remove all references to a third fragment or third half of the sigil."
+            }
+          ]
+        },
+        {
+          "voter": "critic",
+          "vote": "revise",
+          "must_fix": [
+            "Remove all references to a third sigil fragment and keep the unresolved thread limited to the missing half‑sigil trapped in the echo‑phage’s memory‑drain.",
+            "Replace every instance of \"Quill’s essence\" with \"Quill’s origin (first droplet of ink)\" to align with canon.",
+            "Clarify that the forbidden glyph \"el‑sì\" appears only when Elisa is on the brink of total forgetting, cannot be spoken, and can only be activated by physically interacting with the glyph.",
+            "Explicitly show the two possible outcomes: (1) Elisa accepts the keeper’s bargain, becoming the living lock, restoring the northern river fleet and the royal guard’s memory but erasing all recorded history; (2) Elisa uses the glyph, collapsing the rogue echo‑phage, restoring the city’s physical infrastructure but leaving Elisa erased and the world a blank parchment.",
+            "Show concrete world‑scale consequences for each choice{e.g., fleet regaining orders, river flooding, loss of ancestral chronicle}. Include a flash of the erased chronicle to tie emotional stakes to Elisa’s wound about her mother’s lullaby."
+          ]
+        },
+        {
+          "voter": "continuity_keeper",
+          "vote": "revise",
+          "must_fix": [
+            "Remove all references to a third sigil fragment; keep the unresolved thread limited to the missing half‑sigil trapped in the echo‑phage’s memory‑drain.",
+            "Replace every instance of \"Quill’s essence\" with \"Quill’s origin (first droplet of ink)\" to align with the established world rule.",
+            "Clarify that the forbidden glyph \"el‑sì\" is a glyph that appears only when Elisa is on the brink of total forgetting, cannot be spoken freely, and can only be activated by physically interacting with the glyph (e.g., inserting the Mirror Fruit shard).",
+            "Eliminate all placeholder junk and incomplete sentences; complete the narrative with clear, lyrical prose that follows the style guide.",
+            "Explicitly show the two outcomes: (1) Elisa accepts the keeper’s bargain, becoming the living lock, restoring the northern river fleet and the royal guard’s memory but erasing the House’s recorded history; (2) Elisa uses the glyph, collapsing the rogue echo‑phage, restoring the city’s physical infrastructure but leaving Elisa erased and the world a blank parchment.",
+            "Tie the loss of the House’s recorded history to a personal element—e.g., the family’s ancestral chronicle containing Elisa’s mother’s lullaby—and show a brief flash of that chronicle being erased to heighten emotional stakes.",
+            "Show concrete world‑scale consequences of each choice (fleet regaining orders, river flooding, bridges collapsing, etc.) to reinforce the stakes.",
+            "Ensure the echo‑phage’s memory‑drain glyph is described as appearing only when Elisa’s cognition teeters on collapse, not merely on a stone wall."
+          ]
+        },
+        {
+          "voter": "editor",
+          "vote": "revise",
+          "must_fix": [
+            "Remove all references to a third sigil fragment and ensure only two halves exist, with the missing half trapped in the echo‑phage’s memory‑drain.",
+            "Replace every instance of \"Quill’s essence\" with \"Quill’s origin (first droplet of ink)\" to match the canon.",
+            "Clarify that the forbidden glyph \"el‑sì\" appears only when Elisa is on the brink of total forgetting, cannot be spoken, and can only be activated by physically interacting with the glyph (e.g., inserting the Mirror Fruit shard).",
+            "Eliminate placeholder junk and incomplete sentences; complete all broken lines and ensure logical flow.",
+            "Explicitly show the two possible outcomes: (1) Elisa accepts the keeper’s bargain, becoming the living lock, restoring the northern river fleet and royal guard’s memory but erasing the House’s recorded history,  ,  (2) Elisa uses the glyph, collapsing the rogue echo‑phage, restoring physical infrastructure but leaving Elisa erased and the world a blank parchment. Include concrete scenes to illustrate these stakes (e.g., fleet"
+          ]
+        }
+      ]
+    }
+  },
+  "revision_round": 2
+}

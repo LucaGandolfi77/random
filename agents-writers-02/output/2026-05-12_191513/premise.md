@@ -1,0 +1,2 @@
+Title: The Geometry of Silence
+Premise: Between the hushed, dust-mote aisles of a private archive and the blinding flash of high-fashion runways, two parallel worlds collide when a reclusive archivist is tasked with cataloging the chaotic estate of a fading supermodel. As they navigate the tension between preserved history and fleeting beauty, they must decide if a love built in the shadows can survive the relentless scrutiny of the light.

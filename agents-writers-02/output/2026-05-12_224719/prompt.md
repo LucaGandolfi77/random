@@ -1,0 +1,1 @@
+A mean girl falling in love wiht a nice and handsome man who change her mind over kindness and love and make her think that intelligence is better than beauty at the end

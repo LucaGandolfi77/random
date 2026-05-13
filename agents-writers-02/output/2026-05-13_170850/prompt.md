@@ -1,0 +1,2 @@
+Title: *Beneath the Tuscan Sky*  
+Premise: A reclusive Italian artist, haunted by a tragic past, returns to her childhood home in Tuscany to restore a crumbling villa—only to discover a mysterious love letter hidden within its walls, leading her into a forbidden romance with the local vineyard owner whose family has guarded the villa’s secrets for generations. Torn between the weight of history and the pull of newfound love, she must confront the ghosts of her own heart while navigating a world where trust is as fragile as the terra cotta tiles beneath her feet.

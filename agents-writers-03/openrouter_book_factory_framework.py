@@ -58,6 +58,13 @@ if not DEFAULT_TEMPLATE.exists():
     DEFAULT_TEMPLATE.write_text('genre: fantasy\nstyle: epic\ntone: immersive\n', encoding='utf-8')
 
 
+def book_subdir(job_id):
+    """Ensure and return the subdirectory path for a given book job_id."""
+    sub = BOOKS_DIR / str(job_id)
+    sub.mkdir(parents=True, exist_ok=True)
+    return sub
+
+
 def unique_models(*groups):
     ordered = []
     seen = set()
@@ -151,8 +158,25 @@ def normalize_summary_list(values):
 
 def merge_character_profiles(existing, updates):
     merged = dict(existing or {})
-    for name, details in normalize_character_updates(updates).items():
+    normalized_updates = normalize_character_updates(updates) or {}
+
+    for name, details in normalized_updates.items():
         current = dict(merged.get(name) or {})
+
+        # If the provided details are a list, treat them as free-form notes.
+        if isinstance(details, list):
+            current['notes'] = append_unique_strings(current.get('notes', []), details)
+            merged[name] = current
+            continue
+
+        # If details is not a dict (e.g. a scalar), append it as a single note.
+        if not isinstance(details, dict):
+            text = str(details) if details not in (None, '') else ''
+            if text:
+                current['notes'] = append_unique_strings(current.get('notes', []), [text])
+            merged[name] = current
+            continue
+
         for key, value in (details or {}).items():
             if isinstance(value, list):
                 current[key] = append_unique_strings(current.get(key, []), value)
@@ -160,7 +184,9 @@ def merge_character_profiles(existing, updates):
                 current[key] = {**(current.get(key) or {}), **value}
             elif value not in (None, ''):
                 current[key] = value
+
         merged[name] = current
+
     return merged
 
 
@@ -455,14 +481,18 @@ class Factory:
 
     async def ensure_unique_job_id(self, job_id):
         normalized = sanitize_job_id(job_id)
-        if await self.store.load(normalized) or (BOOKS_DIR / f'{normalized}_outline.md').exists():
+        if await self.store.load(normalized) or (BOOKS_DIR / normalized / f'{normalized}_outline.md').exists():
             return sanitize_job_id(f'{normalized}_{int(time.time())}')
         return normalized
 
     def chapter_files(self, job_id, language='en'):
         expected_suffix = language_file_suffix(language)
         chapter_files = []
-        for chapter_file in BOOKS_DIR.glob(f'{job_id}_chapter_*.md'):
+        book_dir = BOOKS_DIR / str(job_id)
+        if not book_dir.exists():
+            return []
+
+        for chapter_file in book_dir.glob(f'{job_id}_chapter_*.md'):
             match = CHAPTER_FILE_RE.match(chapter_file.name)
             if not match or match.group('job_id') != job_id:
                 continue
@@ -571,20 +601,21 @@ class Factory:
         return await self.ask('translator', prompt)
 
     async def translate_book_to_italian(self, job):
-        outline_path = BOOKS_DIR / f'{job.job_id}_outline.md'
+        bd = book_subdir(job.job_id)
+        outline_path = bd / f'{job.job_id}_outline.md'
         if outline_path.exists():
             translated_outline = await self.translate_text_to_italian(
                 outline_path.read_text(encoding='utf-8'),
                 f'outline for {job.job_id}'
             )
-            (BOOKS_DIR / f'{job.job_id}_outline_it.md').write_text(translated_outline, encoding='utf-8')
+            (bd / f'{job.job_id}_outline_it.md').write_text(translated_outline, encoding='utf-8')
 
         for chapter_file in self.chapter_files(job.job_id):
             translated_text = await self.translate_text_to_italian(
                 chapter_file.read_text(encoding='utf-8'),
                 chapter_file.stem
             )
-            (BOOKS_DIR / f'{chapter_file.stem}_it.md').write_text(translated_text, encoding='utf-8')
+            (chapter_file.parent / f'{chapter_file.stem}_it.md').write_text(translated_text, encoding='utf-8')
 
         self.export_epub(job.job_id, language='it')
         self.export_pdf(job.job_id, language='it')
@@ -609,11 +640,13 @@ class Factory:
         book.spine = spine
         book.add_item(epub.EpubNcx())
         book.add_item(epub.EpubNav())
-        epub.write_epub(str(BOOKS_DIR / f'{output_stem}.epub'), book)
+        bd = book_subdir(job_id)
+        epub.write_epub(str(bd / f'{output_stem}.epub'), book)
 
     def export_pdf(self, job_id, language='en'):
         output_stem = f'{job_id}{language_file_suffix(language)}'
-        document = SimpleDocTemplate(str(BOOKS_DIR / f'{output_stem}.pdf'))
+        bd = book_subdir(job_id)
+        document = SimpleDocTemplate(str(bd / f'{output_stem}.pdf'))
         styles = getSampleStyleSheet()
         story = []
         for chapter_file in self.chapter_files(job_id, language):
@@ -624,7 +657,8 @@ class Factory:
         document.build(story)
 
     async def run_job(self, job):
-        outline_path = BOOKS_DIR / f'{job.job_id}_outline.md'
+        bd = book_subdir(job.job_id)
+        outline_path = bd / f'{job.job_id}_outline.md'
         outline = outline_path.read_text(encoding='utf-8') if outline_path.exists() else await self.plan(job)
         outline_path.write_text(outline, encoding='utf-8')
 
@@ -642,7 +676,7 @@ class Factory:
             if consistency_check.strip():
                 final_text = f'{chosen_text}\n\n<!-- consistency_check -->\n{consistency_check}'
 
-            (BOOKS_DIR / f'{job.job_id}_chapter_{chapter_number}.md').write_text(final_text, encoding='utf-8')
+            (bd / f'{job.job_id}_chapter_{chapter_number}.md').write_text(final_text, encoding='utf-8')
 
             merge_summary_into_memory(job.memory, summary)
             job.memory.setdefault('scene_vectors', []).append({

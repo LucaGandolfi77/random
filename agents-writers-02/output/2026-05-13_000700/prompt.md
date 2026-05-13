@@ -1,0 +1,1 @@
+A handsome and genius man who have a lot of friends is tormented because its beauty is fading away and friends are getting old and he want to stay alive and be happy and for him a right dose of madness will make him happy and proud, make him find love at the end even if he is selfish

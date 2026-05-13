@@ -1,0 +1,1 @@
+A girl who likes concerts and mayo can't find a partner and want to fal in love, she love poems and fashion

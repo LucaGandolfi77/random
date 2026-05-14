@@ -77,12 +77,12 @@ def unique_models(*groups):
 
 
 FREE_FALLBACK_MODELS = [
-    'openrouter/free',
     'openai/gpt-oss-20b:free',
     'google/gemini-2.0-flash-exp:free',
     'deepseek/deepseek-chat-v3-0324:free',
     'meta-llama/llama-3.3-70b-instruct:free',
-    'liquid/lfm-2.5-1.2b-instruct:free'
+    'liquid/lfm-2.5-1.2b-instruct:free',
+    'openrouter/free'
 ]
 
 MODELS = {

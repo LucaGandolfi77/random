@@ -1,0 +1,2 @@
+{
+  "analysis": "Il testo è un racconto in inglese che descrive la scoperta di una lettera misteriosa in una cassetta postale abbandonata, il suo contenuto, la reazione emotiva del protagonista e la successiva

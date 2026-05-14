@@ -1,0 +1,1 @@
+[Bound by a shared obsession with the architecture of reality, a quantum physicist at MIT and a literature scholar in Dublin exchange letters that blur the line between mathematical equations and poetic metaphors. As their distance grows, they discover that their research into entanglement and narrative structure might actually be synchronizing their lives across the Atlantic

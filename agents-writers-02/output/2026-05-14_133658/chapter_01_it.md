@@ -1,0 +1,23 @@
+**Punto di Origine**
+
+Il vento giullare che sferzava i calzoni di Dublino era un tumulto di piogge, nebbie e sogni confusi. Le luci dei lampioni danzavano sulla strada umida, mentre le biciclette che passavano sembravano svanire in una nebbia sottile. In quel panorama, tra i custodi della storia che si aggraffiavano sulle pareti del Trinity College e tra i centri tecnologici di St. Patrick’s, un filo sottile e invisibile univa due mondi apparentemente lontani.
+
+Sofia, con i capelli scuri avvolti in una morbida coda grigia, sedeva su un cuscino di velluto in una piccola stanza al terzo piano di un edificio in mattoni rossi a Malahide. Il suo viso, illuminato dalla luce fredda di una lampada a LED blu, era un quadro di concentrazione. Dalle dita, sottili e rapide, scorreva sulla tastiera con la precisione di un chirurgo. Il suo laboratorio a Saint‑Patrick’s era un silenzio di metallo e cristallo, dove il tempo si spezzava in probabilità, e gli atomi non esistevano più come semplici particelle, ma paradossi di possibilità. Ma quella serata, il suo smartphone vibrò tra le sue mani come un piccolo drago che ricordava al mondo reale quante volte era cambiata la sua esistenza.
+
+Al centro della città, Elena, con gli occhi che sembravano catturare l’ombra di ogni parola, si era recata alla biblioteca di Trinity. Indossava il suo cappotto di velluto verde, un ricordo di un costituto familiare, e portava un senso di nostalgia che si faceva sentire con ogni respiro. Sospirò profondamente, come se volesse assorbire il fruscio della pioggia che cadeva sui banchi di legno. Studiava un’enorme opera di Joyce, cercando di far emergere dal caos la struttura che la sua mente cercava di comprendere: il tessuto di una metropoli che non aveva mai trovato casa.
+
+Il primo messaggio di Sofia al sorgere del sole era stato semplicemente: “Buongiorno, amore. Il mio ultimo esperimento è stato un ‘tocco’ di fotoni. Ti manca la nostra routine?” Elena rispose con parole morbide, quasi lacrime nella voce: “Sembra che l’universo abbia preso una pausa, amore. Sto cercando di capire se il nostro amore può essere una costante in un mondo di entropia.”
+
+Il loro dialogo era un gioco di parole; frasi legate come fili di un tessuto che un tempo era liscio, ma ora si sforzava di resistere a una distanza impossibile. Per entrambe, la distanza non era solo geografica, ma un vasto silenzio che non si spegnesse mai.
+
+Sofia si ricordava di come fosse riuscita a ritrovare se stessa nella sua stanza di laboratorio. Sembrava che ogni parola, ogni respiro, fosse stata un tentativo disperato per toccare l’anima di un mondo che non aveva mai conosciuto la pace. Il suo discorso frammentato, “Ti ho dietro la camicia, cara,” aveva scintillato in mente, ma al di là del dolore, un senso di colpa l’avvolgeva come una nebbia grigia. Adattarsi alla vita con una mentore letteraria era stato un’avventura, ma il prezzo da pagare era alta.
+
+Per lei, Elena era come una goccia d’acqua che si trasformava in un fiore di loto. Studiare un Master in Letteratura in una città carica di energia culturale faceva sentire, per un attimo, di comprendere l’essenza di qualcosa di più grande. Il suo spirito era un meccanismo che si piegava, pronto per cogliere una disciplina insolita, per comprendere il legame tra arte, letteratura e vita.
+
+Quando si incontrarono per la prima volta, era in un caffè di St. Stephen’s Green, dove gli studenti di ogni angolo del mondo si incontravano in qualche modo. Quel momento era stato un’esplosione di parole che non avevano ancora un senso, solo curiosità. Il loro scambio era così fluido che, in un istante, le loro anime si erano unite come due fiumi che si incontrano in un bivio.
+
+Quella notte, Sofia si guardò allo specchio, accettando la decisione di volersi trasformare quel piccolo universo di letteratura in un ponte. i suo suocchi le ricordavano come il suo corpo fosse un equilibrio fragile, il cuore un intuito cosmico, ogni parola un incantesimo per alterare il corso del tempo. Sapeva che quella relazione era una forza più potente di qualsiasi rivelazione scientifica.
+
+Elena, contro l’aspettativa, era diventata come una sprigola. Studiare per un Master di Letteratura in una città che pulsava di creatività e pensieri profondi era il modo più stretto con cui cercava di dare un senso a ciò che stava cercando di comprendere: l’unione tra cuore e letteratura.
+
+Sofia e Elena si sentivano più vicine di quanto avesse mai immaginato. L’amore di queste due storie si era fatta crescere come una pianta in un terreno difficile, le sue radici che si spingevano nella terra, cercando di apprendere l’equilibrio tra passione e silentio.

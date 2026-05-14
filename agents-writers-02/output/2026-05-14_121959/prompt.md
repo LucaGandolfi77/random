@@ -1,0 +1,1 @@
+A man is lost during a run and coming back it found that all people are disappeared and he has to live in solitude and think about distant loves

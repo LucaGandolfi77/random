@@ -1,0 +1,9 @@
+## Capitolo 6: Il Nome sulla Muretta
+
+La lettera era ancora calda nella sua tasca, un frammento di carta che una volta aveva significato qualcosa per qualcun altro. L'aveva fatto con cura, come se i pieghe potessero preservare una vita, ma l'inchiostro era già svuotandosi sulla sua coscia. Si avviò, oltre i soli e i lucernari silenziosi, oltre le case che lo fissavano con finestre vuote. Il quartiere era un museo di cose non completate—una bicicletta da bambino abbandonata in un giardino, le sue ruote schiacciate; un furgoncino ancora avvolto in gomme, il bocchino che scorreva in un terreno secco. Aveva l'impulso assurdo di spegnere l'acqua, di sistemare il mondo in ordine, ma sapeva che l'acqua si sarebbe riempita di bolle e sparita.
+
+Non sapeva perché si era inflessione per le Maple Street. Il nome era scritto sulla segnaletica, i caratteri consumati dalla salma e dal tempo. Forse era l'attrazione dell'abitudine, la memoria di un sentiero breve che aveva fatto un milione di volte. Forse era qualcos'altro—la stessa gravità inesplicabile che lo aveva portato fuori dalla sua corsa quella mattina, che aveva disfatto tutto. La strada era più stretta di quanto ricordasse, gli alberi inclinati come se volessero sussurrargli. I loro rami sfioravano le sue spalle, le foglie secche e spezzate. Si sentiva come una intrusione nel proprio passato.
+
+E poi lo vide: l'albero.
+
+Si trovava all'angolo dove la asfalto si rompeva in un vicolo, un mappamondo di biricco con la corteccia che si staccava in lunghe strip. L'aveva scalato una volta, in un'altra vita, strisciando le sue ginocchia sulla superficie ruvida mentre lei rideva di sotto. La sua voce era stata acuta e chiara, come un campanello in una stanza buia. Ricordava il modo in cui aveva teso la mano alla bocca, gli occhi schiacciati contro il sole. Ricordava il modo in cui era caduto, non male, ma abbastanza da farla correre verso di lui, le dita tracciando il graffio sul suo avvolto:

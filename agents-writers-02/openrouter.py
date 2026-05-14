@@ -41,12 +41,12 @@ DEFAULT_MODEL = "google/gemma-4-31b-it:free"
 
 FREE_FALLBACK_MODELS = [
     "google/gemma-4-31b-it:free",
-    "openrouter/free",
     "openai/gpt-oss-20b:free",
     "google/gemini-2.0-flash-exp:free",
     "deepseek/deepseek-chat-v3-0324:free",
     "meta-llama/llama-3.3-70b-instruct:free",
     "liquid/lfm-2.5-1.2b-instruct:free",
+    "openrouter/free",
 ]
 
 HEADERS = {

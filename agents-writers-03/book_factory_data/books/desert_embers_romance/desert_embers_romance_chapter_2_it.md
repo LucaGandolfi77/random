@@ -1,0 +1,6 @@
+<!-- consistency_check -->  
+**Capitolo 2 – “Il Peso delle Mappe”**  
+
+Il campo sotto di loro era un deserto di mappe topografiche, il loro inchiostro sbiadito dalla pioggia e polvere. Il respiro di Mara si accorciò mentre la mano di Eli la afferrava—un ancoraggio incerto nel compromesso. Dietro di loro, il radio del tempokeeper ronzava, trasmettendo mappe paralamente bloccate dal rumore, aumentando le scommesse. Ricordò la sua infanzia: le risate della sorella, il modo in cui drappò le mappe nelle tasche, l'angoscia di perderle tutto. Gli occhi di Eli si contrazzarono; ogni weathered corner nella loro condivisione si illuminava, rivelando l'oscurità imminente.  
+
+Un bagliore di movimento attirò la loro attenzione: un'ombra fugace, un improvviso esplosione o una pattuglia di Gestapo? Il silenzio del campo si intensificò, denso come cenere. Mara chiese se l'amore potesse sopravvivere alla guerra—o se si avvicinasse sempre di più. Eli presa il suo digitale con esitazione, come se nascondesse un segreto. *Siamo entrambi prigioniere*, pensò, e prigioni soggette a obiettivi reciproci.

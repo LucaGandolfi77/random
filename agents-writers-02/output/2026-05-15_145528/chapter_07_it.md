@@ -1,0 +1,41 @@
+## Capitolo 7 – Silenzio nella Notte Fervida
+
+Aurelia era una cattedrale di ottone e vapore, le sue strade un labirinto di ingranaggi che ruotavano in perfetta armonia. Quando il sole si affacciava dietro le guglie, le lanterne a carbone accendevano un bagliore che inghiottiva l’oscurità, e l’aria si ipnotizzava di olio e ozono. In questa gigantesca macchina vivente ogni battito di cuore era misurato, ogni respiro calcolato. Nessuno poté ignorare il suo ritmo: Eron sapeva che oltre a un migliaio di orologi, la struttura di Aurelia pulsava come un organismo.
+
+Quella notte tamponò il freddo acciaio della parete esterna dell’Osservatorio, sentendo il tenue battito dei droni di pattuglia. Da settimane era un fantasma in quel luogo, passava tra corridoi che, per farlo credere, dovevano essere chiusi. L’Osservatorio dell’Arcide sarebbe stato una fortezza di ferro e vetro, dove il sovrano custodiva i cronometri che reggevano la popolazione. Se avesse potuto imparare il funzionamento del Protocollo di Reset, Eron avrebbe avuto una possibilità di fermarlo—se, a sua avventura, fosse riuscito a sopravvivere.
+
+L’Osservatorio si ergeva come un’alveo che tagliava il cielo; le sue lastre di vetro riflettevano la città come polvere di stelle spezzata. Sotto, la piazza pulsava con l’ultimo bagliore di sera: tram di rame, carrozzine a vapore, e il lamento di un bambino che piangeva per un giocattolo smarrito. Eron stringeva gli occhi. Doveva ricordare dove i condotti di ventilazione si snodavano lungo i muri esterni, una rete di bocchetti che si aprivano nel nucleo stesso dell’edificio.
+
+Si infilò in un cedimento, il lucchetto di bronzo lasciandosi scivolare come una lama tra le sue dita. Il corridoio era fresco, l’aria ricchissima di metallo e ozono. Le pareti erano rivestite di bobine di rame che pulsavano, promemoria del battito di Aurora. Sentiva il respiro dei droni su entrambe le parti, i loro sensori scintillanti mentre passavano. Eron si muoveva silenzioso, i passi ammortizzati da un guanto di cuoio consumato. Ogni passo era un rischio calcolato: le lenti infrarossi dei droni brillavano come occhi vigili.
+
+La sua mente non era concentrata solo sul cammino davanti a lui; era un vortice di dubbi, paure e una punta di speranza. Ricordava il sussurro che si era propagato dal piccolo orologio, un suono che sembrava una voce di un estraneo—una promessa, o un avvertimento. L’orologio era così piccolo da poterlo mettere in tasca, ma il suo peso in mano era come un universo in miniatura. Dopo le sue sperimentazioni segrete, aveva capito che il suo potere non era assoluto: piegava il tempo come un fiume che può serpeggiare intorno a una roccia, ma la roccia era la città stessa, e non era facile cambiarla.
+
+Non era l’unico a lavorare su quel progetto. I Custodi del Tempo lo avevano avvicinato in quella stessa settimana, volti coperti, occhi che riflettevano la stessa acciaio che pulsava nei loro orologi. Gli avevano offerto aiuto, una rete segreta per guidarlo nel cuore del Reset. Ma Eron era diffidente: il potere della città era un essere vivente, e la tentazione di usare l’orologio era enorme. Aveva visto i cronometri abbattere, le crepe sottili nascondere i pistoni, e non poteva evitarne la sensazione che la città fosse sull’orlo del collasso.
+
+Il corridoio si apriva su una grande camera centrale, un vasto spazio di vetro e acciaio, il culmine del genio tecnologico di Aurelia. Il soffitto era un reticolo di rame, i pilastri vibra come il battito che lo aveva attirato. Al centro, un massiccio tamburo di ingranaggi e molle—un gigantesco cronometro che pulsava come un cuore—restateva su un letto sospeso. Era il cuore della città, l’artefatto che regolava il tempo di ogni cittadino e, allo stesso tempo, il meccanismo che avrebbe attivato il Reset.
+
+Le dita di Eron sfiorarono il vetro freddo. Sentiva il battito dell’apparecchio, la leggera vibrazione che si scioglieva tra le pareti. Le orecchie si riempivano di un click quasi inaudibile—il ritmo degli ingranaggi. In quell’istante di chiarezza improvvisa, vide che l’orologio era la chiave non solo del Reset, ma dell’intera struttura temporale della città. Potrebbe fermare il Reset, o potrebbe resettare la città stessa. Potrebbe riparare le crepe degli ingranaggi, o chiuderle in modo definitivo.
+
+Era un momento di terrore silenzioso, un respiro trattenuto al bordo di un precipizio. I droni, insetti metallici sospesi sopra di lui, li tracciavano con le loro lenti. Doveva decidere: prendere l’orologio e entrar
+
+e in un labirinto di ingranaggi, o allontanarsi. Non poteva, si rese conto, essere un semplice pedone nel piano dell’Arcide. Doveva agire. Doveva fare una scelta che influenzerebbe la sua vita, la città, e il destino di ogni cittadino.
+
+Fermò il primo respiro, e il vetro si frantumò in un’unica crepa acuta. Un sibilo d’aria fischiò mentre l’energia del meccanismo pulsante inondava la stanza. Il tenue ruggito dell’orologio si gonfiò, un ninna nanna per il cuore di Aurelia. Sollevò l’orologio sul petto. Era caldo, come un cuore pulsante tra le sue mani, e la luce tenue dei suoi ingranaggi pulsava sotto la pelle. Sentiva il peso della città nei suoi dita: un mondo che lo aveva insegnato, che lo aveva fatto tirare il tempo e ora gli offriva il potere di riscriverlo tutto.
+
+Il ruggito si acuisse, trasformandosi in un sussurro di voce, un’espressione che sembrava emettersi dall’orologio stesso, dagli ingranaggi che componevano la città. La voce era morbida, come un respiro su una pietra, ma portava il peso di mille anni. Sussurrò: “Hai la chiave del tempo di questa città, ma non comprendere ancora il prezzo.”
+
+Eron chiuse gli occhi. Il suo cuore batteva in sintonia con i meccanismi, e il battito della città divenne il suo. Il ruggito dell’orologio rimbombava nella sua mente, ricordandogli che il tempo non era un dono, ma una responsabilità. Il peso di quell’onere schiacciava il petto.
+
+Pensieri si agitavano. Ricordò il primo giorno in cui aveva visto lo scintillio di ferro dell’Arcide contro il cielo. Ricordò le parole del Maestro Kestrel: “Ogni ingranaggio che muoviamo deve rispettare l’equilibrio.” Ricordò le parole dei Custodi del Tempo: “L’orologio non è un’arma; è uno specchio.” Ricordò la paura che aveva convogliato la città in una notte di terrore. E ricordò la promessa di un nuovo alba.
+
+Il ruggito dell’orologio si allineò con il respiro. Sentiva gli ingranaggi che si muovevano, il tempo della città che si svelava come una storia in un libro. Sapeva di dover agire, ma la domanda rimaneva: Agire o non agire? Camminare o attendere? Non poteva essere un pedone; doveva essere un re. E per essere re doveva avere il potere di cambiare il destino della città. Il destino era un orologio che, con pochi ingranaggi, svelerà se la città prospererà o cadrà.
+
+Aprì gli occhi. Il battito della città era una melodia di speranza. Il ruggito dell’orologio, così vicino al cuore, divenne una sinfonia. Era deciso a risolvere tutto. Era pronto a scegliere il suo cammino: quello che sarebbe salvato la città o concesso a condannarla a un tempo che non sarebbe esistito.
+
+Non era un burattino, né un tiranno, ma un uomo che capiva il prezzo del tempo. Doveva scegliere tra il cuore o l’avvenir. Sapeva di non essere l’unico a poter giocare un ruolo. Sospirò, e con un respiro silenzioso, lasciò che l’orologio in mano pulsa e guidasse la città verso un nuovo destino.
+
+La sua mano, tremante, si stabilizzò. Sollevò l’orologio. Era una promessa silenziosa, un sussurro che si poteva sentire nell’oscurità di Aurelia. Sentiva il futuro scritto negli ingranaggi, il peso del destino della città nella sua palma. Vedeva il momento in cui doveva scegliere. Doveva decidere se prendere la sua chance o lasciare che la città continui con il tempo come sempre.
+
+Tutte le conoscenze sul destino della città erano in mano. Tutta la responsabilità del suo futuro. Aveva il potere di cambiare la città o di lasciarla così. Doveva scegliere.
+
+Avanzò. Il battito della città pulsava nelle sue vene. Decisero presto.

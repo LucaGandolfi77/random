@@ -156,12 +156,76 @@ def normalize_summary_list(values):
     return [values]
 
 
+def stringify_profile_value(value):
+    if value in (None, ''):
+        return ''
+    if isinstance(value, str):
+        return value.strip()
+    if isinstance(value, (dict, list)):
+        return json.dumps(value, ensure_ascii=False, sort_keys=True)
+    return str(value).strip()
+
+
+def normalize_character_profile(profile):
+    if isinstance(profile, dict):
+        return dict(profile)
+    if isinstance(profile, list):
+        notes = append_unique_strings([], [stringify_profile_value(item) for item in profile])
+        return {'notes': notes} if notes else {}
+
+    text = stringify_profile_value(profile)
+    return {'notes': [text]} if text else {}
+
+
+def add_character_note(profile, key, value):
+    text = stringify_profile_value(value)
+    if not text:
+        return
+    profile['notes'] = append_unique_strings(profile.get('notes', []), [f'{key}: {text}'])
+
+
+def merge_character_field(profile, key, value):
+    current_value = profile.get(key)
+
+    if isinstance(value, list):
+        if current_value is None:
+            profile[key] = append_unique_strings([], value)
+        elif isinstance(current_value, list):
+            profile[key] = append_unique_strings(current_value, value)
+        elif isinstance(current_value, dict):
+            add_character_note(profile, key, value)
+        else:
+            existing_text = stringify_profile_value(current_value)
+            profile[key] = append_unique_strings([existing_text] if existing_text else [], value)
+        return
+
+    if isinstance(value, dict):
+        if isinstance(current_value, dict):
+            profile[key] = {**current_value, **value}
+        else:
+            if current_value not in (None, ''):
+                add_character_note(profile, key, current_value)
+            profile[key] = dict(value)
+        return
+
+    if value in (None, ''):
+        return
+
+    text = stringify_profile_value(value)
+    if isinstance(current_value, list):
+        profile[key] = append_unique_strings(current_value, [text])
+    elif isinstance(current_value, dict):
+        add_character_note(profile, key, value)
+    else:
+        profile[key] = value
+
+
 def merge_character_profiles(existing, updates):
     merged = dict(existing or {})
     normalized_updates = normalize_character_updates(updates) or {}
 
     for name, details in normalized_updates.items():
-        current = dict(merged.get(name) or {})
+        current = normalize_character_profile(merged.get(name))
 
         # If the provided details are a list, treat them as free-form notes.
         if isinstance(details, list):
@@ -178,12 +242,7 @@ def merge_character_profiles(existing, updates):
             continue
 
         for key, value in (details or {}).items():
-            if isinstance(value, list):
-                current[key] = append_unique_strings(current.get(key, []), value)
-            elif isinstance(value, dict):
-                current[key] = {**(current.get(key) or {}), **value}
-            elif value not in (None, ''):
-                current[key] = value
+            merge_character_field(current, key, value)
 
         merged[name] = current
 

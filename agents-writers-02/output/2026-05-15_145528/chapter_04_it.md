@@ -1,0 +1,47 @@
+## Capitolo 4 – L’ordine del Tiranno
+
+Le strade meccaniche di Aurelia tremavano sotto un cielo di ferro denso. Le lampioni di bronzo, sentinelle dorate, proiettavano ombre lunghe e tremolanti sui ciottoli, mentre la grande citadella che pulsava di energia si ergeva come un ingranaggio lucido nel cuore della città. Le sue torri si intrecciavano di fili di rame, e il grande dôme di vetro sovrastante rifletteva il movimento incessante della metropoli—un cronometro vivente fatto di cielo e acciaio.
+
+Archon Voss, il sovrano la cui mano di ferro era sostenuta dal rigore orologico della città, scese dal suo palco privato sulla piazza centrale. Indossava una capa di blu notte, bordata di filigrana d’argento che tracciava l’arco di un grande sabbiere. Gli occhi, di verde pallido che sembrava scintillare come un fuoco invisibile, scansavano la folla come le zampe di un falco.
+
+«Cittadini di Aurelia», iniziò, con voce bassa e resonante, che echeggiò nella piazza come il suono di una grande clappernella. «Oggi siamo sul bordo di un’era che guarirà le ferite del dissenso, le fratture del caos e le cicatrici della deviancy. Il Grande Orologio della nostra città è stato recentemente assediato da coloro che cercano di smantellarne la stessa base.»
+
+Un sussurro si diffuse tra la gente—alcuni volti si contorcevano di paura, altri si indurivano di disprezzo. Alcuni venditori stringevano saldamente le loro merci, le dita tremanti come se il semplice gesto di tenere un pacchetto di viti potesse scatenare una catastrofe.
+
+Voss alzò la mano. Da lontano, la grande torre dell’orologio, il suo quadrante una spirale di bronzo riflesso, iniziò a lampeggiare in un battito uniforme e minaccioso. I cittadini di città fissarono i numeri giganteschi, perfetti e inesorabili, testimonianza del loro amore per l’ordine. L’aria crepitava di ingranaggi invisibili, ognuno un preciso contropointo all’altro, proprio come la voce dell’Archon risuonava nei loro cuori.
+
+«Siamo a rischio», intonò Voss, «perché un piccolo gruppo di… traditori, un mistico insieme di Custodi del Tempo, minaccia la stessa struttura della nostra società con sabotaggi e manovre subapposte. Vogliono rovesciare il Grande Orologio, mettere l’intera città in disordine.»
+
+Un sorriso fantasma giocò sulle sue labbra, una contrazione ironica che insinuava una filosofia più oscura sotto la veste del dovere civico. Era un uomo di mille paradossi—architetto dell’ordine e tiranno della punizione. Era l’incarnazione vivente del paradosso della città: progresso incatenato a una devozione inesorabile al tempo.
+
+«Quindi», proseguì, «la città subirà un Reset temporale. Questo Reset sarà una cancellazione completa e deliberata di tutti i cronometri di dissenso e di chiunque abbia scelto di opporsi ai comandi dello Stato. Riporterà la città all’ora pura che è sempre stata—pura di ribellione, intatta dalla sfida.»
+
+Le parole, semplici e assolute, pesavano come una morsa su ogni anima nella piazza. Il respiro del pubblico si figeva. Il suono del campanello della grande torre riecheggiava nei loro cervelli come un battito tremolante. Il motore della città, mille ingranaggi che giravano in perfetta sincronia, pareva fermarsi, in attesa dell’ordine successivo.
+
+Tutti i sguardi si voltarono al grande dôme di vetro, dove una sottile linea di luce, come un filo appena acceso, brillava. Voss alzò il polso, e una tenue luce blu si diffuse su ogni ingranaggio, su ogni cronometro, sul cuore meccanico di Aurelia. Il tempo della città—ogni microsecondo della sua esistenza—veniva ricostruito, ricontrollato, riprogrammato per conformarsi alla volontà del sovrano.
+
+Dietro l’architettura della torre, una figura in abiti neri osservava gli eventi. Era un uomo che la città aveva dimenticato: Eron, il cui nome era diventato una maledizione per il grande Municipio. Una discesa proibita, un colibrì silenzioso che aveva seguito ogni suo respiro. La fredda lama di paura si insinuava nella sua schiena, tagliando più profondamente ogni volta che cercava di respirare.
+
+Non era mai stato un uomo che seguiva le direttive dello Stato, ma aveva sempre rispettato qualcosa di più grande: un senso di equilibrio, un codice morale che guidava i suoi pensieri e le sue opere. Sognava una città in cui gli ingranaggi non scricchiolavano ma galleggiavano in armonia, dove il flusso del tempo non fosse un’arma ma una melodia viva. Ma quel sogno era stato oscurato da una notte crudele e solitaria, quella in cui fu costretto a lasciare l’officina, quella in cui fu esiliato per l’umiliazione brutale che lo portò alla sconfitta. La notte in cui aveva visto il suo maestro, il Maestro Kestrel, cadere a causa di un meccanismo sbagliato—un incidente che doveva essere la lezione perfetta di disciplina e rispetto per la struttura del tempo.
+
+Quella notte aveva trovato l’orologio da tasca, un reliquia abbandonata sul retro dell’officina, con un leggero ruggito che vibra nei suoi ingranaggi intricati. Non lo aveva più visto. Ma ora, nella quiete del suo cuore, gli sussurrava un segreto che non poteva ignorare: un segreto che poteva arrivare al cuore della città e forse spegnere le fiamme del tiranno.
+
+Gli occhi di Eron si stringirono. Il tempo della città stava per essere resettato, i suoi cronometri sovrascritti da una sola mano minuta. Era l’unico che sapeva che era possibile fermare il reset e appena il tempo della città, tenendolo tra le sue mani tremanti. Aveva una scelta, una decisione che avrebbe determinato il destino della città e il senso della sua vita.
+
+Pensò ai cittadini di Aurelia. Pensò al giovane apprendista che un tempo suo, il ragazzo che avrebbe preso il suo posto nella grande città, il ragazzo che avrebbe lanciato l’orologio nelle strade e cercato di liberare la città dalle catene. Pensò al prezzo che quel gesto avrebbe potuto pagare, al prezzo che avrebbe potuto costargli la vita, la libertà, l’onore, o forse, involontariamente, la capacità di vivere una vita che contasse.
+
+Fece un passo avanti, le sue scarpe coprivano il ruggito metallico delle strade. I ciottoli vecchi riflettevano la luce del grande dôme. La sua mente era un turbine di conflitto. Il tempo della città era in gioco, e doveva scegliere tra l’amore per il suo mestiere e l’amore che pulsava nel suo cuore per le persone. Potrebbe restare a guardare la città resetta, o usare l’orologio da tasca per fermare il Reset, per permettere alla città di respirare di nuovo e ripristinare l’equilibrio fragile tra progresso e libertà.
+
+Il momento pendeva nell’aria. Il grande sabbiere, come un respiro trattenuto, attendeva la prossima parola dell’Archon. Il cronometro della città cantava la sua ultima nota, e i suoi cronometri iniziarono l’ultimo aggiustamento al nuovo tempo. Un suono, come un’orchestra di ingranaggi in desolazione, riempiva la piazza. Gli ingranaggi della città anticipavano il futuro come una mente attenta anticipava la fine di un brano perfetto. Non poteva vedere gli occhi della città, né quelli del Maestro Kestrel, che aveva perso la vita tanti anni fa. Le sue pensieri erano solo i suoi. Non poteva vedere i volti delle persone. La città era una macchina. L’unica cosa rimasta era la sua volontà. L’unica cosa rimasta era la scelta. Doveva decidere.
+
+Fece un passo avanti, nella luce, nella notte. Sapeva che il potere dell’orologio era suo, e doveva decidere se usarlo come arma o come bussola. Il tempo della città era sotto la sua autorità, ma non nel modo in cui avrebbe potuto controllarlo. Non poteva semplicemente decidere, era una decisione che avrebbe determinato il destino della città. Oppure avrebbe potuto scegliere di restare e guardare il cronometro cadere.
+
+Mentre il cronometro iniziava a cadere, vide la grande città mutare, e il vento soffiava su di essa. Sapeva che se non agiva ora, la città sarebbe stata distrutta. Alzò la mano, la palma tremava, lo stesso tremore che attraversava gli ingranaggi e i cronometri della città. Teniva l’orologio, che sussurrava la verità nel suo cuore. La città sarebbe stata salvata. La città sarebbe stata persa. La città sarebbe stata dannata. Era l’unico che poteva decidere. Il tempo era suo.
+
+Il cronometro della città, l’ora grande del giorno, i cronometri, il grande orologio della città, erano così meticolosamente ingegnerizzati e puntualmente misurati. Il tempo della città era in pericolo. I cronometri, l’ora grande della città, il grande orologio, la grande bussola, il cuore della città, erano tutti minacciati. La città era una macchina. Il cuore di una macchinetta che poteva essere un’arma o una bussola. Doveva scegliere.
+
+Nella seconda finale del reset, il grande sabbiere della città, i cronometri, e il grande orologio erano sul punto di essere riavvolti. Eron sapeva che se non agiva, la città sarebbe stata cancellata. Doveva decidere. Doveva scegliere. Doveva decidere di usare l’orologio per resetare la città o lasciar continuare come era. Il tempo della città era in pericolo, e lui era l’unico che poteva decidere. Non poteva scegliere. Doveva decidere.
+
+Alla fine, alzò la mano verso il grande sabbiere della città. I cronometri stavano in pericolo. Il tempo era in pericolo. Il cuore era in pericolo. La bussola era in pericolo. La sua decisione era l’unica cosa che contava. Doveva decidere.
+
+E così, con il respiro dell’intera città che se ne andava, Eron prese la sua ultima decisione—e l’eco del tempo si fissò nell’aria, pronto a riscrivere il destino di Aurelia.

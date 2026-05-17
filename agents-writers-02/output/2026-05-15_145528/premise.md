@@ -1,0 +1,2 @@
+Title: **The Clockmaker’s Whisper**  
+Premise: In a steampunk city where every citizen’s life is governed by a precisely engineered chronometer, a disgraced apprentice clockmaker discovers a forgotten pocket watch that holds the power to rewrite time itself. When the city’s tyrannical ruler threatens to erase all dissent with a citywide time reset, the young mechanic must decide whether to use the watch to free the populace or to protect the fragile balance between progress and freedom.

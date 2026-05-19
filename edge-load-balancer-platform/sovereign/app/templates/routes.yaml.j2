@@ -1,0 +1,21 @@
+resources:
+{% for host in hosts %}
+  - name: route_{{ host.name }}
+    virtual_hosts:
+      - name: vh_{{ host.name }}
+        domains:
+          - {{ host.fqdn | tojson }}
+        routes:
+{% for route in host.routes %}
+          - match:
+              prefix: {{ route.prefix | tojson }}
+            route:
+              cluster: {{ route.cluster_name | tojson }}
+              timeout: {{ (route.timeout_ms|string + 'ms') | tojson }}
+            typed_per_filter_config:
+              envoy.filters.http.ratelimit:
+                '@type': type.googleapis.com/envoy.extensions.filters.http.ratelimit.v3.RateLimitPerRoute
+                rate_limit_config:
+                  domain: {{ tenant.rate_limit_domain | tojson }}
+{% endfor %}
+{% endfor %}

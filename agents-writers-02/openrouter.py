@@ -37,16 +37,25 @@ OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
 BASE_URL = "https://openrouter.ai/api/v1/chat/completions"
 
-DEFAULT_MODEL = "google/gemma-4-31b-it:free"
+DEFAULT_MODEL = "arcee-ai/trinity-large-thinking:free"
 
 FREE_FALLBACK_MODELS = [
-    "google/gemma-4-31b-it:free",
-    "openai/gpt-oss-20b:free",
-    "google/gemini-2.0-flash-exp:free",
-    "deepseek/deepseek-chat-v3-0324:free",
-    "meta-llama/llama-3.3-70b-instruct:free",
-    "liquid/lfm-2.5-1.2b-instruct:free",
-    "openrouter/free",
+    'poolside/laguna-m.1:free',
+    'openai/gpt-oss-120b:free',
+    'z-ai/glm-4.5-air:free',
+    'deepseek/deepseek-v4-flash:free',
+    'minimax/minimax-m2.5:free',
+    'poolside/laguna-xs.2:free',
+    'google/gemma-4-31b-it:free',
+    'nvidia/nemotron-3-super-120b-a12b:free',
+    'nousresearch/hermes-3-llama-3.1-405b:free',
+    'deepseek/deepseek-chat-v3-0324:free',
+    'liquid/lfm-2.5-1.2b-instruct:free',
+    'openrouter/free',
+    'openai/gpt-oss-20b:free',
+    'google/gemini-2.0-flash-exp:free',
+    'meta-llama/llama-3.3-70b-instruct:free',
+    'nvidia/nemotron-3-nano-30b-a3b:free'
 ]
 
 HEADERS = {

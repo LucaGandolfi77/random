@@ -1,0 +1,82 @@
+---
+- name: Build hardened Envoy edge node
+  hosts: all
+  become: true
+  tasks:
+    - name: Install base packages
+      ansible.builtin.package:
+        name:
+          - curl
+          - unzip
+          - jq
+        state: present
+
+    - name: Create envoy user
+      ansible.builtin.user:
+        name: envoy
+        shell: /sbin/nologin
+        system: true
+        create_home: false
+
+    - name: Create config directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+      loop:
+        - /etc/envoy
+        - /opt/sidecars
+        - /var/log/envoy
+
+    - name: Write placeholder bootstrap config
+      ansible.builtin.copy:
+        dest: /etc/envoy/bootstrap.yaml
+        mode: '0644'
+        content: |
+          node:
+            id: edge-node
+            cluster: edge-fleet
+          dynamic_resources:
+            ads_config:
+              api_type: GRPC
+              transport_api_version: V3
+              grpc_services:
+                - envoy_grpc:
+                    cluster_name: sovereign
+            lds_config: { ads: {} }
+            cds_config: { ads: {} }
+          static_resources:
+            clusters:
+              - name: sovereign
+                type: LOGICAL_DNS
+                connect_timeout: 1s
+                load_assignment:
+                  cluster_name: sovereign
+                  endpoints:
+                    - lb_endpoints:
+                        - endpoint:
+                            address:
+                              socket_address:
+                                address: sovereign.service.internal
+                                port_value: 18000
+          admin:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 9901
+
+    - name: Apply kernel tuning
+      ansible.builtin.copy:
+        dest: /etc/sysctl.d/99-edge-platform.conf
+        mode: '0644'
+        content: |
+          net.core.somaxconn=4096
+          net.ipv4.ip_local_port_range=1024 65000
+          net.ipv4.tcp_fin_timeout=15
+          net.ipv4.tcp_tw_reuse=1
+
+    - name: Reload sysctl
+      ansible.builtin.command: sysctl --system
+      changed_when: true

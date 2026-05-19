@@ -1,0 +1,18 @@
+resources:
+{% for cluster in clusters %}
+  - name: {{ cluster.name | tojson }}
+    connect_timeout: {{ (cluster.connect_timeout_ms|string + 'ms') | tojson }}
+    type: {{ cluster.type | tojson }}
+    lb_policy: {{ cluster.lb_policy | tojson }}
+    load_assignment:
+      cluster_name: {{ cluster.name | tojson }}
+      endpoints:
+        - lb_endpoints:
+{% for endpoint in cluster.endpoints %}
+            - endpoint:
+                address:
+                  socket_address:
+                    address: {{ endpoint.address | tojson }}
+                    port_value: {{ endpoint.port }}
+{% endfor %}
+{% endfor %}

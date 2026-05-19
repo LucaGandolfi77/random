@@ -31,6 +31,23 @@ PDF_TABLE_SEPARATOR_RE = re.compile(r'^\|(?:\s*:?-{3,}:?\s*\|)+\s*$')
 CHAPTER_FILE_RE = re.compile(r'^(?P<job_id>.+)_chapter_(?P<number>\d+)(?P<suffix>_[a-z]{2})?\.md$')
 
 
+def load_dotenv_file(path: Path) -> None:
+    if not path.exists():
+        return
+    for raw_line in path.read_text(encoding='utf-8').splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith('#') or '=' not in line:
+            continue
+        key, value = line.split('=', 1)
+        key = key.strip()
+        value = value.strip().strip('"\'')
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+
+load_dotenv_file(Path(__file__).with_name('.env'))
+
+
 def embed_text(text: str, dim: int = 128):
     vector = [0.0] * dim
     for word in text.lower().split():
@@ -77,37 +94,41 @@ def unique_models(*groups):
 
 
 FREE_FALLBACK_MODELS = [
+    'arcee-ai/trinity-large-thinking:free',
+    'poolside/laguna-m.1:free',
+    'openai/gpt-oss-120b:free',
+    'z-ai/glm-4.5-air:free',
+    'deepseek/deepseek-v4-flash:free',
+    'minimax/minimax-m2.5:free',
+    'poolside/laguna-xs.2:free',
+    'nvidia/nemotron-3-super-120b-a12b:free',
+    'nousresearch/hermes-3-llama-3.1-405b:free',
+    'deepseek/deepseek-chat-v3-0324:free',
+    'liquid/lfm-2.5-1.2b-instruct:free',
+    'openrouter/free',
     'openai/gpt-oss-20b:free',
     'google/gemini-2.0-flash-exp:free',
-    'deepseek/deepseek-chat-v3-0324:free',
     'meta-llama/llama-3.3-70b-instruct:free',
-    'liquid/lfm-2.5-1.2b-instruct:free',
-    'openrouter/free'
+    'nvidia/nemotron-3-nano-30b-a3b:free'
 ]
 
 MODELS = {
     'planner': unique_models(
-        ['google/gemma-4-26b-a4b-it:free', 'openrouter/free', 'openai/gpt-oss-20b:free'],
         FREE_FALLBACK_MODELS
     ),
     'writer': unique_models(
-        ['google/gemma-4-31b-it:free', 'openrouter/free', 'openai/gpt-oss-20b:free', 'meta-llama/llama-3.3-70b-instruct:free'],
         FREE_FALLBACK_MODELS
     ),
     'editor': unique_models(
-        ['nvidia/nemotron-3-nano-30b-a3b:free', 'openrouter/free', 'openai/gpt-oss-20b:free'],
         FREE_FALLBACK_MODELS
     ),
     'scorer': unique_models(
-        ['nvidia/nemotron-3-super-120b-a12b:free', 'openrouter/free', 'openai/gpt-oss-20b:free', 'google/gemini-2.0-flash-exp:free'],
         FREE_FALLBACK_MODELS
     ),
     'inventor': unique_models(
-        ['google/gemma-4-26b-a4b-it:free', 'openrouter/free', 'openai/gpt-oss-20b:free'],
         FREE_FALLBACK_MODELS
     ),
     'translator': unique_models(
-        ['google/gemma-4-31b-it:free', 'openrouter/free', 'openai/gpt-oss-20b:free', 'google/gemini-2.0-flash-exp:free'],
         FREE_FALLBACK_MODELS
     )
 }

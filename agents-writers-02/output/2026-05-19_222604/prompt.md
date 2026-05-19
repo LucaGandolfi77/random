@@ -1,0 +1,1 @@
+two chaotic cooks fall in love making dinners to friends, it all happens inside a small apartment in Milan, they are young and beautiful

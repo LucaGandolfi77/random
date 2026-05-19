@@ -1,0 +1,81 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Edge compute stack with NLB and Auto Scaling Group.
+
+Parameters:
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+  PublicSubnetAId:
+    Type: AWS::EC2::Subnet::Id
+  PublicSubnetBId:
+    Type: AWS::EC2::Subnet::Id
+  EdgeNodeSecurityGroupId:
+    Type: AWS::EC2::SecurityGroup::Id
+  EdgeAmiId:
+    Type: AWS::EC2::Image::Id
+  InstanceType:
+    Type: String
+    Default: t3.small
+
+Resources:
+  EdgeTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Port: 443
+      Protocol: TCP
+      VpcId: !Ref VpcId
+      TargetType: instance
+      HealthCheckProtocol: TCP
+
+  EdgeLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Type: network
+      Scheme: internet-facing
+      Subnets:
+        - !Ref PublicSubnetAId
+        - !Ref PublicSubnetBId
+
+  EdgeListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref EdgeLoadBalancer
+      Port: 443
+      Protocol: TCP
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref EdgeTargetGroup
+
+  EdgeLaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    Properties:
+      LaunchTemplateData:
+        ImageId: !Ref EdgeAmiId
+        InstanceType: !Ref InstanceType
+        SecurityGroupIds:
+          - !Ref EdgeNodeSecurityGroupId
+        MetadataOptions:
+          HttpTokens: required
+        UserData:
+          Fn::Base64: |
+            #!/bin/bash
+            systemctl enable envoy --now
+            systemctl enable authn-sidecar --now
+
+  EdgeAutoScalingGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      MinSize: '2'
+      MaxSize: '20'
+      DesiredCapacity: '2'
+      VPCZoneIdentifier:
+        - !Ref PublicSubnetAId
+        - !Ref PublicSubnetBId
+      TargetGroupARNs:
+        - !Ref EdgeTargetGroup
+      LaunchTemplate:
+        LaunchTemplateId: !Ref EdgeLaunchTemplate
+        Version: !GetAtt EdgeLaunchTemplate.LatestVersionNumber
+
+Outputs:
+  NlbDnsName:
+    Value: !GetAtt EdgeLoadBalancer.DNSName

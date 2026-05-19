@@ -1,0 +1,25 @@
+resources:
+{% for listener in listeners %}
+  - name: {{ listener.name | tojson }}
+    address:
+      socket_address:
+        address: {{ listener.address | tojson }}
+        port_value: {{ listener.port }}
+    filter_chains:
+      - filters:
+          - name: envoy.filters.network.http_connection_manager
+            typed_config:
+              '@type': type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+              stat_prefix: ingress_http
+              route_config:
+                name: local_route
+                virtual_hosts:
+                  - name: catch_all
+                    domains: ['*']
+                    routes:
+                      - match: { prefix: '/' }
+                        route: { cluster: 'local_service' }
+              http_filters:
+                - name: envoy.filters.http.ext_authz
+                - name: envoy.filters.http.router
+{% endfor %}

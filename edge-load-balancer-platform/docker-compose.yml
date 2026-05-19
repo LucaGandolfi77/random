@@ -1,0 +1,76 @@
+services:
+  broker:
+    build:
+      context: .
+      dockerfile: docker/python.Dockerfile
+    command: uvicorn broker.app.main:app --app-dir /app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: docker
+      AWS_REGION: eu-west-1
+      PLATFORM_DB_PATH: /app/runtime/platform.db
+      S3_CONTEXT_DIR: /app/examples/s3-context
+      BROKER_BASE_URL: http://broker:8000
+      SOVEREIGN_BASE_URL: http://sovereign:8010
+      POLL_INTERVAL_SECONDS: 2
+    volumes:
+      - ./:/app
+    working_dir: /app
+
+  sovereign:
+    build:
+      context: .
+      dockerfile: docker/python.Dockerfile
+    command: uvicorn sovereign.app.main:app --app-dir /app --host 0.0.0.0 --port 8010 --reload
+    ports:
+      - "8010:8010"
+    environment:
+      APP_ENV: docker
+      AWS_REGION: eu-west-1
+      PLATFORM_DB_PATH: /app/runtime/platform.db
+      S3_CONTEXT_DIR: /app/examples/s3-context
+      BROKER_BASE_URL: http://broker:8000
+      SOVEREIGN_BASE_URL: http://sovereign:8010
+      POLL_INTERVAL_SECONDS: 2
+    volumes:
+      - ./:/app
+    working_dir: /app
+
+  worker:
+    build:
+      context: .
+      dockerfile: docker/python.Dockerfile
+    command: python -m worker.app.main
+    depends_on:
+      - broker
+      - sovereign
+    environment:
+      APP_ENV: docker
+      AWS_REGION: eu-west-1
+      PLATFORM_DB_PATH: /app/runtime/platform.db
+      S3_CONTEXT_DIR: /app/examples/s3-context
+      BROKER_BASE_URL: http://broker:8000
+      SOVEREIGN_BASE_URL: http://sovereign:8010
+      POLL_INTERVAL_SECONDS: 2
+    volumes:
+      - ./:/app
+    working_dir: /app
+
+  authn-sidecar:
+    build:
+      context: .
+      dockerfile: docker/authn-sidecar.Dockerfile
+    ports:
+      - "7001:7001"
+
+  mock-upstream:
+    build:
+      context: .
+      dockerfile: docker/python.Dockerfile
+    command: python /app/examples/mock_upstream.py
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./:/app
+    working_dir: /app

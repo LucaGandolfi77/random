@@ -1,0 +1,14 @@
+{
+  "service_id": "edge-lb",
+  "plan_id": "standard",
+  "organization_guid": "org-123",
+  "space_guid": "space-456",
+  "parameters": {
+    "tenant_id": "default",
+    "hostname": "sample.local.edge.test",
+    "upstream_cluster": "sample_backend",
+    "upstream_host": "127.0.0.1",
+    "upstream_port": 9000,
+    "timeout_ms": 2500
+  }
+}

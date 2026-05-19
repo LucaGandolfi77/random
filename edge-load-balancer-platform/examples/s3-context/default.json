@@ -1,0 +1,51 @@
+{
+  "version": "seed-1",
+  "environment": "dev",
+  "rate_limit_domain": "default-edge",
+  "hosts": [
+    {
+      "name": "sample-api",
+      "fqdn": "sample.local.edge.test",
+      "routes": [
+        {
+          "prefix": "/",
+          "cluster_name": "sample_backend",
+          "timeout_ms": 2500
+        }
+      ]
+    }
+  ],
+  "clusters": [
+    {
+      "name": "sample_backend",
+      "connect_timeout_ms": 1000,
+      "type": "STRICT_DNS",
+      "lb_policy": "ROUND_ROBIN",
+      "endpoints": [
+        {
+          "address": "127.0.0.1",
+          "port": 9000
+        }
+      ]
+    },
+    {
+      "name": "authn_sidecar",
+      "connect_timeout_ms": 250,
+      "type": "STATIC",
+      "lb_policy": "ROUND_ROBIN",
+      "endpoints": [
+        {
+          "address": "127.0.0.1",
+          "port": 7001
+        }
+      ]
+    }
+  ],
+  "listeners": [
+    {
+      "name": "edge_https",
+      "address": "0.0.0.0",
+      "port": 8443
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+two young cooks fall in love in a cozy apartment kitchen making frdinner for friends, it all takes place in the kitchen

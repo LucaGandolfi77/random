@@ -59,7 +59,29 @@ Recommended flow:
    ./smoke-test.sh
    ```
 
-7. Print or run ready-to-use example prompts:
+7. Run the OpenRouter live smoke when you want to verify a real Hermes-family model on OpenRouter against Atlas:
+
+   ```bash
+   ./smoke-test-openrouter.sh --dry-run
+   OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh
+   OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh --model nousresearch/hermes-4-70b --scenario trial-review
+   ```
+
+8. Start the private local control server when you want a web UI for scenarios, custom prompts, job logs, and a Telegram bridge target:
+
+   ```bash
+   python3 ./control-panel/server.py
+   ```
+
+9. Start the Telegram bridge when you want to control the local Atlas server from Telegram without exposing a public webhook:
+
+   ```bash
+   export ATLAS_TELEGRAM_BOT_TOKEN=...your bot token...
+   export ATLAS_TELEGRAM_CHAT_ID=...your chat id...
+   python3 ./control-panel/telegram_control_bot.py
+   ```
+
+10. Print or run ready-to-use example prompts:
 
    ```bash
    ./hermes-profile/launch-example.sh novel
@@ -79,13 +101,13 @@ Recommended flow:
    ./hermes-profile/launch-example.sh novel --translate-it
    ```
 
-8. To execute directly through Hermes when available:
+11. To execute directly through Hermes when available:
 
    ```bash
    ./hermes-profile/launch-example.sh novel --run
    ```
 
-9. To start Hermes through the repository-local wrapper:
+12. To start Hermes through the repository-local wrapper:
 
    ```bash
    ./hermes-profile/run-local-hermes.sh
@@ -152,6 +174,25 @@ The runtime wrapper is the preferred execution path for local work:
 - it exports the approved local-output paths to the process environment
 - it audits the Atlas bundle before and after execution and reports writes outside `local-output/`
 - it strengthens local repository discipline, but it is not a full operating-system sandbox
+
+The OpenRouter smoke script is the preferred live provider check:
+
+- it verifies direct OpenRouter reachability first
+- it then verifies Hermes plus the installed Atlas profile against the same model
+- it stores prompts, raw API output, Hermes output, and a summary under `local-output/reviews/`
+
+The control panel is the preferred local GUI:
+
+- it stays on loopback only
+- it previews launcher scenarios using the existing Atlas scripts
+- it executes runs only through `run-local-hermes.sh`
+- it writes job artifacts under `local-output/reviews/control-panel/`
+
+The Telegram bridge is the preferred remote control path:
+
+- it polls Telegram instead of exposing a webhook
+- it can be restricted to one chat id
+- it forwards commands to the private local control server rather than calling Hermes directly
 
 The launcher supports both safe preview and direct execution:
 

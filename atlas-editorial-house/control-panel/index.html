@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atlas Private Control</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Private Atlas Console</p>
+        <h1>Control Atlas from a local dashboard</h1>
+        <p class="lead">
+          This panel talks only to a loopback-only server on your machine. It previews launcher scenarios,
+          starts guarded Atlas runs, lists agent overlays, and exposes job logs without opening the bundle to the public internet.
+        </p>
+      </div>
+      <div class="hero-card" id="health-card">
+        <p class="card-label">Server status</p>
+        <strong id="health-status">Checking...</strong>
+        <p id="health-details">Waiting for /api/health</p>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Scenario Control</h2>
+          <p>Build a launcher-generated prompt, preview it, then run it through the guarded wrapper.</p>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            API token
+            <input id="api-token" type="password" placeholder="Optional if server requires X-Atlas-Token">
+          </label>
+          <label>
+            Profile
+            <input id="profile" type="text" value="atlas-editorial-house">
+          </label>
+          <label>
+            Scenario
+            <select id="scenario"></select>
+          </label>
+          <label>
+            Personality hint
+            <select id="personality-hint"></select>
+          </label>
+          <label class="checkbox-row">
+            <input id="translate-it" type="checkbox">
+            <span>Add final Italian translation step</span>
+          </label>
+        </div>
+
+        <div class="button-row">
+          <button id="preview-button" type="button">Preview scenario</button>
+          <button id="run-button" type="button">Run scenario</button>
+          <button id="refresh-jobs-button" type="button" class="ghost">Refresh jobs</button>
+        </div>
+
+        <div class="output-block">
+          <h3>Scenario preview</h3>
+          <pre id="scenario-preview">No preview loaded yet.</pre>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Custom Prompt</h2>
+          <p>Submit a direct Atlas assignment through the same guarded wrapper. You can attach a personality hint if you want the runtime to prefer a named overlay.</p>
+        </div>
+
+        <label>
+          Custom prompt
+          <textarea id="custom-prompt" rows="12" placeholder="Use the atlas-writers-room skill and route this as..."></textarea>
+        </label>
+
+        <div class="button-row">
+          <button id="custom-run-button" type="button">Run custom prompt</button>
+        </div>
+      </section>
+
+      <section class="panel jobs-panel">
+        <div class="panel-head">
+          <h2>Job Monitor</h2>
+          <p>Live runs are recorded under local-output/reviews/control-panel. Select a job to inspect prompt, stdout, and stderr tails.</p>
+        </div>
+        <div class="jobs-layout">
+          <div>
+            <ul id="jobs-list" class="jobs-list"></ul>
+          </div>
+          <div class="job-detail">
+            <h3 id="job-title">No job selected</h3>
+            <p id="job-meta">Choose a job from the list.</p>
+            <details open>
+              <summary>Prompt</summary>
+              <pre id="job-prompt"></pre>
+            </details>
+            <details open>
+              <summary>STDOUT tail</summary>
+              <pre id="job-stdout"></pre>
+            </details>
+            <details>
+              <summary>STDERR tail</summary>
+              <pre id="job-stderr"></pre>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel agents-panel">
+        <div class="panel-head">
+          <h2>Agent Directory</h2>
+          <p>Short descriptions are loaded directly from the installed Atlas personality config, so the dashboard stays aligned with the current roster.</p>
+        </div>
+        <div id="agents-grid" class="agents-grid"></div>
+      </section>
+
+      <section class="panel telegram-panel">
+        <div class="panel-head">
+          <h2>Telegram Control</h2>
+          <p>The Telegram bridge polls the Bot API locally and forwards commands to this server. It does not expose a webhook or public HTTP endpoint.</p>
+        </div>
+        <div class="callout">
+          <p><strong>Core Telegram commands</strong></p>
+          <ul>
+            <li><code>/scenarios</code> lists available launcher presets.</li>
+            <li><code>/agents</code> lists available personalities.</li>
+            <li><code>/preview article</code> previews a scenario.</li>
+            <li><code>/run article</code> launches a scenario job.</li>
+            <li><code>/custom Use the atlas-editorial-house skill...</code> runs a custom prompt.</li>
+            <li><code>/status JOB_ID</code> shows status and log tails.</li>
+          </ul>
+        </div>
+        <p class="telegram-note">Full setup instructions live in the top-level README and in <code>control-panel/telegram_control_bot.py</code>.</p>
+      </section>
+    </main>
+  </div>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

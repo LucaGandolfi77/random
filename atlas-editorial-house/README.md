@@ -41,6 +41,7 @@ The root files and directories are intentionally compact, but each one has a dis
 - `hermes-profile/launch-example.sh`: generates ready-to-run Atlas prompts for predefined scenarios and can delegate execution to the guarded wrapper.
 - `hermes-profile/run-local-hermes.sh`: the preferred execution wrapper. It starts Hermes from an approved session directory and audits the repository for writes outside `local-output/`.
 - `smoke-test.sh`: a one-command validation entrypoint for manifests, skill directories, documentation references, launcher presets, and wrapper/install dry-runs.
+- `control-panel/`: a loopback-only web control surface with a private Python server, static HTML/CSS/JS dashboard, and an optional Telegram bridge.
 
 ## Design Principles
 
@@ -132,10 +133,167 @@ The main operational commands are:
 - `./hermes-profile/run-local-hermes.sh`: starts Hermes from a dedicated session directory under `local-output/runs/` and performs a post-run repository audit.
 - `./hermes-profile/launch-example.sh`: prints ready-to-use Atlas prompts for predefined scenarios and can run them through the wrapper.
 - `./smoke-test.sh`: validates roster counts, skill directories, launcher presets, README references, and wrapper/install dry-run behavior in one pass.
+- `./smoke-test-openrouter.sh`: runs a live OpenRouter smoke test, first against the raw API and then through Hermes plus the Atlas profile when `OPENROUTER_API_KEY` is available.
+- `python3 ./control-panel/server.py`: starts a private loopback-only control server that serves the dashboard and local APIs on `127.0.0.1:8765` by default.
+- `python3 ./control-panel/telegram_control_bot.py`: starts a Telegram Bot API polling bridge that forwards Telegram commands to the private local control server.
 
 Atlas also supports a final translation step:
 
 - add `--translate-it` to `./hermes-profile/launch-example.sh` when you want the main output in English plus a final faithful Italian translation in modern language.
+
+## OpenRouter Compatibility and Live Smoke
+
+Atlas is structurally compatible with Hermes running on OpenRouter-backed models because the public Hermes agent project exposes OpenRouter as a first-class provider and OpenRouter currently lists multiple Hermes-family models.
+
+Practical implication:
+
+- Atlas behavior is primarily driven by profile overlays, skill files, routing prompts, and wrapper discipline.
+- if Hermes CLI is configured to use OpenRouter, Atlas can run on top of that provider without needing bundle-level schema changes.
+
+Recommended models for Atlas-style workloads:
+
+- `nousresearch/hermes-4-70b`
+- `nousresearch/hermes-4-405b`
+- `nousresearch/hermes-3-llama-3.1-70b`
+- `nousresearch/hermes-3-llama-3.1-405b`
+
+The default model for the live smoke script is `nousresearch/hermes-4-70b` because it is a practical balance of capability and cost for long prompts, multi-role routing, and continuity-heavy tasks.
+
+The live test entrypoint is:
+
+- `./smoke-test-openrouter.sh`
+
+What it checks:
+
+- a direct OpenRouter API call to the selected Hermes-family model.
+- a Hermes CLI run through `./hermes-profile/run-local-hermes.sh` using the Atlas profile and the same OpenRouter model.
+- prompt generation through one of the existing launcher scenarios.
+- persistent logs under `local-output/reviews/`.
+
+Typical usage:
+
+- `./smoke-test-openrouter.sh --dry-run`
+- `OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh`
+- `OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh --model nousresearch/hermes-4-405b --scenario trial-review`
+- `OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh --raw-only`
+
+Live prerequisites:
+
+- `OPENROUTER_API_KEY` must be set.
+- `hermes` must be installed and available on `PATH` for the Hermes integration half of the test.
+- the Atlas profile must already be installed under `${HERMES_HOME:-~/.hermes}/profiles/atlas-editorial-house/` unless you run `--raw-only`.
+
+## Private Control Panel
+
+Atlas now includes a minimal local control plane under `control-panel/`.
+
+Files:
+
+- `control-panel/server.py`: a loopback-only Python HTTP server that exposes local APIs for scenario preview, scenario execution, custom prompt execution, job inspection, and agent listing.
+- `control-panel/index.html`: the dashboard UI shell.
+- `control-panel/styles.css`: dashboard styling.
+- `control-panel/app.js`: browser logic for loading scenarios, previewing prompts, starting jobs, and tailing logs.
+- `control-panel/telegram_control_bot.py`: an optional Telegram bridge that polls the Telegram Bot API and forwards commands to the local server.
+
+What the private server does:
+
+- binds only to `127.0.0.1` or `localhost`.
+- serves the HTML/CSS/JS dashboard.
+- previews existing launcher scenarios using `./hermes-profile/launch-example.sh`.
+- executes Atlas runs through `./hermes-profile/run-local-hermes.sh`.
+- stores job artifacts under `local-output/reviews/control-panel/`.
+- optionally requires an API token through `ATLAS_CONTROL_TOKEN` or `--api-token`.
+
+Start the private server:
+
+```bash
+cd /workspaces/random/atlas-editorial-house
+python3 ./control-panel/server.py
+```
+
+Optional flags:
+
+- `--host 127.0.0.1`
+- `--port 8765`
+- `--profile atlas-editorial-house`
+- `--api-token YOUR_LOCAL_SECRET`
+- `--check` to validate configuration and exit
+
+Once the server is running, open:
+
+- `http://127.0.0.1:8765/`
+
+The dashboard lets you:
+
+- preview any of the 14 launcher scenarios.
+- submit a scenario run through the guarded wrapper.
+- submit a fully custom prompt.
+- inspect the roster with descriptions loaded from `config.yaml`.
+- monitor job status and stdout/stderr tails.
+
+Important operational note:
+
+- the dashboard does not bypass Atlas safeguards.
+- every execution still flows through the existing wrapper and remains subject to the `local-output/` write policy.
+
+## Telegram Control
+
+Telegram control is intentionally implemented as a polling bridge, not as a public webhook. That means:
+
+- no public HTTP endpoint is required.
+- the local machine keeps polling the Telegram Bot API.
+- each Telegram command is translated into a call to the private local control server.
+
+Environment variables for Telegram control:
+
+- `ATLAS_TELEGRAM_BOT_TOKEN`: required Telegram bot token.
+- `ATLAS_TELEGRAM_CHAT_ID`: optional but strongly recommended; restricts the bridge to one Telegram chat id.
+- `ATLAS_CONTROL_SERVER`: optional server URL, default `http://127.0.0.1:8765`.
+- `ATLAS_CONTROL_TOKEN`: optional shared secret if the private control server requires a token.
+
+Start the Telegram bridge:
+
+```bash
+cd /workspaces/random/atlas-editorial-house
+export ATLAS_TELEGRAM_BOT_TOKEN=...your bot token...
+export ATLAS_TELEGRAM_CHAT_ID=...your allowed chat id...
+python3 ./control-panel/telegram_control_bot.py
+```
+
+Optional flags:
+
+- `--server http://127.0.0.1:8765`
+- `--bot-token TOKEN`
+- `--allowed-chat-id CHAT_ID`
+- `--control-token YOUR_LOCAL_SECRET`
+- `--check` to validate configuration and exit
+
+Telegram commands currently supported:
+
+- `/start`
+- `/help`
+- `/scenarios`
+- `/agents`
+- `/preview <scenario>`
+- `/run <scenario>`
+- `/custom <prompt text>`
+- `/status <job_id>`
+
+Typical Telegram workflow:
+
+1. Start the private local server.
+2. Start the Telegram bridge on the same machine.
+3. Open Telegram and message your bot.
+4. Send `/scenarios` to list presets.
+5. Send `/preview article` to inspect a scenario prompt.
+6. Send `/run article` to launch a guarded Atlas job.
+7. Send `/status JOB_ID` to read back the current status and log tail.
+
+Security notes for Telegram control:
+
+- set `ATLAS_TELEGRAM_CHAT_ID` so only one trusted chat can issue commands.
+- if you expose the control server token, use a different secret from any model API key.
+- the bridge is safer than a webhook because the server itself stays local-only.
 
 ## Skill Catalog
 

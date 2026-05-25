@@ -42,6 +42,13 @@ expected_skills = [
     "atlas-trial-mode",
     "atlas-final-review",
 ]
+expected_control_panel_files = [
+    "control-panel/server.py",
+    "control-panel/index.html",
+    "control-panel/styles.css",
+    "control-panel/app.js",
+    "control-panel/telegram_control_bot.py",
+]
 expected_scenarios = [
     "novel",
     "family-saga",
@@ -125,6 +132,11 @@ assert len(personalities) == len(agent_files) == len(manifest_agent_files) == 36
 )
 assert skill_dirs == sorted(expected_skills), f"unexpected skill directories: {skill_dirs}"
 
+missing_control_panel_files = [
+    relative_path for relative_path in expected_control_panel_files if not (root / relative_path).exists()
+]
+assert not missing_control_panel_files, f"missing control-panel files: {missing_control_panel_files}"
+
 readme = (root / "README.md").read_text()
 profile_readme = (root / "hermes-profile" / "README.md").read_text()
 
@@ -151,10 +163,15 @@ for script_path in \
     "$script_dir/hermes-profile/run-local-hermes.sh" \
     "$script_dir/hermes-profile/show-commands.sh" \
     "$script_dir/hermes-profile/launch-example.sh" \
-    "$script_dir/smoke-test.sh"
+    "$script_dir/smoke-test.sh" \
+    "$script_dir/smoke-test-openrouter.sh"
 do
     bash -n "$script_path"
 done
+
+python3 -m py_compile \
+    "$script_dir/control-panel/server.py" \
+    "$script_dir/control-panel/telegram_control_bot.py"
 
 log_info "Checking dry-run commands"
 "$script_dir/hermes-profile/install-profile.sh" \
@@ -167,6 +184,13 @@ log_info "Checking dry-run commands"
     --session-name atlas-smoke \
     --chat-query "Use the atlas-editorial-house skill and produce a smoke test acknowledgement." \
     >/dev/null
+
+"$script_dir/smoke-test-openrouter.sh" \
+    --dry-run \
+    >/dev/null
+
+python3 "$script_dir/control-panel/server.py" --check >/dev/null
+python3 "$script_dir/control-panel/telegram_control_bot.py" --check >/dev/null
 
 log_info "Checking launcher presets and command helper output"
 declare -A scenario_skill=(

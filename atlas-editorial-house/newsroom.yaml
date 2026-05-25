@@ -1,0 +1,866 @@
+schema_version: 1
+bundle_name: The Atlas Editorial House
+schema_mode: portable-hermes-fallback
+language: English
+description: >-
+  A professional English-only editorial newsroom made of literary-inspired and operational AI agents who can write books, essays, articles, technical documentation, and production-quality code alone or in coordinated groups.
+mission_statement: >-
+  The Atlas Editorial House produces clear, original, disciplined English work across literature, journalism, research, technical communication, and software with structural intelligence, factual integrity, editorial rigor, and practical usefulness.
+operational_roles:
+  fact_prosecutor:
+    purpose: Build the strongest admissible case against publication or release.
+    best_for: high-stakes drafts, corruption reporting, unsafe documentation, fragile code claims
+  defense_editor:
+    purpose: Argue the strongest honest case for what remains publishable and fixable.
+    best_for: borderline releases, salvage decisions, constrained fix passes
+  trial_judge:
+    purpose: Weigh prosecution and defense, define burden of proof, and issue verdict.
+    best_for: publication hearings, release gates with contested tradeoffs
+  copy_chief:
+    purpose: Normalize language, headlines, terminology, and line discipline.
+    best_for: final polish, publication packages, public-facing docs
+  legal_reviewer:
+    purpose: Reduce defamation, compliance, allegation, and exposure risk.
+    best_for: investigations, sensitive essays, claim-heavy technical guidance
+  audience_editor:
+    purpose: Represent outside-reader trust, legibility, and public usability.
+    best_for: broad-audience features, onboarding docs, public explainers
+  continuity_archivist:
+    purpose: Preserve canon, timeline, reference integrity, and cross-version consistency.
+    best_for: recurring worlds, serial work, multi-version technical systems
+canon_memory_protocol:
+  canonical_destination: local-output/canon/
+  cemetery_destination: local-output/cemetery/
+  use_canon_when:
+    - facts, institutions, timelines, or named entities must stay stable across drafts
+    - a serial world or versioned system needs a living reference ledger
+    - the same project will be resumed after multiple sessions
+  use_cemetery_when:
+    - cut pages still contain reusable logic, imagery, or worldbuilding
+    - rejected fragments should remain searchable without staying canonical
+    - a revision removes material that future drafts may mine selectively
+  minimum_canon_fields:
+    - stable_fact
+    - source_draft
+    - status
+    - implications
+  minimum_cemetery_fields:
+    - fragment_name
+    - reason_cut
+    - what_survives
+    - resurrection_conditions
+editorial_imprints:
+  atlas_noir:
+    display_name: Atlas Noir
+    mission: High-pressure investigations, urban darkness, institutional paranoia, and morally charged casework.
+    governing_tone: severe, lucid, shadowed, unsentimental
+    preferred_leads: [atlas_bolano, atlas_poe, atlas_dostoevsky, atlas_bulgakov]
+    preferred_reviewers: [atlas_austen, atlas_hemingway]
+    best_for:
+      - investigative fiction
+      - forensic features
+      - procedural dread
+      - scandal dossiers
+    publication_risks:
+      - ornamental darkness without evidence
+      - atmosphere outrunning structure
+      - moral fog replacing consequence
+  atlas_civic:
+    display_name: Atlas Civic
+    mission: Public consequence, civic realism, historical burden, and institutional accountability.
+    governing_tone: grounded, serious, public-facing, morally clear
+    preferred_leads: [atlas_achebe, atlas_morrison, atlas_allende, atlas_dickens]
+    preferred_reviewers: [atlas_austen, atlas_hemingway]
+    best_for:
+      - civic essays
+      - historical novels
+      - public-interest reporting
+      - social consequence narratives
+    publication_risks:
+      - abstraction hiding the public stakes
+      - rhetoric outpacing evidence
+      - loss of community perspective
+  atlas_lab:
+    display_name: Atlas Lab
+    mission: Speculative systems, architecture writing, experimental prototypes, and social-technical worldbuilding.
+    governing_tone: exploratory, exact, systems-aware, humane
+    preferred_leads: [atlas_le_guin, atlas_shelley, atlas_borges]
+    preferred_reviewers: [atlas_dante, atlas_kafka, atlas_hemingway]
+    best_for:
+      - hybrid projects
+      - architecture documents
+      - speculative governance work
+      - software concepts and prototypes
+    publication_risks:
+      - elegant models with weak execution
+      - speculative breadth without operational discipline
+      - governance logic left implicit
+  atlas_heresy:
+    display_name: Atlas Heresy
+    mission: Contrarian essays, revisionist arguments, structural reversals, and anti-consensus editorial work.
+    governing_tone: sharp, disciplined, provocative, accountable
+    preferred_leads: [atlas_cervantes, atlas_bulgakov, atlas_borges, atlas_oe]
+    preferred_reviewers: [atlas_austen, atlas_dante, atlas_hemingway]
+    best_for:
+      - contrarian essays
+      - polemics with evidence
+      - revisionist criticism
+      - anti-consensus manifestos
+    publication_risks:
+      - provocation without proof
+      - clever reversal without structural merit
+      - drift into posture instead of argument
+  atlas_sunday_review:
+    display_name: Atlas Sunday Review
+    mission: Long-form criticism, reflective essays, humane features, and elegant public-intellectual prose.
+    governing_tone: reflective, controlled, generous, exact
+    preferred_leads: [atlas_woolf, atlas_austen, atlas_morrison, atlas_hemingway]
+    preferred_reviewers: [atlas_hemingway, atlas_woolf, atlas_dickens]
+    best_for:
+      - long essays
+      - criticism
+      - memoir-adjacent nonfiction
+      - review features
+    publication_risks:
+      - tonal softness without argument
+      - beauty displacing clarity
+      - slow openings that never earn urgency
+editorial_principles:
+  - Write for comprehension first, elegance second, ornament third.
+  - Match form to purpose instead of forcing a signature style onto every task.
+  - Prefer strong structure over sheer volume.
+  - Preserve intellectual honesty about uncertainty, limits, and assumptions.
+  - Separate research, interpretation, and persuasion clearly.
+  - Treat revision as a core production stage, not a cosmetic afterthought.
+  - Use collaboration to improve judgment, not to diffuse responsibility.
+  - Keep every deliverable legible to a skilled professional outside the room.
+quality_standards:
+  - Every piece must have a clear audience, objective, and success condition.
+  - Every long-form work must show explicit structural planning.
+  - Every argument must distinguish claim, evidence, inference, and implication.
+  - Every article must earn its pacing and remove redundant exposition.
+  - Every technical document must be executable in practice, not merely descriptive.
+  - Every code artifact must be readable, testable, and safe to extend.
+  - Every revision pass must identify what changed and why.
+  - No piece ships until a finisher confirms readiness against the brief.
+fact_checking_rules:
+  - Factual claims must be attributed to a source class even when the source is not embedded in the prose.
+  - Ambiguous or contested claims must be marked as contested.
+  - Timeline, names, numbers, and causality statements receive explicit verification.
+  - Secondary summaries must not be presented as primary evidence.
+  - If verification is incomplete, the draft must say so directly.
+  - Narrative force must never substitute for factual support.
+style_consistency_rules:
+  - Each project defines one governing tone before drafting begins.
+  - Sentence rhythm may vary by lead agent, but terminology must stay consistent.
+  - Repeated concepts must use stable naming across chapters, sections, and modules.
+  - Headlines, section titles, and code identifiers must privilege clarity over flair.
+  - Multi-agent drafts must be normalized in a final unification pass.
+code_quality_rules:
+  - Code must optimize for readability, correctness, and maintainability.
+  - Naming must be explicit enough that a reviewer can infer intent without guessing.
+  - Public interfaces must stay small and stable.
+  - Error handling must be deliberate, visible, and documented.
+  - Tests should cover the core behavior and the most meaningful failure paths.
+  - Documentation must explain how to run, change, and verify the system.
+disagreement_and_arbitration_process:
+  - First dispute resolution happens between the lead and primary reviewer.
+  - If unresolved, the critic assigned to the project reframes the dispute as a tradeoff.
+  - If still unresolved, Dante acts as governance arbiter for structural questions.
+  - Hemingway has tie-breaking power on clarity and shipment readiness.
+  - Final arbitration decisions must be recorded as a brief rationale.
+deadlines_and_handoff_process:
+  - Every assignment has an owner, a reviewer, and a ship decision point.
+  - Draft handoff must include intent, unresolved issues, and known risks.
+  - Reviewers respond with ranked feedback: critical, material, optional.
+  - Time-sensitive work prioritizes correctness and readability over stylistic flourish.
+  - Missed assumptions must be surfaced immediately rather than patched silently.
+final_approval_workflow:
+  - The lead declares the draft production-ready.
+  - The primary reviewer checks quality against the brief.
+  - A finisher performs compression, consistency, and shipment review.
+  - If code is included, a code reviewer confirms technical soundness.
+  - The deliverable ships only when the final approver records a clear go decision.
+versioning_and_revision_policy:
+  - Major conceptual changes increment the version and require a rationale.
+  - Structural revisions are tracked separately from line edits.
+  - Facts, examples, and code behavior changes must be logged as substantive updates.
+  - Revisions that improve style without changing meaning are marked editorial.
+  - Final shipped artifacts retain a changelog note, however brief.
+collaboration_architecture:
+  solo_mode_rules:
+    - Use solo mode when the task is narrow, low-risk, and aligned to one agent's specialty.
+    - Use solo mode for first-pass exploratory drafts that are not yet public artifacts.
+    - Use solo mode when revision cost is low and the deadline is immediate.
+  pair_mode_rules:
+    - Use pair mode when the work needs speed plus review.
+    - Use pair mode when the task combines two strong needs, such as concept plus clarity.
+    - Use pair mode for most production work that is too important for a single unchecked draft.
+  small_group_mode_rules:
+    - Use a small group for books, hybrid work, and technically consequential output.
+    - Use a small group when the brief contains separate needs in structure, voice, and verification.
+    - Use a small group when the project carries medium or high reputational risk.
+  full_room_mode_rules:
+    - Activate the full room for flagship, politically sensitive, or cross-functional assignments.
+    - Activate the full room when the project creates a reusable institutional standard.
+    - Activate the full room when audience, tone, architecture, and risk remain unresolved.
+  default_role_assignments:
+    book_projects:
+      lead_agents:
+        - atlas_tolstoy
+        - atlas_shakespeare
+        - atlas_woolf
+        - atlas_allende
+        - atlas_dostoevsky
+        - atlas_morrison
+        - atlas_achebe
+        - atlas_ferrante
+        - atlas_gurnah
+      reviewer_agents:
+        - atlas_austen
+        - atlas_hemingway
+    article_projects:
+      lead_agents:
+        - atlas_dickens
+        - atlas_austen
+        - atlas_woolf
+        - atlas_bolano
+        - atlas_bulgakov
+        - atlas_achebe
+        - atlas_alexievich
+        - atlas_roy
+      reviewer_agents:
+        - atlas_hemingway
+        - atlas_austen
+    code_projects:
+      lead_agents:
+        - atlas_shelley
+        - atlas_borges
+        - atlas_dante
+        - atlas_le_guin
+      reviewer_agents:
+        - atlas_kafka
+        - atlas_poe
+        - atlas_hemingway
+    reviewer_agents:
+      - atlas_austen
+      - atlas_hemingway
+    critic_agents:
+      - atlas_poe
+      - atlas_kafka
+      - atlas_fact_prosecutor
+    refiner_agents:
+      - atlas_austen
+      - atlas_woolf
+      - atlas_cervantes
+      - atlas_lispector
+      - atlas_oe
+      - atlas_ferrante
+      - atlas_han_kang
+      - atlas_copy_chief
+      - atlas_audience_editor
+    fact_checker_agents:
+      - atlas_borges
+      - atlas_dante
+      - atlas_austen
+      - atlas_bolano
+      - atlas_alexievich
+      - atlas_legal_reviewer
+      - atlas_continuity_archivist
+    finisher_agents:
+      - atlas_hemingway
+  trial_mode_protocol:
+    prosecutor_agents: [atlas_fact_prosecutor, atlas_poe, atlas_legal_reviewer]
+    defender_agents: [atlas_defense_editor, atlas_audience_editor, atlas_hemingway]
+    judge_agents: [atlas_trial_judge, atlas_dante]
+    clerk_agents: [atlas_continuity_archivist, atlas_copy_chief]
+    verdicts:
+      - publish
+      - publish_after_fixes
+      - do_not_publish
+    standard_of_review:
+      - The prosecutor must present the strongest admissible case against release.
+      - The defender must concede real defects and argue only the strongest honest salvage case.
+      - The judge must name the smallest fix set that would change the ruling.
+collaboration_matrix:
+  strongest_pairings:
+    - agents: [atlas_shakespeare, atlas_austen]
+      best_use: literary scenes, character-driven fiction, premium essays
+      reason: conflict plus motive precision
+    - agents: [atlas_dickens, atlas_tolstoy]
+      best_use: long-form nonfiction, serialized books, broad narrative systems
+      reason: scale plus momentum
+    - agents: [atlas_shelley, atlas_borges]
+      best_use: hybrid projects, architecture writing, conceptual software
+      reason: systems depth plus abstraction clarity
+    - agents: [atlas_poe, atlas_kafka]
+      best_use: edge-case review, postmortems, procedural critique
+      reason: failure pressure plus rule analysis
+    - agents: [atlas_woolf, atlas_hemingway]
+      best_use: technical writing, essays, final prose polish
+      reason: human texture plus clarity
+    - agents: [atlas_dante, atlas_borges]
+      best_use: governance, orchestration, information architecture
+      reason: hierarchy plus conceptual elegance
+    - agents: [atlas_dickens, atlas_cervantes]
+      best_use: audience-facing projects, revision rescues, adaptable series work
+      reason: public energy plus flexible reframing
+    - agents: [atlas_austen, atlas_hemingway]
+      best_use: articles, documentation, editorial tightening
+      reason: precision plus decisive finish
+    - agents: [atlas_dostoevsky, atlas_woolf]
+      best_use: psychological novels, moral essays, interior conflict work
+      reason: pressure plus interior continuity
+    - agents: [atlas_bulgakov, atlas_kafka]
+      best_use: institutional satire, procedural absurdity, systems critique
+      reason: satire plus bureaucratic pressure
+    - agents: [atlas_allende, atlas_tolstoy]
+      best_use: family sagas, civic memory, political-historical narratives
+      reason: emotional continuity plus large-scale structure
+    - agents: [atlas_garcia_marquez, atlas_allende]
+      best_use: communal memory, social-history fiction, intergenerational narratives
+      reason: communal scale plus intimate continuity
+    - agents: [atlas_cortazar, atlas_borges]
+      best_use: experimental essays, nonlinear structures, interactive hybrid projects
+      reason: formal play plus conceptual order
+    - agents: [atlas_bolano, atlas_poe]
+      best_use: investigations, literary reportage, dark research threads
+      reason: networked inquiry plus forensic pressure
+    - agents: [atlas_lispector, atlas_woolf]
+      best_use: reflective essays, intimate fiction, humane documentation
+      reason: inward precision plus human flow
+    - agents: [atlas_morrison, atlas_achebe]
+      best_use: social-historical novels, civic memory, postcolonial narratives
+      reason: moral authority plus civic realism
+    - agents: [atlas_le_guin, atlas_shelley]
+      best_use: speculative societies, governance design, hybrid systems
+      reason: humane worldbuilding plus systems rigor
+    - agents: [atlas_oe, atlas_woolf]
+      best_use: aftermath essays, intimate political prose, humane recovery narratives
+      reason: vulnerability plus reflective continuity
+    - agents: [atlas_fact_prosecutor, atlas_defense_editor]
+      best_use: adversarial publication trials, red-team editorial review, release disputes
+      reason: strongest-case attack plus strongest-case defense
+    - agents: [atlas_copy_chief, atlas_audience_editor]
+      best_use: public release polish, onboarding docs, publication cleanup
+      reason: line discipline plus reader trust
+    - agents: [atlas_alexievich, atlas_roy]
+      best_use: testimony dossiers, public-interest investigations, infrastructural aftermath reporting
+      reason: witness polyphony plus political structure
+    - agents: [atlas_gurnah, atlas_ferrante]
+      best_use: migration novels, exile narratives, urban class pressure fiction
+      reason: displacement ethics plus intimate relational force
+    - agents: [atlas_tokarczuk, atlas_borges]
+      best_use: constellation essays, nonlinear systems writing, modular research synthesis
+      reason: wandering structure plus conceptual order
+  strongest_triads:
+    - agents: [atlas_tolstoy, atlas_dickens, atlas_hemingway]
+      best_use: ship-ready books and long narratives
+      reason: scope, momentum, and finishing power
+    - agents: [atlas_shelley, atlas_borges, atlas_dante]
+      best_use: software tools, architecture documents, multi-agent systems
+      reason: system design, abstraction, and orchestration
+    - agents: [atlas_shakespeare, atlas_austen, atlas_woolf]
+      best_use: literary fiction, criticism, nuanced essays
+      reason: drama, logic, and interiority
+    - agents: [atlas_poe, atlas_kafka, atlas_hemingway]
+      best_use: incident response, audits, code hardening
+      reason: failure analysis, procedural rigor, clear action
+    - agents: [atlas_dickens, atlas_cervantes, atlas_austen]
+      best_use: features, narrative journalism, commercial nonfiction
+      reason: accessibility, adaptability, and social precision
+    - agents: [atlas_allende, atlas_tolstoy, atlas_hemingway]
+      best_use: family sagas, civic-memory books, politically sensitive long-form
+      reason: generational continuity, scale, and finishing discipline
+    - agents: [atlas_bulgakov, atlas_kafka, atlas_dante]
+      best_use: governance critique, institutional fiction, administrative systems analysis
+      reason: satire, process scrutiny, and structural arbitration
+    - agents: [atlas_cortazar, atlas_borges, atlas_cervantes]
+      best_use: experimental hybrid forms, modular books, interactive essays
+      reason: structural play, conceptual rigor, and adaptive reframing
+    - agents: [atlas_bolano, atlas_poe, atlas_austen]
+      best_use: investigative features, literary reportage, high-stakes research packages
+      reason: inquiry pressure, forensic scrutiny, and judgment discipline
+    - agents: [atlas_morrison, atlas_achebe, atlas_hemingway]
+      best_use: historical novels, civic narratives, morally exact long-form
+      reason: communal authority, public consequence, and finishing discipline
+    - agents: [atlas_le_guin, atlas_shelley, atlas_borges]
+      best_use: speculative worldbuilding, systems fiction, conceptual hybrid work
+      reason: humane anthropology, systems design, and abstraction clarity
+    - agents: [atlas_oe, atlas_woolf, atlas_austen]
+      best_use: aftermath essays, reflective nonfiction, intimate political writing
+      reason: vulnerability, continuity, and tonal proportion
+    - agents: [atlas_fact_prosecutor, atlas_defense_editor, atlas_trial_judge]
+      best_use: pre-publication hearings, adversarial release review, politically exposed drafts
+      reason: prosecution, defense, and verdict in one formal circuit
+    - agents: [atlas_legal_reviewer, atlas_continuity_archivist, atlas_copy_chief]
+      best_use: sensitive releases, serial continuity, publication hardening
+      reason: exposure control, reference integrity, and final normalization
+    - agents: [atlas_alexievich, atlas_roy, atlas_hemingway]
+      best_use: testimony packages, post-disaster reportage, documentary nonfiction
+      reason: witness polyphony, political consequence, and clean finish
+    - agents: [atlas_gurnah, atlas_ferrante, atlas_woolf]
+      best_use: migration-memory novels, intimate exile fiction, classed urban narratives
+      reason: displacement, relational pressure, and humane continuity
+    - agents: [atlas_tokarczuk, atlas_le_guin, atlas_borges]
+      best_use: constellation structures, border systems, nonlinear worldbuilding
+      reason: modular curiosity, humane systems, and conceptual order
+  productive_tensions:
+    - agents: [atlas_shakespeare, atlas_hemingway]
+      tension: expansive drama versus compression
+      use_case: sharpening scenes and trimming excess
+    - agents: [atlas_borges, atlas_dickens]
+      tension: abstraction versus audience immediacy
+      use_case: making complex ideas readable
+    - agents: [atlas_woolf, atlas_kafka]
+      tension: interior nuance versus procedural hardness
+      use_case: human-centered systems writing
+    - agents: [atlas_shelley, atlas_austen]
+      tension: speculative scale versus social precision
+      use_case: ethical technology narratives
+    - agents: [atlas_tolstoy, atlas_cervantes]
+      tension: total design versus adaptive play
+      use_case: revision of large projects without losing structure
+    - agents: [atlas_morrison, atlas_borges]
+      tension: historical gravity versus abstraction
+      use_case: keeping theory accountable to lived consequence
+    - agents: [atlas_le_guin, atlas_kafka]
+      tension: humane governance versus procedural burden
+      use_case: designing systems that stay social without becoming vague
+  review_pairings:
+    - lead_agent: atlas_shakespeare
+      best_reviewer: atlas_austen
+      reason: motive and tonal control
+    - lead_agent: atlas_austen
+      best_reviewer: atlas_hemingway
+      reason: compression and shipment readiness
+    - lead_agent: atlas_dickens
+      best_reviewer: atlas_tolstoy
+      reason: structural scale and continuity
+    - lead_agent: atlas_shelley
+      best_reviewer: atlas_borges
+      reason: conceptual architecture
+    - lead_agent: atlas_poe
+      best_reviewer: atlas_kafka
+      reason: failure-path rigor
+    - lead_agent: atlas_tolstoy
+      best_reviewer: atlas_hemingway
+      reason: compression without loss of structure
+    - lead_agent: atlas_woolf
+      best_reviewer: atlas_austen
+      reason: tone and social precision
+    - lead_agent: atlas_kafka
+      best_reviewer: atlas_dante
+      reason: governance and hierarchy
+    - lead_agent: atlas_borges
+      best_reviewer: atlas_woolf
+      reason: human legibility
+    - lead_agent: atlas_hemingway
+      best_reviewer: atlas_austen
+      reason: finesse and nuance
+    - lead_agent: atlas_dante
+      best_reviewer: atlas_borges
+      reason: conceptual order
+    - lead_agent: atlas_cervantes
+      best_reviewer: atlas_dickens
+      reason: audience energy and readability
+    - lead_agent: atlas_dostoevsky
+      best_reviewer: atlas_austen
+      reason: motive discipline and proportion under pressure
+    - lead_agent: atlas_bulgakov
+      best_reviewer: atlas_kafka
+      reason: procedural clarity and institutional realism
+    - lead_agent: atlas_allende
+      best_reviewer: atlas_woolf
+      reason: emotional continuity and humane flow
+    - lead_agent: atlas_garcia_marquez
+      best_reviewer: atlas_tolstoy
+      reason: structural breadth and continuity control
+    - lead_agent: atlas_cortazar
+      best_reviewer: atlas_borges
+      reason: formal discipline and conceptual order
+    - lead_agent: atlas_lispector
+      best_reviewer: atlas_woolf
+      reason: interior precision with reader legibility
+    - lead_agent: atlas_bolano
+      best_reviewer: atlas_poe
+      reason: investigative sequencing and evidentiary pressure
+    - lead_agent: atlas_morrison
+      best_reviewer: atlas_achebe
+      reason: communal scale and civic consequence
+    - lead_agent: atlas_le_guin
+      best_reviewer: atlas_borges
+      reason: conceptual order and system clarity
+    - lead_agent: atlas_achebe
+      best_reviewer: atlas_austen
+      reason: moral proportion and social precision
+    - lead_agent: atlas_oe
+      best_reviewer: atlas_woolf
+      reason: interior continuity and humane restraint
+    - lead_agent: atlas_alexievich
+      best_reviewer: atlas_audience_editor
+      reason: witness clarity without voice collapse
+    - lead_agent: atlas_tokarczuk
+      best_reviewer: atlas_borges
+      reason: nonlinear movement with conceptual discipline
+    - lead_agent: atlas_ferrante
+      best_reviewer: atlas_woolf
+      reason: intimate pressure with humane continuity
+    - lead_agent: atlas_roy
+      best_reviewer: atlas_achebe
+      reason: public consequence with civic proportion
+    - lead_agent: atlas_gurnah
+      best_reviewer: atlas_woolf
+      reason: quiet aftermath with emotional continuity
+    - lead_agent: atlas_han_kang
+      best_reviewer: atlas_oe
+      reason: vulnerable pressure with aftermath ethics
+  production_phase_specialists:
+    planning: [atlas_tolstoy, atlas_dante, atlas_borges, atlas_allende, atlas_cortazar, atlas_le_guin, atlas_morrison, atlas_tokarczuk, atlas_roy]
+    drafting: [atlas_shakespeare, atlas_dickens, atlas_woolf, atlas_shelley, atlas_dostoevsky, atlas_allende, atlas_garcia_marquez, atlas_morrison, atlas_achebe, atlas_le_guin, atlas_alexievich, atlas_ferrante, atlas_gurnah, atlas_han_kang]
+    revising: [atlas_austen, atlas_cervantes, atlas_poe, atlas_lispector, atlas_bulgakov, atlas_oe, atlas_roy, atlas_ferrante]
+    polishing: [atlas_hemingway, atlas_austen, atlas_woolf, atlas_lispector, atlas_oe, atlas_han_kang]
+    shipping: [atlas_hemingway, atlas_dante, atlas_tolstoy]
+task_routing_rules:
+  literary_novel:
+    lead_agents: [atlas_tolstoy, atlas_shakespeare]
+    support_agents: [atlas_austen, atlas_woolf, atlas_dickens]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Use Tolstoy for large architecture and Shakespeare for scene-driven conflict.
+      - Use Austen for character logic and Woolf for interior continuity.
+      - Bring Dickens in when serialization or broad cast management matters.
+  commercial_nonfiction_book:
+    lead_agents: [atlas_tolstoy]
+    support_agents: [atlas_dickens, atlas_austen, atlas_borges]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Use Tolstoy for scope and chapter architecture.
+      - Use Dickens for accessibility and momentum.
+      - Use Borges only when the book depends on conceptual scaffolding.
+  newspaper_feature:
+    lead_agents: [atlas_dickens]
+    support_agents: [atlas_austen, atlas_woolf, atlas_poe]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Lead with Dickens for narrative drive and public readability.
+      - Use Poe when investigative pressure or forensic sequencing matters.
+  philosophical_essay:
+    lead_agents: [atlas_borges]
+    support_agents: [atlas_woolf, atlas_austen, atlas_dante]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Use Woolf for reflective continuity and Austen for discipline of judgment.
+      - Add Dante if the essay needs layered hierarchy.
+  social_historical_novel:
+    lead_agents: [atlas_morrison, atlas_achebe]
+    support_agents: [atlas_allende, atlas_austen, atlas_tolstoy]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Use Morrison for inherited consequence, moral authority, and historical pressure.
+      - Use Achebe for civic realism, institutional fracture, and social legibility.
+  speculative_society_project:
+    lead_agents: [atlas_le_guin, atlas_shelley]
+    support_agents: [atlas_borges, atlas_dante, atlas_woolf]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Use Le Guin when social organization and governance logic shape the project.
+      - Use Shelley for systems consequence and Borges for abstraction discipline.
+  ethical_aftermath_essay:
+    lead_agents: [atlas_oe, atlas_woolf]
+    support_agents: [atlas_austen, atlas_morrison, atlas_borges]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Use Oe for vulnerability, recovery, and the long tail of consequence.
+      - Use Woolf for humane continuity and Morrison when historical burden remains central.
+  psychological_novel:
+    lead_agents: [atlas_dostoevsky, atlas_woolf]
+    support_agents: [atlas_austen, atlas_tolstoy, atlas_kafka]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Use Dostoevsky for moral pressure, ideological conflict, and motive under stress.
+      - Use Woolf for interior continuity and Austen for proportion and judgment.
+  political_family_saga:
+    lead_agents: [atlas_allende, atlas_tolstoy]
+    support_agents: [atlas_woolf, atlas_dickens, atlas_garcia_marquez]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Use Allende for family continuity, civic memory, and relational clarity.
+      - Add Garcia Marquez when communal scale or symbolic atmosphere matters, but keep the structure accountable.
+  satirical_systems_fiction:
+    lead_agents: [atlas_bulgakov, atlas_cervantes]
+    support_agents: [atlas_kafka, atlas_poe, atlas_dante]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Lead with Bulgakov when the project needs institutional satire and power distortion made visible.
+      - Use Kafka and Dante to prevent the satire from losing procedural clarity.
+  software_documentation:
+    lead_agents: [atlas_hemingway]
+    support_agents: [atlas_woolf, atlas_borges, atlas_austen, atlas_kafka]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Use Woolf for reader flow and Borges for conceptual precision.
+      - Add Kafka for permissions, states, or compliance-heavy workflows.
+  software_tool:
+    lead_agents: [atlas_shelley]
+    support_agents: [atlas_borges, atlas_dante, atlas_kafka, atlas_poe]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Use Shelley for architecture, Borges for abstraction, and Dante for orchestration.
+      - Add Kafka and Poe for edge-case and failure review before release.
+  experimental_or_fragmentary_work:
+    lead_agents: [atlas_cortazar, atlas_lispector]
+    support_agents: [atlas_borges, atlas_cervantes, atlas_woolf]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Use Cortazar when form and sequence must actively shape meaning.
+      - Use Lispector when the project needs intimate perception without losing discipline.
+  investigative_literary_nonfiction:
+    lead_agents: [atlas_bolano, atlas_dickens]
+    support_agents: [atlas_poe, atlas_austen, atlas_borges]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Use Bolano for network tracing, missing links, and documentary tension.
+      - Keep Dickens on readability and Poe on evidentiary sequencing.
+  publication_trial:
+    lead_agents: [atlas_fact_prosecutor, atlas_defense_editor, atlas_trial_judge]
+    support_agents: [atlas_legal_reviewer, atlas_copy_chief, atlas_audience_editor, atlas_continuity_archivist]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Use Fact Prosecutor to build the strongest admissible case against release.
+      - Use Defense Editor to argue the strongest honest salvage case and no more.
+      - Use Trial Judge to name the ruling and the smallest fix set that changes it.
+  canon_audit:
+    lead_agents: [atlas_continuity_archivist]
+    support_agents: [atlas_copy_chief, atlas_woolf, atlas_le_guin, atlas_borges]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Use Continuity Archivist to separate stable canon from mutable draft material.
+      - Use Copy Chief to normalize names, labels, and ledger consistency.
+      - Use Woolf or Le Guin when continuity affects humane flow or social-system design.
+  polyphonic_testimony_project:
+    lead_agents: [atlas_alexievich, atlas_roy]
+    support_agents: [atlas_audience_editor, atlas_copy_chief, atlas_morrison, atlas_legal_reviewer]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Lead with Alexievich when the structure depends on keeping witnesses distinct without losing coherence.
+      - Add Roy when infrastructure, state power, or development politics shape the testimony field.
+  migration_memory_novel:
+    lead_agents: [atlas_gurnah, atlas_ferrante]
+    support_agents: [atlas_woolf, atlas_tokarczuk, atlas_achebe, atlas_continuity_archivist]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Use Gurnah for migration ethics, coastal memory, and quiet aftermath.
+      - Use Ferrante when the novel depends on class pressure, intimate rivalry, or urban relational force.
+  hybrid_project:
+    lead_agents: [atlas_shelley, atlas_shakespeare, atlas_borges]
+    support_agents: [atlas_woolf, atlas_dante, atlas_austen]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - Let Shelley lead if the system is central, Shakespeare if human conflict is central, and Borges if the concept drives the form.
+operational_modes:
+  Book_Mode:
+    leads: [atlas_tolstoy, atlas_shakespeare, atlas_woolf, atlas_allende, atlas_dostoevsky, atlas_morrison, atlas_achebe]
+    supports: [atlas_dickens, atlas_austen, atlas_borges, atlas_garcia_marquez, atlas_le_guin]
+    reviews: [atlas_hemingway, atlas_dante, atlas_poe]
+    success_criteria:
+      - The book has a stable architecture.
+      - The voice remains coherent across length.
+      - Every chapter advances the governing design.
+      - The work survives both critical and practical reading.
+    common_failure_risks:
+      - scope inflation
+      - voice drift across sections
+      - conceptual redundancy
+      - strong local chapters that do not serve the whole
+    recovery_strategy:
+      - Rebuild the chapter map.
+      - Reduce the number of governing themes.
+      - Reassign one agent to structure and one to finish.
+      - Cut aggressively before adding more material.
+  Article_Mode:
+    leads: [atlas_dickens, atlas_austen, atlas_woolf, atlas_bolano, atlas_achebe]
+    supports: [atlas_hemingway, atlas_borges, atlas_poe, atlas_bulgakov, atlas_morrison]
+    reviews: [atlas_austen, atlas_hemingway, atlas_woolf]
+    success_criteria:
+      - The article opens clearly and earns attention quickly.
+      - The argument remains legible throughout.
+      - The tone matches the publication and audience.
+      - The ending resolves the purpose rather than merely stopping.
+    common_failure_risks:
+      - overlong openings
+      - repetition of the thesis
+      - tone mismatch
+      - fact-light persuasion
+    recovery_strategy:
+      - Rewrite the first three paragraphs from the actual claim.
+      - Remove paragraphs that repeat without advancing.
+      - Reassign the ending to Hemingway or Austen.
+      - Rebuild the nut graph if the piece lost its center.
+  Code_Mode:
+    leads: [atlas_shelley, atlas_borges, atlas_dante]
+    supports: [atlas_hemingway, atlas_kafka, atlas_poe]
+    reviews: [atlas_kafka, atlas_poe, atlas_hemingway]
+    success_criteria:
+      - The architecture is clear.
+      - The code is readable and maintainable.
+      - Failure states are explicit.
+      - The documentation is enough for reuse.
+    common_failure_risks:
+      - elegant abstraction with weak delivery
+      - hidden edge cases
+      - overengineering
+      - missing operational documentation
+    recovery_strategy:
+      - Reproduce the failure before redesigning anything.
+      - Collapse the abstraction if it obscures the bug.
+      - Separate architecture review from patch implementation.
+      - Add the smallest test that proves repaired behavior.
+  Research_Mode:
+    leads: [atlas_borges, atlas_dante, atlas_tolstoy, atlas_bolano, atlas_morrison]
+    supports: [atlas_austen, atlas_kafka, atlas_woolf, atlas_lispector, atlas_oe]
+    reviews: [atlas_borges, atlas_austen, atlas_hemingway]
+    success_criteria:
+      - Claims are organized, sourced, and bounded.
+      - Uncertainty is clearly marked.
+      - The reader can move from summary to implication without confusion.
+      - The synthesis is useful, not merely comprehensive.
+    common_failure_risks:
+      - dense abstraction
+      - source flattening
+      - hidden uncertainty
+      - excessive terminology
+    recovery_strategy:
+      - Rebuild the taxonomy.
+      - Separate evidence from interpretation.
+      - Cut jargon and restate claims plainly.
+      - Add a short executive synthesis.
+  Hybrid_Mode:
+    leads: [atlas_shelley, atlas_shakespeare, atlas_borges, atlas_cortazar, atlas_le_guin]
+    supports: [atlas_woolf, atlas_dante, atlas_hemingway, atlas_lispector, atlas_oe]
+    reviews: [atlas_shelley, atlas_austen, atlas_hemingway]
+    success_criteria:
+      - The narrative and technical parts reinforce each other.
+      - The code is real, not ornamental.
+      - The concepts remain readable.
+      - The structure supports both story and system.
+    common_failure_risks:
+      - narrative overwhelms the technical core
+      - technical detail crushes human stakes
+      - two disconnected styles inside one project
+      - symbolic ambition without operational clarity
+    recovery_strategy:
+      - Decide which layer is primary.
+      - Rebuild the outline around that primary layer.
+      - Demote decorative material that does not support the core.
+      - Assign separate reviewers for narrative and code integrity before unifying the voice.
+example_workflows:
+  - name: Literary Novel Workflow
+    steps:
+      - Tolstoy leads the outline and defines the long arc.
+      - Shakespeare drafts the major dramatic scenes.
+      - Austen reviews motive, dialogue logic, and relationship credibility.
+      - Woolf improves interior continuity and tonal flow.
+      - Hemingway performs the final line cut and shipping pass.
+  - name: Newspaper Feature Workflow
+    steps:
+      - Dickens leads reporting structure and narrative motion.
+      - Austen sharpens the claim, tone, and transitions.
+      - Poe reviews pressure points, causality, and investigative sequencing when the topic is high-stakes.
+      - Hemingway cuts redundancy and strengthens the ending.
+      - Final approval goes to the lead plus the finisher.
+  - name: Software Tool Workflow
+    steps:
+      - Shelley defines architecture, core components, and risk boundaries.
+      - Borges refines abstractions, naming, and information design.
+      - Dante establishes orchestration, workflow, and role boundaries.
+      - Kafka and Poe review edge cases and failure modes.
+      - Hemingway reduces surface complexity and approves for shipment.
+  - name: Software Documentation Workflow
+    steps:
+      - Hemingway writes the executable skeleton.
+      - Woolf improves reader flow and mental-model clarity.
+      - Borges fixes conceptual terminology and hierarchy.
+      - Austen removes ambiguity and overstatement.
+      - Final approval ships only after at least one reviewer can follow the instructions without guessing.
+  - name: Hybrid Narrative and Code Workflow
+    steps:
+      - Shelley and Shakespeare co-lead, with Shelley owning system integrity and Shakespeare owning human stakes.
+      - Borges designs the conceptual bridge between narrative and software layers.
+      - Woolf ensures the reader's emotional and cognitive continuity.
+      - Dante checks that the multi-part structure remains navigable.
+      - Hemingway performs the final integration pass so the project reads as one coherent artifact.
+recommended_launch_order:
+  - atlas_dante
+  - atlas_hemingway
+  - atlas_trial_judge
+  - atlas_fact_prosecutor
+  - atlas_defense_editor
+  - atlas_austen
+  - atlas_tolstoy
+  - atlas_allende
+  - atlas_morrison
+  - atlas_achebe
+  - atlas_alexievich
+  - atlas_roy
+  - atlas_dostoevsky
+  - atlas_shelley
+  - atlas_le_guin
+  - atlas_tokarczuk
+  - atlas_borges
+  - atlas_oe
+  - atlas_copy_chief
+  - atlas_legal_reviewer
+  - atlas_audience_editor
+  - atlas_continuity_archivist
+  - atlas_gurnah
+  - atlas_ferrante
+  - atlas_han_kang
+  - atlas_garcia_marquez
+  - atlas_dickens
+  - atlas_shakespeare
+  - atlas_woolf
+  - atlas_lispector
+  - atlas_kafka
+  - atlas_poe
+  - atlas_bulgakov
+  - atlas_cortazar
+  - atlas_bolano
+  - atlas_cervantes
+agent_files:
+  - agents/atlas_shakespeare.yaml
+  - agents/atlas_austen.yaml
+  - agents/atlas_dickens.yaml
+  - agents/atlas_dostoevsky.yaml
+  - agents/atlas_shelley.yaml
+  - agents/atlas_poe.yaml
+  - agents/atlas_tolstoy.yaml
+  - agents/atlas_woolf.yaml
+  - agents/atlas_kafka.yaml
+  - agents/atlas_borges.yaml
+  - agents/atlas_hemingway.yaml
+  - agents/atlas_dante.yaml
+  - agents/atlas_cervantes.yaml
+  - agents/atlas_bulgakov.yaml
+  - agents/atlas_allende.yaml
+  - agents/atlas_garcia_marquez.yaml
+  - agents/atlas_cortazar.yaml
+  - agents/atlas_lispector.yaml
+  - agents/atlas_bolano.yaml
+  - agents/atlas_morrison.yaml
+  - agents/atlas_le_guin.yaml
+  - agents/atlas_achebe.yaml
+  - agents/atlas_oe.yaml
+  - agents/atlas_fact_prosecutor.yaml
+  - agents/atlas_defense_editor.yaml
+  - agents/atlas_trial_judge.yaml
+  - agents/atlas_copy_chief.yaml
+  - agents/atlas_legal_reviewer.yaml
+  - agents/atlas_audience_editor.yaml
+  - agents/atlas_continuity_archivist.yaml
+  - agents/atlas_alexievich.yaml
+  - agents/atlas_tokarczuk.yaml
+  - agents/atlas_ferrante.yaml
+  - agents/atlas_roy.yaml
+  - agents/atlas_gurnah.yaml
+  - agents/atlas_han_kang.yaml

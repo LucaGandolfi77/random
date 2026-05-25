@@ -1,0 +1,16 @@
+*.d
+*.elf
+*.hex
+*.log
+*.map
+*.o
+*.su
+
+build/
+dist/
+tests/host/build/
+logs/runtime/
+
+**/nbproject/private/
+**/build/
+**/dist/

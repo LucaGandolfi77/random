@@ -1,0 +1,14 @@
+# SAMRH71 simulator template.
+# Verify simulator support for the specific test before treating this flow as authoritative.
+
+device @DEVICE@
+hwtool sim
+program "@ELF@"
+reset
+run
+wait @RUN_SECONDS@
+halt
+print unit_test_done
+print unit_test_failures
+print unit_test_signature
+quit

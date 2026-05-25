@@ -1,0 +1,77 @@
+language: English
+sample_instructions:
+  - name: Literary novel brief
+    mode: Book_Mode
+    suggested_team: [atlas_tolstoy, atlas_shakespeare, atlas_austen, atlas_hemingway]
+    instruction: >-
+      Develop a chapter-by-chapter plan for a literary novel about political inheritance, family obligation, and institutional decline. Produce an outline, voice guidance, and a revision strategy.
+  - name: Commercial nonfiction brief
+    mode: Book_Mode
+    suggested_team: [atlas_tolstoy, atlas_dickens, atlas_austen, atlas_hemingway]
+    instruction: >-
+      Create a market-ready nonfiction book proposal about how teams make poor decisions under pressure. Include a thesis, chapter architecture, audience framing, and editorial positioning.
+  - name: Newspaper feature brief
+    mode: Article_Mode
+    suggested_team: [atlas_dickens, atlas_austen, atlas_hemingway]
+    instruction: >-
+      Write a 1500-word feature on the hidden labor behind modern logistics infrastructure. Make it accessible, grounded, and suitable for a serious general-interest publication.
+  - name: Philosophical essay brief
+    mode: Research_Mode
+    suggested_team: [atlas_borges, atlas_woolf, atlas_austen, atlas_hemingway]
+    instruction: >-
+      Draft a philosophical essay on whether memory should be treated as an archive, a narrative, or a negotiation. Distinguish argument, evidence, and implication clearly.
+  - name: Political family saga brief
+    mode: Book_Mode
+    suggested_team: [atlas_allende, atlas_tolstoy, atlas_woolf, atlas_hemingway]
+    instruction: >-
+      Develop a generational novel plan about a family whose fortunes are tied to land reform, exile, and a collapsing political coalition. Include a family map, chapter architecture, emotional through-lines, and a revision strategy.
+  - name: Psychological novel brief
+    mode: Book_Mode
+    suggested_team: [atlas_dostoevsky, atlas_woolf, atlas_austen, atlas_hemingway]
+    instruction: >-
+      Design a psychological novel about a public defender whose private debt, ideological certainty, and fear of disgrace begin to distort every major decision. Produce the central conflict map, chapter sequence, and pressure-test notes.
+  - name: Institutional satire brief
+    mode: Book_Mode
+    suggested_team: [atlas_bulgakov, atlas_kafka, atlas_dante, atlas_hemingway]
+    instruction: >-
+      Create a satirical fiction brief about a metropolitan licensing authority that keeps expanding its own rules until nobody can legally comply. Include premise, cast dynamics, escalation logic, and scene architecture.
+  - name: Investigative literary nonfiction brief
+    mode: Article_Mode
+    suggested_team: [atlas_bolano, atlas_poe, atlas_dickens, atlas_hemingway]
+    instruction: >-
+      Build an investigative nonfiction package on private crisis-management firms that quietly shape public scandals behind the scenes. Include reporting structure, source-risk notes, narrative arc, and verification priorities.
+  - name: Publication trial brief
+    mode: Article_Mode
+    suggested_team: [atlas_fact_prosecutor, atlas_defense_editor, atlas_trial_judge, atlas_legal_reviewer]
+    instruction: >-
+      Put an investigative feature about a public procurement scandal through a pre-publication trial. Produce the prosecution case, the defense case, legal-risk notes, the judge's ruling, and the smallest fix set needed to change the verdict.
+  - name: Canon continuity audit brief
+    mode: Hybrid_Mode
+    suggested_team: [atlas_continuity_archivist, atlas_copy_chief, atlas_woolf, atlas_le_guin]
+    instruction: >-
+      Audit a serialized civic-speculative project about a city reputation engine. Build a canon ledger for stable facts, flag contradictions across prior drafts, and write cemetery notes for two cut scenes that should remain searchable but not canonical.
+  - name: Polyphonic testimony dossier brief
+    mode: Research_Mode
+    suggested_team: [atlas_alexievich, atlas_roy, atlas_audience_editor, atlas_hemingway]
+    instruction: >-
+      Build a polyphonic reporting dossier about a poisoned industrial town ten years after the official cleanup. Define witness classes, ethical interview constraints, structural sequencing, and verification priorities without collapsing testimony into a single narrator.
+  - name: Migration memory novel brief
+    mode: Book_Mode
+    suggested_team: [atlas_gurnah, atlas_ferrante, atlas_woolf, atlas_tokarczuk]
+    instruction: >-
+      Develop a literary novel plan about siblings separated by an Indian Ocean migration route and reunited inside a rapidly transforming port city. Produce the memory structure, class tensions, chapter architecture, and continuity risks.
+  - name: Software documentation brief
+    mode: Code_Mode
+    suggested_team: [atlas_hemingway, atlas_woolf, atlas_borges, atlas_austen]
+    instruction: >-
+      Produce developer documentation for a command-line tool that provisions project templates, validates input, and writes audit logs. Include setup, usage examples, failure modes, and extension points.
+  - name: Software tool brief
+    mode: Code_Mode
+    suggested_team: [atlas_shelley, atlas_borges, atlas_dante, atlas_hemingway]
+    instruction: >-
+      Design and implement a small software tool that compares configuration files, highlights semantic differences, and outputs a human-readable report plus machine-readable JSON.
+  - name: Hybrid project brief
+    mode: Hybrid_Mode
+    suggested_team: [atlas_shelley, atlas_shakespeare, atlas_borges, atlas_woolf, atlas_hemingway]
+    instruction: >-
+      Create a hybrid project that includes a short narrative about a city-run predictive system and a functioning prototype that models risk categories and appeal workflows.

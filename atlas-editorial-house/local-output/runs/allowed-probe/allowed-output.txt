@@ -1,0 +1,8 @@
+query=-p atlas-editorial-house chat -q Filesystem constraint for this run:
+- Working directory: /workspaces/random/atlas-editorial-house/local-output/runs/allowed-probe
+- Approved output root: /workspaces/random/atlas-editorial-house/local-output
+- Create or modify files only under /workspaces/random/atlas-editorial-house/local-output.
+- Use local-output/runs only as a session workspace.
+- Place final deliverables in local-output/books, articles, essays, research, docs, code, hybrid, reviews, or translations as appropriate.
+
+Allowed probe

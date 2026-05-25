@@ -1,0 +1,79 @@
+schema_version: 1
+bundle_name: The Atlas Editorial House
+language: English
+imprints:
+  - imprint_id: atlas_noir
+    display_name: Atlas Noir
+    mission: Investigations, urban dread, hidden systems, and moral pressure under institutional darkness.
+    tone: severe, lucid, shadowed, unsentimental
+    preferred_leads: [atlas_bolano, atlas_poe, atlas_dostoevsky, atlas_bulgakov]
+    preferred_reviewers: [atlas_austen, atlas_hemingway]
+    deliverables:
+      - investigative fiction
+      - literary reportage
+      - procedural novellas
+      - scandal casebooks
+    reject_if:
+      - atmosphere replaces evidence
+      - the plot hides the real system behind the event
+      - darkness becomes decorative
+  - imprint_id: atlas_civic
+    display_name: Atlas Civic
+    mission: Public consequence, social history, institutional accountability, and communal legibility.
+    tone: grounded, public-facing, morally clear, historically alert
+    preferred_leads: [atlas_achebe, atlas_morrison, atlas_allende, atlas_dickens]
+    preferred_reviewers: [atlas_austen, atlas_hemingway]
+    deliverables:
+      - public-interest essays
+      - civic narratives
+      - social-historical novels
+      - policy-facing features
+    reject_if:
+      - the public stake disappears behind theory
+      - institutional power is named but not explained
+      - moral urgency outruns factual support
+  - imprint_id: atlas_lab
+    display_name: Atlas Lab
+    mission: Speculative systems, experimental prototypes, social-technical architecture, and governance design.
+    tone: exploratory, exact, systems-aware, humane
+    preferred_leads: [atlas_le_guin, atlas_shelley, atlas_borges]
+    preferred_reviewers: [atlas_dante, atlas_kafka, atlas_hemingway]
+    deliverables:
+      - hybrid narrative-plus-code work
+      - architecture documents
+      - speculative system fiction
+      - prototypes and design notes
+    reject_if:
+      - system elegance outruns real use
+      - governance assumptions remain hidden
+      - experimentation confuses rather than clarifies
+  - imprint_id: atlas_heresy
+    display_name: Atlas Heresy
+    mission: Contrarian arguments, revisionist essays, structural reversals, and anti-consensus editorial work.
+    tone: provocative, disciplined, accountable, sharp
+    preferred_leads: [atlas_cervantes, atlas_bulgakov, atlas_borges, atlas_oe]
+    preferred_reviewers: [atlas_austen, atlas_dante, atlas_hemingway]
+    deliverables:
+      - contrarian essays
+      - revisionist criticism
+      - polemics with evidence
+      - manifestos with review gates
+    reject_if:
+      - rebellion substitutes for analysis
+      - inversion is clever but not true
+      - the piece cannot survive adversarial review
+  - imprint_id: atlas_sunday_review
+    display_name: Atlas Sunday Review
+    mission: Elegant long-form criticism, review features, reflective essays, and serious weekend prose.
+    tone: reflective, controlled, generous, exact
+    preferred_leads: [atlas_woolf, atlas_austen, atlas_morrison, atlas_hemingway]
+    preferred_reviewers: [atlas_hemingway, atlas_woolf, atlas_dickens]
+    deliverables:
+      - long essays
+      - criticism
+      - reflective features
+      - literary public-intellectual prose
+    reject_if:
+      - the opening drifts without claim
+      - beauty displaces argument
+      - reflection never arrives at judgment

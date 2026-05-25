@@ -1,0 +1,14 @@
+# SAMRH707 simulator template.
+# Verify the command syntax against the local MDB version before using in CI.
+
+device @DEVICE@
+hwtool sim
+program "@ELF@"
+reset
+run
+wait @RUN_SECONDS@
+halt
+print unit_test_done
+print unit_test_failures
+print unit_test_signature
+quit

@@ -1,0 +1,9 @@
+[INFO] Atlas root: /workspaces/random/atlas-editorial-house
+[INFO] Approved output root: /workspaces/random/atlas-editorial-house/local-output
+[INFO] Session directory: /workspaces/random/atlas-editorial-house/local-output/runs/atlas-openrouter-20260526T102326Z
+[INFO] Hermes provider: openrouter
+[INFO] Hermes model: google/gemini-2.0-flash-exp:free
+[INFO] Hermes mode: text-only OpenRouter compatibility
+
+session_id: 20260526_102327_10ed6a
+API call failed after 3 retries: HTTP 404: No endpoints found for google/gemini-2.0-flash-exp:free.

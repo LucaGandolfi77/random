@@ -1,0 +1,63 @@
+Title: The Many Faces of Love
+
+Author Team:
+1. Lead (Tolstoy) – Structural architect, chapter outlines, narrative voice.
+2. Reviewer (Austen) – Tone, audience suitability, character authenticity.
+3. Refiner (Woolf) – Flow, transitions, lyrical richness.
+4. Fact‑checker (Borges) – Historical, cultural, philosophical references.
+5. Finisher (Hemingway) – Word‑count control, clarity, final polishing.
+
+Book Overview:
+- Passionate, expansive exploration of love in its many forms – romantic, familial, platonic, self‑love, love of work, love of art, love of nature, love across time, love in crisis, love in joy, love as sacrifice, love as growth, love in loss, love in redemption, love in community, love in spirituality, love in technology, love in aging, love in death, love as universal language.
+- Intended for adult readers seeking depth and emotional resonance, written in a literary‑popular hybrid tone.
+- 20 chapters, each >= 3000 words (≈ 60,000 words total).
+- After English manuscript, a professional Italian translation will be produced.
+
+Chapter Sketch (titles & focus):
+1. Beginnings – First stirrings of love in childhood.
+2. The Heart’s Mirror – Self‑love as foundation.
+3. Eyes of the Soul – Romantic love’s awakening.
+4. The Dance of Two – Partnership and mutual growth.
+5. Blood and Bond – Familial love across generations.
+6. The Unchosen Family – Chosen families and friendships.
+7. Love’s Labor – Passion for work and creation.
+8. Art’s Embrace – Love of beauty and artistic expression.
+9. Nature’s Whisper – Ecological love and stewardship.
+10. Time‑Traveling Hearts – Love across ages and histories.
+11. Storms and Shelters – Love in crisis and trauma.
+12. Joyful Reckoning – Love in celebration and triumph.
+13. Sacred Sacrifice – Love as self‑sacrifice.
+14. Healing Horizons – Love as recovery and redemption.
+15. Community Canvas – Collective love and social movements.
+16. Spiritual Currents – Divine love and transcendence.
+17. Digital Affinity – Love in the age of technology.
+18. Golden Years – Love in aging and legacy.
+19. Farewell Embrace – Love confronting mortality.
+20. Universal Pulse – Synthesizing love as a language that binds humanity.
+
+Production Schedule (per chapter):
+- Week 1: Outline, research notes, key quotations – Lead.
+- Week 2: First draft (≈ 1500 words) – Lead.
+- Week 3: Complete draft (≥3000 words) – Lead.
+- Week 4: Review & feedback – Reviewer.
+- Week 5: Refinement – Refiner.
+- Week 6: Fact‑check – Fact‑checker.
+- Week 7: Final polish – Finisher.
+- Week 8: Publish English chapter & update canon.
+
+After all 20 chapters are finished, the translation phase begins:
+- Translate each chapter into Italian (≈ 8‑9 weeks total).
+- Italian proof‑read and cultural adaptation – Italian reviewer (to be recruited).
+- Final Italian manuscript stored in local-output/translations/.
+
+Definition of Done (per chapter):
+- Minimum 3000 words, English only.
+- No anachronistic errors (fact‑checked).
+- Narrative coherence with previous chapters.
+- Style meets passionate yet accessible tone.
+- All editorial roles signed off.
+
+Next Steps:
+- Lead will create detailed outline for Chapter 1 (Beginnings) in a separate file.
+- Reviewer will prepare a checklist of tone and audience criteria.
+- Refiner will draft transition guidelines.

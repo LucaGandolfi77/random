@@ -1,0 +1,52 @@
+# Work Order: Passionate Book on Love
+
+## Classification
+- **Task type**: Book (20 chapters, >=3000 words each)
+- **Audience**: Adult readers seeking depth and emotional resonance; literary‑popular hybrid tone.
+- **Primary challenge**: Structural cohesion across many thematic facets of love while maintaining passionate voice.
+- **Risk level**: Moderate (large scope, multiple thematic arcs).
+
+## Mode
+- **Operating mode**: Small Group (4 members) – sufficient for robust editorial workflow without overstaffing.
+
+## Assigned Roles
+| Role | Persona | Responsibilities |
+|------|---------|-------------------|
+| Lead | Tolstoy | Define overall structure, outline each chapter, draft first‑pass prose.
+| Reviewer | Austen | Ensure tone, audience suitability, character/authenticity consistency.
+| Refiner | Woolf | Polish flow, transitions, lyrical richness, maintain passion.
+| Fact‑checker | Borges | Verify historical, cultural, philosophical references; flag anachronisms.
+| Finisher | Hemingway | Final word‑count control, clarity, final polish before shipment.
+
+*Note*: While the brief requested a team of 4, the Finisher role is considered a *post‑production* checkpoint and does not count toward the core writing team.
+
+## Output Directory
+- **Base path**: `local-output/books/love-passionate/`
+- Chapters will be stored as `chapter01.md`, `chapter02.md`, … `chapter20.md`.
+- The Italian translation will reside in `local-output/translations/love-passionate/` as `capitolo01_it.md`, etc.
+
+## Primary Risks
+1. **Scope creep** – 20 distinct love themes may drift; maintain a master thematic map.
+2. **Consistency** – Voice must stay unified across chapters written over weeks.
+3. **Fact‑checking load** – Diverse cultural references require thorough verification.
+
+## Handoff Sequence
+1. **Lead ➜ Reviewer** – After full draft (≥3000 words).
+2. **Reviewer ➜ Refiner** – After tone/audience sign‑off.
+3. **Refiner ➜ Fact‑checker** – After stylistic polish.
+4. **Fact‑checker ➜ Finisher** – After factual clearance.
+5. **Finisher ➜ Publication** – Final approval, move chapter to `canon/` and archive previous drafts in `cemetery/`.
+
+## Definition of Done (per chapter)
+- Minimum 3000 words, English only.
+- No factual errors (fact‑checked).
+- Narrative coherence with preceding chapters.
+- Passionate yet accessible tone confirmed by Reviewer.
+- All assigned roles have signed off.
+- File saved as `chapterXX.md` in the output directory.
+
+## First Action
+- **Lead (Tolstoy)** will create a detailed outline for Chapter 1 “Beginnings” and store it as `local-output/books/love-passionate/chapter01_outline.md`.
+
+---
+*All team members will adhere to the Atlas Editorial House writers’‑room workflow as outlined in the `atlas-writers-room` skill.*

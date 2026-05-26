@@ -1,0 +1,9 @@
+[INFO] Atlas root: /workspaces/random/atlas-editorial-house
+[INFO] Approved output root: /workspaces/random/atlas-editorial-house/local-output
+[INFO] Session directory: /workspaces/random/atlas-editorial-house/local-output/runs/atlas-openrouter-20260526T103746Z
+[INFO] Hermes provider: openrouter
+[INFO] Hermes model: nvidia/nemotron-3-super-120b-a12b:free
+[INFO] Hermes mode: text-only OpenRouter compatibility
+
+session_id: 20260526_103748_8b4f59
+ATLAS_HERMES_OPENROUTER_OK

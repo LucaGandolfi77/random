@@ -112,7 +112,31 @@ Recommended flow:
    ```bash
    ./hermes-profile/run-local-hermes.sh
    ./hermes-profile/run-local-hermes.sh --chat-query "Use the atlas-editorial-house skill and draft a release note."
+   ./hermes-profile/run-local-hermes.sh --provider openrouter --model nousresearch/hermes-4-70b --chat-query "Reply with exactly OK"
    ```
+
+Wrapper override knobs:
+
+- `--provider <name>` overrides the Hermes provider for one Atlas run.
+- `--model <id>` overrides the model for one Atlas run.
+- `--allow-tools` keeps Hermes toolsets enabled even for OpenRouter single-query runs.
+- `ATLAS_HERMES_PROVIDER` overrides the Atlas wrapper provider default. If unset, Atlas defaults to `openrouter`.
+- `ATLAS_HERMES_MODEL` overrides the Atlas wrapper model default. If unset, Atlas defaults to `ATLAS_OPENROUTER_MODEL`.
+- `ATLAS_OPENROUTER_MODEL` overrides the preferred OpenRouter model for Atlas wrapper runs and the OpenRouter smoke script. If unset, Atlas defaults to `nousresearch/hermes-4-70b`.
+
+Wrapper resolution order:
+
+1. explicit `--provider` and `--model` flags.
+2. `ATLAS_HERMES_PROVIDER`, `ATLAS_HERMES_MODEL`, and `ATLAS_OPENROUTER_MODEL`.
+3. Atlas project defaults: `ATLAS_HERMES_PROVIDER=openrouter`, `ATLAS_OPENROUTER_MODEL=nousresearch/hermes-4-70b`, and `ATLAS_HERMES_MODEL=$ATLAS_OPENROUTER_MODEL`.
+4. Hermes global config in `${HERMES_HOME:-~/.hermes}/config.yaml` is only a secondary fallback when you intentionally override Atlas defaults.
+
+OpenRouter single-query compatibility:
+
+- when Atlas resolves to `provider=openrouter` for `--chat-query` or `chat -q ...`, the wrapper defaults to a text-only mode.
+- that mode creates a temporary `HERMES_HOME`, reuses the installed profiles and secrets, and writes a temporary config with `agent.disabled_toolsets: ["*"]`.
+- the goal is to avoid OpenRouter 404 failures on models or routed providers that do not support tool use.
+- if you know your selected OpenRouter provider supports tools and you want normal tool calling, pass `--allow-tools`.
 
 After installing the profile:
 
@@ -172,6 +196,9 @@ The runtime wrapper is the preferred execution path for local work:
 
 - it starts Hermes from a dedicated session directory under `local-output/runs/`
 - it exports the approved local-output paths to the process environment
+- it can inject provider and model defaults so Atlas runs do not depend on an implicit global shell state
+- it can switch OpenRouter single-query runs into a text-only compatibility mode when tool use is unavailable
+- for non-interactive `chat -q` style runs, it persists the Hermes transcript under the session directory as `hermes-chat-output.txt` even when the model does not write a deliverable file on its own
 - it audits the Atlas bundle before and after execution and reports writes outside `local-output/`
 - it strengthens local repository discipline, but it is not a full operating-system sandbox
 

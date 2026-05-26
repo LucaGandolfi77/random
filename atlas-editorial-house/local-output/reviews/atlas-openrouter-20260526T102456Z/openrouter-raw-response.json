@@ -1,0 +1,54 @@
+{
+  "id": "gen-1779791096-Jxyh4ADyouMtQejylzUU",
+  "object": "chat.completion",
+  "created": 1779791096,
+  "model": "nvidia/nemotron-3-super-120b-a12b-20230311:free",
+  "provider": "Nvidia",
+  "system_fingerprint": null,
+  "service_tier": null,
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "length",
+      "native_finish_reason": "length",
+      "message": {
+        "role": "assistant",
+        "content": "We need to follow user instruction: \"Use the atlas-editorial-house skill. Write a 1500-word feature... Before drafting, state the recommended route, including lead, reviewer, and finisher, then produce the article in English. For this OpenRouter live smoke test, do not perform the full assignment",
+        "refusal": null,
+        "reasoning": "We need to follow user instruction: \"Use the atlas-editorial-house skill. Write a 1500-word feature... Before drafting, state the recommended route, including lead, reviewer, and finisher, then produce the article in English. For this OpenRouter live smoke test, do not perform the full assignment",
+        "reasoning_details": [
+          {
+            "type": "reasoning.text",
+            "text": "We need to follow user instruction: \"Use the atlas-editorial-house skill. Write a 1500-word feature... Before drafting, state the recommended route, including lead, reviewer, and finisher, then produce the article in English. For this OpenRouter live smoke test, do not perform the full assignment",
+            "format": "unknown",
+            "index": 0
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 124,
+    "completion_tokens": 64,
+    "total_tokens": 188,
+    "cost": 0,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0,
+      "upstream_inference_prompt_cost": 0,
+      "upstream_inference_completions_cost": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 75,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}

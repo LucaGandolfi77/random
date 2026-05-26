@@ -164,7 +164,8 @@ for script_path in \
     "$script_dir/hermes-profile/show-commands.sh" \
     "$script_dir/hermes-profile/launch-example.sh" \
     "$script_dir/smoke-test.sh" \
-    "$script_dir/smoke-test-openrouter.sh"
+    "$script_dir/smoke-test-openrouter.sh" \
+    "$script_dir/try-openrouter-models.sh"
 do
     bash -n "$script_path"
 done
@@ -188,6 +189,32 @@ log_info "Checking dry-run commands"
 "$script_dir/smoke-test-openrouter.sh" \
     --dry-run \
     >/dev/null
+
+"$script_dir/try-openrouter-models.sh" \
+    --dry-run \
+    >/dev/null
+
+log_info "Checking transcript persistence for non-interactive wrapper runs"
+mkdir -p "$tmp_dir/bin"
+cat > "$tmp_dir/bin/hermes" <<'EOF'
+#!/usr/bin/env bash
+printf 'ATLAS_SMOKE_TRANSCRIPT_OK\n'
+EOF
+chmod +x "$tmp_dir/bin/hermes"
+
+smoke_session_dir="$script_dir/local-output/runs/atlas-smoke-transcript"
+rm -rf "$smoke_session_dir"
+PATH="$tmp_dir/bin:$PATH" \
+    "$script_dir/hermes-profile/run-local-hermes.sh" \
+    --provider local \
+    --model atlas-smoke-model \
+    --session-name atlas-smoke-transcript \
+    --chat-query "Reply with exactly ATLAS_SMOKE_TRANSCRIPT_OK" \
+    >/dev/null
+
+grep -Fxq "ATLAS_SMOKE_TRANSCRIPT_OK" "$smoke_session_dir/hermes-chat-output.txt" \
+    || die "run-local-hermes.sh did not persist the non-interactive transcript"
+rm -rf "$smoke_session_dir"
 
 python3 "$script_dir/control-panel/server.py" --check >/dev/null
 python3 "$script_dir/control-panel/telegram_control_bot.py" --check >/dev/null

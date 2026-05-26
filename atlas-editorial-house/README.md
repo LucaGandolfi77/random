@@ -130,7 +130,7 @@ Useful installer options:
 The main operational commands are:
 
 - `./hermes-profile/show-commands.sh`: prints recommended Hermes commands for installing the profile, switching personalities, and using the six Atlas skills.
-- `./hermes-profile/run-local-hermes.sh`: starts Hermes from a dedicated session directory under `local-output/runs/` and performs a post-run repository audit.
+- `./hermes-profile/run-local-hermes.sh`: starts Hermes from a dedicated session directory under `local-output/runs/`, can inject provider and model overrides for the current run, and performs a post-run repository audit.
 - `./hermes-profile/launch-example.sh`: prints ready-to-use Atlas prompts for predefined scenarios and can run them through the wrapper.
 - `./smoke-test.sh`: validates roster counts, skill directories, launcher presets, README references, and wrapper/install dry-run behavior in one pass.
 - `./smoke-test-openrouter.sh`: runs a live OpenRouter smoke test, first against the raw API and then through Hermes plus the Atlas profile when `OPENROUTER_API_KEY` is available.
@@ -140,6 +140,30 @@ The main operational commands are:
 Atlas also supports a final translation step:
 
 - add `--translate-it` to `./hermes-profile/launch-example.sh` when you want the main output in English plus a final faithful Italian translation in modern language.
+
+The runtime wrapper also supports explicit model selection when you need a provider-specific run without changing your global Hermes defaults:
+
+- `--provider <name>` to override the Hermes provider for one run.
+- `--model <id>` to override the model for one run.
+- `--allow-tools` to keep Hermes toolsets enabled even for OpenRouter single-query runs.
+- `ATLAS_HERMES_PROVIDER` overrides the Atlas wrapper provider default. If unset, Atlas now defaults to `openrouter`.
+- `ATLAS_HERMES_MODEL` overrides the Atlas wrapper model default. If unset, Atlas now defaults to `ATLAS_OPENROUTER_MODEL`.
+- `ATLAS_OPENROUTER_MODEL` overrides the preferred OpenRouter model for Atlas scripts and wrappers. If unset, Atlas now defaults to `openai/gpt-oss-120b:free`.
+- `ATLAS_OPENROUTER_FALLBACK_MODELS` overrides the OpenRouter fallback chain used by Atlas text-only Hermes runs. It expects a comma-separated list of model ids.
+
+Resolution order for the wrapper is:
+
+1. explicit `--provider` and `--model` flags.
+2. `ATLAS_HERMES_PROVIDER`, `ATLAS_HERMES_MODEL`, and `ATLAS_OPENROUTER_MODEL`.
+3. Atlas project defaults: `ATLAS_HERMES_PROVIDER=openrouter`, `ATLAS_OPENROUTER_MODEL=openai/gpt-oss-120b:free`, `ATLAS_HERMES_MODEL=$ATLAS_OPENROUTER_MODEL`, and `ATLAS_OPENROUTER_FALLBACK_MODELS=openai/gpt-oss-20b:free,liquid/lfm-2.5-1.2b-instruct:free`.
+4. Hermes global config under `${HERMES_HOME:-~/.hermes}/config.yaml` is consulted only if you explicitly override the Atlas defaults back to an empty or alternate state before invocation.
+
+OpenRouter compatibility note:
+
+- for non-interactive Atlas runs such as `--chat-query` or `chat -q ...`, the wrapper now defaults to a text-only compatibility mode when the provider resolves to `openrouter`.
+- those non-interactive wrapper runs also persist the Hermes transcript under the session directory as `hermes-chat-output.txt`, even when the model responds only on stdout and does not create a deliverable file.
+- that mode creates a temporary Hermes home for the run, forces `platform_toolsets.cli: []` so no interactive tool surface leaks into the request, and injects an OpenRouter fallback chain based on Atlas defaults or `ATLAS_OPENROUTER_FALLBACK_MODELS`.
+- if you explicitly want tool calling on an OpenRouter run, pass `--allow-tools`.
 
 ## OpenRouter Compatibility and Live Smoke
 
@@ -152,16 +176,18 @@ Practical implication:
 
 Recommended models for Atlas-style workloads:
 
-- `nousresearch/hermes-4-70b`
-- `nousresearch/hermes-4-405b`
-- `nousresearch/hermes-3-llama-3.1-70b`
-- `nousresearch/hermes-3-llama-3.1-405b`
+- `openai/gpt-oss-120b:free`
+- `openai/gpt-oss-20b:free`
+- `liquid/lfm-2.5-1.2b-instruct:free`
+- `openai/gpt-4.1-mini`
+- `google/gemini-2.0-flash-001`
 
-The default model for the live smoke script is `nousresearch/hermes-4-70b` because it is a practical balance of capability and cost for long prompts, multi-role routing, and continuity-heavy tasks.
+The default model for the live smoke script is `openai/gpt-oss-120b:free`, with Atlas text-only fallback routed next to `openai/gpt-oss-20b:free` and `liquid/lfm-2.5-1.2b-instruct:free`, because those were the free models that completed the latest OpenRouter raw smoke without failing.
 
 The live test entrypoint is:
 
 - `./smoke-test-openrouter.sh`
+- `./try-openrouter-models.sh`
 
 What it checks:
 
@@ -176,12 +202,28 @@ Typical usage:
 - `OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh`
 - `OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh --model nousresearch/hermes-4-405b --scenario trial-review`
 - `OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh --raw-only`
+- `OPENROUTER_API_KEY=... ./try-openrouter-models.sh --hermes-only`
+- `OPENROUTER_API_KEY=... ./try-openrouter-models.sh --free-only --hermes-only`
+- `OPENROUTER_API_KEY=... ./try-openrouter-models.sh --hermes-only --model nousresearch/hermes-4-405b --model openai/gpt-4.1-mini`
+- `OPENROUTER_API_KEY=... ./try-openrouter-models.sh --hermes-only --model arcee-ai/trinity-large-thinking:free --model poolside/laguna-m.1:free --model openai/gpt-oss-120b:free`
+- `OPENROUTER_API_KEY=... ./hermes-profile/run-local-hermes.sh --provider openrouter --model openai/gpt-oss-120b:free --chat-query "Reply with exactly OK"`
+- `OPENROUTER_API_KEY=... ATLAS_OPENROUTER_FALLBACK_MODELS=openai/gpt-oss-20b:free,liquid/lfm-2.5-1.2b-instruct:free ./hermes-profile/run-local-hermes.sh --provider openrouter --model openai/gpt-oss-120b:free --chat-query "Reply with exactly OK"`
+- `OPENROUTER_API_KEY=... ./hermes-profile/run-local-hermes.sh --provider openrouter --model openai/gpt-4.1-mini --allow-tools --chat-query "Use the atlas-editorial-house skill and produce a tool-enabled run"`
+
+The model sweep helper is useful when you already have `OPENROUTER_API_KEY` in your current terminal and want a quick pass/fail matrix across a shortlist of candidate models without editing the smoke script itself.
+
+Its default sweep now covers both the Atlas-focused Hermes shortlist and a larger free-friendly fallback set, including models such as `arcee-ai/trinity-large-thinking:free`, `poolside/laguna-m.1:free`, `openai/gpt-oss-120b:free`, `z-ai/glm-4.5-air:free`, `google/gemma-4-31b-it:free`, and other low-friction OpenRouter candidates.
 
 Live prerequisites:
 
 - `OPENROUTER_API_KEY` must be set.
 - `hermes` must be installed and available on `PATH` for the Hermes integration half of the test.
 - the Atlas profile must already be installed under `${HERMES_HOME:-~/.hermes}/profiles/atlas-editorial-house/` unless you run `--raw-only`.
+
+Important note for the Atlas wrapper:
+
+- Atlas now ships with project-local defaults for provider and model, so it no longer needs a matching global Hermes config just to choose OpenRouter and a Hermes-family model.
+- if you want a different provider or model, prefer explicit wrapper flags or Atlas env vars for reproducible runs.
 
 ## Private Control Panel
 

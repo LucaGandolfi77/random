@@ -1,0 +1,54 @@
+{
+  "id": "gen-1779791082-esyo1N3wnbi3smhCDAES",
+  "object": "chat.completion",
+  "created": 1779791082,
+  "model": "arcee-ai/trinity-large-thinking:free",
+  "provider": "Arcee AI",
+  "system_fingerprint": null,
+  "service_tier": null,
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "length",
+      "native_finish_reason": "length",
+      "message": {
+        "role": "assistant",
+        "content": null,
+        "refusal": null,
+        "reasoning": "We are asked to use the \"atlas-editorial-house\" skill. The user wants a 1500-word feature on the hidden labor behind modern logistics infrastructure. They want it accessible, grounded, and suitable for a serious general-interest publication. They also ask to state the recommended route, including lead, reviewer, and finisher",
+        "reasoning_details": [
+          {
+            "type": "reasoning.text",
+            "text": "We are asked to use the \"atlas-editorial-house\" skill. The user wants a 1500-word feature on the hidden labor behind modern logistics infrastructure. They want it accessible, grounded, and suitable for a serious general-interest publication. They also ask to state the recommended route, including lead, reviewer, and finisher",
+            "format": "unknown",
+            "index": 0
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 117,
+    "completion_tokens": 64,
+    "total_tokens": 181,
+    "cost": 0,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0,
+      "upstream_inference_prompt_cost": 0,
+      "upstream_inference_completions_cost": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 66,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,9 @@
+[INFO] Atlas root: /workspaces/random/atlas-editorial-house
+[INFO] Approved output root: /workspaces/random/atlas-editorial-house/local-output
+[INFO] Session directory: /workspaces/random/atlas-editorial-house/local-output/runs/atlas-openrouter-20260526T094321Z
+[INFO] Hermes provider: openrouter
+[INFO] Hermes model: openai/gpt-4.1-mini
+[INFO] Hermes mode: text-only OpenRouter compatibility
+Error: Error code: 400 - {'error': {'message': 'No models provided', 'code': 400}, 'user_id': 'user_3CGMrZJlStjOoDDyDlLrY0HSkQP'}
+
+session_id: 20260526_094322_05c38b

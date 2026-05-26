@@ -1,0 +1,9 @@
+[INFO] Atlas root: /workspaces/random/atlas-editorial-house
+[INFO] Approved output root: /workspaces/random/atlas-editorial-house/local-output
+[INFO] Session directory: /workspaces/random/atlas-editorial-house/local-output/runs/atlas-openrouter-20260526T095223Z
+[INFO] Hermes provider: openrouter
+[INFO] Hermes model: openai/gpt-4.1-mini
+[INFO] Hermes mode: text-only OpenRouter compatibility
+
+session_id: 20260526_095225_5bb17b
+ATLAS_HERMES_OPENROUTER_OK

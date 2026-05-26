@@ -1,0 +1,9 @@
+[INFO] Atlas root: /workspaces/random/atlas-editorial-house
+[INFO] Approved output root: /workspaces/random/atlas-editorial-house/local-output
+[INFO] Session directory: /workspaces/random/atlas-editorial-house/local-output/runs/atlas-openrouter-20260526T103659Z
+[INFO] Hermes provider: openrouter
+[INFO] Hermes model: deepseek/deepseek-v4-flash:free
+[INFO] Hermes mode: text-only OpenRouter compatibility
+
+session_id: 20260526_103701_fb5db7
+API call failed after 3 retries: HTTP 429: Provider returned error

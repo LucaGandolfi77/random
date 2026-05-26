@@ -1,0 +1,9 @@
+[INFO] Atlas root: /workspaces/random/atlas-editorial-house
+[INFO] Approved output root: /workspaces/random/atlas-editorial-house/local-output
+[INFO] Session directory: /workspaces/random/atlas-editorial-house/local-output/runs/atlas-openrouter-20260526T102041Z
+[INFO] Hermes provider: openrouter
+[INFO] Hermes model: arcee-ai/trinity-large-thinking:free
+[INFO] Hermes mode: text-only OpenRouter compatibility
+
+session_id: 20260526_102043_7b104d
+ATLAS_HERMES_OPENROUTER_OK

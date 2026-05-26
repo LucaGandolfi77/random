@@ -1,0 +1,9 @@
+[INFO] Atlas root: /workspaces/random/atlas-editorial-house
+[INFO] Approved output root: /workspaces/random/atlas-editorial-house/local-output
+[INFO] Session directory: /workspaces/random/atlas-editorial-house/local-output/runs/atlas-openrouter-20260526T102049Z
+[INFO] Hermes provider: openrouter
+[INFO] Hermes model: poolside/laguna-m.1:free
+[INFO] Hermes mode: text-only OpenRouter compatibility
+
+session_id: 20260526_102051_9d323f
+ATLAS_HERMES_OPENROUTER_OK

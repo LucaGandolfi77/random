@@ -1,0 +1,36 @@
+[INFO] Atlas root: /workspaces/random/atlas-editorial-house
+[INFO] Approved output root: /workspaces/random/atlas-editorial-house/local-output
+[INFO] Session directory: /workspaces/random/atlas-editorial-house/local-output/runs/atlas-openrouter-20260526T084110Z
+Query: Use the atlas-editorial-house skill. Write a 1500-word feature on the hidden labor behind modern logistics infrastructure. Make it accessible,
+grounded, and suitable for a serious general-interest publication. Before drafting, state the recommended route, including lead, reviewer, and 
+finisher, then produce the article in English.
+
+For this Hermes plus OpenRouter live smoke test, do not perform the full assignment. Reply with exactly: ATLAS_HERMES_OPENROUTER_OK
+Initializing agent...
+  ⚠ tirith security scanner enabled but not available — command scanning will use pattern matching only
+────────────────────────────────────────
+
+⚠️  API call failed (attempt 1/3): BadRequestError [HTTP 400]
+   🔌 Provider: openrouter  Model: 
+   🌐 Endpoint: https://openrouter.ai/api/v1
+   📝 Error: HTTP 400: No models provided
+   📋 Details: {'message': 'No models provided', 'code': 400}
+⚠️ Non-retryable error (HTTP 400) — trying fallback...
+❌ Non-retryable error (HTTP 400): HTTP 400: No models provided
+❌ Non-retryable client error (HTTP 400). Aborting.
+   🔌 Provider: openrouter  Model: 
+   🌐 Endpoint: https://openrouter.ai/api/v1
+   💡 This type of error won't be fixed by retrying.
+ ─  ⚕ Hermes  ───────────────────────────────────────────────────────────────── 
+                                                                                
+     Error: Error code: 400 - {'error': {'message': 'No models provided',       
+     'code': 400}, 'user_id': 'user_3CGMrZJlStjOoDDyDlLrY0HSkQP'}               
+                                                                                
+ ────────────────────────────────────────────────────────────────────────────── 
+
+Resume this session with:
+  hermes --resume 20260526_084114_904d4b -p atlas-editorial-house
+
+Session:        20260526_084114_904d4b
+Duration:       4s
+Messages:       1 (1 user, 0 tool calls)

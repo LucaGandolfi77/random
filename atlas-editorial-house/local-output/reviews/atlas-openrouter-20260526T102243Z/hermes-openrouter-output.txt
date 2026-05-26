@@ -1,0 +1,9 @@
+[INFO] Atlas root: /workspaces/random/atlas-editorial-house
+[INFO] Approved output root: /workspaces/random/atlas-editorial-house/local-output
+[INFO] Session directory: /workspaces/random/atlas-editorial-house/local-output/runs/atlas-openrouter-20260526T102243Z
+[INFO] Hermes provider: openrouter
+[INFO] Hermes model: nousresearch/hermes-3-llama-3.1-405b:free
+[INFO] Hermes mode: text-only OpenRouter compatibility
+
+session_id: 20260526_102244_6a30fc
+API call failed after 3 retries: HTTP 404: No endpoints found that support tool use. Try disabling "clarify". To learn more about provider routing, visit: https://openrouter.ai/docs/guides/routing/provider-selection

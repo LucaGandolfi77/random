@@ -29,7 +29,7 @@ By default the script performs two checks:
   2. A Hermes CLI run through Atlas' guarded wrapper using the same model.
 
 Options:
-  --model <id>          OpenRouter model id. Default: nousresearch/hermes-4-70b
+    --model <id>          OpenRouter model id. Default: openai/gpt-oss-120b:free
   --scenario <name>     Atlas launcher scenario used to build the smoke prompt.
                         Default: article
   --profile <name>      Hermes profile name. Default: atlas-editorial-house
@@ -94,7 +94,7 @@ launcher_path="$atlas_root/hermes-profile/launch-example.sh"
 wrapper_path="$atlas_root/hermes-profile/run-local-hermes.sh"
 reviews_root="$atlas_root/local-output/reviews"
 
-model_name="${ATLAS_OPENROUTER_MODEL:-nousresearch/hermes-4-70b}"
+model_name="${ATLAS_OPENROUTER_MODEL:-openai/gpt-oss-120b:free}"
 scenario="article"
 profile_name="atlas-editorial-house"
 session_name="atlas-openrouter-$(date -u +%Y%m%dT%H%M%SZ)"
@@ -182,11 +182,11 @@ For this Hermes plus OpenRouter live smoke test, do not perform the full assignm
 hermes_command=(
     "$wrapper_path"
     --profile "$profile_name"
-    --session-name "$session_name"
-    --
     --provider openrouter
     --model "$model_name"
-    chat -q "$hermes_prompt"
+    --session-name "$session_name"
+    --quiet
+    --chat-query "$hermes_prompt"
 )
 
 if [[ "$dry_run" -eq 1 ]]; then
@@ -307,7 +307,7 @@ if [[ "$raw_only" -ne 1 ]]; then
         die "Hermes OpenRouter smoke failed"
     fi
 
-    grep -Fq "$hermes_token" "$log_dir/hermes-openrouter-output.txt" || {
+    grep -Fxq "$hermes_token" "$log_dir/hermes-openrouter-output.txt" || {
         sed -n '1,120p' "$log_dir/hermes-openrouter-output.txt" >&2 || true
         die "Hermes OpenRouter smoke did not emit the expected token: $hermes_token"
     }

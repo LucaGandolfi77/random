@@ -10,6 +10,7 @@ Print recommended Hermes commands for The Atlas Editorial House profile.
 Sections:
   install         Show only installation commands
   startup         Show startup and profile commands
+  books           Show autonomous book-production commands
   personalities   Show personality switch commands
   skills          Show skill usage examples
   all             Show the full cheat sheet (default)
@@ -50,6 +51,24 @@ One-shot local query through the wrapper:
 If your Hermes setup supports profile commands, create or switch to a profile named atlas-editorial-house before chatting.
 
 Once the profile is installed, keep the default SOUL persona active for newsroom-level behavior and use personality overlays only when you want a specific writer-agent.
+EOF
+}
+
+print_books() {
+    cat <<'EOF'
+== Books ==
+
+Write a full book with one command:
+  ./write-book.sh --title "Red Inheritance" --theme "Political power, family betrayal, institutional decline"
+
+Preview the exact prompt and Hermes invocation without running the model:
+  ./write-book.sh --title "Red Inheritance" --theme "Political power, family betrayal, institutional decline" --dry-run
+
+Resume an interrupted production run:
+  ./write-book.sh --title "Red Inheritance" --theme "Political power, family betrayal, institutional decline" --resume
+
+Add stronger production constraints and an Italian translation pass:
+  ./write-book.sh --title "Red Inheritance" --theme "Political power, family betrayal, institutional decline" --chapters 20 --min-words 3000 --italian
 EOF
 }
 
@@ -166,6 +185,9 @@ case "$section" in
     startup)
         print_startup
         ;;
+  books)
+    print_books
+    ;;
     personalities)
         print_personalities
         ;;
@@ -177,6 +199,8 @@ case "$section" in
         printf '\n'
         print_startup
         printf '\n'
+      print_books
+      printf '\n'
         print_personalities
         printf '\n'
         print_skills

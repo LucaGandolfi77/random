@@ -47,7 +47,7 @@ Environment:
 Examples:
   ./smoke-test-openrouter.sh --dry-run
   OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh
-  OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh --model nousresearch/hermes-4-405b --scenario trial-review
+  OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh --model nousresearch/hermes-3-llama-3.1-405b:free --scenario trial-review
   OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh --raw-only
 EOF
 }

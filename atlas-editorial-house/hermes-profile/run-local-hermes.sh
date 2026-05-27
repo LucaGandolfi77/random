@@ -183,25 +183,85 @@ normalize_openrouter_model_value() {
     printf '%s\n' "$value"
 }
 
-build_text_only_hermes_home() {
-    local real_home temp_home provider_override model_override fallback_models_csv
+populate_temp_hermes_home() {
+    local real_home temp_home include_config overlay_profile entry basename profile_entry profile_basename
 
-    real_home="${HERMES_HOME:-$HOME/.hermes}"
-    provider_override="${1:-}"
-    model_override="${2:-}"
-    fallback_models_csv="${3:-}"
-    temp_home="$(mktemp -d)"
+    real_home="$1"
+    temp_home="$2"
+    include_config="$3"
+    overlay_profile="${4:-}"
 
     while IFS= read -r -d '' entry; do
-        local basename
-
         basename="$(basename "$entry")"
-        if [[ "$basename" == "config.yaml" ]]; then
+
+        if [[ "$basename" == "profiles" ]]; then
+            continue
+        fi
+
+        if [[ "$include_config" != "1" && "$basename" == "config.yaml" ]]; then
             continue
         fi
 
         ln -s "$entry" "$temp_home/$basename"
     done < <(find "$real_home" -mindepth 1 -maxdepth 1 -print0)
+
+    mkdir -p "$temp_home/profiles"
+
+    if [[ -d "$real_home/profiles" ]]; then
+        while IFS= read -r -d '' profile_entry; do
+            profile_basename="$(basename "$profile_entry")"
+
+            if [[ -n "$overlay_profile" && "$profile_basename" == "$overlay_profile" ]]; then
+                continue
+            fi
+
+            ln -s "$profile_entry" "$temp_home/profiles/$profile_basename"
+        done < <(find "$real_home/profiles" -mindepth 1 -maxdepth 1 -print0)
+    fi
+}
+
+overlay_repo_profile_into_home() {
+    local temp_home profile_to_overlay repo_profile_dir target_profile_dir
+
+    temp_home="$1"
+    profile_to_overlay="$2"
+    repo_profile_dir="$script_dir/$profile_to_overlay"
+
+    if [[ ! -d "$repo_profile_dir" ]]; then
+        return 0
+    fi
+
+    target_profile_dir="$temp_home/profiles/$profile_to_overlay"
+    rm -rf "$target_profile_dir"
+    mkdir -p "$target_profile_dir"
+    cp -a "$repo_profile_dir/." "$target_profile_dir/"
+}
+
+build_runtime_hermes_home() {
+    local real_home temp_home profile_to_overlay
+
+    profile_to_overlay="$1"
+    real_home="${HERMES_HOME:-$HOME/.hermes}"
+    temp_home="$(mktemp -d)"
+
+    populate_temp_hermes_home "$real_home" "$temp_home" 1 "$profile_to_overlay"
+    overlay_repo_profile_into_home "$temp_home" "$profile_to_overlay"
+
+    printf '%s\n' "$temp_home"
+}
+
+build_text_only_hermes_home() {
+    local real_home temp_home provider_override model_override fallback_models_csv profile_to_overlay
+
+    real_home="${HERMES_HOME:-$HOME/.hermes}"
+    provider_override="${1:-}"
+    model_override="${2:-}"
+    fallback_models_csv="${3:-}"
+    profile_to_overlay="${4:-}"
+    temp_home="$(mktemp -d)"
+
+    populate_temp_hermes_home "$real_home" "$temp_home" 0 "$profile_to_overlay"
+    overlay_repo_profile_into_home "$temp_home" "$profile_to_overlay"
 
     python3 - "$real_home/config.yaml" "$temp_home/config.yaml" "$provider_override" "$model_override" "$fallback_models_csv" <<'PY'
 from __future__ import annotations
@@ -327,16 +387,18 @@ snapshot_repo_state() {
 }
 
 build_query_with_policy() {
-    cat <<EOF
-Filesystem constraint for this run:
-- Working directory: $session_dir
-- Approved output root: $allowed_output_root
-- Create or modify files only under $allowed_output_root.
-- Use local-output/runs only as a session workspace.
-- Place final deliverables in local-output/books, articles, essays, research, docs, code, hybrid, reviews, canon, cemetery, or translations as appropriate.
-
-$chat_query
-EOF
+    # Use printf instead of a heredoc to avoid heredoc-terminator injection.
+    # If $chat_query contained a line that is exactly the heredoc delimiter the
+    # heredoc would terminate early, truncating the query and potentially
+    # exposing trailing content to the shell parser.
+    printf 'Filesystem constraint for this run:\n'
+    printf -- '- Working directory: %s\n' "$session_dir"
+    printf -- '- Approved output root: %s\n' "$allowed_output_root"
+    printf -- '- Create or modify files only under %s.\n' "$allowed_output_root"
+    printf -- '- Use local-output/runs only as a session workspace.\n'
+    printf -- '- Place final deliverables in local-output/books, articles, essays, research, docs, code, hybrid, reviews, canon, cemetery, or translations as appropriate.\n'
+    printf '\n'
+    printf '%s\n' "$chat_query"
 }
 
 print_command() {
@@ -488,7 +550,7 @@ if [[ -z "$model_name" ]]; then
 fi
 
 if [[ -z "$model_name" && "$provider_name" == "openrouter" ]]; then
-    model_name="${ATLAS_OPENROUTER_MODEL:-nousresearch/hermes-4-70b}"
+    model_name="${ATLAS_OPENROUTER_MODEL:-nousresearch/hermes-3-llama-3.1-405b:free}"
 fi
 
 if [[ "$provider_name" == "openrouter" && -n "$model_name" ]]; then
@@ -605,7 +667,9 @@ fi
 temp_hermes_home=""
 if [[ "$text_only_mode" -eq 1 ]]; then
     command -v python3 >/dev/null 2>&1 || die "python3 is required for text-only OpenRouter compatibility mode"
-    temp_hermes_home="$(build_text_only_hermes_home "$provider_name" "$model_name" "$ATLAS_OPENROUTER_FALLBACK_MODELS")"
+    temp_hermes_home="$(build_text_only_hermes_home "$provider_name" "$model_name" "$ATLAS_OPENROUTER_FALLBACK_MODELS" "$profile_name")"
+elif [[ -d "$script_dir/$profile_name" ]]; then
+    temp_hermes_home="$(build_runtime_hermes_home "$profile_name")"
 fi
 
 before_snapshot="$(mktemp)"

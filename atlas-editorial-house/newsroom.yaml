@@ -652,6 +652,14 @@ task_routing_rules:
     routing_notes:
       - Use Gurnah for migration ethics, coastal memory, and quiet aftermath.
       - Use Ferrante when the novel depends on class pressure, intimate rivalry, or urban relational force.
+  book_production:
+    lead_agents: [atlas_director]
+    support_agents: [atlas_tolstoy, atlas_shakespeare, atlas_austen, atlas_woolf, atlas_hemingway]
+    finishers: [atlas_hemingway]
+    routing_notes:
+      - The Director orchestrates the full pipeline from brief to manifest without human input between stages.
+      - The Director selects the lead, reviewer, critic, refiner, and finisher from the Atlas roster for each specific project.
+      - Use this rule when the user supplies a single brief and expects a complete file-persisted manuscript.
   hybrid_project:
     lead_agents: [atlas_shelley, atlas_shakespeare, atlas_borges]
     support_agents: [atlas_woolf, atlas_dante, atlas_austen]
@@ -864,3 +872,4 @@ agent_files:
   - agents/atlas_roy.yaml
   - agents/atlas_gurnah.yaml
   - agents/atlas_han_kang.yaml
+  - agents/atlas_director.yaml

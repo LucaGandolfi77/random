@@ -11,6 +11,7 @@ This directory contains a Hermes-style profile export based on the public `nousr
 - `atlas-editorial-house/config.yaml`
 - `atlas-editorial-house/SOUL.md`
 - `atlas-editorial-house/profile.yaml`
+- `atlas-editorial-house/skills/creative/atlas-book-factory/SKILL.md`
 - `atlas-editorial-house/skills/creative/atlas-editorial-house/SKILL.md`
 - `atlas-editorial-house/skills/creative/atlas-canon-memory/SKILL.md`
 - `atlas-editorial-house/skills/creative/atlas-imprints/SKILL.md`
@@ -64,7 +65,7 @@ Recommended flow:
    ```bash
    ./smoke-test-openrouter.sh --dry-run
    OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh
-   OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh --model nousresearch/hermes-4-70b --scenario trial-review
+   OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh --model nousresearch/hermes-3-llama-3.1-405b:free --scenario trial-review
    ```
 
 8. Start the private local control server when you want a web UI for scenarios, custom prompts, job logs, and a Telegram bridge target:
@@ -122,13 +123,13 @@ Wrapper override knobs:
 - `--allow-tools` keeps Hermes toolsets enabled even for OpenRouter single-query runs.
 - `ATLAS_HERMES_PROVIDER` overrides the Atlas wrapper provider default. If unset, Atlas defaults to `openrouter`.
 - `ATLAS_HERMES_MODEL` overrides the Atlas wrapper model default. If unset, Atlas defaults to `ATLAS_OPENROUTER_MODEL`.
-- `ATLAS_OPENROUTER_MODEL` overrides the preferred OpenRouter model for Atlas wrapper runs and the OpenRouter smoke script. If unset, Atlas defaults to `nousresearch/hermes-4-70b`.
+- `ATLAS_OPENROUTER_MODEL` overrides the preferred OpenRouter model for Atlas wrapper runs and the OpenRouter smoke script. If unset, Atlas defaults to `nousresearch/hermes-3-llama-3.1-405b:free`.
 
 Wrapper resolution order:
 
 1. explicit `--provider` and `--model` flags.
 2. `ATLAS_HERMES_PROVIDER`, `ATLAS_HERMES_MODEL`, and `ATLAS_OPENROUTER_MODEL`.
-3. Atlas project defaults: `ATLAS_HERMES_PROVIDER=openrouter`, `ATLAS_OPENROUTER_MODEL=nousresearch/hermes-4-70b`, and `ATLAS_HERMES_MODEL=$ATLAS_OPENROUTER_MODEL`.
+3. Atlas project defaults: `ATLAS_HERMES_PROVIDER=openrouter`, `ATLAS_OPENROUTER_MODEL=nousresearch/hermes-3-llama-3.1-405b:free`, and `ATLAS_HERMES_MODEL=$ATLAS_OPENROUTER_MODEL`.
 4. Hermes global config in `${HERMES_HOME:-~/.hermes}/config.yaml` is only a secondary fallback when you intentionally override Atlas defaults.
 
 OpenRouter single-query compatibility:

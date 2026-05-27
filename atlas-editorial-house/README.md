@@ -17,14 +17,15 @@ Atlas is made of four layers that work together:
 
 At the current state of the bundle, Atlas includes:
 
-- 36 named personalities.
+- 37 named personalities (including the Director orchestrator).
 - 23 literary-inspired writer/editor roles.
 - 7 operational newsroom roles.
 - 6 additional global-contemporary literary roles.
-- 6 profile-local skills.
+- 1 autonomous orchestration agent (Director).
+- 7 profile-local skills.
 - 14 ready launcher scenarios.
 - 5 editorial imprints.
-- a guarded wrapper and a root smoke suite.
+- a guarded wrapper, a single-command book launcher, and a root smoke suite.
 
 ## Repository Layout
 
@@ -91,12 +92,13 @@ The profile mirrors the layout Hermes expects under `~/.hermes/profiles/<name>/`
 
 Core profile files:
 
-- `config.yaml` with named personalities for the 36 Atlas personalities, including literary and operational roles.
+- `config.yaml` with named personalities for the 37 Atlas personalities, including the Director orchestrator plus literary and operational roles.
 - `SOUL.md` with the default newsroom-level conductor persona.
 - `profile.yaml` with profile metadata.
 
 Skill files:
 
+- `skills/creative/atlas-book-factory/SKILL.md`: autonomous book production pipeline from a single brief to a complete file-persisted manuscript, managed by the Director agent.
 - `skills/creative/atlas-editorial-house/SKILL.md`: general routing, role selection, output discipline, and baseline editorial behavior.
 - `skills/creative/atlas-canon-memory/SKILL.md`: canon ledger maintenance, continuity review, and cemetery management for cut material.
 - `skills/creative/atlas-imprints/SKILL.md`: house-line selection before drafting, including tonal and deliverable defaults.
@@ -129,7 +131,8 @@ Useful installer options:
 
 The main operational commands are:
 
-- `./hermes-profile/show-commands.sh`: prints recommended Hermes commands for installing the profile, switching personalities, and using the six Atlas skills.
+- `./write-book.sh`: single-command entrypoint for autonomous book production. Supply `--title` and `--theme`; the Director agent handles team selection, planning, chapter drafting, quality gates, manifest completion, and optional translation end-to-end. See the Write-Book section below for exact commands.
+- `./hermes-profile/show-commands.sh`: prints recommended Hermes commands for installing the profile, switching personalities, and using the seven Atlas skills.
 - `./hermes-profile/run-local-hermes.sh`: starts Hermes from a dedicated session directory under `local-output/runs/`, can inject provider and model overrides for the current run, and performs a post-run repository audit.
 - `./hermes-profile/launch-example.sh`: prints ready-to-use Atlas prompts for predefined scenarios and can run them through the wrapper.
 - `./smoke-test.sh`: validates roster counts, skill directories, launcher presets, README references, and wrapper/install dry-run behavior in one pass.
@@ -179,8 +182,7 @@ Recommended models for Atlas-style workloads:
 - `openai/gpt-oss-120b:free`
 - `openai/gpt-oss-20b:free`
 - `liquid/lfm-2.5-1.2b-instruct:free`
-- `openai/gpt-4.1-mini`
-- `google/gemini-2.0-flash-001`
+
 
 The default model for the live smoke script is `openai/gpt-oss-120b:free`, with Atlas text-only fallback routed next to `openai/gpt-oss-20b:free` and `liquid/lfm-2.5-1.2b-instruct:free`, because those were the free models that completed the latest OpenRouter raw smoke without failing.
 
@@ -200,15 +202,15 @@ Typical usage:
 
 - `./smoke-test-openrouter.sh --dry-run`
 - `OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh`
-- `OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh --model nousresearch/hermes-4-405b --scenario trial-review`
+- `OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh --model nousresearch/hermes-3-llama-3.1-405b:free --scenario trial-review`
 - `OPENROUTER_API_KEY=... ./smoke-test-openrouter.sh --raw-only`
 - `OPENROUTER_API_KEY=... ./try-openrouter-models.sh --hermes-only`
 - `OPENROUTER_API_KEY=... ./try-openrouter-models.sh --free-only --hermes-only`
-- `OPENROUTER_API_KEY=... ./try-openrouter-models.sh --hermes-only --model nousresearch/hermes-4-405b --model openai/gpt-4.1-mini`
+- `OPENROUTER_API_KEY=... ./try-openrouter-models.sh --hermes-only --model nousresearch/hermes-3-llama-3.1-405b:free --model :free`
 - `OPENROUTER_API_KEY=... ./try-openrouter-models.sh --hermes-only --model arcee-ai/trinity-large-thinking:free --model poolside/laguna-m.1:free --model openai/gpt-oss-120b:free`
 - `OPENROUTER_API_KEY=... ./hermes-profile/run-local-hermes.sh --provider openrouter --model openai/gpt-oss-120b:free --chat-query "Reply with exactly OK"`
 - `OPENROUTER_API_KEY=... ATLAS_OPENROUTER_FALLBACK_MODELS=openai/gpt-oss-20b:free,liquid/lfm-2.5-1.2b-instruct:free ./hermes-profile/run-local-hermes.sh --provider openrouter --model openai/gpt-oss-120b:free --chat-query "Reply with exactly OK"`
-- `OPENROUTER_API_KEY=... ./hermes-profile/run-local-hermes.sh --provider openrouter --model openai/gpt-4.1-mini --allow-tools --chat-query "Use the atlas-editorial-house skill and produce a tool-enabled run"`
+- `OPENROUTER_API_KEY=... ./hermes-profile/run-local-hermes.sh --provider openrouter --model nousresearch/hermes-3-llama-3.1-405b:free --allow-tools --chat-query "Use the atlas-editorial-house skill and produce a tool-enabled run"`
 
 The model sweep helper is useful when you already have `OPENROUTER_API_KEY` in your current terminal and want a quick pass/fail matrix across a shortlist of candidate models without editing the smoke script itself.
 
@@ -339,7 +341,18 @@ Security notes for Telegram control:
 
 ## Skill Catalog
 
-These six skills are the conceptual core of the Hermes-native profile:
+These seven skills are the conceptual core of the Hermes-native profile:
+
+### `atlas-book-factory`
+
+This is the autonomous book-production skill. Use it when the assignment is not a chapter sample or a plan, but a complete manuscript written to disk under `local-output/books/`.
+
+Typical use cases:
+
+- full novels from a single brief.
+- long-form book production with chapter-level review and finishing gates.
+- resumed book projects that need to continue from existing chapter files.
+- translated book runs that should produce both the English manuscript and localized chapter files.
 
 ### `atlas-editorial-house`
 
@@ -453,9 +466,88 @@ The sample set includes, among other things:
 
 If Atlas changes significantly, updating `sample_instructions.yaml` is one of the cheapest ways to preserve behavioral coverage.
 
+## Write-Book: Single-Command Autonomous Book Production
+
+`write-book.sh` is the recommended entrypoint when you want to go from a brief to a complete, file-persisted manuscript without building a prompt manually. It activates the Director agent through the `atlas-book-factory` skill, which enforces an autonomous production pipeline from brief to final manifest.
+
+Fastest full-book command:
+
+```bash
+./write-book.sh \
+  --title "Red Inheritance" \
+  --theme "Political power, family betrayal, institutional decline"
+```
+
+That one command is enough to trigger the full book pipeline: team assembly, planning documents, chapter drafting, reviewer and critic passes, finishing, file persistence, and final manifest generation under `local-output/books/<slug>/`.
+
+Basic usage variants:
+
+With translation to Italian and a custom chapter count:
+
+```bash
+./write-book.sh \
+  --title "Red Inheritance" \
+  --theme "Political power, family betrayal, institutional decline" \
+  --chapters 20 \
+  --min-words 3000 \
+  --italian
+```
+
+Resuming an interrupted run:
+
+```bash
+./write-book.sh \
+  --title "Red Inheritance" \
+  --theme "Political power, family betrayal, institutional decline" \
+  --resume
+```
+
+Preview the resolved prompt without running Hermes:
+
+```bash
+./write-book.sh \
+  --title "Red Inheritance" \
+  --theme "Political power, family betrayal, institutional decline" \
+  --dry-run
+```
+
+All options:
+
+- `--title <text>`: book title. Required.
+- `--theme <text>`: core themes. Required.
+- `--genre <text>`: literary style or genre. Default: literary novel.
+- `--chapters <n>`: number of chapters. Default: 20.
+- `--min-words <n>`: minimum words per chapter. Default: 3000.
+- `--slug <text>`: output directory name under `local-output/books/`. Default: derived from title.
+- `--italian`: translate the completed English manuscript into Italian.
+- `--language <code>`: translate into a language other than Italian (e.g. `fr`, `de`, `es`).
+- `--model <id>`: primary OpenRouter model. Default: `openrouter/free`.
+- `--provider <name>`: Hermes provider. Default: openrouter.
+- `--imprint <name>`: Atlas imprint. Options: `noir`, `civic`, `lab`, `heresy`, `sunday-review`.
+- `--resume`: resume from the last completed chapter instead of restarting.
+- `--dry-run`: print the resolved prompt and command without running Hermes.
+
+Output always lands under `local-output/books/<slug>/` and follows the required file list defined in the `atlas-book-factory` skill:
+
+- `00_work_order.md`: team, route, handoff sequence, definition of done.
+- `01_outline.md`: chapter-by-chapter plan.
+- `02_voice_guide.md`: narrative voice, POV, dialogue policy, style guardrails.
+- `03_character_bible.md`: characters, arcs, and relationships.
+- `04_revision_strategy.md`: structural, stylistic, critical, and final-polish pass rules.
+- `chapter01.md` through `chapterNN.md`: manuscript chapters.
+- `it/chapter01.it.md` (etc.): Italian translation chapters, if `--italian` was passed.
+- `98_translation_notes.md`: translation decisions, if translation was requested.
+- `99_manifest.md`: production record. Project is complete when this file shows all entries as `complete`.
+
+Note: `write-book.sh` always passes `--allow-tools` to `run-local-hermes.sh` because autonomous file creation requires tool access. The primary default model is `openrouter/free`. If that run fails, Atlas retries the same book prompt with free-model fallbacks from `ATLAS_WRITE_BOOK_FALLBACK_MODELS`. The default free fallback chain is `openrouter/free`, `openai/gpt-oss-120b:free`, `openai/gpt-oss-20b:free`, and `liquid/lfm-2.5-1.2b-instruct:free`. You can override the primary model with `--model` or `ATLAS_WRITE_BOOK_MODEL`, and you can override the fallback chain with `ATLAS_WRITE_BOOK_FALLBACK_MODELS`.
+
 ## Agent Catalog
 
-Atlas currently includes 36 named personalities. The list below gives a brief description of each agent and the kind of work each one is best suited for.
+Atlas currently includes 37 named personalities. The list below gives a brief description of each agent and the kind of work each one is best suited for.
+
+### Orchestration
+
+- `director`: autonomous book production orchestrator. The Director does not write prose. It manages the full pipeline from a single brief to a finished file-persisted manuscript: team selection, planning documents, chapter production with quality gates, continuity checks, translation, and final manifest. Use it through `./write-book.sh` or by activating the `atlas-book-factory` skill.
 
 ### Foundational Literary and Editorial Core
 

@@ -35,12 +35,13 @@ profile_root = root / "hermes-profile" / "atlas-editorial-house"
 skills_root = profile_root / "skills" / "creative"
 
 expected_skills = [
-    "atlas-editorial-house",
+    "atlas-book-factory",
     "atlas-canon-memory",
-    "atlas-imprints",
-    "atlas-writers-room",
-    "atlas-trial-mode",
+    "atlas-editorial-house",
     "atlas-final-review",
+    "atlas-imprints",
+    "atlas-trial-mode",
+    "atlas-writers-room",
 ]
 expected_control_panel_files = [
     "control-panel/server.py",
@@ -93,6 +94,7 @@ expected_routing_rules = [
     "canon_audit",
     "polyphonic_testimony_project",
     "migration_memory_novel",
+    "book_production",
 ]
 
 newsroom = yaml.safe_load((root / "newsroom.yaml").read_text())
@@ -125,7 +127,7 @@ assert not missing_rules, f"missing routing rules: {missing_rules}"
 missing_briefs = sorted(name for name in expected_briefs if name not in sample_names)
 assert not missing_briefs, f"missing sample briefs: {missing_briefs}"
 
-assert len(personalities) == len(agent_files) == len(manifest_agent_files) == 36, (
+assert len(personalities) == len(agent_files) == len(manifest_agent_files) == 37, (
     len(personalities),
     len(agent_files),
     len(manifest_agent_files),
@@ -163,6 +165,7 @@ for script_path in \
     "$script_dir/hermes-profile/run-local-hermes.sh" \
     "$script_dir/hermes-profile/show-commands.sh" \
     "$script_dir/hermes-profile/launch-example.sh" \
+    "$script_dir/write-book.sh" \
     "$script_dir/smoke-test.sh" \
     "$script_dir/smoke-test-openrouter.sh" \
     "$script_dir/try-openrouter-models.sh"
@@ -192,6 +195,12 @@ log_info "Checking dry-run commands"
 
 "$script_dir/try-openrouter-models.sh" \
     --dry-run \
+    >/dev/null
+
+"$script_dir/write-book.sh" \
+    --dry-run \
+    --title "Atlas Smoke Book" \
+    --theme "Test production run" \
     >/dev/null
 
 log_info "Checking transcript persistence for non-interactive wrapper runs"

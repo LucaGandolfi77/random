@@ -42,12 +42,7 @@ Environment:
 
 Defaults:
   If no --model flags are supplied, the helper tests a practical shortlist:
-    - nousresearch/hermes-4-70b
-    - nousresearch/hermes-4-405b
-    - nousresearch/hermes-3-llama-3.1-70b
-    - nousresearch/hermes-3-llama-3.1-405b
-    - nousresearch/hermes-3-llama-3.1-405b:free
-    - nousresearch/hermes-2-pro-llama-3-8b
+        - nousresearch/hermes-3-llama-3.1-405b:free
         - arcee-ai/trinity-large-thinking:free
         - poolside/laguna-m.1:free
         - openai/gpt-oss-120b:free
@@ -64,16 +59,13 @@ Defaults:
         - google/gemini-2.0-flash-exp:free
         - meta-llama/llama-3.3-70b-instruct:free
         - nvidia/nemotron-3-nano-30b-a3b:free
-    - openai/gpt-4.1-mini
-    - google/gemini-2.0-flash-001
-    - meta-llama/llama-3.3-70b-instruct
 
 Examples:
   ./try-openrouter-models.sh --dry-run
     ./try-openrouter-models.sh --free-only --dry-run
   OPENROUTER_API_KEY=... ./try-openrouter-models.sh --hermes-only
     OPENROUTER_API_KEY=... ./try-openrouter-models.sh --free-only --hermes-only
-  OPENROUTER_API_KEY=... ./try-openrouter-models.sh --hermes-only --model nousresearch/hermes-4-405b --model openai/gpt-4.1-mini
+  OPENROUTER_API_KEY=... ./try-openrouter-models.sh --hermes-only --model nousresearch/hermes-3-llama-3.1-405b:free 
 EOF
 }
 
@@ -111,12 +103,7 @@ free_models=(
 )
 
 default_models=(
-    "nousresearch/hermes-4-70b"
-    "nousresearch/hermes-4-405b"
-    "nousresearch/hermes-3-llama-3.1-70b"
-    "nousresearch/hermes-3-llama-3.1-405b"
     "nousresearch/hermes-3-llama-3.1-405b:free"
-    "nousresearch/hermes-2-pro-llama-3-8b"
     "arcee-ai/trinity-large-thinking:free"
     "poolside/laguna-m.1:free"
     "openai/gpt-oss-120b:free"
@@ -133,9 +120,6 @@ default_models=(
     "google/gemini-2.0-flash-exp:free"
     "meta-llama/llama-3.3-70b-instruct:free"
     "nvidia/nemotron-3-nano-30b-a3b:free"
-    "openai/gpt-4.1-mini"
-    "google/gemini-2.0-flash-001"
-    "meta-llama/llama-3.3-70b-instruct"
 )
 
 while [[ $# -gt 0 ]]; do

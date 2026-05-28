@@ -49,6 +49,10 @@ expected_control_panel_files = [
     "control-panel/styles.css",
     "control-panel/app.js",
     "control-panel/telegram_control_bot.py",
+    "control-panel/install-systemd-user-services.sh",
+    "control-panel/telegram-control.env.example",
+    "control-panel/systemd/atlas-control-server.service.in",
+    "control-panel/systemd/atlas-telegram-bot.service.in",
 ]
 expected_scenarios = [
     "novel",
@@ -165,6 +169,7 @@ for script_path in \
     "$script_dir/hermes-profile/run-local-hermes.sh" \
     "$script_dir/hermes-profile/show-commands.sh" \
     "$script_dir/hermes-profile/launch-example.sh" \
+    "$script_dir/control-panel/install-systemd-user-services.sh" \
     "$script_dir/write-book.sh" \
     "$script_dir/smoke-test.sh" \
     "$script_dir/smoke-test-openrouter.sh" \

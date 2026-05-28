@@ -339,6 +339,24 @@ Security notes for Telegram control:
 - if you expose the control server token, use a different secret from any model API key.
 - the bridge is safer than a webhook because the server itself stays local-only.
 
+Persistent user services via systemd:
+
+- copy `./control-panel/telegram-control.env.example` to `./control-panel/telegram-control.env`.
+- fill in `ATLAS_TELEGRAM_BOT_TOKEN` and preferably `ATLAS_TELEGRAM_CHAT_ID`.
+- if you change `ATLAS_CONTROL_PORT`, update `ATLAS_CONTROL_SERVER` to the matching `http://127.0.0.1:<port>` value.
+- install the user units with `./control-panel/install-systemd-user-services.sh install`.
+- start the stack with `./control-panel/install-systemd-user-services.sh start`.
+
+Useful follow-up commands:
+
+- `./control-panel/install-systemd-user-services.sh check`
+- `./control-panel/install-systemd-user-services.sh status`
+- `./control-panel/install-systemd-user-services.sh logs bot`
+- `./control-panel/install-systemd-user-services.sh restart`
+- `./control-panel/install-systemd-user-services.sh stop`
+
+The installer writes user units under `~/.config/systemd/user/` and keeps the secret-bearing env file in your repo-local ignored `*.env` path. On hosts that support persistent user services after logout, enable lingering once with `loginctl enable-linger "$USER"`.
+
 ## Skill Catalog
 
 These seven skills are the conceptual core of the Hermes-native profile:

@@ -82,6 +82,8 @@ Recommended flow:
    python3 ./control-panel/telegram_control_bot.py
    ```
 
+   For persistent background services through user-level systemd, copy `./control-panel/telegram-control.env.example` to `./control-panel/telegram-control.env`, fill in the Telegram values, then run `./control-panel/install-systemd-user-services.sh start`.
+
 10. Print or run ready-to-use example prompts:
 
    ```bash

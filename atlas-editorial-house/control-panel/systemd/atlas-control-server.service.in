@@ -1,0 +1,15 @@
+[Unit]
+Description=Atlas private control server
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=__ATLAS_ROOT__
+EnvironmentFile=__ATLAS_ENV_FILE__
+ExecStart=/usr/bin/env python3 __ATLAS_ROOT__/control-panel/server.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

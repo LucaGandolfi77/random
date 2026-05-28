@@ -27,6 +27,7 @@ Options:
   --session-name <name>   Session directory name under local-output/runs/
   --session-dir <path>    Custom session directory under local-output/runs/
   --chat-query <text>     Run hermes chat -q with an Atlas filesystem preamble
+    --goal <text>           Start Hermes interactively and submit /goal with an Atlas filesystem preamble
   --dry-run               Print the resolved session directory and Hermes command
   --help                  Show this help text
 
@@ -401,10 +402,134 @@ build_query_with_policy() {
     printf '%s\n' "$chat_query"
 }
 
+build_goal_with_policy() {
+    # Keep the /goal payload self-contained so Hermes can persist it across
+    # turns and resume the same objective later if needed.
+    printf 'Work only within this Atlas filesystem envelope while pursuing the goal below:\n'
+    printf -- '- Working directory: %s\n' "$session_dir"
+    printf -- '- Approved output root: %s\n' "$allowed_output_root"
+    printf -- '- Create or modify files only under %s.\n' "$allowed_output_root"
+    printf -- '- Use local-output/runs only as a session workspace.\n'
+    printf -- '- Place final deliverables in local-output/books, articles, essays, research, docs, code, hybrid, reviews, canon, cemetery, or translations as appropriate.\n'
+    printf '\n'
+    printf 'Goal:\n'
+    printf '%s\n' "$goal_query"
+}
+
+run_bootstrapped_hermes() {
+    local bootstrap_input transcript_path
+
+    bootstrap_input="$1"
+    transcript_path="$2"
+    shift 2
+
+    python3 - "$bootstrap_input" "$transcript_path" "$@" <<'PY'
+from __future__ import annotations
+
+import os
+import pty
+import select
+import subprocess
+import sys
+import termios
+import tty
+from contextlib import nullcontext
+
+
+bootstrap_input = sys.argv[1]
+transcript_path = sys.argv[2]
+command = sys.argv[3:]
+
+if not command:
+    raise SystemExit("missing Hermes command")
+
+master_fd, slave_fd = pty.openpty()
+stdin_fd = sys.stdin.fileno()
+stdin_open = True
+stdin_is_tty = os.isatty(stdin_fd)
+saved_tty = None
+
+try:
+    process = subprocess.Popen(
+        command,
+        stdin=slave_fd,
+        stdout=slave_fd,
+        stderr=slave_fd,
+        close_fds=True,
+    )
+    os.close(slave_fd)
+
+    if stdin_is_tty:
+        saved_tty = termios.tcgetattr(stdin_fd)
+        tty.setraw(stdin_fd)
+
+    os.write(master_fd, (bootstrap_input + "\n").encode("utf-8"))
+
+    transcript_context = (
+        open(transcript_path, "wb")
+        if transcript_path
+        else nullcontext(None)
+    )
+    stdout_buffer = getattr(sys.stdout, "buffer", sys.stdout)
+
+    with transcript_context as transcript_handle:
+        while True:
+            watch_fds = [master_fd]
+            if stdin_open:
+                watch_fds.append(stdin_fd)
+
+            readable, _, _ = select.select(watch_fds, [], [], 0.1)
+
+            if master_fd in readable:
+                try:
+                    data = os.read(master_fd, 4096)
+                except OSError:
+                    data = b""
+
+                if data:
+                    stdout_buffer.write(data)
+                    stdout_buffer.flush()
+                    if transcript_handle is not None:
+                        transcript_handle.write(data)
+                        transcript_handle.flush()
+                elif process.poll() is not None:
+                    break
+
+            if stdin_open and stdin_fd in readable:
+                try:
+                    user_input = os.read(stdin_fd, 4096)
+                except OSError:
+                    user_input = b""
+
+                if user_input:
+                    os.write(master_fd, user_input)
+                else:
+                    stdin_open = False
+
+            if process.poll() is not None and master_fd not in readable:
+                break
+
+    raise SystemExit(process.wait())
+finally:
+    if stdin_is_tty and saved_tty is not None:
+        termios.tcsetattr(stdin_fd, termios.TCSADRAIN, saved_tty)
+    try:
+        os.close(master_fd)
+    except OSError:
+        pass
+PY
+}
+
 print_command() {
     printf 'Command:'
     printf ' %q' hermes "${hermes_args[@]}"
     printf '\n'
+
+    if [[ -n "$goal_query" ]]; then
+        printf 'Bootstrap:'
+        printf ' %q' "/goal $(build_goal_with_policy)"
+        printf '\n'
+    fi
 }
 
 profile_name="atlas-editorial-house"
@@ -432,6 +557,7 @@ allow_tools="${ATLAS_HERMES_ALLOW_TOOLS:-0}"
 session_name="atlas-$(date -u +%Y%m%dT%H%M%SZ)"
 session_dir=""
 chat_query=""
+goal_query=""
 dry_run=0
 extra_args=()
 capture_transcript=0
@@ -482,6 +608,11 @@ while [[ $# -gt 0 ]]; do
             chat_query="$2"
             shift 2
             ;;
+        --goal)
+            [[ $# -ge 2 ]] || die "Missing value for --goal"
+            goal_query="$2"
+            shift 2
+            ;;
         --dry-run)
             dry_run=1
             shift
@@ -504,8 +635,16 @@ done
 [[ -d "$allowed_output_root" ]] || die "Approved output root not found: $allowed_output_root"
 mkdir -p "$runs_root"
 
-if [[ -n "$chat_query" && ${#extra_args[@]} -gt 0 ]]; then
-    die "--chat-query cannot be combined with explicit trailing Hermes arguments"
+if [[ -n "$chat_query" && -n "$goal_query" ]]; then
+    die "--chat-query and --goal cannot be combined"
+fi
+
+if [[ -n "$goal_query" && "$quiet_mode" -eq 1 ]]; then
+    die "--quiet is not supported with --goal"
+fi
+
+if [[ ( -n "$chat_query" || -n "$goal_query" ) && ${#extra_args[@]} -gt 0 ]]; then
+    die "--chat-query and --goal cannot be combined with explicit trailing Hermes arguments"
 fi
 
 if [[ -z "$session_dir" ]]; then
@@ -515,13 +654,15 @@ fi
 session_dir="$(ensure_under_root "$runs_root" "$session_dir" "Session directory")"
 mkdir -p "$session_dir"
 
-if [[ -n "$chat_query" ]]; then
+if [[ -n "$chat_query" || -n "$goal_query" ]]; then
     capture_transcript=1
+    if [[ -n "$goal_query" ]]; then
+        transcript_file="$session_dir/hermes-goal-output.txt"
+    else
+        transcript_file="$session_dir/hermes-chat-output.txt"
+    fi
 elif [[ ${#extra_args[@]} -gt 0 ]] && has_chat_query_args "${extra_args[@]}"; then
     capture_transcript=1
-fi
-
-if [[ "$capture_transcript" -eq 1 ]]; then
     transcript_file="$session_dir/hermes-chat-output.txt"
 fi
 
@@ -593,6 +734,16 @@ if [[ -n "$chat_query" ]]; then
     fi
 
     hermes_args+=( -q "$(build_query_with_policy)")
+elif [[ -n "$goal_query" ]]; then
+    hermes_args=( -p "$profile_name" )
+
+    if [[ -n "$provider_name" && "$provider_name" != "auto" ]]; then
+        hermes_args+=( --provider "$provider_name" )
+    fi
+
+    if [[ -n "$model_name" ]]; then
+        hermes_args+=( --model "$model_name" )
+    fi
 elif [[ ${#extra_args[@]} -gt 0 ]]; then
     if [[ "${extra_args[0]}" == "chat" ]]; then
         hermes_args=()
@@ -686,7 +837,19 @@ trap cleanup EXIT
 snapshot_repo_state "$before_snapshot"
 
 command_status=0
-if [[ "$capture_transcript" -eq 1 ]]; then
+if [[ -n "$goal_query" ]]; then
+    if (
+        cd "$session_dir"
+        if [[ -n "$temp_hermes_home" ]]; then
+            export HERMES_HOME="$temp_hermes_home"
+        fi
+        run_bootstrapped_hermes "/goal $(build_goal_with_policy)" "$transcript_file" hermes "${hermes_args[@]}"
+    ); then
+        command_status=0
+    else
+        command_status=$?
+    fi
+elif [[ "$capture_transcript" -eq 1 ]]; then
     if (
         cd "$session_dir"
         if [[ -n "$temp_hermes_home" ]]; then

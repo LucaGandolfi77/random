@@ -1,0 +1,14 @@
+Query: Filesystem constraint for this run:
+- Working directory: /workspaces/random/atlas-editorial-house/local-output/runs/atlas-20260528T130034Z
+- Approved output root: /workspaces/random/atlas-editorial-house/local-output
+- Create or modify files only under /workspaces/random/atlas-editorial-house/local-output.
+- Use local-output/runs only as a session workspace.
+- Place final deliverables in local-output/books, articles, essays, research, docs, code, hybrid, reviews, canon, cemetery, or translations as appropriate.
+
+Use the atlas-writers-room skill. Route this as a serious literary novel project for The Atlas Editorial House. Develop a chapter-by-chapter plan for a literary
+novel about political inheritance, family obligation, and institutional decline. Name the lead, reviewer, critic, and finisher, explain the handoff sequence, 
+and produce an outline, voice guidance, and revision strategy in English. Then write the whole book in english and translate it in italian
+
+⚠️  Provider resolver returned an empty API key. Set OPENROUTER_API_KEY or run: hermes setup
+
+Goodbye! ⚕

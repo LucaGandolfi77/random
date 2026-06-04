@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Statistics Atlas — Global Data Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.7.0/dist/jsvectormap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #eef4fb;
+      --bg-strong: #dfeeff;
+      --surface: rgba(255, 255, 255, 0.86);
+      --surface-strong: #ffffff;
+      --surface-muted: #f4f8fc;
+      --line: rgba(15, 23, 42, 0.1);
+      --line-strong: rgba(15, 23, 42, 0.18);
+      --text: #0f172a;
+      --text-soft: #475569;
+      --text-muted: #64748b;
+      --primary: #0f766e;
+      --primary-strong: #115e59;
+      --primary-light: rgba(15, 118, 110, 0.12);
+      --accent: #1d4ed8;
+      --accent-light: rgba(29, 78, 216, 0.1);
+      --accent-soft: #dbeafe;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --success: #10b981;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+      --shadow-sm: 0 4px 16px rgba(15, 23, 42, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --font-mono: 'JetBrains Mono', monospace;
+      --chart-height: 320px;
+    }
+
+    .dark-mode {
+      --bg: #0b1120;
+      --bg-strong: #131c31;
+      --surface: rgba(18, 28, 50, 0.88);
+      --surface-strong: #1a2640;
+      --surface-muted: #111c30;
+      --line: rgba(148, 163, 184, 0.12);
+      --line-strong: rgba(148, 163, 184, 0.2);
+      --text: #e2e8f0;
+      --text-soft: #94a3b8;
+      --text-muted: #64748b;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; min-height: 100%; }
+
+    body {
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      color: var(--text);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s;
+    }
+    .theme-toggle:hover { background: var(--surface-strong); transform: scale(1.05); }
+
+    .page-shell {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      padding: 28px;
+      max-width: 1480px;
+      margin: 0 auto;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) 380px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .content-stack { display: grid; gap: 24px; }
+
+    .hero, .map-card, .sidebar, .section-card {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 32px;
+      border-radius: var(--radius-xl);
+      display: grid;
+      gap: 24px;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.56), rgba(255,255,255,0.08)),
+        radial-gradient(circle at 85% 20%, rgba(29,78,216,0.15), transparent 32%);
+      pointer-events: none;
+    }
+    .dark-mode .hero::before {
+      background:
+        linear-gradient(135deg, rgba(15,118,110,0.08), transparent),
+        radial-gradient(circle at 85% 20%, rgba(29,78,216,0.12), transparent 32%);
+    }
+    .hero-inner, .hero-stats { position: relative; z-index: 1; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 12px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(15,118,110,0.1);
+      color: var(--primary-strong);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0;
+      max-width: 720px;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+    }
+    .hero p {
+      margin: 0;
+      max-width: 760px;
+      color: var(--text-soft);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .hero-chips, .legend { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .chip, .legend-item, .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.76);
+      border: 1px solid rgba(15,23,42,0.08);
+      color: var(--text-soft);
+      font-size: 0.94rem;
+      font-weight: 600;
+    }
+    .dark-mode .chip, .dark-mode .legend-item, .dark-mode .meta-pill {
+      background: rgba(255,255,255,0.06);
+      border-color: var(--line);
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; }
+    .dot.primary { background: var(--primary); }
+    .dot.accent { background: var(--accent); }
+    .dot.warning { background: var(--warning); }
+    .dot.success { background: var(--success); }
+    .dot.danger { background: var(--danger); }
+
+    .summary-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .summary-card {
+      flex: 1 1 180px;
+      min-width: 160px;
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.74);
+      border: 1px solid var(--line);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dark-mode .summary-card { background: rgba(255,255,255,0.04); }
+    .summary-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .summary-card span {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .summary-card strong { display: block; font-size: 1.38rem; line-height: 1.2; }
+    .summary-card small {
+      display: block;
+      margin-top: 10px;
+      color: var(--text-soft);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    /* ---- Map Card ---- */
+    .map-card {
+      position: relative;
+      overflow: hidden;
+      padding: 26px;
+      border-radius: var(--radius-xl);
+    }
+    .map-card::before {
+      content: "";
+      position: absolute;
+      inset: auto 24px 24px auto;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(29,78,216,0.16), transparent);
+      pointer-events: none;
+    }
+    .card-header {
+      position: relative; z-index: 1;
+      display: flex; flex-wrap: wrap; justify-content: space-between;
+      align-items: flex-start; gap: 16px; margin-bottom: 22px;
+    }
+    .card-header h2 {
+      margin: 0 0 8px;
+      font-family: "Sora", sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: -0.03em;
+    }
+    .card-header p { margin: 0; max-width: 620px; color: var(--text-soft); line-height: 1.65; }
+
+    .map-stage {
+      position: relative;
+      min-height: 500px;
+      border-radius: calc(var(--radius-xl) - 8px);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(242,247,252,0.92));
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .dark-mode .map-stage {
+      background: linear-gradient(180deg, rgba(15,23,42,0.6), rgba(15,23,42,0.8));
+    }
+    #map { position: relative; z-index: 1; width: 100%; height: 500px; }
+    .map-note {
+      position: absolute; left: 16px; bottom: 16px; z-index: 2;
+      max-width: 260px; padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.88); border: 1px solid var(--line);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+    .dark-mode .map-note { background: rgba(15,23,42,0.88); }
+    .map-note strong { display: block; margin-bottom: 4px; font-size: 0.9rem; }
+    .map-note span { color: var(--text-soft); font-size: 0.84rem; line-height: 1.5; }
+
+    /* ---- Search + Filter Bar ---- */
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      background: var(--surface-muted);
+      border: 1px solid var(--line);
+    }
+    .toolbar input, .toolbar select {
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background: var(--surface-strong);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .toolbar input:focus, .toolbar select:focus { border-color: var(--primary); }
+    .toolbar input { flex: 1; min-width: 180px; }
+    .toolbar .badge {
+      margin-left: auto;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--primary-light);
+      color: var(--primary-strong);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    /* ---- Rankings Table ---- */
+    .section-card {
+      padding: 26px;
+      border-radius: var(--radius-xl);
+    }
+    .section-card h2 {
+      margin: 0 0 4px;
+      font-family: "Sora", sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: -0.03em;
+    }
+    .section-card > p { margin: 0 0 18px; color: var(--text-soft); font-size: 0.95rem; }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    thead { background: var(--surface-muted); }
+    th {
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+      border-bottom: 2px solid var(--line);
+    }
+    th:hover { color: var(--primary); }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--text-soft);
+    }
+    tr:hover td { background: var(--accent-light); }
+    .rank-cell { font-weight: 800; font-family: var(--font-mono); color: var(--text); width: 48px; }
+    .bar-cell {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .bar {
+      height: 8px;
+      border-radius: 999px;
+      background: var(--primary);
+      min-width: 4px;
+      transition: width 0.6s ease;
+    }
+
+    /* ---- Comparison Tool ---- */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .compare-col {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: var(--surface-muted);
+      border: 1px solid var(--line);
+    }
+    .compare-col h3 { margin: 0 0 12px; font-size: 1rem; }
+    .compare-row {
+      display: flex; justify-content: space-between; gap: 8px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.9rem;
+    }
+    .compare-row:last-child { border-bottom: 0; }
+    .compare-row .label { color: var(--text-muted); }
+    .compare-row .value { font-weight: 600; }
+
+    .compare-selector {
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 18px;
+    }
+    .compare-selector select {
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background: var(--surface-strong);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      font-size: 0.9rem;
+      min-width: 140px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 0;
+      border-radius: var(--radius-sm);
+      background: var(--primary);
+      color: #fff;
+      font-family: "Inter", sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: var(--primary-strong); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--text);
+    }
+    .btn-outline:hover { background: var(--surface-muted); }
+    .btn-sm { padding: 6px 12px; font-size: 0.82rem; }
+
+    /* ---- Charts ---- */
+    .chart-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .chart-box {
+      padding: 20px;
+      border-radius: var(--radius-md);
+      background: var(--surface-muted);
+      border: 1px solid var(--line);
+    }
+    .chart-box h3 { margin: 0 0 12px; font-size: 1rem; }
+    .chart-box canvas { width: 100% !important; height: var(--chart-height) !important; max-height: var(--chart-height); }
+
+    /* ---- Sidebar ---- */
+    .sidebar {
+      position: sticky; top: 28px;
+      min-height: calc(100vh - 56px);
+      padding: 26px; border-radius: var(--radius-xl);
+      display: grid; align-content: start; gap: 18px;
+    }
+    .sidebar-head {
+      display: flex; justify-content: space-between; align-items: center; gap: 14px;
+    }
+    .sidebar-head h2 {
+      margin: 0; font-family: "Sora", sans-serif; font-size: 1.35rem; letter-spacing: -0.03em;
+    }
+    .close-button {
+      display: none; width: 40px; height: 40px;
+      border: 0; border-radius: 50%;
+      background: var(--surface-muted); color: var(--text);
+      font-size: 1.1rem; cursor: pointer;
+    }
+    .sidebar-body { display: grid; gap: 18px; }
+    .country-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      width: fit-content; padding: 8px 12px;
+      border-radius: 999px; background: var(--accent-light); color: var(--accent);
+      font-size: 0.84rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .country-name {
+      margin: 0; font-family: "Sora", sans-serif; font-size: 2rem; line-height: 1.08; letter-spacing: -0.04em;
+    }
+    .country-description { margin: 0; color: var(--text-soft); line-height: 1.7; font-size: 0.98rem; }
+
+    .meta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .metric-grid { display: flex; flex-wrap: wrap; gap: 14px; }
+    .metric-card {
+      flex: 1 1 140px; min-width: 120px;
+      padding: 16px; border-radius: var(--radius-md);
+      background: var(--surface-strong); border: 1px solid var(--line);
+    }
+    .metric-card span {
+      display: block; margin-bottom: 8px;
+      color: var(--text-muted); font-size: 0.82rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .metric-card strong { display: block; font-size: 1.15rem; line-height: 1.3; }
+    .metric-card small { display: block; margin-top: 6px; color: var(--text-soft); font-size: 0.84rem; line-height: 1.5; }
+
+    .source-card, .placeholder-card {
+      padding: 18px; border-radius: var(--radius-md);
+      background: var(--surface-strong); border: 1px solid var(--line);
+    }
+    .source-card h3, .placeholder-card h3 { margin: 0 0 8px; font-size: 1rem; }
+    .source-card p, .placeholder-card p { margin: 0; color: var(--text-soft); line-height: 1.65; }
+    .source-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 12px; padding: 12px 14px; border-radius: 12px;
+      background: var(--primary-light); color: var(--primary-strong);
+      text-decoration: none; font-weight: 700;
+    }
+    .source-link:hover { background: rgba(15,118,110,0.16); }
+    .sidebar-footer { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; }
+
+    .sidebar-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(15,23,42,0.38);
+      opacity: 0; pointer-events: none; transition: opacity 0.22s ease; z-index: 15;
+    }
+    .sidebar-backdrop.visible { opacity: 1; pointer-events: auto; }
+
+    .jvm-region { transition: fill 0.18s ease, stroke 0.18s ease, opacity 0.18s ease; }
+    .jvm-tooltip {
+      min-width: 210px; padding: 12px 14px;
+      border: 1px solid var(--line); border-radius: 16px;
+      background: var(--surface-strong); color: var(--text);
+      box-shadow: 0 18px 34px rgba(0,0,0,0.14);
+      backdrop-filter: blur(12px);
+      white-space: pre-line; line-height: 1.5;
+    }
+
+    /* ---- Tab system inside section cards ---- */
+    .tabs {
+      display: flex; gap: 4px; margin-bottom: 20px;
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      background: var(--surface-muted);
+      border: 1px solid var(--line);
+      width: fit-content;
+    }
+    .tab {
+      padding: 8px 18px;
+      border: 0; border-radius: 10px;
+      background: transparent;
+      color: var(--text-soft);
+      font-family: "Inter", sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab.active {
+      background: var(--surface-strong);
+      color: var(--text);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .tab:hover:not(.active) { color: var(--text); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ---- Loading ---- */
+    .loading {
+      display: grid; place-items: center; padding: 48px;
+      color: var(--text-muted); font-size: 0.95rem;
+    }
+    .spinner {
+      width: 28px; height: 28px;
+      border: 3px solid var(--line);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ---- Toast ---- */
+    .toast {
+      position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+      padding: 14px 24px;
+      border-radius: var(--radius-sm);
+      background: var(--surface-strong);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 200;
+    }
+    .toast.show { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 1180px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar {
+        position: fixed; top: auto; right: 18px; bottom: 18px; left: 18px;
+        min-height: auto; max-height: min(78vh, 760px); overflow-y: auto;
+        transform: translateY(110%); opacity: 0; pointer-events: none;
+        transition: transform 0.26s ease, opacity 0.22s ease; z-index: 20;
+      }
+      .sidebar.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+      .close-button { display: inline-grid; place-items: center; }
+      .chart-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 820px) {
+      .page-shell { padding: 14px; }
+      .hero, .map-card, .sidebar, .section-card { border-radius: 24px; padding: 18px; }
+      .map-stage, #map { min-height: 360px; height: 360px; }
+      .toolbar { flex-direction: column; }
+      .toolbar input { min-width: 100%; }
+      .toolbar .badge { margin-left: 0; }
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">🌙</button>
+
+  <div class="page-shell">
+    <div class="layout">
+      <main class="content-stack">
+
+        <!-- ============ HERO ============ -->
+        <section class="hero">
+          <div class="hero-inner">
+            <p class="eyebrow"><span class="dot primary"></span>Global Insights Platform</p>
+            <h1>World Statistics Atlas</h1>
+            <p>
+              A comprehensive data platform covering <strong id="hero-count">120+</strong> countries.
+              Explore an interactive vector map, compare nations side by side, browse rankings,
+              and export datasets — all powered by a live REST API.
+            </p>
+          </div>
+          <div class="hero-chips">
+            <div class="chip"><span class="dot primary"></span>120+ Countries</div>
+            <div class="chip"><span class="dot accent"></span>Compare up to 5 nations</div>
+            <div class="chip"><span class="dot warning"></span>Rankings &amp; charts</div>
+            <div class="chip"><span class="dot success"></span>CSV export</div>
+          </div>
+          <div id="summary-grid" class="summary-grid"></div>
+        </section>
+
+        <!-- ============ MAP ============ -->
+        <section class="map-card">
+          <div class="card-header">
+            <div>
+              <h2>World Map Explorer</h2>
+              <p>Hover to preview a country. Click to pin and open the statistics panel. Selected countries appear in teal.</p>
+            </div>
+            <div class="legend">
+              <div class="legend-item"><span class="dot accent"></span>Hover</div>
+              <div class="legend-item"><span class="dot primary"></span>Selected</div>
+            </div>
+          </div>
+          <div class="map-stage">
+            <div id="map" aria-label="Interactive world map"></div>
+            <div class="map-note">
+              <strong>Interaction</strong>
+              <span>Click any country → sidebar opens with full metrics.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ SEARCH + RANKINGS ============ -->
+        <section class="section-card">
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px;">
+            <div>
+              <h2>Country Rankings</h2>
+              <p>Browse, search, and sort all 120+ countries by any metric.</p>
+            </div>
+            <button id="export-csv-btn" class="btn btn-outline btn-sm">⬇ CSV Export</button>
+          </div>
+
+          <!-- Tabs -->
+          <div class="tabs">
+            <button class="tab active" data-tab="tab-table">Table</button>
+            <button class="tab" data-tab="tab-charts">Charts</button>
+            <button class="tab" data-tab="tab-compare">Compare</button>
+          </div>
+
+          <!-- Tab: Table -->
+          <div id="tab-table" class="tab-content active">
+            <div class="toolbar">
+              <input type="text" id="search-input" placeholder="Search country name or code…" aria-label="Search countries">
+              <select id="continent-filter" aria-label="Filter by continent">
+                <option value="">All Continents</option>
+              </select>
+              <select id="metric-select" aria-label="Ranking metric">
+                <option value="gdpUsd">GDP (USD)</option>
+                <option value="population">Population</option>
+                <option value="gdpPerCapita">GDP per Capita</option>
+                <option value="areaKm2">Area (km²)</option>
+                <option value="hdi">HDI</option>
+                <option value="lifeExpectancy">Life Expectancy</option>
+                <option value="internetPct">Internet %</option>
+              </select>
+              <span class="badge" id="result-count">0 countries</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th data-sort="name" class="sortable">Country</th>
+                    <th data-sort="continent">Continent</th>
+                    <th data-sort="population">Population</th>
+                    <th data-sort="gdpUsd">GDP</th>
+                    <th data-sort="gdpPerCapita">GDP / Capita</th>
+                    <th data-sort="areaKm2">Area</th>
+                    <th data-sort="hdi">HDI</th>
+                    <th data-sort="lifeExpectancy">Life Exp.</th>
+                    <th data-sort="internetPct">Internet</th>
+                  </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+              </table>
+            </div>
+            <div id="table-loading" class="loading"><div class="spinner"></div></div>
+          </div>
+
+          <!-- Tab: Charts -->
+          <div id="tab-charts" class="tab-content">
+            <p>Visual overview of global metrics. Hover for exact values.</p>
+            <div class="chart-grid">
+              <div class="chart-box">
+                <h3>Top 15 GDP (USD)</h3>
+                <canvas id="chart-gdp"></canvas>
+              </div>
+              <div class="chart-box">
+                <h3>Top 15 Population</h3>
+                <canvas id="chart-population"></canvas>
+              </div>
+              <div class="chart-box">
+                <h3>GDP per Capita (Top 15)</h3>
+                <canvas id="chart-gdppc"></canvas>
+              </div>
+              <div class="chart-box">
+                <h3>HDI Distribution (Top 15)</h3>
+                <canvas id="chart-hdi"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab: Compare -->
+          <div id="tab-compare" class="tab-content">
+            <p>Select up to 5 countries and compare key metrics side by side.</p>
+            <div class="compare-selector">
+              <select id="compare-1"><option value="">— Select —</option></select>
+              <select id="compare-2"><option value="">— Select —</option></select>
+              <select id="compare-3"><option value="">— Select —</option></select>
+              <select id="compare-4"><option value="">— Select —</option></select>
+              <select id="compare-5"><option value="">— Select —</option></select>
+              <button id="compare-btn" class="btn btn-sm">Compare</button>
+            </div>
+            <div id="compare-results"></div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- ============ SIDEBAR ============ -->
+      <aside id="sidebar" class="sidebar" aria-live="polite">
+        <div class="sidebar-head">
+          <h2>Country Profile</h2>
+          <button id="close-sidebar" class="close-button" type="button" aria-label="Close">✕</button>
+        </div>
+        <div id="sidebar-body" class="sidebar-body">
+          <div class="placeholder-card">
+            <h3>No country selected</h3>
+            <p>Click any country on the map to view its detailed statistics.</p>
+          </div>
+        </div>
+        <div class="sidebar-footer">
+          Data sourced from World Bank / UN approximations. Hover the map for quick previews.
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div id="sidebar-backdrop" class="sidebar-backdrop" aria-hidden="true"></div>
+  <div id="toast" class="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.7.0/dist/jsvectormap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.7.0/dist/maps/world.js"></script>
+  <script>
+    // ============================================================
+    //  CONFIG
+    // ============================================================
+    const API_BASE = window.location.origin;
+    let allCountries = [];
+    let filteredCountries = [];
+    let mapInstance = null;
+    let activeCountryCode = null;
+    let chartInstances = {};
+    let regionNames = typeof Intl !== 'undefined' && Intl.DisplayNames
+      ? new Intl.DisplayNames(['en'], { type: 'region' })
+      : null;
+
+    // ============================================================
+    //  DOM refs
+    // ============================================================
+    const $ = (id) => document.getElementById(id);
+    const summaryGrid = $('summary-grid');
+    const sidebar = $('sidebar');
+    const sidebarBody = $('sidebar-body');
+    const sidebarBackdrop = $('sidebar-backdrop');
+    const closeSidebarBtn = $('close-sidebar');
+    const searchInput = $('search-input');
+    const continentFilter = $('continent-filter');
+    const metricSelect = $('metric-select');
+    const tableBody = $('table-body');
+    const tableLoading = $('table-loading');
+    const resultCount = $('result-count');
+    const heroCount = $('hero-count');
+    const exportBtn = $('export-csv-btn');
+    const toastEl = $('toast');
+    const themeToggle = $('theme-toggle');
+
+    // ============================================================
+    //  UTILITY
+    // ============================================================
+    function escapeHtml(v) {
+      return String(v).replace(/[&<>"']/g, function(m) {
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+      });
+    }
+
+    function formatNumber(v) {
+      return new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(v || 0);
+    }
+
+    function formatCompact(v) {
+      return new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(v || 0);
+    }
+
+    function formatCompactUsd(v) {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 1 }).format(v || 0);
+    }
+
+    function formatFullUsd(v) {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(v || 0);
+    }
+
+    function formatPct(v) {
+      return (v || 0).toFixed(1) + '%';
+    }
+
+    function showToast(msg) {
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      clearTimeout(toastEl._t);
+      toastEl._t = setTimeout(() => toastEl.classList.remove('show'), 2800);
+    }
+
+    function getRegionName(code) {
+      var u = String(code || '').toUpperCase();
+      if (regionNames) { try { return regionNames.of(u) || u; } catch(e) { return u; } }
+      return u;
+    }
+
+    function isMobile() { return window.matchMedia('(max-width: 1180px)').matches; }
+
+    function openSidebar() { if (isMobile()) { sidebar.classList.add('open'); sidebarBackdrop.classList.add('visible'); } }
+    function closeSidebar() { if (isMobile()) { sidebar.classList.remove('open'); sidebarBackdrop.classList.remove('visible'); } }
+
+    // ============================================================
+    //  THEME
+    // ============================================================
+    function applyTheme(dark) {
+      document.body.classList.toggle('dark-mode', dark);
+      themeToggle.textContent = dark ? '☀️' : '🌙';
+      localStorage.setItem('ws-atlas-theme', dark ? 'dark' : 'light');
+    }
+    themeToggle.addEventListener('click', () => {
+      applyTheme(!document.body.classList.contains('dark-mode'));
+    });
+    if (localStorage.getItem('ws-atlas-theme') === 'dark') applyTheme(true);
+
+    // ============================================================
+    //  TOAST
+    // ============================================================
+    // ============================================================
+    //  API HELPERS
+    // ============================================================
+    async function apiFetch(path) {
+      const r = await fetch(API_BASE + path);
+      if (!r.ok) throw new Error('API error: ' + r.status);
+      return r.json();
+    }
+
+    // ============================================================
+    //  LOAD DATA
+    // ============================================================
+    async function loadCountries() {
+      tableLoading.style.display = 'grid';
+      try {
+        const data = await apiFetch('/api/countries');
+        allCountries = data.countries;
+        heroCount.textContent = allCountries.length;
+        populateContinentFilter();
+        populateCompareSelects();
+        applyFilters();
+        renderSummaryCards();
+        buildCharts();
+      } catch (e) {
+        console.error(e);
+        tableBody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:40px;color:var(--danger);">Failed to load countries. Is the API server running?<br><code>cd server && pip install -r requirements.txt && python app.py</code></td></tr>';
+      } finally {
+        tableLoading.style.display = 'none';
+      }
+    }
+
+    function populateContinentFilter() {
+      const continents = [...new Set(allCountries.map(c => c.continent).filter(Boolean))].sort();
+      continentFilter.innerHTML = '<option value="">All Continents</option>' +
+        continents.map(c => '<option value="' + escapeHtml(c) + '">' + escapeHtml(c) + '</option>').join('');
+    }
+
+    function populateCompareSelects() {
+      const opts = '<option value="">— Select —</option>' +
+        allCountries.map(c => '<option value="' + escapeHtml(c.code) + '">' + escapeHtml(c.name) + '</option>').join('');
+      for (let i = 1; i <= 5; i++) {
+        $('compare-' + i).innerHTML = opts;
+      }
+    }
+
+    // ============================================================
+    //  FILTER + SORT
+    // ============================================================
+    let sortBy = 'gdpUsd';
+    let sortOrder = 'desc';
+
+    function applyFilters() {
+      const query = searchInput.value.trim().toLowerCase();
+      const continent = continentFilter.value;
+      const metric = metricSelect.value;
+
+      filteredCountries = allCountries.filter(c => {
+        if (query && !c.name.toLowerCase().includes(query) && !c.code.toLowerCase().includes(query)) return false;
+        if (continent && c.continent !== continent) return false;
+        return true;
+      });
+
+      // sort
+      const key = metric === 'gdpPerCapita' ? 'gdpPerCapita' : metric;
+      filteredCountries.sort((a, b) => {
+        const av = a[key] ?? 0;
+        const bv = b[key] ?? 0;
+        return bv - av;
+      });
+
+      resultCount.textContent = filteredCountries.length + ' countries';
+      renderTable();
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    continentFilter.addEventListener('change', applyFilters);
+    metricSelect.addEventListener('change', applyFilters);
+
+    // ============================================================
+    //  TABLE RENDER
+    // ============================================================
+    function renderTable() {
+      const maxGdp = Math.max(...filteredCountries.map(c => c.gdpUsd || 0), 1);
+      const maxPop = Math.max(...filteredCountries.map(c => c.population || 0), 1);
+
+      tableBody.innerHTML = filteredCountries.map((c, i) => {
+        const gdpPct = ((c.gdpUsd || 0) / maxGdp * 100).toFixed(1);
+        const popPct = ((c.population || 0) / maxPop * 100).toFixed(1);
+        return '<tr data-code="' + escapeHtml(c.code) + '" style="cursor:pointer">' +
+          '<td class="rank-cell">' + (i + 1) + '</td>' +
+          '<td><strong>' + escapeHtml(c.name) + '</strong> <span style="color:var(--text-muted);font-size:0.82rem;">' + escapeHtml(c.code) + '</span></td>' +
+          '<td>' + escapeHtml(c.continent || '—') + '</td>' +
+          '<td><div class="bar-cell">' + formatCompact(c.population) + '<div class="bar" style="width:' + popPct + '%;max-width:80px;"></div></div></td>' +
+          '<td><div class="bar-cell">' + formatCompactUsd(c.gdpUsd) + '<div class="bar" style="width:' + gdpPct + '%;max-width:80px;"></div></div></td>' +
+          '<td>' + formatCompactUsd(c.gdpPerCapita) + '</td>' +
+          '<td>' + formatCompact(c.areaKm2) + ' km²</td>' +
+          '<td>' + (c.hdi ? c.hdi.toFixed(3) : '—') + '</td>' +
+          '<td>' + (c.lifeExpectancy || '—') + '</td>' +
+          '<td>' + formatPct(c.internetPct) + '</td>' +
+        '</tr>';
+      }).join('');
+
+      // Click row → show in sidebar
+      tableBody.querySelectorAll('tr').forEach(tr => {
+        tr.addEventListener('click', function() {
+          const code = this.dataset.code;
+          if (code) showCountryInSidebar(code);
+        });
+      });
+    }
+
+    // ============================================================
+    //  SUMMARY CARDS
+    // ============================================================
+    function renderSummaryCards() {
+      const total = allCountries.length;
+      const totalPop = allCountries.reduce((s, c) => s + (c.population || 0), 0);
+      const totalGdp = allCountries.reduce((s, c) => s + (c.gdpUsd || 0), 0);
+      const topGdp = allCountries.reduce((a, b) => (a.gdpUsd || 0) > (b.gdpUsd || 0) ? a : b, allCountries[0] || {});
+
+      summaryGrid.innerHTML =
+        '<div class="summary-card" onclick="showToast(\'Countries loaded: ' + total + '\')">' +
+          '<span>Countries</span><strong>' + total + '</strong>' +
+          '<small>Full dataset with demographics &amp; economics.</small></div>' +
+        '<div class="summary-card">' +
+          '<span>World Population</span><strong>' + formatCompact(totalPop) + '</strong>' +
+          '<small>Aggregate population of all countries in the dataset.</small></div>' +
+        '<div class="summary-card">' +
+          '<span>World GDP</span><strong>' + formatCompactUsd(totalGdp) + '</strong>' +
+          '<small>Combined nominal GDP across all countries.</small></div>' +
+        '<div class="summary-card">' +
+          '<span>Top Economy</span><strong>' + escapeHtml(topGdp.name || 'N/A') + '</strong>' +
+          '<small>' + (topGdp.gdpUsd ? formatCompactUsd(topGdp.gdpUsd) : '') + '</small></div>';
+    }
+
+    // ============================================================
+    //  SIDEBAR
+    // ============================================================
+    async function showCountryInSidebar(code) {
+      activeCountryCode = code;
+      try {
+        const data = await apiFetch('/api/countries/' + code);
+        renderSidebarDetails(data);
+      } catch (e) {
+        sidebarBody.innerHTML = '<div class="placeholder-card"><h3>Not Found</h3><p>No data for code: ' + escapeHtml(code) + '</p></div>';
+      }
+      openSidebar();
+    }
+
+    function renderSidebarDetails(d) {
+      sidebarBody.innerHTML =
+        '<div class="country-badge">Country Profile</div>' +
+        '<h3 class="country-name">' + escapeHtml(d.name) + '</h3>' +
+        '<p class="country-description">' + escapeHtml(d.note || 'No description available.') + '</p>' +
+        '<div class="meta-row">' +
+          '<div class="meta-pill">ISO: ' + escapeHtml(d.code) + '</div>' +
+          '<div class="meta-pill">' + escapeHtml(d.continent) + '</div>' +
+          '<div class="meta-pill">' + escapeHtml(d.capital) + '</div>' +
+          '<div class="meta-pill">' + escapeHtml(d.language) + '</div>' +
+          '<div class="meta-pill">' + escapeHtml(d.currency) + '</div>' +
+        '</div>' +
+        '<div class="metric-grid">' +
+          '<div class="metric-card"><span>Population</span><strong>' + formatNumber(d.population) + '</strong><small>Estimated residents.</small></div>' +
+          '<div class="metric-card"><span>GDP</span><strong>' + formatCompactUsd(d.gdpUsd) + '</strong><small>' + formatFullUsd(d.gdpUsd) + '</small></div>' +
+          '<div class="metric-card"><span>GDP / Capita</span><strong>' + formatCompactUsd(d.gdpPerCapita) + '</strong><small>Per person.</small></div>' +
+          '<div class="metric-card"><span>Area</span><strong>' + formatNumber(d.areaKm2) + ' km²</strong><small>Density: ' + (d.density || '—') + '/km²</small></div>' +
+          '<div class="metric-card"><span>HDI</span><strong>' + (d.hdi || '—') + '</strong><small>Human Development Index.</small></div>' +
+          '<div class="metric-card"><span>Life Exp.</span><strong>' + (d.lifeExpectancy || '—') + '</strong><small>Years at birth.</small></div>' +
+          '<div class="metric-card"><span>Internet</span><strong>' + formatPct(d.internetPct) + '</strong><small>Population access.</small></div>' +
+        '</div>' +
+        (d.sourceUrl ? '<div class="source-card"><h3>Source</h3><p>Reference data from the World Bank.</p><a class="source-link" href="' + escapeHtml(d.sourceUrl) + '" target="_blank" rel="noreferrer noopener">' + escapeHtml(d.sourceLabel || 'World Bank') + '</a></div>' : '');
+    }
+
+    // ============================================================
+    //  MAP
+    // ============================================================
+    function initializeMap() {
+      const el = $('map');
+      if (typeof jsVectorMap === 'undefined') {
+        el.innerHTML = '<div class="loading">Map library could not load. Check your internet connection.</div>';
+        return;
+      }
+
+      // Build a quick lookup for tooltips from allCountries
+      const lookup = {};
+      allCountries.forEach(c => { lookup[c.code.toUpperCase()] = c; });
+
+      mapInstance = new jsVectorMap({
+        selector: '#map',
+        map: 'world',
+        zoomOnScroll: false,
+        zoomButtons: false,
+        regionsSelectable: true,
+        regionsSelectableOne: true,
+        selectedRegions: [],
+        regionStyle: {
+          initial: { fill: '#d7e3f2', stroke: '#ffffff', strokeWidth: 1, fillOpacity: 1 },
+          hover: { fill: '#3b82f6', cursor: 'pointer', fillOpacity: 1 },
+          selected: { fill: '#0f766e' },
+          selectedHover: { fill: '#115e59' }
+        },
+        onRegionTooltipShow: function(event, tooltip, code) {
+          const u = code.toUpperCase();
+          const e = lookup[u];
+          const name = getRegionName(u);
+          if (e) {
+            tooltip.text(name + '\nPopulation: ' + formatNumber(e.population) + '\nGDP: ' + formatCompactUsd(e.gdpUsd));
+          } else {
+            tooltip.text(name + '\nClick to explore.');
+          }
+        },
+        onRegionClick: function(event, code) {
+          showCountryInSidebar(code.toUpperCase());
+        }
+      });
+    }
+
+    // ============================================================
+    //  CHARTS
+    // ============================================================
+    function buildCharts() {
+      if (typeof Chart === 'undefined') return;
+      if (!allCountries.length) return;
+
+      const sortedGdp = [...allCountries].sort((a, b) => (b.gdpUsd || 0) - (a.gdpUsd || 0)).slice(0, 15);
+      const sortedPop = [...allCountries].sort((a, b) => (b.population || 0) - (a.population || 0)).slice(0, 15);
+      const sortedGdppc = [...allCountries].sort((a, b) => (b.gdpPerCapita || 0) - (a.gdpPerCapita || 0)).slice(0, 15);
+      const sortedHdi = [...allCountries].sort((a, b) => (b.hdi || 0) - (a.hdi || 0)).slice(0, 15);
+
+      makeBar('chart-gdp', sortedGdp, 'gdpUsd', formatCompactUsd, '#0f766e');
+      makeBar('chart-population', sortedPop, 'population', formatCompact, '#1d4ed8');
+      makeBar('chart-gdppc', sortedGdppc, 'gdpPerCapita', formatCompactUsd, '#10b981');
+      makeBar('chart-hdi', sortedHdi, 'hdi', v => (v || 0).toFixed(3), '#f59e0b');
+    }
+
+    function makeBar(canvasId, data, key, fmt, color) {
+      if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
+
+      const isDark = document.body.classList.contains('dark-mode');
+      const textColor = isDark ? '#94a3b8' : '#475569';
+
+      const ctx = document.getElementById(canvasId);
+      if (!ctx) return;
+
+      chartInstances[canvasId] = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: data.map(d => d.name.length > 18 ? d.name.slice(0, 16) + '…' : d.name),
+          datasets: [{
+            label: '',
+            data: data.map(d => d[key] ?? 0),
+            backgroundColor: color,
+            borderRadius: 4,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  const idx = ctx.dataIndex;
+                  const row = data[idx];
+                  if (key === 'hdi') return 'HDI: ' + (row.hdi || 0).toFixed(3);
+                  return fmt(row[key]);
+                }
+              }
+            }
+          },
+          scales: {
+            y: { beginAtZero: true, ticks: { color: textColor } },
+            x: { ticks: { color: textColor, maxRotation: 45 } }
+          }
+        }
+      });
+    }
+
+    // ============================================================
+    //  COMPARE
+    // ============================================================
+    async function runCompare() {
+      const codes = [];
+      for (let i = 1; i <= 5; i++) {
+        const v = $('compare-' + i).value;
+        if (v) codes.push(v);
+      }
+      if (!codes.length) { showToast('Select at least one country to compare.'); return; }
+
+      try {
+        const data = await apiFetch('/api/compare?codes=' + codes.join(','));
+        renderComparison(data.comparison);
+      } catch (e) {
+        showToast('Compare failed: ' + e.message);
+      }
+    }
+    $('compare-btn').addEventListener('click', runCompare);
+
+    function renderComparison(obj) {
+      const entries = Object.values(obj);
+      if (!entries.length) { $('compare-results').innerHTML = '<p style="color:var(--danger);">No results.</p>'; return; }
+
+      const keys = [
+        { key: 'name', label: 'Country' },
+        { key: 'continent', label: 'Continent' },
+        { key: 'capital', label: 'Capital' },
+        { key: 'population', label: 'Population', fmt: formatNumber },
+        { key: 'gdpUsd', label: 'GDP', fmt: formatCompactUsd },
+        { key: 'gdpPerCapita', label: 'GDP / Capita', fmt: formatCompactUsd },
+        { key: 'areaKm2', label: 'Area', fmt: v => formatNumber(v) + ' km²' },
+        { key: 'hdi', label: 'HDI' },
+        { key: 'lifeExpectancy', label: 'Life Exp.' },
+        { key: 'internetPct', label: 'Internet', fmt: formatPct },
+        { key: 'density', label: 'Density', fmt: v => v + '/km²' },
+      ];
+
+      let html = '<div class="compare-grid">';
+      entries.forEach(e => {
+        html += '<div class="compare-col"><h3>' + escapeHtml(e.name) + ' <span style="font-weight:400;color:var(--text-muted)">' + escapeHtml(e.code) + '</span></h3>';
+        keys.forEach(k => {
+          const val = e[k.key];
+          const display = k.fmt ? k.fmt(val) : (val ?? '—');
+          html += '<div class="compare-row"><span class="label">' + k.label + '</span><span class="value">' + display + '</span></div>';
+        });
+        html += '</div>';
+      });
+      html += '</div>';
+      $('compare-results').innerHTML = html;
+    }
+
+    // ============================================================
+    //  EXPORT CSV
+    // ============================================================
+    exportBtn.addEventListener('click', function() {
+      window.open(API_BASE + '/api/export.csv', '_blank');
+      showToast('CSV download started');
+    });
+
+    // ============================================================
+    //  TABS
+    // ============================================================
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+        this.classList.add('active');
+        $(this.dataset.tab).classList.add('active');
+        // Rebuild charts when switching to chart tab (fix rendering)
+        if (this.dataset.tab === 'tab-charts') {
+          setTimeout(buildCharts, 100);
+        }
+      });
+    });
+
+    // ============================================================
+    //  CLOSE SIDEBAR
+    // ============================================================
+    closeSidebarBtn.addEventListener('click', closeSidebar);
+    sidebarBackdrop.addEventListener('click', closeSidebar);
+    window.addEventListener('resize', function() {
+      if (!isMobile()) { sidebar.classList.remove('open'); sidebarBackdrop.classList.remove('visible'); }
+    });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeSidebar(); });
+
+    // ============================================================
+    //  INIT
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', async function() {
+      await loadCountries();
+      initializeMap();
+      if (typeof Chart !== 'undefined') buildCharts();
+    });
+  </script>
+</body>
+</html>

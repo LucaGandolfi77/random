@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+tests/test_pipeline.py
+trend_meme_factory/__init__.py
+trend_meme_factory/__main__.py
+trend_meme_factory/cli.py
+trend_meme_factory/pipeline.py
+trend_meme_factory.egg-info/PKG-INFO
+trend_meme_factory.egg-info/SOURCES.txt
+trend_meme_factory.egg-info/dependency_links.txt
+trend_meme_factory.egg-info/entry_points.txt
+trend_meme_factory.egg-info/requires.txt
+trend_meme_factory.egg-info/top_level.txt

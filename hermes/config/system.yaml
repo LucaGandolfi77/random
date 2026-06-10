@@ -1,0 +1,18 @@
+workspace_name: Hermes Specialist Workspace
+default_backend: hermes-cli
+default_run_mode: preview
+hermes_binary: hermes
+max_parallel_agents: 3
+shared_memory_path: runtime/memory/shared_memory.json
+logs_dir: runtime/logs
+reload_on_each_command: true
+agent_order:
+  - ricercatore
+  - sviluppatore
+  - revisore
+  - storico
+  - economista
+  - giurista
+  - statistico
+  - architetto
+  - docente

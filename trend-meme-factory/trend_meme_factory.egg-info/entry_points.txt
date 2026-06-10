@@ -1,0 +1,2 @@
+[console_scripts]
+trend-meme-factory = trend_meme_factory.cli:main

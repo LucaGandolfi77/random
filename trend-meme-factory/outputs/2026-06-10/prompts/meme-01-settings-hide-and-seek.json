@@ -1,0 +1,9 @@
+{
+  "meme_id": "meme-01",
+  "final_image_prompt": "Create a office comic style meme illustration. A simple cartoon office worker hunting for missing settings across three generic software windows and a maze of update popups on bright monitors. Family-friendly, original, high contrast, clear composition, empty space at the top and bottom for short meme text, no real people, no logos, no brand names, no copyrighted characters, no political imagery.",
+  "negative_prompt": "real people, celebrity likeness, politician, copyrighted character, trademarked logo, sexual content, hate, violence, gore, tragedy, disaster, photorealism",
+  "aspect_ratio": "square",
+  "text_overlay_instructions": "Use bold uppercase white text with a dark outline. Keep the top caption inside the upper band and the bottom caption inside the lower band.",
+  "filename_slug": "meme-01-settings-hide-and-seek",
+  "output_format": "png"
+}

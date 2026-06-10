@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trend-meme-factory"
+version = "0.1.0"
+description = "Safe, auditable daily meme pipeline with trend research, local image generation, and metadata logging."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "GitHub Copilot" }
+]
+keywords = ["memes", "automation", "rss", "images", "agents", "safety"]
+dependencies = [
+  "Pillow>=10.0",
+  "requests>=2.31"
+]
+
+[project.scripts]
+trend-meme-factory = "trend_meme_factory.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["trend_meme_factory*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

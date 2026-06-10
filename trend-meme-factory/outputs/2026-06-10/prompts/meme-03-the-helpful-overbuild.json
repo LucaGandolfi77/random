@@ -1,0 +1,9 @@
+{
+  "meme_id": "meme-03",
+  "final_image_prompt": "Create a clean digital illustration meme illustration. A cheerful generic robot at an office desk proudly presenting an absurdly large color-coded workflow map to one stunned office worker, with floating checklists, arrows, and a coffee cup. Family-friendly, original, high contrast, clear composition, empty space at the top and bottom for short meme text, no real people, no logos, no brand names, no copyrighted characters, no political imagery.",
+  "negative_prompt": "real people, celebrity likeness, politician, copyrighted character, trademarked logo, sexual content, hate, violence, gore, tragedy, disaster, photorealism",
+  "aspect_ratio": "square",
+  "text_overlay_instructions": "Use bold uppercase white text with a dark outline. Keep the top caption inside the upper band and the bottom caption inside the lower band.",
+  "filename_slug": "meme-03-the-helpful-overbuild",
+  "output_format": "png"
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "meme_id": "meme-01",
+    "filename": "meme-01-the-helpful-overbuild_final.png",
+    "approved": true,
+    "reason": "Approved. Technical checks passed and prompt/caption content stayed within safety rules.",
+    "required_fix_if_rejected": null
+  },
+  {
+    "meme_id": "meme-02",
+    "filename": "meme-02-confident-draft-mode_final.png",
+    "approved": true,
+    "reason": "Approved. Technical checks passed and prompt/caption content stayed within safety rules.",
+    "required_fix_if_rejected": null
+  },
+  {
+    "meme_id": "meme-03",
+    "filename": "meme-03-settings-hide-and-seek_final.png",
+    "approved": true,
+    "reason": "Approved. Technical checks passed and prompt/caption content stayed within safety rules.",
+    "required_fix_if_rejected": null
+  },
+  {
+    "meme_id": "meme-04",
+    "filename": "meme-04-progress-bar-philosophy_final.png",
+    "approved": true,
+    "reason": "Approved. Technical checks passed and prompt/caption content stayed within safety rules.",
+    "required_fix_if_rejected": null
+  },
+  {
+    "meme_id": "meme-05",
+    "filename": "meme-05-minor-balance-change_final.png",
+    "approved": true,
+    "reason": "Approved. Technical checks passed and prompt/caption content stayed within safety rules.",
+    "required_fix_if_rejected": null
+  },
+  {
+    "meme_id": "meme-06",
+    "filename": "meme-06-launch-day-confidence_final.png",
+    "approved": true,
+    "reason": "Approved. Technical checks passed and prompt/caption content stayed within safety rules.",
+    "required_fix_if_rejected": null
+  },
+  {
+    "meme_id": "meme-07",
+    "filename": "meme-07-system-for-the-systems_final.png",
+    "approved": true,
+    "reason": "Approved. Technical checks passed and prompt/caption content stayed within safety rules.",
+    "required_fix_if_rejected": null
+  },
+  {
+    "meme_id": "meme-08",
+    "filename": "meme-08-calendar-creep_final.png",
+    "approved": true,
+    "reason": "Approved. Technical checks passed and prompt/caption content stayed within safety rules.",
+    "required_fix_if_rejected": null
+  },
+  {
+    "meme_id": "meme-09",
+    "filename": "meme-09-weekend-watchlist-physics_final.png",
+    "approved": true,
+    "reason": "Approved. Technical checks passed and prompt/caption content stayed within safety rules.",
+    "required_fix_if_rejected": null
+  },
+  {
+    "meme_id": "meme-10",
+    "filename": "meme-10-recommendation-avalanche_final.png",
+    "approved": true,
+    "reason": "Approved. Technical checks passed and prompt/caption content stayed within safety rules.",
+    "required_fix_if_rejected": null
+  }
+]

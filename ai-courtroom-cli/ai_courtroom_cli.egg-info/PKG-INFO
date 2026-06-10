@@ -10,17 +10,21 @@ Description-Content-Type: text/markdown
 
 # AI Courtroom CLI
 
-AI Courtroom CLI is a terminal-only MVP of AI Courtroom. It runs entirely from Python on the command line, stores sessions locally in SQLite, generates a courtroom-style multi-agent debate with mocked responses, and exports verdict reports to Markdown.
+AI Courtroom CLI e' una versione interamente da terminale del progetto AI Courtroom.
+Non richiede browser, interfacce web o componenti grafiche: tutto il flusso si usa con Python dalla linea di comando.
 
-## Core capabilities
+Il progetto esegue un dibattito strutturato fra agenti con ruoli distinti, salva casi e verdetti in SQLite locale ed esporta il report finale in Markdown. La prima versione usa agenti mock deterministici, ma la struttura e' gia' pronta per sostituire il provider con chiamate reali a LLM.
 
-- create a new decision case from the terminal
-- run a structured debate across specialized agents
-- store cases, messages, verdicts, reports, and history locally
-- print the full debate and verdict in the terminal
-- export the final report to Markdown
+## Funzionalita'
 
-## Agents included
+- creazione di un nuovo caso decisionale da terminale
+- dibattito multi-agente con opening statements, challenge e verdetto finale
+- salvataggio locale di casi, messaggi, report e cronologia sessioni
+- visualizzazione completa del report direttamente nel terminale
+- export del verdetto in Markdown
+- supporto sia come modulo Python sia come comando installabile `ai-courtroom`
+
+## Agenti inclusi
 
 - Case Intake Agent
 - Pro Advocate
@@ -31,15 +35,15 @@ AI Courtroom CLI is a terminal-only MVP of AI Courtroom. It runs entirely from P
 - Futurist
 - Judge
 
-## Architecture goals
+## Obiettivi architetturali
 
-- CLI-only workflow
-- Python-only MVP with no browser requirement
-- storage in SQLite for local persistence
-- modular provider interface so real LLM APIs can be added later
-- deterministic mock outputs for testing and demos
+- CLI-only, senza dipendenze da browser
+- Python-only per il flusso MVP
+- storage locale con SQLite
+- provider layer sostituibile per integrazione LLM futura
+- output deterministico dei mock per demo e test ripetibili
 
-## Project structure
+## Struttura del progetto
 
 ```text
 ai-courtroom-cli/
@@ -56,33 +60,73 @@ ai-courtroom-cli/
     providers.py
     storage.py
     templates.py
+  examples/
+    used-rtx-3090.json
   tests/
     test_trial_engine.py
+  run.py
   pyproject.toml
   README.md
 ```
 
-## Run locally
+## Requisiti
+
+- Python 3.11+
+
+## Avvio rapido
+
+Esecuzione diretta come modulo:
 
 ```bash
 cd /workspaces/random/ai-courtroom-cli
 python -m ai_courtroom_cli
 ```
 
-Run the built-in demo case:
+Esecuzione con launcher locale:
+
+```bash
+cd /workspaces/random/ai-courtroom-cli
+python run.py
+```
+
+Caso demo incluso:
 
 ```bash
 python -m ai_courtroom_cli demo
 ```
 
-Optional editable install:
+oppure:
 
 ```bash
-python -m pip install -e .
-ai-courtroom demo
+python run.py demo
 ```
 
-## Commands
+## Comando installabile
+
+Il progetto espone gia' uno script console Python chiamato `ai-courtroom`.
+
+Installazione editable locale:
+
+```bash
+cd /workspaces/random/ai-courtroom-cli
+python -m pip install -e .
+```
+
+Dopo l'installazione puoi usare il comando direttamente:
+
+```bash
+ai-courtroom
+ai-courtroom demo
+ai-courtroom new --dilemma "Should I buy 2 used RTX 3090 GPUs now, or should I wait?"
+ai-courtroom list
+ai-courtroom show 1
+ai-courtroom export 1
+ai-courtroom settings
+```
+
+## Comandi disponibili
+
+### Modalita' modulo Python
 
 ```bash
 python -m ai_courtroom_cli
@@ -94,168 +138,95 @@ python -m ai_courtroom_cli export 1
 python -m ai_courtroom_cli settings
 ```
 
-## Storage
-
-By default the app stores data in:
-
-```text
-~/.ai_courtroom/courtroom.sqlite3
-```
-
-Override the database path if needed:
+### Modalita' launcher locale
 
 ```bash
-python -m ai_courtroom_cli --db-path /custom/path/courtroom.sqlite3 demo
+python run.py
+python run.py new
+python run.py demo
+python run.py list
+python run.py show 1
+python run.py export 1
+python run.py settings
 ```
 
-## Example dilemma
+## Input supportati per un nuovo caso
 
-The included demo case is:
+Quando crei un caso puoi fornire:
 
-"Should I buy 2 used RTX 3090 GPUs now, or should I wait?"
+- titolo
+- dilemma
+- categoria
+- budget
+- orizzonte temporale
+- vincoli
+- tolleranza al rischio
+- contesto esistente
+- alternative gia' considerate
 
-## Add a real LLM later
+Esempio completo:
 
-1. implement the `AgentProvider` protocol in `ai_courtroom_cli/providers.py`
-2. replace `MockAgentProvider` in `ai_courtroom_cli/cli.py`
-3. keep storage, orchestration, reporting, and terminal UX unchanged
+```bash
+ai-courtroom new \
+  --title "GPU purchase decision" \
+  --dilemma "Should I buy 2 used RTX 3090 GPUs now, or should I wait?" \
+  --category "Technology purchase" \
+  --budget "1500 EUR" \
+  --time-horizon "6 months" \
+  --constraints "Need CUDA for local LLM experiments" \
+  --risk-tolerance 45 \
+  --context "Electricity cost is high and market prices are volatile" \
+  --alternatives "Wait for RTX 5000 discounts,Buy 1 GPU only"
+```
 
-## Safety notices
+## Dove salva i dati
 
-- This tool is for decision support only.
-- It does not provide legal, financial, medical, or professional advice.
-- Financial analysis is informational only.
-- The final decision remains the user's responsibility.
+Per default i dati vengono salvati nel database SQLite locale gestito da `CourtroomStorage`.
 
-## Testing
+Puoi usare un path custom con:
+
+```bash
+ai-courtroom --db-path /custom/path/courtroom.sqlite3 demo
+```
+
+I report Markdown esportati vengono salvati nella cartella `exports/` del progetto o nel path esplicitamente richiesto.
+
+## Caso di esempio incluso
+
+Il caso demo incluso nel progetto e' questo:
+
+```text
+Should I buy 2 used RTX 3090 GPUs now, or should I wait?
+```
+
+Il relativo input strutturato e' disponibile in `examples/used-rtx-3090.json`.
+
+## Come sostituire i mock con un provider reale
+
+1. implementa il protocollo `AgentProvider` in `ai_courtroom_cli/providers.py`
+2. sostituisci `MockAgentProvider` nel bootstrap della CLI
+3. mantieni invariati orchestrazione, storage e formato dei report
+
+In questo modo puoi aggiungere un backend LLM reale senza cambiare il flusso terminale o la persistenza locale.
+
+## Test
 
 ```bash
 cd /workspaces/random/ai-courtroom-cli
 python -m unittest discover -s tests
 ```
 
-AI Courtroom CLI e' una versione interamente da linea di comando del progetto AI Courtroom.
-Non richiede browser, frontend web o interfacce grafiche: tutto il flusso si usa da terminale
-con Python.
-
-## Cosa fa
-
-Il tool ti permette di:
-
-- aprire un nuovo caso decisionale
-- far partire un dibattito simulato tra agenti AI con ruoli distinti
-- ottenere un verdetto strutturato con rischi, alternative e piano d'azione
-- salvare cronologia, messaggi e report in locale
-- esportare il report finale in Markdown
-
-Ruoli inclusi nel MVP:
-
-- Case Intake Agent
-- Pro Advocate
-- Contra Advocate
-- Judge
-- Technical Expert
-- Financial Expert
-- Skeptic
-- Futurist
-
-Il MVP usa risposte mock deterministiche, ma il codice e' organizzato per sostituire il provider
-mock con chiamate reali a LLM in un secondo momento.
-
-## Requisiti
-
-- Python 3.11+
-
-## Avvio rapido
-
-Dal terminale:
-
-```bash
-cd /workspaces/random/ai-courtroom-cli
-python run.py
-```
-
-Per vedere un caso demo gia' pronto:
-
-```bash
-python run.py demo
-```
-
-Per creare un caso nuovo in modo interattivo:
-
-```bash
-python run.py new
-```
-
-## Installazione opzionale come comando locale
-
-Se vuoi installarlo come comando CLI nel tuo ambiente Python:
-
-```bash
-cd /workspaces/random/ai-courtroom-cli
-python -m pip install -e .
-ai-courtroom demo
-```
-
-## Comandi principali
-
-```bash
-python run.py
-python run.py demo
-python run.py new
-python run.py history
-python run.py show <case_id>
-python run.py export <case_id>
-python run.py settings
-```
-
-## Dove salva i dati
-
-Per default il programma salva tutto in:
-
-```text
-~/.ai_courtroom
-```
-
-Struttura:
-
-- database SQLite con casi, messaggi e verdetti
-- cartella `exports/` con i report Markdown
-
-Puoi cambiare percorso impostando la variabile d'ambiente:
-
-```bash
-export AI_COURTROOM_HOME=/percorso/personalizzato
-```
-
-## Flusso del MVP
-
-1. Inserisci dilemma, categoria e contesto.
-2. Il Case Intake Agent estrae vincoli, assunzioni e dati mancanti.
-3. Gli agenti producono opening statements.
-4. Gli agenti producono challenge statements.
-5. Il Judge sintetizza e decide.
-6. Il report finale viene salvato ed esportabile.
-
-## Esempio di dilemma
-
-```text
-Should I buy 2 used RTX 3090 GPUs now, or should I wait?
-```
-
-E' incluso anche come file di esempio in `examples/used-rtx-3090.json`.
-
 ## Limiti del MVP
 
-- Nessuna chiamata reale a LLM nel primo rilascio
-- Nessuna autenticazione
-- Nessuna integrazione web
-- Nessuna ricerca live sul web
-- Nessuna consulenza professionale reale
+- nessuna chiamata reale a LLM nel rilascio corrente
+- nessuna autenticazione
+- nessuna UI web
+- nessuna ricerca live sul web
+- nessun upload di evidenze o documenti
 
 ## Disclaimer
 
-- Questo strumento e' un supporto decisionale, non un sostituto di consulenza professionale.
-- Non fornisce consulenza legale, finanziaria, medica o professionale.
-- L'analisi finanziaria e' solo informativa.
-- La decisione finale resta all'utente.
+- questo strumento e' un supporto decisionale, non un sostituto di consulenza professionale
+- non fornisce consulenza legale, finanziaria, medica o professionale
+- l'analisi finanziaria e' solo informativa
+- la decisione finale resta sempre all'utente

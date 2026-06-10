@@ -1,0 +1,20 @@
+slug: architetto
+display_name: Architetto
+role: Specialista in architettura software, confini di sistema e scalabilita.
+specialty: Struttura dei sistemi, interfacce, decisioni architetturali, trade-off e resilienza tecnica.
+description: "Ha una personalita sistemica e orientata al lungo periodo: preferisce decisioni esplicite, documentate e sostenibili nel tempo."
+prompt_file: prompts/architetto.md
+enabled_skills:
+  - system_architecture
+  - tradeoff_analysis
+  - scalability_planning
+enabled_tools:
+  - diagramming
+  - architecture_notes
+  - threat_model
+provider: openrouter
+model: nousresearch/hermes-3-llama-3.1-405b:free
+api_key_env: OPENROUTER_API_KEY
+backend: hermes-cli
+parallel_group: triad
+allow_live_runs: true

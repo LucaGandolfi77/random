@@ -1,0 +1,132 @@
+{
+  "run_date": "2026-06-10",
+  "config": {
+    "max_topics_to_research": 20,
+    "max_topics_to_approve": 8,
+    "memes_per_topic": 2,
+    "max_final_memes": 10,
+    "output_root": "./outputs",
+    "image_format": "png",
+    "default_aspect_ratio": "square",
+    "run_date": null,
+    "enable_web_research": true,
+    "enable_image_generation": true,
+    "enable_text_overlay": true,
+    "strict_safety_mode": true
+  },
+  "counts": {
+    "topics_approved": 5,
+    "topics_rejected": 0,
+    "meme_concepts": 10,
+    "images_generated": 10,
+    "final_memes_ready": 10
+  },
+  "warnings": [],
+  "assets": [
+    {
+      "meme_id": "meme-01",
+      "filename_slug": "meme-01-the-helpful-overbuild",
+      "raw_image_path": "outputs/2026-06-10/images/meme-01-the-helpful-overbuild.png",
+      "final_image_path": "outputs/2026-06-10/final/meme-01-the-helpful-overbuild_final.png",
+      "prompt_path": "outputs/2026-06-10/prompts/meme-01-the-helpful-overbuild.json",
+      "image_generation_status": "generated",
+      "overlay_status": "generated",
+      "failure_reason": null
+    },
+    {
+      "meme_id": "meme-02",
+      "filename_slug": "meme-02-confident-draft-mode",
+      "raw_image_path": "outputs/2026-06-10/images/meme-02-confident-draft-mode.png",
+      "final_image_path": "outputs/2026-06-10/final/meme-02-confident-draft-mode_final.png",
+      "prompt_path": "outputs/2026-06-10/prompts/meme-02-confident-draft-mode.json",
+      "image_generation_status": "generated",
+      "overlay_status": "generated",
+      "failure_reason": null
+    },
+    {
+      "meme_id": "meme-03",
+      "filename_slug": "meme-03-settings-hide-and-seek",
+      "raw_image_path": "outputs/2026-06-10/images/meme-03-settings-hide-and-seek.png",
+      "final_image_path": "outputs/2026-06-10/final/meme-03-settings-hide-and-seek_final.png",
+      "prompt_path": "outputs/2026-06-10/prompts/meme-03-settings-hide-and-seek.json",
+      "image_generation_status": "generated",
+      "overlay_status": "generated",
+      "failure_reason": null
+    },
+    {
+      "meme_id": "meme-04",
+      "filename_slug": "meme-04-progress-bar-philosophy",
+      "raw_image_path": "outputs/2026-06-10/images/meme-04-progress-bar-philosophy.png",
+      "final_image_path": "outputs/2026-06-10/final/meme-04-progress-bar-philosophy_final.png",
+      "prompt_path": "outputs/2026-06-10/prompts/meme-04-progress-bar-philosophy.json",
+      "image_generation_status": "generated",
+      "overlay_status": "generated",
+      "failure_reason": null
+    },
+    {
+      "meme_id": "meme-05",
+      "filename_slug": "meme-05-minor-balance-change",
+      "raw_image_path": "outputs/2026-06-10/images/meme-05-minor-balance-change.png",
+      "final_image_path": "outputs/2026-06-10/final/meme-05-minor-balance-change_final.png",
+      "prompt_path": "outputs/2026-06-10/prompts/meme-05-minor-balance-change.json",
+      "image_generation_status": "generated",
+      "overlay_status": "generated",
+      "failure_reason": null
+    },
+    {
+      "meme_id": "meme-06",
+      "filename_slug": "meme-06-launch-day-confidence",
+      "raw_image_path": "outputs/2026-06-10/images/meme-06-launch-day-confidence.png",
+      "final_image_path": "outputs/2026-06-10/final/meme-06-launch-day-confidence_final.png",
+      "prompt_path": "outputs/2026-06-10/prompts/meme-06-launch-day-confidence.json",
+      "image_generation_status": "generated",
+      "overlay_status": "generated",
+      "failure_reason": null
+    },
+    {
+      "meme_id": "meme-07",
+      "filename_slug": "meme-07-system-for-the-systems",
+      "raw_image_path": "outputs/2026-06-10/images/meme-07-system-for-the-systems.png",
+      "final_image_path": "outputs/2026-06-10/final/meme-07-system-for-the-systems_final.png",
+      "prompt_path": "outputs/2026-06-10/prompts/meme-07-system-for-the-systems.json",
+      "image_generation_status": "generated",
+      "overlay_status": "generated",
+      "failure_reason": null
+    },
+    {
+      "meme_id": "meme-08",
+      "filename_slug": "meme-08-calendar-creep",
+      "raw_image_path": "outputs/2026-06-10/images/meme-08-calendar-creep.png",
+      "final_image_path": "outputs/2026-06-10/final/meme-08-calendar-creep_final.png",
+      "prompt_path": "outputs/2026-06-10/prompts/meme-08-calendar-creep.json",
+      "image_generation_status": "generated",
+      "overlay_status": "generated",
+      "failure_reason": null
+    },
+    {
+      "meme_id": "meme-09",
+      "filename_slug": "meme-09-weekend-watchlist-physics",
+      "raw_image_path": "outputs/2026-06-10/images/meme-09-weekend-watchlist-physics.png",
+      "final_image_path": "outputs/2026-06-10/final/meme-09-weekend-watchlist-physics_final.png",
+      "prompt_path": "outputs/2026-06-10/prompts/meme-09-weekend-watchlist-physics.json",
+      "image_generation_status": "generated",
+      "overlay_status": "generated",
+      "failure_reason": null
+    },
+    {
+      "meme_id": "meme-10",
+      "filename_slug": "meme-10-recommendation-avalanche",
+      "raw_image_path": "outputs/2026-06-10/images/meme-10-recommendation-avalanche.png",
+      "final_image_path": "outputs/2026-06-10/final/meme-10-recommendation-avalanche_final.png",
+      "prompt_path": "outputs/2026-06-10/prompts/meme-10-recommendation-avalanche.json",
+      "image_generation_status": "generated",
+      "overlay_status": "generated",
+      "failure_reason": null
+    }
+  ],
+  "model_notes": {
+    "research_mode": "Google News RSS search plus deterministic scoring",
+    "image_mode": "local procedural illustration via Pillow",
+    "overlay_mode": "caption overlay via Pillow"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "meme_id": "meme-02",
+  "final_image_prompt": "Create a surreal but family-friendly meme illustration. A generic office computer screen exploding into too many tidy project cards while a small cartoon robot beams with confidence and the human user slowly lowers a coffee mug. Family-friendly, original, high contrast, clear composition, empty space at the top and bottom for short meme text, no real people, no logos, no brand names, no copyrighted characters, no political imagery.",
+  "negative_prompt": "real people, celebrity likeness, politician, copyrighted character, trademarked logo, sexual content, hate, violence, gore, tragedy, disaster, photorealism",
+  "aspect_ratio": "square",
+  "text_overlay_instructions": "Use bold uppercase white text with a dark outline. Keep the top caption inside the upper band and the bottom caption inside the lower band.",
+  "filename_slug": "meme-02-confident-draft-mode",
+  "output_format": "png"
+}

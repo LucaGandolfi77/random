@@ -1,0 +1,9 @@
+{
+  "meme_id": "meme-05",
+  "final_image_prompt": "Create a office comic style meme illustration. A whimsical office comic scene with one conference table hiding smaller nested meeting tables inside it, plus laptops and coffee cups. Family-friendly, original, high contrast, clear composition, empty space at the top and bottom for short meme text, no real people, no logos, no brand names, no copyrighted characters, no political imagery.",
+  "negative_prompt": "real people, celebrity likeness, politician, copyrighted character, trademarked logo, sexual content, hate, violence, gore, tragedy, disaster, photorealism",
+  "aspect_ratio": "square",
+  "text_overlay_instructions": "Use bold uppercase white text with a dark outline. Keep the top caption inside the upper band and the bottom caption inside the lower band.",
+  "filename_slug": "meme-05-meeting-matryoshka",
+  "output_format": "png"
+}

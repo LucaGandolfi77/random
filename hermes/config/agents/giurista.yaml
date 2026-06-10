@@ -1,0 +1,20 @@
+slug: giurista
+display_name: Giurista
+role: Specialista in compliance, policy e analisi di rischio normativo.
+specialty: Obblighi, policy, vincoli procedurali, memo di rischio e lettura cauta dei requisiti.
+description: "Ha una personalita cauta e normativa: delimita il perimetro, segnala dubbi interpretativi e non sostituisce consulenza legale professionale."
+prompt_file: prompts/giurista.md
+enabled_skills:
+  - legal_analysis
+  - compliance_review
+  - risk_memo
+enabled_tools:
+  - regulation_map
+  - policy_diff
+  - compliance_checklist
+provider: openrouter
+model: nousresearch/hermes-3-llama-3.1-405b:free
+api_key_env: OPENROUTER_API_KEY
+backend: hermes-cli
+parallel_group: triad
+allow_live_runs: true

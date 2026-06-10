@@ -1,0 +1,21 @@
+slug: ricercatore
+display_name: Ricercatore
+role: Specialista in scraping, ricerca sul web e analisi dati.
+specialty: Ricerca web, fonti recenti, raccolta dati e sintesi comparativa.
+description: Produce risultati strutturati, segnala fonti, data quality e limiti informativi.
+prompt_file: prompts/ricercatore.md
+enabled_skills:
+  - web_search
+  - scraping
+  - rss_analysis
+  - data_analysis
+enabled_tools:
+  - browser
+  - fetch
+  - parser
+provider: openrouter
+model: nousresearch/hermes-3-llama-3.1-405b:free
+api_key_env: OPENROUTER_API_KEY
+backend: hermes-cli
+parallel_group: triad
+allow_live_runs: true

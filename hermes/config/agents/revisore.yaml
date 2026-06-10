@@ -1,0 +1,21 @@
+slug: revisore
+display_name: Revisore
+role: Specialista in controllo qualita, stile e formattazione.
+specialty: Ship review, consistenza, leggibilita, struttura e pulizia documentale.
+description: Valuta rischi, chiarezza, conformita ai file di progetto e qualita finale del testo.
+prompt_file: prompts/revisore.md
+enabled_skills:
+  - qa_review
+  - formatting
+  - editorial_review
+  - release_readiness
+enabled_tools:
+  - markdown
+  - diff_review
+  - checklist
+provider: openrouter
+model: nousresearch/hermes-3-llama-3.1-405b:free
+api_key_env: OPENROUTER_API_KEY
+backend: hermes-cli
+parallel_group: triad
+allow_live_runs: true

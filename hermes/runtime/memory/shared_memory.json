@@ -1,0 +1,130 @@
+{
+  "entries": [
+    {
+      "entry_id": "mem-0001",
+      "timestamp": "2026-06-10T12:55:25+00:00",
+      "author": "orchestrator",
+      "category": "task",
+      "tags": [
+        "dispatch",
+        "preview"
+      ],
+      "metadata": {
+        "agents": [
+          "ricercatore",
+          "sviluppatore",
+          "revisore"
+        ]
+      },
+      "content": "Analizza le fonti, proponi una patch e fai una review finale"
+    },
+    {
+      "entry_id": "mem-0002",
+      "timestamp": "2026-06-10T12:55:25+00:00",
+      "author": "revisore",
+      "category": "agent_output",
+      "tags": [
+        "revisore",
+        "preview"
+      ],
+      "metadata": {
+        "status": "completed",
+        "mode": "preview"
+      },
+      "content": "Revisore\n\n            Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.\n            Ruolo: Specialista in controllo qualita, stile e formattazione.\n            Skill attive: qa_review, formatting, editorial_review, release_readiness\n            Tool configurati: markdown, diff_review, checklist\n\n            Piano immediato:\n            - controllo coerenza, chiarezza e presentazione del risultato\n- evidenzio rischi, regressioni o buchi di qualità\n- chiudo con decisione ship o no-ship\n\n            Memoria condivisa disponibile:\n            - [2026-06-10T12:55:25+00:00] orchestrator: Analizza le fonti, proponi una patch e fai una review finale"
+    },
+    {
+      "entry_id": "mem-0003",
+      "timestamp": "2026-06-10T12:55:25+00:00",
+      "author": "ricercatore",
+      "category": "agent_output",
+      "tags": [
+        "ricercatore",
+        "preview"
+      ],
+      "metadata": {
+        "status": "completed",
+        "mode": "preview"
+      },
+      "content": "Ricercatore\n\n            Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.\n            Ruolo: Specialista in scraping, ricerca sul web e analisi dati.\n            Skill attive: web_search, scraping, rss_analysis, data_analysis\n            Tool configurati: browser, fetch, parser\n\n            Piano immediato:\n            - mappo fonti e segnali utili collegati al task\n- estraggo dati o pattern da confrontare\n- segnalo assunzioni, limiti e verifiche ancora aperte\n\n            Memoria condivisa disponibile:\n            - [2026-06-10T12:55:25+00:00] orchestrator: Analizza le fonti, proponi una patch e fai una review finale"
+    },
+    {
+      "entry_id": "mem-0004",
+      "timestamp": "2026-06-10T12:55:25+00:00",
+      "author": "sviluppatore",
+      "category": "agent_output",
+      "tags": [
+        "sviluppatore",
+        "preview"
+      ],
+      "metadata": {
+        "status": "completed",
+        "mode": "preview"
+      },
+      "content": "Sviluppatore\n\n            Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.\n            Ruolo: Specialista in scrittura del codice, debug e test.\n            Skill attive: code_generation, debugging, refactoring, testing\n            Tool configurati: editor, shell, pytest\n\n            Piano immediato:\n            - trasformo il task in interventi tecnici verificabili\n- isolo bug o gap implementativi\n- propongo patch minime e test rapidi\n\n            Memoria condivisa disponibile:\n            - [2026-06-10T12:55:25+00:00] orchestrator: Analizza le fonti, proponi una patch e fai una review finale"
+    },
+    {
+      "entry_id": "mem-0005",
+      "timestamp": "2026-06-10T12:58:00+00:00",
+      "author": "orchestrator",
+      "category": "task",
+      "tags": [
+        "dispatch",
+        "preview"
+      ],
+      "metadata": {
+        "agents": [
+          "ricercatore",
+          "sviluppatore",
+          "revisore"
+        ]
+      },
+      "content": "Analizza le fonti, proponi una patch e fai una review finale"
+    },
+    {
+      "entry_id": "mem-0006",
+      "timestamp": "2026-06-10T12:58:00+00:00",
+      "author": "revisore",
+      "category": "agent_output",
+      "tags": [
+        "revisore",
+        "preview"
+      ],
+      "metadata": {
+        "status": "completed",
+        "mode": "preview"
+      },
+      "content": "Revisore\n\n            Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.\n            Ruolo: Specialista in controllo qualita, stile e formattazione.\n            Skill attive: qa_review, formatting, editorial_review, release_readiness\n            Tool configurati: markdown, diff_review, checklist\n\n            Piano immediato:\n            - controllo coerenza, chiarezza e presentazione del risultato\n- evidenzio rischi, regressioni o buchi di qualità\n- chiudo con decisione ship o no-ship\n\n            Memoria condivisa disponibile:\n            - [2026-06-10T12:55:25+00:00] orchestrator: Analizza le fonti, proponi una patch e fai una review finale\n- [2026-06-10T12:55:25+00:00] revisore: Revisore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in controllo qualita, stile e formattazione.   ...\n- [2026-06-10T12:55:25+00:00] ricercatore: Ricercatore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in scraping, ricerca sul web e analisi dati....\n- [2026-06-10T12:55:25+00:00] sviluppatore: Sviluppatore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in scrittura del codice, debug e test.     ...\n- [2026-06-10T12:58:00+00:00] orchestrator: Analizza le fonti, proponi una patch e fai una review finale"
+    },
+    {
+      "entry_id": "mem-0007",
+      "timestamp": "2026-06-10T12:58:00+00:00",
+      "author": "ricercatore",
+      "category": "agent_output",
+      "tags": [
+        "ricercatore",
+        "preview"
+      ],
+      "metadata": {
+        "status": "completed",
+        "mode": "preview"
+      },
+      "content": "Ricercatore\n\n            Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.\n            Ruolo: Specialista in scraping, ricerca sul web e analisi dati.\n            Skill attive: web_search, scraping, rss_analysis, data_analysis\n            Tool configurati: browser, fetch, parser\n\n            Piano immediato:\n            - mappo fonti e segnali utili collegati al task\n- estraggo dati o pattern da confrontare\n- segnalo assunzioni, limiti e verifiche ancora aperte\n\n            Memoria condivisa disponibile:\n            - [2026-06-10T12:55:25+00:00] orchestrator: Analizza le fonti, proponi una patch e fai una review finale\n- [2026-06-10T12:55:25+00:00] revisore: Revisore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in controllo qualita, stile e formattazione.   ...\n- [2026-06-10T12:55:25+00:00] ricercatore: Ricercatore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in scraping, ricerca sul web e analisi dati....\n- [2026-06-10T12:55:25+00:00] sviluppatore: Sviluppatore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in scrittura del codice, debug e test.     ...\n- [2026-06-10T12:58:00+00:00] orchestrator: Analizza le fonti, proponi una patch e fai una review finale"
+    },
+    {
+      "entry_id": "mem-0008",
+      "timestamp": "2026-06-10T12:58:00+00:00",
+      "author": "sviluppatore",
+      "category": "agent_output",
+      "tags": [
+        "sviluppatore",
+        "preview"
+      ],
+      "metadata": {
+        "status": "completed",
+        "mode": "preview"
+      },
+      "content": "Sviluppatore\n\n            Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.\n            Ruolo: Specialista in scrittura del codice, debug e test.\n            Skill attive: code_generation, debugging, refactoring, testing\n            Tool configurati: editor, shell, pytest\n\n            Piano immediato:\n            - trasformo il task in interventi tecnici verificabili\n- isolo bug o gap implementativi\n- propongo patch minime e test rapidi\n\n            Memoria condivisa disponibile:\n            - [2026-06-10T12:55:25+00:00] orchestrator: Analizza le fonti, proponi una patch e fai una review finale\n- [2026-06-10T12:55:25+00:00] revisore: Revisore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in controllo qualita, stile e formattazione.   ...\n- [2026-06-10T12:55:25+00:00] ricercatore: Ricercatore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in scraping, ricerca sul web e analisi dati....\n- [2026-06-10T12:55:25+00:00] sviluppatore: Sviluppatore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in scrittura del codice, debug e test.     ...\n- [2026-06-10T12:58:00+00:00] orchestrator: Analizza le fonti, proponi una patch e fai una review finale"
+    }
+  ]
+}

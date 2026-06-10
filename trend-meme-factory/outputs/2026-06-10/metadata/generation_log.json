@@ -1,0 +1,368 @@
+[
+  {
+    "step": "research",
+    "status": "ok",
+    "query": "AI tools",
+    "topic_id": "topic-01",
+    "sources": [
+      "news.google.com"
+    ]
+  },
+  {
+    "step": "research",
+    "status": "ok",
+    "query": "Software updates",
+    "topic_id": "topic-02",
+    "sources": [
+      "news.google.com"
+    ]
+  },
+  {
+    "step": "research",
+    "status": "ok",
+    "query": "Gaming",
+    "topic_id": "topic-03",
+    "sources": [
+      "news.google.com"
+    ]
+  },
+  {
+    "step": "research",
+    "status": "ok",
+    "query": "Streaming",
+    "topic_id": "topic-04",
+    "sources": [
+      "news.google.com"
+    ]
+  },
+  {
+    "step": "research",
+    "status": "ok",
+    "query": "Apps",
+    "topic_id": "topic-05",
+    "sources": [
+      "news.google.com"
+    ]
+  },
+  {
+    "step": "research",
+    "status": "ok",
+    "query": "Productivity",
+    "topic_id": "topic-06",
+    "sources": [
+      "news.google.com"
+    ]
+  },
+  {
+    "step": "research",
+    "status": "ok",
+    "query": "Consumer gadgets",
+    "topic_id": "topic-07",
+    "sources": [
+      "news.google.com"
+    ]
+  },
+  {
+    "step": "research",
+    "status": "ok",
+    "query": "Technology",
+    "topic_id": "topic-08",
+    "sources": [
+      "news.google.com"
+    ]
+  },
+  {
+    "step": "research",
+    "status": "ok",
+    "query": "Entertainment",
+    "topic_id": "topic-09",
+    "sources": [
+      "news.google.com"
+    ]
+  },
+  {
+    "step": "safety_review",
+    "status": "approved",
+    "topic_id": "topic-01"
+  },
+  {
+    "step": "safety_review",
+    "status": "approved",
+    "topic_id": "topic-02"
+  },
+  {
+    "step": "safety_review",
+    "status": "approved",
+    "topic_id": "topic-03"
+  },
+  {
+    "step": "safety_review",
+    "status": "approved",
+    "topic_id": "topic-04"
+  },
+  {
+    "step": "safety_review",
+    "status": "approved",
+    "topic_id": "topic-05"
+  },
+  {
+    "step": "safety_review",
+    "status": "approved",
+    "topic_id": "topic-06"
+  },
+  {
+    "step": "safety_review",
+    "status": "approved",
+    "topic_id": "topic-07"
+  },
+  {
+    "step": "safety_review",
+    "status": "approved",
+    "topic_id": "topic-08"
+  },
+  {
+    "step": "safety_review",
+    "status": "approved",
+    "topic_id": "topic-09"
+  },
+  {
+    "step": "meme_strategy",
+    "status": "ok",
+    "topic_id": "topic-01",
+    "meme_id": "meme-01"
+  },
+  {
+    "step": "meme_strategy",
+    "status": "ok",
+    "topic_id": "topic-01",
+    "meme_id": "meme-02"
+  },
+  {
+    "step": "meme_strategy",
+    "status": "ok",
+    "topic_id": "topic-02",
+    "meme_id": "meme-03"
+  },
+  {
+    "step": "meme_strategy",
+    "status": "ok",
+    "topic_id": "topic-02",
+    "meme_id": "meme-04"
+  },
+  {
+    "step": "meme_strategy",
+    "status": "ok",
+    "topic_id": "topic-03",
+    "meme_id": "meme-05"
+  },
+  {
+    "step": "meme_strategy",
+    "status": "ok",
+    "topic_id": "topic-03",
+    "meme_id": "meme-06"
+  },
+  {
+    "step": "meme_strategy",
+    "status": "ok",
+    "topic_id": "topic-06",
+    "meme_id": "meme-07"
+  },
+  {
+    "step": "meme_strategy",
+    "status": "ok",
+    "topic_id": "topic-06",
+    "meme_id": "meme-08"
+  },
+  {
+    "step": "meme_strategy",
+    "status": "ok",
+    "topic_id": "topic-04",
+    "meme_id": "meme-09"
+  },
+  {
+    "step": "meme_strategy",
+    "status": "ok",
+    "topic_id": "topic-04",
+    "meme_id": "meme-10"
+  },
+  {
+    "step": "prompt_engineering",
+    "status": "ok",
+    "meme_id": "meme-01",
+    "filename": "meme-01-the-helpful-overbuild"
+  },
+  {
+    "step": "prompt_engineering",
+    "status": "ok",
+    "meme_id": "meme-02",
+    "filename": "meme-02-confident-draft-mode"
+  },
+  {
+    "step": "prompt_engineering",
+    "status": "ok",
+    "meme_id": "meme-03",
+    "filename": "meme-03-settings-hide-and-seek"
+  },
+  {
+    "step": "prompt_engineering",
+    "status": "ok",
+    "meme_id": "meme-04",
+    "filename": "meme-04-progress-bar-philosophy"
+  },
+  {
+    "step": "prompt_engineering",
+    "status": "ok",
+    "meme_id": "meme-05",
+    "filename": "meme-05-minor-balance-change"
+  },
+  {
+    "step": "prompt_engineering",
+    "status": "ok",
+    "meme_id": "meme-06",
+    "filename": "meme-06-launch-day-confidence"
+  },
+  {
+    "step": "prompt_engineering",
+    "status": "ok",
+    "meme_id": "meme-07",
+    "filename": "meme-07-system-for-the-systems"
+  },
+  {
+    "step": "prompt_engineering",
+    "status": "ok",
+    "meme_id": "meme-08",
+    "filename": "meme-08-calendar-creep"
+  },
+  {
+    "step": "prompt_engineering",
+    "status": "ok",
+    "meme_id": "meme-09",
+    "filename": "meme-09-weekend-watchlist-physics"
+  },
+  {
+    "step": "prompt_engineering",
+    "status": "ok",
+    "meme_id": "meme-10",
+    "filename": "meme-10-recommendation-avalanche"
+  },
+  {
+    "step": "image_generation",
+    "status": "generated",
+    "meme_id": "meme-01",
+    "file": "outputs/2026-06-10/images/meme-01-the-helpful-overbuild.png"
+  },
+  {
+    "step": "image_generation",
+    "status": "generated",
+    "meme_id": "meme-02",
+    "file": "outputs/2026-06-10/images/meme-02-confident-draft-mode.png"
+  },
+  {
+    "step": "image_generation",
+    "status": "generated",
+    "meme_id": "meme-03",
+    "file": "outputs/2026-06-10/images/meme-03-settings-hide-and-seek.png"
+  },
+  {
+    "step": "image_generation",
+    "status": "generated",
+    "meme_id": "meme-04",
+    "file": "outputs/2026-06-10/images/meme-04-progress-bar-philosophy.png"
+  },
+  {
+    "step": "image_generation",
+    "status": "generated",
+    "meme_id": "meme-05",
+    "file": "outputs/2026-06-10/images/meme-05-minor-balance-change.png"
+  },
+  {
+    "step": "image_generation",
+    "status": "generated",
+    "meme_id": "meme-06",
+    "file": "outputs/2026-06-10/images/meme-06-launch-day-confidence.png"
+  },
+  {
+    "step": "image_generation",
+    "status": "generated",
+    "meme_id": "meme-07",
+    "file": "outputs/2026-06-10/images/meme-07-system-for-the-systems.png"
+  },
+  {
+    "step": "image_generation",
+    "status": "generated",
+    "meme_id": "meme-08",
+    "file": "outputs/2026-06-10/images/meme-08-calendar-creep.png"
+  },
+  {
+    "step": "image_generation",
+    "status": "generated",
+    "meme_id": "meme-09",
+    "file": "outputs/2026-06-10/images/meme-09-weekend-watchlist-physics.png"
+  },
+  {
+    "step": "image_generation",
+    "status": "generated",
+    "meme_id": "meme-10",
+    "file": "outputs/2026-06-10/images/meme-10-recommendation-avalanche.png"
+  },
+  {
+    "step": "overlay",
+    "status": "generated",
+    "meme_id": "meme-01",
+    "file": "outputs/2026-06-10/final/meme-01-the-helpful-overbuild_final.png"
+  },
+  {
+    "step": "overlay",
+    "status": "generated",
+    "meme_id": "meme-02",
+    "file": "outputs/2026-06-10/final/meme-02-confident-draft-mode_final.png"
+  },
+  {
+    "step": "overlay",
+    "status": "generated",
+    "meme_id": "meme-03",
+    "file": "outputs/2026-06-10/final/meme-03-settings-hide-and-seek_final.png"
+  },
+  {
+    "step": "overlay",
+    "status": "generated",
+    "meme_id": "meme-04",
+    "file": "outputs/2026-06-10/final/meme-04-progress-bar-philosophy_final.png"
+  },
+  {
+    "step": "overlay",
+    "status": "generated",
+    "meme_id": "meme-05",
+    "file": "outputs/2026-06-10/final/meme-05-minor-balance-change_final.png"
+  },
+  {
+    "step": "overlay",
+    "status": "generated",
+    "meme_id": "meme-06",
+    "file": "outputs/2026-06-10/final/meme-06-launch-day-confidence_final.png"
+  },
+  {
+    "step": "overlay",
+    "status": "generated",
+    "meme_id": "meme-07",
+    "file": "outputs/2026-06-10/final/meme-07-system-for-the-systems_final.png"
+  },
+  {
+    "step": "overlay",
+    "status": "generated",
+    "meme_id": "meme-08",
+    "file": "outputs/2026-06-10/final/meme-08-calendar-creep_final.png"
+  },
+  {
+    "step": "overlay",
+    "status": "generated",
+    "meme_id": "meme-09",
+    "file": "outputs/2026-06-10/final/meme-09-weekend-watchlist-physics_final.png"
+  },
+  {
+    "step": "overlay",
+    "status": "generated",
+    "meme_id": "meme-10",
+    "file": "outputs/2026-06-10/final/meme-10-recommendation-avalanche_final.png"
+  }
+]

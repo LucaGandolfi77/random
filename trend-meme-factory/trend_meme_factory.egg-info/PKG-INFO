@@ -1,0 +1,89 @@
+Metadata-Version: 2.4
+Name: trend-meme-factory
+Version: 0.1.0
+Summary: Safe, auditable daily meme pipeline with trend research, local image generation, and metadata logging.
+Author: GitHub Copilot
+License: MIT
+Keywords: memes,automation,rss,images,agents,safety
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: Pillow>=10.0
+Requires-Dist: requests>=2.31
+
+# TrendMemeFactory
+
+TrendMemeFactory is a local, reproducible meme pipeline that researches safe recent trends, filters risky topics, turns approved topics into original meme concepts, generates image assets, overlays captions, and writes a full audit trail.
+
+## What it does
+
+- Researches recent safe topics from public RSS and Google News RSS search feeds.
+- Applies strict safety filtering before any humor is generated.
+- Produces original, non-political, non-targeted meme concepts.
+- Generates prompt JSON files and local PNG image assets.
+- Saves metadata for approval, rejection, prompts, failures, and final review.
+- Supports daily automation through a CLI entry point and a helper shell script.
+
+## Safety model
+
+The pipeline rejects topics that touch politics, war, tragedy, crimes, protected identity groups, sexual content, minors, private individuals, or other sensitive areas. Meme captions and prompts stay generic and avoid real people, logos, copyrighted characters, and brand-dependent jokes.
+
+## Run
+
+From this project directory:
+
+```bash
+python -m trend_meme_factory.cli
+```
+
+Or via the installed script:
+
+```bash
+trend-meme-factory
+```
+
+Useful options:
+
+```bash
+python -m trend_meme_factory.cli --help
+python -m trend_meme_factory.cli --disable-web-research
+python -m trend_meme_factory.cli --max-final-memes 6
+python -m trend_meme_factory.cli --output-root ./outputs
+```
+
+## Daily automation
+
+The helper script runs the pipeline from the project root:
+
+```bash
+./run_daily.sh
+```
+
+Example cron entry:
+
+```cron
+15 8 * * * cd /workspaces/random/trend-meme-factory && ./run_daily.sh >> /workspaces/random/logs/trend-meme-factory.log 2>&1
+```
+
+## Output structure
+
+```text
+outputs/
+  YYYY-MM-DD/
+    images/
+    final/
+    prompts/
+    metadata/
+      run_summary.json
+      approved_topics.json
+      rejected_topics.json
+      meme_concepts.json
+      image_prompts.json
+      generation_log.json
+      final_review.json
+```
+
+## Notes
+
+- Research defaults to the last 72 hours when feeds provide publication dates.
+- If web research returns nothing safe, the pipeline falls back to evergreen safe topics.
+- If image generation fails for a meme, prompt JSON and metadata are still saved.

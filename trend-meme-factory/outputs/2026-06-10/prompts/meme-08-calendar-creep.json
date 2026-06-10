@@ -1,0 +1,9 @@
+{
+  "meme_id": "meme-08",
+  "final_image_prompt": "Create a simple cartoon meme illustration. A cartoon calendar stretching across an office wall like a giant unfolding map while a tiny worker clutches a coffee cup and stares upward. Family-friendly, original, high contrast, clear composition, empty space at the top and bottom for short meme text, no real people, no logos, no brand names, no copyrighted characters, no political imagery.",
+  "negative_prompt": "real people, celebrity likeness, politician, copyrighted character, trademarked logo, sexual content, hate, violence, gore, tragedy, disaster, photorealism",
+  "aspect_ratio": "square",
+  "text_overlay_instructions": "Use bold uppercase white text with a dark outline. Keep the top caption inside the upper band and the bottom caption inside the lower band.",
+  "filename_slug": "meme-08-calendar-creep",
+  "output_format": "png"
+}

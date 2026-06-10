@@ -1,0 +1,2 @@
+[console_scripts]
+ai-courtroom = ai_courtroom_cli.cli:main

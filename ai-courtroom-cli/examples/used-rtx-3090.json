@@ -1,0 +1,11 @@
+{
+  "title": "Used RTX 3090 Purchase Decision",
+  "dilemma": "Should I buy 2 used RTX 3090 GPUs now, or should I wait?",
+  "category": "Technology purchase",
+  "budget": "EUR 1400 to EUR 1800 total",
+  "time_horizon": "Need useful compute capacity in the next 3 to 6 months",
+  "constraints": "Cards must be stable for AI workloads, manageable power draw, no major maintenance surprises",
+  "risk_tolerance": 42,
+  "existing_context": "I want local GPUs for AI experimentation and model fine tuning, but I am worried about used hardware wear, electricity cost, and new GPU launches.",
+  "alternatives_considered": "Wait for price drops, buy one card now, or buy a newer but less VRAM-rich GPU later"
+}

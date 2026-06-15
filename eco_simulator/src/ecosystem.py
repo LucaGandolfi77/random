@@ -183,12 +183,12 @@ class EcoSystem:
         self.env.process(self.climate_process())
 
         # Optional: start a process that updates dashboard data
-        self.env.process(self._monitor_for_dashboard)
+        self.env.process(self._monitor_for_dashboard())
 
     # ------------------------------------------------------------------
     # Helper for dashboard updates (exposes current state)
     # ------------------------------------------------------------------
-    async def _monitor_for_dashboard(self):
+    def _monitor_for_dashboard(self):
         while True:
             # Yield control back to SimPy
             yield self.env.timeout(0)

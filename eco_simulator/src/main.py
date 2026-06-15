@@ -1,19 +1,31 @@
-# /workspaces/random/eco_simulator/src/main.py
-# Entry point: initializes SimPy environment, Pygame UI, and starts the game loop.
-import pygame
-import sys
+"""Eco‑Simulator entry point.
+
+This file provides a minimal but functional game loop that integrates:
+
+* **SimPy** for the simulation engine
+* **pygame** for a simple graphical window (stub UI components are used)
+* Configuration loading from ``eco_simulator/config/default_config.json``
+
+The original file became corrupted after multiple patches, resulting in
+missing imports, duplicated code and indentation errors.  The implementation
+below restores a clean structure and adds lightweight logging so the user can
+see why the program may exit automatically.
+"""
+
+from __future__ import annotations
+
+import argparse
 import json
-import random
+import sys
 from pathlib import Path
 
+import pygame
 import simpy
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 
 from ecosystem import EcoSystem
 from ui.board import IslandBoard
 from ui.dashboard import LiveDashboard
-from utils.mutation import generate_mutation
+from utils.save_load import load_state
 
 # ----------------------------------------------------------------------
 # Global constants
@@ -21,99 +33,109 @@ from utils.mutation import generate_mutation
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 800
 FPS = 60
-ISLAND_GRID_SIZE = 10  # number of cells per side
-CELL_SIZE = 80
 
-# ----------------------------------------------------------------------
-# Helper to load config
-# ----------------------------------------------------------------------
-def load_config():
-    config_path = Path("config/default_config.json")
-    with open(config_path) as f:
+
+def load_config() -> dict:
+    """Load the default configuration JSON.
+
+    The configuration file lives in ``eco_simulator/config/default_config.json``.
+    Using ``Path(__file__)`` ensures the path works regardless of the current
+    working directory.
+    """
+    config_path = (
+        Path(__file__).resolve().parent.parent / "config" / "default_config.json"
+    )
+    with open(config_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
-# ----------------------------------------------------------------------
-# Main function
-# ----------------------------------------------------------------------
-def main():
+
+def main() -> None:
+    # ------------------------------------------------------------------
     # Load configuration
+    # ------------------------------------------------------------------
+    print("[EcoSim] Loading configuration…")
     cfg = load_config()
+    print("[EcoSim] Configuration loaded.")
 
-
-    # Parse CLI arguments for save/load
-    import argparse
+    # ------------------------------------------------------------------
+    # Parse CLI arguments for optional save/load
+    # ------------------------------------------------------------------
     parser = argparse.ArgumentParser()
-    parser.add_argument('--save', type=str, help='File path to save the game state')
-    parser.add_argument('--load', type=str, help='File path to load a saved game state')
+    parser.add_argument("--save", type=str, help="File path to save the game state")
+    parser.add_argument("--load", type=str, help="File path to load a saved game state")
     args = parser.parse_args()
-    
-    # If a save file is provided, load it and skip the UI
-    if args.save:
-        from utils.save_load import load_state
-        load_state(args.save, ecosystem)
-        return
-    if args.load:
-        from utils.save_load import load_state
-        load_state(args.load, ecosystem)
-        # Continue to UI after loading
 
-    # Initialize pygame
+    # If a save file is requested, perform a quick save (no UI) and exit.
+    if args.save:
+        print(f"[EcoSim] Save requested to {args.save} – operation not implemented in stub.")
+        return
+
+    # ------------------------------------------------------------------
+    # Initialise pygame
+    # ------------------------------------------------------------------
+    print("[EcoSim] Initialising pygame…")
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("Eco‑Simulator: The Garden of Species")
     clock = pygame.time.Clock()
 
-    # Create SimPy environment and ecosystem model
+    # ------------------------------------------------------------------
+    # Create simulation environment and ecosystem model
+    # ------------------------------------------------------------------
+    print("[EcoSim] Creating SimPy environment and ecosystem model…")
     env = simpy.Environment()
     ecosystem = EcoSystem(env, cfg)
-# Parse CLI arguments for save/load
-    import argparse
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--save', type=str, help='File path to save the game state')
-    parser.add_argument('--load', type=str, help='File path to load a saved game state')
-    args = parser.parse_args()
+    ecosystem.start_all()  # Start all SimPy processes so events are scheduled
 
-    # If a save file is provided, load it and exit
-    if args.save:
-        from utils.save_load import load_state
-        load_state(args.save, ecosystem)
-        return
+    # If a load file was supplied, populate the ecosystem now.
     if args.load:
-        from utils.save_load import load_state
         load_state(args.load, ecosystem)
-    # Setup UI components
+
+    # ------------------------------------------------------------------
+    # Setup UI components (stub implementations)
+    # ------------------------------------------------------------------
     board = IslandBoard(screen, ecosystem)
     dashboard = LiveDashboard(screen, ecosystem)
 
-    # Initial draw
+    # Initial draw so the window is not blank.
     board.draw()
     dashboard.draw()
 
     # ------------------------------------------------------------------
     # Main loop
     # ------------------------------------------------------------------
+    print("[EcoSim] Starting main loop…")
     running = True
+    frame = 0
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             else:
-                # Forward events to UI components
                 board.handle_event(event)
                 dashboard.handle_event(event)
 
-        # Update dashboard data (plots) at each frame
+        # Update UI each frame
         dashboard.update_plot()
+        board.draw()
+        dashboard.draw()
 
-        # Advance SimPy time a little each frame to keep events flowing
-        env.step(0.1)
+        # Advance the simulation; exit gracefully when no events remain.
+        try:
+            env.step()
+        except simpy.core.EmptySchedule:
+            print(f"[EcoSim] No more scheduled events after frame {frame}. Exiting.")
+            running = False
 
         pygame.display.flip()
         clock.tick(FPS)
+        frame += 1
+        if frame % 60 == 0:
+            print(f"[EcoSim] Frame {frame} rendered.")
 
     pygame.quit()
     sys.exit()
 
-# ----------------------------------------------------------------------
+
 if __name__ == "__main__":
     main()

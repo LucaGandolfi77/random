@@ -1,0 +1,45 @@
+{
+  "species": [
+    {
+      "id": 0,
+      "name": "Herbivore",
+      "diet": "herbivore",
+      "prey": [],
+      "traits": {
+        "reproduction_rate": 0.1,
+        "carrying_capacity": 100,
+        "mutation_chance": 0.05,
+        "initial_population": 5
+      }
+    },
+    {
+      "id": 1,
+      "name": "Carnivore",
+      "diet": "carnivore",
+      "prey": ["Herbivore"],
+      "traits": {
+        "reproduction_rate": 0.08,
+        "carrying_capacity": 60,
+        "mutation_chance": 0.04,
+        "initial_population": 3
+      }
+    }
+  ],
+  "resources": {
+    "food": 500,
+    "water": 300,
+    "space": 200
+  },
+  "climate": {
+    "event_interval": 30,
+    "events": ["drought", "flood", "temperature_shift"]
+  },
+  "mutation": {
+    "probability_per_step": 0.05,
+    "possible_traits": ["photosynthetic", "camouflage", "fast_reproduction"]
+  },\n  "ai_species": [
+    "Herbivore",
+    "Carnivore"
+  ]
+]
+}

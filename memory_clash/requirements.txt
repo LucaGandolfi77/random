@@ -1,0 +1,4 @@
+pygame
+aiohttp
+aioredis
+python-socketio

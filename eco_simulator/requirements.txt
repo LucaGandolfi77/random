@@ -1,0 +1,16 @@
+simpy
+pygame
+matplotlib
+plotly   # optional – can be used instead of matplotlib
+stable-baselines3
+gym
+fastapi
+uvicorn[standard]
+pydantic
+pytest
+black
+isort
+flake8
+mypy
+sphinx
+alembic

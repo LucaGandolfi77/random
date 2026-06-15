@@ -1,5 +1,7 @@
-
+# ============================================================
 # Qiskit – N Servers / M VMs – Optimization Problem
+# Updated for Qiskit 1.x + qiskit-algorithms + qiskit-aer
+# ============================================================
 
 try:
     INSTALLED
@@ -36,7 +38,7 @@ from qiskit_optimization.translators import from_docplex_mp
 
 algorithm_globals.massive = True
 
-# Defaults
+# ── Defaults ────────────────────────────────────────────────
 MAX_N = 7
 default_n_servers      = 5
 default_n_vms          = 5
@@ -76,9 +78,12 @@ capacities = parse_list_of_numbers(args.capacities, int)   or [
     11 if i < 3 else 10 for i in range(n_servers)
 ]
 
-# Safe vm_allocation_limits
+# ── Safe vm_allocation_limits (only server_load) ────────────
 def safe_vm_alloc(capacities, n_vms, margin=1.25):
-# sum(lims) >= sum(capacities) - n_servers
+    """
+    Guarantee feasibility for server_load only:
+        sum(lims) >= sum(capacities) - n_servers
+    """
     n_s = len(capacities)
     need_load = max(sum(capacities) - n_s, 0)
     min_per_vm = math.ceil(need_load / n_vms) if n_vms > 0 else 0
@@ -96,9 +101,13 @@ print(
     f"(need >= {sum(capacities) - n_servers} for server_load)"
 )
 
-# Pre-run feasibility check
+# ── Pre-run feasibility check (only server_load) ────────────
 def pre_check_feasibility(capacities, vm_allocation_limits, n_vms, n_servers):
-# sum(lims) >= sum(cap) - n_servers
+    """
+    Returns (is_feasible: bool, reason: str).
+    Check only the server_load necessary condition:
+        sum(lims) >= sum(cap) - n_servers
+    """
     need_load = sum(capacities) - n_servers
     have_load = sum(vm_allocation_limits)
     if have_load < need_load:
@@ -107,7 +116,7 @@ def pre_check_feasibility(capacities, vm_allocation_limits, n_vms, n_servers):
             f"< sum(cap)-n_servers={need_load}. "
             f"Increase vm_allocation_limits so their sum >= {need_load}."
         )
-    return True, "OK - feasible"
+    return True, "OK"
 
 feasible, reason = pre_check_feasibility(
     capacities, vm_allocation_limits, n_vms, n_servers
@@ -121,7 +130,7 @@ if not feasible:
 else:
     print(" Feasibility pre-check passed — proceeding.\n")
 
-# Validation
+# ── Validations ─────────────────────────────────────────────
 if n_servers > MAX_N or n_vms > MAX_N:
     print(f"Error: n_servers and n_vms must be <= {MAX_N}")
     sys.exit(1)
@@ -142,7 +151,7 @@ if len(vm_allocation_limits) < n_vms:
     )
     sys.exit(1)
 
-# Optimizers
+# ── Base optimizers ─────────────────────────────────────────
 cobyla = CobylaOptimizer()
 
 if fast_mode:
@@ -160,7 +169,7 @@ else:
 qaoa  = MinimumEigenOptimizer(qaoa_algo)
 exact = MinimumEigenOptimizer(NumPyMinimumEigensolver())
 
-# Docplex model 
+# ── Build DOcplex model ─────────────────────────────────────
 mdl    = Model("qiskit_server")
 s_vars = [mdl.binary_var(name=f"si{i}") for i in range(n_servers)]
 
@@ -171,6 +180,7 @@ for j in range(n_vms):
 
 u_vars = [mdl.continuous_var(lb=min_cpu_per_vm, name=f"uj{j}") for j in range(n_vms)]
 
+# Objective: fixed server cost + dynamic utilization
 obj = mdl.sum(
     pi_list[i] * s_vars[i]
     + pd_list[i] * mdl.sum(u_vars[j] * v_vars[(j, i)] for j in range(n_vms))
@@ -181,11 +191,12 @@ mdl.minimize(obj)
 # Server load: sum_j vj >= cap[i] - 1
 for i in range(n_servers):
     mdl.add_constraint(
-        mdl.sum(v_vars[(j, i)] for j in range(n_vms)) 
+        mdl.sum(v_vars[(j, i)] for j in range(n_vms))
         >= capacities[i] - 1,
         f"cons_server_load_{i}",
     )
 
+# All servers ON if required
 if require_all_on:
     for i in range(n_servers):
         mdl.add_constraint(s_vars[i] == 1, f"cons_server_on_{i}")
@@ -208,14 +219,17 @@ print("=== Quadratic Program (LP) ===")
 print(qp.export_as_lp_string())
 
 script_name = "q"
-'''
-# Fix ADMM approximate solution to feasibility 
+
+# ── Snap ADMM approximate solution to feasibility ──────────
 # qiskit-optimization uses strict zero-tolerance feasibility checks.
 # ADMM solutions may violate bounds/constraints by tiny amounts (~1e-4).
+# This function snaps variables to bounds AND fixes small linear-constraint
+# violations so qiskit's strict zero-tolerance feasibility check passes.
 from qiskit_optimization.algorithms import OptimizationResultStatus
 from qiskit_optimization.problems.constraint import ConstraintSense
 
 def snap_to_feasible(result, qp):
+    """Snap near-feasible ADMM result to exact feasibility."""
     x = np.array(result.x, dtype=float)
     n = len(x)
     lb = np.array([qp.variables[i].lowerbound for i in range(n)])
@@ -224,6 +238,7 @@ def snap_to_feasible(result, qp):
     x = np.clip(x, lb, ub)
     for _ in range(20):
         any_violation = False
+        # Find vars that are tight against a LE ceiling
         le_tight = set()
         for con in qp.linear_constraints:
             if con.sense == ConstraintSense.LE:
@@ -237,6 +252,7 @@ def snap_to_feasible(result, qp):
             coeffs = con.linear.to_dict()
             if con.sense == ConstraintSense.GE and lhs < con.rhs:
                 deficit = con.rhs - lhs
+                # Prefer vars NOT at a LE ceiling to avoid oscillation
                 cands = [(k, coeffs[k]) for k in coeffs
                          if coeffs[k] > 0 and is_cont[k] and x[k] < ub[k]
                          and k not in le_tight]
@@ -273,26 +289,11 @@ def snap_to_feasible(result, qp):
         result._status = OptimizationResultStatus.SUCCESS
     result._fval = qp.objective.evaluate(x)
     return result
-'''
-from qiskit_optimization.algorithms import OptimizationResultStatus
-import numpy as np
-def snap_to_feasible(result, qp):
 
-    x = np.array(result.x, dtype=float)
-    lb = np.array([var.lowerbound for var in qp.variables])
-    ub = np.array([var.upperbound for var in qp.variables])
-    x = np.clip(x, lb, ub)
-    result._x = x
-    result._fval = qp.objective.evaluate(x)
-    if qp.is_feasible(x):
-        result._status = OptimizationResultStatus.SUCCESS
-    return result
-
-
-# CLASSICAL SOLUTION
-print("\n")
+# ── CLASSICAL SOLUTION ──────────────────────────────────────
+print("\n" + "=" * 60)
 print(" CLASSICAL SOLUTION  (Exact QUBO + COBYLA)")
-print("\n")
+print("=" * 60)
 
 if fast_mode:
     admm_params_classic = ADMMParameters(
@@ -300,6 +301,7 @@ if fast_mode:
         maxiter=100, three_block=True, tol=1e-4,
     )
 else:
+    # tol allineata a 1e-4 per evitare false INFEASIBLE al bordo
     admm_params_classic = ADMMParameters(
         rho_initial=100, beta=1000, factor_c=900,
         maxiter=100, three_block=True, tol=1e-4,
@@ -331,10 +333,10 @@ axes[1].grid(True, axis="y")
 plt.tight_layout()
 plt.close()
 
-# QUANTUM SOLUTION ────────────────────────────────────────
-print("\n")
+# ── QUANTUM SOLUTION ────────────────────────────────────────
+print("\n" + "=" * 60)
 print(" QUANTUM SOLUTION  (QAOA + COBYLA)")
-print("\n")
+print("=" * 60)
 
 if fast_mode:
     admm_params_quantum = ADMMParameters(
@@ -375,10 +377,10 @@ axes[1].grid(True, axis="y")
 plt.tight_layout()
 plt.close()
 
-# Comparison
-print("\n")
+# ── Comparison ──────────────────────────────────────────────
+print("\n" + "=" * 60)
 print(" COMPARISON")
-print("\n")
+print("=" * 60)
 print(
     f"Classical -> Objective: {result_classic.fval:.4f} | "
     f"Status: {result_classic.status.name}"
@@ -388,7 +390,7 @@ print(
     f"Status: {result_quantum.status.name}"
 )
 
-# Results to JSON
+# ── Serialize results to JSON ───────────────────────────────
 def as_list(x):
     try:
         return list(x)

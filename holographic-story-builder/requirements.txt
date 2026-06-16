@@ -1,0 +1,5 @@
+panda3d>=1.10.0
+PyQt6>=6.6.0
+numpy>=1.24.0
+pyrr>=0.10.0
+pyglet>=2.0.0

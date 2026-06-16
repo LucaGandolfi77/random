@@ -1,0 +1,55 @@
+{
+  "start_node": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "content": "Welcome to the Holographic Story Builder!",
+      "character": "guide",
+      "emotion": "neutral",
+      "next_node": "intro"
+    },
+    {
+      "id": "intro",
+      "type": "dialogue",
+      "content": "I am your holographic guide. What story would you like to create?",
+      "character": "guide",
+      "emotion": "joy",
+      "next_node": "choice"
+    },
+    {
+      "id": "choice",
+      "type": "choice",
+      "content": "Choose your path:",
+      "character": "guide",
+      "emotion": "neutral",
+      "choices": [
+        {"text": "Fantasy Adventure", "next_node": "fantasy"},
+        {"text": "Sci-Fi Mystery", "next_node": "scifi"}
+      ]
+    },
+    {
+      "id": "fantasy",
+      "type": "dialogue",
+      "content": "The ancient wizard speaks in riddles, his holographic form shimmering with magical energy...",
+      "character": "wizard",
+      "emotion": "joy",
+      "next_node": "end"
+    },
+    {
+      "id": "scifi",
+      "type": "dialogue",
+      "content": "The robot's optical sensors glow with streams of data, processing your request...",
+      "character": "robot",
+      "emotion": "neutral",
+      "next_node": "end"
+    },
+    {
+      "id": "end",
+      "type": "end",
+      "content": "Story complete! Save your creation and share it with the world.",
+      "character": "guide",
+      "emotion": "joy"
+    }
+  ]
+}

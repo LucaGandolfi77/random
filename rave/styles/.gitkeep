@@ -1,0 +1,6 @@
+# Place ONNX style models here
+# Download or train models for:
+# - van_gogh.onnx
+# - picasso.onnx
+# - monet.onnx
+# - hokusai.onnx

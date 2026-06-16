@@ -1,0 +1,12 @@
+opencv-python>=4.9.0
+onnxruntime>=1.17.0
+torch>=2.2.0
+torchvision>=0.17.0
+numpy>=1.26.0
+customtkinter>=5.2.0
+ttkbootstrap>=1.7.0
+Pillow>=10.2.0
+mediapipe>=0.10.0
+SpeechRecognition>=3.10.0
+pyaudio>=0.2.14
+ffmpeg-python>=0.2.0

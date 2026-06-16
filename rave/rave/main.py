@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+"""RAVE - Real-Time Artistic Vision Engine main entry point."""
+
+import customtkinter as ctk
+from ui.main_window import MainWindow
+
+
+def main():
+    ctk.set_appearance_mode("dark")
+    ctk.set_default_color_theme("dark-blue")
+    
+    app = MainWindow()
+    app.mainloop()
+
+
+if __name__ == "__main__":
+    main()

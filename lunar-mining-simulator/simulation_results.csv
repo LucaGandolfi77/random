@@ -1,0 +1,104 @@
+Year,Regolith_Tons,Iron_kg,Aluminum_kg,Silicon_kg,Oxygen_kg,Power_kW,Robots_Simulated
+0,162422.08,812110.40,1380587.68,3248441.60,6496883.20,5482.69,20
+1,89947.68,449738.40,764555.28,1798953.60,3597907.20,300.00,23
+2,19902.24,99511.20,169169.04,398044.80,796089.60,300.00,26
+3,0.00,0.00,0.00,0.00,0.00,300.00,29
+4,0.00,0.00,0.00,0.00,0.00,300.00,33
+5,0.00,0.00,0.00,0.00,0.00,300.00,37
+6,0.00,0.00,0.00,0.00,0.00,300.00,42
+7,0.00,0.00,0.00,0.00,0.00,300.00,48
+8,0.00,0.00,0.00,0.00,0.00,300.00,55
+9,0.00,0.00,0.00,0.00,0.00,300.00,63
+10,0.00,0.00,0.00,0.00,0.00,300.00,72
+11,0.00,0.00,0.00,0.00,0.00,300.00,82
+12,0.00,0.00,0.00,0.00,0.00,300.00,94
+13,0.00,0.00,0.00,0.00,0.00,300.00,108
+14,0.00,0.00,0.00,0.00,0.00,300.00,124
+15,0.00,0.00,0.00,0.00,0.00,300.00,163
+16,0.00,0.00,0.00,0.00,0.00,300.00,187
+17,0.00,0.00,0.00,0.00,0.00,300.00,215
+18,0.00,0.00,0.00,0.00,0.00,300.00,247
+19,0.00,0.00,0.00,0.00,0.00,300.00,284
+20,0.00,0.00,0.00,0.00,0.00,300.00,326
+21,0.00,0.00,0.00,0.00,0.00,300.00,374
+22,0.00,0.00,0.00,0.00,0.00,300.00,430
+23,0.00,0.00,0.00,0.00,0.00,300.00,494
+24,0.00,0.00,0.00,0.00,0.00,300.00,568
+25,0.00,0.00,0.00,0.00,0.00,300.00,653
+26,0.00,0.00,0.00,0.00,0.00,300.00,750
+27,0.00,0.00,0.00,0.00,0.00,300.00,862
+28,0.00,0.00,0.00,0.00,0.00,300.00,991
+29,0.00,0.00,0.00,0.00,0.00,300.00,1139
+30,0.00,0.00,0.00,0.00,0.00,300.00,1139
+
+# Summary
+Total_Regolith,272272.00
+Final_Robots_Projected,1139
+Total_Power_kW,300.00
+
+# Materials (kg)
+iron_kg,1361360.00
+titanium_kg,108908.80
+aluminum_kg,2314312.00
+silicon_kg,5445440.00
+magnesium_kg,2178176.00
+calcium_kg,2722720.00
+oxygen_kg,10890880.00
+
+# Energy System
+Solar_Panels,5
+Nuclear_Reactors,1
+
+# Monte Carlo Statistics
+Mean_Tons,116578
+Median_Tons,116452
+Std_Dev_Tons,17483
+Min_Tons,67190
+Max_Tons,166392
+CI_Lower,80850
+CI_Upper,150139
+
+# Financial Projections (USD)
+Material,Quantity_tons,Price_per_ton,Revenue_USD
+Iron,1361,15000,20415000000
+Titanium,109,25000,2722500000
+Aluminum,2314,12000,27768000000
+Silicon,5445,8000,43560000000
+Magnesium,2178,10000,21780000000
+Calcium,2723,5000,13615000000
+Oxygen,10891,3000,32673000000
+Total_Revenue,,,"138933500000"
+
+# Material Availability (kg per ton of regolith)
+Material,Available_On_Moon,Source
+Iron,5.0,Ilmenite/Pyroxene
+Titanium,0.4,Ilmenite
+Aluminum,8.5,Anorthosite
+Silicon,20.0,All silicates
+Magnesium,8.0,Olivine/Pyroxene
+Calcium,10.0,Pyroxene/Anorthosite
+Oxygen,40.0,Oxygen bound in oxides
+Copper,0.0,MUST_BE_SHIPPED
+Electronics,0.0,MUST_BE_SHIPPED
+
+# Robot Components Required
+Component,Quantity_kg,Available_On_Moon,Launch_Cost_USD_per_kg
+Aluminum,150,Yes,0
+Iron,200,Yes,0
+Silicon,100,Yes,0
+Copper,20,No,50000
+Electronics,30,No,100000
+
+# Launch Costs (USD)
+Item,Cost_USD
+Initial_Components_20_Robots,80000000000
+Energy_System,15000000000
+Infrastructure,25000000000
+Total_Initial_Investment,120000000000
+
+# Annual Maintenance Costs (USD)
+Item,Annual_Cost_USD
+Robot_Maintenance,900000
+Tech_Upgrades,40000000
+Space_Logistics,50000000
+Total_Annual_Maintenance,90900000

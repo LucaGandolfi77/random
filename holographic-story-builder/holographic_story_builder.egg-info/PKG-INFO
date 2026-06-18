@@ -1,0 +1,63 @@
+Metadata-Version: 2.4
+Name: holographic_story_builder
+Version: 1.0.0
+Summary: Immersive storytelling with 3D holograms and speech synthesis
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: PyQt6>=6.7.0
+Requires-Dist: pyttsx3>=2.90
+Requires-Dist: numpy>=1.26.0
+Requires-Dist: panda3d>=1.10.0
+Provides-Extra: dev
+Requires-Dist: black>=24.0; extra == "dev"
+Requires-Dist: mypy>=1.10; extra == "dev"
+Requires-Dist: pytest>=8.0; extra == "dev"
+
+# Holographic Story Builder
+
+An immersive, interactive storytelling application that brings characters to life through 3D holograms with realistic speech synthesis.
+
+## Features
+
+- **3D Character Engine**: Panda3D-powered holographic characters with animations
+- **Speech Synthesis**: Offline TTS with pytttsx3 and emotional voice modulation
+- **Interactive Stories**: Branching narratives with visual node editor
+- **Hologram Effects**: Shader-based holographic rendering with scanlines and glow
+- **Lip Sync**: Automatic phoneme-based lip synchronization
+
+## Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage
+
+```bash
+python -m holographic_story_builder
+```
+
+## Project Structure
+
+```
+holographic-story-builder/
+├── src/
+│   ├── core/
+│   │   ├── story_engine.py
+│   │   ├── character_manager.py
+│   │   └── audio_manager.py
+│   ├── ui/
+│   │   ├── main_window.py
+│   │   ├── story_canvas.py
+│   │   └── character_editor.py
+│   ├── rendering/
+│   │   ├── hologram_shader.py
+│   │   └── scene_manager.py
+│   └── utils/
+│       ├── asset_loader.py
+│       └── config.py
+├── assets/
+│   └── shaders/
+├── stories/
+└── main.py
+```

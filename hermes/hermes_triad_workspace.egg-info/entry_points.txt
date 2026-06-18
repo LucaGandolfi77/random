@@ -1,0 +1,2 @@
+[console_scripts]
+hermes-workspace = hermes_workspace.cli:main

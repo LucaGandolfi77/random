@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "holographic_story_builder"
+version = "1.0.0"
+description = "Immersive storytelling with 3D holograms and speech synthesis"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "PyQt6>=6.7.0",
+    "pyttsx3>=2.90",
+    "numpy>=1.26.0",
+    "panda3d>=1.10.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=24.0",
+    "mypy>=1.10",
+    "pytest>=8.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["holographic_story_builder*"]
+
+[project.scripts]
+holographic-story-builder = "holographic_story_builder.main:main"

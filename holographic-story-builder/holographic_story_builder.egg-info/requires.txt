@@ -1,0 +1,9 @@
+PyQt6>=6.7.0
+pyttsx3>=2.90
+numpy>=1.26.0
+panda3d>=1.10.0
+
+[dev]
+black>=24.0
+mypy>=1.10
+pytest>=8.0

@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+quantum_circuit_simulator.egg-info/PKG-INFO
+quantum_circuit_simulator.egg-info/SOURCES.txt
+quantum_circuit_simulator.egg-info/dependency_links.txt
+quantum_circuit_simulator.egg-info/entry_points.txt
+quantum_circuit_simulator.egg-info/requires.txt
+quantum_circuit_simulator.egg-info/top_level.txt
+quantum_simulator/__init__.py
+quantum_simulator/__main__.py
+quantum_simulator/core/__init__.py
+quantum_simulator/core/circuit.py
+quantum_simulator/core/gates.py
+quantum_simulator/ui/main.py
+quantum_simulator/ui/visualization.py

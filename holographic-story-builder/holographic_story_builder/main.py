@@ -6,11 +6,11 @@ import sys
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtCore import QTimer
 
-from src.ui.main_window import MainWindow
-from src.rendering.scene_manager import SceneManager
-from src.core.story_engine import StoryEngine, StoryNode, NodeType
-from src.core.character_manager import CharacterManager, Character, Emotion
-from src.core.audio_manager import AudioManager, VoiceProfile
+from .ui.main_window import MainWindow
+from .rendering.scene_manager import SceneManager
+from .core.story_engine import StoryEngine, StoryNode, NodeType
+from .core.character_manager import CharacterManager, Character, Emotion
+from .core.audio_manager import AudioManager, VoiceProfile
 
 
 class HolographicStoryBuilder:
@@ -72,6 +72,11 @@ class HolographicStoryBuilder:
         return self.app.exec()
 
 
-if __name__ == "__main__":
+def main():
+    """Entry point for the application"""
     builder = HolographicStoryBuilder()
-    sys.exit(builder.run())
+    return builder.run()
+
+
+if __name__ == "__main__":
+    sys.exit(main())

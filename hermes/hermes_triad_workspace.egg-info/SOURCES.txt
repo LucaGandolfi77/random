@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+hermes_triad_workspace.egg-info/PKG-INFO
+hermes_triad_workspace.egg-info/SOURCES.txt
+hermes_triad_workspace.egg-info/dependency_links.txt
+hermes_triad_workspace.egg-info/entry_points.txt
+hermes_triad_workspace.egg-info/requires.txt
+hermes_triad_workspace.egg-info/top_level.txt
+hermes_workspace/__init__.py
+hermes_workspace/__main__.py
+hermes_workspace/cli.py
+hermes_workspace/orchestrator.py
+hermes_workspace/shell.py
+hermes_workspace/store.py
+hermes_workspace/tui.py
+tests/test_workspace.py

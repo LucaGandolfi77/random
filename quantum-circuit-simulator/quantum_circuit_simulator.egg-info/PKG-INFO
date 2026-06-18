@@ -1,0 +1,77 @@
+Metadata-Version: 2.4
+Name: quantum-circuit-simulator
+Version: 1.0.0
+Summary: Visual quantum circuit simulator with drag-and-drop gates and real-time animations
+Author: GitHub Copilot
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: pygame>=2.5.0
+Requires-Dist: qiskit>=1.0.0
+Requires-Dist: numpy>=1.26.0
+Requires-Dist: scipy>=1.12.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: black>=24.0; extra == "dev"
+Requires-Dist: mypy>=1.8; extra == "dev"
+
+# Visual Quantum Circuit Simulator
+
+A visual quantum circuit simulator built with Pygame and Qiskit, featuring drag-and-drop gate placement and real-time quantum state animations.
+
+## Features
+
+- **Interactive Circuit Building**: Click on the circuit grid to place quantum gates
+- **Real-time State Visualization**: See quantum state vector amplitudes update as you build
+- **Multiple Qubit Support**: Add/remove qubits dynamically
+- **Common Gates**: X, Y, Z, H, S, T, CNOT, CZ, SWAP gates
+- **Phase Visualization**: State amplitudes colored by phase
+
+## Installation
+
+```bash
+cd quantum-circuit-simulator
+pip install -e .
+```
+
+## Usage
+
+Run the simulator:
+```bash
+python -m quantum_simulator
+```
+
+Or after installation:
+```bash
+quantum-sim
+```
+
+## Controls
+
+- **Mouse Click**: Place selected gate on circuit
+- **+ / -**: Add/remove qubits
+- **Space**: Clear circuit
+- **S**: Toggle state vector display
+- **Escape**: Exit
+
+## Project Structure
+
+```
+quantum_simulator/
+├── core/
+│   ├── __init__.py
+│   ├── circuit.py      # Quantum circuit simulation
+│   └── gates.py        # Gate definitions
+├── ui/
+│   ├── __init__.py
+│   ├── main.py         # Pygame application
+│   └── visualization.py # Circuit visualization
+└── __init__.py
+```
+
+## Requirements
+
+- Python 3.10+
+- pygame >= 2.5.0
+- numpy >= 1.26.0
+- qiskit >= 1.0.0 (optional, for advanced features)

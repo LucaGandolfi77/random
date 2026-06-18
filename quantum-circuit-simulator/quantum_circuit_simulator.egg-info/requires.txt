@@ -1,0 +1,9 @@
+pygame>=2.5.0
+qiskit>=1.0.0
+numpy>=1.26.0
+scipy>=1.12.0
+
+[dev]
+pytest>=8.0
+black>=24.0
+mypy>=1.8

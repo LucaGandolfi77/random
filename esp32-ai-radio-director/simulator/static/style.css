@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #eee;
+}
+
+.radio-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.display {
+    width: 320px;
+    height: 240px;
+    background: #0a0a0a;
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 15px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    font-size: 12px;
+}
+
+.display-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.station-name {
+    color: #00ff88;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.mode-badge {
+    background: #ff6b35;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+}
+
+.show-info {
+    margin-bottom: 15px;
+}
+
+.current-show {
+    color: #ffb86c;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.current-item {
+    color: #aaa;
+    font-size: 11px;
+}
+
+.dj-message {
+    background: #1a1a2e;
+    border-left: 3px solid #00ff88;
+    padding: 8px;
+    margin: 10px 0;
+    font-size: 11px;
+    min-height: 40px;
+}
+
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 10px;
+    color: #666;
+}
+
+.next-item {
+    font-size: 10px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.listeners {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 10px;
+    color: #00ff88;
+}
+
+.controls {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.encoder {
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #333 0%, #111 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    border: 2px solid #555;
+    position: relative;
+}
+
+.encoder:hover {
+    border-color: #00ff88;
+}
+
+.encoder-center {
+    color: #666;
+    font-size: 10px;
+}
+
+.encoder-hint {
+    font-size: 9px;
+    color: #666;
+    text-align: center;
+    max-width: 120px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.btn {
+    padding: 12px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.btn-skip { background: #ff6b35; color: white; }
+.btn-like { background: #06d6a0; color: #111; }
+.btn-dislike { background: #ef476f; color: white; }
+.btn-emergency { background: #ffd166; color: #111; }
+
+.btn:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.led-mood {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.led-ring {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #ffaa44;
+    box-shadow: 0 0 20px #ffaa44;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.energy-bar {
+    width: 100px;
+    height: 8px;
+    background: #333;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.energy-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #06d6a0, #ffd166, #ff6b35);
+    transition: width 0.5s;
+}
+
+.taste-profile {
+    background: #1a1a2e;
+    padding: 15px;
+    border-radius: 10px;
+    width: 320px;
+}
+
+.taste-profile h3 {
+    color: #ffb86c;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.taste-bar {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    font-size: 11px;
+}
+
+.taste-bar-label {
+    width: 80px;
+}
+
+.taste-bar-fill {
+    flex: 1;
+    height: 10px;
+    background: #333;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.taste-bar-fill-inner {
+    height: 100%;
+    background: #00ff88;
+    transition: width 0.3s;
+}

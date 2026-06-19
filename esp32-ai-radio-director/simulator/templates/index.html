@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 AI Radio Station Director - Simulatore</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="radio-container">
+        <!-- Display principale -->
+        <div class="display">
+            <div class="display-header">
+                <span class="station-name" id="station-name">Radio Gandolfi</span>
+                <span class="mode-badge" id="mode-badge">AUTO DJ</span>
+            </div>
+            
+            <div class="show-info">
+                <div class="current-show" id="current-show">Morning Flow</div>
+                <div class="current-item" id="current-item">Morning Dust - Royalty Free Artist</div>
+            </div>
+            
+            <div class="dj-message" id="dj-message">Buongiorno! Parte Morning Flow con suoni morbidi.</div>
+            
+            <div class="status-bar">
+                <span id="time">08:20</span>
+                <span id="wifi-status">WiFi: ✓</span>
+                <span id="volume">Vol: 70%</span>
+            </div>
+            
+            <div class="next-item">Prossimo: <span id="next-item">AI Weekly Brief</span></div>
+            
+            <div class="listeners">Ascoltatori: <span id="listeners">12</span></div>
+        </div>
+        
+        <!-- Controlli -->
+        <div class="controls">
+            <div class="encoder-area">
+                <div class="encoder" id="encoder">
+                    <div class="encoder-center">ENCODER</div>
+                </div>
+                <div class="encoder-hint">Rotazione: volume | Click: cambia show | L-press: modalità</div>
+            </div>
+            
+            <div class="buttons">
+                <button class="btn btn-skip" onclick="sendCommand('skip')">SKIP</button>
+                <button class="btn btn-like" onclick="sendCommand('like')">LIKE</button>
+                <button class="btn btn-dislike" onclick="sendCommand('dislike')">DISLIKE</button>
+                <button class="btn btn-emergency" onclick="sendCommand('emergency')">EMERGENCY</button>
+            </div>
+        </div>
+        
+        <!-- LED Mood -->
+        <div class="led-mood">
+            <div class="led-ring" id="led-ring"></div>
+            <div class="energy-bar">
+                <div class="energy-fill" id="energy-fill"></div>
+            </div>
+        </div>
+        
+        <!-- Taste Profile -->
+        <div class="taste-profile">
+            <h3>Taste Profile</h3>
+            <div id="taste-bars"></div>
+        </div>
+    </div>
+    
+    <script src="/static/app.js"></script>
+</body>
+</html>

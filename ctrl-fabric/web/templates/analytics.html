@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Ctrl+Fabric</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Ctrl+Fabric</h1>
+            <nav class="nav">
+                <a href="/">Dashboard</a>
+                <a href="/issues">Issues</a>
+                <a href="/pull-requests">Pull Requests</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Advanced Analytics</h2>
+
+        <div class="analytics-grid">
+            <div class="analytics-card">
+                <h3>Trend Prediction</h3>
+                <div id="trends-content">Loading...</div>
+            </div>
+
+            <div class="analytics-card">
+                <h3>Customer Segmentation</h3>
+                <div id="segments-content">Loading...</div>
+            </div>
+
+            <div class="analytics-card">
+                <h3>Price Optimization</h3>
+                <div id="prices-content">Loading...</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        async function loadAnalytics() {
+            const response = await fetch('/api/analytics');
+            const data = await response.json();
+            
+            renderTrends(data.trends);
+            renderSegments(data.segments);
+            renderPrices(data.price_optimization);
+        }
+
+        function renderTrends(trends) {
+            let html = `<p>Top Trend: <strong>${trends.top_trend}</strong></p>`;
+            html += `<p>Confidence: ${(trends.confidence * 100).toFixed(0)}%</p>`;
+            html += '<ul>';
+            for (const [cat, score] of Object.entries(trends.predicted_categories)) {
+                html += `<li>${cat}: ${score} units predicted</li>`;
+            }
+            html += '</ul>';
+            document.getElementById('trends-content').innerHTML = html;
+        }
+
+        function renderSegments(segments) {
+            let html = '';
+            for (const [seg, data] of Object.entries(segments)) {
+                html += `<div class="segment">
+                    <h4>${seg}</h4>
+                    <p>Customers: ${data.count}</p>
+                    <p>Avg Spend: $${data.avg_spend}</p>
+                </div>`;
+            }
+            document.getElementById('segments-content').innerHTML = html;
+        }
+
+        function renderPrices(prices) {
+            let html = '';
+            for (const [cat, data] of Object.entries(prices)) {
+                const change = data.change_percent;
+                const color = change > 0 ? 'green' : 'red';
+                html += `<div class="price-item">
+                    <span>${cat}</span>
+                    <span>$${data.optimized_price} (${change > 0 ? '+' : ''}${change}%)</span>
+                </div>`;
+            }
+            document.getElementById('prices-content').innerHTML = html;
+        }
+
+        loadAnalytics();
+    </script>
+</body>
+</html>

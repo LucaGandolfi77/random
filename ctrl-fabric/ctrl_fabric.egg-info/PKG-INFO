@@ -1,0 +1,81 @@
+Metadata-Version: 2.4
+Name: ctrl-fabric
+Version: 1.0.0
+Summary: AI-driven fashion company operating like a software organization
+Author: Ctrl+Fabric Team
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.26.0
+Requires-Dist: pandas>=2.2.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: openai>=1.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: black>=24.0; extra == "dev"
+
+# Ctrl+Fabric
+
+An AI-driven fashion company that operates like a software organization. Every garment is engineered with technical specifications, version history, and continuous improvement cycles.
+
+## Vision
+
+Instead of selling "clothes for engineers," we sell **clothing developed like software**. Each piece has a lifecycle, versions, release notes, metrics, tests, and user feedback. The entire company functions as a multi-agent system where each AI is a microservice with a precise role.
+
+## Architecture
+
+```
+ctrl-fabric/
+├── agents/
+│   ├── ceo_assistant.py      # Daily reports & KPI monitoring
+│   ├── creative_director.py  # Brand philosophy & trend analysis
+│   ├── fashion_architect.py  # Collection generation
+│   ├── textile_engineer.py   # Fabric specifications
+│   ├── cad_agent.py          # Tech packs & CAD files
+│   ├── production_agent.py   # Factory communication
+│   ├── supply_chain_agent.py # Inventory & logistics
+│   ├── finance_agent.py      # Cash flow & forecasting
+│   ├── legal_agent.py        # Compliance & IP
+│   ├── marketing_strategist.py # Campaign strategy
+│   ├── brand_story_agent.py  # Content creation
+│   ├── social_media_team.py  # Multi-agent social management
+│   ├── advertising_agent.py  # Ad platform management
+│   ├── customer_agent.py     # Customer service
+│   └── data_scientist.py     # Analytics & insights
+├── products/
+│   └── garment.py            # Technical specification model
+├── community/
+│   └── engineering_council.py # Feedback aggregation
+└── main.py                   # System orchestrator
+```
+
+## Garment Specification Example
+
+```
+TEE-4.2
+
+Weight: 210 gsm
+Thermal Efficiency: 7.8/10
+Stretch: 12%
+Abrasion: 9800 cycles
+Wrinkle Recovery: 92%
+Expected Lifetime: 430 washes
+```
+
+## Version History
+
+```
+Hoodie v1.0 → v1.1 (Improved collar) → v1.2 (New zipper) → v2.0 (Fabric updated)
+```
+
+## Installation
+
+```bash
+pip install -e .
+```
+
+## Usage
+
+```bash
+python -m ctrl_fabric
+```

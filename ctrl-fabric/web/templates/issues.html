@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Issues{% endblock %}
+{% block content %}
+<div class="issues-header">
+    <h2>Issues</h2>
+    <a href="{{ url_for('new_issue') }}" class="button">New Issue</a>
+</div>
+
+<div class="issues-list">
+    {% for issue in issues %}
+    <div class="issue-item">
+        <span class="issue-status">{{ issue.status }}</span>
+        <h4>{{ issue.title }}</h4>
+        <p>{{ issue.description }}</p>
+        <span class="issue-author">by {{ issue.author }} on {{ issue.created_at.strftime('%Y-%m-%d') }}</span>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

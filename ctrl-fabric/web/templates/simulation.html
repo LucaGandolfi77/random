@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Simulation - {{ garment.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Ctrl+Fabric</h1>
+            <nav class="nav">
+                <a href="/">Dashboard</a>
+                <a href="/issues">Issues</a>
+                <a href="/pull-requests">Pull Requests</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="/">Dashboard</a> / <a href="/garments/{{ garment.sku }}">{{ garment.name }}</a> / 3D Simulation
+        </div>
+
+        <h2>3D Simulation: {{ garment.name }}</h2>
+
+        <div class="simulation-controls">
+            <label for="size-select">Size:</label>
+            <select id="size-select" onchange="loadSimulation()">
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M" selected>M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+            </select>
+        </div>
+
+        <div class="simulation-grid">
+            <div class="pattern-viewer">
+                <h3>Pattern Pieces</h3>
+                <canvas id="pattern-canvas" width="400" height="400"></canvas>
+                <div id="pattern-info"></div>
+            </div>
+
+            <div class="avatar-viewer">
+                <h3>Avatar Simulation</h3>
+                <div id="avatar-container">
+                    <div class="avatar-placeholder">
+                        <p>3D Avatar View</p>
+                        <div id="avatar-measurements"></div>
+                    </div>
+                </div>
+                <div id="fit-metrics"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        async function loadSimulation() {
+            const size = document.getElementById('size-select').value;
+            const response = await fetch(`/api/garments/{{ garment.sku }}/pattern?size=${size}`);
+            const data = await response.json();
+            
+            renderPattern(data.pattern);
+            renderSimulation(data.simulation);
+        }
+
+        function renderPattern(pattern) {
+            const canvas = document.getElementById('pattern-canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.strokeStyle = '#00ff88';
+            ctx.lineWidth = 2;
+            
+            let info = '<ul>';
+            for (const [piece, data] of Object.entries(pattern.pieces)) {
+                info += `<li>${piece}: ${data.points.length} points</li>`;
+            }
+            info += '</ul>';
+            document.getElementById('pattern-info').innerHTML = info;
+        }
+
+        function renderSimulation(simulation) {
+            const measurements = simulation.avatar_size;
+            document.getElementById('avatar-measurements').innerHTML = `
+                <p>Chest: ${measurements.chest}cm</p>
+                <p>Waist: ${measurements.waist}cm</p>
+                <p>Hip: ${measurements.hip}cm</p>
+                <p>Height: ${measurements.height}cm</p>
+            `;
+            
+            const fit = simulation.fit_simulation;
+            document.getElementById('fit-metrics').innerHTML = `
+                <h4>Fit Metrics</h4>
+                <p>Chest Fit: ${fit.chest_fit}</p>
+                <p>Fit Score: ${fit.fit_score}/10</p>
+                <p>Ease: ${fit.ease_allowance}cm</p>
+            `;
+        }
+
+        // Load on page load
+        loadSimulation();
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{{ garment.sku }}{% endblock %}
+{% block content %}
+<div class="garment-header">
+    <h2>{{ garment.sku }} - {{ garment.name }}</h2>
+    <div class="garment-actions">
+        <a href="{{ url_for('garment_simulate', sku=garment.sku) }}" class="button">3D Simulation</a>
+        <a href="{{ url_for('garment_quality', sku=garment.sku) }}" class="button">Quality & Sustainability</a>
+        <a href="{{ url_for('garment_docs', sku=garment.sku) }}" class="button">Documentation</a>
+        <a href="{{ url_for('pull_requests') }}" class="button">New Pull Request</a>
+    </div>
+</div>
+
+<div class="version-history">
+    <h3>Version History</h3>
+    {% for version in garment.versions|reverse %}
+    <div class="version-item">
+        <span class="version-tag">v{{ version.version }}</span>
+        <span class="version-date">{{ version.release_date.strftime('%Y-%m-%d') }}</span>
+        <span class="version-changes">{{ version.changes }}</span>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="specs-section">
+    <h3>Specifications</h3>
+    {% if garment.versions %}
+    <pre>{{ garment.versions[-1].specs }}</pre>
+    {% endif %}
+</div>
+{% endblock %}

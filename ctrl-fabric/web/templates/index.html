@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Products{% endblock %}
+{% block content %}
+<div class="page-header">
+    <h2>Products</h2>
+    <a href="{{ url_for('analytics') }}" class="button">Analytics Dashboard</a>
+</div>
+<div class="products-grid">
+    {% for garment in garments %}
+    <div class="product-card">
+        <h3><a href="{{ url_for('garment_detail', sku=garment.sku) }}">{{ garment.sku }}</a></h3>
+        <p>{{ garment.name }}</p>
+        <span class="category">{{ garment.category }}</span>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

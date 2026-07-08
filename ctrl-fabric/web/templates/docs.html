@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - {{ garment.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Ctrl+Fabric</h1>
+            <nav class="nav">
+                <a href="/">Dashboard</a>
+                <a href="/issues">Issues</a>
+                <a href="/pull-requests">Pull Requests</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="/">Dashboard</a> / <a href="/garments/{{ garment.sku }}">{{ garment.name }}</a> / Documentation
+        </div>
+
+        <h2>Documentation: {{ garment.name }}</h2>
+
+        <div class="docs-tabs">
+            <button class="tab-button active" onclick="showTab('tech')">Tech Specs</button>
+            <button class="tab-button" onclick="showTab('user')">User Guide</button>
+            <button class="tab-button" onclick="showTab('maintenance')">Maintenance</button>
+        </div>
+
+        <div id="tech-tab" class="tab-content active">
+            <h3>Technical Specifications</h3>
+            <div id="tech-specs-content">Loading...</div>
+        </div>
+
+        <div id="user-tab" class="tab-content">
+            <h3>User Guide</h3>
+            <div id="user-guide-content">Loading...</div>
+        </div>
+
+        <div id="maintenance-tab" class="tab-content">
+            <h3>Maintenance Manual</h3>
+            <div id="maintenance-content">Loading...</div>
+        </div>
+    </main>
+
+    <script>
+        async function loadDocs() {
+            const response = await fetch(`/api/garments/{{ garment.sku }}/docs`);
+            const data = await response.json();
+            
+            renderTechSpecs(data.tech_specs);
+            renderUserGuide(data.user_guide);
+            renderMaintenance(data.maintenance_manual);
+        }
+
+        function renderTechSpecs(specs) {
+            let html = '<h4>Materials</h4><ul>';
+            for (const [key, val] of Object.entries(specs.sections.materials)) {
+                html += `<li>${key}: ${JSON.stringify(val)}</li>`;
+            }
+            html += '</ul>';
+            
+            html += '<h4>Construction</h4><ul>';
+            specs.sections.construction.forEach(item => {
+                html += `<li>${item}</li>`;
+            });
+            html += '</ul>';
+            
+            html += '<h4>Compliance</h4><ul>';
+            specs.sections.compliance.forEach(item => {
+                html += `<li>${item}</li>`;
+            });
+            html += '</ul>';
+            
+            document.getElementById('tech-specs-content').innerHTML = html;
+        }
+
+        function renderUserGuide(guide) {
+            let html = `<p>${guide.sections.overview}</p>`;
+            html += '<h4>Features</h4><ul>';
+            guide.sections.features.forEach(f => {
+                html += `<li>${f}</li>`;
+            });
+            html += '</ul>';
+            
+            document.getElementById('user-guide-content').innerHTML = html;
+        }
+
+        function renderMaintenance(maintenance) {
+            let html = '<h4>Washing</h4><ul>';
+            maintenance.sections.washing.forEach(item => {
+                html += `<li>${item}</li>`;
+            });
+            html += '</ul>';
+            
+            html += '<h4>Expected Lifetime</h4>';
+            html += `<p>${maintenance.sections.lifetime.expected_wears} wears</p>`;
+            
+            document.getElementById('maintenance-content').innerHTML = html;
+        }
+
+        function showTab(tab) {
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(`${tab}-tab`).classList.add('active');
+        }
+
+        loadDocs();
+    </script>
+</body>
+</html>

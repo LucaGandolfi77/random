@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ctrl+Fabric - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="{{ url_for('index') }}">Ctrl+Fabric</a></h1>
+            <nav>
+                <a href="{{ url_for('index') }}">Products</a>
+                <a href="{{ url_for('issues') }}">Issues</a>
+                <a href="{{ url_for('pull_requests') }}">Pull Requests</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>Clothing engineered like software</p>
+        </div>
+    </footer>
+</body>
+</html>

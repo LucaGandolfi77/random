@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality & Sustainability - {{ garment.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Ctrl+Fabric</h1>
+            <nav class="nav">
+                <a href="/">Dashboard</a>
+                <a href="/issues">Issues</a>
+                <a href="/pull-requests">Pull Requests</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="/">Dashboard</a> / <a href="/garments/{{ garment.sku }}">{{ garment.name }}</a> / Quality & Sustainability
+        </div>
+
+        <h2>Quality & Sustainability: {{ garment.name }}</h2>
+
+        <div class="quality-grid">
+            <div class="quality-card">
+                <h3>Quality Tests</h3>
+                <div id="quality-content">Loading...</div>
+            </div>
+
+            <div class="quality-card">
+                <h3>Sustainability Metrics</h3>
+                <div id="sustainability-content">Loading...</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        async function loadQuality() {
+            const sku = "{{ garment.sku }}";
+            
+            const qaResponse = await fetch(`/api/garments/${sku}/quality`);
+            const qaData = await qaResponse.json();
+            
+            const sustainResponse = await fetch(`/api/garments/${sku}/sustainability`);
+            const sustainData = await sustainResponse.json();
+            
+            renderQuality(qaData);
+            renderSustainability(sustainData);
+        }
+
+        function renderQuality(data) {
+            let html = `<p>Quality Score: <strong>${data.quality_score}/10</strong></p>`;
+            html += `<p>Certification: ${data.certification.certification}</p>`;
+            html += '<h4>Tests</h4><ul>';
+            for (const [test, result] of Object.entries(data.tests)) {
+                html += `<li>${test}: ${result.rating}</li>`;
+            }
+            html += '</ul>';
+            document.getElementById('quality-content').innerHTML = html;
+        }
+
+        function renderSustainability(data) {
+            let html = `<p>Sustainability Score: <strong>${data.sustainability_score}/100</strong></p>`;
+            html += `<p>Carbon Footprint: ${data.carbon_footprint_kg} kg CO2</p>`;
+            html += `<p>Water Usage: ${data.water_usage_liters} liters</p>`;
+            html += '<h4>Eco Recommendations</h4><ul>';
+            data.eco_recommendations.forEach(rec => {
+                html += `<li>${rec}</li>`;
+            });
+            html += '</ul>';
+            document.getElementById('sustainability-content').innerHTML = html;
+        }
+
+        loadQuality();
+    </script>
+</body>
+</html>

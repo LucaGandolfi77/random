@@ -1,201 +1,328 @@
 # L'ULTIMA CENA
 
-## Avviso ai partecipanti
+## Prefazione del cinico
 
-Questo libro è un dialogo. Non uno scenario. Non una trama con inizio, mezzo e fine. È una conversazione tra cinque persone che, un venerdì sera di dicembre, decidono di cenare insieme in un appartamento di periferia. Uno di loro morirà quella stessa notte. Non per omicidio, non per incidente: per scelta.
+Non leggete questo libro per sapere chi morira'. Leggetelo per sapere perche'. E se, alla fine, credete di aver capito, avete sbagliato. Perche' il perche' non e' una risposta. E' una malattia.
 
-Non leggete questo libro per sapere chi. Leggetelo per sapere perché. E se, alla fine, credete di aver capito il perché, ricordate che la comprensione è solo una forma di orgoglio. E l'orgoglio, come il suicidio, non richiede spettatori: richiede solo chi ha il coraggio di guardare.
-
-Io ho guardato. Non ho capito. Ma ho guardato.
-
-E questo è il mio unico merito.
+Questa e' la storia di cinque persone a cena. Una di loro morira'. Per scelta. E la scelta, come sempre, e' piu' terribile della morte.
 
 ---
 
-## PARTE UNICA: LA CENA
-### Capitolo I \u2014 Gli invitati
+## PARTE PRIMA: GLI INVITATI
 
-L'appartamento era al settimo piano di un palazzo senza ascensore, in una città che non ha nome perché ogni città ha lo stesso quartiere, lo stesso marciapiede, lo stesso odore di fritto che sale dalle scale. Chi ci abitava \u2014 e che aveva invitato gli altri \u2014 si chiamava Roman. Trentaquattro anni, ex studente di filosofia, ora cassiere in un supermercato. Non ex per abbandono: ex per delusione. Aveva capito, dopo cinque anni di università, che la filosofia non risponde alle domande: le rende più eleganti. E l'eleganza, quando hai fame, non sazia.
+### Capitolo I — L'invito
 
-Roman aveva invitato quattro persone. Non amici: conoscenti. Persone incontrate in momenti diversi della sua vita, e che aveva deciso di riunire per una sola ragione: voleva annunciare la sua morte prima di commetterla. Non per dramma: per polifonia. Perché, se una sola voce dice \u2018muoio\u2019, suona come pazzia. Se cinque voci discutono della morte, suona come sinfonia. E Roman, che amava Dostoevskij, voleva morire in modo polifonico.
+Roman fece l'invito. Non con carta. Con parole. In un caffe' di periferia.
 
-Gli invitati:
+’Stasera. Casa mia. Cena. E poi, uno di noi morira'.’
 
-**Elena**, trentadue anni, insegnante di matematica. Ateista, sposata con un uomo che non amava, madre di una bambina che non capiva. Elena credeva che i numeri fossero l'unica verità. Non perché i numeri dicano qualcosa: perché non mentono mai. Un numero è sempre se stesso. Due è sempre due. Non ha crisi esistenziali.
+Non rise. Non scherzo'. E nessuno degli invitati rise.
 
-**Davide**, cinquantotto anni, prete luterano convertito al nulla. Aveva lasciato la fede dopo la morte della figlia, una bambina di sei anni colpita da leucemia. Non era arrabbiato con Dio: era semplicemente stanco di fingere di capire. Ora lavorava in una ONG che aiutava clandestini. Aiutare gli altri, diceva, era l'unica forma di preghiera che ancora reggeva.
-
-**Sara**, ventisei anni, studentessa di letteratura. Leggeva i classici russi con la stessa avidità con cui altri leggono il giornale: per confermarsi che il mondo è disperato. Non era depressa: era realista. E il suo realismo le aveva fatto perdere tre lavori, due fidanzati, e la capacità di dormire senza sonniferi.
-
-**Giorgio**, quarantadue anni, medico. Oncologo. Passava le giornate a dire ai malati che stavano per morire. Aveva imparato a dirlo in modo gentile, con eufemismi, con cifre sopravvivenza. Ma dentro di sé, ogni volta che pronunciava la frase, sentiva che stava parlando di sé stesso. Di una malattia che non aveva nome ma che tutti avevano.
-
-Roman aprò la porta. Indossava una camicia bianca, stirata male, con le pieghe che sembravano ferite. Sorrise. Un sorriso che non era allegro ma solo funzionale: il sorriso di chi ha deciso di essere cortese fino alla fine.
-
-\u2018Entrate\u2019, disse. \u2018C'è poco, ma è tutto ciò che ho.\u2019
-
-L'appartamento era piccolo, monolocale, con un tavolo rotondo al centro \u2014 Roman aveva comprato il tavolo rotondo apposta, perché non voleva angoli, non voleva teste, non voleva gerarchie \u2014 e cinque sedie. Sul tavolo: pane, vino, una zuppa di lenticchie, formaggio. Niente carne. Roman aveva deciso che l'ultima cena non dovesse costare la vita a nessun altro essere.
-
-Si sedettero. Roman prese la testa del tavolo \u2014 anche il rotondo ha una testa, se ci si siede con cinque persone: quella che guarda la porta \u2014 e disse: \u2018Ho un annuncio da fare. Ma non ora. Dopo cena. Prima, voglio sentirvi parlare. Voglio sentire cinque voci. Voglio sentire che il mondo, almeno per una sera, è più di una sola nota.\u2019
-
-Elena, pragmatica, prese il pane. \u2018Parlare di cosa?\u2019
-
-\u2018Di qualsiasi cosa. Di ciò che vi tiene svegli. Di ciò che vi farebbe morire, se non lo aveste.\u2019
-
-Davide, il prete-niente, scoppiò a ridere. \u2018Roman, sembri un protagonista di Dostoevskij.\u2019
-
-\u2018Lo sono. Lo siamo tutti. Solo che alcuni di noi non lo sanno ancora.\u2019
-
-Sara guardò Roman con occhi che già sospettavano. Non sapeva cosa, ma sospettava. \u2018Tu sei strano stasera.\u2019
-
-\u2018Sono sempre strano. Stasera solo decido di mostrarlo.\u2019
-
-Giorgio, il medico, versò il vino. Lo fece con la precisione di chi versa veleni, o medicine. \u2018Allora iniziamo. Io parlerò della morte.\u2019
-
-\u2018Perché della morte?\u2019 chiese Elena.
-
-\u2018Perché è l'unico argomento di cui sono esperto. E anche l'unico di cui nessuno vuole parlare.\u2019
+Elia, il credente, disse: ’Non puoi decidere chi muore.’
+’Non decido io. Decidiamo noi.’
+Teresa, la scettica, disse: ’E' un gioco?’
+’E' la vita. La vita e' un gioco che finisce. Stasera finisce per uno di noi.’
+Sasha, l'amante, disse: ’Io non vengo.’
+’Verrai. Perche' sei curiosa.’
+Il Cinico non disse nulla. Bevve il caffe'. E il silenzio, intorno al tavolo, divenne il primo piatto.
 
 ---
 
-### Capitolo II \u2014 Il discorso della morte
+### Capitolo II — L'arrivo
 
-Giorgio parlò per venti minuti. Non come conferenza: come confessione. Disse dei pazienti che aveva visto morire. Non i casi, non le statistiche: le facce. La vecchia che, morendo, gli aveva chiesto se il paradiso avesse il riscaldamento. Il giovane che gli aveva chiesto se potesse portare il suo cane. La donna che non aveva chiesto nulla, ma che aveva stretto la sua mano con una forza che sembrava voler strappargli l'anima.
+La casa era un appartamento di periferia. Non brutto: anonimo. Come una cella di prigione con i quadri appesi.
 
-\u2018La morte\u2019, disse Giorgio, \u2018non è un evento medico. È un evento teatrale. Ognuno muore come ha vissuto. Il codardo muore codardamente. Il coraggioso muore coraggiosamente. E chi non ha mai vissuto... chi non ha mai vissuto muore in silenzio, senza pubblico, senza applausi. E questo è il peggio.\u2019
+Arrivarono uno per uno. Elia con una Bibbia. Teresa con una borsa vuota. Sasha con il rossetto sbagliato. Il Cinico con le mani in tasca.
 
-Sara si servì della zuppa. Non perché avesse fame: perché le serviva qualcosa da fare mentre ascoltava. \u2018E tu, Giorgio, come morirai?\u2019
+Roman apri'. Sorrise. Ma il sorriso non arrivo' agli occhi.
 
-\u2018Da solo.\u2019
+’Entrate. La cena e' pronta.’
+’E la morte?’ chiese Teresa.
+’Anche quella.’
 
-\u2018Non è triste?\u2019
-
-\u2018No. È preciso. Ho passato la vita a vedere la morte di altri. Non voglio che nessuno veda la mia. È un privilegio che mi concedo.\u2019
-
-Elena, che fino ad allora aveva mangiato in silenzio, posò il cucchiaio. \u2018Io non capisco questa ossessione. La morte è la fine di una funzione. Come lo zero in una divisione. Non ha mistero. Non ha poesia. È solo... zero.\u2019
-
-Davide scosse la testa. \u2018Il zero è il numero più pieno, Elena. Contiene tutto ciò che non è stato contato.\u2019
-
-\u2018Queste sono chiacchiere da prete.\u2019
-
-\u2018Sono chiacchiere da uomo che ha perso. E chi ha perso sa che la perdita ha più volume della vittoria.\u2019
-
-Roman ascoltava. Non interveniva. Con la mano sinistra, sotto il tavolo, stringeva una busta. Una busta che conteneva una lettera. La lettera che avrebbe letto dopo cena.
-
-Sara guardò Roman. Poi guardò la busta. Non poteva vederla, ma sospettava che ci fosse. \u2018E tu, Roman, come morirai?\u2019
-
-Roman sorrise. \u2018Stasera.\u2019
-
-Silenzio. Il termosifone sfrigolò. Il vino, nel bicchiere di Giorgio, tremolò.
-
-\u2018Cosa intendi?\u2019 chiese Elena, con la voce che uscì più alta del previsto.
-
-\u2018Intendo che morirò stasera. Dopo cena. Non qui: da qualche parte. Non voglio sporcarmi il pavimento. Ma morirò.\u2019
-
-Davide si alzò. Non di scatto: lentamente, come quando ti alzi da una panchina dopo aver ricevuto una notizia troppo pesante. \u2018Roman... non dire sciocchezze.\u2019
-
-\u2018Non sono sciocchezze. Sono piani. Ho pianificato per mesi. Ho scelto il metodo, il luogo, il momento. Ho anche scritto una lettera.\u2019 Estrasse la busta dal grembo. La posò sul tavolo. Tra i piatti, tra il pane, tra il vino. \u2018Voglio che la leggiate. Non per pieta: per testimonianza. Voglio che cinque persone sappiano perché lo faccio. E voglio che, sapendolo, mi diciate se ho torto.\u2019
-
-Elena prese la busta. Non la aprí: la tenne in mano, come si tiene una bomba. \u2018Sei pazzo.\u2019
-
-\u2018Sono lucido. Più lucido di voi. Voi vivete fingendo che la morte sia lontana. Io vivo sapendo che è vicina. E preferisco incontrarla da solo, pulito, preparato. Piuttosto che lasciarla sorprendermi sporco, stanco, in un letto d'ospedale.\u2019
-
-Giorgio, stranamente, non sembrò sorpreso. Sembrò... riconosciuto. Come se avesse aspettato quella frase per anni. \u2018Il suicidio \u00e8 una malattia, Roman. Non una scelta.\u2019
-
-\u2018Tutte le malattie sono scelte, dottore. Scelte che il corpo fa per noi. E io scelgo per il mio corpo.\u2019
+Si sedettero'. Il tavolo era rotondo. Per non dare a nessuno la testa. O la coda.
 
 ---
 
-### Capitolo III \u2014 La lettera e le obiezioni
+### Capitolo III — La cena
 
-Roman lesse la lettera ad alta voce. Non la dette da leggere: la lesse lui, con la voce calma di chi recita una poesia che ha imparato a memoria.
+Roman servi'. Pollo. Patate. Vino. Non un menu' speciale: un menu' normale. Il cibo della vita, servito alla morte.
 
-\u2018Cari tutti: non chiedo perdono. Non chiedo comprensione. Chiedo solo che non diciate che ho fatto un errore. Perché l'errore, per me, sarebbe stato continuare. Continuare a cassare prodotti al supermercato. Continuare a fingere che la filosofia serva a qualcosa. Continuare a svegliarmi ogni mattina con la domanda \u2018perché?\u2019 e a coricarmi ogni sera senza risposta.
+’Perche' pollo?’ chiese Sasha.
+’Perche' il pollo non sa di essere vivo. Come noi.’
+’E il vino?’
+’Il vino sa di essere stato uva. E l'uva, a differenza nostra, sapeva di essere viva.’
 
-Ho provato la fede. Non funziona. Ho provato l'amore. Non funziona. Ho provato il lavoro, l'amicizia, la politica, l'arte. Nulla funziona. Non perché queste cose siano false: sono vere. Ma sono vere per altri. Per me, sono solo maschere. E sono stanco di indossare maschere.
+Mangiarono. Piano. Come se ogni boccone fosse l'ultimo. E forse lo era.
 
-La libertà è terribile. Lo so. Ma è l'unica cosa che mi resta. E uso la mia libertà per dire no. No alla vita che non ho chiesto. No al dolore che non merito. No al senso che non trovo.\u2019
-
-Finita la lettura, silenzio. Poi Sara parlò. \u2018Roman, questo è nichilismo. Non libertà.\u2019
-
-\u2018Il nichilismo è la forma più pura di libertà.\u2019
-
-\u2018No. Il nichilismo è la forma più pura di codardia. È arrendersi prima della battaglia.\u2019
-
-\u2018Quale battaglia? La battaglia contro il nulla? Il nulla non combatte. Accetta ogni resa.\u2019
-
-Davide tornò a sedersi. Versò altro vino. Ne bevve un sorso. Poi disse: \u2018Io ho perso mia figlia. So cosa vuol dire voler morire. Per un anno, ogni mattina, aprivo gli occhi e pensavo: \u2018perché non sono morto io?\u2019 Ma poi ho capito. La morte non è un atto d'amore verso chi ha perso. È un atto di egoismo. L'unico egoismo che non puoi chiedere scusa.\u2019
-
-\u2018Non chiedo scusa\u2019, disse Roman. \u2018Chiedo rispetto. Il rispetto per la mia libertà di dire basta.\u2019
-
-Elena prese la busta, la aprí, lesse la lettera con i propri occhi. Poi la strappò. In quattro pezzi. Otto. Sedici. \u2018No\u2019, disse. \u2018Non ti rispetto. Perché il rispetto è per chi lotta. Tu non lotti. Abbandoni.\u2019
-
-Roman guardò i pezzi di carta. Non si arrabbiò. Sorrise. \u2018Grazie, Elena. Perché, strappando la lettera, mi hai dato l'unica risposta che vale. Hai detto no. E il no è più forte del sì.\u2019
-
-Giorgio, il medico, parlò ora con una voce che non era la sua voce professionale: era la voce di un uomo. \u2018Roman, ho visto centinaia di morti. E ti dico una cosa che non dico mai ai pazienti. La morte non è dignitosa. Non è pulita. Non è romantica. È solo la fine. E la fine, per chi la guarda da vicino, non ha niente di tragico. Ha solo l'odore del disinfettante e il suono del monitor piatto.\u2019
-
-\u2018Non voglio la tragedia\u2019, disse Roman. \u2018Voglio solo la fine.\u2019
-
-\u2018E noi?\u2019 chiese Sara. \u2018Cosa vogliamo noi?\u2019
-
-\u2018Voi volete salvarmi. E non potete. Perché non sono in pericolo. Sono in scelta.\u2019
+Elia disse: ’Moriremo tutti. Questa cena non cambia nulla.’
+’Cambia. Perche' e' l'ultima comunione.’
+’Non e' comunione. E' solo digestione.’
+’La digestione della fine e' comunione.’
 
 ---
 
-### Capitolo IV \u2014 La cena continua
+### Capitolo IV — La conversazione
 
-Stranamente, dopo lo strappo, dopo l'annuncio, la cena continuò. Roman non se ne andò. Non salí sul tetto, non aprí la finestra. Rimase seduto. E mangiò. Mangiò le lenticchie, il pane, il formaggio. Bevve il vino. E mentre mangiava, parlò. Parlò di cose che non c'entravano. Del tempo a Torino. Di una ragazza che aveva amato alle superiori. Di un gatto che aveva avuto da bambino. Di una volta che, a Parigi, aveva pianto davanti al Pantheon senza sapere perché.
+Parlarono. Di tutto. Di niente. Di politica. Di Dio. Di amore. Di sport.
 
-E gli altri ascoltarono. Non perché volessero distoglierlo dal proposito: perché capirono, tutti e quattro, che la cena era diventata il suo ultimo desiderio. E che negarglielo sarebbe stato peggiore del suicidio stesso.
+Ogni argomento era un modo per non parlare. E il non parlare, piano piano, diventava il vero argomento.
 
-Davide raccontò di una messa in un campo profughi, dove un bambino gli aveva chiesto se Gesù avesse fame. \u2018Ho detto di no. Ma ho mentito. Gesù ha fame. Ha fame di noi. Ma noi non gli diamo da mangiare. Gli diamo solo parole.\u2019
+Sasha disse: ’Ho tradito mio marito.’
+Silenzio.
+Elia disse: ’Ho perso la fede.’
+Silenzio.
+Teresa disse: ’Ho abortito. Due volte.’
+Silenzio.
+Roman non disse nulla. Guardo' il Cinico.
 
-Sara raccontò di un esame universitario, dove un professore le aveva chiesto: \u2018Perché legge i libri russi?\u2019 E lei aveva risposto: \u2018Perché sono l'unico posto dove la disperazione non è considerata malattia.\u2019
-
-Elena, a sorpresa, raccontò del suo matrimonio. Di come avesse sposato un uomo che somigliava a suo padre. Di come avesse avuto una figlia che non somigliava a nessuno. Di come, a volte, guardasse la figlia e pensasse: \u2018questa creatura è la prova che io esisto. Non per i miei geni: per la mia capacità di farne uscire qualcosa di diverso.\u2019
-
-Giorgio raccontò di un paziente che, morendo, gli aveva detto: \u2018Grazie per la bugia.\u2019 \u2018Quale bugia?\u2019 aveva chiesto Giorgio. E il paziente: \u2018Quando mi ha detto che stavo meglio. Sapevo che mentiva. Ma era una bella bugia. E le belle bugie meritano gratitudine.\u2019
-
-La cena durò fino a mezzanotte. Non si accesero altre luci. Solo le candele che Roman aveva messo sul tavolo, che consumavano lentamente, che gocciolavano cera sul legno.
-
-Poi, a mezzanotte e un quarto, Roman si alzò.
-
-\u2018Devo andare\u2019, disse.
-
-\u2018Resta\u2019, disse Sara. Non come supplica: come constatazione.
-
-\u2018Non posso. Ho un appuntamento.\u2019
-
-\u2018Con chi?\u2019
-
-\u2018Con me stesso. Con la parte di me che non sopporta più.\u2019
-
-Giorgio si alzò. Gli strinse la mano. Non disse \u2018non farlo\u2019. Disse: \u2018Se cambi idea, chiamami.\u2019
-
-Elena non si mosse. Guardò Roman andarsene, con la camicia bianca e le pieghe che sembravano ferite. E quando la porta si chiuse, disse: \u2018Non tornerà.\u2019
-
-\u2018Lo so\u2019, disse Davide.
-
-\u2018E noi?\u2019 chiese Sara. \u2018Cosa facciamo noi?\u2019
-
-\u2018Restiamo\u2019, disse Giorgio. \u2019Restiamo e finiamo il vino. Perché, se lui può scegliere di morire, noi possiamo scegliere di bere. E la scelta, anche quando è piccola, è sacra.\u2019
-
-Bevvero fino alle due. Non si ubriacarono. Si parlarono. Si dissero cose che non si sarebbero mai dette. E quando uscirono, nel corridoio buio, Elena disse: \u2018Credo che abbia sbagliato. Ma credo anche che avesse il diritto di sbagliare.\u2019
-
-\u2018Il diritto di sbagliare \u00e8 l'unico diritto che non ci viene mai tolto\u2019, disse Davide.
-
-\u2018Sì. Ma a volte è anche il più difficile da esercitare.\u2019
+Il Cinico, infine, disse: ’Io non ho mai amato nessuno. E questo, a differenza vostra, non e' una colpa. E' una scelta.’
 
 ---
 
-### Capitolo V \u2014 L'epilogo senza risposta
+### Capitolo V — La morte
 
-Roman morì quella notte. Non lo so per certezza \u2014 nessuno dei quattro lo seppe subito \u2014 ma lo so. Lo so perché il mattino dopo, leggendo il giornale, trovai una notizia. Un uomo di trentaquattro anni trovato morto in un parco, seduto su una panchina, con una bottiglia di pillole vuota accanto. Nessun documento. Nessuna lettera. Solo il corpo, e il freddo.
+Roman tiro' fuori una scatola. Piccola. Bianca.
 
-I quattro non andarono al funerale. Non c'era funerale. Il corpo non fu identificato subito. E quando lo fu, nessuno reclamò le ceneri. Roman, nel suo suicidio, aveva raggiunto l'ultima forma di libertà: l'anonimato.
+’Qui dentro c'e' un composto. Veleno. Painless.’
+’E chi lo prende?’ chiese Teresa.
+’Chi sceglie.’
+’E se nessuno sceglie?’
+’Allora scegliero' io. E non sara' me.’
 
-Ma io so \u2014 e voi ora sapete \u2014 che non è anonimo. Che ha un nome. Che ha avuto una cena. Che ha avuto cinque voci che hanno discusso, che hanno obiettato, che hanno strappato una lettera. E che, forse, per un attimo, prima di prendere le pillole, ha ricordato quella cena. E ha ricordato che, almeno una volta, qualcuno lo aveva guardato. Qualcuno lo aveva ascoltato. Qualcuno gli aveva detto no.
+Roman guardo' ognuno.
 
-E il no, forse, è stato l'unico sì che ha ricevuto.
+Elia disse: ’Non scelgo. Lascio che Dio scelga.’
+Teresa disse: ’Non scelgo. Lascio che la noia scelga.’
+Sasha disse: ’Non scelgo. Ho ancora troppo da perdere.’
+Il Cinico disse: ’Non scelgo. Non perche' ho paura. Perche' non mi interessa.’
+
+Roman prese la scatola. L'apri'. E ingoio'.
+
+’Roman!’ grido' Sasha.
+’Troppo tardi. Ho scelto. E la scelta, ragazzi, e' l'unica prova che esistiamo.’
+
+Roman mori' in quindici minuti. Seduto. Con un sorriso. Che non era serenita': era soddisfazione.
+
+---
+
+## PARTE SECONDA: I SEGRETI
+
+### Capitolo VI — La padrona di casa
+
+La padrona di casa, una donna di nome Ada, venne a pulire il giorno dopo. Non sapeva nulla. Trovo' Roman seduto.
+
+Chiamo' la polizia. Non pianse. Non conosceva Roman.
+
+Ma, guardandolo, disse: ’Sembra soddisfatto.’
+’Soddisfatto?’ chiese il poliziotto.
+’Si'. Come chi ha finito un lavoro.’
+
+E quando seppe che aveva scelto di morire, Ada disse: ’Avrei voluto che scegliesse di vivere. Ma non e' mai stata una scelta che ho saputo offrire.’
+
+---
+
+### Capitolo VII — Il cameriere
+
+Elia, il giorno dopo, torno' al caffe'. Ordino' un caffe'. Il cameriere, lo stesso che aveva visto l'invito, disse:
+
+’E andata bene la cena?’
+’No.’
+’Perche'?’
+’Perche' uno e' morto.’
+’Chi?’
+’Quello che invitava.’
+’E gli altri?’
+’Gli altri sono vivi. Ma non lo sanno ancora.’
+
+Il cameriere asciugo' un bicchiere. E disse: ’Io ho servito caffe' a Roman per anni. Non mi ha mai guardato in faccia.’
+’E ora?’
+’Ora lo guardo io. E vedo che non c'e'.’
+
+---
+
+### Capitolo VIII — L'ex-amante di Roman
+
+Teresa, investigando, trovo' un nome. Claudia. L'ex-amante di Roman.
+
+Ando' a trovarla. Una donna di quarant'anni. Con gli occhi gonfi.
+
+’Lui mi ha lasciata un anno fa. Non perche' non mi amasse. Perche' non si amava piu'.’
+’E la cena?’
+’Me l'ha detto. Ha detto: voglio morire con persone che non mi amino. Perche', se muoio con chi mi ama, li ferisco. E io non voglio ferire. Voglio solo finire.’
+’E noi?’
+’Voi siete i testimoni. Non gli amanti. I testimoni possono sopportare.’
+
+---
+
+### Capitolo IX — Il figlio di Teresa
+
+Teresa ricevette una telefonata. Suo figlio, Marco, quindici anni.
+
+’Mamma, dove sei?’
+’Fuori.’
+’Con chi?’
+’Con nessuno.’
+’Mamma, qualcuno e' morto?’
+’Perche' lo chiedi?’
+’Perche' sento che sei diversa. Piu' vuota.’
+
+Teresa chiuse il telefono. E, per la prima volta, capi' che la madre non puo' testimoniare la morte senza portarla a casa.
+
+---
+
+### Capitolo X — La madre di Sasha
+
+Sasha ando' dalla madre. Una vecchia. Con la fede. Con le foto.
+
+’Mamma, ho visto un uomo morire.’
+’Perche' ci sei andata?’
+’Perche' ero invitata.’
+’E non hai fermato?’
+’Non potevo.’
+’Perche'?’
+’Perche' la liberta' di morire e' piu' importante della mia compassione.’
+
+La madre la guardo'. E disse: ’Sei cambiata.’
+’No. Solo svegliata.’
+
+---
+
+## PARTE TERZA: LE RIVELAZIONI
+
+### Capitolo XI — Il sacerdote bussa
+
+Elia, sconvolto, chiamo' un sacerdote. Non per la benedizione di Roman. Per la propria.
+
+’Padre, ho visto un uomo scegliere la morte.’
+’E tu hai scelto la vita?’
+’Non ho scelto. Sono solo rimasto.’
+’Restare e' una scelta.’
+’Non se hai paura di andare.’
+
+Il prete guardo' Elia. E disse: ’Roman ha avuto coraggio. Non per morire. Per decidere. E tu, Elia, hai il coraggio di decidere di vivere?’
+
+Elia non rispose. Perche' non lo sapeva.
+
+---
+
+### Capitolo XII — Il Cinico rivela
+
+Il Cinico, una settimana dopo, convoco' gli altri. Allo stesso tavolo.
+
+’Devo dirvi una cosa. Sono il padre di Roman.’
+
+Silenzio.
+
+’Non ho mai detto nulla. Non perche' mi vergognassi. Perche' non mi importava. Ma ora che e' morto, mi importa.’
+’E perche' non glielo hai detto?’ chiese Teresa.
+’Perche' il figlio che non conosci, quando muore, non muore piu' di te.’
+
+Sasha pianse. Il Cinico no. Ma le sue mani, per la prima volta, uscirono dalle tasche.
+
+---
+
+### Capitolo XIII — Roman confessa
+
+Trovarono una lettera. Nella giacca di Roman.
+
+’Cari tutti: ho scelto di morire perche' ero stanco di aspettare. La vita, per me, era un ristorante aperto dove nessuno ordinava. E io ero il cameriere. Stasera, alla cena, ho ordinato io. E l'ordinazione e' stata la morte.
+Non mi piangete. Non pregate per me. Solo, ogni tanto, sedetevi a un tavolo e chiedetevi: che cosa ho ordinato?
+Roman.’
+
+Teresa lesse la lettera. Poi la brucio'. Non per rabbia. Perche' la lettera, una volta letta, diventava un fantasma.
+
+---
+
+### Capitolo XIV — Teresa mostra i referti
+
+Teresa, una sera, mostro' gli altri un referto medico.
+
+’Ho un tumore. Non lo sapevo. L'ho scoperto oggi.’
+’E Roman lo sapeva?’ chiese Sasha.
+’No.’
+’Allora perche' mostri a noi?’
+’Perche' voi siete gli unici che hanno visto la morte. E ora, vedendo la mia, non avrete paura.’
+
+Elia disse: ’Teresa, puoi guarire.’
+’Puoi non guarire. E' la stessa cosa.’
+
+---
+
+### Capitolo XV — Sasha racconta il marito
+
+Sasha racconto' del marito. Un uomo violento. Che la picchiava. Che la isolava.
+
+’Roman lo sapeva. E mi ha detto: vieni alla cena. E scegli la tua morte. Ma non quella che ti da' lui. La tua.’
+’E tu hai scelto?’
+’Ho scelto di vivere. Ma non so se ce la faro'.’
+
+Teresa le prese la mano. E, per la prima volta, le donne al tavolo si toccarono.
+
+---
+
+## PARTE QUARTA: LA NOTTE
+
+### Capitolo XVI — Elia perde la fede
+
+Elia, una notte, grido'. Nella sua stanza. ’Dio, non esisti!’
+
+Il vicino busso'. Elia apri'. E disse: ’Scusi. Non per lei. Per me.’
+’Che c'e'?’
+’C'e' che ho visto un uomo morire serenamente senza Dio. E se si puo' morire serenamente senza Dio, allora Dio non serve.’
+
+Il vicino, un ateo, disse: ’Non serve mai. Serve solo credere che serva.’
+
+Elia non credette piu'. Ma, non credendo, dormi' meglio.
+
+---
+
+### Capitolo XVII — Il poliziotto
+
+Un poliziotto, Bianchi, indago'. Non per omicidio. Per curiosita'.
+
+’Perche' eravate li'?’ chiese a Teresa.
+’Perche' eravamo invitati.’
+’E non avete chiamato i soccorsi?’
+’Non erano necessari.’
+’La morte e' sempre necessaria?’
+’No. Ma e' sempre inevitabile.’
+
+Bianchi chiuse il fascicolo. E scrisse: ’Suicidio volontario. Testimoni non colpevoli.’ Ma aggiunse, a penna: ’Testimoni fortunati.’
+
+---
+
+### Capitolo XVIII — Il giornalista
+
+Un giornalista pubblico' la storia. ’La cena della morte’.
+
+Gli altri furono intervistati. Sasha rifiuto'. Teresa disse: ’Non e' una storia. E' una cena.’ Elia disse: ’Non ho commenti.’ Il Cinico disse: ’Mio figlio e' morto. Non e' un articolo.’
+
+Il giornalista, frustrato, scrisse comunque. E la cena divenne leggenda. Una leggenda che, come tutte le leggende, non aveva niente a che vedere con la verita'.
+
+---
+
+### Capitolo XIX — Il medico legale
+
+Il medico legale, Dott. Ferri, firmo' il certificato.
+
+’Causa: avvelenamento.’
+Ma aggiunse, in calce: ’Nota: il soggetto presentava un sorriso muscolare. Non cadaverico. Congenito. Come se avesse passato la vita ad aspettare quel momento.’
+che nessuno lesse.
+
+---
+
+### Capitolo XX — La sepoltura e la lettera
+
+Seppellarono Roman. Non in chiesa. In un campo. Con una pietra senza nome.
+
+Gli altri andarono. Tutti tranne il Cinico.
+
+Sasha depose una lettera. Indirizzata a Roman. Non spedita. Mai spedita.
+
+’Caro Roman: ho scelto. Ho scelto di vivere. E ogni giorno, quando mi sveglio, ti ringrazio. Non per la morte. Per la cena. Perche', alla cena, ho capito che la vita non e' un diritto. E' una scelta. E io, scelta, finalmente la faccio.’
+
+Teresa aggiunse un fiore. Elia una preghiera muta. E il vento, sopra la tomba, fece il resto.
 
 ---
 
@@ -203,20 +330,6 @@ E il no, forse, è stato l'unico sì che ha ricevuto.
 
 ---
 
-*Dedica*
+*Nota del cinico*
 
-A Roman, ovunque sia.
-A Elena, che continua a contare.
-A Davide, che ha smesso di pregare ma non di sperare.
-A Sara, che legge ancora i russi.
-A Giorgio, che ogni giorno dice a qualcuno che sta per morire.
-
-E a chiunque, una sera, abbia pensato di non farcela.
-Questo libro è per voi.
-Non per salvarvi.
-Per dirvi che siete stati ascoltati.
-Che il vostro no è stato sentito.
-E che, anche se il mondo non risponde,
-la domanda resta.
-E la domanda, da sola,
-è già libertà.
+Non andai alla sepoltura. Non perche' non mi importasse. Perche' ero gia' morto, in un certo senso. E i morti non seppelliscono i morti. Solo i vivi, con la loro speranza, lo fanno.

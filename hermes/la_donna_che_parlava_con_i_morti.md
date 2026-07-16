@@ -6,72 +6,241 @@ Non credo nei fantasmi. Ma credo in lei. Caterina parlava con i morti non perche
 
 Questo libro e' la sua voce.
 
+Ma se la voce e' mancanza, chi ascolta non e' forse solo un testimone del vuoto?
+
 ---
 
-## PARTE UNICA: LE VOCI
+## PARTE PRIMA: LE VOCI
+
 ### Capitolo I — La sensitiva
 
 Caterina Belli aveva quarant'anni e un dono. Non secondo lei: secondo i clienti. Da quando aveva vent'anni, la gente veniva da lei a parlare con i defunti. Non perche' Caterina avesse poteri soprannaturali. Per un motivo piu' semplice: ascoltava.
 
-Lei stessa non capiva perche' la gente le credesse. Quando ’parlava con i morti’, diceva solo cio' che le persone volevano sentire. Non inventava: interpretava. Interpretava il dolore, il rimorso, la domanda non detta.
-
-’Ma come fai a sapere?’ le chiedevano.
-’So perche' voi lo sapete. E io ascolto cio' che voi non dite.’
+Lei stessa non credeva nei fantasmi. Credeva nel dolore. E il dolore, sebbente muto, ha voce.
 
 ---
 
-### Capitolo II — Il marito
+### Capitolo II — Il primo cliente
 
-Nel 2010, mori' suo marito. Marco. Non improvvisamente: di malattia. Caterina lo assistette. E quando mori', per la prima volta, provo' il desiderio di parlare con un morto.
+Il primo cliente fu un vecchio. Mario. Con la moglie morta.
 
-Ma non riusci'. Non perche' Marco non le parlasse. Perche' lei, nel dolore, non sapeva piu' ascoltare.
+'Vuoi parlarle?' chiese Caterina.
 
-’Marco’, disse, nella stanza vuota. ’Dimmi qualcosa.’
+'Si'. Ma non so come.'
+
+'Siediti. Chiudi gli occhi. E parla. Io ascoltero'. E, ascoltando, sentiro'.'
+
+Mario parlo'. Per un'ora. Di ricordi. Di rimpianti.
+
+Caterina ascolto'. E, ascoltando, disse: 'Lei ti sente. E, sentendoti, e' felice.'
+
+---
+
+### Capitolo III — Il secondo cliente
+
+Il secondo fu una madre. Con il figlio morto.
+
+'Vuoi sentirlo?' chiese Caterina.
+
+'Si'. Ma non so come.'
+
+'Siediti. Chiudi gli occhi. E ascolta. Io parlero'. E, parlando, sentiro'.'
+
+La madre ascolto'. E, ascoltando, pianse.
+
+Caterina disse: 'Lui ti sente. E, sentendoti, e' vicino.'
+
+---
+
+### Capitolo IV — Il terzo cliente
+
+Il terzo fu un bambino. Con il cane morto.
+
+'Vuoi sentirlo?' chiese Caterina.
+
+'Si'. Ma non so come.'
+
+'Siediti. Chiudi gli occhi. E sogna. Io sognero'. E, sognando, sentiro'.'
+
+Il bambino sogno'. E, sognando, rise.
+
+Caterina disse: 'Lui ti sente. E, sentendoti, scodinzola.'
+
+---
+
+### Capitolo V — La voce
+
+Caterina non sentiva voci. Sentiva silenzi.
+
+E, nel silenzio, trovava le parole.
+
+'Le parole,' disse a un cliente, 'non sono dei morti. Sono tue. E, essendo tue, sono vere.'
+
+---
+
+## PARTE SECONDA: I MORTI
+
+### Capitolo VI — La madre
+
+La madre di Caterina, Adele, mori'. E Caterina parlo' con lei.
+
+Non per dono. Per bisogno.
+
+'Mamma,' disse, 'sei li'?'
 
 Silenzio.
 
-’Perche' non mi parli? Parli con tutti gli altri.’
-
-E capi'. I morti non parlano. Sono le persone che parlano. E lei, da vedova, non aveva piu' nessuno che le parlasse per lei.
+'Lo so. Non sei li'. Ma io sono qui. E, essendo qui, ti sento.'
 
 ---
 
-### Capitolo III — La crisi
+### Capitolo VII — Il padre
 
-Caterina chiuse lo studio. Per un anno, non parlo' con nessuno. Non con i vivi, non con i morti. Perse il lavoro, perse gli amici, perse la casa.
+Il padre, Bruno, mori'. E Caterina non parlo' con lui.
 
-Vive in un monolocale. E, una sera, busso' un uomo. Non un cliente: un figlio. Un figlio che sosteneva di essere di Marco. Di un'amante, nascosto per anni.
+Non perche' non volesse. Perche' non aveva nulla da dire.
 
-’Mia madre e' morta’, disse il ragazzo. ’Voglio parlare con lei. Attraverso te.’
-
-Caterina lo guardo'. Non era figlio di Marco. Lo sapeva. Ma il ragazzo credeva di esserlo. E la sua credenza era piu' vera della verita'.
-
-’Entra’, disse. ’E parliamo.’
+'Papa',' disse, 'non ti sento. E, non sentendoti, so che sei morto.'
 
 ---
 
-### Capitolo IV — La riapertura
+### Capitolo VIII — Il fratello
 
-Caterina riapri' lo studio. Ma cambio' metodo. Non parlava piu' con i morti degli altri. Parlava con i morti di chi veniva. E raccontava non cio' che i morti dicevano: cio' che i vivi sentivano.
+Il fratello, Luca, mori'. Suicida.
 
-Il ragazzo venne ogni settimana. Parlarono della ’madre morta’. Della ’colpa di Marco’. Del ’tradimento’. E piano piano, il ragazzo capi' che non era figlio di Marco. Ma capi' anche che, in un certo senso, lo era. Perche' Marco, attraverso il tradimento, aveva generato il dolore. E il dolore, di quel ragazzo, era reale.
+Caterina parlo' con lui. Per ore.
 
-’Non sono figlio di tuo marito’, disse, infine.
-’Lo so.’
-’Ma lo sono stato, per un anno.’
-’Si'. E questo conta piu' del sangue.’
+'Perche'?' chiese.
+
+Silenzio.
+
+'Lo so. Non rispondi. Ma io rispondo per te. E, rispondendo, ti tengo vivo.'
 
 ---
 
-### Capitolo V — La voce finale
+### Capitolo IX — L'amante
 
-Caterina mori' nel 2020. Non prima di aver detto, a un gruppo di amici:
+L'amante, Marco, mori'. In un incidente.
 
-’Non parlate mai con i morti. Parlate con il vuoto che lasciano. E il vuoto, se lo ascoltate, vi dice tutto. Non del morto: di voi.’
+Caterina non parlo' con lui. Per mesi.
 
-Fu seppellita accanto a Marco. Non per amore: per geometria. Perche' il vuoto, tra due tombe vicine, e' minore.
+Poi, una notte, disse: 'Marco, ti perdono. E, perdonandoti, ti libero.'
 
-E se qualcuno, oggi, parla con lei, sappia che non e' Caterina che risponde. E' il proprio vuoto. E il proprio vuoto, alla fine, e' l'unica voce che abbiamo.
+---
+
+### Capitolo X — La figlia
+
+La figlia, Sara, chiese: 'Mamma, parli con i morti?'
+
+'No. Parlo con chi manca. E il mancare, Sara, e' vivo.'
+
+---
+
+## PARTE TERZA: I CLIENTI
+
+### Capitolo XI — Il prete
+
+Il prete, Don Marco, venne.
+
+'E' peccato parlare con i morti.'
+
+'No. E' peccato non parlare con i vivi. E io, parlando con i morti, parlo con i vivi.'
+
+---
+
+### Capitolo XII — Il medico
+
+Il medico, Dott. Levi, venne.
+
+'Ha una patologia.'
+
+'No. Ho una professione. E la professione, dottore, e' ascoltare.'
+
+---
+
+### Capitolo XIII — L'ubriaco
+
+Un ubriaco venne. Per parlare con la madre.
+
+Caterina ascolto'. E, ascoltando, disse: 'Tua madre ti dice di smettere di bere.'
+
+'L'ho sentita,' disse l'ubriaco.
+
+'No. L'hai detto tu. E, dicendolo, sei guarito.'
+
+---
+
+### Capitolo XIV — La vedova
+
+Una vedova venne. Per parlare con il marito.
+
+Caterina ascolto'. E, ascoltando, disse: 'Lui ti dice di risposarti.'
+
+'Non lo faro',' disse la vedova.
+
+'Lo so. Ma lui vuole che tu sia felice. E, essendo felice, lo ricordi.'
+
+---
+
+### Capitolo XV — Il bambino
+
+Un bambino venne. Per parlare con il cane.
+
+Caterina ascolto'. E, ascoltando, disse: 'Il cane ti dice di giocare.'
+
+'E' morto,' disse il bambino.
+
+'No. E' nel ricordo. E il ricordo, sebbente morto, e' vivo.'
+
+---
+
+## PARTE QUARTA: LA FINE
+
+### Capitolo XVI — La malattia
+
+Caterina ammalo'. Non grave. Ma, a quarant'anni, sufficiente.
+
+Non parlo' piu' con i morti. Parlo' con se stessa.
+
+E, parlando, capi' che i morti erano lei.
+
+---
+
+### Capitolo XVII — L'ultima voce
+
+L'ultima voce fu sua. Nel silenzio.
+
+'Ho parlato con i morti. E, parlando, ho capito che il morto sono io. E, essendo morta, sono viva.'
+
+---
+
+### Capitolo XVIII — La morte
+
+Caterina mori'. Serenamente. Con un sorriso.
+
+Sara, al funerale, disse: 'Mamma parlava con i morti. E, parlando, ha capito che la vita e' un dialogo. E il dialogo, sebbente muto, e' la sola voce che non s'interrompe.'
+
+---
+
+### Capitolo XIX — L'eredità
+
+Sara divenne sensitiva. Non per dono. Per bisogno.
+
+E, sentendo il bisogno, capi' che il bisogno e' voce.
+
+---
+
+### Capitolo XX — L'epitaffio
+
+Sulla tomba di Caterina, Sara scrisse:
+
+'Qui giace una donna che parlava con i morti. E, parlando, ha capito che i morti non parlano. Parlano i vivi. E i vivi, sebbente muti, hanno voce.'
+
+E sotto, un cliente aggiunse:
+
+'Caterina: ho parlato con mia madre. E, parlando, ho capito che la voce era mia. E, essendo mia, ero libero.'
+
+Ma libero, alla fine, non e' forse solo un altro modo di dire solo?
 
 ---
 

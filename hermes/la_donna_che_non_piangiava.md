@@ -6,57 +6,251 @@ Ho avuto una paziente che non piangeva. Mai. Neanche di gioia. Nei tre anni di t
 
 Questa e' la sua storia. Non come caso clinico: come tragedia greca moderna.
 
+Ma se il pianto e' tragedia, chi non piange non e' forse l'unico che sopravvive?
+
 ---
 
-## PARTE UNICA: L'ASCIUGATURA
+## PARTE PRIMA: L'ASCIUGATURA
+
 ### Capitolo I — L'essiccazione
 
-Sonia Melli nacque in una famiglia dove il pianto era proibito. Non perche' fosse considerato debolezza: perche' era considerato inutile. ’Le lacrime non risolvono nulla’, diceva il padre. E Sonia, obbediente, smise di piangere.
+Sonia Melli nacque in una famiglia dove il pianto era proibito. Non perche' fosse considerato debolezza: perche' era considerato inutile. 'Le lacrime non risolvono nulla', diceva il padre. E Sonia, obbediente, smise di piangere.
 
-Non fisicamente: interiormente. Il suo corpo produsse lacrime fino all'eta' di dieci anni. Poi si fermo'. Non perche' non provasse dolore: perche' il dolore non trovava piu' via d'uscita.
-
----
-
-### Capitolo II — La vita senza lacrime
-
-Sonia divenne un'adulta perfetta. Efficiente, precisa, fredda. Lavorava in banca. Gestiva denaro, non persone. E il denaro, a differenza delle persone, non le chiedeva emozioni.
-
-Si sposo'. Ebbe figli. Ma non pianse alla nascita. Non perche' non provasse gioia: perche' la gioia, nel suo corpo, non aveva forma liquida.
+Non fisicamente: interiormente. I suoi occhi rimasero capaci di lacrime. Ma la sua anima, no.
 
 ---
 
-### Capitolo III — La terapia
+### Capitolo II — Il padre
 
-Nella terapia, Sonia parlava. Ma non piangeva. Parlava del padre, della madre, del marito. Parlava con la voce di chi racconta un film visto troppo volte.
+Il padre, Bruno, non piangeva mai. Nemmeno alla morte della moglie.
 
-Un giorno, porto' una foto. Una foto di se stessa da bambina, che piangeva.
-’Questa e' l'ultima volta che ho pianto’, disse.
-’Cosa successe dopo?’
-’Mio padre mi disse: basta. E io obbedii.’
-’E se ora lei decidesse di non obbedire piu'?’
+'Sonia,' disse, 'le lacrime sono acqua. E l'acqua, sebbente pura, non scalda.'
 
-Sonia guardo' la foto. E per la prima volta, senti' qualcosa. Non lacrime: un nodo. Un nodo in gola, in petto, in stomaco.
+'Papa', l'acqua spegne il fuoco.'
+
+'Proprio. E io non voglio fuoco. Voggo controllo.'
 
 ---
 
-### Capitolo IV — La rottura del nodo
+### Capitolo III — La madre
 
-Sonia, una notte, pianse. Non piano: forte. Grido'. Un grido che non era umano: era animale. Il grido di trent'anni di lacrime represse.
+La madre, Elena, piangeva di nascosto. Nel bagno. Con l'acqua che scorreva.
 
-Il marito, spaventato, chiamo' me. Io andai. Trovai Sonia sul pavimento, con il viso bagnato, con il corpo che tremava.
+Sonia la sentiva. Ma non diceva nulla.
 
-’Dottore, ho rotto qualcosa’, disse.
-’Cosa?’
-’Il nodo. Ora sono vuota.’
-’Non sei vuota. Sei liquida. E il liquido, finalmente, scorre.’
+'Mamma,' disse una volta, 'piangi.'
+
+'No. Se piango, lui se ne accorge. E, accorgendosi, mi lascia.'
+
+'Lascia chi?'
+
+'Me stessa.'
 
 ---
 
-### Capitolo V — La donna che piange
+### Capitolo IV — Il fratello
 
-Sonia, da allora, pianse sempre. Pianse per gioia, per dolore, per rabbia, per noia. Divenne una donna che piangeva al cinema, alle notizie, al tramonto.
+Il fratello, Marco, piangeva. Di rabbia. Di dolore. Di tutto.
 
-E disse, una volta: ’Ho perso trent'anni di lacrime. Ma ora le recupero. Ogni giorno. Ogni ora.’
+'Sonia,' disse, 'tu non piangi. Sei di ghiaccio.'
+
+'No. Sono di fuoco. Ma il fuoco, sebbente caldo, non produce lacrime. Produce cenere.'
+
+---
+
+### Capitolo V — La scuola
+
+A scuola, Sonia non piangeva. Nemmeno quando la picchiavano.
+
+'Perche' non piangi?' chiedevano.
+
+'Perche' le lacrime sono vittoria. E io, non piangendo, non perdo.'
+
+---
+
+## PARTE SECONDA: I NON-PIANTI
+
+### Capitolo VI — La prima delusione
+
+La prima delusione fu a dieci anni. Un amico le rubo' la penna.
+
+Non pianse. Ando' dal maestro.
+
+'Maestro, mi ha rubato la penna.'
+
+'E piangi?'
+
+'No. Piangere e' perdere. E io, non piangendo, recupero.'
+
+---
+
+### Capitolo VII — L'amore
+
+Sono innamoro' a vent'anni. Di Luca.
+
+Lui la lascio'. Per un'altra.
+
+Sonia non pianse. Si taglio' i capelli.
+
+'Perche'?' chiese Luca.
+
+'Perche' i capelli crescono. E le lacrime, no.'
+
+---
+
+### Capitolo VIII — Il matrimonio
+
+Sposo' Marco. Non per amore. Per abitudine.
+
+Non pianse al matrimonio. Nemmeno di gioia.
+
+'Mamma,' disse Marco, 'non sei felice?'
+
+'Si'. Ma la felicita', Marco, non si piange. Si tace.'
+
+---
+
+### Capitolo IX — Il figlio
+
+Ebbero un figlio. Giulio.
+
+Sonia non pianse alla nascita. Nemmeno alla morte.
+
+Giulio mori'. A tre anni.
+
+Sonia rimase in piedi. Al funerale. Senza lacrime.
+
+'Perche'?' chiese Marco.
+
+'Perche' piangere Giulio e' tradirlo. E io, non piangendo, lo tengo vivo.'
+
+---
+
+### Capitolo X — La terapia
+
+Ando' dallo psicologo. Dott. Levi.
+
+'Perche' non piange?'
+
+'Perche' le lacrime sono acqua. E io sono fuoco.'
+
+'Il fuoco, a volte, produce vapore.'
+
+'No. Il mio fuoco produce cenere. E la cenere, dottore, non bagnata.'
+
+---
+
+## PARTE TERZA: LE LACRIME
+
+### Capitolo XI — La lacrima rubata
+
+Un giorno, Sonia vide una donna piangere. In strada. Senza motivo.
+
+Ando' da lei. E le prese la lacrima. Con un fazzoletto.
+
+'Perche' piangi?'
+
+'Perche' ho perso tutto.'
+
+'Tutto?'
+
+'Tutto cio' che non ho mai avuto.'
+
+Sonia capi'. E, capendo, pianse. Per la prima volta. Per l'ultima.
+
+---
+
+### Capitolo XII — Il pianto
+
+Il pianto duro' un'ora. Poi, fini'.
+
+Sonia non pianse mai piu'.
+
+'Mamma,' disse la figlia, 'non piangi.'
+
+'Ho pianto. Una volta. E, piangendo, ho capito che le lacrime non cambiano nulla.'
+
+---
+
+### Capitolo XIII — Il sogno
+
+Sogno' di piangere. Ogni notte. Ma, svegliandosi, era asciutta.
+
+'Il sogno,' disse lo psicologo, 'e' la verita'.'
+
+'No. Il sogno e' menzogna. E io, svegliandomi, sono vera.'
+
+---
+
+### Capitolo XIV — Il ricordo
+
+Ricordo' la madre. Che piangeva nel bagno.
+
+E, ricordando, capi' che le lacrime, sebbente nascoste, erano presenti.
+
+'Ero presente,' disse. 'Ma non sapevo.'
+
+---
+
+### Capitolo XV — La fine
+
+Sonia mori'. Serenamente. Senza lacrime.
+
+Marco, al funerale, pianse.
+
+'E' felice,' disse. 'Perche' non piangeva. E, non piangendo, era forte.'
+
+---
+
+## PARTE QUARTA: LA FINE
+
+### Capitolo XVI — La malattia
+
+Sonia ammalo'. Non grave. Ma, a cinquant'anni, sufficiente.
+
+Non ando' in ospedale. Ando' nel bagno. Dove piangeva la madre.
+
+'Qui,' disse, 'piango. Nella memoria.'
+
+---
+
+### Capitolo XVII — L'ultimo pianto
+
+L'ultimo pianto fu interno. Senza lacrime.
+
+'Finalmente,' disse, 'piango. E, piangendo, sono libera.'
+
+---
+
+### Capitolo XVIII — La morte
+
+Sonia mori'. Serenamente. Con gli occhi asciutti.
+
+La figlia, presente, pianse. Per lei.
+
+'E' morta,' disse. 'E, morendo, ha finito di non piangere.'
+
+---
+
+### Capitolo XIX — La figlia
+
+La figlia, Giulia, divenne come Sonia. Non per scelta: per imitazione.
+
+E, imitando, capi' che il non-pianto, sebbente duro, e' leggero.
+
+---
+
+### Capitolo XX — L'epitaffio
+
+Sulla tomba di Sonia, Marco scrisse:
+
+'Qui giace una donna che non piangeva. E, non piangendo, ha portato il mondo. Il mondo, sebbente pesante, era suo. E, essendo suo, non l'ha mai tradito.'
+
+E sotto, Giulia aggiunse:
+
+'Mamma: ho pianto oggi. E, piangendo, ho capito che le lacrime non sono debolezza. Sono acqua. E l'acqua, sebbente fredda, lava.'
+
+Ma lavare, alla fine, non e' forse solo un altro modo di dire dimenticare?
 
 ---
 

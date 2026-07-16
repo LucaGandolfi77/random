@@ -2,67 +2,231 @@
 
 ## Prefazione del bestemmiatore pentito
 
-Ho conosciuto questa donna in un manicomio. Non come paziente: come visitatrice. Veniva ogni domenica, con un sorriso che faceva paura ai infermieri. Rideva. Rideva di tutto. E un giorno, quando le chiesi perche' rideva della Bibbia, mi disse: ’Perche' se non rido, piango. E il pianto non cambia nulla.’
+Ho conosciuto questa donna in un manicomio. Non come paziente: come visitatrice. Veniva ogni domenica, con un sorriso che faceva paura ai infermieri. Rideva. Rideva di tutto. E un giorno, quando le chiesi perche' rideva della Bibbia, mi disse: 'Perche' se non rido, piango. E il pianto non cambia nulla.'
 
 Questo libro e' la sua storia, come me l'ha raccontata. O come me l'ha inventata. Con lei, non si distingueva mai.
 
+Ma se il pianto non cambia nulla, il riso cambia forse di piu'?
+
 ---
 
-## PARTE UNICA: LA RISATA
+## PARTE PRIMA: LA RISATA
+
 ### Capitolo I — La nascita dell'ironia
 
-Caterina Rossi nacque nel 1960, in una famiglia di credenti estremi. Non semplicemente cattolici: cattolici militanti. Il padre, un ex seminarista, le leggeva la Bibbia come altri leggono le fiabe. E Caterina, ascoltando, iniziava a ridere.
+Caterina Rossi nacque nel 1960, in una famiglia di credenti ferventi. Il padre era cantoriere. La madre, maestra di catechismo.
 
-Non rideva per cattiveria. Rideva perche' trovava contraddizioni. ‘Dio crea il mondo in sei giorni, e il settimo riposa. Ma se e' onnipotente, perche' stanco?’ chiese, a sei anni.
+Caterina, a cinque anni, durante la messa, rise. Di fronte al prete. Di fronte a Dio.
 
-Il padre la picchio'. Non forte: con la cinghia, tre colpi sulle gambe. ’Non si ride di Dio.’
+Non perche' fosse buffa. Perche' era vera.
 
-Caterina imparo' a non ridere davanti al padre. Ma continuo' a ridere dentro. E la risata dentro, col tempo, divento' piu' forte di qualsiasi cinghia.
+'Caterina,' disse il padre, 'non si ride in chiesa.'
 
----
-
-### Capitolo II — Il convento e la fuga
-
-A diciotto anni, Caterina entro' in convento. Non per vocazione: per sfida. Voleva vedere se, vivendo con le suore, avrebbe smesso di ridere.
-
-Non smise. Nelle notti, sotto le coperte, rideva delle regole. Del silenzio. Della obbedienza. Delle suore che piangevano di notte, senza sapere che lei sentiva. Rideva perche' il dolore altrui, se non lo puoi curare, va almeno celebrato. E la risata era la sua forma di messa.
-
-Fuggi' dopo due anni. Non scappo': semplicemente usci' una mattina e non torno'. Lascio' un biglietto: ‘Ho riso abbastanza. Ora voglio farlo ad alta voce.’
+'Papa', Dio e' grande. E, essendo grande, non si offende.'
 
 ---
 
-### Capitolo III — La risata pubblica
+### Capitolo II — La prima risata
 
-Divenne comica. Non famosa: una comica da cabaret, da locale, da bar sordido. Faceva battute su Dio, sulla Chiesa, sulla morte. Il pubblico, inizialmente, rise. Poi, col tempo, si scandalizzo'. Non perche' le battute fossero peggiori: perche' erano piu' vere.
+La prima risata fu nel 1975. Durante una predica sull'inferno.
 
-‘Il paradiso’, diceva sul palco, ‘e' un posto dove non ci si annoia. Ma se non ci si annoia, significa che c'e' dolore. Perche' senza dolore, non c'e' contrasto. E senza contrasto, c'e' solo la noia. Quindi il paradiso e' l'inferno. E l'inferno, dove si soffre, almeno e' interessante.’
+Il prete disse: 'I peccatori bruciano.'
 
-La gente la fischiava. Lei rideva dei fischi. ‘Avete paura della verita'? La verita' fa male solo se credete alle bugie. Se non credete a nulla, la verita' e' solo un altro rumore.’
+Caterina rise. 'Padre, il fuoco e' caldo. E il caldo, sebbente doloroso, e' confortevole.'
 
----
+'Non e' confortevole. E' punizione.'
 
-### Capitolo IV — La malattia
-
-Nel 2015, scopri' di avere un tumore. Non al seno: al cervello. Ironico, disse lei. Il cervello e' l'organo del pensiero. E il pensiero, per me, e' stato una malattia fin dall'inizio.
-
-Non si curo'. Non perche' credesse nei miracoli: perche' non credeva nella medicina. ’La medicina rimanda la morte. Ma la morte, quando arriva, e' piu' arrabbiata per l'attesa.’
-
-Passo' gli ultimi mesi in un manicomio. Non come paziente: come ospite. Il direttore era un vecchio amico, un medico che aveva perso la licenza per eutanasia attiva. Lei gli chiese: ’Puoi aiutarmi?’
-Lui rispose: ’No. Ma posso restare.’
-
-E resto'. Ogni giorno. Finché lei mori', ridendo. Ridendo di una battuta che non disse a nessuno. Una battuta tra lei e Dio, forse. Una battuta che, per la prima volta, non aveva bisogno di pubblico.
+'Allora punitemi. Ma non chiedetemi di non ridere. Perche' il riso, padre, e' la mia preghiera.'
 
 ---
 
-### Capitolo V — L'eredità
+### Capitolo III — Il manicomio
 
-Caterina non lascio' nulla. Non libri, non registrazioni, non soldi. Lascio' solo una frase, scritta sul muro della sua stanza:
+Entro' nel manicomio a vent'anni. Non come paziente: come visitatrice.
 
-‘Dio, se esisti, sappi che ti perdono. Non perche' ti meriti il perdono: perche' il perdono e' l'unico modo che ho per vincere.’
+Ogni domenica, portava risate. E, portandole, guariva.
 
-Il direttore del manicomio, dopo la sua morte, smise di lavorare. Si ritiro' in montagna. E ogni domenica, a mezzanotte, rideva. Da solo. Nel buio. In memoria di lei.
+Non i pazienti. Se stessa.
 
-Perche' la risata, disse una volta a un visitatore, e' l'unica preghiera che non tradisce. Anche quando e' una preghiera di bestemmia.
+---
+
+### Capitolo IV — L'infermiere
+
+L'infermiere, Bianchi, la temeva.
+
+'Caterina, non si ride qui.'
+
+'Perche'? Qui c'e' piu' bisogno di riso che di medicine.'
+
+'Le medicine curano.'
+
+'Le medicine addormentano. E il riso, sebbente sveglia, guarisce.'
+
+---
+
+### Capitolo V — Il prete
+
+Il prete, Don Marco, venne a trovarla.
+
+'Caterina, il tuo riso e' peccato.'
+
+'No. Il mio riso e' domanda. E la domanda, sebbente sacrilega, e' pia.'
+
+---
+
+## PARTE SECONDA: LE RISATE
+
+### Capitolo VI — La risata di Dio
+
+Caterina disse: 'Dio ride. Dei nostri peccati. Dele nostre preghiere. Del nostro serio.'
+
+'Perche'?' chiese Don Marco.
+
+'Perche' siamo buffi. Con la nostra gravita'. Con le nostre chiese. Con il nostro timore.'
+
+---
+
+### Capitolo VII — La risata della Bibbia
+
+Caterina lesse la Bibbia. E rise.
+
+'Abrahamo rideva,' disse. 'E, ridendo, credeva.'
+
+'Abrahamo rideva di gioia,' disse Don Marco.
+
+'No. Rideva di incredulita'. E l'incredulita', padre, e' la fede piu' vera.'
+
+---
+
+### Capitolo VIII — La risata dei santi
+
+Caterina disse: 'I santi ridevano. Dei demoni. Delle tentazioni. Delle loro stesse virtu'.'
+
+'Perche'?' chiese Bianchi.
+
+'Perche' la virtu', sebbente seria, e' comica. Chi non pecca, Bianchi, e' noioso.'
+
+---
+
+### Capitolo IX — La risata dei pazzi
+
+Caterina rideva con i pazzi. E, ridendo, piangeva.
+
+'Perche' piangi?' chiesero.
+
+'Perche' voi siete piu' sani di me. E, essendo piu' sani, ridete meglio.'
+
+---
+
+### Capitolo X — La risata del mondo
+
+Caterina rideva del mondo. Della guerra. Della fame. Dell'amore.
+
+'Perche'?' chiese Don Marco.
+
+'Perche' il mondo, sebbente tragico, e' comico. E il comico, padre, e' la sola forma di serieta' che non mente.'
+
+---
+
+## PARTE TERZA: I PENTITI
+
+### Capitolo XI — Il bestemmiatore
+
+Il bestemmiatore, Aldo, si penti'. Caterina rise.
+
+'Perche' ridi?' chiese.
+
+'Perche' ti penti. E, pentendoti, credi di cambiare. Ma non cambi. Cambi solo voce.'
+
+---
+
+### Capitolo XII — Il credente
+
+Il credente, Bruno, si arrabbio'.
+
+'Caterina, offendi Dio.'
+
+'No. Offendo te. E, offendendoti, ti libero. Perche' chi e' offeso, Bruno, e' libero di non credere.'
+
+---
+
+### Capitolo XIII — L'ateo
+
+L'ateo, Carlo, non capiva.
+
+'Caterina, non c'e' Dio. E tu ridi.'
+
+'Rido perche' non c'e'. E, non essendoci, e' piu' divertente.'
+
+---
+
+### Capitolo XIV — L'agnostico
+
+L'agnostico, Dante, sorrideva.
+
+'Caterina, non sai se c'e' Dio.'
+
+'Lo so. Non lo so. E, non sapendo, rido. Perche' il dubbio, Dante, e' la sola certezza che non stanca.'
+
+---
+
+### Capitolo XV — Il prete vecchio
+
+Don Marco, vecchio, dimentico', sorrideva.
+
+'Caterina, ti ricordo.'
+
+'Lo so. E, ricordandomi, rido. Perche' il ricordo, padre, e' riso.'
+
+---
+
+## PARTE QUARTA: LA FINE
+
+### Capitolo XVI — La malattia
+
+Caterina ammalo'. Non grave. Ma, a sessant'anni, sufficiente.
+
+Non ando' in ospedale. Ando' nel manicomio.
+
+'Qui,' disse, 'guarisco. Perche' qui, sebbente pazzo, e' sano.'
+
+---
+
+### Capitolo XVII — L'ultima risata
+
+L'ultima risata fu breve. Ma vera.
+
+'Ho capito,' disse. 'Dio e' riso. E, essendo riso, e' vita. E la vita, sebbente breve, e' eterna.'
+
+---
+
+### Capitolo XVIII — La morte
+
+Caterina mori'. Serenamente. Con un sorriso.
+
+Don Marco, al funerale, rise. Non perche' fosse buffo. Perche' era vero.
+
+---
+
+### Capitolo XIX — Il manicomio
+
+Il manicomio chiuse. Non per crisi. Per mancanza di riso.
+
+E, chiudendo, i pazienti piansero. E, piangendo, capirono che il riso, sebbente assente, era presente.
+
+---
+
+### Capitolo XX — L'epitaffio
+
+Sulla tomba di Caterina, Don Marco scrisse:
+
+'Qui giace una donna che rideva di Dio. E, ridendo, ha capito che Dio e' riso. E il riso, sebbente sacrilego, e' la sola preghiera che non tradisce.'
+
+E sotto, Aldo aggiunse:
+
+'Caterina: ho riso oggi. E, ridendo, ho capito che il pianto non cambia nulla. Ma il riso, sebbente inutile, e' tutto.'
+
+Ma tutto, alla fine, non e' forse solo un altro modo di dire niente?
 
 ---
 

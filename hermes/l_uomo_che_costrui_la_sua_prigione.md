@@ -4,77 +4,241 @@
 
 Ho costruito la mia prigione mattone per mattone. Non per nascondermi: per definirmi. Una prigione e' l'unico posto dove sai esattamente dove finisci tu e dove inizia il mondo. E questa certezza, per chi non la trova altrove, diventa una forma di casa.
 
+Ma se la prigione e' casa, chi abita fuori non e' forse senza tetto?
+
 ---
 
-## PARTE UNICA: LE SBARRE
+## PARTE PRIMA: LE SBARRE
+
 ### Capitolo I — L'architetto della solitudine
 
-Rinaldo Mazzini era un uomo di cinquant'anni che non usciva di casa da dieci. Non per agorafobia: per scelta. Aveva deciso che il mondo, fuori, era troppo disordinato. Troppo pieno di persone che si muovevano senza permesso, che parlavano senza avere nulla da dire, che ridevano senza ragione.
+Rinaldo Mazzini era un uomo di cinquant'anni che non usciva di casa da dieci. Non per agorafobia: per scelta. Aveva deciso che il mondo, fuori, era troppo disordinato. Troppo pieno di persone che si muovevano senza direzione.
 
-Costrui' la sua prigione in un appartamento di due stanze. Non ci mise sbarre: ci mise regole. Uscire solo per fare la spesa, e solo il martedi'. Non parlare con nessuno, tranne con il portinaio, e solo per salutare. Non guardare la televisione, perche' la televisione e' la voce del mondo che si insinua.
+E lui, che non aveva mai avuto una direzione, aveva costruito la sua.
 
-E scrisse. Scrisse ogni giorno, per dieci anni. Diari. Lettere mai spedite. Confessioni a se stesso.
-
----
-
-### Capitolo II — Il visitatore
-
-Nel 2015, una nipote, Giulia, venne a trovarlo. Non per curiosita': per dovere. Suo padre, il fratello di Rinaldo, le aveva detto: ’Vai a trovare lo zio. E' strano, ma e' solo.’
-
-Giulia entro'. Odore di chiuso, di libri vecchi, di cibo scaduto.
-
-’Zio, perche' non esci?’
-’Perche' fuori e' pericoloso.’
-’Non e' vero.’
-’E' vero per me.’
-
-Giulia guardo' i diari. Guardo' la stanza, piena di carte, di scatole, di oggetti che non servivano a nulla.
-
-’Zio, hai costruito una prigione.’
-’No. Ho costruito una definizione.’
-’Di cosa?’
-’Di me. Fuori, sono indefinito. Qui, sono esattamente cio' che vedo.’
+Una stanza. Due stanze. Tre. E un muro. Intorno.
 
 ---
 
-### Capitolo III — La malattia della liberta'
+### Capitolo II — Il primo mattone
 
-Rinaldo ammalo'. Non grave: un'influenza. Ma l'influenza, in una prigione, e' piu' grave. Perche' non c'e' nessuno a portare le medicine.
+Il primo mattone lo mise nel 1985. Non per paura: per precisione.
 
-Giulia torno'. Lo trovo' a letto, febbricitante. Lo porto' all'ospedale. Per la prima volta in dieci anni, Rinaldo usci'.
-
-L'ospedale lo terrorizzo'. Non il dolore: la gente. Gli infermieri, i medici, i pazienti. Troppi volti, troppi rumori, troppi movimenti.
-
-’Voglio tornare a casa’, grido'.
-’Zio, devi guarire.’
-’Non voglio guarire fuori. Voglio morire dentro.’
+'Qui,' disse, 'finisco io. E, finendo, inizia tutto il resto. Ma io non voglio il resto. Voglio solo il finire.'
 
 ---
 
-### Capitolo IV — La demolizione
+### Capitolo III — La madre
 
-Giulia, dopo la guarigione, decise di demolire la prigione. Non fisicamente: metaforicamente. Inizio' a portare persone. Vicini, amici, musicisti che suonavano sotto la finestra. Non per forzare Rinaldo a uscire: per fargli capire che la prigione aveva porte.
+La madre, Adele, venne a trovarlo.
 
-Rinaldo, all'inizio, chiuse le porte. Poi, piano piano, le lascio' socchiuse. Non perche' cambiasse idea: perche' si stanco' di chiudere.
+'Rinaldo, esci.'
 
-’Giulia, perche' lo fai?’
-’Perche' la prigione che hai costruito e' bella. Ma e' incompleta. Manca del mondo. E il mondo, per quanto cattivo, e' la parte piu' importante.’
+'Non posso. Ho costruito le pareti. E, costruendole, ho perso la porta.'
+
+'La porta c'e'.'
+
+'Si'. Ma io ho perso la chiave. E, perdendo la chiave, ho perso l'uscita.'
 
 ---
 
-### Capitolo V — L'uscita
+### Capitolo IV — Il fratello
 
-Rinaldo mori' nel 2022. Non in prigione: in ospedale. Circondato da Giulia, da infermieri, dal rumore del mondo. E nella sua ultima ora, sorrise.
+Il fratello, Luca, venne.
 
-’Ho sbagliato. La prigione non e' una definizione. E' una negazione. E io ho passato dieci anni a negare.’
+'Rinaldo, sei pazzo.'
 
-Giulia gli prese la mano.
-’Non importa, zio. Importa che, alla fine, hai detto sì.’
+'No. Sono solo preciso. E la precisione, Luca, e' la sola forma di liberta' che conosco.'
 
-’Ho detto sì a cosa?’
-’Al rumore. Al disordine. All'imperfezione.’
+---
 
-Rinaldo chiuse gli occhi. E il suo ultimo pensiero, raccontato da Giulia, fu: ’Forse l'imperfezione e' meglio della prigione.’
+### Capitolo V — La sorella
+
+La sorella, Mia, venne. Con i libri.
+
+'Leggi. Per viaggiare.'
+
+'Non voglio viaggiare. Voglio restare. E restare, Mia, e' viaggio. Il piu' lungo.'
+
+---
+
+## PARTE SECONDA: I MUROI
+
+### Capitolo VI — La cucina
+
+La cucina era piccola. Con un tavolo. Con una sedia.
+
+Rinaldo mangiava. Solo. Ogni giorno. La stessa cosa.
+
+'Perche' non cambi?' chiese Mia.
+
+'Perche' il cambio e' rischio. E il rischio, Mia, e' fuori delle pareti.'
+
+---
+
+### Capitolo VII — Il letto
+
+Il letto era stretto. Con una coperta. Sufficiente.
+
+Rinaldo dormiva. Bene. Perche' il sonno, sebbente breve, era sicuro.
+
+'E' sicuro?' chiese Luca.
+
+'Si'. Perche' nel sonno non costruisco. E, non costruendo, non sbaglio.'
+
+---
+
+### Capitolo VIII — Il bagno
+
+Il bagno era piccolo. Con una doccia. Calda.
+
+Rinaldo si lavava. Ogni giorno. Per un'ora.
+
+'Perche' cosi' a lungo?' chiese Adele.
+
+'Perche' nell'acqua, mamma, sono pulito. E pulito, non ho bisogno di uscire.'
+
+---
+
+### Capitolo IX — La finestra
+
+La finestra era chiusa. Con le tende.
+
+Rinaldo non guardava fuori. Guardava dentro.
+
+'Fuori c'e' mondo,' disse Mia.
+
+'Dentro c'e' me. E me, Mia, e' tutto cio' che ho.'
+
+---
+
+### Capitolo X — La porta
+
+La porta era chiusa. A chiave. Da dentro.
+
+Rinaldo teneva la chiave. Sempre.
+
+'Perche' chiudi?' chiese Luca.
+
+'Perche' chiudendo, apro. A me stesso. E, aprendo a me stesso, sono libero.'
+
+---
+
+## PARTE TERZA: I VISITATORI
+
+### Capitolo XI — Il prete
+
+Il prete, Don Marco, venne.
+
+'Rinaldo, Dio e' fuori.'
+
+'No. Dio e' dentro. E dentro, sebbente piccolo, e' grande.'
+
+'La chiesa e' fuori.'
+
+'La chiesa, Don Marco, e' questa stanza. E questa stanza, sebbente piccola, e' cattedrale.'
+
+---
+
+### Capitolo XII — Il medico
+
+Il medico, Dott. Levi, venne.
+
+'Ha una patologia.'
+
+'No. Ho una soluzione. La soluzione, dottore, e' la prigione.'
+
+---
+
+### Capitolo XIII — L'ex-moglie
+
+L'ex-moglie, Clara, venne.
+
+'Rinaldo, ti ho lasciato perche' eri chiuso.'
+
+'Lo so. E, essendo chiuso, ero fedele. Fedele a me stesso.'
+
+'Non e' fedelta'. E' paura.'
+
+'La paura, Clara, e' la madre della fedelta'.'
+
+---
+
+### Capitolo XIV — Il vicino
+
+Il vicino, Bianchi, bussava.
+
+'Rinaldo, hai zucchero?'
+
+'No. Ho solo me stesso. E me stesso, Bianchi, non si da'.'
+
+---
+
+### Capitolo XV — Il gatto
+
+Rinaldo ebbe un gatto. Nero. Con un occhio.
+
+Il gatto non usciva. Come lui.
+
+'Ve,' disse a Mia, 'anche lui e' prigioniero. E, essendo prigioniero, e' felice.'
+
+'Il gatto non e' felice. E' solo.'
+
+'Solo e' felice. Per chi non vuole gli altri.'
+
+---
+
+## PARTE QUARTA: LA FINE
+
+### Capitolo XVI — La malattia
+
+Rinaldo ammalo'. Non grave. Ma, a sessant'anni, sufficiente.
+
+Non ando' in ospedale. Ando' nel letto. Nella prigione.
+
+'Qui,' disse, 'muoio come vivo. Dentro.'
+
+---
+
+### Capitolo XVII — L'ultimo mattone
+
+Mise l'ultimo mattone. Non nel muro. Nella mente.
+
+E, mettendolo, chiuse. Tutto.
+
+'Rinaldo,' disse Mia, 'apri.'
+
+'Non posso. Ho finito di costruire. E, finendo, sono completo.'
+
+---
+
+### Capitolo XVIII — La morte
+
+Rinaldo mori'. Serenamente. Nella prigione. Con il gatto.
+
+Il gatto, dopo, miagolo'. Per tre giorni. Poi mori' anche lui.
+
+---
+
+### Capitolo XIX — La prigione vuota
+
+La prigione rimase vuota. Per mesi.
+
+Luca entro'. E, entrando, senti' che il vuoto, sebbente freddo, era pieno. Pieno di Rinaldo.
+
+---
+
+### Capitolo XX — L'epitaffio
+
+Sulla porta della prigione, Luca scrisse:
+
+'Qui visse un uomo che si e' fatto prigioniero. E, imprigionandosi, ha trovato la liberta'. Perche' la liberta', sebbente stretta, e' la sola che non tradisce.'
+
+E sotto, aggiunse:
+
+'Rinaldo: ho bussato. E, bussando, ho capito che la prigione e' la confessione piu' lunga. E la confessione, sebbente breve, e' la prigione piu' vera.'
+
+Ma la prigione, alla fine, non e' forse solo un altro modo di dire casa?
 
 ---
 

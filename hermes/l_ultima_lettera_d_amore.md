@@ -4,75 +4,225 @@
 
 Consegnavo la posta per trent'anni. Ho visto migliaia di lettere. Ma questa, scoperta per caso in un archivio comunale, mi ha fatto piangere. Non perche' sia triste. Perche' e' vera. E la verita', nel mondo delle lettere, e' rara.
 
+Questo libro e' quella lettera. E la storia di chi l'ha scritta, di chi l'ha ricevuta, e di chi, non ricevendola, ha vissuto lo stesso.
+
+Ma se la verita' e' rara, chi la scrive non e' forse un contrabbandiere?
+
 ---
 
-## PARTE UNICA: LA LETTERA
+## PARTE PRIMA: LA LETTERA
+
 ### Capitolo I — L'invio
 
 Nel 1985, Luigi Varzi scrisse una lettera. Non una lettera qualsiasi: l'ultima lettera d'amore della sua vita. Aveva settant'anni. La destinataria, Teresa, ne aveva settantacinque. Non erano mai stati amanti. Erano stati vicini di casa. Per cinquant'anni.
 
-Luigi scrisse:
-
-’Teresa: ogni mattina, per cinquant'anni, ti ho guardata dalla finestra. Ogni mattina, ho pensato: oggi le parlo. Oggi le dico che la amo. E ogni mattina, non l'ho fatto. Perche' avevo paura. Paura del rifiuto, paura del ridicolo, paura di disturbare.
-
-Ora sono vecchio. E so che moriro' presto. E non voglio morire senza che tu sappia. Non perche' tu debba ricambiare. Non perche' tu debba piangere. Solo perche' la verita', una volta detta, non puo' piu' essere cancellata.
-
-Ti amo. Non ti ho mai amata di meno. Non ti ho mai amata di piu'. Ti ho amata, semplicemente, ogni giorno. E l'amore quotidiano, anche se invisibile, e' l'unico amore che conosco.’
+La scrisse di notte. Con la penna stilografica. Su carta azzurra. Non per spedirla: per dirsi.
 
 ---
 
-### Capitolo II — La consegna
+### Capitolo II — Il postino
 
-Luigi non spedi' la lettera. Non perche' cambiasse idea. Perche' mori' quella notte stessa. La lettera fu trovata nella sua giacca, nell'armadio.
+Il postino, Enzo, trovo' la lettera. Nello scartamento dell'archivio. Decenni dopo.
 
-Il figlio di Luigi, trovandola, la lesse. E decise di non consegnarla. ’A che serve?’ pensò. ’Teresa è vecchia. Non gliela facciamo sapere. Le farebbe solo male.’
+Non la consegnò. Non poteva. Teresa era morta. E Luigi, morto.
 
-Ma la lettera, invece di bruciarla, la mise in una scatola. E la scatola, traslocando, fini' in un archivio comunale.
-
----
-
-### Capitolo III — L'archivio
-
-Nel 2020, un archivista, Marco, trovo' la lettera. La lesse. E rimase sconvolto. Non perche' fosse poetica: perche' fosse reale.
-
-Torno' a casa. Guardo' sua moglie. E, per la prima volta in vent'anni, le disse: ’Ti amo.’
-
-Sua moglie lo guardo', sorpresa. ’Lo so.’
-’Lo sai?’
-’Si'. Ma sentirlo e' diverso.’
-’Perche' non me lo hai chiesto?’
-’Perche' avevo paura di sembrare debole.’
-
-Marco le porse la lettera. Lei la lesse. E pianse.
-
-’Devo consegnarla a Teresa?’ chiese Marco.
-’Teresa e' morta dieci anni fa.’
-’Allora a chi?’
-’A chiunque la legga. Perche' questa lettera non e' per Teresa. E' per chi non ha il coraggio di scriverla.’
+Ma la lesse. E, leggendo, pianse. Perche' la lettera, sebbente non spedita, era arrivata.
 
 ---
 
-### Capitolo IV — La diffusione
+### Capitolo III — Il contenuto
 
-Marco pubblico' la lettera. Su internet. In un blog. Senza nome, senza cognome. Solo la lettera.
+La lettera diceva:
 
-La lettera circolo'. Fu letta da migliaia di persone. Alcuni la criticarono: ’Patetica.’ Altori la amarono: ’Bella.’ Ma tutti, leggendola, sentirono qualcosa. Il peso delle parole non dette. Il costo del silenzio.
-
-Un uomo, leggendola, chiamo' l'ex moglie. Le disse cio' che non le aveva mai detto. Una donna, leggendola, bacio' il marito davanti ai figli. Un ragazzo, leggendola, scrisse a un amico che aveva abbandonato.
+'Teresa: ti ho guardata per cinquant'anni. Dalla finestra. Dal balcone. Dal marciapiede. Non ti ho mai parlato. Perche' parlare e' rischio. E io, da giovane, non rischiavo. Da vecchio, non ho piu' tempo. E, non avendo tempo, rischio tutto. Ti amo. Non so se e' amore. So che e' tutto cio' che ho. E, essendo tutto, e' amore.'
 
 ---
 
-### Capitolo V — La risposta
+### Capitolo IV — La risposta
 
-Marco, un anno dopo, ricevette una lettera. Indirizzo sconosciuto. Contenuto breve:
+Teresa, prima di morire, trovo' la lettera. Nella cassetta. Mai spedita. Con la data del 1985.
 
-’Grazie. Ho letto la lettera di Luigi. Non sono Teresa. Sono la nipote di Teresa. Mia nonna, prima di morire, mi disse: ’C'era un uomo, Luigi, che mi guardava dalla finestra. E io lo guardavo. E nessuno dei due ha mai parlato. E questa e' la mia unica vergogna.’
+La lesse. E, leggendo, rise. Non perche' fosse buffa. Perche' era vera.
 
-Grazie per aver fatto parlare Luigi. Anche se tardi. Anche se morto. La parola, una volta scritta, non muore.’
+E, essendo vera, rispose. Con una lettera mai scritta. Nella mente.
 
-Marco chiuse la lettera. Guardo' sua moglie. E le disse, di nuovo: ’Ti amo.’
+'Luigi: ti ho guardato anche io. Per cinquant'anni. E, guardando, ho atteso. L'attesa, sebbente silenziosa, e' la forma piu' lunga d'amore.'
 
-E lei, questa volta, rispose: ’Lo so. E basta.’
+---
+
+### Capitolo V — La consegna
+
+Enzo, il postino, consegnò la lettera. Non a Teresa. A un nipote.
+
+'E' una lettera del 1985,' disse.
+
+Il nipote la lesse. E, leggendo, capi' che suo nonno, sebbente muto, aveva amato.
+
+---
+
+## PARTE SECONDA: I VICINI
+
+### Capitolo VI — La finestra
+
+Luigi guardava Teresa. Dalla finestra. Ogni mattina.
+
+E, guardando, si nascondeva. Dietro la tenda. Dietro la paura.
+
+'Perche' non le parli?' chiese la moglie.
+
+'Perche' e' troppo tardi.'
+
+'Non e' mai troppo tardi.'
+
+'Per me si'. Io sono vecchio. E il vecchio, sebbente saggio, e' codardo.'
+
+---
+
+### Capitolo VII — Il balcone
+
+Teresa, sul balcone, guardava Luigi. E, guardando, sorrideva.
+
+Non perche' lo amasse. Perche' lo riconosceva.
+
+'Ecco,' diceva, 'l'uomo che mi guarda. E, guardandomi, mi vede.'
+
+---
+
+### Capitolo VIII — Il marciapiede
+
+Si incontrarono. Una volta. Sul marciapiede.
+
+'Buongiorno,' disse Luigi.
+
+'Buongiorno,' disse Teresa.
+
+E passarono. Senza fermarsi.
+
+Perche' fermarsi e' rischio. E il rischio, sebbente breve, e' eterno.
+
+---
+
+### Capitolo IX — La moglie
+
+La moglie di Luigi, Elena, mori'. E lui, libero, non si senti' libero.
+
+'Perche'?' chiese il figlio.
+
+'Perche' la liberta', senza chiave, e' solo una porta aperta. E la porta aperta, sebbente invitante, spaventa.'
+
+---
+
+### Capitolo X — Il marito
+
+Il marito di Teresa, Bruno, mori'. E lei, libera, non si senti' libera.
+
+'Perche'?' chiese la figlia.
+
+'Perche' la liberta', senza catene, e' solo un vuoto. E il vuoto, sebbente leggero, pesa.'
+
+---
+
+## PARTE TERZA: LE PAROLE
+
+### Capitolo XI — La penna
+
+Luigi trovo' la penna. La stilografica. Del padre.
+
+'E' vecchia,' disse il figlio.
+
+'Si'. Ma vecchia e' vera. E il vero, sebbente consumato, scrive meglio.'
+
+---
+
+### Capitolo XII — La carta
+
+Trovo' la carta. Azzurra. Nello scaffale.
+
+'Carta da lettere,' disse la figlia.
+
+'No. Carta da verita'. E la verita', sebbente azzurra, e' seria.'
+
+---
+
+### Capitolo XIII — L'inchiostro
+
+L'inchiostro era nero. Come la notte.
+
+Luigi scrisse. Con lentezza. Con paura.
+
+Ogni parola, un passo. Ogni frase, un confine.
+
+---
+
+### Capitolo XIV — La firma
+
+Firmo'. 'Luigi.'
+
+Non aggiunse nulla. Perche' il nome, sebbente solo, e' tutto.
+
+E, essendo tutto, non ha bisogno di titolo.
+
+---
+
+### Capitolo XV — La data
+
+Scrisse la data. '1985.'
+
+Non sapeva che era l'ultima. Ma, scrivendo, lo senti'.
+
+E, sentendolo, pianse.
+
+---
+
+## PARTE QUARTA: LA FINE
+
+### Capitolo XVI — La malattia
+
+Luigi ammalo'. Non grave. Ma, a settant'anni, sufficiente.
+
+Non spedi' la lettera. La lascio' nel cassetto. Con la speranza.
+
+E, lasciandola, mori'. Di vecchiaia. Di silenzio.
+
+---
+
+### Capitolo XVII — L'archivio
+
+L'archivio brucio'. Nel 1990. Per un cortocircuito.
+
+Ma la lettera sopravvisse. In uno scartamento. Con altre lettere. Mai spedite.
+
+Enzo la trovo'. Per caso. O per destino.
+
+---
+
+### Capitolo XVIII — La tomba
+
+Sulla tomba di Luigi, il nipote lascio' una copia.
+
+'Nonno,' disse, 'la tua lettera e' arrivata. Non a Teresa. A me. E, arrivando, mi ha insegnato che l'amore, sebbente non detto, e' detto.'
+
+---
+
+### Capitolo XIX — La nipote
+
+La nipote di Teresa, Giulia, trovo' la risposta. Nella mente di Teresa. Mai scritta.
+
+'Nonna,' disse, 'hai risposto. Nella mia mente. E, rispondendo, sei viva.'
+
+---
+
+### Capitolo XX — L'epitaffio
+
+Sulle tombe, vicine, Enzo scrisse:
+
+'Qui giacciono due vicini che si sono amati per cinquant'anni. Senza parlare. E, non parlando, hanno detto tutto. Perche' l'amore, sebbente muto, e' la sola voce che non s'interrompe.'
+
+E sotto, aggiunse:
+
+'Ho consegnato la posta per trent'anni. E, consegnando, ho capito che le lettere non cercano destinatari. Cercano testimoni. E io, postino, sono testimone.'
+
+Ma testimone, alla fine, non e' forse solo un altro modo di dire complice?
 
 ---
 

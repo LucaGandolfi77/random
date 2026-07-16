@@ -744,6 +744,106 @@ Ma solo per oggi.
 
 ---
 
+## PARTE QUINTA: I NUOVI ANGOLI
+
+### Capitolo XII — Il quinto angolo
+
+Vera, Sofia e Nina. Tre donne. Tre angoli. E un quarto, vuoto.
+
+Ma cosa succederebbe se ci fosse un quinto angolo? Un angolo nascosto. Invisibile. Ma presente.
+
+Vera lo cerco'. Nella vecchiaia. E, cercando, capi' che il quinto angolo era lei. La sua coscienza. La sua colpa. La sua liberta'.
+
+---
+
+### Capitolo XIII — Il gatto ritrovato
+
+Il gatto nero. Quello della loro infanzia. Quello che forse era morto. Forse no.
+
+Vera lo vide. Una sera. Nel cortile. Con la zampa rotta.
+
+'Sei tu?' chiese.
+
+Il gatto non rispose. Ma, non rispondendo, rispose.
+
+---
+
+### Capitolo XIV — La pietra nuova
+
+Sofia trovo' una pietra. Non nel cimitero. Nel cortile.
+
+'E' la stessa,' disse.
+
+'No,' disse Vera. 'E' diversa. Ma diversa, Sofia, e' la stessa.'
+
+---
+
+### Capitolo XV — La sigaretta accesa
+
+Nina, se fosse stata li', avrebbe acceso una sigaretta.
+
+Vera accese una sigaretta. Per Nina.
+
+'Fumi,' disse Sofia.
+
+'No. Fumo per lei. E, fumando per lei, respiro.'
+
+---
+
+### Capitolo XVI — La malattia di Vera
+
+Vera ammalo'. Non grave. Ma, a novant'anni, sufficiente.
+
+Non ando' in ospedale. Ando' nel cortile. Con la pietra.
+
+'Qui,' disse, 'guarisco. Perche' qui, sebbente freddo, e' caldo.'
+
+---
+
+### Capitolo XVII — La malattia di Sofia
+
+Sofia ammalo'. Non grave. Ma, a novant'anni, sufficiente.
+
+Non ando' in ospedale. Ando' nel cortile. Con la pietra.
+
+'Qui,' disse, 'guarisco. Perche' qui, sebbente vuoto, e' pieno.'
+
+---
+
+### Capitolo XVIII — L'ultimo angolo
+
+L'ultimo angolo fu di entrambe.
+
+Vera e Sofia. Sedute. Sulle panchine. Con le pietre.
+
+'Restiamo,' disse Vera.
+
+'Si',' disse Sofia. 'Restiamo. E, restando, finiamo.'
+
+---
+
+### Capitolo XIX — La morte
+
+Vera mori'. Serenamente. Con un sorriso.
+
+Sofia, presente, pianse. Per la prima volta.
+
+'E' morta,' disse. 'E, morendo, ha vinto.'
+
+---
+
+### Capitolo XX — L'epitaffio
+
+Sulla tomba di Vera, Sofia scrisse:
+
+'Qui giace una donna che ha vissuto nel quarto angolo. E, vivendo, ha capito che l'angolo, sebbente vuoto, e' pieno. Pieno di tutto cio' che non diciamo.'
+
+E sotto, aggiunse:
+
+'Ve
+
+---
+
 **FINE**
 
 ---

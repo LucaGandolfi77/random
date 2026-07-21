@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run test
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/reeltv
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test
+          CLERK_SECRET_KEY: sk_test
+          STRIPE_SECRET_KEY: sk_test
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: pk_test
+          UPLOADTHING_SECRET: sk_test
+          UPLOADTHING_APP_ID: test
+          OPENAI_API_KEY: sk-test
+          RESEND_API_KEY: re_test
+          REDIS_URL: redis://localhost:6379

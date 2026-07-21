@@ -1,0 +1,436 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Users & Auth ──────────────────────────────────────────────
+
+model User {
+  id          String   @id @default(cuid())
+  clerkId     String   @unique
+  email       String   @unique
+  name        String?
+  avatar      String?
+  role        Role     @default(CREATOR)
+  bio         String?
+  website     String?
+  socialLinks Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  channels         Channel[]
+  videos           Video[]
+  orders           BroadcastOrder[]
+  likes            Like[]
+  comments         Comment[]
+  subscriptions    Subscription[]
+  reports          Report[]           @relation("FiledReports")
+  reviewedReports  Report[]           @relation("ReviewedReports")
+  notifications    Notification[]
+  transactions     Transaction[]
+  invoices         Invoice[]
+  payments         Payment[]
+  admin            Admin?
+
+  @@index([clerkId])
+  @@index([email])
+}
+
+enum Role {
+  VIEWER
+  CREATOR
+  ADMIN
+}
+
+// ─── Categories & Tags ─────────────────────────────────────────
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  icon        String?
+  channels    Channel[]
+  tags        Tag[]
+  createdAt   DateTime  @default(now())
+}
+
+model Tag {
+  id         String    @id @default(cuid())
+  name       String    @unique
+  slug       String    @unique
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+  videos     Video[]
+  createdAt  DateTime  @default(now())
+
+  @@index([slug])
+}
+
+// ─── Channels ──────────────────────────────────────────────────
+
+model Channel {
+  id              String   @id @default(cuid())
+  name            String
+  slug            String   @unique
+  description     String?
+  logo            String?
+  banner          String?
+  categoryId      String?
+  category        Category? @relation(fields: [categoryId], references: [id])
+  ownerId         String
+  owner           User     @relation(fields: [ownerId], references: [id])
+  isActive        Boolean  @default(true)
+  isFeatured      Boolean  @default(false)
+  subscriberCount Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  schedules         Schedule[]
+  subscriptions     Subscription[]
+  broadcastOrders   BroadcastOrder[]
+  videos            Video[]
+
+  @@index([slug])
+  @@index([categoryId])
+  @@index([ownerId])
+}
+
+// ─── Videos ────────────────────────────────────────────────────
+
+model Video {
+  id            String       @id @default(cuid())
+  title         String
+  description   String?
+  url           String
+  thumbnailUrl  String?
+  previewGif    String?
+  duration      Int?
+  fileSize      Int?
+  status        VideoStatus  @default(PENDING)
+
+  aiTitle       String?
+  aiDescription String?
+  aiTags        String[]
+  aiTranscript  String?
+
+  userId   String
+  user     User     @relation(fields: [userId], references: [id])
+  channelId String?
+  channel  Channel? @relation(fields: [channelId], references: [id])
+
+  likes            Like[]
+  views            View[]
+  comments         Comment[]
+  reports          Report[]
+  schedules        Schedule[]
+  tags             Tag[]
+  broadcastOrders  BroadcastOrder[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum VideoStatus {
+  UPLOADING
+  PROCESSING
+  PENDING
+  APPROVED
+  REJECTED
+  ACTIVE
+  ARCHIVED
+}
+
+// ─── Broadcast Orders ──────────────────────────────────────────
+
+model BroadcastOrder {
+  id                  String        @id @default(cuid())
+  userId              String
+  user                User          @relation(fields: [userId], references: [id])
+  videoId             String
+  video               Video         @relation(fields: [videoId], references: [id])
+  channelId           String
+  channel             Channel       @relation(fields: [channelId], references: [id])
+  package             BroadcastPackage
+  broadcastsRemaining Int
+  broadcastsTotal     Int
+  priority            Int           @default(0)
+  status              OrderStatus   @default(PENDING)
+  startsAt            DateTime?
+  expiresAt           DateTime?
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  schedules Schedule[]
+  payment   Payment?
+
+  @@index([userId])
+  @@index([channelId])
+  @@index([status])
+}
+
+enum BroadcastPackage {
+  STARTER
+  STANDARD
+  PRO
+  BUSINESS
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  ACTIVE
+  COMPLETED
+  CANCELLED
+  REFUNDED
+}
+
+// ─── Schedule ──────────────────────────────────────────────────
+
+model Schedule {
+  id               String         @id @default(cuid())
+  channelId        String
+  channel          Channel        @relation(fields: [channelId], references: [id])
+  videoId          String
+  video            Video          @relation(fields: [videoId], references: [id])
+  broadcastOrderId String?
+  order            BroadcastOrder? @relation(fields: [broadcastOrderId], references: [id])
+  scheduledAt      DateTime
+  endedAt          DateTime?
+  isActive         Boolean        @default(false)
+  broadcastCount   Int            @default(0)
+  createdAt        DateTime       @default(now())
+
+  @@index([channelId, scheduledAt])
+  @@index([videoId])
+}
+
+// ─── Payments ──────────────────────────────────────────────────
+
+model Payment {
+  id               String        @id @default(cuid())
+  stripePaymentId  String        @unique
+  userId           String
+  user             User          @relation(fields: [userId], references: [id])
+  broadcastOrderId String        @unique
+  order            BroadcastOrder @relation(fields: [broadcastOrderId], references: [id])
+  amount           Int
+  currency         String        @default("eur")
+  status           PaymentStatus @default(PENDING)
+  createdAt        DateTime      @default(now())
+
+  @@index([userId])
+  @@index([stripePaymentId])
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+// ─── Subscriptions ─────────────────────────────────────────────
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  userId               String
+  user                 User               @relation(fields: [userId], references: [id])
+  channelId            String
+  channel              Channel            @relation(fields: [channelId], references: [id])
+  stripeSubscriptionId String?
+  status               SubscriptionStatus @default(ACTIVE)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  @@unique([userId, channelId])
+  @@index([userId])
+  @@index([channelId])
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  PAST_DUE
+}
+
+// ─── Engagement ────────────────────────────────────────────────
+
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  videoId   String
+  video     Video    @relation(fields: [videoId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, videoId])
+}
+
+model View {
+  id        String   @id @default(cuid())
+  videoId   String
+  video     Video    @relation(fields: [videoId], references: [id])
+  viewerIp  String?
+  userId    String?
+  watchTime Int      @default(0)
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([videoId])
+  @@index([createdAt])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  videoId   String
+  video     Video    @relation(fields: [videoId], references: [id])
+  parentId  String?
+  parent    Comment? @relation("CommentReplies", fields: [parentId], references: [id])
+  replies   Comment[] @relation("CommentReplies")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([videoId])
+  @@index([userId])
+}
+
+// ─── Reports & Moderation ──────────────────────────────────────
+
+model Report {
+  id          String       @id @default(cuid())
+  reason      String
+  description String?
+  status      ReportStatus @default(PENDING)
+  reporterId  String
+  reporter    User         @relation("FiledReports", fields: [reporterId], references: [id])
+  videoId     String
+  video       Video        @relation(fields: [videoId], references: [id])
+  reviewerId  String?
+  reviewer    User?        @relation("ReviewedReports", fields: [reviewerId], references: [id])
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([status])
+  @@index([videoId])
+}
+
+enum ReportStatus {
+  PENDING
+  REVIEWING
+  RESOLVED
+  DISMISSED
+}
+
+// ─── Notifications ─────────────────────────────────────────────
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id])
+  type      NotificationType
+  title     String
+  message   String
+  link      String?
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  @@index([userId, isRead])
+}
+
+enum NotificationType {
+  ORDER_CONFIRMED
+  VIDEO_APPROVED
+  VIDEO_REJECTED
+  NEW_SUBSCRIBER
+  PAYMENT_RECEIVED
+  SYSTEM
+}
+
+// ─── Admin ─────────────────────────────────────────────────────
+
+model Admin {
+  id          String @id @default(cuid())
+  userId      String @unique
+  user        User   @relation(fields: [userId], references: [id])
+  permissions Json
+  createdAt   DateTime @default(now())
+}
+
+// ─── Transactions ──────────────────────────────────────────────
+
+model Transaction {
+  id              String          @id @default(cuid())
+  userId          String
+  user            User            @relation(fields: [userId], references: [id])
+  type            TransactionType
+  amount          Int
+  currency        String          @default("eur")
+  description     String?
+  stripeSessionId String?
+  createdAt       DateTime        @default(now())
+
+  @@index([userId])
+}
+
+enum TransactionType {
+  PURCHASE
+  REFUND
+  PAYOUT
+}
+
+// ─── Analytics ─────────────────────────────────────────────────
+
+model VideoAnalytics {
+  id             String   @id @default(cuid())
+  videoId        String
+  date           DateTime @default(now())
+  views          Int      @default(0)
+  uniqueViews    Int      @default(0)
+  watchTime      Int      @default(0)
+  completionRate Float    @default(0)
+  likes          Int      @default(0)
+  comments       Int      @default(0)
+  shares         Int      @default(0)
+  ctr            Float    @default(0)
+
+  @@unique([videoId, date])
+  @@index([date])
+}
+
+// ─── Invoices ──────────────────────────────────────────────────
+
+model Invoice {
+  id              String        @id @default(cuid())
+  userId          String
+  user            User          @relation(fields: [userId], references: [id])
+  invoiceNumber   String        @unique
+  amount          Int
+  currency        String        @default("eur")
+  status          InvoiceStatus @default(DRAFT)
+  stripeInvoiceId String?
+  pdfUrl          String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([userId])
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  VOID
+  OVERDUE
+}

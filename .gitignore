@@ -1,6 +1,11 @@
 .DS_Store
 openrouter-free-model-comparator/output/
 
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
 # secrets — never track API keys
 .env
 **/.env

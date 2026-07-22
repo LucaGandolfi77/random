@@ -1,0 +1,46 @@
+# Build
+build/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.ninja
+.ninja_deps
+.ninja_log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Compilati
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.so
+*.dylib
+*.dll
+*.pdb
+
+# Installazione
+PhotoshopClone.app/
+*.dmg
+*.msi
+*.zip
+
+# Log
+*.log
+
+# Cache
+*.cache
+*.pch
+
+# macOS specifici
+*.dSYM/
+*.sym

@@ -21,6 +21,7 @@ export function useBackgroundRemoval() {
 
         const result = await imglyRemoveBackground(blob, {
           model: 'isnet',
+          proxyToWorker: true,
           progress: (key: string, current: number, total: number) => {
             const pct = total > 0 ? Math.round((current / total) * 100) : 0
             setProcessing(true, `Scaricamento ${key}: ${pct}%`)

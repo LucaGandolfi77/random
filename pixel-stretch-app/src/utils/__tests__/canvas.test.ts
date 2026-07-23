@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { compositeLayers, compositeToCanvas, drawCheckerboard } from '../canvas'
+import { compositeLayers, compositeToCanvas, drawCheckerboard, resizeForProcessing } from '../canvas'
 
 function createCanvas(w: number, h: number): HTMLCanvasElement {
   const c = document.createElement('canvas')
@@ -63,6 +63,35 @@ describe('compositeLayers', () => {
   it('handles empty layers', () => {
     const result = compositeLayers([], 50, 50)
     expect(result).toBeDefined()
+  })
+})
+
+describe('resizeForProcessing', () => {
+  it('returns same canvas when within maxDim', () => {
+    const c = createCanvas(500, 300)
+    const result = resizeForProcessing(c, 1500)
+    expect(result.width).toBe(500)
+    expect(result.height).toBe(300)
+  })
+
+  it('downscales when width exceeds maxDim', () => {
+    const c = createCanvas(3000, 2000)
+    const result = resizeForProcessing(c, 1500)
+    expect(result.width).toBe(1500)
+    expect(result.height).toBe(1000)
+  })
+
+  it('downscales when height exceeds maxDim', () => {
+    const c = createCanvas(1000, 3000)
+    const result = resizeForProcessing(c, 1500)
+    expect(result.width).toBe(500)
+    expect(result.height).toBe(1500)
+  })
+
+  it('preserves aspect ratio', () => {
+    const c = createCanvas(4000, 2000)
+    const result = resizeForProcessing(c, 1500)
+    expect(result.width / result.height).toBeCloseTo(2, 0)
   })
 })
 

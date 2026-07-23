@@ -1,9 +1,9 @@
 import { useLayerStore } from '../store/layerStore'
 
 export function StretchControls() {
-  const { tool, blendMode, setBlendMode } = useLayerStore()
+  const { tool, blendMode, setBlendMode, sourceLine, clearSourceLine } = useLayerStore()
 
-  const isStretchTool = tool === 'stretch-radial' || tool === 'stretch-row' || tool === 'stretch-warp' || tool === 'warp-grid'
+  const isStretchTool = tool === 'stretch-radial' || tool === 'stretch-row' || tool === 'stretch-column' || tool === 'stretch-warp' || tool === 'warp-grid'
   const isZoom = tool === 'zoom'
   const isMove = tool === 'move'
 
@@ -23,6 +23,15 @@ export function StretchControls() {
         </div>
       )}
 
+      {sourceLine && (tool === 'stretch-row' || tool === 'stretch-column') && (
+        <div className="source-line-info">
+          <span className="source-line-label">
+            Linea attiva: {sourceLine.type === 'row' ? 'Riga' : 'Colonna'} {sourceLine.position}
+          </span>
+          <button className="toggle-btn" onClick={clearSourceLine}>X</button>
+        </div>
+      )}
+
       {tool === 'stretch-radial' && (
         <div className="stretch-hint">
           <p><strong>Stretch Radiale</strong></p>
@@ -34,8 +43,16 @@ export function StretchControls() {
       {tool === 'stretch-row' && (
         <div className="stretch-hint">
           <p><strong>Stretch da Riga</strong></p>
-          <p>Clicca su una riga del canvas, poi trascina per stirare. Si genera un nuovo layer con solo i pixel stretch.</p>
-          <p className="hint-small">Trascina verso l'alto = stretch verso l'alto<br/>Trascina verso il basso = stretch verso il basso</p>
+          <p><strong>Click</strong> per selezionare la riga sorgente. Poi tieni <strong>Shift</strong> e trascina per stirare.</p>
+          <p className="hint-small">Shift+trascina su = stretch verso l'alto<br/>Shift+trascina giù = stretch verso il basso<br/>ESC = deseleziona</p>
+        </div>
+      )}
+
+      {tool === 'stretch-column' && (
+        <div className="stretch-hint">
+          <p><strong>Stretch da Colonna</strong></p>
+          <p><strong>Click</strong> per selezionare la colonna sorgente. Poi tieni <strong>Shift</strong> e trascina per stirare.</p>
+          <p className="hint-small">Shift+trascina sinistra = stretch a sinistra<br/>Shift+trascina destra = stretch a destra<br/>ESC = deseleziona</p>
         </div>
       )}
 

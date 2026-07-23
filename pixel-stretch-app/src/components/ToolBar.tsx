@@ -2,6 +2,7 @@ import {
   MousePointer2,
   StretchHorizontal,
   AlignVerticalSpaceAround,
+  ChevronsLeftRight,
   Move,
   Grid3x3,
   Waypoints,
@@ -16,6 +17,7 @@ const tools: { id: Tool; label: string; icon: React.ReactNode }[] = [
   { id: 'zoom', label: 'Zoom', icon: <Search size={18} /> },
   { id: 'stretch-radial', label: 'Stretch Radiale', icon: <StretchHorizontal size={18} /> },
   { id: 'stretch-row', label: 'Stretch Riga', icon: <AlignVerticalSpaceAround size={18} /> },
+  { id: 'stretch-column', label: 'Stretch Colonna', icon: <ChevronsLeftRight size={18} /> },
   { id: 'stretch-warp', label: 'Stretch Warp', icon: <Waypoints size={18} /> },
   { id: 'warp-grid', label: 'Warp Griglia', icon: <Grid3x3 size={18} /> },
 ]

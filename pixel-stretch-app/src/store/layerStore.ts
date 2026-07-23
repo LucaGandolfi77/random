@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { Layer, Tool, CanvasSize, BlendMode, WarpGrid, WarpGridPoint } from '../types'
+import type { Layer, Tool, CanvasSize, BlendMode, WarpGrid, WarpGridPoint, SourceLine, StretchPreview } from '../types'
 import { getDefaultGridPoints } from '../effects/gridWarp'
 
 let _id = 0
@@ -14,6 +14,9 @@ interface LayerStore {
   processingMessage: string
   blendMode: BlendMode
   warpGrid: WarpGrid
+  sourceLine: SourceLine | null
+  stretchPreview: StretchPreview | null
+  shiftHeld: boolean
   zoom: number
   panOffset: { x: number; y: number }
 
@@ -34,6 +37,10 @@ interface LayerStore {
   setWarpGrid: (grid: Partial<WarpGrid>) => void
   setWarpGridPoint: (index: number, point: WarpGridPoint) => void
   resetWarpGrid: () => void
+  setSourceLine: (line: SourceLine | null) => void
+  clearSourceLine: () => void
+  setStretchPreview: (preview: StretchPreview | null) => void
+  setShiftHeld: (held: boolean) => void
   setZoom: (zoom: number) => void
   setPanOffset: (offset: { x: number; y: number }) => void
   zoomIn: () => void
@@ -58,6 +65,9 @@ export const useLayerStore = create<LayerStore>((set, get) => ({
     controlPoints: [],
     active: false,
   },
+  sourceLine: null,
+  stretchPreview: null,
+  shiftHeld: false,
   zoom: 1,
   panOffset: { x: 0, y: 0 },
 
@@ -151,12 +161,15 @@ export const useLayerStore = create<LayerStore>((set, get) => ({
 
   setTool: (tool) => {
     const state = get()
+    const isStretchTool = tool === 'stretch-row' || tool === 'stretch-column'
     if (tool === 'warp-grid') {
       const { canvasSize } = state
       const points = getDefaultGridPoints(canvasSize.width, canvasSize.height)
-      set({ tool, warpGrid: { controlPoints: points, active: true } })
+      set({ tool, warpGrid: { controlPoints: points, active: true }, sourceLine: null, stretchPreview: null })
+    } else if (!isStretchTool) {
+      set({ tool, warpGrid: { ...state.warpGrid, active: false }, sourceLine: null, stretchPreview: null })
     } else {
-      set({ tool, warpGrid: { ...state.warpGrid, active: false } })
+      set({ tool, warpGrid: { ...state.warpGrid, active: false }, stretchPreview: null })
     }
   },
 
@@ -178,6 +191,10 @@ export const useLayerStore = create<LayerStore>((set, get) => ({
     set({ warpGrid: { controlPoints: points, active: true } })
   },
 
+  setSourceLine: (line) => set({ sourceLine: line }),
+  clearSourceLine: () => set({ sourceLine: null, stretchPreview: null }),
+  setStretchPreview: (preview) => set({ stretchPreview: preview }),
+  setShiftHeld: (held) => set({ shiftHeld: held }),
   setZoom: (zoom) => set({ zoom: Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, zoom)) }),
   setPanOffset: (offset) => set({ panOffset: offset }),
   zoomIn: () => set(s => ({ zoom: Math.min(ZOOM_MAX, s.zoom + ZOOM_STEP) })),

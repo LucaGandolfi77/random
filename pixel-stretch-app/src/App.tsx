@@ -7,7 +7,7 @@ import { StretchControls } from './components/StretchControls'
 import { ZoomControls } from './components/ZoomControls'
 import { ImageUploader } from './components/ImageUploader'
 import { ExportDialog } from './components/ExportDialog'
-import { BackgroundRemovalButton } from './components/BackgroundRemovalButton'
+import { BackgroundRemovalSection } from './components/BackgroundRemovalSection'
 import { useLayerStore } from './store/layerStore'
 
 function useViewportHeight() {
@@ -40,7 +40,7 @@ export default function App() {
         <div className="sidebar sidebar-left">
           <ToolBar />
           <StretchControls />
-          <BackgroundRemovalButton />
+          <BackgroundRemovalSection />
         </div>
 
         <div className="main-area">

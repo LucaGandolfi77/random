@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState, useEffect } from 'react'
 import { useLayerStore } from '../store/layerStore'
-import { radialStretch, rowStretch, selectionWarp } from '../effects/pixelStretch'
+import { useModifierKeys } from '../hooks/useKeyboard'
+import { radialStretch, rowStretch, columnStretch, selectionWarp } from '../effects/pixelStretch'
 import { applyGridWarp, getDefaultGridPoints } from '../effects/gridWarp'
 import { drawCheckerboard, compositeToCanvas } from '../utils/canvas'
 import { WarpGridOverlay } from './WarpGridOverlay'
@@ -10,13 +11,15 @@ interface DragState {
   startY: number
   currentX: number
   currentY: number
-  mode: 'radial' | 'row' | 'selection-warp' | 'pan'
-  targetRow?: number
+  mode: 'radial' | 'stretch' | 'selection-warp' | 'pan'
+  sourceType?: 'row' | 'column'
   startPanX?: number
   startPanY?: number
 }
 
 export function Canvas() {
+  useModifierKeys()
+
   const {
     layers,
     activeLayerId,
@@ -28,7 +31,10 @@ export function Canvas() {
     warpGrid,
     zoom,
     panOffset,
+    sourceLine,
     setPanOffset,
+    setSourceLine,
+    setStretchPreview,
     zoomIn,
     zoomOut,
   } = useLayerStore()
@@ -38,10 +44,11 @@ export function Canvas() {
   const containerRef = useRef<HTMLDivElement>(null)
   const dragRef = useRef<DragState | null>(null)
   const [, forceRender] = useState(0)
-  const animationRef = useRef<number>(0)
-  const marchingAntsOffset = useRef(0)
+  const animRef = useRef<number>(0)
+  const marchOffset = useRef(0)
 
   const activeLayer = layers.find(l => l.id === activeLayerId)
+  const isLineTool = tool === 'stretch-row' || tool === 'stretch-column'
 
   const render = useCallback(() => {
     const canvas = canvasRef.current
@@ -58,7 +65,7 @@ export function Canvas() {
 
   const drawMarchingAnts = useCallback(
     (ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) => {
-      const offset = marchingAntsOffset.current
+      const offset = marchOffset.current
       ctx.save()
       ctx.strokeStyle = '#fff'
       ctx.lineWidth = 1
@@ -73,74 +80,107 @@ export function Canvas() {
     []
   )
 
-  const renderOverlay = useCallback(
-    (d: DragState | null) => {
-      const ov = overlayRef.current
-      if (!ov) return
-      const ctx = ov.getContext('2d')!
-      ctx.clearRect(0, 0, ov.width, ov.height)
+  const renderOverlay = useCallback(() => {
+    const ov = overlayRef.current
+    if (!ov) return
+    const ctx = ov.getContext('2d')!
+    ctx.clearRect(0, 0, ov.width, ov.height)
 
-      if (!d) return
+    const drag = dragRef.current
+    const store = useLayerStore.getState()
+    const sl = store.sourceLine
+    const sp = store.stretchPreview
 
-      if (d.mode === 'radial') {
-        const dx = d.currentX - d.startX
-        const dy = d.currentY - d.startY
-        ctx.strokeStyle = 'rgba(0,200,255,0.6)'
-        ctx.lineWidth = 1
-        ctx.setLineDash([4, 4])
+    if (drag && drag.mode === 'radial') {
+      const dx = drag.currentX - drag.startX
+      const dy = drag.currentY - drag.startY
+      ctx.strokeStyle = 'rgba(0,200,255,0.6)'
+      ctx.lineWidth = 1
+      ctx.setLineDash([4, 4])
+      ctx.beginPath()
+      ctx.moveTo(drag.startX - Math.abs(dx), drag.startY)
+      ctx.lineTo(drag.startX + Math.abs(dx), drag.startY)
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.moveTo(drag.startX, drag.startY - Math.abs(dy))
+      ctx.lineTo(drag.startX, drag.startY + Math.abs(dy))
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.arc(drag.startX, drag.startY, 3, 0, Math.PI * 2)
+      ctx.fillStyle = 'rgba(0,200,255,0.8)'
+      ctx.fill()
+      ctx.setLineDash([])
+      return
+    }
 
-        ctx.beginPath()
-        ctx.moveTo(d.startX - Math.abs(dx), d.startY)
-        ctx.lineTo(d.startX + Math.abs(dx), d.startY)
-        ctx.stroke()
+    if (drag && drag.mode === 'selection-warp') {
+      const x = Math.min(drag.startX, drag.currentX)
+      const y = Math.min(drag.startY, drag.currentY)
+      const w = Math.abs(drag.currentX - drag.startX)
+      const h = Math.abs(drag.currentY - drag.startY)
+      if (w > 2 && h > 2) {
+        ctx.fillStyle = 'rgba(0,200,255,0.08)'
+        ctx.fillRect(x, y, w, h)
+        drawMarchingAnts(ctx, x, y, w, h)
+      }
+      return
+    }
 
-        ctx.beginPath()
-        ctx.moveTo(d.startX, d.startY - Math.abs(dy))
-        ctx.lineTo(d.startX, d.startY + Math.abs(dy))
-        ctx.stroke()
+    if (sl && sl.type === 'row') {
+      ctx.strokeStyle = 'rgba(255,100,100,0.7)'
+      ctx.lineWidth = 1
+      ctx.setLineDash([6, 3])
+      ctx.beginPath()
+      ctx.moveTo(0, sl.position)
+      ctx.lineTo(ov.width, sl.position)
+      ctx.stroke()
+      ctx.setLineDash([])
 
-        ctx.beginPath()
-        ctx.arc(d.startX, d.startY, 3, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(0,200,255,0.8)'
-        ctx.fill()
-        ctx.setLineDash([])
-      } else if (d.mode === 'row' && d.targetRow !== undefined) {
-        ctx.strokeStyle = 'rgba(255,100,100,0.7)'
-        ctx.lineWidth = 1
-        ctx.setLineDash([6, 3])
-        ctx.beginPath()
-        ctx.moveTo(0, d.targetRow)
-        ctx.lineTo(ov.width, d.targetRow)
-        ctx.stroke()
-        ctx.setLineDash([])
-
-        const dy = d.currentY - d.startY
+      if (sp) {
+        const dy = sp.currentPos - sp.sourcePos
         if (Math.abs(dy) > 2) {
-          const stretchLen = Math.abs(dy)
+          const len = Math.abs(dy)
           const dir = dy < 0 ? -1 : 1
           ctx.fillStyle = 'rgba(255,100,100,0.15)'
-          ctx.fillRect(
-            0,
-            dir > 0 ? d.targetRow : d.targetRow - stretchLen,
-            ov.width,
-            stretchLen
-          )
-        }
-      } else if (d.mode === 'selection-warp') {
-        const x = Math.min(d.startX, d.currentX)
-        const y = Math.min(d.startY, d.currentY)
-        const w = Math.abs(d.currentX - d.startX)
-        const h = Math.abs(d.currentY - d.startY)
-
-        if (w > 2 && h > 2) {
-          ctx.fillStyle = 'rgba(0,200,255,0.08)'
-          ctx.fillRect(x, y, w, h)
-          drawMarchingAnts(ctx, x, y, w, h)
+          ctx.fillRect(0, dir > 0 ? sl.position : sl.position - len, ov.width, len)
         }
       }
-    },
-    [drawMarchingAnts]
-  )
+    }
+
+    if (sl && sl.type === 'column') {
+      ctx.strokeStyle = 'rgba(100,200,255,0.7)'
+      ctx.lineWidth = 1
+      ctx.setLineDash([6, 3])
+      ctx.beginPath()
+      ctx.moveTo(sl.position, 0)
+      ctx.lineTo(sl.position, ov.height)
+      ctx.stroke()
+      ctx.setLineDash([])
+
+      if (sp) {
+        const dx = sp.currentPos - sp.sourcePos
+        if (Math.abs(dx) > 2) {
+          const len = Math.abs(dx)
+          const dir = dx < 0 ? -1 : 1
+          ctx.fillStyle = 'rgba(100,200,255,0.15)'
+          ctx.fillRect(dir > 0 ? sl.position : sl.position - len, 0, len, ov.height)
+        }
+      }
+    }
+  }, [drawMarchingAnts])
+
+  // Persistent overlay loop for source line + preview
+  useEffect(() => {
+    if (!isLineTool && !dragRef.current) return
+
+    const loop = () => {
+      marchOffset.current = (marchOffset.current + 0.5) % 20
+      renderOverlay()
+      animRef.current = requestAnimationFrame(loop)
+    }
+    animRef.current = requestAnimationFrame(loop)
+    return () => cancelAnimationFrame(animRef.current)
+  }, [isLineTool, renderOverlay])
 
   const getCanvasCoords = useCallback(
     (clientX: number, clientY: number): { x: number; y: number } => {
@@ -159,11 +199,8 @@ export function Canvas() {
   const handlePointerDown = useCallback(
     (e: React.PointerEvent) => {
       if (tool === 'zoom') {
-        if (e.altKey) {
-          zoomOut()
-        } else {
-          zoomIn()
-        }
+        if (e.altKey) zoomOut()
+        else zoomIn()
         return
       }
 
@@ -171,9 +208,7 @@ export function Canvas() {
       if (tool === 'warp-grid') return
 
       const overlay = overlayRef.current
-      if (overlay) {
-        overlay.setPointerCapture(e.pointerId)
-      }
+      if (overlay) overlay.setPointerCapture(e.pointerId)
 
       const pos = getCanvasCoords(e.clientX, e.clientY)
 
@@ -187,7 +222,11 @@ export function Canvas() {
           startPanX: panOffset.x,
           startPanY: panOffset.y,
         }
-      } else if (tool === 'stretch-radial') {
+        forceRender(n => n + 1)
+        return
+      }
+
+      if (tool === 'stretch-radial') {
         dragRef.current = {
           startX: pos.x,
           startY: pos.y,
@@ -195,16 +234,11 @@ export function Canvas() {
           currentY: pos.y,
           mode: 'radial',
         }
-      } else if (tool === 'stretch-row') {
-        dragRef.current = {
-          startX: pos.x,
-          startY: pos.y,
-          currentX: pos.x,
-          currentY: pos.y,
-          mode: 'row',
-          targetRow: Math.floor(pos.y),
-        }
-      } else if (tool === 'stretch-warp') {
+        forceRender(n => n + 1)
+        return
+      }
+
+      if (tool === 'stretch-warp') {
         dragRef.current = {
           startX: pos.x,
           startY: pos.y,
@@ -212,10 +246,35 @@ export function Canvas() {
           currentY: pos.y,
           mode: 'selection-warp',
         }
+        forceRender(n => n + 1)
+        return
       }
-      forceRender(n => n + 1)
+
+      if (tool === 'stretch-row' || tool === 'stretch-column') {
+        const type = tool === 'stretch-row' ? 'row' : 'column'
+        const position = type === 'row' ? Math.floor(pos.y) : Math.floor(pos.x)
+
+        if (e.shiftKey && sourceLine) {
+          // Shift+click = start stretch from existing source line
+          dragRef.current = {
+            startX: type === 'column' ? position : pos.x,
+            startY: type === 'row' ? position : pos.y,
+            currentX: pos.x,
+            currentY: pos.y,
+            mode: 'stretch',
+            sourceType: type,
+          }
+          setStretchPreview({ type, sourcePos: position, currentPos: position })
+        } else {
+          // Simple click = set/update source line
+          setSourceLine({ type, position })
+          setStretchPreview(null)
+          dragRef.current = null
+        }
+        forceRender(n => n + 1)
+      }
     },
-    [tool, activeLayer, getCanvasCoords, panOffset, zoomIn, zoomOut]
+    [tool, activeLayer, sourceLine, getCanvasCoords, panOffset, zoomIn, zoomOut, setSourceLine, setStretchPreview]
   )
 
   const handlePointerMove = useCallback(
@@ -233,16 +292,24 @@ export function Canvas() {
       const pos = getCanvasCoords(e.clientX, e.clientY)
       drag.currentX = pos.x
       drag.currentY = pos.y
-      renderOverlay(drag)
+
+      if (drag.mode === 'stretch' && drag.sourceType) {
+        const currentPos = drag.sourceType === 'row' ? pos.y : pos.x
+        setStretchPreview({ type: drag.sourceType, sourcePos: 0, currentPos })
+      }
     },
-    [getCanvasCoords, renderOverlay, setPanOffset]
+    [getCanvasCoords, setPanOffset, setStretchPreview]
   )
 
   const applyStretch = useCallback(() => {
     const drag = dragRef.current
-    if (!drag || !activeLayer || activeLayer.locked) {
+    if (!activeLayer || activeLayer.locked) {
       dragRef.current = null
-      renderOverlay(null)
+      forceRender(n => n + 1)
+      return
+    }
+
+    if (!drag) {
       forceRender(n => n + 1)
       return
     }
@@ -258,67 +325,54 @@ export function Canvas() {
     if (drag.mode === 'radial') {
       const stretchH = Math.abs(Math.round(drag.currentX - drag.startX))
       const stretchV = Math.abs(Math.round(drag.currentY - drag.startY))
-
       if (stretchH > 2 || stretchV > 2) {
-        const result = radialStretch(
-          activeLayer.canvas,
-          drag.startX,
-          drag.startY,
-          stretchH,
-          stretchV,
-          blendMode
-        )
+        const result = radialStretch(activeLayer.canvas, drag.startX, drag.startY, stretchH, stretchV, blendMode)
         addLayer(result, `${activeLayer.name} - Stretch Radiale`)
-      }
-    } else if (drag.mode === 'row' && drag.targetRow !== undefined) {
-      const dy = Math.round(drag.currentY - drag.startY)
-      const stretchUp = dy < 0 ? Math.abs(dy) : 0
-      const stretchDown = dy > 0 ? dy : 0
-
-      if (stretchUp > 2 || stretchDown > 2) {
-        const result = rowStretch(
-          activeLayer.canvas,
-          drag.targetRow,
-          stretchUp,
-          stretchDown,
-          blendMode
-        )
-        addLayer(result, `${activeLayer.name} - Stretch Riga`)
       }
     } else if (drag.mode === 'selection-warp') {
       const selX = Math.min(drag.startX, drag.currentX)
       const selY = Math.min(drag.startY, drag.currentY)
       const selW = Math.abs(drag.currentX - drag.startX)
       const selH = Math.abs(drag.currentY - drag.startY)
-
       if (selW > 4 && selH > 4) {
-        const dragX = drag.currentX - drag.startX
-        const dragY = drag.currentY - drag.startY
-        const result = selectionWarp(
-          activeLayer.canvas,
-          selX,
-          selY,
-          selW,
-          selH,
-          dragX,
-          dragY,
-          blendMode
-        )
+        const dX = drag.currentX - drag.startX
+        const dY = drag.currentY - drag.startY
+        const result = selectionWarp(activeLayer.canvas, selX, selY, selW, selH, dX, dY, blendMode)
         addLayer(result, `${activeLayer.name} - Stretch Warp`)
+      }
+    } else if (drag.mode === 'stretch') {
+      const store = useLayerStore.getState()
+      const sl = store.sourceLine
+      if (sl) {
+        if (sl.type === 'row') {
+          const dy = Math.round(drag.currentY - drag.startY)
+          const stretchUp = dy < 0 ? Math.abs(dy) : 0
+          const stretchDown = dy > 0 ? dy : 0
+          if (stretchUp > 2 || stretchDown > 2) {
+            const result = rowStretch(activeLayer.canvas, sl.position, stretchUp, stretchDown, blendMode)
+            addLayer(result, `${activeLayer.name} - Stretch Riga`)
+          }
+        } else {
+          const dx = Math.round(drag.currentX - drag.startX)
+          const stretchLeft = dx < 0 ? Math.abs(dx) : 0
+          const stretchRight = dx > 0 ? dx : 0
+          if (stretchLeft > 2 || stretchRight > 2) {
+            const result = columnStretch(activeLayer.canvas, sl.position, stretchLeft, stretchRight, blendMode)
+            addLayer(result, `${activeLayer.name} - Stretch Colonna`)
+          }
+        }
       }
     }
 
     dragRef.current = null
-    renderOverlay(null)
+    setStretchPreview(null)
     forceRender(n => n + 1)
-  }, [activeLayer, renderOverlay, blendMode])
+  }, [activeLayer, blendMode, setStretchPreview])
 
   const handlePointerUp = useCallback(
     (e: React.PointerEvent) => {
-      const overlay = overlayRef.current
-      if (overlay) {
-        overlay.releasePointerCapture(e.pointerId)
-      }
+      const ov = overlayRef.current
+      if (ov) ov.releasePointerCapture(e.pointerId)
       applyStretch()
     },
     [applyStretch]
@@ -326,33 +380,19 @@ export function Canvas() {
 
   const applyGridWarpToActive = useCallback(() => {
     if (!activeLayer || activeLayer.locked) return
-
-    const defaults = getDefaultGridPoints(
-      activeLayer.canvas.width,
-      activeLayer.canvas.height
-    )
+    const defaults = getDefaultGridPoints(activeLayer.canvas.width, activeLayer.canvas.height)
     const isDefault = warpGrid.controlPoints.length === 16 &&
-      warpGrid.controlPoints.every((p, i) =>
-        Math.abs(p.x - defaults[i].x) < 1 &&
-        Math.abs(p.y - defaults[i].y) < 1
-      )
-
+      warpGrid.controlPoints.every((p, i) => Math.abs(p.x - defaults[i].x) < 1 && Math.abs(p.y - defaults[i].y) < 1)
     if (!isDefault && warpGrid.controlPoints.length === 16) {
-      const result = applyGridWarp(
-        activeLayer.canvas,
-        warpGrid.controlPoints,
-        blendMode
-      )
-      const { addLayer } = useLayerStore.getState()
-      addLayer(result, `${activeLayer.name} - Warp Griglia`)
+      const result = applyGridWarp(activeLayer.canvas, warpGrid.controlPoints, blendMode)
+      useLayerStore.getState().addLayer(result, `${activeLayer.name} - Warp Griglia`)
     }
   }, [activeLayer, warpGrid.controlPoints, blendMode])
 
   useEffect(() => {
     if (tool !== 'warp-grid' || !warpGrid.active) return
-
     const tick = () => {
-      marchingAntsOffset.current = (marchingAntsOffset.current + 0.5) % 20
+      marchOffset.current = (marchOffset.current + 0.5) % 20
       const ov = overlayRef.current
       if (ov) {
         const ctx = ov.getContext('2d')!
@@ -360,64 +400,60 @@ export function Canvas() {
         const cs = useLayerStore.getState().canvasSize
         drawMarchingAnts(ctx, 0, 0, cs.width, cs.height)
       }
-      animationRef.current = requestAnimationFrame(tick)
+      animRef.current = requestAnimationFrame(tick)
     }
-    animationRef.current = requestAnimationFrame(tick)
-
-    return () => cancelAnimationFrame(animationRef.current)
+    animRef.current = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(animRef.current)
   }, [tool, warpGrid.active, drawMarchingAnts])
 
   // Wheel zoom
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
-
     const handleWheel = (e: WheelEvent) => {
       if (!e.ctrlKey && !e.metaKey) return
       e.preventDefault()
       const state = useLayerStore.getState()
-      const delta = e.deltaY > 0 ? -0.1 : 0.1
-      state.setZoom(state.zoom + delta)
+      state.setZoom(state.zoom + (e.deltaY > 0 ? -0.1 : 0.1))
     }
-
     container.addEventListener('wheel', handleWheel, { passive: false })
     return () => container.removeEventListener('wheel', handleWheel)
   }, [])
 
-  // Arrow keys pan + zoom shortcuts
+  // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return
-
       const state = useLayerStore.getState()
 
-      // Ctrl/Cmd + 0 = reset view
       if ((e.ctrlKey || e.metaKey) && e.key === '0') {
         e.preventDefault()
         state.resetView()
         forceRender(n => n + 1)
         return
       }
-
-      // Ctrl/Cmd + = / + = zoom in
       if ((e.ctrlKey || e.metaKey) && (e.key === '=' || e.key === '+')) {
         e.preventDefault()
         state.zoomIn()
         forceRender(n => n + 1)
         return
       }
-
-      // Ctrl/Cmd + - = zoom out
       if ((e.ctrlKey || e.metaKey) && e.key === '-') {
         e.preventDefault()
         state.zoomOut()
         forceRender(n => n + 1)
         return
       }
+      if (e.key === 'Escape') {
+        state.setSourceLine(null)
+        state.setStretchPreview(null)
+        dragRef.current = null
+        forceRender(n => n + 1)
+        return
+      }
 
       const step = e.shiftKey ? 10 : 50
       let handled = false
-
       switch (e.key) {
         case 'ArrowLeft':
           state.setPanOffset({ x: state.panOffset.x + step, y: state.panOffset.y })
@@ -436,27 +472,20 @@ export function Canvas() {
           handled = true
           break
       }
-
       if (handled) {
         e.preventDefault()
         forceRender(n => n + 1)
       }
     }
-
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
   const cursorStyle =
-    tool === 'zoom'
-      ? 'zoom-in'
-      : tool === 'stretch-radial' || tool === 'stretch-row' || tool === 'stretch-warp'
-        ? 'crosshair'
-        : tool === 'move'
-          ? 'grab'
-          : tool === 'warp-grid'
-            ? 'default'
-            : 'default'
+    tool === 'zoom' ? 'zoom-in'
+    : tool === 'stretch-radial' || tool === 'stretch-row' || tool === 'stretch-column' || tool === 'stretch-warp' ? 'crosshair'
+    : tool === 'move' ? 'grab'
+    : 'default'
 
   const showWarpGrid = tool === 'warp-grid' && warpGrid.active && warpGrid.controlPoints.length === 16
 
@@ -494,24 +523,15 @@ export function Canvas() {
           />
           {showWarpGrid && activeLayer && (
             <>
-              <WarpGridOverlay
-                canvasWidth={canvasSize.width}
-                canvasHeight={canvasSize.height}
-                onApply={applyGridWarpToActive}
-              />
+              <WarpGridOverlay canvasWidth={canvasSize.width} canvasHeight={canvasSize.height} onApply={applyGridWarpToActive} />
               <div className="warp-grid-actions">
-                <button className="btn btn-primary" onClick={applyGridWarpToActive}>
-                  Applica Warp
-                </button>
-                <button className="btn" onClick={() => useLayerStore.getState().resetWarpGrid()}>
-                  Reset Griglia
-                </button>
+                <button className="btn btn-primary" onClick={applyGridWarpToActive}>Applica Warp</button>
+                <button className="btn" onClick={() => useLayerStore.getState().resetWarpGrid()}>Reset Griglia</button>
               </div>
             </>
           )}
         </div>
       )}
-
       {isProcessing && (
         <div className="processing-overlay">
           <div className="spinner" />

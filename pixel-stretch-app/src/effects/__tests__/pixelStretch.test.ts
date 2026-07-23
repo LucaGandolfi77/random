@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { radialStretch, rowStretch, selectionWarp } from '../pixelStretch'
+import { radialStretch, rowStretch, columnStretch, selectionWarp } from '../pixelStretch'
 
 function createCanvas(w: number, h: number, fill?: string): HTMLCanvasElement {
   const c = document.createElement('canvas')
@@ -153,6 +153,75 @@ describe('rowStretch', () => {
   it('dissolve mode produces binary alpha', () => {
     const result = rowStretch(src, 50, 20, 0, 'dissolve')
     const pixel = getPixel(result, 50, 40)
+    expect(pixel[3] === 0 || pixel[3] === 255).toBe(true)
+  })
+})
+
+describe('columnStretch', () => {
+  let src: HTMLCanvasElement
+
+  beforeEach(() => {
+    src = createCanvas(100, 100)
+    const ctx = src.getContext('2d')!
+    ctx.fillStyle = '#ff00ff'
+    ctx.fillRect(50, 0, 1, 100)
+  })
+
+  it('creates transparent canvas', () => {
+    const result = columnStretch(src, 50, 0, 0)
+    const pixel = getPixel(result, 0, 0)
+    expect(pixel[3]).toBe(0)
+  })
+
+  it('returns transparent when stretch is zero', () => {
+    const result = columnStretch(src, 50, 0, 0)
+    const pixel = getPixel(result, 40, 50)
+    expect(pixel[3]).toBe(0)
+  })
+
+  it('stretches left', () => {
+    const result = columnStretch(src, 50, 20, 0)
+    const pixel = getPixel(result, 40, 50)
+    expect(pixel[3]).toBeGreaterThan(0)
+    expect(pixel[0]).toBe(255)
+  })
+
+  it('stretches right', () => {
+    const result = columnStretch(src, 50, 0, 20)
+    const pixel = getPixel(result, 60, 50)
+    expect(pixel[3]).toBeGreaterThan(0)
+    expect(pixel[0]).toBe(255)
+  })
+
+  it('stretches both directions', () => {
+    const result = columnStretch(src, 50, 15, 15)
+    const left = getPixel(result, 40, 50)
+    const right = getPixel(result, 60, 50)
+    expect(left[3]).toBeGreaterThan(0)
+    expect(right[3]).toBeGreaterThan(0)
+  })
+
+  it('alpha decreases with distance from column', () => {
+    const result = columnStretch(src, 50, 30, 0)
+    const near = getPixel(result, 45, 50)
+    const far = getPixel(result, 25, 50)
+    expect(near[3]).toBeGreaterThan(far[3])
+  })
+
+  it('uses source pixel color per row', () => {
+    const c = createCanvas(100, 100)
+    const ctx = c.getContext('2d')!
+    ctx.fillStyle = '#ffff00'
+    ctx.fillRect(50, 0, 1, 100)
+    const result = columnStretch(c, 50, 10, 0)
+    const pixel = getPixel(result, 45, 50)
+    expect(pixel[0]).toBe(255)
+    expect(pixel[1]).toBe(255)
+  })
+
+  it('dissolve mode produces binary alpha', () => {
+    const result = columnStretch(src, 50, 20, 0, 'dissolve')
+    const pixel = getPixel(result, 40, 50)
     expect(pixel[3] === 0 || pixel[3] === 255).toBe(true)
   })
 })

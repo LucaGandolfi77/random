@@ -14,6 +14,7 @@ export type Tool =
   | 'select'
   | 'stretch-radial'
   | 'stretch-row'
+  | 'stretch-column'
   | 'stretch-warp'
   | 'warp-grid'
   | 'move'
@@ -36,6 +37,17 @@ export interface StretchParams {
 export interface WarpGridPoint {
   x: number
   y: number
+}
+
+export interface SourceLine {
+  type: 'row' | 'column'
+  position: number
+}
+
+export interface StretchPreview {
+  type: 'row' | 'column'
+  sourcePos: number
+  currentPos: number
 }
 
 export interface WarpGrid {

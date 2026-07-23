@@ -148,6 +148,59 @@ export function rowStretch(
   return out
 }
 
+export function columnStretch(
+  sourceCanvas: HTMLCanvasElement,
+  col: number,
+  stretchLeft: number,
+  stretchRight: number,
+  blendMode: BlendMode = 'normal'
+): HTMLCanvasElement {
+  const { width, height } = sourceCanvas
+  const srcCtx = sourceCanvas.getContext('2d')!
+  const srcData = srcCtx.getImageData(0, 0, width, height)
+
+  const out = document.createElement('canvas')
+  out.width = width
+  out.height = height
+  const outCtx = out.getContext('2d')!
+  const outData = outCtx.createImageData(width, height)
+
+  const srcPixels = srcData.data
+  const outPixels = outData.data
+  const c = Math.floor(col)
+  const idx = (x: number, y: number) => (y * width + x) * 4
+  const clampX = (v: number) => Math.max(0, Math.min(width - 1, v))
+
+  for (let y = 0; y < height; y++) {
+    const si = idx(c, y)
+    const pr = srcPixels[si]
+    const pg = srcPixels[si + 1]
+    const pb = srcPixels[si + 2]
+    const pa = srcPixels[si + 3]
+
+    for (let i = 1; i <= stretchLeft; i++) {
+      const rawAlpha = Math.max(0, 1 - i / stretchLeft)
+      const ti = idx(clampX(c - i), y)
+      outPixels[ti] = pr
+      outPixels[ti + 1] = pg
+      outPixels[ti + 2] = pb
+      outPixels[ti + 3] = computeAlpha(c - i, y, rawAlpha * pa / 255, blendMode)
+    }
+
+    for (let i = 1; i <= stretchRight; i++) {
+      const rawAlpha = Math.max(0, 1 - i / stretchRight)
+      const bi = idx(clampX(c + i), y)
+      outPixels[bi] = pr
+      outPixels[bi + 1] = pg
+      outPixels[bi + 2] = pb
+      outPixels[bi + 3] = computeAlpha(c + i, y, rawAlpha * pa / 255, blendMode)
+    }
+  }
+
+  outCtx.putImageData(outData, 0, 0)
+  return out
+}
+
 export function selectionWarp(
   sourceCanvas: HTMLCanvasElement,
   selX: number,

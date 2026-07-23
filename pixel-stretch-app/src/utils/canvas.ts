@@ -45,6 +45,26 @@ export function canvasToBlob(
   })
 }
 
+export function resizeForProcessing(
+  canvas: HTMLCanvasElement,
+  maxDim = 1500
+): HTMLCanvasElement {
+  const maxSide = Math.max(canvas.width, canvas.height)
+  if (maxSide <= maxDim) return canvas
+
+  const scale = maxDim / maxSide
+  const w = Math.round(canvas.width * scale)
+  const h = Math.round(canvas.height * scale)
+
+  const out = document.createElement('canvas')
+  out.width = w
+  out.height = h
+  const ctx = out.getContext('2d')!
+  ctx.imageSmoothingEnabled = true
+  ctx.drawImage(canvas, 0, 0, w, h)
+  return out
+}
+
 export function drawCheckerboard(
   ctx: CanvasRenderingContext2D,
   width: number,

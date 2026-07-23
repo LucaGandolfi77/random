@@ -7,6 +7,8 @@ import { StretchControls } from './components/StretchControls'
 import { ZoomControls } from './components/ZoomControls'
 import { ImageUploader } from './components/ImageUploader'
 import { ExportDialog } from './components/ExportDialog'
+import { CanvasResizeDialog } from './components/CanvasResizeDialog'
+import { FilterDialog } from './components/FilterDialog'
 import { BackgroundRemovalSection } from './components/BackgroundRemovalSection'
 import { useLayerStore } from './store/layerStore'
 
@@ -32,10 +34,12 @@ export default function App() {
   useViewportHeight()
   const { layers } = useLayerStore()
   const [exportOpen, setExportOpen] = useState(false)
+  const [resizeOpen, setResizeOpen] = useState(false)
+  const [filterOpen, setFilterOpen] = useState(false)
 
   return (
     <div className="app">
-      <AppHeader />
+      <AppHeader onResize={() => setResizeOpen(true)} onFilter={() => setFilterOpen(true)} />
       <div className="app-body">
         <div className="sidebar sidebar-left">
           <ToolBar />
@@ -53,6 +57,8 @@ export default function App() {
         </div>
       </div>
       <ExportDialog open={exportOpen} onClose={() => setExportOpen(false)} />
+      <CanvasResizeDialog open={resizeOpen} onClose={() => setResizeOpen(false)} />
+      <FilterDialog open={filterOpen} onClose={() => setFilterOpen(false)} />
     </div>
   )
 }

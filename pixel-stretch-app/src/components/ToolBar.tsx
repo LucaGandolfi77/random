@@ -7,6 +7,8 @@ import {
   Grid3x3,
   Waypoints,
   Search,
+  FlipHorizontal,
+  RefreshCw,
 } from 'lucide-react'
 import { useLayerStore } from '../store/layerStore'
 import type { Tool } from '../types'
@@ -16,8 +18,11 @@ const tools: { id: Tool; label: string; icon: React.ReactNode }[] = [
   { id: 'move', label: 'Muovi', icon: <Move size={18} /> },
   { id: 'zoom', label: 'Zoom', icon: <Search size={18} /> },
   { id: 'stretch-radial', label: 'Stretch Radiale', icon: <StretchHorizontal size={18} /> },
+  { id: 'stretch-radial-full', label: 'Stretch Radiale Full', icon: <RefreshCw size={18} /> },
   { id: 'stretch-row', label: 'Stretch Riga', icon: <AlignVerticalSpaceAround size={18} /> },
   { id: 'stretch-column', label: 'Stretch Colonna', icon: <ChevronsLeftRight size={18} /> },
+  { id: 'stretch-mirror', label: 'Stretch Mirror', icon: <FlipHorizontal size={18} /> },
+  { id: 'twirl', label: 'Twirl', icon: <RefreshCw size={18} /> },
   { id: 'stretch-warp', label: 'Stretch Warp', icon: <Waypoints size={18} /> },
   { id: 'warp-grid', label: 'Warp Griglia', icon: <Grid3x3 size={18} /> },
 ]

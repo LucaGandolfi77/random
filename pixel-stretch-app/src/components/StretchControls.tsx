@@ -1,9 +1,17 @@
 import { useLayerStore } from '../store/layerStore'
+import type { EasingCurve, BlendMode } from '../types'
+
+const EASING_LABELS: Record<EasingCurve, string> = {
+  linear: 'Lineare',
+  exponential: 'Esponenziale',
+  sine: 'Sinusoidale',
+  bounce: 'Bounce',
+}
 
 export function StretchControls() {
-  const { tool, blendMode, setBlendMode, sourceLine, clearSourceLine } = useLayerStore()
+  const { tool, blendMode, setBlendMode, easing, setEasing, symmetricStretch, setSymmetricStretch, sourceLine, clearSourceLine } = useLayerStore()
 
-  const isStretchTool = tool === 'stretch-radial' || tool === 'stretch-row' || tool === 'stretch-column' || tool === 'stretch-warp' || tool === 'warp-grid'
+  const isStretchTool = tool === 'stretch-radial' || tool === 'stretch-radial-full' || tool === 'stretch-row' || tool === 'stretch-column' || tool === 'stretch-warp' || tool === 'stretch-mirror' || tool === 'twirl' || tool === 'warp-grid'
   const isZoom = tool === 'zoom'
   const isMove = tool === 'move'
 
@@ -12,13 +20,47 @@ export function StretchControls() {
   return (
     <div className="stretch-controls">
       {isStretchTool && (
+        <>
+          <div className="blend-mode-toggle">
+            <span className="blend-label">Blend Mode</span>
+            <select
+              value={blendMode}
+              onChange={e => setBlendMode(e.target.value as BlendMode)}
+              className="easing-select"
+            >
+              <option value="normal">Normale</option>
+              <option value="dissolve">Dissoluzione</option>
+              <option value="screen">Schermo</option>
+              <option value="multiply">Moltiplica</option>
+              <option value="overlay">Sovrapponi</option>
+              <option value="difference">Differenza</option>
+              <option value="lighten">Schiarisci</option>
+              <option value="darken">Scurisci</option>
+            </select>
+          </div>
+          <div className="blend-mode-toggle">
+            <span className="blend-label">Easing</span>
+            <select
+              value={easing}
+              onChange={e => setEasing(e.target.value as EasingCurve)}
+              className="easing-select"
+            >
+              {(Object.keys(EASING_LABELS) as EasingCurve[]).map(k => (
+                <option key={k} value={k}>{EASING_LABELS[k]}</option>
+              ))}
+            </select>
+          </div>
+        </>
+      )}
+
+      {(tool === 'stretch-row' || tool === 'stretch-column') && (
         <div className="blend-mode-toggle">
-          <span className="blend-label">Dissoluzione</span>
+          <span className="blend-label">Simmetrico</span>
           <button
-            className={`toggle-btn ${blendMode === 'dissolve' ? 'active' : ''}`}
-            onClick={() => setBlendMode(blendMode === 'normal' ? 'dissolve' : 'normal')}
+            className={`toggle-btn ${symmetricStretch ? 'active' : ''}`}
+            onClick={() => setSymmetricStretch(!symmetricStretch)}
           >
-            {blendMode === 'dissolve' ? 'ON' : 'OFF'}
+            {symmetricStretch ? 'ON' : 'OFF'}
           </button>
         </div>
       )}
@@ -40,6 +82,14 @@ export function StretchControls() {
         </div>
       )}
 
+      {tool === 'stretch-radial-full' && (
+        <div className="stretch-hint">
+          <p><strong>Stretch Radiale Full</strong></p>
+          <p>Clicca sul canvas per il centro, poi trascina per impostare il raggio. I pixel si espandono in tutte le direzioni con alpha calante.</p>
+          <p className="hint-small">Trascina lontano = raggio maggiore, più pixel stirati.</p>
+        </div>
+      )}
+
       {tool === 'stretch-row' && (
         <div className="stretch-hint">
           <p><strong>Stretch da Riga</strong></p>
@@ -53,6 +103,22 @@ export function StretchControls() {
           <p><strong>Stretch da Colonna</strong></p>
           <p><strong>Click</strong> per selezionare la colonna sorgente. Poi tieni <strong>Shift</strong> e trascina per stirare.</p>
           <p className="hint-small">Shift+trascina sinistra = stretch a sinistra<br/>Shift+trascina destra = stretch a destra<br/>ESC = deseleziona</p>
+        </div>
+      )}
+
+      {tool === 'twirl' && (
+        <div className="stretch-hint">
+          <p><strong>Twirl / Vortice</strong></p>
+          <p>Clicca per il centro, trascina per impostare l'intensità della rotazione. I pixel più lontani ruotano di più.</p>
+          <p className="hint-small">Trascina lontano = più rotazione</p>
+        </div>
+      )}
+
+      {tool === 'stretch-mirror' && (
+        <div className="stretch-hint">
+          <p><strong>Stretch Mirror</strong></p>
+          <p>Clicca sul canvas per il punto sorgente. Trascina orizzontalmente per specchiare la colonna, verticalmente per specchiare la riga.</p>
+          <p className="hint-small">Trascina orizzontale = mirror colonna<br/>Trascina verticale = mirror riga</p>
         </div>
       )}
 

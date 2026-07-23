@@ -28,9 +28,11 @@ export function compositeToCanvas(
   for (const layer of layers) {
     if (!layer.visible) continue
     ctx.globalAlpha = layer.opacity
+    ctx.globalCompositeOperation = layer.compositeOperation || 'source-over'
     ctx.drawImage(layer.canvas, layer.position.x, layer.position.y)
   }
   ctx.globalAlpha = 1
+  ctx.globalCompositeOperation = 'source-over'
 }
 
 export function canvasToBlob(
@@ -75,8 +77,8 @@ export function drawCheckerboard(
     for (let x = 0; x < width; x += size) {
       ctx.fillStyle =
         (Math.floor(x / size) + Math.floor(y / size)) % 2 === 0
-          ? '#cccccc'
-          : '#999999'
+          ? '#2a2a2a'
+          : '#333333'
       ctx.fillRect(x, y, size, size)
     }
   }

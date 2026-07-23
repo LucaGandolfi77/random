@@ -8,19 +8,24 @@ export interface Layer {
   locked: boolean
   width: number
   height: number
+  compositeOperation?: GlobalCompositeOperation
 }
 
 export type Tool =
   | 'select'
   | 'stretch-radial'
+  | 'stretch-radial-full'
   | 'stretch-row'
   | 'stretch-column'
   | 'stretch-warp'
+  | 'stretch-mirror'
+  | 'twirl'
   | 'warp-grid'
   | 'move'
   | 'zoom'
 
-export type BlendMode = 'normal' | 'dissolve'
+export type BlendMode = 'normal' | 'dissolve' | 'screen' | 'multiply' | 'overlay' | 'difference' | 'lighten' | 'darken'
+export type EasingCurve = 'linear' | 'exponential' | 'sine' | 'bounce'
 
 export interface CanvasSize {
   width: number

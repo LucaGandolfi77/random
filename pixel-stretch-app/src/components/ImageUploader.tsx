@@ -52,7 +52,9 @@ export function ImageUploader() {
           w = Math.round(w * scale)
           h = Math.round(h * scale)
         }
-        setCanvasSize({ width: w, height: h })
+        // Only resize the canvas on the first upload
+        const { layers } = useLayerStore.getState()
+        if (layers.length === 0) setCanvasSize({ width: w, height: h })
         const canvas = document.createElement('canvas')
         canvas.width = w
         canvas.height = h
@@ -60,6 +62,10 @@ export function ImageUploader() {
         ctx.drawImage(img, 0, 0, w, h)
         addLayer(canvas, file.name.replace(/\.[^.]+$/, ''))
         URL.revokeObjectURL(url)
+      }
+      img.onerror = () => {
+        URL.revokeObjectURL(url)
+        alert('Impossibile aprire il file. Il formato potrebbe non essere supportato.')
       }
       img.src = url
     },

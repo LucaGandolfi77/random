@@ -72,8 +72,8 @@ export function WarpGridOverlay({ canvasWidth, canvasHeight }: WarpGridOverlayPr
     [canvasWidth, canvasHeight, setWarpGridPoint]
   )
 
-  const scaleX = (x: number) => (x / canvasWidth) * 100
-  const scaleY = (y: number) => (y / canvasHeight) * 100
+  // The viewBox is in canvas pixels: draw points using raw canvas coordinates
+  const handleR = Math.max(HANDLE_RADIUS, Math.max(canvasWidth, canvasHeight) / 120)
 
   const points = warpGrid.controlPoints
   if (points.length !== 16) return null
@@ -82,7 +82,7 @@ export function WarpGridOverlay({ canvasWidth, canvasHeight }: WarpGridOverlayPr
   for (let row = 0; row < 4; row++) {
     const rowData = points.slice(row * 4, row * 4 + 4)
     const pathD = rowData
-      .map((p, i) => `${i === 0 ? 'M' : 'L'} ${scaleX(p.x)} ${scaleY(p.y)}`)
+      .map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`)
       .join(' ')
     gridLines.push(
       <path key={`h${row}`} d={pathD} className="warp-grid-line" />
@@ -91,7 +91,7 @@ export function WarpGridOverlay({ canvasWidth, canvasHeight }: WarpGridOverlayPr
   for (let col = 0; col < 4; col++) {
     const colData = [0, 1, 2, 3].map(r => points[r * 4 + col])
     const pathD = colData
-      .map((p, i) => `${i === 0 ? 'M' : 'L'} ${scaleX(p.x)} ${scaleY(p.y)}`)
+      .map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`)
       .join(' ')
     gridLines.push(
       <path key={`v${col}`} d={pathD} className="warp-grid-line" />
@@ -120,9 +120,9 @@ export function WarpGridOverlay({ canvasWidth, canvasHeight }: WarpGridOverlayPr
       {points.map((p, i) => (
         <circle
           key={i}
-          cx={scaleX(p.x)}
-          cy={scaleY(p.y)}
-          r={`${(HANDLE_RADIUS / canvasWidth) * 100}%`}
+          cx={p.x}
+          cy={p.y}
+          r={handleR}
           className={`warp-control-point ${draggingIndex === i ? 'dragging' : ''} ${hoverIndex === i ? 'hover' : ''}`}
           style={{ pointerEvents: 'all', cursor: 'grab' }}
           onPointerDown={(e) => handlePointerDown(e, i)}

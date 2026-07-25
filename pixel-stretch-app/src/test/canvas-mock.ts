@@ -56,6 +56,7 @@ class MockCanvasRenderingContext2D {
   strokeStyle = '#000000'
   lineWidth = 1
   globalAlpha = 1
+  globalCompositeOperation = 'source-over'
   private _lineDash: number[] = []
   lineDashOffset = 0
 
@@ -107,15 +108,23 @@ class MockCanvasRenderingContext2D {
       const dw = this._canvas.width
       const sw = img.width
       const sh = img.height
+      const multiply = this.globalCompositeOperation === 'multiply'
       for (let y = 0; y < sh; y++) {
         for (let x = 0; x < sw; x++) {
           const si = (y * sw + x) * 4
           const di = ((y + Math.floor(sy)) * dw + (x + Math.floor(sx))) * 4
           if (di >= 0 && di + 3 < dstBuf.length) {
-            dstBuf[di] = srcBuf[si]
-            dstBuf[di + 1] = srcBuf[si + 1]
-            dstBuf[di + 2] = srcBuf[si + 2]
-            dstBuf[di + 3] = srcBuf[si + 3]
+            if (multiply) {
+              dstBuf[di] = (srcBuf[si] * dstBuf[di]) / 255
+              dstBuf[di + 1] = (srcBuf[si + 1] * dstBuf[di + 1]) / 255
+              dstBuf[di + 2] = (srcBuf[si + 2] * dstBuf[di + 2]) / 255
+              dstBuf[di + 3] = Math.max(srcBuf[si + 3], dstBuf[di + 3])
+            } else {
+              dstBuf[di] = srcBuf[si]
+              dstBuf[di + 1] = srcBuf[si + 1]
+              dstBuf[di + 2] = srcBuf[si + 2]
+              dstBuf[di + 3] = srcBuf[si + 3]
+            }
           }
         }
       }

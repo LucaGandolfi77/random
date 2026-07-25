@@ -50,7 +50,7 @@ export function Canvas() {
   const overlayRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const dragRef = useRef<DragState | null>(null)
-  const [, forceRender] = useState(0)
+  const [dragTick, forceRender] = useState(0)
   const animRef = useRef<number>(0)
   const marchOffset = useRef(0)
   const previewCanvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -95,11 +95,16 @@ export function Canvas() {
     const ctx = ov.getContext('2d')!
     ctx.clearRect(0, 0, ov.width, ov.height)
 
-    // Draw live preview if available
+    // Draw live preview if available, respecting the layer's position
     const pv = previewCanvasRef.current
     if (pv) {
-      ctx.drawImage(pv, 0, 0, ov.width, ov.height)
-      // Don't draw selection indicators when preview is shown
+      const store = useLayerStore.getState()
+      const actLayer = store.activeLayerId ? store.layers.find(l => l.id === store.activeLayerId) : null
+      if (actLayer) {
+        ctx.drawImage(pv, actLayer.position.x, actLayer.position.y, actLayer.width, actLayer.height)
+      } else {
+        ctx.drawImage(pv, 0, 0, ov.width, ov.height)
+      }
       return
     }
 
@@ -256,58 +261,22 @@ export function Canvas() {
       }
     }
 
-    // Draw persistent warp grid on the stretched result
-    const lwp = store.lastWarpPoints
-    if (lwp && lwp.length === 16 && tool !== 'warp-grid') {
-      ctx.save()
-      ctx.strokeStyle = 'rgba(0, 200, 255, 0.3)'
-      ctx.lineWidth = 0.5
-      for (let row = 0; row < 4; row++) {
-        ctx.beginPath()
-        for (let col = 0; col < 4; col++) {
-          const p = lwp[row * 4 + col]
-          col === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y)
-        }
-        ctx.stroke()
-      }
-      for (let col = 0; col < 4; col++) {
-        ctx.beginPath()
-        for (let row = 0; row < 4; row++) {
-          const p = lwp[row * 4 + col]
-          row === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y)
-        }
-        ctx.stroke()
-      }
-      ctx.strokeStyle = 'rgba(0, 200, 255, 0.35)'
-      ctx.fillStyle = 'rgba(0, 200, 255, 0.25)'
-      for (const p of lwp) {
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, 4, 0, Math.PI * 2)
-        ctx.fill()
-        ctx.stroke()
-      }
-      ctx.restore()
-    }
   }, [drawMarchingAnts])
 
-  // Persistent overlay loop for source line + preview
+  // Persistent overlay loop: active for line tools and during any drag
+  // (radial, mirror, twirl, selection-warp previews rely on it).
+  // dragTick changes on every dragRef mutation, re-evaluating the guard.
   useEffect(() => {
     if (!isLineTool && !dragRef.current) return
 
     const loop = () => {
-      const state = useLayerStore.getState()
-      if (!isLineTool && !state.sourceLine) {
-        const ov = overlayRef.current
-        if (ov) ov.getContext('2d')!.clearRect(0, 0, ov.width, ov.height)
-        return
-      }
       marchOffset.current = (marchOffset.current + 0.5) % 20
       renderOverlay()
       animRef.current = requestAnimationFrame(loop)
     }
     animRef.current = requestAnimationFrame(loop)
     return () => cancelAnimationFrame(animRef.current)
-  }, [isLineTool, renderOverlay])
+  }, [isLineTool, dragTick, renderOverlay])
 
   const getCanvasCoords = useCallback(
     (clientX: number, clientY: number): { x: number; y: number } => {
@@ -466,8 +435,186 @@ export function Canvas() {
         forceRender(n => n + 1)
       }
     },
-    [tool, activeLayer, sourceLine, getCanvasCoords, panOffset, zoomIn, zoomOut, setSourceLine, setStretchPreview]
+    [tool, activeLayer, sourceLine, getCanvasCoords, panOffset, zoomIn, zoomOut, setSourceLine, setStretchPreview, layers, setActiveLayer]
   )
+
+  const updatePreview = useCallback((layer: typeof activeLayer, drag: DragState) => {
+    if (!layer) return
+    const PREVIEW_MAX = 300
+    const scale = Math.min(1, PREVIEW_MAX / Math.max(layer.canvas.width, layer.canvas.height))
+    const pw = Math.round(layer.canvas.width * scale)
+    const ph = Math.round(layer.canvas.height * scale)
+
+    const store = useLayerStore.getState()
+    const ds = `(${pw}x${ph})-(${Math.round(drag.startX)}-${Math.round(drag.startY)})-(${Math.round(drag.currentX)}-${Math.round(drag.currentY)})-${store.blendMode}-${store.easing}-${store.symmetricStretch}-${drag.mode}`
+    if (ds === lastPreviewParams.current) return
+    lastPreviewParams.current = ds
+
+    let src = layer.canvas
+    if (scale < 1) {
+      const small = document.createElement('canvas')
+      small.width = pw
+      small.height = ph
+      const sctx = small.getContext('2d')!
+      sctx.imageSmoothingEnabled = true
+      sctx.drawImage(layer.canvas, 0, 0, pw, ph)
+      src = small
+    }
+
+    let result: HTMLCanvasElement | null = null
+    const lx = layer.position.x
+    const ly = layer.position.y
+    const sx = (drag.startX - lx) * scale
+    const sy = (drag.startY - ly) * scale
+    const cx = (drag.currentX - lx) * scale
+    const cy = (drag.currentY - ly) * scale
+
+    try {
+      if (drag.mode === 'radial') {
+        const h = Math.abs(Math.round(cx - sx))
+        const v = Math.abs(Math.round(cy - sy))
+        if (h > 2 || v > 2) result = radialStretch(src, sx, sy, h, v, store.blendMode, store.easing)
+      } else if (drag.mode === 'radial-full') {
+        const r = Math.round(Math.sqrt((cx - sx) ** 2 + (cy - sy) ** 2))
+        if (r > 2) result = radialStretchFull(src, sx, sy, r, store.blendMode, store.easing)
+      } else if (drag.mode === 'stretch') {
+        const sl = store.sourceLine
+        if (sl) {
+          const slPos = sl.position - (sl.type === 'row' ? ly : lx)
+          const sp = slPos * scale
+          if (sl.type === 'row') {
+            const dy = Math.round(cy - sy)
+            const up = store.symmetricStretch ? Math.abs(dy) : (dy < 0 ? Math.abs(dy) : 0)
+            const down = store.symmetricStretch ? Math.abs(dy) : (dy > 0 ? dy : 0)
+            if (up > 2 || down > 2) result = rowStretch(src, sp, up, down, store.blendMode, store.easing)
+          } else {
+            const dx = Math.round(cx - sx)
+            const left = store.symmetricStretch ? Math.abs(dx) : (dx < 0 ? Math.abs(dx) : 0)
+            const right = store.symmetricStretch ? Math.abs(dx) : (dx > 0 ? dx : 0)
+            if (left > 2 || right > 2) result = columnStretch(src, sp, left, right, store.blendMode, store.easing)
+          }
+        }
+      } else if (drag.mode === 'mirror') {
+        const dx = Math.round(Math.abs(cx - sx))
+        const dy = Math.round(Math.abs(cy - sy))
+        if (dx > dy && dx > 2) result = mirrorStretch(src, 'column', sx, dx, store.blendMode)
+        else if (dy > 2) result = mirrorStretch(src, 'row', sy, dy, store.blendMode)
+      } else if (drag.mode === 'twirl') {
+        const r = Math.round(Math.sqrt((cx - sx) ** 2 + (cy - sy) ** 2))
+        if (r > 5) result = twirlEffect(src, sx, sy, r / 3, store.blendMode, r)
+      }
+    } catch {
+      // Preview failed silently
+    }
+
+    if (result) {
+      previewCanvasRef.current = result
+    }
+  }, [lastPreviewParams])
+
+  const applyStretch = useCallback(() => {
+    const drag = dragRef.current
+    if (!activeLayer || activeLayer.locked) {
+      dragRef.current = null
+      forceRender(n => n + 1)
+      return
+    }
+
+    if (!drag) {
+      forceRender(n => n + 1)
+      return
+    }
+
+    if (drag.mode === 'pan' || drag.mode === 'move-layer') {
+      if (drag.mode === 'move-layer') useLayerStore.getState().pushHistory('Sposta layer')
+      dragRef.current = null
+      forceRender(n => n + 1)
+      return
+    }
+
+    const { addLayer } = useLayerStore.getState()
+    const compositeOp: GlobalCompositeOperation | undefined =
+      blendMode !== 'normal' && blendMode !== 'dissolve' ? blendMode : undefined
+
+    // Convert canvas-space coordinates to layer-space (the layer may have been moved)
+    const lx = activeLayer.position.x
+    const ly = activeLayer.position.y
+
+    if (drag.mode === 'radial') {
+      const stretchH = Math.abs(Math.round(drag.currentX - drag.startX))
+      const stretchV = Math.abs(Math.round(drag.currentY - drag.startY))
+      if (stretchH > 2 || stretchV > 2) {
+        const result = radialStretch(activeLayer.canvas, drag.startX - lx, drag.startY - ly, stretchH, stretchV, blendMode, easing)
+        addLayer(result, `${activeLayer.name} - Stretch Radiale`, compositeOp)
+      }
+    } else if (drag.mode === 'radial-full') {
+      const radius = Math.round(
+        Math.sqrt((drag.currentX - drag.startX) ** 2 + (drag.currentY - drag.startY) ** 2)
+      )
+      if (radius > 2) {
+        const result = radialStretchFull(activeLayer.canvas, drag.startX - lx, drag.startY - ly, radius, blendMode, easing)
+        addLayer(result, `${activeLayer.name} - Stretch Radiale Full`, compositeOp)
+      }
+    } else if (drag.mode === 'twirl') {
+      const radius = Math.round(
+        Math.sqrt((drag.currentX - drag.startX) ** 2 + (drag.currentY - drag.startY) ** 2)
+      )
+      if (radius > 5) {
+        const intensity = radius / 3
+        const result = twirlEffect(activeLayer.canvas, drag.startX - lx, drag.startY - ly, intensity, blendMode, radius)
+        addLayer(result, `${activeLayer.name} - Twirl`, compositeOp)
+      }
+    } else if (drag.mode === 'mirror') {
+      const dx = Math.round(Math.abs(drag.currentX - drag.startX))
+      const dy = Math.round(Math.abs(drag.currentY - drag.startY))
+      if (dx > dy && dx > 2) {
+        const result = mirrorStretch(activeLayer.canvas, 'column', drag.startX - lx, dx, blendMode)
+        addLayer(result, `${activeLayer.name} - Mirror Colonna`, compositeOp)
+      } else if (dy > 2) {
+        const result = mirrorStretch(activeLayer.canvas, 'row', drag.startY - ly, dy, blendMode)
+        addLayer(result, `${activeLayer.name} - Mirror Riga`, compositeOp)
+      }
+    } else if (drag.mode === 'selection-warp') {
+      const selX = Math.min(drag.startX, drag.currentX) - lx
+      const selY = Math.min(drag.startY, drag.currentY) - ly
+      const selW = Math.abs(drag.currentX - drag.startX)
+      const selH = Math.abs(drag.currentY - drag.startY)
+      if (selW > 4 && selH > 4) {
+        const dX = drag.currentX - drag.startX
+        const dY = drag.currentY - drag.startY
+        const result = selectionWarp(activeLayer.canvas, selX, selY, selW, selH, dX, dY, blendMode)
+        addLayer(result, `${activeLayer.name} - Stretch Warp`, compositeOp)
+      }
+    } else if (drag.mode === 'stretch') {
+      const store = useLayerStore.getState()
+      const sl = store.sourceLine
+      if (sl) {
+        if (sl.type === 'row') {
+          const dy = Math.round(drag.currentY - drag.startY)
+          const stretchUp = symmetricStretch ? Math.abs(dy) : (dy < 0 ? Math.abs(dy) : 0)
+          const stretchDown = symmetricStretch ? Math.abs(dy) : (dy > 0 ? dy : 0)
+          if (stretchUp > 2 || stretchDown > 2) {
+            const result = rowStretch(activeLayer.canvas, sl.position - ly, stretchUp, stretchDown, blendMode, easing)
+            addLayer(result, `${activeLayer.name} - Stretch Riga`, compositeOp)
+          }
+        } else {
+          const dx = Math.round(drag.currentX - drag.startX)
+          const stretchLeft = symmetricStretch ? Math.abs(dx) : (dx < 0 ? Math.abs(dx) : 0)
+          const stretchRight = symmetricStretch ? Math.abs(dx) : (dx > 0 ? dx : 0)
+          if (stretchLeft > 2 || stretchRight > 2) {
+            const result = columnStretch(activeLayer.canvas, sl.position - lx, stretchLeft, stretchRight, blendMode, easing)
+            addLayer(result, `${activeLayer.name} - Stretch Colonna`, compositeOp)
+          }
+        }
+      }
+    }
+
+    previewCanvasRef.current = null
+    lastPreviewParams.current = ''
+    dragRef.current = null
+    setStretchPreview(null)
+    forceRender(n => n + 1)
+  }, [activeLayer, blendMode, easing, setStretchPreview, symmetricStretch])
 
   const handlePointerMove = useCallback(
     (e: React.PointerEvent) => {
@@ -500,180 +647,10 @@ export function Canvas() {
 
       updatePreview(activeLayer, drag)
     },
-    [getCanvasCoords, setPanOffset, setStretchPreview, activeLayer]
+    [getCanvasCoords, setPanOffset, setStretchPreview, activeLayer, moveLayerPosition, updatePreview]
   )
 
-  const updatePreview = useCallback((layer: typeof activeLayer, drag: DragState) => {
-    if (!layer) return
-    const PREVIEW_MAX = 300
-    const scale = Math.min(1, PREVIEW_MAX / Math.max(layer.canvas.width, layer.canvas.height))
-    const pw = Math.round(layer.canvas.width * scale)
-    const ph = Math.round(layer.canvas.height * scale)
 
-    const ds = `(${pw}x${ph})-(${Math.round(drag.currentX)}-${Math.round(drag.currentY)})`
-    if (ds === lastPreviewParams.current) return
-    lastPreviewParams.current = ds
-
-    // Create a downscaled source canvas
-    let src = layer.canvas
-    if (scale < 1) {
-      const small = document.createElement('canvas')
-      small.width = pw
-      small.height = ph
-      const sctx = small.getContext('2d')!
-      sctx.imageSmoothingEnabled = true
-      sctx.drawImage(layer.canvas, 0, 0, pw, ph)
-      src = small
-    }
-
-    const store = useLayerStore.getState()
-    let result: HTMLCanvasElement | null = null
-    const sx = drag.startX * scale
-    const sy = drag.startY * scale
-    const cx = drag.currentX * scale
-    const cy = drag.currentY * scale
-
-    try {
-      if (drag.mode === 'radial') {
-        const h = Math.abs(Math.round(cx - sx))
-        const v = Math.abs(Math.round(cy - sy))
-        if (h > 2 || v > 2) result = radialStretch(src, sx, sy, h, v, store.blendMode, store.easing)
-      } else if (drag.mode === 'radial-full') {
-        const r = Math.round(Math.sqrt((cx - sx) ** 2 + (cy - sy) ** 2))
-        if (r > 2) result = radialStretchFull(src, sx, sy, r, store.blendMode, store.easing)
-      } else if (drag.mode === 'stretch') {
-        const sl = store.sourceLine
-        if (sl) {
-          const sp = sl.type === 'row' ? sl.position * scale : sl.position * scale
-          if (sl.type === 'row') {
-            const dy = Math.round(cy - sy)
-            const up = store.symmetricStretch ? Math.abs(dy) : (dy < 0 ? Math.abs(dy) : 0)
-            const down = store.symmetricStretch ? Math.abs(dy) : (dy > 0 ? dy : 0)
-            if (up > 2 || down > 2) result = rowStretch(src, sp, up, down, store.blendMode, store.easing)
-          } else {
-            const dx = Math.round(cx - sx)
-            const left = store.symmetricStretch ? Math.abs(dx) : (dx < 0 ? Math.abs(dx) : 0)
-            const right = store.symmetricStretch ? Math.abs(dx) : (dx > 0 ? dx : 0)
-            if (left > 2 || right > 2) result = columnStretch(src, sp, left, right, store.blendMode, store.easing)
-          }
-        }
-      } else if (drag.mode === 'mirror') {
-        const dx = Math.round(Math.abs(cx - sx))
-        const dy = Math.round(Math.abs(cy - sy))
-        if (dx > dy && dx > 2) result = mirrorStretch(src, 'column', sx, dx, store.blendMode)
-        else if (dy > 2) result = mirrorStretch(src, 'row', sy, dy, store.blendMode)
-      } else if (drag.mode === 'twirl') {
-        const r = Math.round(Math.sqrt((cx - sx) ** 2 + (cy - sy) ** 2))
-        if (r > 5) result = twirlEffect(src, sx, sy, r / 3, store.blendMode)
-      }
-    } catch {
-      // Preview failed silently
-    }
-
-    if (result) {
-      previewCanvasRef.current = result
-    }
-  }, [lastPreviewParams])
-
-  const applyStretch = useCallback(() => {
-    const drag = dragRef.current
-    if (!activeLayer || activeLayer.locked) {
-      dragRef.current = null
-      forceRender(n => n + 1)
-      return
-    }
-
-    if (!drag) {
-      forceRender(n => n + 1)
-      return
-    }
-
-    if (drag.mode === 'pan' || drag.mode === 'move-layer') {
-      if (drag.mode === 'move-layer') useLayerStore.getState().pushHistory()
-      dragRef.current = null
-      forceRender(n => n + 1)
-      return
-    }
-
-    const { addLayer } = useLayerStore.getState()
-    const compositeOp: GlobalCompositeOperation | undefined =
-      blendMode !== 'normal' && blendMode !== 'dissolve' ? blendMode : undefined
-
-    if (drag.mode === 'radial') {
-      const stretchH = Math.abs(Math.round(drag.currentX - drag.startX))
-      const stretchV = Math.abs(Math.round(drag.currentY - drag.startY))
-      if (stretchH > 2 || stretchV > 2) {
-        const result = radialStretch(activeLayer.canvas, drag.startX, drag.startY, stretchH, stretchV, blendMode, easing)
-        addLayer(result, `${activeLayer.name} - Stretch Radiale`, compositeOp)
-      }
-    } else if (drag.mode === 'radial-full') {
-      const radius = Math.round(
-        Math.sqrt((drag.currentX - drag.startX) ** 2 + (drag.currentY - drag.startY) ** 2)
-      )
-      if (radius > 2) {
-        const result = radialStretchFull(activeLayer.canvas, drag.startX, drag.startY, radius, blendMode, easing)
-        addLayer(result, `${activeLayer.name} - Stretch Radiale Full`, compositeOp)
-      }
-    } else if (drag.mode === 'twirl') {
-      const radius = Math.round(
-        Math.sqrt((drag.currentX - drag.startX) ** 2 + (drag.currentY - drag.startY) ** 2)
-      )
-      if (radius > 5) {
-        const intensity = radius / 3
-        const result = twirlEffect(activeLayer.canvas, drag.startX, drag.startY, intensity, blendMode)
-        addLayer(result, `${activeLayer.name} - Twirl`, compositeOp)
-      }
-    } else if (drag.mode === 'mirror') {
-      const dx = Math.round(Math.abs(drag.currentX - drag.startX))
-      const dy = Math.round(Math.abs(drag.currentY - drag.startY))
-      if (dx > dy && dx > 2) {
-        const result = mirrorStretch(activeLayer.canvas, 'column', drag.startX, dx, blendMode)
-        addLayer(result, `${activeLayer.name} - Mirror Colonna`, compositeOp)
-      } else if (dy > 2) {
-        const result = mirrorStretch(activeLayer.canvas, 'row', drag.startY, dy, blendMode)
-        addLayer(result, `${activeLayer.name} - Mirror Riga`, compositeOp)
-      }
-    } else if (drag.mode === 'selection-warp') {
-      const selX = Math.min(drag.startX, drag.currentX)
-      const selY = Math.min(drag.startY, drag.currentY)
-      const selW = Math.abs(drag.currentX - drag.startX)
-      const selH = Math.abs(drag.currentY - drag.startY)
-      if (selW > 4 && selH > 4) {
-        const dX = drag.currentX - drag.startX
-        const dY = drag.currentY - drag.startY
-        const result = selectionWarp(activeLayer.canvas, selX, selY, selW, selH, dX, dY, blendMode)
-        addLayer(result, `${activeLayer.name} - Stretch Warp`, compositeOp)
-      }
-    } else if (drag.mode === 'stretch') {
-      const store = useLayerStore.getState()
-      const sl = store.sourceLine
-      if (sl) {
-        if (sl.type === 'row') {
-          const dy = Math.round(drag.currentY - drag.startY)
-          const stretchUp = symmetricStretch ? Math.abs(dy) : (dy < 0 ? Math.abs(dy) : 0)
-          const stretchDown = symmetricStretch ? Math.abs(dy) : (dy > 0 ? dy : 0)
-          if (stretchUp > 2 || stretchDown > 2) {
-            const result = rowStretch(activeLayer.canvas, sl.position, stretchUp, stretchDown, blendMode, easing)
-            addLayer(result, `${activeLayer.name} - Stretch Riga`, compositeOp)
-          }
-        } else {
-          const dx = Math.round(drag.currentX - drag.startX)
-          const stretchLeft = symmetricStretch ? Math.abs(dx) : (dx < 0 ? Math.abs(dx) : 0)
-          const stretchRight = symmetricStretch ? Math.abs(dx) : (dx > 0 ? dx : 0)
-          if (stretchLeft > 2 || stretchRight > 2) {
-            const result = columnStretch(activeLayer.canvas, sl.position, stretchLeft, stretchRight, blendMode, easing)
-            addLayer(result, `${activeLayer.name} - Stretch Colonna`, compositeOp)
-          }
-        }
-      }
-    }
-
-    previewCanvasRef.current = null
-    lastPreviewParams.current = ''
-    dragRef.current = null
-    setStretchPreview(null)
-    forceRender(n => n + 1)
-  }, [activeLayer, blendMode, easing, setStretchPreview])
 
   const handlePointerUp = useCallback(
     (e: React.PointerEvent) => {
@@ -691,37 +668,6 @@ export function Canvas() {
       warpGrid.controlPoints.every((p, i) => Math.abs(p.x - defaults[i].x) < 1 && Math.abs(p.y - defaults[i].y) < 1)
     if (!isDefault && warpGrid.controlPoints.length === 16) {
       const result = applyGridWarp(activeLayer.canvas, warpGrid.controlPoints, blendMode)
-      // Draw warp grid points on the result canvas
-      const ctx = result.getContext('2d')!
-      ctx.save()
-      ctx.strokeStyle = 'rgba(0, 200, 255, 0.5)'
-      ctx.lineWidth = 0.5
-      for (let row = 0; row < 4; row++) {
-        ctx.beginPath()
-        for (let col = 0; col < 4; col++) {
-          const p = warpGrid.controlPoints[row * 4 + col]
-          col === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y)
-        }
-        ctx.stroke()
-      }
-      for (let col = 0; col < 4; col++) {
-        ctx.beginPath()
-        for (let row = 0; row < 4; row++) {
-          const p = warpGrid.controlPoints[row * 4 + col]
-          row === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y)
-        }
-        ctx.stroke()
-      }
-      for (const p of warpGrid.controlPoints) {
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, 4, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(0, 200, 255, 0.4)'
-        ctx.fill()
-        ctx.strokeStyle = '#fff'
-        ctx.lineWidth = 1
-        ctx.stroke()
-      }
-      ctx.restore()
       const compOp: GlobalCompositeOperation | undefined =
         blendMode !== 'normal' && blendMode !== 'dissolve' ? blendMode : undefined
       useLayerStore.getState().addLayer(result, `${activeLayer.name} - Warp Griglia`, compOp)
@@ -831,10 +777,23 @@ export function Canvas() {
         forceRender(n => n + 1)
         return
       }
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault()
+        state.saveProject()
+        return
+      }
       if (e.key === 'Escape') {
         state.setSourceLine(null)
         state.setStretchPreview(null)
         dragRef.current = null
+        previewCanvasRef.current = null
+        lastPreviewParams.current = ''
+        forceRender(n => n + 1)
+        return
+      }
+
+      if ((e.key === 'Delete' || e.key === 'Backspace') && state.activeLayerId) {
+        state.removeLayer(state.activeLayerId)
         forceRender(n => n + 1)
         return
       }

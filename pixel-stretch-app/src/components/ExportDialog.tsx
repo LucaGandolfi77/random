@@ -29,14 +29,27 @@ export function ExportDialog({ open, onClose }: Props) {
     setProcessing(true, 'Esportazione...')
     try {
       const comp = compositeLayers(layers, canvasSize.width, canvasSize.height)
+
+      // JPEG has no alpha channel: flatten onto white instead of black
+      const flattened = format === 'image/jpeg' ? (() => {
+        const c = document.createElement('canvas')
+        c.width = comp.width
+        c.height = comp.height
+        const ctx = c.getContext('2d')!
+        ctx.fillStyle = '#ffffff'
+        ctx.fillRect(0, 0, c.width, c.height)
+        ctx.drawImage(comp, 0, 0)
+        return c
+      })() : comp
+
       const source = scale !== 1 ? (() => {
         const scaled = document.createElement('canvas')
-        scaled.width = canvasSize.width * scale
-        scaled.height = canvasSize.height * scale
+        scaled.width = Math.max(1, Math.round(canvasSize.width * scale))
+        scaled.height = Math.max(1, Math.round(canvasSize.height * scale))
         const ctx = scaled.getContext('2d')!
-        ctx.drawImage(comp, 0, 0, scaled.width, scaled.height)
+        ctx.drawImage(flattened, 0, 0, scaled.width, scaled.height)
         return scaled
-      })() : comp
+      })() : flattened
 
       const qualityParam = format === 'image/png' ? undefined : quality / 100
       const blob = await new Promise<Blob>((resolve, reject) => {
@@ -51,7 +64,10 @@ export function ExportDialog({ open, onClose }: Props) {
       a.href = url
       a.download = `${fileName || 'pixel-stretch'}.${FORMAT_EXT[format]}`
       a.click()
-      URL.revokeObjectURL(url)
+      // Delay revocation: immediate revoke can cancel the download in some browsers
+      setTimeout(() => URL.revokeObjectURL(url), 1000)
+    } catch (err) {
+      window.alert(`Esportazione fallita: ${err instanceof Error ? err.message : 'errore sconosciuto'}`)
     } finally {
       setProcessing(false)
       onClose()

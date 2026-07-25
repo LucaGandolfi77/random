@@ -8,9 +8,34 @@ const uid = () => `layer-${++_id}-${Date.now()}`
 interface HistoryEntry {
   layers: Layer[]
   activeLayerId: string | null
+  canvasSize: CanvasSize
+  label: string
 }
 
 const MAX_HISTORY = 50
+// Cap on estimated memory retained by history entries (unique canvases)
+const HISTORY_MEM_CAP = 512 * 1024 * 1024
+
+function estimateHistoryBytes(entries: HistoryEntry[]): number {
+  const seen = new Set<HTMLCanvasElement>()
+  let bytes = 0
+  for (const e of entries) {
+    for (const l of e.layers) {
+      if (!seen.has(l.canvas)) {
+        seen.add(l.canvas)
+        bytes += l.canvas.width * l.canvas.height * 4
+      }
+    }
+  }
+  return bytes
+}
+
+const INITIAL_HISTORY_ENTRY: HistoryEntry = {
+  layers: [],
+  activeLayerId: null,
+  canvasSize: { width: 800, height: 600 },
+  label: 'Nuovo documento',
+}
 
 interface LayerStore {
   layers: Layer[]
@@ -23,10 +48,8 @@ interface LayerStore {
   easing: EasingCurve
   symmetricStretch: boolean
   warpGrid: WarpGrid
-  lastWarpPoints: WarpGridPoint[] | null
   sourceLine: SourceLine | null
   stretchPreview: StretchPreview | null
-  shiftHeld: boolean
   zoom: number
   panOffset: { x: number; y: number }
   history: HistoryEntry[]
@@ -40,8 +63,11 @@ interface LayerStore {
   setOpacity: (id: string, opacity: number) => void
   setLocked: (id: string, locked: boolean) => void
   renameLayer: (id: string, name: string) => void
+  setLayerCompositeOperation: (id: string, op: GlobalCompositeOperation | undefined) => void
   reorderLayer: (fromIndex: number, toIndex: number) => void
   moveLayerPosition: (id: string, x: number, y: number) => void
+  mergeDown: () => void
+  flattenLayers: () => void
   setTool: (tool: Tool) => void
   setCanvasSize: (size: CanvasSize) => void
   setProcessing: (isProcessing: boolean, message?: string) => void
@@ -51,11 +77,9 @@ interface LayerStore {
   setWarpGrid: (grid: Partial<WarpGrid>) => void
   setWarpGridPoint: (index: number, point: WarpGridPoint) => void
   resetWarpGrid: () => void
-  setLastWarpPoints: (points: WarpGridPoint[] | null) => void
   setSourceLine: (line: SourceLine | null) => void
   clearSourceLine: () => void
   setStretchPreview: (preview: StretchPreview | null) => void
-  setShiftHeld: (held: boolean) => void
   setZoom: (zoom: number) => void
   setPanOffset: (offset: { x: number; y: number }) => void
   zoomIn: () => void
@@ -65,9 +89,10 @@ interface LayerStore {
   saveProject: () => void
   loadProject: (file: File) => Promise<void>
   getActiveLayer: () => Layer | undefined
-  pushHistory: () => void
+  pushHistory: (label?: string) => void
   undo: () => void
   redo: () => void
+  jumpToHistory: (index: number) => void
 }
 
 const ZOOM_MIN = 0.1
@@ -77,8 +102,8 @@ const ZOOM_STEP = 0.25
 export const useLayerStore = create<LayerStore>((set, get) => ({
   layers: [],
   activeLayerId: null,
-  history: [],
-  historyIndex: -1,
+  history: [INITIAL_HISTORY_ENTRY],
+  historyIndex: 0,
   tool: 'select',
   canvasSize: { width: 800, height: 600 },
   isProcessing: false,
@@ -90,10 +115,8 @@ export const useLayerStore = create<LayerStore>((set, get) => ({
     controlPoints: [],
     active: false,
   },
-  lastWarpPoints: null,
   sourceLine: null,
   stretchPreview: null,
-  shiftHeld: false,
   zoom: 1,
   panOffset: { x: 0, y: 0 },
 
@@ -115,7 +138,7 @@ export const useLayerStore = create<LayerStore>((set, get) => ({
       layers: [...state.layers, layer],
       activeLayerId: id,
     }))
-    get().pushHistory()
+    get().pushHistory(layer.name)
     return id
   },
 
@@ -130,7 +153,7 @@ export const useLayerStore = create<LayerStore>((set, get) => ({
             : state.activeLayerId,
       }
     })
-    get().pushHistory()
+    get().pushHistory('Elimina layer')
   },
 
   duplicateLayer: (id) => {
@@ -145,13 +168,17 @@ export const useLayerStore = create<LayerStore>((set, get) => ({
 
   setActiveLayer: (id) => set({ activeLayerId: id }),
 
-  toggleVisibility: (id) =>
+  toggleVisibility: (id) => {
     set(state => ({
       layers: state.layers.map(l =>
         l.id === id ? { ...l, visible: !l.visible } : l
       ),
-    })),
+    }))
+    get().pushHistory('Visibilità layer')
+  },
 
+  // NOTE: no history push here — the opacity slider fires continuously;
+  // the UI calls pushHistory('Opacità layer') once when the drag ends.
   setOpacity: (id, opacity) =>
     set(state => ({
       layers: state.layers.map(l =>
@@ -159,20 +186,35 @@ export const useLayerStore = create<LayerStore>((set, get) => ({
       ),
     })),
 
-  setLocked: (id, locked) =>
+  setLocked: (id, locked) => {
     set(state => ({
       layers: state.layers.map(l =>
         l.id === id ? { ...l, locked } : l
       ),
-    })),
+    }))
+    get().pushHistory(locked ? 'Blocca layer' : 'Sblocca layer')
+  },
 
-  renameLayer: (id, name) =>
+  renameLayer: (id, name) => {
     set(state => ({
       layers: state.layers.map(l =>
         l.id === id ? { ...l, name } : l
       ),
-    })),
+    }))
+    get().pushHistory('Rinomina layer')
+  },
 
+  setLayerCompositeOperation: (id, op) => {
+    set(state => ({
+      layers: state.layers.map(l =>
+        l.id === id ? { ...l, compositeOperation: op } : l
+      ),
+    }))
+    get().pushHistory('Blend mode layer')
+  },
+
+  // NOTE: no history push here — drag&drop reorders fire continuously;
+  // the UI calls pushHistory('Riordina layer') once when the drag ends.
   reorderLayer: (fromIndex, toIndex) => {
     set(state => {
       const arr = [...state.layers]
@@ -180,7 +222,6 @@ export const useLayerStore = create<LayerStore>((set, get) => ({
       arr.splice(toIndex, 0, moved)
       return { layers: arr }
     })
-    get().pushHistory()
   },
 
   moveLayerPosition: (id, x, y) =>
@@ -189,6 +230,66 @@ export const useLayerStore = create<LayerStore>((set, get) => ({
         l.id === id ? { ...l, position: { x, y } } : l
       ),
     })),
+
+  mergeDown: () => {
+    const { layers, activeLayerId } = get()
+    const idx = layers.findIndex(l => l.id === activeLayerId)
+    if (idx <= 0) return
+    const top = layers[idx]
+    const bottom = layers[idx - 1]
+    const out = document.createElement('canvas')
+    out.width = bottom.width
+    out.height = bottom.height
+    const ctx = out.getContext('2d')!
+    const compositeOp = top.compositeOperation || 'source-over'
+    ctx.drawImage(bottom.canvas, 0, 0)
+    ctx.globalCompositeOperation = compositeOp
+    ctx.drawImage(top.canvas, top.position.x - bottom.position.x, top.position.y - bottom.position.y)
+    bottom.canvas.width = out.width
+    bottom.canvas.height = out.height
+    bottom.canvas.getContext('2d')!.drawImage(out, 0, 0)
+    set(state => ({
+      layers: state.layers.filter(l => l.id !== top.id),
+      activeLayerId: bottom.id,
+    }))
+    get().pushHistory('Unisci sotto')
+  },
+
+  flattenLayers: () => {
+    const { layers, canvasSize } = get()
+    const visible = layers.filter(l => l.visible)
+    if (visible.length === 0) return
+    if (visible.length === 1) {
+      set({ activeLayerId: visible[0].id })
+      return
+    }
+    const out = document.createElement('canvas')
+    out.width = canvasSize.width
+    out.height = canvasSize.height
+    const ctx = out.getContext('2d')!
+    for (const layer of visible) {
+      ctx.globalAlpha = layer.opacity
+      ctx.globalCompositeOperation = 'source-over'
+      ctx.drawImage(layer.canvas, layer.position.x, layer.position.y)
+    }
+    ctx.globalAlpha = 1
+    const id = `flattened-${Date.now()}`
+    set({
+      layers: [{
+        id,
+        name: 'Appiattito',
+        canvas: out,
+        visible: true,
+        opacity: 1,
+        position: { x: 0, y: 0 },
+        locked: false,
+        width: out.width,
+        height: out.height,
+      }],
+      activeLayerId: id,
+    })
+    get().pushHistory('Appiattisci')
+  },
 
   setTool: (tool) => {
     const state = get()
@@ -204,7 +305,10 @@ export const useLayerStore = create<LayerStore>((set, get) => ({
     }
   },
 
-  setCanvasSize: (size) => set({ canvasSize: size }),
+  setCanvasSize: (size) => {
+    set({ canvasSize: size })
+    get().pushHistory('Ridimensiona canvas')
+  },
   setProcessing: (isProcessing, message = '') =>
     set({ isProcessing, processingMessage: message }),
   setBlendMode: (mode) => set({ blendMode: mode }),
@@ -223,12 +327,10 @@ export const useLayerStore = create<LayerStore>((set, get) => ({
     const points = getDefaultGridPoints(canvasSize.width, canvasSize.height)
     set({ warpGrid: { controlPoints: points, active: true } })
   },
-  setLastWarpPoints: (points) => set({ lastWarpPoints: points }),
 
   setSourceLine: (line) => set({ sourceLine: line }),
   clearSourceLine: () => set({ sourceLine: null, stretchPreview: null }),
   setStretchPreview: (preview) => set({ stretchPreview: preview }),
-  setShiftHeld: (held) => set({ shiftHeld: held }),
   setZoom: (zoom) => set({ zoom: Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, zoom)) }),
   setPanOffset: (offset) => set({ panOffset: offset }),
   zoomIn: () => set(s => ({ zoom: Math.min(ZOOM_MAX, s.zoom + ZOOM_STEP) })),
@@ -248,7 +350,7 @@ export const useLayerStore = create<LayerStore>((set, get) => ({
       zoom: 1,
       panOffset: { x: 0, y: 0 },
     })
-    get().pushHistory()
+    get().pushHistory('Reset documento')
   },
 
   saveProject: () => {
@@ -277,7 +379,8 @@ export const useLayerStore = create<LayerStore>((set, get) => ({
     a.href = url
     a.download = `pixel-stretch-project-${Date.now()}.json`
     a.click()
-    URL.revokeObjectURL(url)
+    // Delay revocation: immediate revoke can cancel the download in some browsers
+    setTimeout(() => URL.revokeObjectURL(url), 1000)
   },
 
   loadProject: async (file: File) => {
@@ -316,42 +419,72 @@ export const useLayerStore = create<LayerStore>((set, get) => ({
       layers,
       activeLayerId: data.activeLayerId || layers[layers.length - 1]?.id || null,
       canvasSize: data.canvasSize,
+      tool: 'select',
+      warpGrid: { controlPoints: [], active: false },
+      sourceLine: null,
+      stretchPreview: null,
     })
-    get().pushHistory()
+    get().pushHistory('Carica progetto')
   },
 
   getActiveLayer: () => get().layers.find(l => l.id === get().activeLayerId),
 
-  pushHistory: () => {
-    const { layers, activeLayerId, history, historyIndex } = get()
+  pushHistory: (label = 'Modifica') => {
+    const { layers, activeLayerId, canvasSize, history, historyIndex } = get()
     const truncated = history.slice(0, historyIndex + 1)
     truncated.push({
       layers: [...layers],
       activeLayerId,
+      canvasSize,
+      label,
     })
     while (truncated.length > MAX_HISTORY) truncated.shift()
+    // Evict oldest entries when estimated retained memory exceeds the cap
+    while (truncated.length > 1 && estimateHistoryBytes(truncated) > HISTORY_MEM_CAP) {
+      truncated.shift()
+    }
     set({ history: truncated, historyIndex: truncated.length - 1 })
   },
 
   undo: () => {
-    const { history, historyIndex } = get()
-    if (historyIndex <= 0) return
+    const { history, historyIndex, isProcessing } = get()
+    if (isProcessing || historyIndex <= 0) return
     const entry = history[historyIndex - 1]
     set({
       layers: [...entry.layers],
       activeLayerId: entry.activeLayerId,
+      canvasSize: entry.canvasSize,
       historyIndex: historyIndex - 1,
+      sourceLine: null,
+      stretchPreview: null,
     })
   },
 
   redo: () => {
-    const { history, historyIndex } = get()
-    if (historyIndex < 0 || historyIndex >= history.length - 1) return
+    const { history, historyIndex, isProcessing } = get()
+    if (isProcessing || historyIndex < 0 || historyIndex >= history.length - 1) return
     const entry = history[historyIndex + 1]
     set({
       layers: [...entry.layers],
       activeLayerId: entry.activeLayerId,
+      canvasSize: entry.canvasSize,
       historyIndex: historyIndex + 1,
+      sourceLine: null,
+      stretchPreview: null,
+    })
+  },
+
+  jumpToHistory: (index: number) => {
+    const { history, historyIndex, isProcessing } = get()
+    if (isProcessing || index < 0 || index >= history.length || index === historyIndex) return
+    const entry = history[index]
+    set({
+      layers: [...entry.layers],
+      activeLayerId: entry.activeLayerId,
+      canvasSize: entry.canvasSize,
+      historyIndex: index,
+      sourceLine: null,
+      stretchPreview: null,
     })
   },
 }))

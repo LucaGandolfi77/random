@@ -64,6 +64,30 @@ describe('compositeLayers', () => {
     const result = compositeLayers([], 50, 50)
     expect(result).toBeDefined()
   })
+
+  it('respects compositeOperation (export matches preview)', () => {
+    // Regression: export ignored per-layer blend modes, so the exported
+    // file differed from the on-screen preview
+    const c1 = createCanvas(50, 50)
+    c1.getContext('2d')!.fillStyle = '#ff0000'
+    c1.getContext('2d')!.fillRect(0, 0, 50, 50)
+
+    const c2 = createCanvas(50, 50)
+    c2.getContext('2d')!.fillStyle = '#0000ff'
+    c2.getContext('2d')!.fillRect(0, 0, 50, 50)
+
+    const result = compositeLayers([
+      { id: '1', name: 'L1', canvas: c1, visible: true, opacity: 1, position: { x: 0, y: 0 }, locked: false, width: 50, height: 50 },
+      { id: '2', name: 'L2', canvas: c2, visible: true, opacity: 1, position: { x: 0, y: 0 }, locked: false, width: 50, height: 50, compositeOperation: 'multiply' as GlobalCompositeOperation },
+    ], 50, 50)
+
+    // red * blue = black (opaque)
+    const pixel = getPixel(result, 25, 25)
+    expect(pixel[0]).toBe(0)
+    expect(pixel[1]).toBe(0)
+    expect(pixel[2]).toBe(0)
+    expect(pixel[3]).toBe(255)
+  })
 })
 
 describe('resizeForProcessing', () => {

@@ -95,4 +95,25 @@ describe('applyGridWarp', () => {
     const pixel = getPixel(result, 50, 50)
     expect(pixel[3] === 0 || pixel[3] === 255).toBe(true)
   })
+
+  it('dragged control point moves content in the drag direction', () => {
+    // Regression: the warp used the forward map as inverse, so content moved
+    // opposite to the drag. Dragging the inner point (30,30) to (50,30) must
+    // bring the red content near (50,30).
+    const src = createCanvas(90, 90, '#0000ff')
+    const ctx = src.getContext('2d')!
+    ctx.fillStyle = '#ff0000'
+    ctx.fillRect(28, 28, 5, 5)
+    const points = getDefaultGridPoints(90, 90)
+    points[5] = { x: 50, y: 30 }
+    const result = applyGridWarp(src, points)
+    const atDrag = getPixel(result, 50, 30)
+    expect(atDrag[0]).toBe(255)
+  })
+
+  it('handles short grid arrays without crashing', () => {
+    const src = createCanvas(50, 50, '#ff0000')
+    const result = applyGridWarp(src, [{ x: 0, y: 0 }])
+    expect(getPixel(result, 25, 25)[3]).toBe(0)
+  })
 })

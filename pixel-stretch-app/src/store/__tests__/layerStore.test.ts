@@ -21,6 +21,8 @@ describe('layerStore', () => {
       warpGrid: { controlPoints: [], active: false },
       zoom: 1,
       panOffset: { x: 0, y: 0 },
+      history: [{ layers: [], activeLayerId: null, canvasSize: { width: 800, height: 600 }, label: 'Nuovo documento' }],
+      historyIndex: 0,
     })
   })
 
@@ -277,6 +279,130 @@ describe('layerStore', () => {
       expect(useLayerStore.getState().processingMessage).toBe('Loading...')
       setProcessing(false)
       expect(useLayerStore.getState().isProcessing).toBe(false)
+    })
+  })
+
+  describe('history', () => {
+    it('starts with a single initial entry at index 0', () => {
+      const state = useLayerStore.getState()
+      expect(state.history).toHaveLength(1)
+      expect(state.historyIndex).toBe(0)
+      expect(state.history[0].label).toBe('Nuovo documento')
+    })
+
+    it('first action is undoable (returns to empty document)', () => {
+      // Regression: with no initial snapshot, the first action could never be undone
+      const { addLayer, undo } = useLayerStore.getState()
+      addLayer(createCanvas(), 'L1')
+      expect(useLayerStore.getState().layers).toHaveLength(1)
+      undo()
+      expect(useLayerStore.getState().layers).toHaveLength(0)
+      expect(useLayerStore.getState().historyIndex).toBe(0)
+    })
+
+    it('redo restores the undone state', () => {
+      const { addLayer, undo, redo } = useLayerStore.getState()
+      addLayer(createCanvas(), 'L1')
+      undo()
+      redo()
+      expect(useLayerStore.getState().layers).toHaveLength(1)
+      expect(useLayerStore.getState().layers[0].name).toBe('L1')
+    })
+
+    it('records labels for actions', () => {
+      const { addLayer, removeLayer } = useLayerStore.getState()
+      const id = addLayer(createCanvas(), 'Mio layer')
+      removeLayer(id)
+      const { history } = useLayerStore.getState()
+      expect(history[1].label).toBe('Mio layer')
+      expect(history[2].label).toBe('Elimina layer')
+    })
+
+    it('tracks visibility, lock, rename and canvas resize', () => {
+      const { addLayer, toggleVisibility, setLocked, renameLayer, setCanvasSize } = useLayerStore.getState()
+      const id = addLayer(createCanvas(), 'X')
+      toggleVisibility(id)
+      setLocked(id, true)
+      renameLayer(id, 'Y')
+      setCanvasSize({ width: 400, height: 300 })
+      const { history, historyIndex } = useLayerStore.getState()
+      expect(history.map(h => h.label)).toEqual([
+        'Nuovo documento',
+        'X',
+        'Visibilità layer',
+        'Blocca layer',
+        'Rinomina layer',
+        'Ridimensiona canvas',
+      ])
+      expect(historyIndex).toBe(5)
+    })
+
+    it('undo restores canvasSize', () => {
+      const { addLayer, setCanvasSize, undo } = useLayerStore.getState()
+      addLayer(createCanvas(), 'L1')
+      setCanvasSize({ width: 400, height: 300 })
+      undo()
+      expect(useLayerStore.getState().canvasSize).toEqual({ width: 800, height: 600 })
+    })
+
+    it('reorderLayer does not flood history (single push on drag end)', () => {
+      // Regression: one drag&drop produced dozens of history entries
+      const { addLayer, reorderLayer } = useLayerStore.getState()
+      addLayer(createCanvas(), 'A')
+      addLayer(createCanvas(), 'B')
+      addLayer(createCanvas(), 'C')
+      const before = useLayerStore.getState().history.length
+      reorderLayer(0, 1)
+      reorderLayer(1, 2)
+      expect(useLayerStore.getState().history.length).toBe(before)
+      useLayerStore.getState().pushHistory('Riordina layer')
+      expect(useLayerStore.getState().history.length).toBe(before + 1)
+    })
+
+    it('jumpToHistory jumps to a specific state', () => {
+      const { addLayer, jumpToHistory } = useLayerStore.getState()
+      addLayer(createCanvas(), 'A')
+      addLayer(createCanvas(), 'B')
+      addLayer(createCanvas(), 'C')
+      jumpToHistory(1)
+      expect(useLayerStore.getState().layers).toHaveLength(1)
+      expect(useLayerStore.getState().layers[0].name).toBe('A')
+      jumpToHistory(3)
+      expect(useLayerStore.getState().layers).toHaveLength(3)
+    })
+
+    it('jumpToHistory ignores invalid or current index', () => {
+      const { addLayer, jumpToHistory } = useLayerStore.getState()
+      addLayer(createCanvas(), 'A')
+      const idx = useLayerStore.getState().historyIndex
+      jumpToHistory(idx)
+      expect(useLayerStore.getState().historyIndex).toBe(idx)
+      jumpToHistory(-1)
+      jumpToHistory(99)
+      expect(useLayerStore.getState().historyIndex).toBe(idx)
+    })
+
+    it('undo/redo are blocked while processing', () => {
+      const { addLayer, setProcessing, undo } = useLayerStore.getState()
+      addLayer(createCanvas(), 'A')
+      setProcessing(true, 'AI...')
+      undo()
+      expect(useLayerStore.getState().layers).toHaveLength(1)
+      setProcessing(false)
+      undo()
+      expect(useLayerStore.getState().layers).toHaveLength(0)
+    })
+
+    it('new action after undo truncates the redo branch', () => {
+      const { addLayer, undo } = useLayerStore.getState()
+      addLayer(createCanvas(), 'A')
+      addLayer(createCanvas(), 'B')
+      undo()
+      addLayer(createCanvas(), 'C')
+      const { history, historyIndex } = useLayerStore.getState()
+      expect(history).toHaveLength(3)
+      expect(history[historyIndex].label).toBe('C')
+      expect(useLayerStore.getState().layers.map(l => l.name)).toEqual(['A', 'C'])
     })
   })
 })

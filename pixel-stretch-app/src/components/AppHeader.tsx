@@ -1,35 +1,16 @@
 import { useRef } from 'react'
 import { Download, Zap, Undo2, Redo2, RotateCcw, Maximize, Save, Upload, Blend } from 'lucide-react'
 import { useLayerStore } from '../store/layerStore'
-import { compositeLayers } from '../utils/canvas'
 
 interface AppHeaderProps {
   onResize?: () => void
   onFilter?: () => void
+  onExport?: () => void
 }
 
-export function AppHeader({ onResize, onFilter }: AppHeaderProps) {
-  const { layers, activeLayerId, canvasSize, setProcessing, historyIndex, history, undo, redo, resetAll, saveProject, loadProject } = useLayerStore()
+export function AppHeader({ onResize, onFilter, onExport }: AppHeaderProps) {
+  const { layers, activeLayerId, setProcessing, historyIndex, history, undo, redo, resetAll, saveProject, loadProject } = useLayerStore()
   const fileInputRef = useRef<HTMLInputElement>(null)
-
-  const handleExport = async () => {
-    if (layers.length === 0) return
-    setProcessing(true, 'Esportazione PNG...')
-    try {
-      const comp = compositeLayers(layers, canvasSize.width, canvasSize.height)
-      const blob = await new Promise<Blob>((resolve, reject) => {
-        comp.toBlob(b => (b ? resolve(b) : reject(new Error('toBlob'))), 'image/png')
-      })
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = `pixel-stretch-${Date.now()}.png`
-      a.click()
-      URL.revokeObjectURL(url)
-    } finally {
-      setProcessing(false)
-    }
-  }
 
   return (
     <header className="app-header">
@@ -47,7 +28,11 @@ export function AppHeader({ onResize, onFilter }: AppHeaderProps) {
             const file = e.target.files?.[0]
             if (file) {
               setProcessing(true, 'Caricamento progetto...')
-              try { await loadProject(file) } catch {}
+              try {
+                await loadProject(file)
+              } catch (err) {
+                window.alert(`Impossibile caricare il progetto: ${err instanceof Error ? err.message : 'file non valido'}`)
+              }
               setProcessing(false)
             }
             e.target.value = ''
@@ -110,11 +95,12 @@ export function AppHeader({ onResize, onFilter }: AppHeaderProps) {
         </button>
         <button
           className="btn btn-primary"
-          onClick={handleExport}
+          onClick={onExport}
           disabled={layers.length === 0}
+          title="Esporta immagine"
         >
           <Download size={16} />
-          <span>Esporta PNG</span>
+          <span>Esporta</span>
         </button>
       </div>
     </header>

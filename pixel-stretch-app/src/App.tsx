@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { AppHeader } from './components/AppHeader'
 import { Canvas } from './components/Canvas'
 import { LayerPanel } from './components/LayerPanel'
+import { HistoryPanel } from './components/HistoryPanel'
 import { ToolBar } from './components/ToolBar'
 import { StretchControls } from './components/StretchControls'
 import { ZoomControls } from './components/ZoomControls'
@@ -39,7 +40,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <AppHeader onResize={() => setResizeOpen(true)} onFilter={() => setFilterOpen(true)} />
+      <AppHeader onResize={() => setResizeOpen(true)} onFilter={() => setFilterOpen(true)} onExport={() => setExportOpen(true)} />
       <div className="app-body">
         <div className="sidebar sidebar-left">
           <ToolBar />
@@ -54,6 +55,7 @@ export default function App() {
 
         <div className="sidebar sidebar-right">
           <LayerPanel />
+          <HistoryPanel />
         </div>
       </div>
       <ExportDialog open={exportOpen} onClose={() => setExportOpen(false)} />

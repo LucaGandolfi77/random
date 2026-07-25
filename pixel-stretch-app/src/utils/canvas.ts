@@ -1,5 +1,19 @@
 import type { Layer } from '../types'
 
+function compositeLayersInto(
+  layers: Layer[],
+  ctx: CanvasRenderingContext2D
+) {
+  for (const layer of layers) {
+    if (!layer.visible) continue
+    ctx.globalAlpha = layer.opacity
+    ctx.globalCompositeOperation = layer.compositeOperation || 'source-over'
+    ctx.drawImage(layer.canvas, layer.position.x, layer.position.y)
+  }
+  ctx.globalAlpha = 1
+  ctx.globalCompositeOperation = 'source-over'
+}
+
 export function compositeLayers(
   layers: Layer[],
   width: number,
@@ -9,13 +23,7 @@ export function compositeLayers(
   out.width = width
   out.height = height
   const ctx = out.getContext('2d')!
-
-  for (const layer of layers) {
-    if (!layer.visible) continue
-    ctx.globalAlpha = layer.opacity
-    ctx.drawImage(layer.canvas, layer.position.x, layer.position.y)
-  }
-  ctx.globalAlpha = 1
+  compositeLayersInto(layers, ctx)
   return out
 }
 
@@ -25,14 +33,7 @@ export function compositeToCanvas(
 ) {
   const ctx = targetCanvas.getContext('2d')!
   ctx.clearRect(0, 0, targetCanvas.width, targetCanvas.height)
-  for (const layer of layers) {
-    if (!layer.visible) continue
-    ctx.globalAlpha = layer.opacity
-    ctx.globalCompositeOperation = layer.compositeOperation || 'source-over'
-    ctx.drawImage(layer.canvas, layer.position.x, layer.position.y)
-  }
-  ctx.globalAlpha = 1
-  ctx.globalCompositeOperation = 'source-over'
+  compositeLayersInto(layers, ctx)
 }
 
 export function canvasToBlob(
@@ -67,12 +68,19 @@ export function resizeForProcessing(
   return out
 }
 
-export function drawCheckerboard(
-  ctx: CanvasRenderingContext2D,
-  width: number,
-  height: number,
-  size = 10
-) {
+let _checkerboardCache: HTMLCanvasElement | null = null
+let _checkerboardW = 0
+let _checkerboardH = 0
+
+function getCheckerboard(width: number, height: number): HTMLCanvasElement {
+  if (_checkerboardCache && _checkerboardW === width && _checkerboardH === height) {
+    return _checkerboardCache
+  }
+  const size = 10
+  const c = document.createElement('canvas')
+  c.width = width
+  c.height = height
+  const ctx = c.getContext('2d')!
   for (let y = 0; y < height; y += size) {
     for (let x = 0; x < width; x += size) {
       ctx.fillStyle =
@@ -82,4 +90,17 @@ export function drawCheckerboard(
       ctx.fillRect(x, y, size, size)
     }
   }
+  _checkerboardCache = c
+  _checkerboardW = width
+  _checkerboardH = height
+  return c
+}
+
+export function drawCheckerboard(
+  ctx: CanvasRenderingContext2D,
+  width: number,
+  height: number
+) {
+  const cached = getCheckerboard(width, height)
+  ctx.drawImage(cached, 0, 0)
 }

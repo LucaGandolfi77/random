@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id              String    @id @default(cuid())
+  email           String    @unique
+  passwordHash    String
+  name            String
+  birthdate       DateTime?
+  zodiacSign      String?
+  coins           Int       @default(100)
+  xp              Int       @default(0)
+  level           Int       @default(1)
+  loginStreak     Int       @default(0)
+  lastLoginAt     DateTime?
+  lastDailyCardAt DateTime?
+  createdAt       DateTime  @default(now())
+
+  readings         Reading[]
+  unlocks          Unlock[]
+  userAchievements UserAchievement[]
+}
+
+model Deck {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  name        String
+  description String
+  cost        Int     @default(0)
+  isDefault   Boolean @default(false)
+  themeJson   String  @default("{}")
+  sortOrder   Int
+
+  cards    Card[]
+  readings Reading[]
+}
+
+model Card {
+  id              String  @id @default(cuid())
+  deckId          String
+  name            String
+  arcana          String
+  suit            String?
+  rank            String?
+  uprightMeaning  String
+  reversedMeaning String
+  keywords        String
+  imagePath       String
+  sortOrder       Int
+
+  deck Deck @relation(fields: [deckId], references: [id])
+}
+
+model Spread {
+  id             String  @id @default(cuid())
+  slug           String  @unique
+  name           String
+  description    String
+  positionsJson  String
+  cardCount      Int     @default(1)
+  cost           Int     @default(0)
+  isDefault      Boolean @default(false)
+  sortOrder      Int
+
+  readings Reading[]
+}
+
+model Reading {
+  id        String   @id @default(cuid())
+  userId    String
+  spreadId  String
+  deckId    String
+  question  String?
+  cardsJson String
+  notes     String?
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  spread Spread @relation(fields: [spreadId], references: [id])
+  deck   Deck   @relation(fields: [deckId], references: [id])
+}
+
+model Unlock {
+  id        String   @id @default(cuid())
+  userId    String
+  itemType  String
+  itemSlug  String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, itemType, itemSlug])
+}
+
+model Achievement {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  name        String
+  description String
+  coinsReward Int     @default(0)
+  xpReward    Int     @default(0)
+
+  userAchievements UserAchievement[]
+}
+
+model UserAchievement {
+  userId        String
+  achievementId String
+  earnedAt      DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id])
+  achievement Achievement @relation(fields: [achievementId], references: [id])
+
+  @@id([userId, achievementId])
+}

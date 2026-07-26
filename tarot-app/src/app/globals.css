@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-mystic-dark: #0a0a1a;
+  --color-mystic-surface: #13132b;
+  --color-mystic-card: #1a1a3e;
+  --color-mystic-gold: #d4a843;
+  --color-mystic-text: #e8e0d0;
+  --color-mystic-muted: #8a7e6e;
+  --font-heading: "Cormorant Garamond", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  background: var(--color-mystic-dark);
+  color: var(--color-mystic-text);
+  font-family: var(--font-body);
+}
+
+.min-h-screen { min-height: 100vh; }

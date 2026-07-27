@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+  <title>TailSSH</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="TailSSH" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192" href="/icons/icon-192.png" />
+  <link rel="stylesheet" href="/vendor/xterm.css" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header id="topbar">
+    <span class="logo">&gt;_ TailSSH</span>
+    <span id="status" class="status status-off"><span class="dot"></span><span id="status-text">offline</span></span>
+    <div id="view-tabs" class="view-tabs hidden">
+      <button data-view="terminal" class="view-tab">Terminal</button>
+      <button data-view="files" class="view-tab">Files</button>
+      <button data-view="screen" class="view-tab">Screen</button>
+    </div>
+    <button id="install-btn" class="ghost hidden" type="button">Install</button>
+    <button id="disconnect-btn" class="ghost hidden" type="button">Disconnect</button>
+    <button id="back-btn" class="ghost hidden" type="button">&#8592; Back</button>
+  </header>
+
+  <!-- Connect form -->
+  <main id="connect-view" class="connect">
+    <form id="connect-form" autocomplete="off">
+      <div id="profiles" class="profiles"></div>
+
+      <label>
+        Host <span class="hint">(Tailscale IP or MagicDNS name)</span>
+        <input id="host" name="host" inputmode="url" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="mac-mini or 100.64.1.5" required />
+      </label>
+
+      <div class="row">
+        <label class="grow">
+          Username
+          <input id="username" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="alex" required />
+        </label>
+        <label class="port">
+          Port
+          <input id="port" inputmode="numeric" pattern="[0-9]*" value="22" />
+        </label>
+      </div>
+
+      <div class="segmented" role="tablist" aria-label="Auth method">
+        <button type="button" id="tab-password" class="seg active">Password</button>
+        <button type="button" id="tab-key" class="seg">SSH key</button>
+      </div>
+
+      <div id="pane-password">
+        <label>
+          Password
+          <input id="password" type="password" autocomplete="off" placeholder="********" />
+        </label>
+      </div>
+
+      <div id="pane-key" class="hidden">
+        <label class="file-label">
+          Private key (PEM / OpenSSH)
+          <input id="keyfile" type="file" />
+        </label>
+        <span id="keyfile-name" class="hint"></span>
+        <label>
+          Key passphrase <span class="hint">(if any)</span>
+          <input id="passphrase" type="password" autocomplete="off" />
+        </label>
+      </div>
+
+      <label>
+        App token <span class="hint">(only if the relay has AUTH_TOKEN set)</span>
+        <input id="token" type="password" autocomplete="off" placeholder="optional" />
+      </label>
+
+      <div class="row actions">
+        <button id="save-profile-btn" class="ghost medium" type="button">&#43; Save profile</button>
+        <button id="connect-btn" class="primary" type="submit">Connect</button>
+      </div>
+
+      <p id="ios-install-hint" class="hint center hidden">
+        Tip: in Safari tap Share &rarr; &ldquo;Add to Home Screen&rdquo; to install this as an app.
+      </p>
+    </form>
+  </main>
+
+  <!-- Terminal -->
+  <main id="terminal-view" class="terminal-view hidden">
+    <div id="terminal" class="terminal"></div>
+    <div id="toolbar" class="toolbar">
+      <button data-seq="esc"   type="button">Esc</button>
+      <button data-seq="tab"   type="button">Tab</button>
+      <button id="ctrl-btn"    type="button" aria-pressed="false">Ctrl</button>
+      <button data-seq="left"  type="button">&larr;</button>
+      <button data-seq="up"    type="button">&uarr;</button>
+      <button data-seq="down"  type="button">&darr;</button>
+      <button data-seq="right" type="button">&rarr;</button>
+      <button data-seq="tilde" type="button">~</button>
+      <button data-seq="pipe"  type="button">|</button>
+      <button id="kbd-btn"     type="button">&larr;&crarr;</button>
+    </div>
+  </main>
+
+  <!-- File browser -->
+  <main id="files-view" class="file-view hidden">
+    <nav id="breadcrumb" class="breadcrumb"></nav>
+    <div id="file-list" class="file-list"></div>
+    <div id="progress-area" class="progress-area"></div>
+    <div class="file-actions">
+      <button id="file-upload-btn" class="ghost" type="button">Upload</button>
+      <button id="file-mkdir-btn" class="ghost" type="button">New folder</button>
+      <input id="file-picker" type="file" class="hidden" />
+    </div>
+  </main>
+
+  <!-- Screen / VNC -->
+  <main id="screen-view" class="screen-view hidden">
+    <canvas id="vnc-canvas" class="vnc-canvas"></canvas>
+    <div id="vnc-toolbar" class="toolbar">
+      <button id="vnc-kbd-btn" type="button">&larr;&crarr;</button>
+      <button id="vnc-ctrl-alt-del-btn" type="button">Ctrl-Alt-Del</button>
+    </div>
+  </main>
+
+  <script src="/vendor/xterm.js"></script>
+  <script src="/vendor/addon-fit.js"></script>
+  <script src="/app.js"></script>
+  <script src="/files.js"></script>
+</body>
+</html>

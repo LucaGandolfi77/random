@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="g" cx="35%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#a0f0a0"/>
+      <stop offset="40%" stop-color="#40c840"/>
+      <stop offset="100%" stop-color="#209020"/>
+    </radialGradient>
+    <filter id="s"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity=".3"/></filter>
+  </defs>
+  <g filter="url(#s)">
+    <rect x="20" y="4" width="24" height="24" rx="3" transform="rotate(45 32 16)" fill="url(#g)" stroke="#1a751a" stroke-width="1.5"/>
+    <polygon points="32,20 20,32 32,44 44,32" fill="url(#g)" stroke="#1a751a" stroke-width="1.5"/>
+  </g>
+</svg>

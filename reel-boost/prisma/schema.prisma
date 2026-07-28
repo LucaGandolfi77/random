@@ -1,0 +1,155 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ─── Users ─────────────────────────────────────────────────────
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  passwordHash  String
+  name          String
+  avatar        String?
+  bio           String?
+  walletBalance Int      @default(100)
+  role          Role     @default(USER)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  videos       Video[]
+  boosts       Boost[]
+  likes        Like[]
+  views        View[]
+  transactions WalletTransaction[]
+  preferences  UserCategory[]
+
+  @@index([email])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+// ─── Categories ────────────────────────────────────────────────
+model Category {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  icon        String?
+  description String?
+  createdAt   DateTime @default(now())
+
+  videos       Video[]
+  preferences  UserCategory[]
+
+  @@index([slug])
+}
+
+model UserCategory {
+  id         String   @id @default(cuid())
+  userId     String
+  categoryId String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  @@unique([userId, categoryId])
+  @@index([userId])
+}
+
+// ─── Videos ────────────────────────────────────────────────────
+model Video {
+  id           String     @id @default(cuid())
+  title        String
+  description  String?
+  url          String
+  thumbnailUrl String?
+  duration     Int?
+  sourceType   VideoSource
+  externalId   String?
+  authorId     String
+  author       User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  categoryId   String?
+  category     Category?  @relation(fields: [categoryId], references: [id])
+  active       Boolean    @default(true)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  likes   Like[]
+  views   View[]
+  boosts  Boost[]
+
+  @@index([authorId])
+  @@index([categoryId])
+  @@index([createdAt])
+}
+
+enum VideoSource {
+  DEMO
+  UPLOAD
+  YOUTUBE
+}
+
+// ─── Boost (pay to be famous) ──────────────────────────────────
+model Boost {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  videoId   String
+  video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  amount    Int
+  createdAt DateTime @default(now())
+
+  @@index([videoId])
+  @@index([userId])
+}
+
+// ─── Engagement ────────────────────────────────────────────────
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  videoId   String
+  video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, videoId])
+  @@index([videoId])
+}
+
+model View {
+  id        String   @id @default(cuid())
+  videoId   String
+  video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  watchTime Int      @default(0)
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([videoId])
+  @@index([userId])
+}
+
+// ─── Wallet ────────────────────────────────────────────────────
+model WalletTransaction {
+  id        String          @id @default(cuid())
+  userId    String
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      TransactionType
+  amount    Int
+  videoId   String?
+  createdAt DateTime        @default(now())
+
+  @@index([userId])
+}
+
+enum TransactionType {
+  TOPUP
+  BOOST_SPEND
+}

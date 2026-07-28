@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Candy Crush Clone</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="app">
+  <!-- MENU PRINCIPALE -->
+  <div id="menu-view" class="view active">
+    <h1 class="game-title">🍬 Candy Crush</h1>
+    <p class="game-subtitle">Scegli un livello</p>
+    <div id="level-grid"></div>
+  </div>
+
+  <!-- GIOCO -->
+  <div id="game-view" class="view">
+    <div id="game-header">
+      <button id="btn-back" class="btn-icon">⬅</button>
+      <div class="header-info">
+        <span id="level-label">Livello 1</span>
+        <span id="moves-label">30 mosse</span>
+      </div>
+      <div class="header-info">
+        <span id="score-label">Punteggio: 0</span>
+        <span id="target-label">Obiettivo: 1000</span>
+      </div>
+      <div id="jelly-counter" class="hidden">🧊 Gelatine: <span id="jelly-count">0</span></div>
+    </div>
+    <div id="board-wrapper">
+      <div id="board"></div>
+    </div>
+  </div>
+
+  <!-- OVERLAY VITTORIA / SCONFITTA -->
+  <div id="overlay" class="hidden">
+    <div id="overlay-content">
+      <h2 id="overlay-title"></h2>
+      <p id="overlay-text"></p>
+      <div id="stars-container"></div>
+      <div id="overlay-buttons">
+        <button id="btn-retry" class="btn-primary">Riprova</button>
+        <button id="btn-next" class="btn-primary hidden">Prossimo livello</button>
+        <button id="btn-menu" class="btn-secondary">Menu</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

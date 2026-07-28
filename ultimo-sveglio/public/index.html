@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>L'Ultimo Sveglio</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <canvas id="starfield"></canvas>
+
+  <div id="app">
+    <header>
+      <h1>🌙 L'Ultimo Sveglio</h1>
+      <p class="subtitle">La veglia dei solitari</p>
+    </header>
+
+    <div id="day-view" class="view">
+      <div class="countdown-container">
+        <p class="countdown-label">Prossima veglia tra</p>
+        <div id="countdown">--:--:--</div>
+      </div>
+      <p class="day-message">Il gioco inizia a mezzanotte.<br />Finché l'ultimo non si addormenta.</p>
+    </div>
+
+    <div id="night-view" class="view hidden">
+      <div class="night-header">
+        <div class="night-info">
+          <span class="notte-badge">🌙 Notte in corso</span>
+          <span id="notte-data"></span>
+        </div>
+        <div class="presenze-info">
+          <span id="contatore-svegli">0</span> veglianti online
+        </div>
+      </div>
+
+      <div id="chat-section">
+        <div class="chat-header">
+          <h3>💬 Veglia</h3>
+          <span class="chat-hint">finché sarete almeno in due</span>
+        </div>
+        <div id="chat-messages"></div>
+        <div id="chat-input-area">
+          <input type="text" id="chat-input" placeholder="Scrivi qualcosa..." maxlength="500" />
+          <button id="chat-send">Invia</button>
+        </div>
+      </div>
+
+      <div id="user-list-section">
+        <h3>🌙 Ancora svegli</h3>
+        <ul id="user-list"></ul>
+      </div>
+    </div>
+
+    <div id="coronation-view" class="view hidden">
+      <div class="coronation-glow"></div>
+      <div class="coronation-content">
+        <div class="corona-icon">👑</div>
+        <h2 id="coronation-title">Sei l'Ultimo Sveglio!</h2>
+        <p class="coronation-text">La notte è tua. Il silenzio ti appartiene.<br />Lascia un messaggio che tutti ricorderanno.</p>
+        <textarea id="final-message-input" placeholder="Il tuo messaggio ai viandanti del giorno..." maxlength="1000"></textarea>
+        <button id="final-message-send">Consegna il tuo messaggio</button>
+        <p class="coronation-info">Il tuo messaggio vivrà per sempre nell'album dei ricordi.</p>
+      </div>
+    </div>
+
+    <div id="final-message-view" class="view hidden">
+      <div class="final-message-card">
+        <h3>📜 Messaggio della notte</h3>
+        <p class="final-meta"><span id="final-nickname"></span> — <span id="final-date"></span></p>
+        <p id="final-message-text" class="final-text"></p>
+      </div>
+    </div>
+
+    <section id="album-section">
+      <div class="album-header">
+        <h2>📖 Album dei ricordi</h2>
+        <button id="album-toggle" class="album-toggle-btn">Mostra</button>
+      </div>
+      <div id="album-content" class="hidden">
+        <div id="album-empty" class="album-empty">Ancora nessuna notte vissuta.</div>
+        <div id="album-list"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/script.js"></script>
+</body>
+</html>

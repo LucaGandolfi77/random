@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="description" content="SHHH – Leggi in silenzio. Il rumore punisce la lettura.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='64' fill='%230a0a0a'/%3E%3Ccircle cx='256' cy='256' r='180' fill='none' stroke='%23e94560' stroke-width='20'/%3E%3Ctext x='256' y='310' font-family='Georgia,serif' font-size='240' font-weight='bold' text-anchor='middle' fill='%23e94560'%3ES%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+  <title>SHHH – Leggi in silenzio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- topbar -->
+  <header id="topbar">
+    <nav id="tabs">
+      <button class="tab active" data-tab="library">Biblioteca</button>
+      <button class="tab" data-tab="browser">Browser</button>
+      <button class="tab" data-tab="stats">Statistiche</button>
+    </nav>
+    <div id="mic-indicator">
+      <span class="dot green" id="mic-dot"></span>
+      <span id="mode-badge">Soglia</span>
+      <button id="settings-btn" aria-label="Impostazioni">⚙️</button>
+    </div>
+  </header>
+
+  <!-- content -->
+  <main id="content">
+
+    <!-- library tab -->
+    <section id="tab-library" class="tab-content active">
+      <div id="home-view">
+        <h1>SHHH</h1>
+        <p class="subtitle">Leggi in silenzio</p>
+        <div id="dropzone">
+          <p>Trascina un file qui o <a id="file-picker-link">sfoglia</a></p>
+          <input type="file" id="file-input" accept=".pdf,.epub,.txt,.md,.html,.htm" hidden>
+          <p class="formats">PDF &middot; ePub &middot; TXT &middot; MD &middot; HTML</p>
+        </div>
+        <div id="recent-books"></div>
+      </div>
+      <div id="reader-view" hidden>
+        <div id="reader-toolbar">
+          <button id="reader-back">← Biblioteca</button>
+          <span id="reader-title"></span>
+          <span id="reader-page"></span>
+        </div>
+        <div id="reader-content">
+          <div id="pdf-container" hidden><canvas id="pdf-canvas"></canvas></div>
+          <div id="epub-container" hidden></div>
+          <div id="text-container" hidden></div>
+        </div>
+        <div id="reader-nav">
+          <button id="prev-page">←</button>
+          <button id="next-page">→</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- browser tab -->
+    <section id="tab-browser" class="tab-content">
+      <div id="browser-bar">
+        <input type="text" id="url-input" placeholder="Inserisci URL…" autocomplete="off">
+        <button id="go-btn">Vai</button>
+      </div>
+      <div id="quick-links">
+        <button data-url="https://en.wikipedia.org">Wikipedia</button>
+        <button data-url="https://standardebooks.org">Standard eBooks</button>
+        <button data-url="https://gutenberg.org">Project Gutenberg</button>
+        <button data-url="https://are.na">Are.na</button>
+      </div>
+      <iframe id="browser-frame" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" src="about:blank" title="Browser"></iframe>
+      <div id="browser-blocked" hidden>
+        <p>🚫 Questo sito rifiuta il silenzio</p>
+        <p class="sub">(X-Frame-Options impedisce l'embed in iframe)</p>
+      </div>
+    </section>
+
+    <!-- stats tab -->
+    <section id="tab-stats" class="tab-content">
+      <h2>Statistiche del silenzio</h2>
+      <div id="stats-grid">
+        <div class="stat-card">
+          <span class="stat-value" id="stat-today">0s</span>
+          <span class="stat-label">secondi oggi</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="stat-total">0s</span>
+          <span class="stat-label">totali</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="stat-streak">0🔥</span>
+          <span class="stat-label">streak</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="stat-pages">0</span>
+          <span class="stat-label">pagine lette</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- audiobar -->
+  <footer id="audiobar">
+    <div id="level-meter"><div id="level-fill"></div></div>
+    <span id="level-text">-∞ dB</span>
+    <button id="mode-toggle">🌫️</button>
+  </footer>
+
+</div>
+
+<!-- SHHH overlay (threshold mode) -->
+<div id="overlay-shhh" hidden>
+  <div id="overlay-content">
+    <div id="shhh-icon">🤫</div>
+    <div id="shhh-text">SHHH</div>
+    <div id="shhh-meter"><div id="shhh-fill"></div></div>
+    <div id="shhh-level">-∞ dB</div>
+    <div id="shhh-sub">Troppo rumore per leggere</div>
+  </div>
+</div>
+
+<!-- settings panel -->
+<div id="settings-panel" hidden>
+  <div id="settings-header">
+    <span>Cabina di regia</span>
+    <button id="settings-close">✕</button>
+  </div>
+  <div id="settings-body">
+    <div class="setting-group">
+      <label>Modalità</label>
+      <select id="sel-mode">
+        <option value="threshold">🚫 Soglia — tutto o niente</option>
+        <option value="fade">🌫️ Dissolvenza — trasparenza progressiva</option>
+      </select>
+    </div>
+    <div class="setting-group" id="threshold-settings">
+      <label>Limite di rumore: <span id="threshold-val">-20</span> dB</label>
+      <input type="range" id="threshold-slider" min="-50" max="-5" value="-20" step="1">
+    </div>
+    <div class="setting-group" id="fade-settings" hidden>
+      <label>Opaco sotto: <span id="floor-val">-40</span> dB</label>
+      <input type="range" id="floor-slider" min="-55" max="-10" value="-40" step="1">
+      <label>Invisibile sopra: <span id="ceiling-val">-15</span> dB</label>
+      <input type="range" id="ceiling-slider" min="-40" max="0" value="-15" step="1">
+    </div>
+    <div class="setting-group">
+      <label>Grace period: <span id="grace-val">1.5</span> s</label>
+      <input type="range" id="grace-slider" min="0.5" max="5" value="1.5" step="0.1">
+    </div>
+    <button id="reset-stats-btn">Reset statistiche</button>
+  </div>
+</div>
+
+<!-- CDN deps -->
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11/build/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/epubjs@0.3.93/dist/epub.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<!-- app -->
+<script src="js/audio.js"></script>
+<script src="js/reader.js"></script>
+<script src="js/browser.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

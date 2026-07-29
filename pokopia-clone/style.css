@@ -1,0 +1,72 @@
+/* style.css — DITTOPIA. Estetica GBC pixel-art, UI retro. */
+* { box-sizing:border-box; margin:0; padding:0; }
+html,body{ width:100%; height:100%; overflow:hidden; background:#0a0a1a; font-family:'Courier New',monospace; color:#f8f8f8; user-select:none; -webkit-user-select:none; touch-action:none; }
+#game{ display:block; position:absolute; top:0; left:0; image-rendering:pixelated; image-rendering:crisp-edges; }
+
+/* HUD */
+#hud{ position:fixed; top:0; left:0; right:0; display:flex; flex-wrap:wrap; gap:6px; padding:6px 8px; align-items:center; font-size:13px; text-shadow:1px 1px 0 #000; pointer-events:none; }
+#clock{ background:rgba(20,24,48,0.85); padding:3px 8px; border:2px solid #6ab8ff; border-radius:3px; }
+#objective{ flex:1 1 200px; background:rgba(20,24,48,0.7); padding:3px 8px; border:1px solid #445; border-radius:3px; }
+#inv{ display:flex; flex-wrap:wrap; gap:4px; }
+#inv .ic{ background:rgba(20,24,48,0.85); padding:2px 6px; border:1px solid #6ab8ff; border-radius:3px; display:flex; align-items:center; gap:3px; }
+#inv .ic i{ width:14px; height:14px; display:inline-block; background-size:contain; }
+#hotbar{ position:fixed; left:8px; bottom:46px; display:flex; flex-wrap:wrap; max-width:60%; gap:3px; pointer-events:auto; }
+#hotbar .hb{ background:rgba(20,24,48,0.85); border:2px solid #557; border-radius:3px; padding:3px 6px; font-size:11px; cursor:pointer; }
+#hotbar .hb.sel{ border-color:#ffd23f; background:rgba(60,40,10,0.9); }
+
+#tip{ position:fixed; bottom:6px; left:50%; transform:translateX(-50%); font-size:10px; opacity:0.7; text-shadow:1px 1px 0 #000; pointer-events:none; text-align:center; width:90%; }
+#toast{ position:fixed; top:42px; left:50%; transform:translateX(-50%); background:rgba(20,24,48,0.92); border:2px solid #6ab8ff; padding:5px 12px; border-radius:4px; opacity:0; transition:opacity .3s; font-size:13px; pointer-events:none; z-index:30; max-width:80%; }
+
+/* pannelli */
+.panel{ display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(20,24,48,0.96); border:3px solid #6ab8ff; border-radius:4px; padding:12px 16px; width:min(92vw, 520px); max-height:82vh; overflow-y:auto; z-index:20; font-size:14px; box-shadow:0 0 0 4px #111, 0 8px 30px rgba(0,0,0,0.7); }
+#menu{ display:none; }
+.mt{ text-align:center; font-weight:bold; color:#6ab8ff; border-bottom:2px solid #445; padding-bottom:6px; margin-bottom:8px; }
+.mo{ padding:6px 10px; margin:2px 0; border:2px solid transparent; border-radius:3px; cursor:pointer; }
+.mo.sel{ border-color:#ffd23f; background:rgba(80,60,20,0.5); }
+.mo small{ color:#9ab; }
+
+/* Pokédex layout a due colonne */
+#dex .dexEntry{ display:flex; gap:10px; margin-top:6px; padding:6px; background:rgba(10,12,30,0.6); border:1px solid #445; border-radius:3px; }
+#dex .dexEntry i{ width:48px; height:48px; display:inline-block; background:#1a1a2e; border:2px solid #445; border-radius:2px; }
+#dex .sil{ background:#222; }
+
+/* flauto */
+#flute .label{ color:#9ab; margin-top:8px; font-size:12px; }
+#fluteSeq, #fluteIn{ min-height:28px; padding:6px; background:rgba(10,12,30,0.7); border:1px solid #445; border-radius:3px; margin-top:4px; font-size:16px; letter-spacing:2px; }
+.fn0{ color:#f55; }.fn1{ color:#ff5; }.fn2{ color:#5f5; }.fn3{ color:#5ff; }.fn4{ color:#55f; }.fn5{ color:#f5f; }
+.fnrow{ display:flex; gap:6px; margin-top:14px; flex-wrap:wrap; }
+.fnrow button{ flex:1; min-width:64px; padding:10px; font-family:inherit; font-weight:bold; border:3px solid #445; background:rgba(40,44,72,0.9); color:#fff; border-radius:4px; cursor:pointer; }
+#fluteMsg{ margin-top:14px; text-align:center; color:#ffd23f; }
+
+/* touch */
+#touch{ display:none; position:fixed; bottom:0; left:0; right:0; height:calc(100%); pointer-events:none; z-index:15; }
+#touchpad{ position:absolute; bottom:24px; left:24px; width:150px; height:150px; border-radius:50%; background:rgba(80,100,160,0.18); border:3px solid rgba(150,170,220,0.5); pointer-events:auto; touch-action:none; }
+#touchpad:after{ content:'↺'; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:24px; opacity:0.4; }
+#touchBtns{ position:absolute; bottom:30px; right:24px; display:flex; gap:14px; }
+.tbtn{ width:74px; height:74px; border-radius:50%; background:rgba(150,60,60,0.5); border:3px solid rgba(255,150,150,0.8); display:flex; flex-direction:column; align-items:center; justify-content:center; font-weight:bold; pointer-events:auto; touch-action:none; }
+#btnB{ background:rgba(60,60,160,0.5); border-color:rgba(150,150,255,0.8); }
+.tbtn small{ font-size:9px; opacity:0.8; }
+
+/* overlay titolo/custom */
+.overlay{ display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(8,10,28,0.92); z-index:50; flex-direction:column; align-items:center; justify-content:center; padding:20px; text-align:center; }
+#title{ display:flex; }
+.tlogo{ font-size:clamp(36px,9vw,72px); font-weight:bold; color:#ffd23f; text-shadow:4px 4px 0 #b53737, 8px 8px 0 #6ab8ff; letter-spacing:3px; }
+.tsub{ margin-top:6px; color:#6ab8ff; font-size:clamp(13px,2.5vw,18px); margin-bottom:30px; }
+.tbtn{ margin:8px 0; padding:12px 24px; border:3px solid #6ab8ff; background:rgba(40,44,72,0.9); color:#fff; font-family:inherit; font-size:18px; border-radius:4px; cursor:pointer; pointer-events:auto; min-width:240px; }
+.tbtn:hover{ background:rgba(70,80,120,0.9); }
+.tdisc{ position:absolute; bottom:14px; font-size:10px; color:#9ab; max-width:90%; }
+
+#customize .mt{ color:#ffd23f; }
+#prevC{ image-rendering:pixelated; border:4px solid #6ab8ff; background:#0a0a20; margin:12px auto; display:block; }
+.custRow{ display:flex; align-items:center; justify-content:center; gap:14px; margin:10px 0; font-size:15px; }
+.custRow button{ width:40px; height:40px; font-size:20px; font-family:inherit; border:3px solid #6ab8ff; background:rgba(40,44,72,0.9); color:#fff; border-radius:4px; cursor:pointer; }
+.custRow span{ min-width:90px; display:inline-block; }
+
+#dialogue{ display:none; position:fixed; bottom:0; left:0; right:0; max-height:42%; background:rgba(10,12,30,0.96); border-top:4px solid #6ab8ff; padding:14px 18px; z-index:25; }
+#dName{ color:#ffd23f; font-weight:bold; margin-bottom:6px; }
+#dText{ font-size:15px; line-height:1.45; white-space:pre-wrap; }
+#dPrompt{ position:absolute; right:16px; bottom:10px; color:#6ab8ff; animation:blink 1s infinite; }
+@keyframes blink{ 0%,50%{opacity:1} 51%,100%{opacity:0} }
+
+@media (max-width:600px){ #hotbar{ max-width:52%; font-size:9px; } #tip{ display:none; } }
+@media (prefers-reduced-motion:reduce){ *{ animation:none !important; } }

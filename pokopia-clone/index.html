@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#1a1a2e">
+<title>DITTOPIA — omaggio a Pokopia</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/180.png">
+<link rel="icon" href="icons/192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<!-- HUD -->
+<div id="hud">
+  <div id="clock">08:00 ☀</div>
+  <div id="objective"></div>
+  <div id="inv"></div>
+  <div id="hotbar"></div>
+</div>
+
+<div id="tip">WASD/Frecce muovi · E interagisci · 1-9 mosse · C craft · T Pokédex · P menu</div>
+<div id="toast"></div>
+
+<!-- Dialogo -->
+<div id="dialogue"><div id="dName"></div><div id="dText"></div><div id="dPrompt">▼</div></div>
+
+<!-- Menu -->
+<div id="menu" class="panel"></div>
+<div id="craft" class="panel"></div>
+<div id="dex" class="panel"></div>
+
+<!-- Minigioco flauto -->
+<div id="flute" class="panel">
+  <div class="mt">POKé FLAUTO</div>
+  <div class="label">Sequenza:</div>
+  <div id="fluteSeq"></div>
+  <div class="label">Tuoi tasti:</div>
+  <div id="fluteIn"></div>
+  <div class="fnrow">
+    <button data-n="0" class="fn0">Do(1)</button>
+    <button data-n="1" class="fn1">Re(2)</button>
+    <button data-n="2" class="fn2">Mi(3)</button>
+    <button data-n="3" class="fn3">Fa(4)</button>
+    <button data-n="4" class="fn4">Sol(5)</button>
+    <button data-n="5" class="fn5">La(6)</button>
+  </div>
+  <div id="fluteMsg"></div>
+</div>
+
+<!-- Touch controls -->
+<div id="touch">
+  <div id="touchpad"></div>
+  <div id="touchBtns">
+    <div id="btnA" class="tbtn">A<br><small>E</small></div>
+    <div id="btnB" class="tbtn">B<br><small>menu</small></div>
+  </div>
+</div>
+
+<!-- Titolo & Customizzazione -->
+<div id="title" class="overlay"></div>
+<div id="customize" class="overlay"></div>
+
+<script src="js/data.js"></script>
+<script src="js/sprites.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/world.js"></script>
+<script src="js/pokemon.js"></script>
+<script src="js/save.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/game.js"></script>
+<script>
+window.addEventListener('load', function(){
+  // esponi riferimenti save/ui/etc globali già var
+  GAME.init();
+  // place hotbar click per selezione mossa
+  document.getElementById('hotbar').addEventListener('click', function(e){
+    var t=e.target; var mv=t.getAttribute && t.getAttribute('data-mv');
+    if(mv && GAME.state().player.moves[mv]){ GAME.state().player.curMove=mv; AUDIO.sfxSelect(); }
+  });
+  // touch btn
+  var bA=document.getElementById('btnA'), bB=document.getElementById('btnB');
+  if(bA) bA.addEventListener('touchstart', function(e){ e.preventDefault(); GAME.doInteract(); },{passive:false});
+  if(bB) bB.addEventListener('touchstart', function(e){ e.preventDefault(); UI.openMenu(GAME.state()); },{passive:false});
+  // Service worker (PWA offline installabile). Richiede http(s): ignora errori su file://
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(function(){}); }
+});
+</script>
+</body>
+</html>

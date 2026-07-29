@@ -1,0 +1,16 @@
+{
+  "name": "Dittopia — omaggio a Pokopia",
+  "short_name": "Dittopia",
+  "description": "Fan game non ufficiale: Pokémon Pokopia-like 2D in pixel art. Gioca come un Ditto in forma umana, ricostruisci la Kanto.",
+  "lang": "it",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a0a1a",
+  "theme_color": "#1a1a2e",
+  "icons": [
+    { "src": "icons/192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

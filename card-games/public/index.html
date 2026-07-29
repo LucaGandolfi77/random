@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Giochi di Carte</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🃏</text></svg>">
+</head>
+<body>
+  <div id="app">
+    <div id="login" class="section">
+      <div class="login-box">
+        <h1>🃏 Giochi di Carte</h1>
+        <p class="subtitle">Scegli un nickname per entrare</p>
+        <input type="text" id="nickname-input" placeholder="Il tuo nickname" maxlength="20" autocomplete="off">
+        <button id="login-btn" class="btn primary">Entra</button>
+        <p class="error" id="login-error"></p>
+      </div>
+    </div>
+
+    <div id="home" class="section hidden">
+      <div class="top-bar">
+        <span>Benvenuto, <strong id="user-name"></strong></span>
+        <button id="logout-btn" class="btn small">Esci</button>
+      </div>
+      <h2>Scegli un gioco</h2>
+      <div id="games-grid" class="games-grid"></div>
+      <h3>Stanze aperte <span id="room-count" class="badge"></span></h3>
+      <div id="rooms-list" class="rooms-list"></div>
+      <p class="muted" id="no-rooms-msg">Nessuna stanza aperta. Creane una!</p>
+    </div>
+
+    <div id="lobby" class="section hidden">
+      <button id="lobby-back-btn" class="btn small back-btn">← Home</button>
+      <h2 id="lobby-title">Stanza: <span id="room-code-display"></span></h2>
+      <p id="lobby-game-name" class="muted"></p>
+      <div class="lobby-layout">
+        <div class="lobby-main">
+          <div id="lobby-players" class="players-list"></div>
+          <div id="lobby-actions" class="lobby-actions">
+            <button id="add-bot-btn" class="btn">Aggiungi Bot</button>
+            <button id="start-game-btn" class="btn primary">Inizia Partita</button>
+          </div>
+        </div>
+        <div class="chat-panel" id="lobby-chat">
+          <div class="chat-messages" id="lobby-chat-msgs"></div>
+          <div class="chat-input-row">
+            <input type="text" id="lobby-chat-input" placeholder="Scrivi..." maxlength="200">
+            <button id="lobby-chat-send" class="btn small">Invia</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="game-container" class="section hidden">
+      <div id="game-top-bar" class="top-bar">
+        <span id="game-info"></span>
+        <div class="top-right">
+          <span id="game-timer" class="timer"></span>
+          <button id="leave-game-btn" class="btn small danger">Abbandona</button>
+        </div>
+      </div>
+      <div class="game-layout">
+        <div id="game-table" class="game-table"></div>
+        <div class="chat-panel" id="game-chat">
+          <div class="chat-messages" id="game-chat-msgs"></div>
+          <div class="chat-input-row">
+            <input type="text" id="game-chat-input" placeholder="Scrivi..." maxlength="200">
+            <button id="game-chat-send" class="btn small">Invia</button>
+          </div>
+        </div>
+      </div>
+      <div id="game-events" class="game-events"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/cards.js"></script>
+  <script src="/js/lobby.js"></script>
+  <script src="/js/game.js"></script>
+</body>
+</html>

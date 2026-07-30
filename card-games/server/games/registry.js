@@ -7,6 +7,11 @@ const poker = require('./poker');
 const uno = require('./uno');
 const explodingkittens = require('./explodingkittens');
 const skullking = require('./skullking');
+const themind = require('./themind');
+const thiryone = require('./thiryone');
+const ramino = require('./ramino');
+const scala40 = require('./scala40');
+const memory = require('./memory');
 
 function wrap(game) {
   return { ...game.meta, create: game.create, getPublicState: game.getPublicState, getValidActions: game.getValidActions, applyAction: game.applyAction, isOver: game.isOver, getRoundScores: game.getRoundScores, nextRound: game.nextRound, getBotAction: game.getBotAction };
@@ -22,6 +27,11 @@ const games = {
   uno: wrap(uno),
   explodingkittens: wrap(explodingkittens),
   skullking: wrap(skullking),
+  themind: wrap(themind),
+  thiryone: wrap(thiryone),
+  ramino: wrap(ramino),
+  scala40: wrap(scala40),
+  memory: wrap(memory),
 };
 
 const registry = {

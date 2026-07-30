@@ -23,6 +23,7 @@ Il server si avvia su `http://localhost:3000`. Altri dispositivi nella stessa re
 | UNO | 2–6 | 108 carte UNO |
 | Exploding Kittens | 2–5 | Mazzo custom |
 | Skull King | 2–6 | 70 carte (4 semi + speciali) |
+| The Mind | 2–6 | 100 carte numerate |
 
 ## Funzionalità
 

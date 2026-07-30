@@ -113,7 +113,7 @@ function renderGames(games) {
   const grid = $('games-grid');
   grid.innerHTML = '';
   const icons = { scopa: '🃏', briscola: '♠️', blackjack: '🂡', ramino: '📋', scala40: '🔟', poker: '♣️' };
-  const comingSoon = ['ramino', 'scala40', 'poker'];
+  const comingSoon = [];
 
   for (const g of games) {
     const card = document.createElement('div');
@@ -175,6 +175,9 @@ function joinRoom(code) {
   });
 }
 
+let memoryRows = 6;
+let memoryCols = 6;
+
 function renderLobby(room) {
   window.currentRoom = room;
   $('room-code-display').textContent = room.code;
@@ -195,10 +198,52 @@ function renderLobby(room) {
   }
   $('add-bot-btn').style.display = room.hostId === window.playerId && room.players.length < room.maxPlayers ? '' : 'none';
   $('start-game-btn').style.display = room.hostId === window.playerId && room.players.length >= room.minPlayers ? '' : 'none';
+
+  const optionsArea = $('game-options');
+  optionsArea.innerHTML = '';
+  if (room.gameId === 'memory' && room.hostId === window.playerId) {
+    const maxVal = window.innerWidth < 768 ? 12 : 15;
+    memoryRows = Math.min(memoryRows, maxVal);
+    memoryCols = Math.min(memoryCols, maxVal);
+
+    const div = document.createElement('div');
+    div.className = 'mem-options';
+    div.innerHTML = `
+      <div class="label">Opzioni griglia Memory:</div>
+      <div class="mem-sliders">
+        <label>Righe: <input type="range" min="5" max="${maxVal}" value="${memoryRows}" id="mem-rows-slider">
+          <span id="mem-rows-val">${memoryRows}</span></label>
+        <label>Colonne: <input type="range" min="5" max="${maxVal}" value="${memoryCols}" id="mem-cols-slider">
+          <span id="mem-cols-val">${memoryCols}</span></label>
+      </div>
+      <div class="mem-preview" id="mem-preview">${memoryRows}×${memoryCols} = ${memoryRows * memoryCols} carte${(memoryRows * memoryCols) % 2 !== 0 ? ' (⭐ jolly incluso)' : ''}</div>
+    `;
+    optionsArea.appendChild(div);
+
+    $('mem-rows-slider').addEventListener('input', (e) => {
+      memoryRows = parseInt(e.target.value);
+      $('mem-rows-val').textContent = memoryRows;
+      updateMemPreview();
+    });
+    $('mem-cols-slider').addEventListener('input', (e) => {
+      memoryCols = parseInt(e.target.value);
+      $('mem-cols-val').textContent = memoryCols;
+      updateMemPreview();
+    });
+  }
+}
+
+function updateMemPreview() {
+  const p = $('mem-preview');
+  if (p) {
+    const total = memoryRows * memoryCols;
+    p.textContent = `${memoryRows}×${memoryCols} = ${total} carte${total % 2 !== 0 ? ' (⭐ jolly incluso)' : ''}`;
+  }
 }
 
 function startGame() {
-  socket.emit('startGame', null, (res) => {
+  const options = currentGameId === 'memory' ? { rows: memoryRows, cols: memoryCols } : undefined;
+  socket.emit('startGame', { options }, (res) => {
     if (res && res.error) showToast(res.error);
   });
 }

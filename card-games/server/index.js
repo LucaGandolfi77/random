@@ -65,13 +65,13 @@ io.on('connection', (socket) => {
     cb({ ok: true, bot: result.bot });
   });
 
-  socket.on('startGame', (_, cb) => {
+  socket.on('startGame', ({ options } = {}, cb) => {
     const code = rooms.getPlayerRoom(socket.id);
     if (!code) { cb({ error: 'Not in a room' }); return; }
     const room = rooms.getRoom(code);
     if (!room || room.hostId !== socket.id) { cb({ error: 'Only host can start' }); return; }
 
-    const result = rooms.startGame(code);
+    const result = rooms.startGame(code, options);
     if (result.error) { cb(result); return; }
 
     io.to(code).emit('gameStarted');

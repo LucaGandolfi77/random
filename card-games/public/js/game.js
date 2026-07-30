@@ -14,11 +14,16 @@ function renderGame(state) {
     case 'uno': renderUno(state); break;
     case 'explodingkittens': renderExplodingKittens(state); break;
     case 'skullking': renderSkullKing(state); break;
+    case 'themind': renderTheMind(state); break;
+    case 'thiryone': renderThirtyOne(state); break;
+    case 'ramino': renderRamino(state); break;
+    case 'scala40': renderScala40(state); break;
+    case 'memory': renderMemory(state); break;
     default: renderScopa(state);
   }
 }
 
-const GAME_NAMES = { scopa: 'Scopa', briscola: 'Briscola', blackjack: 'Blackjack', settenmezzo: 'Sette e Mezzo', tressette: 'Tressette', poker: 'Texas Hold\'em', uno: 'UNO', explodingkittens: 'Exploding Kittens', skullking: 'Skull King' };
+const GAME_NAMES = { scopa: 'Scopa', briscola: 'Briscola', blackjack: 'Blackjack', settenmezzo: 'Sette e Mezzo', tressette: 'Tressette', poker: 'Texas Hold\'em', uno: 'UNO', explodingkittens: 'Exploding Kittens', skullking: 'Skull King', themind: 'The Mind', thiryone: '31', ramino: 'Ramino', scala40: 'Scala 40', memory: 'Memory' };
 
 function renderGameTopBar(state, name) {
   const info = $('game-info');
@@ -856,6 +861,500 @@ function renderSkullKing(state) {
   showEvents(state);
 }
 
+/* ======================= THE MIND ======================= */
+
+function renderTheMind(state) {
+  const table = $('game-table'); table.innerHTML = '';
+  const el = $('game-info');
+  el.textContent = `The Mind — Livello ${state.level}/${state.maxLevel}`;
+
+  if (state.phase === 'gameOver') {
+    table.innerHTML = `<div class="tm-overlay"><h2>${state.winner ? '🎉 Vittoria!' : '💀 Sconfitta!'}</h2><p>Livello raggiunto: ${state.level}${state.winner ? '/' + state.maxLevel : ''}</p></div>`;
+    showOverlay(state);
+    return;
+  }
+
+  const c = document.createElement('div'); c.className = 'tm-container';
+
+  const statusBar = document.createElement('div'); statusBar.className = 'tm-status';
+  statusBar.innerHTML = `<span>❤️ ${'❤️'.repeat(state.lives)}${'🖤'.repeat(Math.max(0, state.maxLives - state.lives))}</span><span>⭐ ${'⭐'.repeat(state.stars)}${'☆'.repeat(Math.max(0, state.maxStars - state.stars))}</span><span>🃏 ${state.remainingCards} carte rimaste</span>`;
+  c.appendChild(statusBar);
+
+  const stackArea = document.createElement('div'); stackArea.className = 'tm-stack';
+  if (state.lastPlayedValue > 0) {
+    const lastCard = state.cardsPlayed && state.cardsPlayed.length > 0 ? state.cardsPlayed[state.cardsPlayed.length - 1] : null;
+    if (lastCard) {
+      const el2 = createCardElement(lastCard);
+      el2.style.width = '80px'; el2.style.height = '110px'; el2.style.fontSize = '28px';
+      el2.style.background = '#1565C0'; el2.style.color = '#fff';
+      el2.style.borderRadius = '10px'; el2.style.margin = '0 auto';
+      el2.querySelector('.rank').style.color = '#fff';
+      el2.querySelector('.suit').style.display = 'none';
+      stackArea.appendChild(el2);
+    }
+    const lbl = document.createElement('div'); lbl.style.cssText = 'font-size:13px;margin-top:6px;color:#ffca28';
+    lbl.textContent = `Ultima: ${state.lastPlayedValue}`;
+    stackArea.appendChild(lbl);
+  } else {
+    const empty = document.createElement('div'); empty.className = 'tm-empty-stack';
+    empty.textContent = '⚪';
+    empty.style.cssText = 'width:80px;height:110px;border:2px dashed #666;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto;';
+    stackArea.appendChild(empty);
+    const lbl = document.createElement('div'); lbl.style.cssText = 'font-size:12px;margin-top:6px;color:#888';
+    lbl.textContent = 'In attesa...';
+    stackArea.appendChild(lbl);
+  }
+  c.appendChild(stackArea);
+
+  const playedCount = state.cardsPlayed ? state.cardsPlayed.length : 0;
+  const totalCards = state.playerOrder ? state.playerOrder.length * state.level : 1;
+  const progress = document.createElement('div'); progress.className = 'tm-progress';
+  const pct = totalCards > 0 ? Math.round(playedCount / totalCards * 100) : 0;
+  progress.innerHTML = `<div class="tm-bar"><div class="tm-fill" style="width:${pct}%"></div></div><span>${playedCount}/${totalCards}</span>`;
+  c.appendChild(progress);
+
+  if (state.hand && state.phase === 'play') {
+    const hd = document.createElement('div'); hd.id = 'player-hand'; hd.className = 'tm-hand';
+    for (const card of state.hand) {
+      const el2 = createCardElement(card);
+      el2.style.background = '#1565C0'; el2.style.color = '#fff'; el2.style.border = '2px solid #0D47A1';
+      el2.style.width = '56px'; el2.style.height = '80px';
+      el2.querySelector('.rank').style.color = '#fff';
+      el2.querySelector('.rank').style.fontSize = '22px';
+      el2.querySelector('.suit').style.display = 'none';
+      hd.appendChild(el2);
+    }
+    c.appendChild(hd);
+  }
+
+  for (const pid of state.playerOrder) {
+    if (pid === window.playerId) continue;
+    const info = document.createElement('div'); info.className = 'tm-opponent';
+    info.textContent = `${findPlayerName(pid)}: ${state.handSize[pid] || 0} carte`;
+    if (state.ready && state.ready[pid] && state.phase === 'ready') info.textContent += ' ✅';
+    c.appendChild(info);
+  }
+
+  table.appendChild(c);
+
+  const ap = document.createElement('div'); ap.id = 'action-panel'; table.appendChild(ap);
+
+  if (state.phase === 'ready') {
+    if (!state.ready[window.playerId]) {
+      const btn = document.createElement('button'); btn.className = 'btn primary';
+      btn.textContent = '👋 Pronto!';
+      btn.addEventListener('click', () => window.socket.emit('playerAction', { action: { type: 'ready' } }));
+      ap.appendChild(btn);
+    } else {
+      const w = document.createElement('span'); w.style.cssText = 'color:#ffca28;font-size:16px;';
+      w.textContent = '⏳ In attesa degli altri...';
+      ap.appendChild(w);
+    }
+  }
+
+  if (state.phase === 'play') {
+    if ((state.hand || []).length > 0) {
+      const btn = document.createElement('button'); btn.className = 'btn primary';
+      btn.style.fontSize = '20px'; btn.style.padding = '14px 32px';
+      btn.textContent = `🎯 Gioca (${state.hand[0].value})`;
+      btn.addEventListener('click', () => window.socket.emit('playerAction', { action: { type: 'play' } }));
+      ap.appendChild(btn);
+    } else {
+      const w = document.createElement('span'); w.style.cssText = 'color:#4CAF50;font-size:16px;';
+      w.textContent = '✅ Hai finito le carte!';
+      ap.appendChild(w);
+    }
+
+    if (state.stars > 0) {
+      const sbtn = document.createElement('button'); sbtn.className = 'btn';
+      sbtn.textContent = `⭐ Usa Stella (×${state.stars})`;
+      sbtn.addEventListener('click', () => window.socket.emit('playerAction', { action: { type: 'useStar' } }));
+      ap.appendChild(sbtn);
+    }
+  }
+
+  if (state.phase === 'levelComplete') {
+    const nb = document.createElement('button'); nb.className = 'btn primary';
+    nb.textContent = state.level >= state.maxLevel ? '🏁 Fine!' : '▶️ Prossimo livello';
+    nb.addEventListener('click', () => window.socket.emit('playerAction', { action: { type: 'nextLevel' } }));
+    ap.appendChild(nb);
+  }
+
+  showEvents(state);
+}
+
+/* ======================= 31 ======================= */
+
+function renderThirtyOne(state) {
+  const table = $('game-table'); table.innerHTML = '';
+  renderGameTopBar(state, '31'); updateTimer(state);
+
+  if (state.phase === 'gameOver') { showOverlay(state); return; }
+  if (state.phase === 'roundOver') { showOverlay(state); return; }
+
+  const c = document.createElement('div'); c.className = 'to-container';
+
+  const livesRow = document.createElement('div'); livesRow.className = 'to-lives';
+  livesRow.innerHTML = state.playerOrder.map(pid =>
+    `<span${pid === window.playerId ? ' style="color:#FFC107"' : ''}>${findPlayerName(pid)}: ${'❤️'.repeat(state.lives[pid] || 0)}${'🖤'.repeat(Math.max(0, 3 - (state.lives[pid] || 0)))}</span>`
+  ).join(' ');
+  c.appendChild(livesRow);
+
+  if (state.knocked) {
+    const kc = document.createElement('div'); kc.className = 'to-knock';
+    kc.textContent = `🔔 ${findPlayerName(state.knocker)} ha chiuso!`;
+    c.appendChild(kc);
+  }
+
+  const poolArea = document.createElement('div'); poolArea.className = 'to-pool';
+  const poolLabel = document.createElement('div'); poolLabel.style.cssText = 'font-size:13px;font-weight:600;color:#ccc;margin-bottom:4px;';
+  poolLabel.textContent = 'Mazzo:';
+  poolArea.appendChild(poolLabel);
+  const poolCards = document.createElement('div'); poolCards.style.display = 'flex'; poolCards.style.gap = '6px'; poolCards.style.justifyContent = 'center';
+  for (const pc of state.pool) {
+    const el = createCardElement(pc); el.dataset.cardId = pc.id;
+    poolCards.appendChild(el);
+  }
+  poolArea.appendChild(poolCards);
+  c.appendChild(poolArea);
+
+  if (state.hand) {
+    const handDiv = document.createElement('div'); handDiv.id = 'player-hand';
+    handDiv.style.display = 'flex'; handDiv.style.justifyContent = 'center'; handDiv.style.gap = '6px'; handDiv.style.margin = '8px 0';
+    for (let i = 0; i < state.hand.length; i++) {
+      const el = createCardElement(state.hand[i]);
+      el.dataset.cardIndex = i;
+      el.dataset.cardId = state.hand[i].id;
+      handDiv.appendChild(el);
+    }
+    c.appendChild(handDiv);
+
+    const hv = document.createElement('div'); hv.className = 'to-handvalue';
+    const v = state.handValue;
+    hv.textContent = `Valore mano: ${v === 30.5 ? '30½' : v === 32 ? '32 (Fuoco!)' : v} pt`;
+    if (v >= 28) hv.style.color = '#4CAF50';
+    else if (v >= 22) hv.style.color = '#FFC107';
+    else hv.style.color = '#ff5252';
+    c.appendChild(hv);
+  }
+
+  for (const pid of state.playerOrder) {
+    if (pid === window.playerId) continue;
+    const oi = document.createElement('div'); oi.className = 'to-opponent';
+    oi.textContent = `${findPlayerName(pid)}: ${state.handSize[pid] || 0} carte${state.currentPlayer === pid ? ' 🎯' : ''}`;
+    c.appendChild(oi);
+  }
+
+  table.appendChild(c);
+
+  const ap = document.createElement('div'); ap.id = 'action-panel'; table.appendChild(ap);
+
+  if (state.phase === 'play' && state.currentPlayer === window.playerId) {
+    const addBtn = (label, actionData, cls = 'btn') => {
+      const btn = document.createElement('button'); btn.className = cls;
+      btn.textContent = label;
+      btn.addEventListener('click', () => window.socket.emit('playerAction', { action: actionData }));
+      ap.appendChild(btn);
+    };
+
+    if (state.handValue >= 31) {
+      addBtn('🎉 Dichiara 31!', { type: 'declare31' }, 'btn primary');
+    }
+    if (state.handValue === 32) {
+      addBtn('🔥 Fuoco! (3 Assi)', { type: 'declareFeuer' }, 'btn danger');
+    }
+    if (!state.knocked) {
+      addBtn('🔔 Chiudi', { type: 'knock' }, 'btn');
+    }
+    addBtn('⏭️ Passa', { type: 'pass' });
+
+    for (let i = 0; i < (state.hand || []).length; i++) {
+      for (const pc of state.pool) {
+        addBtn(`Scambia ${state.hand[i].rank}${state.hand[i].suitSymbol} ↔ ${pc.rank}${pc.suitSymbol}`,
+          { type: 'swap', cardIndex: i, poolCardId: pc.id });
+      }
+    }
+    if (!state.knocked && state.pool.length === 3) {
+      addBtn('🔄 Scambia tutto', { type: 'swapAll' });
+    }
+  }
+
+  if (state.phase === 'roundOver' && state.currentPlayer === window.playerId) {
+    const nb = document.createElement('button'); nb.className = 'btn primary';
+    nb.textContent = 'Prossimo round ➡️';
+    nb.addEventListener('click', () => window.socket.emit('playerAction', { action: { type: 'nextRound' } }));
+    ap.appendChild(nb);
+  }
+
+  showEvents(state);
+}
+
+let selectedMeldCards = [];
+
+function renderRamino(state) {
+  const table = $('game-table'); table.innerHTML = '';
+  renderGameTopBar(state, 'Ramino'); updateTimer(state);
+
+  if (state.phase === 'roundOver' || state.phase === 'gameOver') { showOverlay(state); return; }
+
+  const c = document.createElement('div'); c.className = 'rm-container';
+
+  const info = document.createElement('div'); info.className = 'rm-info';
+  info.innerHTML = `📚 Mazzo: ${state.deckSize} carte | 🗑️ Scarto: ${state.discardTop ? createCardElement(state.discardTop).outerHTML : '—'}`;
+  c.appendChild(info);
+
+  for (const pid of state.playerOrder) {
+    const isMe = pid === window.playerId;
+    const sec = document.createElement('div'); sec.className = 'rm-player';
+
+    const header = document.createElement('div'); header.className = 'rm-header';
+    header.textContent = `${isMe ? '👤 Tu' : findPlayerName(pid)} — ${state.handSize[pid] || 0} carte${state.currentPlayer === pid ? ' 🎯' : ''}`;
+    sec.appendChild(header);
+
+    if (state.melds && state.melds[pid] && state.melds[pid].length > 0) {
+      const meldArea = document.createElement('div'); meldArea.className = 'rm-melds';
+      for (let mi = 0; mi < state.melds[pid].length; mi++) {
+        const g = document.createElement('div'); g.className = 'rm-meld-group';
+        for (const mc of state.melds[pid][mi]) {
+          const el = createCardElement(mc);
+          if (mc.rank === 'JOKER') el.classList.add('joker');
+          g.appendChild(el);
+        }
+        meldArea.appendChild(g);
+      }
+      sec.appendChild(meldArea);
+    }
+
+    if (isMe && state.hand) {
+      const handDiv = document.createElement('div'); handDiv.className = 'rm-hand';
+      for (let i = 0; i < state.hand.length; i++) {
+        const el = createCardElement(state.hand[i]);
+        el.dataset.cardId = state.hand[i].id;
+        const idx = selectedMeldCards.indexOf(state.hand[i].id);
+        if (idx >= 0) el.classList.add('selected');
+        el.addEventListener('click', () => {
+          const i2 = selectedMeldCards.indexOf(state.hand[i].id);
+          if (i2 >= 0) selectedMeldCards.splice(i2, 1);
+          else selectedMeldCards.push(state.hand[i].id);
+          renderRamino(state);
+        });
+        handDiv.appendChild(el);
+      }
+      sec.appendChild(handDiv);
+    }
+
+    c.appendChild(sec);
+  }
+
+  table.appendChild(c);
+
+  const ap = document.createElement('div'); ap.id = 'action-panel'; table.appendChild(ap);
+  if (state.phase === 'play' || state.phase === 'action' && state.currentPlayer === window.playerId) {
+    if (state.phase === 'draw' && !state.drawnThisTurn) {
+      addActionBtn(ap, '📥 Pesca dal mazzo', { type: 'drawFromDeck' });
+      addActionBtn(ap, '📤 Pesca dallo scarto', { type: 'drawFromDiscard' });
+      if (state.deckSize === 0) addActionBtn(ap, '⏭️ Salta pesca', { type: 'skipDraw' });
+    }
+    if (state.phase === 'action' && state.drawnThisTurn) {
+      if (selectedMeldCards.length >= 3) {
+        addActionBtn(ap, '🃏 Mela selezionate', { type: 'meld', cardIds: selectedMeldCards }, 'btn');
+      }
+      if (selectedMeldCards.length === 1) {
+        const sid = selectedMeldCards[0];
+        for (const pid of state.playerOrder) {
+          const ml = state.melds[pid] || [];
+          for (let mi = 0; mi < ml.length; mi++) {
+            addActionBtn(ap, `➕ Appoggia a mela ${findPlayerName(pid)} #${mi+1}`,
+              { type: 'addToMeld', ownerId: pid, meldIndex: mi, cardId: sid }, 'btn');
+          }
+        }
+      }
+      if (selectedMeldCards.length === 1) {
+        addActionBtn(ap, '🗑️ Scarta', { type: 'discard', cardId: selectedMeldCards[0] }, 'btn');
+      }
+    }
+  }
+  showEvents(state);
+}
+
+function renderScala40(state) {
+  const table = $('game-table'); table.innerHTML = '';
+  renderGameTopBar(state, 'Scala 40'); updateTimer(state);
+
+  if (state.phase === 'roundOver' || state.phase === 'gameOver') { showOverlay(state); return; }
+
+  const c = document.createElement('div'); c.className = 'rm-container';
+
+  const info = document.createElement('div'); info.className = 'rm-info';
+  info.innerHTML = `📚 Mazzo: ${state.deckSize} carte | 🗑️ Scarto: ${state.discardTop ? createCardElement(state.discardTop).outerHTML : '—'}`;
+  c.appendChild(info);
+
+  for (const pid of state.playerOrder) {
+    const isMe = pid === window.playerId;
+    const sec = document.createElement('div'); sec.className = 'rm-player';
+
+    const initDone = state.initialMeldDone && state.initialMeldDone[pid];
+    const header = document.createElement('div'); header.className = 'rm-header';
+    header.innerHTML = `${isMe ? '👤 Tu' : findPlayerName(pid)} — ${state.handSize[pid] || 0} carte${state.currentPlayer === pid ? ' 🎯' : ''} ${initDone ? '✅ Scala 40' : '⏳ Scala 40'}`;
+    sec.appendChild(header);
+
+    if (state.melds && state.melds[pid] && state.melds[pid].length > 0) {
+      const meldArea = document.createElement('div'); meldArea.className = 'rm-melds';
+      for (let mi = 0; mi < state.melds[pid].length; mi++) {
+        const g = document.createElement('div'); g.className = 'rm-meld-group';
+        for (const mc of state.melds[pid][mi]) {
+          const el = createCardElement(mc);
+          if (mc.rank === 'JOKER') el.classList.add('joker');
+          g.appendChild(el);
+        }
+        meldArea.appendChild(g);
+      }
+      sec.appendChild(meldArea);
+    }
+
+    if (isMe && state.hand) {
+      const handDiv = document.createElement('div'); handDiv.className = 'rm-hand';
+      for (let i = 0; i < state.hand.length; i++) {
+        const el = createCardElement(state.hand[i]);
+        el.dataset.cardId = state.hand[i].id;
+        if (state.hand[i].rank === 'JOKER') el.classList.add('joker');
+        const idx = selectedMeldCards.indexOf(state.hand[i].id);
+        if (idx >= 0) el.classList.add('selected');
+        el.addEventListener('click', () => {
+          const i2 = selectedMeldCards.indexOf(state.hand[i].id);
+          if (i2 >= 0) selectedMeldCards.splice(i2, 1);
+          else selectedMeldCards.push(state.hand[i].id);
+          renderScala40(state);
+        });
+        handDiv.appendChild(el);
+      }
+      sec.appendChild(handDiv);
+    }
+
+    c.appendChild(sec);
+  }
+
+  table.appendChild(c);
+
+  const ap = document.createElement('div'); ap.id = 'action-panel'; table.appendChild(ap);
+  if (state.phase === 'play' || state.phase === 'action' && state.currentPlayer === window.playerId) {
+    if (state.phase === 'draw' && !state.drawnThisTurn) {
+      addActionBtn(ap, '📥 Pesca dal mazzo', { type: 'drawFromDeck' });
+      addActionBtn(ap, '📤 Pesca dallo scarto', { type: 'drawFromDiscard' });
+      if (state.deckSize === 0) addActionBtn(ap, '⏭️ Salta pesca', { type: 'skipDraw' });
+    }
+    if (state.phase === 'action' && state.drawnThisTurn) {
+      if (selectedMeldCards.length >= 3) {
+        addActionBtn(ap, '🃏 Mela selezionate', { type: 'meld', cardIds: selectedMeldCards }, 'btn');
+      }
+      if (selectedMeldCards.length === 1) {
+        const sid = selectedMeldCards[0];
+        for (const pid of state.playerOrder) {
+          const ml = state.melds[pid] || [];
+          for (let mi = 0; mi < ml.length; mi++) {
+            addActionBtn(ap, `➕ Appoggia a mela ${findPlayerName(pid)} #${mi+1}`,
+              { type: 'addToMeld', ownerId: pid, meldIndex: mi, cardId: sid }, 'btn');
+          }
+        }
+      }
+      if (selectedMeldCards.length === 1) {
+        addActionBtn(ap, '🗑️ Scarta', { type: 'discard', cardId: selectedMeldCards[0] }, 'btn');
+      }
+    }
+  }
+  showEvents(state);
+}
+
+/* ======================= MEMORY ======================= */
+
+let memMismatchTimer = null;
+
+function renderMemory(state) {
+  const table = $('game-table'); table.innerHTML = '';
+  renderGameTopBar(state, 'Memory'); updateTimer(state);
+
+  if (state.phase === 'roundOver' || state.phase === 'gameOver') { showOverlay(state); return; }
+
+  const c = document.createElement('div'); c.className = 'mem-container';
+
+  const info = document.createElement('div'); info.className = 'mem-info';
+  const myPairs = state.pairsFound[window.playerId] || 0;
+  let totalFound = 0;
+  const infoParts = [];
+  for (const pid of state.playerOrder) {
+    const cnt = state.pairsFound[pid] || 0;
+    totalFound += cnt;
+    infoParts.push(`${findPlayerName(pid)}: ${cnt}${pid === state.currentPlayer ? ' 🎯' : ''}`);
+  }
+  info.innerHTML = `<span>${infoParts.join(' | ')}</span><span>Trovate: ${totalFound}/${state.pairsCount}</span>`;
+  if (state.hasJoker) info.innerHTML += '<span>⭐ Jolly</span>';
+  c.appendChild(info);
+
+  const grid = document.createElement('div'); grid.className = 'mem-grid';
+  grid.style.gridTemplateColumns = `repeat(${state.cols}, 1fr)`;
+
+  const isMyTurn = state.currentPlayer === window.playerId &&
+    (state.phase === 'pickFirst' || state.phase === 'pickSecond');
+
+  for (const card of state.grid) {
+    const el = document.createElement('div');
+    el.className = 'mem-card';
+    el.dataset.row = card.row;
+    el.dataset.col = card.col;
+
+    if (card.matched) {
+      el.classList.add('matched');
+      el.textContent = card.symbol;
+      if (card.isJoker) el.classList.add('joker');
+    } else if (card.flipped && card.visible) {
+      el.classList.add('flipped');
+      el.textContent = card.symbol;
+      if (card.isJoker) el.classList.add('joker');
+    } else {
+      el.classList.add('back');
+      el.textContent = '?';
+    }
+
+    if (isMyTurn && !card.matched && !card.flipped) {
+      el.classList.add('clickable');
+      el.addEventListener('click', () => {
+        window.socket.emit('playerAction', { action: { type: 'pickCard', cardId: card.id } });
+      });
+    }
+
+    grid.appendChild(el);
+  }
+
+  c.appendChild(grid);
+  table.appendChild(c);
+
+  const ap = document.createElement('div'); ap.id = 'action-panel'; table.appendChild(ap);
+
+  if (state.phase === 'mismatch' && state.currentPlayer === window.playerId) {
+    const waitMsg = document.createElement('div');
+    waitMsg.className = 'mem-wait';
+    waitMsg.textContent = '🔄 Ricorda le carte...';
+    ap.appendChild(waitMsg);
+
+    if (memMismatchTimer) { clearTimeout(memMismatchTimer); memMismatchTimer = null; }
+    memMismatchTimer = setTimeout(() => {
+      window.socket.emit('playerAction', { action: { type: 'resolveMismatch' } });
+      memMismatchTimer = null;
+    }, 1500);
+  } else {
+    if (memMismatchTimer) { clearTimeout(memMismatchTimer); memMismatchTimer = null; }
+  }
+
+  showEvents(state);
+}
+
+function addActionBtn(ap, label, actionData, cls = 'btn') {
+  const btn = document.createElement('button'); btn.className = cls;
+  btn.textContent = label;
+  btn.addEventListener('click', () => window.socket.emit('playerAction', { action: actionData }));
+  ap.appendChild(btn);
+}
+
 /* ======================= SHARED ======================= */
 
 function showOverlay(state) {
@@ -889,7 +1388,7 @@ function showOverlay(state) {
   }
   ov.appendChild(sd);
 
-  const canNext = ((gameType === 'blackjack' || gameType === 'settenmezzo' || gameType === 'uno' || gameType === 'explodingkittens' || gameType === 'skullking' || (gameType === 'poker' && state.handOver))) && state.phase !== 'gameOver';
+  const canNext = ((gameType === 'blackjack' || gameType === 'settenmezzo' || gameType === 'uno' || gameType === 'explodingkittens' || gameType === 'skullking' || gameType === 'themind' || gameType === 'thiryone' || gameType === 'ramino' || gameType === 'scala40' || gameType === 'memory' || (gameType === 'poker' && state.handOver))) && state.phase !== 'gameOver';
   if (canNext) {
     const nb = document.createElement('button'); nb.className = 'btn primary';
     nb.textContent = 'Prossima mano →';
@@ -1144,6 +1643,52 @@ function formatEvents(events) {
       let m = `📊 ${findPlayerName(e.playerId)}: puntate ${e.bid}, fatte ${e.won} = ${e.score >= 0 ? '+' : ''}${e.score}pt (tot: ${e.total})`;
       msgs.push(m);
     }
+    else if (e.type === 'ready') msgs.push(`👋 ${findPlayerName(e.playerId)} è pronto`);
+    else if (e.type === 'startLevel') msgs.push(`🎯 Livello ${e.level} — Inizia!`);
+    else if (e.type === 'play' && e.value) msgs.push(`${findPlayerName(e.playerId)}: ${e.value}`);
+    else if (e.type === 'error') msgs.push(`💥 ${findPlayerName(e.playerId)} sbaglia! (${e.value}) — persa 1 vita, scartate ${e.discarded} carte (❤️×${e.livesLeft})`);
+    else if (e.type === 'starUsed') msgs.push(`⭐ ${findPlayerName(e.playerId)} usa una stella! Tutti scartano la carta più bassa`);
+    else if (e.type === 'discard') msgs.push(`  ${findPlayerName(e.playerId)} scarta ${e.value}`);
+    else if (e.type === 'continue') msgs.push(`▶️ Continuate!`);
+    else if (e.type === 'reward') {
+      const icon = e.item === 'life' ? '❤️' : '⭐';
+      msgs.push(`🎁 Ricompensa: +${e.count}${icon}`);
+    } else if (e.type === 'levelComplete') msgs.push(`✅ Livello ${e.level} completato!`);
+    else if (e.type === 'newLevel') msgs.push(`🆕 Livello ${e.level}`);
+    else if (e.type === 'newGame') msgs.push(`🔄 Nuova partita!`);
+    else if (e.type === 'swap') msgs.push(`${findPlayerName(e.playerId)} scambia ${e.cardValue}×${e.gaveValue}`);
+    else if (e.type === 'swapAll') msgs.push(`🔄 ${findPlayerName(e.playerId)} scambia tutto`);
+    else if (e.type === 'pass') msgs.push(`⏭️ ${findPlayerName(e.playerId)} passa`);
+    else if (e.type === 'knock') msgs.push(`🔔 ${findPlayerName(e.playerId)} chiude!`);
+    else if (e.type === 'declare') msgs.push(`🎉 ${findPlayerName(e.playerId)}: ${e.name} (${e.value})`);
+    else if (e.type === 'reveal') {
+      const parts = Object.entries(e.values || {}).map(([pid, v]) => `${findPlayerName(pid)}: ${v === 30.5 ? '30½' : v === 32 ? '32🔥' : v}`);
+      msgs.push('🃏 Scoperta: ' + parts.join(' | '));
+    } else if (e.type === 'knockResult') {
+      const kv = e.values ? e.values[e.knocker] : 0;
+      msgs.push(`${findPlayerName(e.knocker)} ha chiuso con ${kv === 30.5 ? '30½' : kv} pt`);
+    } else if (e.type === 'roundOver') {
+      if (e.loser) msgs.push(`💀 ${findPlayerName(e.loser)} perde una vita! (❤️×${e.livesLeft})`);
+      if (e.winner) msgs.push(`👑 ${findPlayerName(e.winner)} vince il round!`);
+      if (e.scores) {
+        const parts = Object.entries(e.scores).map(([pid, s]) => `${findPlayerName(pid)}: -${s}pt`);
+        msgs.push(`📊 Penalità: ${parts.join(' | ')}`);
+      }
+    } else if (e.type === 'tieLowest') {
+      const names = (e.players || []).map(findPlayerName).join(', ');
+      msgs.push(`🤝 Pari: ${names} perdono tutti una vita!`);
+    } else if (e.type === 'eliminated') msgs.push(`❌ ${findPlayerName(e.playerId)} eliminato!`);
+    else if (e.type === 'skipDraw') msgs.push(`⏭️ ${findPlayerName(e.playerId)} salta la pesca`);
+    else if (e.type === 'meld') {
+      const t = e.drewReplacement ? ' (pesca rimpiazzo)' : '';
+      msgs.push(`🃏 ${findPlayerName(e.playerId)} melda ${e.count || ''} carte${t}`);
+    } else if (e.type === 'addToMeld') {
+      const o = e.ownerId === e.playerId ? 'proprie' : `di ${findPlayerName(e.ownerId)}`;
+      msgs.push(`➕ ${findPlayerName(e.playerId)} appoggia a meld ${o}`);
+    }     else if (e.type === 'memMatch') msgs.push(`✅ ${findPlayerName(e.playerId)} trova ${e.symbol}! (coppia!)`);
+    else if (e.type === 'memMismatch') msgs.push(`❌ ${findPlayerName(e.playerId)} sbaglia! (non è coppia)`);
+    else if (e.type === 'memJoker') msgs.push(`⭐ ${findPlayerName(e.playerId)} trova il Jolly! (match automatico!)`);
+    else if (e.type === 'reshuffle') msgs.push(`🔄 Mazzo rimescolato (${e.count} carte)`);
   }
   return msgs.join('<br>');
 }

@@ -88,12 +88,12 @@ function addBot(code) {
   return { ok: true, bot: { id: botId, nickname } };
 }
 
-function startGame(code) {
+function startGame(code, options) {
   const room = rooms.get(code);
   if (!room) return { error: 'Room not found' };
   if (room.state !== 'waiting') return { error: 'Game already started' };
   if (room.players.length < room.game.minPlayers) return { error: 'Not enough players' };
-  const gameState = room.game.create(room.players);
+  const gameState = room.game.create(room.players, options || {});
   room.gameState = gameState;
   room.state = 'playing';
   return { ok: true, gameState };
@@ -116,6 +116,9 @@ function startTurnTimer(room, io) {
     return;
   }
   if (room.gameState.handOver) return;
+  if (room.gameState.meta && room.gameState.meta.id === 'memory' && room.gameState.phase === 'mismatch') {
+    return;
+  }
   const currentId = room.gameState.currentPlayer;
   if (room.players.some(p => p.id === currentId && p.isBot)) return; // bots handled by bot.js
 
@@ -188,6 +191,30 @@ function getPlayerRoom(playerId) { return playerRoom.get(playerId) || null; }
 
 function scheduleBotAction(room, io) {
   if (!room.gameState || room.gameState.phase === 'gameOver') return;
+
+  if (room.gameState.meta && room.gameState.meta.id === 'memory' && room.gameState.phase === 'mismatch') {
+    const delay = 1500;
+    const timer = setTimeout(() => {
+      const result = room.game.applyAction(room.gameState, room.gameState.currentPlayer, { type: 'resolveMismatch' });
+      if (result && !result.error) {
+        if (room.gameState.phase === 'roundEnd' && room.game.nextRound) {
+          room.game.nextRound(room.gameState);
+        }
+        const state = {};
+        for (const p of room.gameState.playerOrder) {
+          state[p] = room.game.getPublicState(room.gameState, p);
+        }
+        for (const p of room.gameState.playerOrder) {
+          io.to(p).emit('gameUpdate', state[p]);
+        }
+        scheduleBotAction(room, io);
+        startTurnTimer(room, io);
+      }
+    }, delay);
+    room.botTimers.push(timer);
+    return;
+  }
+
   const pid = room.gameState.currentPlayer;
   const bot = room.players.find(p => p.id === pid && p.isBot);
   if (!bot) return;

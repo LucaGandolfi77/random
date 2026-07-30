@@ -127,6 +127,12 @@ body {
 .player-row .host-badge { font-size: 11px; background: #ffca28; color: #1a1a1a; padding: 2px 8px; border-radius: 4px; }
 
 .lobby-actions { display: flex; gap: 10px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
+.mem-options { background: rgba(255,255,255,.08); border-radius: 10px; padding: 12px; margin: 8px 0; text-align: center; }
+.mem-options .label { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.mem-sliders { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.mem-sliders label { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.mem-sliders input[type=range] { width: 100px; }
+.mem-preview { font-size: 13px; color: #ffca28; margin-top: 6px; }
 
 .game-table {
   background: rgba(0,0,0,.15); border-radius: 16px; padding: 16px; min-height: 300px;
@@ -265,6 +271,25 @@ body {
 /* Exploding Kittens */
 .ek-table { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 
+/* The Mind */
+.tm-container { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.tm-status { display: flex; justify-content: center; gap: 20px; font-size: 18px; padding: 8px; background: rgba(0,0,0,.2); border-radius: 8px; width: 100%; flex-wrap: wrap; }
+.tm-stack { text-align: center; min-height: 130px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.tm-progress { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 300px; }
+.tm-bar { flex: 1; height: 10px; background: rgba(255,255,255,.15); border-radius: 5px; overflow: hidden; }
+.tm-fill { height: 100%; background: #4CAF50; transition: width .3s; border-radius: 5px; }
+.tm-hand { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin: 4px 0; }
+.tm-opponent { font-size: 13px; padding: 4px 8px; background: rgba(0,0,0,.15); border-radius: 6px; margin: 2px; }
+.tm-empty-stack { filter: brightness(.5); }
+
+/* 31 */
+.to-container { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; }
+.to-lives { font-size: 14px; padding: 6px; background: rgba(0,0,0,.2); border-radius: 8px; width: 100%; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.to-knock { font-size: 16px; font-weight: 700; color: #FFC107; padding: 6px; }
+.to-pool { text-align: center; padding: 8px; background: rgba(0,0,0,.15); border-radius: 8px; width: 100%; }
+.to-handvalue { font-size: 18px; font-weight: 700; padding: 6px; text-align: center; }
+.to-opponent { font-size: 13px; padding: 4px 8px; background: rgba(0,0,0,.12); border-radius: 6px; margin: 2px; width: 100%; text-align: center; }
+
 /* Skull King */
 .sk-container { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; }
 .sk-info-row { font-size: 14px; text-align: center; padding: 6px; background: rgba(0,0,0,.2); border-radius: 8px; width: 100%; }
@@ -273,6 +298,35 @@ body {
 .sk-bid-status { font-size: 13px; padding: 4px 8px; margin: 2px; }
 .sk-bid-status.highlight { background: rgba(255,193,7,.2); border-radius: 6px; }
 .bid-area { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; width: 100%; }
+
+/* Memory */
+.mem-container { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.mem-info { font-size: 13px; text-align: center; padding: 8px; background: rgba(0,0,0,.2); border-radius: 8px; width: 100%; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.mem-grid { display: grid; gap: 4px; justify-content: center; max-width: 100%; }
+.mem-card {
+  aspect-ratio: 3/4; border-radius: 6px; cursor: default; display: flex; align-items: center;
+  justify-content: center; font-size: 1.5rem; background: #1565C0; color: rgba(255,255,255,.3);
+  transition: transform .2s, background .2s; user-select: none; min-width: 0;
+  border: 2px solid transparent;
+}
+.mem-card.back { background: linear-gradient(135deg, #1565C0, #0D47A1); color: rgba(255,255,255,.3); }
+.mem-card.flipped { background: #fff; color: #111; transform: rotateY(180deg); border-color: #FFC107; }
+.mem-card.matched { background: rgba(255,255,255,.15); color: #fff; opacity: .6; border-color: #4CAF50; }
+.mem-card.joker { border-color: #D4A017; box-shadow: 0 0 8px rgba(212,160,23,.5); }
+.mem-card.clickable { cursor: pointer; }
+.mem-card.clickable:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,.3); }
+.mem-wait { font-size: 16px; color: #FFC107; animation: pulse .6s infinite; }
+
+/* Ramino / Scala 40 */
+.rm-container { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.rm-info { font-size: 14px; text-align: center; padding: 6px; background: rgba(0,0,0,.2); border-radius: 8px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.rm-player { width: 100%; background: rgba(0,0,0,.1); border-radius: 8px; padding: 8px; }
+.rm-header { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.rm-hand { display: flex; justify-content: center; gap: 6px; margin: 6px 0; flex-wrap: wrap; }
+.rm-melds { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 6px 0; }
+.rm-meld-group { display: flex; gap: 3px; padding: 4px; background: rgba(255,255,255,.08); border-radius: 6px; border: 1px solid rgba(255,255,255,.15); }
+.card.selected { transform: translateY(-12px); box-shadow: 0 4px 12px rgba(255, 193, 7, .7); border-color: #FFC107; }
+.card.joker { border-color: #D4A017; box-shadow: 0 0 8px rgba(212, 160, 23, .5); }
 
 @media (max-width: 600px) {
   .card { width: 52px; height: 74px; }
@@ -283,6 +337,7 @@ body {
   .card.tiny { width: 30px; height: 42px; }
   .card.card-back::after { font-size: 24px; }
   .card.tiny.card-back::after { font-size: 16px; }
+  .mem-card { font-size: 1.1rem; }
   .games-grid { grid-template-columns: repeat(2, 1fr); }
   .login-box { margin: 40px auto; padding: 24px 16px; }
   .chat-panel { width: 100%; min-height: 120px; }

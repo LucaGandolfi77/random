@@ -19,6 +19,11 @@ Specialist roster:
 - `architetto`: system architecture, trade-off analysis, scalability and boundary decisions.
 - `docente`: layered explanations, onboarding, curriculum structure and knowledge transfer.
 
+Creative roster:
+
+- `dostoevskij`: philosophical-literary analysis, existential dialogue, poliphonic exploration of guilt, faith, and freedom.
+- `profeta`: delirious apocalyptic prophet — transforms daily notes into visionary book paragraphs.
+
 ## Source of truth
 
 - Agent YAML files live in `config/agents/`.

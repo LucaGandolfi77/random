@@ -112,7 +112,7 @@ function loadHome() {
 function renderGames(games) {
   const grid = $('games-grid');
   grid.innerHTML = '';
-  const icons = { scopa: '🃏', briscola: '♠️', blackjack: '🂡', ramino: '📋', scala40: '🔟', poker: '♣️' };
+  const icons = { scopa: '🃏', briscola: '♠️', blackjack: '🂡', ramino: '📋', scala40: '🔟', poker: '♣️', monopolydeal: '🏠' };
   const comingSoon = [];
 
   for (const g of games) {
@@ -184,19 +184,51 @@ function renderLobby(room) {
   $('lobby-game-name').textContent = room.gameName + ' — ' + (room.gameDescription || '');
   const list = $('lobby-players');
   list.innerHTML = '';
+  const diffLabels = { easy: 'Facile', medium: 'Medio', hard: 'Difficile' };
   for (const p of room.players) {
     const row = document.createElement('div');
     row.className = 'player-row';
     const initial = (p.nickname || '?')[0].toUpperCase();
+    const diffBadge = p.isBot && p.difficulty ? `<span class="diff-badge diff-${p.difficulty}">${diffLabels[p.difficulty]}</span>` : '';
+    const hostControls = p.isBot && room.hostId === window.playerId ? `
+      <select class="bot-diff-select" data-bot-id="${p.id}">
+        <option value="easy" ${p.difficulty === 'easy' ? 'selected' : ''}>Facile</option>
+        <option value="medium" ${p.difficulty === 'medium' ? 'selected' : ''}>Medio</option>
+        <option value="hard" ${p.difficulty === 'hard' ? 'selected' : ''}>Difficile</option>
+      </select>
+      <button class="btn small danger remove-bot-btn" data-bot-id="${p.id}">✕</button>
+    ` : '';
     row.innerHTML = `
       <div class="avatar">${initial}</div>
       <div class="nickname">${p.nickname}</div>
       ${p.isBot ? '<span class="bot-badge">Bot</span>' : ''}
+      ${diffBadge}
       ${p.id === room.hostId ? '<span class="host-badge">Host</span>' : ''}
+      ${hostControls}
     `;
     list.appendChild(row);
   }
-  $('add-bot-btn').style.display = room.hostId === window.playerId && room.players.length < room.maxPlayers ? '' : 'none';
+
+  list.querySelectorAll('.bot-diff-select').forEach(sel => {
+    sel.addEventListener('change', (e) => {
+      const botId = e.target.dataset.botId;
+      const difficulty = e.target.value;
+      socket.emit('updateBot', { botId, difficulty }, (res) => {
+        if (res && res.error) showToast(res.error);
+      });
+    });
+  });
+  list.querySelectorAll('.remove-bot-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const botId = e.target.dataset.botId;
+      socket.emit('removeBot', { botId }, (res) => {
+        if (res && res.error) showToast(res.error);
+      });
+    });
+  });
+
+  const addGroup = $('bot-add-group');
+  if (addGroup) addGroup.style.display = room.hostId === window.playerId && room.players.length < room.maxPlayers ? '' : 'none';
   $('start-game-btn').style.display = room.hostId === window.playerId && room.players.length >= room.minPlayers ? '' : 'none';
 
   const optionsArea = $('game-options');
@@ -249,7 +281,8 @@ function startGame() {
 }
 
 function addBot() {
-  socket.emit('addBot', null, (res) => {
+  const difficulty = $('bot-difficulty-select')?.value || 'medium';
+  socket.emit('addBot', { difficulty }, (res) => {
     if (res && res.error) showToast(res.error);
   });
 }

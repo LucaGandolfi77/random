@@ -40,7 +40,14 @@
           <div id="lobby-players" class="players-list"></div>
           <div id="game-options"></div>
           <div id="lobby-actions" class="lobby-actions">
-            <button id="add-bot-btn" class="btn">Aggiungi Bot</button>
+            <div class="bot-add-group" id="bot-add-group">
+              <select id="bot-difficulty-select">
+                <option value="easy">Facile</option>
+                <option value="medium" selected>Medio</option>
+                <option value="hard">Difficile</option>
+              </select>
+              <button id="add-bot-btn" class="btn">+ Bot</button>
+            </div>
             <button id="start-game-btn" class="btn primary">Inizia Partita</button>
           </div>
         </div>

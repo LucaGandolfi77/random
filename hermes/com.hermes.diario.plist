@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  com.hermes.diario.plist
+  LaunchAgent macOS per mantenere il bot Telegram -> Profeta in Delirio
+  attivo e riavviato automaticamente per tutta la settimana.
+
+  INSTALLAZIONE:
+    1. Copia questo file in ~/Library/LaunchAgents/com.hermes.diario.plist
+    2. Modifica i percorsi qui sotto (HERMES_DIR e per Python)
+    3. Carica:   launchctl load ~/Library/LaunchAgents/com.hermes.diario.plist
+    4. Stop:     launchctl unload ~/Library/LaunchAgents/com.hermes.diario.plist
+
+  Il servizio:
+    - Si avvia automaticamente al login
+    - Si riavvia se crasha (KeepAlive)
+    - Non consuma CPU quando il bot è in long-polling
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.hermes.diario</string>
+
+    <!-- Sostituisci con il percorso reale di python3 (cerca con: which python3) -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python3</string>
+        <string>/Users/tuo_utente/random/hermes/telegram_diario_bot.py</string>
+    </array>
+
+    <!-- Cartella di lavoro -->
+    <key>WorkingDirectory</key>
+    <string>/Users/tuo_utente/random/hermes</string>
+
+    <!-- Variabili d'ambiente: il bot legge diario.env da qui -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>HOME</key>
+        <string>/Users/tuo_utente</string>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin</string>
+    </dict>
+
+    <!-- Ricomincia sempre se muore -->
+    <key>KeepAlive</key>
+    <true/>
+
+    <!-- Ricomincia dopo crash: aspetta 10s tra un tentativo e l'altro -->
+    <key>ThrottleInterval</key>
+    <integer>10</integer>
+
+    <!-- Avvia al login -->
+    <key>RunAtLoad</key>
+    <true/>
+
+    <!-- Log stdout/stderr -->
+    <key>StandardOutPath</key>
+    <string>/Users/tuo_utente/random/hermes/runtime/logs/launchd_stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/tuo_utente/random/hermes/runtime/logs/launchd_stderr.log</string>
+</dict>
+</plist>

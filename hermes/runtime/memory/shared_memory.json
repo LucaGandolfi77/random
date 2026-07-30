@@ -125,6 +125,37 @@
         "mode": "preview"
       },
       "content": "Sviluppatore\n\n            Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.\n            Ruolo: Specialista in scrittura del codice, debug e test.\n            Skill attive: code_generation, debugging, refactoring, testing\n            Tool configurati: editor, shell, pytest\n\n            Piano immediato:\n            - trasformo il task in interventi tecnici verificabili\n- isolo bug o gap implementativi\n- propongo patch minime e test rapidi\n\n            Memoria condivisa disponibile:\n            - [2026-06-10T12:55:25+00:00] orchestrator: Analizza le fonti, proponi una patch e fai una review finale\n- [2026-06-10T12:55:25+00:00] revisore: Revisore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in controllo qualita, stile e formattazione.   ...\n- [2026-06-10T12:55:25+00:00] ricercatore: Ricercatore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in scraping, ricerca sul web e analisi dati....\n- [2026-06-10T12:55:25+00:00] sviluppatore: Sviluppatore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in scrittura del codice, debug e test.     ...\n- [2026-06-10T12:58:00+00:00] orchestrator: Analizza le fonti, proponi una patch e fai una review finale"
+    },
+    {
+      "entry_id": "mem-0009",
+      "timestamp": "2026-07-30T11:09:14+00:00",
+      "author": "orchestrator",
+      "category": "task",
+      "tags": [
+        "dispatch",
+        "preview"
+      ],
+      "metadata": {
+        "agents": [
+          "profeta"
+        ]
+      },
+      "content": "test"
+    },
+    {
+      "entry_id": "mem-0010",
+      "timestamp": "2026-07-30T11:09:14+00:00",
+      "author": "profeta",
+      "category": "agent_output",
+      "tags": [
+        "profeta",
+        "preview"
+      ],
+      "metadata": {
+        "status": "completed",
+        "mode": "preview"
+      },
+      "content": "Profeta in Delirio\n\n            Task ricevuto: test.\n            Ruolo: Profeta apocalittico — riceve le note quotidiane dell'utente come visioni divine e le trasfigura in paragrafi visionari per un libro.\n            Skill attive: \n            Tool configurati: \n\n            Piano immediato:\n            - analizzo il task nel mio dominio specialistico\n- preparo output strutturati e riusabili\n- segnalo rischi, ipotesi e prossime azioni utili\n\n            Memoria condivisa disponibile:\n            - [2026-06-10T12:55:25+00:00] sviluppatore: Sviluppatore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in scrittura del codice, debug e test.     ...\n- [2026-06-10T12:58:00+00:00] orchestrator: Analizza le fonti, proponi una patch e fai una review finale\n- [2026-06-10T12:58:00+00:00] revisore: Revisore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in controllo qualita, stile e formattazione.   ...\n- [2026-06-10T12:58:00+00:00] ricercatore: Ricercatore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in scraping, ricerca sul web e analisi dati....\n- [2026-06-10T12:58:00+00:00] sviluppatore: Sviluppatore              Task ricevuto: Analizza le fonti, proponi una patch e fai una review finale.             Ruolo: Specialista in scrittura del codice, debug e test.     ...\n- [2026-07-30T11:09:14+00:00] orchestrator: test"
     }
   ]
 }

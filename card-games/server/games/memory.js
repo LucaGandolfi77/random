@@ -267,7 +267,7 @@ function nextRound(state) {
   return { ok: true };
 }
 
-function getBotAction(state, playerId) {
+function getBotAction(state, playerId, difficulty) {
   if (state.phase === 'mismatch' && state.currentPlayer === playerId) {
     return { type: 'resolveMismatch' };
   }
@@ -284,6 +284,13 @@ function getBotAction(state, playerId) {
     if (!state._botMemory.find(m => m.id === c.id)) {
       state._botMemory.push({ id: c.id, pairId: c.pairId, symbol: c.symbol });
     }
+  }
+
+  // Cap memory by difficulty (easy: ~2 pairs, medium: ~6 pairs, hard: unlimited)
+  if (difficulty === 'easy' && state._botMemory.length > 4) {
+    state._botMemory = state._botMemory.slice(-4);
+  } else if (difficulty === 'medium' && state._botMemory.length > 12) {
+    state._botMemory = state._botMemory.slice(-12);
   }
 
   if (state.phase === 'pickSecond' && state.firstPick) {

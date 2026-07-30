@@ -3,4 +3,5 @@ __pycache__/
 .mypy_cache/
 config/secrets.local.yaml
 runtime/logs/
-*.pyc
+*.pycdiario.env
+diario_local_*

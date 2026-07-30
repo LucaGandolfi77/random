@@ -53,16 +53,40 @@ io.on('connection', (socket) => {
     if (cb) cb({ ok: true });
   });
 
-  socket.on('addBot', (_, cb) => {
+  socket.on('addBot', ({ difficulty } = {}, cb) => {
     const code = rooms.getPlayerRoom(socket.id);
     if (!code) { cb({ error: 'Not in a room' }); return; }
     const room = rooms.getRoom(code);
     if (!room || room.hostId !== socket.id) { cb({ error: 'Only host can add bots' }); return; }
-    const result = rooms.addBot(code);
+    const result = rooms.addBot(code, difficulty);
     if (result.error) { cb(result); return; }
     io.to(code).emit('roomUpdate', serializeRoom(room));
-    io.to(code).emit('chatMessage', { from: 'Sistema', text: `${result.bot.nickname} è stato aggiunto` });
+    const label = rooms.DIFFICULTY_LABELS[result.bot.difficulty] || 'Medio';
+    io.to(code).emit('chatMessage', { from: 'Sistema', text: `${result.bot.nickname} (${label}) è stato aggiunto` });
     cb({ ok: true, bot: result.bot });
+  });
+
+  socket.on('updateBot', ({ botId, difficulty } = {}, cb) => {
+    const code = rooms.getPlayerRoom(socket.id);
+    if (!code) { cb({ error: 'Not in a room' }); return; }
+    const room = rooms.getRoom(code);
+    if (!room || room.hostId !== socket.id) { cb({ error: 'Only host can modify bots' }); return; }
+    const result = rooms.updateBotDifficulty(code, botId, difficulty);
+    if (result.error) { cb(result); return; }
+    io.to(code).emit('roomUpdate', serializeRoom(room));
+    cb({ ok: true });
+  });
+
+  socket.on('removeBot', ({ botId } = {}, cb) => {
+    const code = rooms.getPlayerRoom(socket.id);
+    if (!code) { cb({ error: 'Not in a room' }); return; }
+    const room = rooms.getRoom(code);
+    if (!room || room.hostId !== socket.id) { cb({ error: 'Only host can remove bots' }); return; }
+    const result = rooms.removeBot(code, botId);
+    if (result.error) { cb(result); return; }
+    io.to(code).emit('roomUpdate', serializeRoom(room));
+    io.to(code).emit('chatMessage', { from: 'Sistema', text: `${result.nickname} è stato rimosso` });
+    cb({ ok: true });
   });
 
   socket.on('startGame', ({ options } = {}, cb) => {
@@ -168,7 +192,7 @@ function serializeRoom(room) {
   return {
     code: room.code, gameId: room.gameId, gameName: room.game.name,
     state: room.state, chatHistory: room.chatHistory || [],
-    players: room.players.map(p => ({ id: p.id, nickname: p.nickname, isBot: p.isBot })),
+    players: room.players.map(p => ({ id: p.id, nickname: p.nickname, isBot: p.isBot, difficulty: p.isBot ? p.difficulty : undefined })),
     hostId: room.hostId, minPlayers: room.game.minPlayers, maxPlayers: room.game.maxPlayers,
     gameDescription: room.game.description,
   };

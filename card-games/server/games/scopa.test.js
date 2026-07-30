@@ -102,6 +102,7 @@ describe('Briscola', () => {
     state.hands.p2 = [{ id: 'c2', suit: 'coppe', rank: '2', value: 2, briscolaValue: 0 }];
     state.deck = [];
     state.briscola = { suit: 'spade', rank: '3', value: 3, briscolaValue: 10 };
+    state.briscolaSuit = 'spade';
 
     const result = briscola.applyAction(state, 'p1', { cardId: 'c1' });
     assert.ok(result.ok);

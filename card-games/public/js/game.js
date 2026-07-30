@@ -19,11 +19,13 @@ function renderGame(state) {
     case 'ramino': renderRamino(state); break;
     case 'scala40': renderScala40(state); break;
     case 'memory': renderMemory(state); break;
+    case 'monopolydeal': renderMonopolyDeal(state); break;
+    case 'odin': renderOdin(state); break;
     default: renderScopa(state);
   }
 }
 
-const GAME_NAMES = { scopa: 'Scopa', briscola: 'Briscola', blackjack: 'Blackjack', settenmezzo: 'Sette e Mezzo', tressette: 'Tressette', poker: 'Texas Hold\'em', uno: 'UNO', explodingkittens: 'Exploding Kittens', skullking: 'Skull King', themind: 'The Mind', thiryone: '31', ramino: 'Ramino', scala40: 'Scala 40', memory: 'Memory' };
+const GAME_NAMES = { scopa: 'Scopa', briscola: 'Briscola', blackjack: 'Blackjack', settenmezzo: 'Sette e Mezzo', tressette: 'Tressette', poker: 'Texas Hold\'em', uno: 'UNO', explodingkittens: 'Exploding Kittens', skullking: 'Skull King', themind: 'The Mind', thiryone: '31', ramino: 'Ramino', scala40: 'Scala 40', memory: 'Memory', monopolydeal: 'Monopoly Deal', odin: 'Odin' };
 
 function renderGameTopBar(state, name) {
   const info = $('game-info');
@@ -1377,6 +1379,7 @@ function showOverlay(state) {
       pts = state.alive && state.alive[pid] ? '✅ Vivo' : '💥 Eliminato';
     } else if (gameType === 'blackjack' || gameType === 'settenmezzo' || gameType === 'poker') pts = `${state.chips[pid] || 0} fiche`;
     else if (gameType === 'skullking') pts = `${state.gameScores[pid] || 0} pt${state.phase !== 'roundOver' ? ` (${state.tricksWon[pid] || 0}/${state.bids[pid] === -1 ? '?' : state.bids[pid]} prese)` : ''}`;
+    else if (gameType === 'monopolydeal') pts = `${(state.completeSets && state.completeSets[pid]) || 0} set completi`;
     else if (state.gamePoints && state.gamePoints[pid] !== undefined) pts = `${state.gamePoints[pid]} pt`;
     else if (state.points) pts = `${state.points[pid] || 0} pt`;
     else pts = `${state.scores[pid] || 0} pt`;
@@ -1388,7 +1391,7 @@ function showOverlay(state) {
   }
   ov.appendChild(sd);
 
-  const canNext = ((gameType === 'blackjack' || gameType === 'settenmezzo' || gameType === 'uno' || gameType === 'explodingkittens' || gameType === 'skullking' || gameType === 'themind' || gameType === 'thiryone' || gameType === 'ramino' || gameType === 'scala40' || gameType === 'memory' || (gameType === 'poker' && state.handOver))) && state.phase !== 'gameOver';
+  const canNext = ((gameType === 'blackjack' || gameType === 'settenmezzo' || gameType === 'uno' || gameType === 'explodingkittens' || gameType === 'skullking' || gameType === 'themind' || gameType === 'thiryone' || gameType === 'ramino' || gameType === 'scala40' || gameType === 'memory' || gameType === 'monopolydeal' || (gameType === 'poker' && state.handOver))) && state.phase !== 'gameOver';
   if (canNext) {
     const nb = document.createElement('button'); nb.className = 'btn primary';
     nb.textContent = 'Prossima mano →';
@@ -1689,8 +1692,678 @@ function formatEvents(events) {
     else if (e.type === 'memMismatch') msgs.push(`❌ ${findPlayerName(e.playerId)} sbaglia! (non è coppia)`);
     else if (e.type === 'memJoker') msgs.push(`⭐ ${findPlayerName(e.playerId)} trova il Jolly! (match automatico!)`);
     else if (e.type === 'reshuffle') msgs.push(`🔄 Mazzo rimescolato (${e.count} carte)`);
+    // Monopoly Deal events
+    else if (e.type === 'turnStart') msgs.push(`🎯 Turno di ${findPlayerName(e.playerId)}`);
+    else if (e.type === 'endTurn') msgs.push(`⏭️ ${findPlayerName(e.playerId)} finisce il turno`);
+    else if (e.type === 'bank') msgs.push(`🏦 ${findPlayerName(e.playerId)} mette in banca: ${e.cardName}`);
+    else if (e.type === 'playProperty') msgs.push(`🏠 ${findPlayerName(e.playerId)} gioca ${e.cardName} (${e.color})`);
+    else if (e.type === 'moveWild') msgs.push(`🔀 ${findPlayerName(e.playerId)} sposta un jolly da ${e.from} a ${e.to}`);
+    else if (e.type === 'passgo') msgs.push(`➡️ ${findPlayerName(e.playerId)} Passa Via! Pescate ${e.drawn} carte`);
+    else if (e.type === 'rent') msgs.push(`💸 ${findPlayerName(e.playerId)} riscuote affitto ${e.color} (${e.amount}M${e.doubleUsed ? ' x2' : ''})`);
+    else if (e.type === 'paymentDue') msgs.push(`💰 ${findPlayerName(e.playerId)} deve pagare ${e.amount}M a ${findPlayerName(e.to)}`);
+    else if (e.type === 'paid') msgs.push(`💳 ${findPlayerName(e.fromId)} paga ${e.amount}M (${e.cardCount} carte) a ${findPlayerName(e.toId)}`);
+    else if (e.type === 'paidNothing') msgs.push(`🤷 ${findPlayerName(e.playerId)} non ha nulla per pagare`);
+    else if (e.type === 'debtcollector') msgs.push(`💰 ${findPlayerName(e.playerId)} manda l'Esattore da ${findPlayerName(e.targetId)} (5M)`);
+    else if (e.type === 'birthday') msgs.push(`🎂 ${findPlayerName(e.playerId)}: Buon Compleanno! Tutti pagano 2M`);
+    else if (e.type === 'slydeal') msgs.push(`🥷 ${findPlayerName(e.playerId)} tenta un Furto Furtivo a ${findPlayerName(e.targetId)}`);
+    else if (e.type === 'forcedeal') msgs.push(`🔄 ${findPlayerName(e.playerId)} tenta uno Scambio Forzato con ${findPlayerName(e.targetId)}`);
+    else if (e.type === 'dealbreaker') msgs.push(`💥 ${findPlayerName(e.playerId)} tenta Rompi Patto su ${findPlayerName(e.targetId)} (${e.color})`);
+    else if (e.type === 'stolen') msgs.push(`🥷 ${findPlayerName(e.fromId)} ruba ${e.cardName} a ${findPlayerName(e.fromTarget)}`);
+    else if (e.type === 'swapped') msgs.push(`🔄 ${findPlayerName(e.fromId)} scambia ${e.mine} con ${e.theirs} di ${findPlayerName(e.targetId)}`);
+    else if (e.type === 'setStolen') msgs.push(`💥 ${findPlayerName(e.fromId)} ruba il set ${e.color} a ${findPlayerName(e.fromTarget)}${e.withHouse ? ' +Casa' : ''}${e.withHotel ? ' +Albergo' : ''}`);
+    else if (e.type === 'houseBuilt') msgs.push(`🏠 ${findPlayerName(e.playerId)} costruisce una Casa su ${e.color}`);
+    else if (e.type === 'hotelBuilt') msgs.push(`🏨 ${findPlayerName(e.playerId)} costruisce un Albergo su ${e.color}`);
+    else if (e.type === 'jsnPrompt') msgs.push(`🛑 ${findPlayerName(e.targetId)}: usare "Col Cavolo!" contro ${findPlayerName(e.fromId)}?`);
+    else if (e.type === 'jsnPlayed') msgs.push(`🛑 ${findPlayerName(e.by)}: "Col Cavolo!" (catena ${e.count})`);
+    else if (e.type === 'jsnAccepted') msgs.push(`✅ ${findPlayerName(e.by)} accetta`);
+    else if (e.type === 'jsnCanceled') msgs.push(`🚫 ${findPlayerName(e.by)} annulla l'azione con "Col Cavolo!"`);
+    else if (e.type === 'discarded') msgs.push(`🗑️ ${findPlayerName(e.playerId)} scarta ${e.count} carte`);
   }
   return msgs.join('<br>');
 }
 
+/* ======================= MONOPOLY DEAL ======================= */
+
+let mdSelection = null; // { step, cardId, actionKind, ... }
+
+const MD_COLORS = ['brown','lightblue','pink','orange','red','yellow','green','darkblue','railroad','utility'];
+const MD_SET_NAMES = { brown:'Marrone', lightblue:'Azzurro', pink:'Rosa', orange:'Arancione', red:'Rosso', yellow:'Giallo', green:'Verde', darkblue:'Blu', railroad:'Stazioni', utility:'Societa' };
+
+function mdColorHex(color) {
+  const map = { brown:'#6D4C41', lightblue:'#4FC3F7', pink:'#F06292', orange:'#FFA726', red:'#E53935', yellow:'#FDD835', green:'#43A047', darkblue:'#1E88E5', railroad:'#37474F', utility:'#90A4AE', wild:'#6D4C41', money:'#9E9E9E' };
+  return map[color] || '#666';
+}
+
+function createMDCardElement(card, opts = {}) {
+  const el = document.createElement('div');
+  el.className = 'md-card' + (opts.small ? ' small' : '') + (opts.clickable ? ' clickable' : '');
+  el.dataset.cardId = card.id;
+  if (card.assignedColor) el.dataset.assignedColor = card.assignedColor;
+
+  if (card.type === 'money') {
+    el.classList.add('md-money');
+    el.innerHTML = `<div class="md-value">${card.value}M</div><div class="md-label">Denaro</div>`;
+  } else if (card.type === 'property' || card.type === 'wild') {
+    const color = card.assignedColor || card.color || 'wild';
+    el.classList.add('md-property');
+    el.style.borderColor = mdColorHex(color);
+    el.style.background = `linear-gradient(180deg, ${mdColorHex(color)} 30%, rgba(255,255,255,.92) 30%)`;
+    const namePart = card.type === 'wild' ? '★ Jolly' : (card.name || '');
+    el.innerHTML = `<div class="md-prop-top">${MD_SET_NAMES[color] || color}</div><div class="md-prop-name">${namePart}</div><div class="md-prop-val">${card.value}M</div>`;
+  } else if (card.type === 'action') {
+    el.classList.add('md-action');
+    const icons = { passgo:'➡️', dealbreaker:'💥', forcedeal:'🔄', slydeal:'🥷', justsayno:'🛑', debtcollector:'💰', birthday:'🎂', doublerent:'✕2', house:'🏠', hotel:'🏨' };
+    el.innerHTML = `<div class="md-action-icon">${icons[card.subtype] || '⚡'}</div><div class="md-action-name">${card.name || card.subtype}</div><div class="md-prop-val">${card.value}M</div>`;
+  } else if (card.type === 'rent') {
+    el.classList.add('md-rent');
+    const colors = card.colors && card.colors.length === 2 ? card.colors : ['wild'];
+    if (colors[0] === 'wild') {
+      el.style.background = 'linear-gradient(135deg,#6D4C41,#FFC107)';
+      el.innerHTML = `<div class="md-rent-top">AFFITTO JOLLY</div><div class="md-prop-val">${card.value}M</div>`;
+    } else {
+      el.style.background = `linear-gradient(135deg, ${mdColorHex(colors[0])}, ${mdColorHex(colors[1])})`;
+      el.innerHTML = `<div class="md-rent-top">AFFITTO</div><div class="md-prop-val">${card.value}M</div>`;
+    }
+  }
+  return el;
+}
+
+function propsGroupedByColor(properties, pid, state) {
+  const groups = {};
+  for (const p of properties) {
+    const c = p.assignedColor || p.color || 'wild';
+    if (!groups[c]) groups[c] = [];
+    groups[c].push(p);
+  }
+  return groups;
+}
+
+function renderPropertyArea(properties, setAddons, completeSets, forSelf) {
+  const container = document.createElement('div');
+  container.className = 'md-props';
+  const groups = propsGroupedByColor(properties);
+  const ordered = MD_COLORS.concat(['wild']);
+  for (const color of ordered) {
+    if (!groups[color]) continue;
+    const set = groups[color];
+    const setSize = { brown:2, lightblue:3, pink:3, orange:3, red:3, yellow:3, green:3, darkblue:2, railroad:4, utility:2 }[color] || 99;
+    const isComplete = completeSets && completeSets.includes(color);
+    const grpDiv = document.createElement('div');
+    grpDiv.className = 'md-prop-group' + (isComplete ? ' complete' : '');
+    grpDiv.style.borderColor = mdColorHex(color);
+    const hdr = document.createElement('div');
+    hdr.className = 'md-group-hdr';
+    hdr.style.background = mdColorHex(color);
+    hdr.textContent = `${MD_SET_NAMES[color] || color} ${set.length}/${setSize}${isComplete ? ' ✓' : ''}`;
+    if (color === 'wild') hdr.textContent = 'Jolly';
+    grpDiv.appendChild(hdr);
+    for (const p of set) {
+      const cardEl = createMDCardElement(p, { small: true });
+      cardEl.dataset.cardId = p.id;
+      if (forSelf) cardEl.classList.add('own-prop');
+      grpDiv.appendChild(cardEl);
+    }
+    const addon = setAddons && setAddons[color];
+    if (addon) {
+      if (addon.house) { const h = document.createElement('div'); h.className = 'md-addon'; h.textContent = '🏠'; grpDiv.appendChild(h); }
+      if (addon.hotel) { const h = document.createElement('div'); h.className = 'md-addon'; h.textContent = '🏨'; grpDiv.appendChild(h); }
+    }
+    container.appendChild(grpDiv);
+  }
+  return container;
+}
+
+function renderMonopolyDeal(state) {
+  renderGameTopBar(state, 'Monopoly Deal'); updateTimer(state);
+  const table = $('game-table'); table.innerHTML = '';
+  if (state.phase === 'gameOver') { showOverlay(state); return; }
+
+  const root = document.createElement('div'); root.className = 'md-table';
+
+  // info bar
+  const info = document.createElement('div'); info.className = 'md-info';
+  info.innerHTML = `<strong>Mazzo: ${state.deckSize}</strong> carte | <strong>Scarti: ${state.discardSize || 0}</strong>`;
+  if (state.currentPlayer === window.playerId && state.phase === 'play') info.innerHTML += ` | <strong>Giocate: ${state.playsLeft}/3</strong>`;
+  if (state.pending) info.innerHTML += ` | <strong>⚠️ Azione in corso</strong>`;
+  root.appendChild(info);
+
+  // opponents
+  const oppArea = document.createElement('div'); oppArea.className = 'md-opponents';
+  for (const pid of state.playerOrder) {
+    if (pid === window.playerId) continue;
+    oppArea.appendChild(renderPlayerBox(state, pid, false));
+  }
+  root.appendChild(oppArea);
+
+  // me (properties + bank)
+  const meBox = renderPlayerBox(state, window.playerId, true);
+  root.appendChild(meBox);
+
+  table.appendChild(root);
+
+  // action panel + hand
+  const ap = document.createElement('div'); ap.id = 'action-panel'; table.appendChild(ap);
+  renderMDActions(state, ap);
+
+  showEvents(state);
+}
+
+function renderPlayerBox(state, pid, isMe) {
+  const box = document.createElement('div');
+  box.className = 'md-player' + (isMe ? ' me' : '') + (state.currentPlayer === pid ? ' current' : '');
+  const name = isMe ? 'Tu' : findPlayerName(pid);
+  const bankTotal = state.bankTotals && state.bankTotals[pid] !== undefined ? state.bankTotals[pid] : 0;
+  const setCount = (state.completeSets && state.completeSets[pid]) || 0;
+
+  const hdr = document.createElement('div'); hdr.className = 'md-player-hdr';
+  hdr.innerHTML = `${name} ${state.currentPlayer === pid ? '👈' : ''} — ${setCount}/3 set | Banca: ${bankTotal}M | Mano: ${state.handSize[pid] || 0}`;
+  box.appendChild(hdr);
+
+  // properties
+  const propsArea = renderPropertyArea(state.properties[pid] || [], state.setAddons[pid], state.completeSets[pid], isMe);
+  box.appendChild(propsArea);
+
+  // bank
+  const bankDiv = document.createElement('div'); bankDiv.className = 'md-bank';
+  const bankLabel = document.createElement('div'); bankLabel.className = 'md-bank-label'; bankLabel.textContent = 'Banca:';
+  bankDiv.appendChild(bankLabel);
+  const bankCards = document.createElement('div'); bankCards.className = 'md-bank-cards';
+  for (const c of (state.banks[pid] || [])) {
+    const ce = createMDCardElement(c, { small: true });
+    ce.dataset.cardId = c.id;
+    if (isMe) ce.classList.add('own-bank');
+    bankCards.appendChild(ce);
+  }
+  bankDiv.appendChild(bankCards);
+  box.appendChild(bankDiv);
+
+  // my hand only rendered in renderMDActions
+  return box;
+}
+
+function mdEmit(action) {
+  window.socket.emit('playerAction', { action });
+  mdSelection = null;
+}
+
+function renderMDActions(state, ap) {
+  const isMyTurn = state.currentPlayer === window.playerId;
+  // hand always shown (mine)
+  const handDiv = document.createElement('div'); handDiv.className = 'md-hand';
+  handDiv.id = 'player-hand';
+  if (isMyTurn && state.hand) {
+    for (const c of state.hand) {
+      const el = createMDCardElement(c);
+      el.classList.add('fade-in');
+      el.addEventListener('click', () => onMDHandCardClick(c, state));
+      handDiv.appendChild(el);
+    }
+  } else if (state.hand) {
+    for (const c of state.hand) handDiv.appendChild(createMDCardElement(c));
+  }
+  ap.appendChild(handDiv);
+
+  // phase-specific panels
+  if (state.phase === 'discard' && isMyTurn) {
+    return renderMDDiscardPanel(state, ap);
+  }
+  if (state.phase === 'pay' && state.pending && state.pending.targetId === window.playerId) {
+    return renderMDPayPanel(state, ap);
+  }
+  if (state.phase === 'jsn' && state.pending && state.pending.respondent === window.playerId) {
+    return renderMDJSNPanel(state, ap);
+  }
+  if (!isMyTurn || state.phase !== 'play') return;
+
+  // selection flow panel
+  if (mdSelection) {
+    return renderMDSelectionPanel(state, ap);
+  }
+
+  // end turn button
+  const etBtn = document.createElement('button'); etBtn.className = 'btn';
+  etBtn.textContent = `Fine turno (${state.playsLeft} giocate rimaste)`;
+  etBtn.addEventListener('click', () => mdEmit({ type: 'endTurn' }));
+  ap.appendChild(etBtn);
+}
+
+function onMDHandCardClick(card, state) {
+  if (state.phase !== 'play' || state.currentPlayer !== window.playerId) return;
+  mdSelection = { cardId: card.id, card };
+  renderMonopolyDeal(state);
+}
+
+function renderMDSelectionPanel(state, ap) {
+  const sel = mdSelection;
+  const c = sel.card;
+  const cancelBtn = document.createElement('button'); cancelBtn.className = 'btn small'; cancelBtn.textContent = '✕ Annulla';
+  cancelBtn.addEventListener('click', () => { mdSelection = null; renderMonopolyDeal(state); });
+  ap.appendChild(cancelBtn);
+
+  const title = document.createElement('div'); title.className = 'md-sel-title'; title.textContent = 'Cosa fare con questa carta?';
+  ap.appendChild(title);
+
+  if (c.type === 'money' || c.type === 'action' || c.type === 'rent') {
+    const bBtn = document.createElement('button'); bBtn.className = 'btn';
+    bBtn.textContent = `🏦 Metti in banca (${c.value}M)`;
+    bBtn.addEventListener('click', () => mdEmit({ type: 'bank', cardId: c.id }));
+    ap.appendChild(bBtn);
+  }
+  if (c.type === 'property') {
+    const pBtn = document.createElement('button'); pBtn.className = 'btn success';
+    pBtn.textContent = `🏠 Gioca in ${MD_SET_NAMES[c.color]}`;
+    pBtn.addEventListener('click', () => mdEmit({ type: 'playProperty', cardId: c.id }));
+    ap.appendChild(pBtn);
+  }
+  if (c.type === 'wild') {
+    const lbl = document.createElement('div'); lbl.textContent = 'Scegli colore del jolly:'; ap.appendChild(lbl);
+    for (const col of c.colors) {
+      const b = document.createElement('button'); b.className = 'btn small';
+      b.style.background = mdColorHex(col); b.style.color = col === 'yellow' || col === 'lightblue' ? '#000' : '#fff';
+      b.textContent = MD_SET_NAMES[col];
+      b.addEventListener('click', () => mdEmit({ type: 'playProperty', cardId: c.id, color: col }));
+      ap.appendChild(b);
+    }
+  }
+  if (c.type === 'action') {
+    if (c.subtype === 'passgo') {
+      const b = document.createElement('button'); b.className = 'btn'; b.textContent = '➡️ Passa Via (pesca 2)';
+      b.addEventListener('click', () => mdEmit({ type: 'playAction', cardId: c.id, action: 'passgo' })); ap.appendChild(b);
+    } else if (c.subtype === 'birthday') {
+      const b = document.createElement('button'); b.className = 'btn'; b.textContent = '🎂 Buon Compleanno (tutti pagano 2M)';
+      b.addEventListener('click', () => mdEmit({ type: 'playAction', cardId: c.id, action: 'birthday' })); ap.appendChild(b);
+    } else if (c.subtype === 'debtcollector') {
+      if (!sel.targetId) {
+        const lbl = document.createElement('div'); lbl.textContent = 'Scegli bersaglio:'; ap.appendChild(lbl);
+        for (const pid of state.playerOrder) {
+          if (pid === window.playerId) continue;
+          const b = document.createElement('button'); b.className = 'btn small'; b.textContent = findPlayerName(pid);
+          b.addEventListener('click', () => { mdSelection.targetId = pid; renderMonopolyDeal(state); });
+          ap.appendChild(b);
+        }
+      } else {
+        const b = document.createElement('button'); b.className = 'btn';
+        b.textContent = `💰 Esattore → ${findPlayerName(sel.targetId)} (5M)`;
+        b.addEventListener('click', () => mdEmit({ type: 'playAction', cardId: c.id, action: 'debtcollector', targetId: sel.targetId }));
+        ap.appendChild(b);
+      }
+    } else if (c.subtype === 'slydeal') {
+      if (!sel.targetId) { ap.appendChild(mdTargetPicker(state, sel, 'Scegli da chi rubare:')); return; }
+      if (!sel.targetCardId) { ap.appendChild(mdTargetPropertyPicker(state, sel, 'Scegli proprieta da rubare', false)); return; }
+      const b = document.createElement('button'); b.className = 'btn'; b.textContent = `🥷 Ruba la proprieta`;
+      b.addEventListener('click', () => mdEmit({ type: 'playAction', cardId: c.id, action: 'slydeal', targetId: sel.targetId, targetCardId: sel.targetCardId })); ap.appendChild(b);
+    } else if (c.subtype === 'forcedeal') {
+      if (!sel.myCardId) { ap.appendChild(mdOwnPropertyPicker(state, sel, 'Scegli la TUA proprieta da scambiare')); return; }
+      if (!sel.targetId) { ap.appendChild(mdTargetPicker(state, sel, 'Scegli con chi scambiare:')); return; }
+      if (!sel.targetCardId) { ap.appendChild(mdTargetPropertyPicker(state, sel, 'Scegli proprieta da ricevere', false)); return; }
+      const b = document.createElement('button'); b.className = 'btn'; b.textContent = `🔄 Conferma scambio`;
+      b.addEventListener('click', () => mdEmit({ type: 'playAction', cardId: c.id, action: 'forcedeal', targetId: sel.targetId, targetCardId: sel.targetCardId, myCardId: sel.myCardId })); ap.appendChild(b);
+    } else if (c.subtype === 'dealbreaker') {
+      if (!sel.targetId) { ap.appendChild(mdTargetPickerCompleteSet(state, sel)); return; }
+      if (!sel.color) { ap.appendChild(mdCompleteSetColorPicker(state, sel)); return; }
+      const b = document.createElement('button'); b.className = 'btn danger'; b.textContent = `💥 Rompi set ${MD_SET_NAMES[sel.color]} di ${findPlayerName(sel.targetId)}`;
+      b.addEventListener('click', () => mdEmit({ type: 'playAction', cardId: c.id, action: 'dealbreaker', targetId: sel.targetId, color: sel.color })); ap.appendChild(b);
+    } else if (c.subtype === 'house') {
+      ap.appendChild(mdMyCompleteSetColorPicker(state, sel, 'Costruisci Casa su:'));
+      if (sel.color) {
+        const b = document.createElement('button'); b.className = 'btn'; b.textContent = `🏠 Casa su ${MD_SET_NAMES[sel.color]}`;
+        b.addEventListener('click', () => mdEmit({ type: 'playHouse', cardId: c.id, color: sel.color })); ap.appendChild(b);
+      }
+    } else if (c.subtype === 'hotel') {
+      ap.appendChild(mdMyHouseSetColorPicker(state, sel, 'Costruisci Albergo su:'));
+      if (sel.color) {
+        const b = document.createElement('button'); b.className = 'btn'; b.textContent = `🏨 Albergo su ${MD_SET_NAMES[sel.color]}`;
+        b.addEventListener('click', () => mdEmit({ type: 'playHotel', cardId: c.id, color: sel.color })); ap.appendChild(b);
+      }
+    }
+  }
+  if (c.type === 'rent') {
+    const myColors = c.colors.filter(col => countMyProps(state, col) > 0);
+    if (myColors.length === 0) { const lbl = document.createElement('div'); lbl.textContent = 'Non hai proprieta per questo affitto'; ap.appendChild(lbl); return; }
+    if (!sel.color) {
+      const lbl = document.createElement('div'); lbl.textContent = 'Scegli colore affitto:'; ap.appendChild(lbl);
+      for (const col of myColors) {
+        const b = document.createElement('button'); b.className = 'btn small';
+        b.style.background = mdColorHex(col);
+        b.textContent = `${MD_SET_NAMES[col]} (${mdRentFor(state, col)}M)`;
+        b.addEventListener('click', () => { mdSelection.color = col; renderMonopolyDeal(state); });
+        ap.appendChild(b);
+      }
+      // double rent option
+      const dr = (state.hand || []).find(x => x.type === 'action' && x.subtype === 'doublerent');
+      if (dr && state.playsLeft >= 2 && sel.color) {
+        const db = document.createElement('button'); db.className = 'btn'; db.textContent = `✕2 Doppio Affitto (${mdRentFor(state, sel.color)*2}M)`;
+        db.addEventListener('click', () => mdEmit({ type: 'playRent', cardId: c.id, color: sel.color, doubleCardId: dr.id }));
+        ap.appendChild(db);
+      }
+      return;
+    }
+    const confirmBtn = document.createElement('button'); confirmBtn.className = 'btn';
+    confirmBtn.textContent = `💸 Affitto ${MD_SET_NAMES[sel.color]} (${mdRentFor(state, sel.color)}M)`;
+    confirmBtn.addEventListener('click', () => mdEmit({ type: 'playRent', cardId: c.id, color: sel.color }));
+    ap.appendChild(confirmBtn);
+    const dr = (state.hand || []).find(x => x.type === 'action' && x.subtype === 'doublerent');
+    if (dr && state.playsLeft >= 2) {
+      const db = document.createElement('button'); db.className = 'btn'; db.textContent = `✕2 Doppio (${mdRentFor(state, sel.color)*2}M)`;
+      db.addEventListener('click', () => mdEmit({ type: 'playRent', cardId: c.id, color: sel.color, doubleCardId: dr.id }));
+      ap.appendChild(db);
+    }
+  }
+}
+
+function countMyProps(state, color) {
+  const myProps = state.properties[window.playerId] || [];
+  return myProps.filter(p => (p.assignedColor || p.color) === color).length;
+}
+
+function mdRentFor(state, color) {
+  // approximate: client doesn't compute house/hotel bonuses precisely, but tries
+  const sizes = { brown:2, lightblue:3, pink:3, orange:3, red:3, yellow:3, green:3, darkblue:2, railroad:4, utility:2 };
+  const rents = { brown:[1,2], lightblue:[1,2,3], pink:[1,2,4], orange:[1,3,5], red:[2,3,6], yellow:[2,4,6], green:[2,4,7], darkblue:[3,8], railroad:[1,2,3,4], utility:[1,2] };
+  const n = countMyProps(state, color);
+  if (n === 0) return 0;
+  const sz = sizes[color];
+  const base = rents[color][Math.min(n, sz) - 1];
+  const sets = state.completeSets && state.completeSets[window.playerId];
+  const isComplete = sets && sets.includes(color);
+  let extra = 0;
+  if (isComplete) {
+    const addon = state.setAddons && state.setAddons[window.playerId] && state.setAddons[window.playerId][color];
+    if (addon && addon.house) extra += 3;
+    if (addon && addon.hotel) extra += 4;
+  }
+  return base + extra;
+}
+
+function mdTargetPicker(state, sel, label) {
+  const wrap = document.createElement('div');
+  const lbl = document.createElement('div'); lbl.textContent = label; wrap.appendChild(lbl);
+  for (const pid of state.playerOrder) {
+    if (pid === window.playerId) continue;
+    const b = document.createElement('button'); b.className = 'btn small'; b.textContent = findPlayerName(pid);
+    b.addEventListener('click', () => { mdSelection.targetId = pid; renderMonopolyDeal(window.gameState); });
+    wrap.appendChild(b);
+  }
+  return wrap;
+}
+
+function mdTargetPickerCompleteSet(state, sel) {
+  const wrap = document.createElement('div');
+  const lbl = document.createElement('div'); lbl.textContent = 'Scegli chi ha un set completo:'; wrap.appendChild(lbl);
+  let any = false;
+  for (const pid of state.playerOrder) {
+    if (pid === window.playerId) continue;
+    const sets = state.completeSets && state.completeSets[pid];
+    if (sets && sets.length > 0) {
+      any = true;
+      const b = document.createElement('button'); b.className = 'btn small'; b.textContent = `${findPlayerName(pid)} (${sets.length} set)`;
+      b.addEventListener('click', () => { mdSelection.targetId = pid; mdSelection.targetSets = sets; renderMonopolyDeal(window.gameState); });
+      wrap.appendChild(b);
+    }
+  }
+  if (!any) wrap.appendChild(document.createTextNode('Nessuno ha set completi'));
+  return wrap;
+}
+
+function mdCompleteSetColorPicker(state, sel) {
+  const wrap = document.createElement('div');
+  const sets = sel.targetSets || (state.completeSets && state.completeSets[sel.targetId]) || [];
+  const lbl = document.createElement('div'); lbl.textContent = 'Scegli set da rubare:'; wrap.appendChild(lbl);
+  for (const col of sets) {
+    const b = document.createElement('button'); b.className = 'btn small'; b.style.background = mdColorHex(col);
+    b.textContent = MD_SET_NAMES[col];
+    b.addEventListener('click', () => { mdSelection.color = col; renderMonopolyDeal(window.gameState); });
+    wrap.appendChild(b);
+  }
+  return wrap;
+}
+
+function mdMyCompleteSetColorPicker(state, sel, label) {
+  const wrap = document.createElement('div');
+  const sets = (state.completeSets && state.completeSets[window.playerId]) || [];
+  const sizes = { brown:2, lightblue:3, pink:3, orange:3, red:3, yellow:3, green:3, darkblue:2, railroad:4, utility:2 };
+  const lbl = document.createElement('div'); lbl.textContent = label; wrap.appendChild(lbl);
+  for (const col of sets) {
+    if (col === 'railroad' || col === 'utility') continue;
+    const hasHouse = state.setAddons[window.playerId] && state.setAddons[window.playerId][col] && state.setAddons[window.playerId][col].house;
+    if (sel.card.subtype === 'house' && hasHouse) continue;
+    if (sel.card.subtype === 'hotel' && !hasHouse) continue;
+    const b = document.createElement('button'); b.className = 'btn small'; b.style.background = mdColorHex(col);
+    b.textContent = MD_SET_NAMES[col];
+    b.addEventListener('click', () => { mdSelection.color = col; renderMonopolyDeal(window.gameState); });
+    wrap.appendChild(b);
+  }
+  return wrap;
+}
+
+function mdMyHouseSetColorPicker(state, sel, label) { return mdMyCompleteSetColorPicker(state, sel, label); }
+
+function mdOwnPropertyPicker(state, sel, label) {
+  const wrap = document.createElement('div');
+  const lbl = document.createElement('div'); lbl.textContent = label; wrap.appendChild(lbl);
+  const myProps = state.properties[window.playerId] || [];
+  const complete = state.completeSets && state.completeSets[window.playerId];
+  for (const p of myProps) {
+    const col = p.assignedColor || p.color;
+    if (complete && complete.includes(col)) continue; // can't swap complete-set properties
+    const b = document.createElement('button'); b.className = 'btn small';
+    b.style.borderColor = mdColorHex(col);
+    b.textContent = (p.name || 'Jolly') + ' (' + (MD_SET_NAMES[col] || col) + ')';
+    b.addEventListener('click', () => { mdSelection.myCardId = p.id; renderMonopolyDeal(window.gameState); });
+    wrap.appendChild(b);
+  }
+  return wrap;
+}
+
+function mdTargetPropertyPicker(state, sel, label) {
+  const wrap = document.createElement('div');
+  const lbl = document.createElement('div'); lbl.textContent = label; wrap.appendChild(lbl);
+  const props = state.properties[sel.targetId] || [];
+  const complete = state.completeSets && state.completeSets[sel.targetId];
+  for (const p of props) {
+    const col = p.assignedColor || p.color;
+    if (complete && complete.includes(col)) continue;
+    const b = document.createElement('button'); b.className = 'btn small';
+    b.style.borderColor = mdColorHex(col);
+    b.textContent = (p.name || 'Jolly') + ' (' + (MD_SET_NAMES[col] || col) + ')';
+    b.addEventListener('click', () => { mdSelection.targetCardId = p.id; renderMonopolyDeal(window.gameState); });
+    wrap.appendChild(b);
+  }
+  return wrap;
+}
+
+function renderMDDiscardPanel(state, ap) {
+  const hand = state.hand || [];
+  const need = hand.length - 7;
+  const lbl = document.createElement('div'); lbl.className = 'md-sel-title';
+  lbl.textContent = `Scarta ${need} carte (scegliele nella mano e conferma)`;
+  ap.appendChild(lbl);
+  if (!mdSelection) mdSelection = { discardIds: [] };
+  if (!mdSelection.discardIds) mdSelection.discardIds = [];
+  for (const c of hand) {
+    const idx = mdSelection.discardIds.indexOf(c.id);
+    const b = document.createElement('button'); b.className = 'btn small' + (idx >= 0 ? ' selected' : '');
+    b.textContent = (c.name || c.value + 'M' || c.subtype) + (idx >= 0 ? ' ✓' : '');
+    b.addEventListener('click', () => {
+      if (idx >= 0) mdSelection.discardIds.splice(idx, 1);
+      else if (mdSelection.discardIds.length < need) mdSelection.discardIds.push(c.id);
+      renderMonopolyDeal(state);
+    });
+    ap.appendChild(b);
+  }
+  const confirm = document.createElement('button'); confirm.className = 'btn primary';
+  confirm.textContent = `Conferma scarto (${mdSelection.discardIds.length}/${need})`;
+  confirm.disabled = mdSelection.discardIds.length !== need;
+  confirm.addEventListener('click', () => mdEmit({ type: 'discardCards', cardIds: mdSelection.discardIds }));
+  ap.appendChild(confirm);
+}
+
+let mdPaySelection = null;
+
+function renderMDPayPanel(state, ap) {
+  const p = state.pending;
+  const amount = p.amount;
+  if (!mdPaySelection) mdPaySelection = { ids: [] };
+  const lbl = document.createElement('div'); lbl.className = 'md-sel-title';
+  lbl.textContent = `Paga ${amount}M a ${findPlayerName(p.fromId)} (totale: ${mdPayTotal(state)}M)`;
+  ap.appendChild(lbl);
+
+  // bank cards clickable
+  for (const c of (state.banks[window.playerId] || [])) {
+    const idx = mdPaySelection.ids.indexOf(c.id);
+    const b = document.createElement('button'); b.className = 'btn small' + (idx >= 0 ? ' selected' : '');
+    b.textContent = `${c.value}M${idx >= 0 ? ' ✓' : ''}`;
+    b.addEventListener('click', () => {
+      if (idx >= 0) mdPaySelection.ids.splice(idx, 1);
+      else mdPaySelection.ids.push(c.id);
+      renderMonopolyDeal(state);
+    });
+    ap.appendChild(b);
+  }
+  // properties clickable
+  for (const prop of (state.properties[window.playerId] || [])) {
+    const col = prop.assignedColor || prop.color;
+    const val = prop.type === 'wild' ? ({ brown:1,lightblue:1,pink:2,orange:2,red:3,yellow:3,green:4,darkblue:4,railroad:2,utility:2 }[col] || 1) : prop.value;
+    const idx = mdPaySelection.ids.indexOf(prop.id);
+    const b = document.createElement('button'); b.className = 'btn small' + (idx >= 0 ? ' selected' : '');
+    b.style.borderColor = mdColorHex(col);
+    b.textContent = `${prop.name || 'Jolly'} ${val}M${idx >= 0 ? ' ✓' : ''}`;
+    b.addEventListener('click', () => {
+      if (idx >= 0) mdPaySelection.ids.splice(idx, 1);
+      else mdPaySelection.ids.push(prop.id);
+      renderMonopolyDeal(state);
+    });
+    ap.appendChild(b);
+  }
+  const confirm = document.createElement('button'); confirm.className = 'btn primary';
+  confirm.textContent = `Paga (${mdPayTotal(state)}M)`;
+  confirm.addEventListener('click', () => {
+    const ids = mdPaySelection ? mdPaySelection.ids.slice() : [];
+    mdPaySelection = null;
+    mdEmit({ type: 'payCards', cardIds: ids });
+  });
+  ap.appendChild(confirm);
+}
+
+function mdPayTotal(state) {
+  if (!mdPaySelection) return 0;
+  let total = 0;
+  for (const id of mdPaySelection.ids) {
+    const c = (state.banks[window.playerId] || []).find(x => x.id === id);
+    if (c) { total += c.value; continue; }
+    const p = (state.properties[window.playerId] || []).find(x => x.id === id);
+    if (p) {
+      const col = p.assignedColor || p.color;
+      total += p.type === 'wild' ? ({ brown:1,lightblue:1,pink:2,orange:2,red:3,yellow:3,green:4,darkblue:4,railroad:2,utility:2 }[col] || 1) : p.value;
+    }
+  }
+  return total;
+}
+
+function renderMDJSNPanel(state, ap) {
+  const p = state.pending;
+  const lbl = document.createElement('div'); lbl.className = 'md-sel-title';
+  const kindNames = { slydeal:'Furto Furtivo', forcedeal:'Scambio Forzato', dealbreaker:'Rompi Patto', debtcollector:'Esattore (5M)', rent:'Affitto', birthday:'Buon Compleanno (2M)' };
+  lbl.innerHTML = `🛑 <strong>${findPlayerName(p.fromId)}</strong> ha giocato <strong>${kindNames[p.kind] || p.kind}</strong> contro di te!<br>Usi "Col Cavolo!"?`;
+  ap.appendChild(lbl);
+  const jsnBtn = document.createElement('button'); jsnBtn.className = 'btn danger';
+  jsnBtn.textContent = '🛑 Col Cavolo!';
+  const jsnCard = (state.hand || []).find(c => c.type === 'action' && c.subtype === 'justsayno');
+  jsnBtn.disabled = !jsnCard;
+  jsnBtn.addEventListener('click', () => { if (jsnCard) mdEmit({ type: 'playJSN', cardId: jsnCard.id }); });
+  ap.appendChild(jsnBtn);
+  const accBtn = document.createElement('button'); accBtn.className = 'btn';
+  accBtn.textContent = '✅ Accetta';
+  accBtn.addEventListener('click', () => { mdSelection = null; mdEmit({ type: 'accept' }); });
+  ap.appendChild(accBtn);
+}
+
 window.findPlayerName = findPlayerName;
+
+/* ======================= ODIN ======================= */
+
+function renderOdin(state) {
+  renderGameTopBar(state, 'Odin'); updateTimer(state);
+  const table = $('game-table'); table.innerHTML = '';
+
+  if (state.phase === 'gameOver') { showOverlay(state); return; }
+  if (state.phase === 'handOver') { showOverlay(state); return; }
+
+  const root = document.createElement('div'); root.className = 'od-container';
+
+  // Info bar
+  const info = document.createElement('div'); info.className = 'sk-info-row';
+  info.innerHTML = `<strong>Mano ${state.handNumber}</strong> | Round ${state.roundNumber} | Carte al centro: <strong>${state.centerValue}</strong> (${state.centerCount})`;
+  root.appendChild(info);
+
+  // Scores
+  const scoresDiv = document.createElement('div'); scoresDiv.className = 'sk-tricks';
+  for (const pid of state.playerOrder) {
+    const span = document.createElement('span'); span.className = 'sk-bid-status';
+    span.textContent = `${findPlayerName(pid)}: ${state.scores[pid] || 0}pt`;
+    if (state.currentPlayer === pid) span.classList.add('highlight');
+    scoresDiv.appendChild(span);
+  }
+  root.appendChild(scoresDiv);
+
+  // Opponents
+  const oppArea = document.createElement('div'); oppArea.className = 'opponent-area';
+  for (const pid of state.playerOrder) {
+    if (pid === window.playerId) continue;
+    const box = document.createElement('div'); box.className = 'opponent-box' + (state.currentPlayer === pid ? ' is-current' : '');
+    box.innerHTML = `<div class="name">${findPlayerName(pid)}</div><div class="cards-count">${state.handSize[pid] || 0} carte</div>`;
+    oppArea.appendChild(box);
+  }
+  root.appendChild(oppArea);
+
+  // Center cards display
+  const centerArea = document.createElement('div'); centerArea.className = 'center-area';
+  const centerLabel = document.createElement('div'); centerLabel.style.cssText = 'font-size:14px;color:#aaa;';
+  centerLabel.textContent = `Valore al centro: ${state.centerValue} (${state.centerCount} carta/e)`;
+  centerArea.appendChild(centerLabel);
+
+  const centerCardsDiv = document.createElement('div'); centerCardsDiv.id = 'table-cards';
+  for (const c of (state.centerCards || [])) {
+    const el = document.createElement('div'); el.className = 'card';
+    el.style.background = '#fff'; el.style.color = '#333';
+    el.innerHTML = `<div class="rank">${c.value}</div><div class="suit">${c.colorSymbol}</div>`;
+    centerCardsDiv.appendChild(el);
+  }
+  centerArea.appendChild(centerCardsDiv);
+  root.appendChild(centerArea);
+
+  // Player hand
+  const handDiv = document.createElement('div'); handDiv.id = 'player-hand';
+  if (state.hand) {
+    for (const c of state.hand) {
+      const el = document.createElement('div'); el.className = 'card fade-in';
+      el.style.background = '#fff'; el.style.color = '#333';
+      el.innerHTML = `<div class="rank">${c.value}</div><div class="suit">${c.colorSymbol}</div>`;
+      if (state.currentPlayer === window.playerId && state.phase === 'play') {
+        el.addEventListener('click', () => playOdinCard(c.id));
+      } else {
+        el.classList.add('disabled');
+      }
+      handDiv.appendChild(el);
+    }
+  }
+  root.appendChild(handDiv);
+
+  // Action panel
+  const ap = document.createElement('div'); ap.id = 'action-panel';
+  if (state.currentPlayer === window.playerId && state.phase === 'play') {
+    const passBtn = document.createElement('button'); passBtn.className = 'btn';
+    passBtn.textContent = 'Passa';
+    passBtn.addEventListener('click', () => window.socket.emit('playerAction', { action: { type: 'pass' } }));
+    if (state.centerCards.length === 0) passBtn.disabled = true;
+    ap.appendChild(passBtn);
+  }
+  root.appendChild(ap);
+
+  table.appendChild(root);
+  showEvents(state);
+}
+
+function playOdinCard(cardId) {
+  window.socket.emit('playerAction', { action: { type: 'play', cardIds: [cardId] } });
+}

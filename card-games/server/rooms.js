@@ -3,6 +3,10 @@ const registry = require('./games/registry');
 const rooms = new Map();
 const playerRoom = new Map();
 
+const VALID_DIFFICULTIES = ['easy', 'medium', 'hard'];
+const DIFFICULTY_LABELS = { easy: 'Facile', medium: 'Medio', hard: 'Difficile' };
+const BOT_DIFFICULTIES = { easy: 0.25, medium: 0.65, hard: 1.0 };
+
 function generateCode() {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   for (let attempt = 0; attempt < 100; attempt++) {
@@ -74,18 +78,44 @@ function removePendingPlayer(room, playerId) {
       if (room.gameState.blackjacks) delete room.gameState.blackjacks[playerId];
       if (room.gameState.results) delete room.gameState.results[playerId];
       if (room.gameState.scopePoints) delete room.gameState.scopePoints[playerId];
+      if (room.gameState.banks) delete room.gameState.banks[playerId];
+      if (room.gameState.properties) delete room.gameState.properties[playerId];
+      if (room.gameState.setAddons) delete room.gameState.setAddons[playerId];
     }
   }
 }
 
-function addBot(code) {
+function addBot(code, difficulty = 'medium') {
   const room = rooms.get(code);
   if (!room || room.state !== 'waiting') return { error: 'Cannot add bot' };
   if (room.players.length >= room.game.maxPlayers) return { error: 'Room full' };
+  if (!VALID_DIFFICULTIES.includes(difficulty)) return { error: 'Invalid difficulty' };
   const botId = `bot_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
   const nickname = `Bot ${room.players.filter(p => p.isBot).length + 1}`;
-  room.players.push({ id: botId, nickname, isBot: true, socketId: null });
-  return { ok: true, bot: { id: botId, nickname } };
+  room.players.push({ id: botId, nickname, isBot: true, socketId: null, difficulty });
+  return { ok: true, bot: { id: botId, nickname, difficulty } };
+}
+
+function updateBotDifficulty(code, botId, difficulty) {
+  const room = rooms.get(code);
+  if (!room) return { error: 'Room not found' };
+  if (room.state !== 'waiting') return { error: 'Cannot modify bot after game start' };
+  if (!VALID_DIFFICULTIES.includes(difficulty)) return { error: 'Invalid difficulty' };
+  const bot = room.players.find(p => p.id === botId && p.isBot);
+  if (!bot) return { error: 'Bot not found' };
+  bot.difficulty = difficulty;
+  return { ok: true };
+}
+
+function removeBot(code, botId) {
+  const room = rooms.get(code);
+  if (!room) return { error: 'Room not found' };
+  if (room.state !== 'waiting') return { error: 'Cannot remove bot after game start' };
+  const idx = room.players.findIndex(p => p.id === botId && p.isBot);
+  if (idx === -1) return { error: 'Bot not found' };
+  const bot = room.players[idx];
+  room.players.splice(idx, 1);
+  return { ok: true, nickname: bot.nickname };
 }
 
 function startGame(code, options) {
@@ -224,7 +254,7 @@ function scheduleBotAction(room, io) {
 
   const delay = 1500 + Math.random() * 2000;
   const timer = setTimeout(() => {
-    const action = pickBotAction(room.game, actions, room.gameState, bot.id);
+    const action = pickBotAction(room.game, actions, room.gameState, bot.id, bot.difficulty);
     if (!action) return;
 
     const result = room.game.applyAction(room.gameState, bot.id, action);
@@ -247,11 +277,13 @@ function scheduleBotAction(room, io) {
   room.botTimers.push(timer);
 }
 
-function pickBotAction(game, actions, gameState, botId) {
-  if (game.getBotAction) {
-    return game.getBotAction(gameState, botId);
-  }
+function actionMatch(a, b) {
+  if (a.type !== b.type) return false;
+  if (a.cardId !== undefined && a.cardId !== b.cardId) return false;
+  return true;
+}
 
+function getGenericSmartAction(game, actions, gameState, botId) {
   const standHit = actions.find(a => a.type === 'stand');
   if (standHit && gameState && gameState.meta && gameState.meta.id === 'blackjack') {
     const hand = gameState.hands[botId] || [];
@@ -263,14 +295,34 @@ function pickBotAction(game, actions, gameState, botId) {
     if (val >= 17) return { type: 'stand' };
     if (val < 17) return { type: 'hit' };
   }
-
   const takeActions = actions.filter(a => a.take && a.take.length > 0);
   if (takeActions.length > 0) {
     const multi = takeActions.filter(a => a.take.length >= 2);
     if (multi.length > 0) return multi[Math.floor(Math.random() * multi.length)];
     return takeActions[Math.floor(Math.random() * takeActions.length)];
   }
+  return null;
+}
+
+function pickBotAction(game, actions, gameState, botId, difficulty) {
+  if (!actions || actions.length === 0) return null;
+
+  const p = BOT_DIFFICULTIES[difficulty] ?? 0.65;
+
+  if (Math.random() < p) {
+    let smart = null;
+    if (game.getBotAction) {
+      smart = game.getBotAction(gameState, botId, difficulty);
+    }
+    if (!smart) {
+      smart = getGenericSmartAction(game, actions, gameState, botId);
+    }
+    if (smart && actions.some(a => actionMatch(a, smart))) return smart;
+  }
+
+  const nonNull = actions.filter(a => a.take === null || a.take);
+  if (nonNull.length > 0) return nonNull[Math.floor(Math.random() * nonNull.length)];
   return actions[Math.floor(Math.random() * actions.length)];
 }
 
-module.exports = { createRoom, getRoom, joinRoom, leaveRoom, addBot, startGame, handleAction, clearTimers, getRoomList, getPlayerRoom, scheduleBotAction, startTurnTimer, clearTurnTimer };
+module.exports = { createRoom, getRoom, joinRoom, leaveRoom, addBot, updateBotDifficulty, removeBot, startGame, handleAction, clearTimers, getRoomList, getPlayerRoom, scheduleBotAction, startTurnTimer, clearTurnTimer, pickBotAction, DIFFICULTY_LABELS };

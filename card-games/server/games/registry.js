@@ -12,6 +12,8 @@ const thiryone = require('./thiryone');
 const ramino = require('./ramino');
 const scala40 = require('./scala40');
 const memory = require('./memory');
+const monopolydeal = require('./monopolydeal');
+const odin = require('./odin');
 
 function wrap(game) {
   return { ...game.meta, create: game.create, getPublicState: game.getPublicState, getValidActions: game.getValidActions, applyAction: game.applyAction, isOver: game.isOver, getRoundScores: game.getRoundScores, nextRound: game.nextRound, getBotAction: game.getBotAction };
@@ -32,6 +34,8 @@ const games = {
   ramino: wrap(ramino),
   scala40: wrap(scala40),
   memory: wrap(memory),
+  monopolydeal: wrap(monopolydeal),
+  odin: wrap(odin),
 };
 
 const registry = {

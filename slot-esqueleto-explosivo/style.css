@@ -318,7 +318,7 @@ h1 {
 
 /* Cascata: caduta dalle posizioni precedenti */
 .cell.cascade-fall {
-  animation: cascadeFall var(--fall-from, -100%) 0.5s cubic-bezier(0.25, 0.9, 0.35, 1) forwards;
+  animation: cascadeFall 0.5s cubic-bezier(0.25, 0.9, 0.35, 1) forwards;
 }
 
 @keyframes cascadeFall {

@@ -20,10 +20,12 @@ aprendo `index.html` via `file://` il gioco funziona comunque, senza caching off
 ## Struttura
 
 - `engine.js` — motore puro (RNG crittografico, paylines, cascate, Wild, moltiplicatore)
+- `symbols.js` — teschi SVG (big-head chibi Día de los Muertos), modulo puro condiviso
 - `script.js` — client: replay del round, animazioni, autoplay, paytable, gestione errori
 - `index.html` / `style.css` — UI
 - `manifest.webmanifest` / `sw.js` / `icons/` — PWA offline
 - `tools/simulate.js` — calibratore RTP Monte Carlo
+- `tools/engine.test.js` / `tools/symbols.test.js` — test unitari (motore + simboli)
 - `docs/PAYLINES.md` — allegato tecnico: schema 17 linee, paytable, report RTP
 
 ## Comandi utili

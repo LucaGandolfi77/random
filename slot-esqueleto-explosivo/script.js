@@ -11,6 +11,7 @@
   const META = E.SYMBOL_META;
   const ROWS = CONFIG.rows;
   const COLS = CONFIG.cols;
+  const SKULLS = window.SkullSymbols.SKULLS;
 
   /* ==============================
      🎵 AUDIO (Web Audio)
@@ -168,8 +169,8 @@
   function setCellSymbol(cellEl, symbolId) {
     const meta = META[symbolId];
     const span = cellEl.querySelector('.cell-symbol');
-    span.textContent = meta.emoji;
-    span.className = `cell-symbol sym-${meta.tint}`;
+    span.innerHTML = SKULLS[symbolId] || meta.emoji;
+    span.className = `cell-symbol${symbolId === CONFIG.wildId ? ' sym-wild' : ''}`;
     cellEl.dataset.symbolId = symbolId;
   }
 
@@ -200,7 +201,7 @@
       row.className = 'pay-row';
       if (sym.id === 'gold') row.classList.add('top-row');
       const left = document.createElement('span');
-      left.innerHTML = `<span class="pay-sym sym-${meta.tint}">${meta.emoji}</span><span class="pay-name">${meta.name}</span>`;
+      left.innerHTML = `<span class="pay-sym">${SKULLS[sym.id]}</span><span class="pay-name">${meta.name}</span>`;
       const vals = document.createElement('span');
       const p = CONFIG.paytable[sym.id];
       vals.innerHTML = `<span class="pay-val">3× ${p[3]}×</span><span class="pay-val">4× ${p[4]}×</span><span class="pay-val">5× ${p[5]}×</span>`;
@@ -210,8 +211,7 @@
     });
     const wildRow = document.createElement('div');
     wildRow.className = 'pay-row wild-row';
-    const wildMeta = META[CONFIG.wildId];
-    wildRow.innerHTML = `<span><span class="pay-sym sym-wild">${wildMeta.emoji}</span><span class="pay-name">Explosivo Wild</span></span><span class="pay-val">sostituisce + esplode 3×3</span>`;
+    wildRow.innerHTML = `<span><span class="pay-sym sym-wild">${SKULLS[CONFIG.wildId]}</span><span class="pay-name">Explosivo Wild</span></span><span class="pay-val">sostituisce + esplode 3×3</span>`;
     paytableGrid.appendChild(wildRow);
   }
 
@@ -297,6 +297,7 @@
         for (let r = 0; r < ROWS; r++) {
           const idx = r * COLS + c;
           const cell = cells[idx];
+          cell.classList.remove('blank');
           if (r >= ROWS - survivorCount) {
             const s = survivors[r - (ROWS - survivorCount)];
             setCellSymbol(cell, newGrid[idx]);
@@ -424,7 +425,14 @@
 
         if (step.ended) {
           updateLadder(CONFIG.multiplierLadder[0]);
-          if (step.removedCells.length > 0) await sleep(300);
+          if (step.removedCells.length > 0) {
+            for (const idx of step.removedCells) {
+              const cell = cells[idx];
+              cell.classList.remove('blank');
+              setCellSymbol(cell, step.grid[idx]);
+            }
+            await sleep(150);
+          }
           break;
         }
 

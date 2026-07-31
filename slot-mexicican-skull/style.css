@@ -691,3 +691,24 @@ h1 {
 @supports (padding-top: env(safe-area-inset-top)) {
   body { padding-top: calc(12px + env(safe-area-inset-top)); }
 }
+
+.cell.falling-win {
+  animation: fallingWin 0.6s ease-out forwards;
+  z-index: 10;
+}
+
+.cell.falling-other {
+  animation: fallingOther 0.6s ease-out forwards;
+}
+
+@keyframes fallingWin {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(20px) scale(1.1); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes fallingOther {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(10px) scale(0.95); }
+  100% { transform: translateY(0) scale(1); }
+}

@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Navbar from '@/components/Navbar'
+import CardPile from '@/components/CardPile'
+import TarotCard from '@/components/TarotCard'
 
 interface Deck {
   id: string
@@ -61,25 +63,14 @@ export default function NewReadingPage() {
     })
   }, [])
 
-  function shuffleDeck(cards: Card[]): Card[] {
-    const arr = [...cards]
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]]
-    }
-    return arr
-  }
-
-  function handleDraw() {
+  function handlePileComplete(drawn: { card: Card; reversed: boolean }[]) {
     if (!selectedSpread) return
-    const shuffled = shuffleDeck(allCards)
     const positions = JSON.parse(selectedSpread.positionsJson) as { key: string; label: string }[]
-    const drawn = positions.map((pos, i) => ({
-      card: shuffled[i % shuffled.length],
-      position: pos.key,
-      reversed: Math.random() < 0.3,
+    const withPositions = drawn.map((d, i) => ({
+      ...d,
+      position: positions[i]?.key || `pos_${i}`,
     }))
-    setDrawnCards(drawn)
+    setDrawnCards(withPositions)
     setStep('reveal')
   }
 
@@ -225,26 +216,15 @@ export default function NewReadingPage() {
         )}
 
         {step === 'draw' && (
-          <div className="text-center">
-            <p className="text-mystic-muted mb-8">
-              Focus on your question, then draw the cards.
+          <div>
+            <p className="text-mystic-muted mb-6 text-center">
+              Focus on your question, then pick the cards from the pile.
             </p>
-            <div className="flex justify-center gap-2 mb-8">
-              {Array.from({ length: selectedSpread?.cardCount || 0 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="w-12 h-16 bg-mystic-card rounded-lg border border-mystic-gold/20 flex items-center justify-center text-mystic-muted"
-                >
-                  🃏
-                </div>
-              ))}
-            </div>
-            <button
-              onClick={handleDraw}
-              className="px-8 py-3 bg-mystic-gold text-mystic-dark rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity"
-            >
-              ✨ Reveal the Cards
-            </button>
+            <CardPile
+              allCards={allCards}
+              count={selectedSpread?.cardCount || 1}
+              onComplete={handlePileComplete}
+            />
           </div>
         )}
 
@@ -260,11 +240,15 @@ export default function NewReadingPage() {
                     const posLabel = positions[i]?.label || `Position ${i + 1}`
                     return (
                       <div key={i} className="bg-mystic-card rounded-lg p-4 border border-mystic-gold/10">
-                        <div className="aspect-[2/3] bg-mystic-dark rounded-lg mb-2 flex items-center justify-center border border-mystic-gold/20">
-                          <div className="text-center p-1">
-                            <div className="text-2xl">🃏</div>
-                            <div className="text-xs mt-1 font-semibold">{draw.card.name}</div>
-                          </div>
+                        <div className="flex justify-center mb-3">
+                          <TarotCard
+                            name={draw.card.name}
+                            arcana={draw.card.arcana}
+                            suit={draw.card.suit}
+                            rank={draw.card.rank}
+                            reversed={draw.reversed}
+                            faceUp
+                          />
                         </div>
                         <div className="text-xs text-mystic-gold font-semibold mb-1">{posLabel}</div>
                         {draw.reversed && (

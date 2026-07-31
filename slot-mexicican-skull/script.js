@@ -69,7 +69,7 @@ function playSpinSound() {
 }
 
 /* ==============================
-   💀 8 SKULL SYMBOLS (Día de los Muertos)
+   💀 12 SKULL SYMBOLS (Día de los Muertos)
    ============================== */
 const SYMBOLS = [
   { id: 'skull-gold',   emoji: '💀', name: 'Calavera d\'Oro',    payout5: 500, weight: 4  },
@@ -80,8 +80,14 @@ const SYMBOLS = [
   { id: 'skull-rose',   emoji: '🌹', name: 'Calavera Rosa',      payout5: 140, weight: 14 },
   { id: 'bones',        emoji: '🦴', name: 'Ossa Incrociate',    payout5: 120, weight: 16 },
   { id: 'candle',       emoji: '🕯️', name: 'Candela',           payout5: 80,  weight: 20 },
-  // Bonus symbol (special)
-  { id: 'flower',       emoji: '🌺', name: 'Cempasúchil',        payout5: 0,   weight: 8  },
+  // Additional skull symbols for more variety
+  { id: 'skull-sword',  emoji: '⚔️', name: 'Calavera Guerriero', payout5: 100, weight: 18 },
+  { id: 'skull-cross',  emoji: '✝️', name: 'Calavera Croce',     payout5: 90,  weight: 22 },
+  { id: 'skull-star',   emoji: '⭐', name: 'Calavera Stella',    payout5: 85,  weight: 24 },
+  { id: 'skull-moon',   emoji: '🌙', name: 'Calavera Luna',      payout5: 80,  weight: 26 },
+  { id: 'skull-heart',  emoji: '❤️', name: 'Calavera Cuore',     payout5: 75,  weight: 28 },
+  // Bonus symbol (special) - reduced weight to make it even rarer
+  { id: 'flower',       emoji: '🌺', name: 'Cempasúchil',        payout5: 0,   weight: 1 },
 ];
 
 /* --- WIN LINES (15 lines) --- */
@@ -112,7 +118,7 @@ let autoMode = false;
 let autoTimer = null;
 let bonusMeter = 0;
 let bonusActive = false;
-const BONUS_METER_MAX = 3;
+const BONUS_METER_MAX = 4;
 
 const MIN_BET = 50;
 const MAX_BET = 500;
@@ -300,7 +306,7 @@ function spawnSkullExplosion(cellEl) {
   const rect = cellEl.getBoundingClientRect();
   const cx = rect.left + rect.width / 2;
   const cy = rect.top + rect.height / 2;
-  const emojis = ['💀', '☠️', '🌺', '🎭', '✨', '🔥'];
+  const emojis = ['💀', '☠️', '🌺', '🎭', '⚔️', '✝️', '⭐', '🌙', '❤️', '✨', '🔥'];
   for (let i = 0; i < 8; i++) {
     const p = document.createElement('div');
     p.className = 'particle explode';
@@ -356,6 +362,37 @@ async function animateSpin() {
   for (const cell of cells) cell.classList.remove('landing');
 }
 
+/* ==============================
+   🎰 FALLING WIN ANIMATION
+   ============================== */
+async function animateFallingWin(winningCells) {
+  const cells = grid.children;
+  const cellArray = Array.from(winningCells);
+
+  // Make winning symbols fall down to their positions
+  for (const idx of cellArray) {
+    const cell = cells[idx];
+    cell.classList.add('falling-win');
+    playWinSound(false);
+    await new Promise(r => setTimeout(r, 100));
+  }
+
+  // Make other symbols fall into place
+  for (let i = 0; i < cells.length; i++) {
+    if (!cellArray.includes(i)) {
+      const cell = cells[i];
+      cell.classList.add('falling-other');
+      playReelSound();
+      await new Promise(r => setTimeout(r, 50));
+    }
+  }
+
+  // Remove falling classes after animation
+  await new Promise(r => setTimeout(r, 800));
+  for (const cell of cells) {
+    cell.classList.remove('falling-win', 'falling-other');
+  }
+}
 /* ==============================
    💥 EXPLODE WINNING CELLS
    ============================== */
@@ -423,7 +460,7 @@ function showBonus() {
 function showSuperBonus() {
   if (bonusActive) return;
   bonusActive = true;
-  const superMultiplier = 15 + Math.floor(Math.random() * 16); // 15x-30x
+  const superMultiplier = 20 + Math.floor(Math.random() * 31); // 20x-50x
   const superWin = bet * superMultiplier;
 
   bonusTitle.textContent = '🔥 SUPER BONUS! 💀';
@@ -435,6 +472,20 @@ function showSuperBonus() {
   spawnParticles('🔥', 20, true);
   spawnParticles('✨', 15, true);
 
+  // Auto-close after 1 second
+  const autoCloseTimer = setTimeout(() => {
+    bonusOverlay.classList.remove('active');
+    bonusActive = false;
+    credits += superWin;
+    updateUI();
+    showWinMessage(`🔥 SUPER BONUS! +${superWin} crediti! 🔥`, true);
+    spawnParticles('💀', 40, true);
+    spawnParticles('🌺', 30, true);
+    spawnParticles('🎉', 20, true);
+    playWinSound(true);
+    clearTimeout(autoCloseTimer);
+  }, 1000);
+
   bonusClaimBtn.onclick = () => {
     bonusOverlay.classList.remove('active');
     bonusActive = false;
@@ -445,6 +496,7 @@ function showSuperBonus() {
     spawnParticles('🌺', 30, true);
     spawnParticles('🎉', 20, true);
     playWinSound(true);
+    clearTimeout(autoCloseTimer);
   };
 }
 
@@ -490,7 +542,7 @@ function spin() {
       updateBonusMeter();
     }
 
-    // Check super bonus (4+ skull symbols of same type)
+    // Check super bonus (5+ skull symbols of same type)
     let superBonusTriggered = false;
     for (const sym of SYMBOLS) {
       if (sym.id === 'flower') continue;
@@ -498,7 +550,7 @@ function spin() {
       for (let i = 0; i < 25; i++) {
         if (grid.children[i].dataset.symbolId === sym.id) count++;
       }
-      if (count >= 4) {
+      if (count >= 5) {
         superBonusTriggered = true;
         break;
       }
@@ -516,8 +568,19 @@ function spin() {
       }
       isSpinning = false;
       spinBtn.disabled = false;
-      if (autoMode) {
-        autoTimer = setTimeout(spin, 800);
+      // Continue to auto-spin logic after super bonus
+      if (autoMode && credits >= bet) {
+        // Check bonus meter before next auto spin
+        if (bonusMeter >= BONUS_METER_MAX) {
+          autoTimer = setTimeout(spin, 300);
+        } else {
+          autoTimer = setTimeout(spin, 600);
+        }
+      } else if (autoMode) {
+        autoMode = false;
+        autoBtn.classList.remove('active');
+        autoBtn.textContent = '🔄 Auto';
+        showWinMessage('⛔ Auto fermo — credito insufficiente');
       }
       return;
     }
@@ -537,14 +600,15 @@ function spin() {
         spawnParticles('💀', 15, true);
         spawnParticles('🌺', 10, true);
         playWinSound(true);
+        // Explode winning cells for big wins
+        animateExplodeWinning(result.winningCells);
       } else {
         showWinMessage(`🎉 +${win} crediti su ${lineCount} linee!`);
         spawnParticles('✨', 6, true);
         playWinSound(false);
+        // Use falling animation for regular wins
+        animateFallingWin(result.winningCells);
       }
-
-      // Explode winning cells animation
-      animateExplodeWinning(result.winningCells);
     } else {
       // No win, still show some small particles for flower
       if (flowerCount > 0) {

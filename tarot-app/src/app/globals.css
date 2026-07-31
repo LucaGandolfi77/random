@@ -18,3 +18,153 @@ body {
 }
 
 .min-h-screen { min-height: 100vh; }
+
+/* ── Tarot Card ─────────────────────────────────── */
+
+.tarot-card {
+  perspective: 800px;
+  width: 90px;
+  height: 135px;
+  cursor: default;
+}
+
+.tarot-card.is-clickable {
+  cursor: pointer;
+}
+
+.tarot-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.tarot-card.is-flipped .tarot-card-inner {
+  transform: rotateY(180deg);
+}
+
+.tarot-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ── Card Back ──────────────────────────────────── */
+
+.tarot-card-back {
+  background: linear-gradient(135deg, #2a1a4e 0%, #1a0a3e 50%, #2a1a4e 100%);
+  border: 2px solid #d4a84340;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.card-back-pattern {
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 25% 25%, #d4a84310 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, #d4a84310 0%, transparent 50%),
+    repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg 30deg, #d4a84308 30deg 60deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-back-border {
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+  border: 1px solid #d4a84330;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(45deg, transparent 48%, #d4a84315 49%, #d4a84315 51%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, #d4a84315 49%, #d4a84315 51%, transparent 52%);
+}
+
+.card-back-center {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #d4a84340;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, #d4a84315, transparent);
+}
+
+.card-back-star {
+  color: #d4a843;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* ── Card Front ─────────────────────────────────── */
+
+.tarot-card-front {
+  background: linear-gradient(180deg, #1a1a3e 0%, #0f0f2a 100%);
+  border: 2px solid #d4a84330;
+  transform: rotateY(180deg);
+  box-shadow:
+    0 2px 12px rgba(212, 168, 67, 0.15),
+    inset 0 1px 0 #d4a84315;
+}
+
+.tarot-card-front.is-reversed {
+  transform: rotateY(180deg) rotate(180deg);
+}
+
+.card-front-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  gap: 4px;
+}
+
+.card-arcana-badge {
+  font-size: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+.card-symbol {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.card-name {
+  font-size: 9px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.2;
+  color: #e8e0d0;
+}
+
+.card-reversed-badge {
+  font-size: 7px;
+  color: #f87171;
+  font-weight: 500;
+}
+
+/* ── Pile hover glow ────────────────────────────── */
+
+.tarot-card.is-clickable .tarot-card-back {
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.tarot-card.is-clickable:hover .tarot-card-back {
+  border-color: #d4a84380;
+  box-shadow:
+    0 4px 20px rgba(212, 168, 67, 0.25),
+    0 0 30px rgba(212, 168, 67, 0.1);
+}

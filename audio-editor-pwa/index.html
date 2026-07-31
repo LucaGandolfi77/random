@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#14141f">
+  <meta name="description" content="Multi-track audio editor PWA: cut, mix, apply effects and export WAV/MP3.">
+  <title>🎚 Audio Editor — Multi-track mixer</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="toolbar">
+    <div class="brand">🎚 <b>Audio Editor</b></div>
+    <div class="toolbar-actions">
+      <button id="btnNew" title="New project">New</button>
+      <button id="btnOpen" title="Open project (JSON)">Open…</button>
+      <button id="btnSave" title="Save to browser (auto-saves too)">Save</button>
+      <button id="btnExportProject" title="Download project as JSON">Export Proj.</button>
+      <span class="tb-sep"></span>
+      <button id="btnImport" class="primary" title="Import audio files">Import Audio…</button>
+      <button id="btnAddTrack" title="Add track">+ Track</button>
+      <button id="btnSplit" title="Split clip at playhead">✂ Split</button>
+      <label class="check" title="Snap clips to grid"><input type="checkbox" id="snapToggle" checked> Snap</label>
+      <label class="zoom">Zoom <input type="range" id="zoomSlider" min="8" max="220" value="60" step="1"></label>
+    </div>
+  </header>
+
+  <section class="transport">
+    <button id="btnPlay" class="play" title="Play / pause (Space)">▶</button>
+    <button id="btnStop" title="Stop">⏹</button>
+    <span class="time" id="timeDisplay">00:00.000</span>
+    <span class="transport-hint">Drag on the ruler to select a region · Double-click clears it · Del removes the selected clip</span>
+    <button id="btnExport" class="primary export-btn" title="Export the selected region as WAV/MP3">Export Selection…</button>
+  </section>
+
+  <main class="workspace">
+    <aside class="track-heads" id="trackHeads"></aside>
+    <div class="timeline-scroll" id="timelineScroll">
+      <div class="track-area" id="trackArea">
+        <canvas id="rulerCanvas" class="ruler-canvas"></canvas>
+        <div id="lanes" class="lanes"></div>
+        <div id="regionOverlay" class="region-overlay"></div>
+        <div id="playhead" class="playhead"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="panels">
+    <section class="panel inspector" id="inspector">
+      <div class="panel-title">Inspector</div>
+      <div id="inspectorBody" class="inspector-empty">Select a clip or a track to edit its properties.</div>
+    </section>
+    <section class="panel master" id="masterPanel">
+      <div class="panel-title">Master</div>
+      <div id="masterBody"></div>
+    </section>
+  </footer>
+
+  <div id="exportModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <h2>Export audio</h2>
+      <label>Format
+        <select id="exFormat">
+          <option value="wav16">WAV 16-bit PCM</option>
+          <option value="wav24">WAV 24-bit PCM</option>
+          <option value="mp3">MP3</option>
+        </select>
+      </label>
+      <label>MP3 bitrate
+        <select id="exKbps">
+          <option value="128">128 kbps</option>
+          <option value="192" selected>192 kbps</option>
+          <option value="256">256 kbps</option>
+          <option value="320">320 kbps</option>
+        </select>
+      </label>
+      <label>Range
+        <select id="exRange">
+          <option value="region">Selected region only</option>
+          <option value="all">Whole project</option>
+        </select>
+      </label>
+      <label>Sample rate
+        <select id="exRate">
+          <option value="44100">44.1 kHz</option>
+          <option value="48000">48 kHz</option>
+        </select>
+      </label>
+      <div class="progress hidden" id="exProgress"><div class="bar" id="exBar"></div><span id="exStatus"></span></div>
+      <div class="modal-actions">
+        <button id="exCancel" class="ghost">Cancel</button>
+        <button id="exGo" class="primary">Export</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <input type="file" id="fileInput" accept="audio/*,.mp3,.wav,.ogg,.m4a,.flac,.aac" multiple hidden>
+  <input type="file" id="projectInput" accept=".json,application/json" hidden>
+
+  <script src="st-global.js"></script>
+  <script src="vendor/lame.min.js"></script>
+  <script src="project.js"></script>
+  <script src="wav.js"></script>
+  <script src="mp3.js"></script>
+  <script src="audio.js"></script>
+  <script src="waveform.js"></script>
+  <script src="store.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

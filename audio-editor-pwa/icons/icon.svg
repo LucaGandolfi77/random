@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#242434"/>
+      <stop offset="1" stop-color="#14141f"/>
+    </linearGradient>
+    <linearGradient id="eq" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4dc3ff"/>
+      <stop offset="1" stop-color="#35d0ba"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <g fill="url(#eq)">
+    <rect x="80" y="220" width="36" height="132" rx="18"/>
+    <rect x="150" y="150" width="36" height="232" rx="18"/>
+    <rect x="220" y="240" width="36" height="104" rx="18"/>
+    <rect x="290" y="110" width="36" height="296" rx="18"/>
+    <rect x="360" y="200" width="36" height="160" rx="18"/>
+  </g>
+  <circle cx="256" cy="256" r="66" fill="#14141f"/>
+  <path d="M 234 214 l 68 42 -68 42 z" fill="#f6c63f"/>
+  <text x="256" y="462" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#8a8aa0">Audio</text>
+</svg>

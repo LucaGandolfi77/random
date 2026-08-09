@@ -5,6 +5,7 @@ openrouter-free-model-comparator/output/
 __pycache__/
 *.py[cod]
 *.egg-info/
+.venv/
 
 # secrets — never track API keys
 .env

@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+*.pyc
+
+# Segreti — mai pushare
+config/secrets.local.yaml
+diario.env
+.env
+
+# Runtime generato (creato al primo run)
+runtime/
+diario_di_bordo.md
+il_diario_del_profeta.md
+diario_local_*

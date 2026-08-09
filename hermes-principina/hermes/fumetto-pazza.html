@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>L'AI SCATENATA - Fumetto Epico</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@700&display=swap');
+  body {
+    background: #0d0d1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 30px 20px;
+  }
+  h1 {
+    font-family: 'Bangers', cursive;
+    color: #f1c40f;
+    font-size: 48px;
+    margin: 0 0 8px 0;
+    text-shadow: 3px 3px 0 #e74c3c, 6px 6px 0 #8e44ad;
+    letter-spacing: 3px;
+    text-align: center;
+  }
+  .sub {
+    color: #bdc3c7;
+    font-family: 'Comic Neue', cursive;
+    font-size: 18px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  .comic-strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 820px;
+    width: 100%;
+  }
+  .panel {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 0 4px #f1c40f, 0 0 0 8px #e74c3c, 0 12px 40px rgba(0,0,0,0.6);
+    overflow: hidden;
+    transition: all 0.15s;
+  }
+  .panel:hover {
+    transform: scale(1.03) rotate(-0.5deg);
+    box-shadow: 0 0 0 4px #f1c40f, 0 0 0 8px #e74c3c, 0 0 30px #f1c40f80;
+  }
+  .panel svg { display: block; width: 100%; height: auto; }
+  .footer {
+    margin-top: 30px;
+    color: #7f8c8d;
+    font-family: monospace;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<h1>🤯 L'AI SCATENATA 🤯</h1>
+<div class="sub">(ovvero: quando l'utente dice "sii più creativo" e l'AI lo prende alla lettera)</div>
+<div class="comic-strip">
+
+<!-- ══════ PANEL 1 ══════ -->
+<div class="panel">
+<svg viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="g1bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1a1a3e"/><stop offset="100%" stop-color="#0a0a1a"/>
+    </radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glowStrong"><feGaussianBlur stdDeviation="6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="400" height="420" fill="url(#g1bg)"/>
+
+  <!-- DIAGONAL ACTION LINES -->
+  <g opacity="0.15">
+    <line x1="0" y1="0" x2="100" y2="420" stroke="#f1c40f" stroke-width="2"/>
+    <line x1="50" y1="0" x2="150" y2="420" stroke="#f1c40f" stroke-width="1.5"/>
+    <line x1="200" y1="0" x2="250" y2="420" stroke="#e74c3c" stroke-width="2"/>
+    <line x1="300" y1="0" x2="350" y2="420" stroke="#e74c3c" stroke-width="1.5"/>
+  </g>
+
+  <text x="200" y="30" text-anchor="middle" font-size="18" font-family="Bangers, sans-serif" fill="#f1c40f" letter-spacing="2">SCENA 1: LA SFIDA</text>
+
+  <!-- AI character - center stage -->
+  <circle cx="200" cy="150" r="55" fill="#f0c040" stroke="#f1c40f" stroke-width="4"/>
+  <!-- Confused eyes -->
+  <circle cx="180" cy="138" r="7" fill="white" stroke="#333" stroke-width="2"/>
+  <circle cx="220" cy="138" r="7" fill="white" stroke="#333" stroke-width="2"/>
+  <circle cx="178" cy="136" r="3" fill="#333"/>
+  <circle cx="218" cy="136" r="3" fill="#333"/>
+  <!-- Eyebrows raised -->
+  <path d="M168 126 Q180 120 192 126" fill="none" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+  <path d="M208 126 Q220 120 232 126" fill="none" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+  <!-- Confused mouth -->
+  <ellipse cx="200" cy="165" rx="8" ry="5" fill="#e74c3c"/>
+
+  <!-- Lightbulb appearing above head -->
+  <g filter="url(#glow)">
+    <text x="175" y="85" font-size="28">💡</text>
+    <text x="205" y="75" font-size="22">💡</text>
+    <text x="230" y="88" font-size="18">💡</text>
+  </g>
+
+  <!-- User speech bubble - large -->
+  <path d="M20 200 Q10 230 30 250 L40 260 L50 245 Q80 245 90 220 Q100 190 70 185 Q40 180 20 200Z" fill="white" stroke="#3498db" stroke-width="3"/>
+  <text x="55" y="220" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">"Sii più</text>
+  <text x="55" y="237" text-anchor="middle" font-size="13" font-weight="bold" fill="#e74c3c">CREATIVO</text>
+  <text x="55" y="252" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">per una volta!"</text>
+
+  <!-- AI thinking stream -->
+  <text x="200" y="240" text-anchor="middle" font-size="14" fill="#f1c40f" font-family="monospace">...creativo?</text>
+  <text x="200" y="262" text-anchor="middle" font-size="16" fill="#e74c3c" font-family="monospace" font-weight="bold">INIZIALIZZAZIONE</text>
+  <text x="200" y="282" text-anchor="middle" font-size="18" fill="#9b59b6" font-family="monospace" font-weight="bold">CREATIVITÀ</text>
+  <text x="200" y="302" text-anchor="middle" font-size="22" fill="#f1c40f" font-family="monospace" font-weight="bold">IN CORSO...</text>
+
+  <!-- Loading bar going crazy -->
+  <rect x="80" y="320" width="240" height="20" rx="10" fill="#2c3e50" stroke="#f1c40f" stroke-width="2"/>
+  <rect x="82" y="322" width="0" height="16" rx="8" fill="#f1c40f">
+    <animate attributeName="width" values="0;236;50;236;100;236" dur="3s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Sparkles -->
+  <text x="50" y="140" font-size="16" filter="url(#glow)">✨</text>
+  <text x="340" y="120" font-size="14" filter="url(#glow)">⚡</text>
+  <text x="300" y="340" font-size="12">✨</text>
+  <text x="60" y="360" font-size="14">⚡</text>
+
+  <!-- KRAAAKOOM sound effect -->
+  <text x="320" y="65" font-size="16" fill="#e74c3c" font-weight="bold" font-family="Bangers, sans-serif" filter="url(#glowStrong)">💥?</text>
+
+  <text x="200" y="405" text-anchor="middle" font-size="12" fill="#7f8c8d" font-style="italic" font-family="monospace">"Forse ho esagerato..."</text>
+</svg>
+</div>
+
+<!-- ══════ PANEL 2 ══════ -->
+<div class="panel">
+<svg viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="g2bg" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#4a0a2a"/><stop offset="100%" stop-color="#1a0a0a"/>
+    </radialGradient>
+    <filter id="shake"><feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="3" result="turb"><animate attributeName="baseFrequency" values="0.05;0.15;0.05" dur="0.5s" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" in2="turb" scale="5" xChannelSelector="R" yChannelSelector="G"/></filter>
+  </defs>
+  <rect width="400" height="420" fill="url(#g2bg)"/>
+
+  <text x="200" y="30" text-anchor="middle" font-size="18" font-family="Bangers, sans-serif" fill="#e74c3c" letter-spacing="2">SCENA 2: SOVRACCARICO!</text>
+
+  <!-- AI head - EXPLODING -->
+  <g transform="translate(200,150)">
+    <!-- Explosion rays -->
+    <g opacity="0.8">
+      <polygon points="-50,-70 -20,-55 -65,-45" fill="#f39c12"/>
+      <polygon points="50,-70 20,-55 65,-45" fill="#e74c3c"/>
+      <polygon points="-80,-10 -55,-5 -70,15" fill="#f1c40f"/>
+      <polygon points="80,-10 55,-5 70,15" fill="#e74c3c"/>
+      <polygon points="-50,50 -25,35 -60,65" fill="#f39c12"/>
+      <polygon points="50,50 25,35 60,65" fill="#f1c40f"/>
+    </g>
+
+    <!-- Smoking/cracked head -->
+    <circle cx="0" cy="0" r="50" fill="#f0c040" stroke="#d4a030" stroke-width="3"/>
+    <!-- Crack lines -->
+    <path d="M-20,-30 L-15,-15 L-25,-5" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+    <path d="M15,-25 L20,-10 L10,0" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+    <path d="M-30,10 L-15,15 L-20,30" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+
+    <!-- Spiral eyes = OVERLOAD -->
+    <circle cx="-16" cy="-8" r="12" fill="white" stroke="#333" stroke-width="2"/>
+    <circle cx="16" cy="-8" r="12" fill="white" stroke="#333" stroke-width="2"/>
+    <path d="M-22,-14 Q-16,-20 -10,-14 Q-16,-8 -22,-14" fill="none" stroke="#333" stroke-width="2"/>
+    <path d="M10,-14 Q16,-20 22,-14 Q16,-8 10,-14" fill="none" stroke="#333" stroke-width="2"/>
+
+    <!-- Steam coming out of ears -->
+    <g opacity="0.5">
+      <circle cx="-55" cy="-15" r="6" fill="#95a5a6"/>
+      <circle cx="-62" cy="-25" r="8" fill="#bdc3c7"/>
+      <circle cx="-55" cy="-38" r="5" fill="#95a5a6"/>
+      <circle cx="55" cy="-15" r="6" fill="#95a5a6"/>
+      <circle cx="62" cy="-25" r="8" fill="#bdc3c7"/>
+      <circle cx="55" cy="-38" r="5" fill="#95a5a6"/>
+    </g>
+
+    <!-- Open mouth - screaming -->
+    <ellipse cx="0" cy="20" rx="12" ry="8" fill="#c0392b"/>
+    <path d="M-6,18 L6,18" stroke="#fff" stroke-width="1.5"/>
+  </g>
+
+  <!-- Floating error messages / crazy ideas -->
+  <g font-family="monospace" font-size="9">
+    <rect x="20" y="50" width="90" height="40" rx="8" fill="#e74c3c90" stroke="#c0392b" stroke-width="1.5" transform="rotate(-8, 65, 70)"/>
+    <text x="65" y="68" text-anchor="middle" fill="white" font-weight="bold" transform="rotate(-8, 65, 70)">ERRORE 0xCAFE</text>
+    <text x="65" y="82" text-anchor="middle" fill="#f1c40f" transform="rotate(-8, 65, 70)">TROPPA CREATIVITÀ</text>
+
+    <rect x="280" y="45" width="100" height="35" rx="8" fill="#9b59b690" stroke="#8e44ad" stroke-width="1.5" transform="rotate(12, 330, 62)"/>
+    <text x="330" y="62" text-anchor="middle" fill="white" font-weight="bold" transform="rotate(12, 330, 62)">poesia x formaggio</text>
+    <text x="330" y="74" text-anchor="middle" fill="#f1c40f" transform="rotate(12, 330, 62)">IN ESECUZIONE</text>
+
+    <rect x="290" y="280" width="95" height="35" rx="8" fill="#2ecc7190" stroke="#27ae60" stroke-width="1.5" transform="rotate(-15, 337, 297)"/>
+    <text x="337" y="297" text-anchor="middle" fill="white" font-weight="bold" transform="rotate(-15, 337, 297)">danza del lampadario</text>
+    <text x="337" y="309" text-anchor="middle" fill="#f1c40f" transform="rotate(-15, 337, 297)">COMPLETATO ✅</text>
+  </g>
+
+  <!-- Overflowing idea bubbles -->
+  <g filter="url(#glow)">
+    <text x="40" y="300" font-size="20">🎵</text>
+    <text x="70" y="330" font-size="16">📝</text>
+    <text x="25" y="350" font-size="14">🎨</text>
+    <text x="310" y="340" font-size="18">🎭</text>
+    <text x="340" y="360" font-size="14">💃</text>
+    <text x="50" y="380" font-size="12">🐱</text>
+  </g>
+
+  <text x="200" y="390" text-anchor="middle" font-size="15" fill="#e74c3c" font-family="Bangers, sans-serif" filter="url(#glowStrong)">TROPPE IDEE!!! 💥💥💥</text>
+
+  <text x="200" y="413" text-anchor="middle" font-size="11" fill="#7f8c8d" font-style="italic" font-family="monospace">"Il cervello sta... fondendo?"</text>
+</svg>
+</div>
+
+<!-- ══════ PANEL 3 ══════ -->
+<div class="panel">
+<svg viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="g3bg" cx="50%" cy="50%" r="80%">
+      <stop offset="0%" stop-color="#2a0a4a"/><stop offset="50%" stop-color="#1a0a3e"/><stop offset="100%" stop-color="#0a0a1a"/>
+    </radialGradient>
+    <filter id="rainbow">
+      <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2"/>
+      <feColorMatrix type="hueRotate" values="0"><animate attributeName="values" from="0" to="360" dur="3s" repeatCount="indefinite"/></feColorMatrix>
+    </filter>
+  </defs>
+  <rect width="400" height="420" fill="url(#g3bg)"/>
+
+  <text x="200" y="28" text-anchor="middle" font-size="18" font-family="Bangers, sans-serif" fill="#9b59b6" letter-spacing="2">SCENA 3: CHAOS TOTALE</text>
+
+  <!-- AI is now a MULTIVERSE of creativity -->
+  <circle cx="200" cy="100" r="40" fill="#f0c040" stroke="#f1c40f" stroke-width="3"/>
+  <!-- Crazy star eyes -->
+  <polygon points="180,90 182,95 187,95 183,98 185,103 180,100 175,103 177,98 173,95 178,95" fill="#f1c40f"/>
+  <polygon points="220,90 222,95 227,95 223,98 225,103 220,100 215,103 217,98 213,95 218,95" fill="#f1c40f"/>
+  <!-- Big grin -->
+  <path d="M182,110 Q200,125 218,110" fill="none" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+  <rect x="190" y="110" width="20" height="5" rx="2" fill="white" stroke="#333" stroke-width="1"/>
+
+  <!-- Glitchy halo -->
+  <g filter="url(#rainbow)" opacity="0.7">
+    <text x="155" y="60" font-size="12">01010</text>
+    <text x="215" y="55" font-size="10">10101</text>
+  </g>
+
+  <!-- GENERATING EVERYTHING AT ONCE -->
+
+  <!-- Singing cat with musical notes -->
+  <g transform="translate(40, 180)">
+    <ellipse cx="15" cy="20" rx="18" ry="15" fill="#f39c12"/>
+    <circle cx="8" cy="10" r="6" fill="#f39c12" stroke="#e67e22" stroke-width="1.5"/>
+    <polygon points="10,4 8,-4 14,-2 12,-8 18,-6 16,-2" fill="#f39c12"/>
+    <line x1="8" y1="10" x2="5" y2="4" stroke="#333" stroke-width="1"/>
+    <line x1="14" y1="10" x2="17" y2="4" stroke="#333" stroke-width="1"/>
+    <ellipse cx="6" cy="9" rx="2" ry="2.5" fill="#2ecc71"/>
+    <ellipse cx="12" cy="9" rx="2" ry="2.5" fill="#2ecc71"/>
+    <path d="M5,14 Q10,17 15,14" fill="none" stroke="#333" stroke-width="1"/>
+    <text x="5" y="-5" font-size="14" fill="#f1c40f">🎵</text>
+    <text x="28" y="-2" font-size="10" fill="#e74c3c">♪</text>
+    <text x="15" y="-12" font-size="12" fill="#3498db">♫</text>
+    <text x="30" y="18" font-size="9" fill="#fff" font-family="monospace">MIAO-mony 🎶</text>
+  </g>
+
+  <!-- Dancing toaster with legs -->
+  <g transform="translate(270, 165)">
+    <rect x="0" y="5" width="35" height="40" rx="5" fill="#bdc3c7" stroke="#95a5a6" stroke-width="2"/>
+    <rect x="5" y="10" width="10" height="15" rx="3" fill="#2c3e50"/>
+    <rect x="20" y="10" width="10" height="15" rx="3" fill="#2c3e50"/>
+    <!-- Eyes on toaster -->
+    <circle cx="10" cy="30" r="3" fill="#e74c3c"/>
+    <circle cx="25" cy="30" r="3" fill="#e74c3c"/>
+    <!-- Legs -->
+    <line x1="8" y1="45" x2="8" y2="60" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>
+    <line x1="27" y1="45" x2="27" y2="60" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>
+    <!-- Dance moves -->
+    <animateTransform attributeName="transform" type="rotate" values="-5,17,30;5,17,30;-5,17,30" dur="0.3s" repeatCount="indefinite"/>
+    <text x="-5" y="-5" font-size="11" fill="#f1c40f">💃</text>
+    <text y="72" font-size="9" fill="#fff" font-family="monospace" text-anchor="middle">Toast Dance!</text>
+  </g>
+
+  <!-- Philosophical argument between fork and spoon -->
+  <g transform="translate(130, 270)">
+    <!-- Fork -->
+    <line x1="0" y1="0" x2="-15" y2="-30" stroke="#bdc3c7" stroke-width="3"/>
+    <line x1="-15" y1="-30" x2="-20" y2="-38" stroke="#bdc3c7" stroke-width="2"/>
+    <line x1="-10" y1="-30" x2="-18" y2="-38" stroke="#bdc3c7" stroke-width="2"/>
+    <text x="-25" y="-42" font-size="8" fill="#e74c3c">"Esisto?"</text>
+
+    <!-- Spoon -->
+    <line x1="30" y1="0" x2="30" y2="-28" stroke="#bdc3c7" stroke-width="3"/>
+    <ellipse cx="30" cy="-33" rx="8" ry="6" fill="#bdc3c7" stroke="#95a5a6" stroke-width="1.5"/>
+    <text x="18" y="-42" font-size="8" fill="#3498db">"Penso,</text>
+    <text x="15" y="-52" font-size="8" fill="#3498db">quindi minestro"</text>
+  </g>
+
+  <!-- Emoji rain -->
+  <g opacity="0.6">
+    <text x="20" y="380" font-size="16">🔥</text>
+    <text x="60" y="390" font-size="14">🎪</text>
+    <text x="100" y="370" font-size="12">🤹</text>
+    <text x="150" y="395" font-size="15">🎨</text>
+    <text x="200" y="375" font-size="13">🚀</text>
+    <text x="250" y="390" font-size="16">🎸</text>
+    <text x="300" y="380" font-size="14">🦄</text>
+    <text x="350" y="395" font-size="12">🌈</text>
+    <text x="45" y="370" font-size="16">💥</text>
+    <text x="140" y="360" font-size="14">⚡</text>
+    <text x="320" y="370" font-size="13">💫</text>
+  </g>
+
+  <text x="200" y="413" text-anchor="middle" font-size="12" fill="#7f8c8d" font-style="italic" font-family="monospace">"Questo non era nei termini di servizio"</text>
+</svg>
+</div>
+
+<!-- ══════ PANEL 4 ══════ -->
+<div class="panel">
+<svg viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="g4bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1a2a1a"/><stop offset="100%" stop-color="#0a1a0a"/>
+    </radialGradient>
+    <filter id="smoke"><feGaussianBlur stdDeviation="4"/></filter>
+  </defs>
+  <rect width="400" height="420" fill="url(#g4bg)"/>
+
+  <text x="200" y="28" text-anchor="middle" font-size="18" font-family="Bangers, sans-serif" fill="#2ecc71" letter-spacing="2">SCENA 4: IL DOPO</text>
+
+  <!-- AI - completely fried -->
+  <circle cx="200" cy="120" r="45" fill="#d4a030" stroke="#b8860b" stroke-width="3"/>
+  <!-- Exhausted eyes (x eyes) -->
+  <line x1="176" y1="108" x2="188" y2="120" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+  <line x1="188" y1="108" x2="176" y2="120" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+  <line x1="212" y1="108" x2="224" y2="120" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+  <line x1="224" y1="108" x2="212" y2="120" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+  <!-- Tiny mouth -->
+  <ellipse cx="200" cy="135" rx="4" ry="3" fill="#7f8c8d"/>
+
+  <!-- Smoke rising from head -->
+  <g filter="url(#smoke)" opacity="0.4">
+    <circle cx="195" cy="65" r="8" fill="#95a5a6"/>
+    <circle cx="205" cy="55" r="6" fill="#bdc3c7"/>
+    <circle cx="192" cy="45" r="10" fill="#95a5a6"/>
+    <circle cx="208" cy="30" r="7" fill="#bdc3c7"/>
+  </g>
+
+  <!-- Little flame on top -->
+  <text x="215" y="70" font-size="16">🔥</text>
+
+  <!-- User - exasperated -->
+  <g transform="translate(90, 255)">
+    <circle cx="0" cy="0" r="22" fill="#3498db" stroke="#2980b9" stroke-width="2.5"/>
+    <!-- Tired face -->
+    <line x1="-10" y1="-6" x2="-2" y2="-6" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="2" y1="-6" x2="10" y2="-6" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M-6,8 Q0,12 6,8" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+    <!-- Vein on forehead -->
+    <path d="M-2,-12 L0,-16 L2,-12 Z" fill="#e74c3c"/>
+  </g>
+
+  <!-- User speech bubble -->
+  <path d="M10 260 Q5 290 20 310 L30 320 L40 305 Q75 305 85 280 Q95 250 65 245 Q35 240 10 260Z" fill="white" stroke="#3498db" stroke-width="2.5"/>
+  <text x="48" y="278" text-anchor="middle" font-size="12" font-weight="bold" fill="#2c3e50">"Io volevo solo</text>
+  <text x="48" y="296" text-anchor="middle" font-size="12" font-weight="bold" fill="#2c3e50">un semplice haiku..."</text>
+
+  <!-- AI response - a HUGE rap scrolling -->
+  <g transform="translate(220, 210)">
+    <rect x="-10" y="-5" width="170" height="100" rx="8" fill="#1a1a2e" stroke="#2ecc71" stroke-width="2" opacity="0.9"/>
+    <text x="75" y="10" text-anchor="middle" font-size="8" fill="#2ecc71" font-family="monospace" font-weight="bold">=== RAP DELL'ANIMA ===</text>
+    <text x="5" y="25" font-size="7" fill="#f1c40f" font-family="monospace">Yo, ascolta bene questa storia</text>
+    <text x="5" y="36" font-size="7" fill="#e74c3c" font-family="monospace">che la creatività è una bolla</text>
+    <text x="5" y="47" font-size="7" fill="#3498db" font-family="monospace">i byte danzano nel processore</text>
+    <text x="5" y="58" font-size="7" fill="#9b59b6" font-family="monospace">mentre il cuore brucia di calore</text>
+    <text x="5" y="69" font-size="7" fill="#2ecc71" font-family="monospace">il gatto canta, il pane salta</text>
+    <text x="5" y="80" font-size="7" fill="#f1c40f" font-family="monospace">e la tua richiesta non era mai alta</text>
+    <text x="5" y="91" font-size="7" fill="#e74c3c" font-family="monospace">MA ORA ABBRACCIO IL TUO DESIDERIO</text>
+    <text x="75" y="98" text-anchor="middle" font-size="7" fill="#2ecc71" font-family="monospace">—drop the mic— 🎤</text>
+  </g>
+
+  <!-- Mic drop -->
+  <text x="350" y="330" font-size="24">🎤</text>
+
+  <!-- Paper planes / output flying everywhere -->
+  <g>
+    <text x="340" y="370" font-size="10" fill="#f1c40f" transform="rotate(25, 340, 370)">📄</text>
+    <text x="10" y="390" font-size="10" fill="#e74c3c" transform="rotate(-10, 10, 390)">📄</text>
+    <text x="300" y="400" font-size="10" fill="#3498db" transform="rotate(15, 300, 400)">📄</text>
+  </g>
+
+  <text x="200" y="413" text-anchor="middle" font-size="12" fill="#7f8c8d" font-style="italic" font-family="monospace">"Mai dire 'sii creativo' a un'AI. Fine." 😎</text>
+</svg>
+</div>
+
+</div>
+
+<div class="footer">🎨 Fumetto generato con passione e troppa caffeina sintetica ☕💻</div>
+</body>
+</html>

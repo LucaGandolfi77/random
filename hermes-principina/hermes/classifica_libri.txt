@@ -1,0 +1,146 @@
+CLASSIFICA COMPLETA DEI 60 LIBRI
+================================================================================
+
+Criteri di valutazione (scala 0-10, basati su densita' lessicale normalizzata)
+
+  Profondita  : temi filosofici (liberta', fede, anima, colpa, verita', nulla...)
+  Polifonia   : voci contrastanti, dubbio, dialogo interiore (ma, eppure, forse...)
+  Coerenza    : archetipi emotivi (amore, morte, dolore, solitudine, speranza...)
+  Originalita : unicit lessicale del titolo rispetto agli altri (penalizza 'L'uomo/la donna che...')
+  Personaggi  : numero e varieta' di nomi propri
+  Struttura   : presenza di capitoli, parti, prefazioni, prologhi, epiloghi
+  Smech       : umorismo tragicomico (riso, ironia, paradosso, risata...)
+  Domande     : densita' di punti interrogativi (domande aperte)
+  Intensita   : eventi drammatici (morte, malattia, abbandono, prigione, follia...)
+  Lacrime     : pianto, lacrime, cordoglio, lutto, commozione, singhiozzo...
+
+================================================================================
+
+#   Libro                                      Prof Poli Coer Orig Pers Stru Smech  Dom Inte Lacr   TOT MEDIA
+-------------------------------------------------------------------------------------------------------------
+1   la_casa_delle_lacrime_inutili.md           10.0 10.0 10.0  2.9 10.0  9.7  10.0 10.0 10.0 10.0  92.5   9.3
+2   la_risa_e_la_tomba.md                      10.0 10.0 10.0  1.7 10.0 10.0  10.0 10.0 10.0 10.0  91.7   9.2
+3   la_bambina_che_amava_dio.md                10.0 10.0 10.0  0.6 10.0 10.0  10.0 10.0 10.0 10.0  90.6   9.1
+4   la_donna_che_rise_di_dio.md                10.0 10.0 10.0  0.6 10.0 10.0  10.0  8.8 10.0 10.0  89.4   8.9
+5   il_cristallo_e_la_bambina.md                9.3 10.0 10.0  0.0 10.0 10.0  10.0 10.0 10.0 10.0  89.3   8.9
+6   la_donna_che_non_dimenticava.md            10.0 10.0 10.0  0.0 10.0 10.0  10.0 10.0 10.0  7.5  87.5   8.8
+7   il_professore_di_nulla.md                  10.0 10.0  7.1  1.7 10.0 10.0  10.0 10.0  7.1 10.0  85.9   8.6
+8   l_ultima_confessione.md                    10.0 10.0 10.0  0.0 10.0 10.0   6.0 10.0 10.0  9.0  85.1   8.5
+9   l_ultima_cena.md                           10.0 10.0 10.0  0.0 10.0 10.0  10.0 10.0 10.0  4.5  84.5   8.5
+10  il_libro_incompleto_d_amore.md             10.0 10.0 10.0  3.8  6.0 10.0  10.0  8.2  8.2  8.2  84.3   8.4
+11  l_uomo_che_costrui_la_sua_prigione.md      10.0 10.0  7.1  0.0 10.0 10.0  10.0 10.0 10.0  7.1  84.1   8.4
+12  la_prigione_dei_libri.md                    7.6  7.6 10.0  1.7  9.3 10.0  10.0 10.0 10.0  7.6  83.7   8.4
+13  la_donna_che_parlava_con_i_morti.md        10.0 10.0 10.0  1.7 10.0 10.0   7.0  7.0 10.0  7.0  82.8   8.3
+14  i_fratelli_del_ricordo.md                  10.0 10.0 10.0  6.4  8.7 10.0   0.0 10.0 10.0  6.5  81.6   8.2
+15  l_uomo_che_non_finiva_i_libri.md           10.0 10.0 10.0  0.0 10.0 10.0   7.4 10.0 10.0  3.7  81.1   8.1
+16  l_ultima_cena_d_amore.md                   10.0 10.0 10.0  0.0 10.0 10.0  10.0  5.5  5.5 10.0  81.0   8.1
+17  il_padre_dei_figli_assenti.md              10.0 10.0 10.0  1.7 10.0 10.0   7.6  3.8 10.0  7.6  80.6   8.1
+18  il_vecchio_che_insegnava_a_morire.md       10.0 10.0 10.0  4.4 10.0 10.0   5.6  0.0 10.0 10.0  80.0   8.0
+19  l_ultima_lettera_d_amore.md                10.0 10.0 10.0  0.0 10.0 10.0  10.0 10.0  0.0 10.0  80.0   8.0
+20  la_donna_che_non_piangiava.md               9.9 10.0 10.0  0.0 10.0 10.0  10.0 10.0  0.0 10.0  79.9   8.0
+21  il_fratello_che_non_perdono.md             10.0 10.0 10.0  0.0 10.0 10.0  10.0  9.3  9.3  0.0  78.5   7.9
+22  la_donna_che_non_sentiva_il_freddo.md      10.0 10.0 10.0  0.0  7.3 10.0  10.0 10.0  0.0 10.0  77.3   7.7
+23  l_uomo_che_camminava_all_indietro.md       10.0 10.0 10.0  0.6 10.0 10.0   6.6 10.0 10.0  0.0  77.2   7.7
+24  la_casa_di_morire.md                       10.0 10.0 10.0  2.9  8.0 10.0  10.0 10.0  5.6  0.0  76.5   7.7
+25  l_uomo_che_non_era.md                      10.0 10.0  9.7  0.0 10.0  5.4  10.0 10.0  3.0  7.6  75.7   7.6
+26  la_prigione_della_confessione.md           10.0 10.0 10.0  1.7  6.7 10.0  10.0  7.2 10.0  0.0  75.6   7.6
+27  il_cristallo_e_il_fango.md                  5.5 10.0  3.7  0.0 10.0 10.0  10.0 10.0  5.5 10.0  74.6   7.5
+28  il_bambino_che_vide_troppo.md              10.0 10.0 10.0  2.9 10.0 10.0  10.0  0.0  6.9  3.4  73.2   7.3
+29  la_risata_sui_muri.md                      10.0 10.0 10.0  0.0  6.0 10.0  10.0 10.0  7.1  0.0  73.1   7.3
+30  il_padre_giocatore.md                      10.0 10.0 10.0  0.0 10.0 10.0  10.0  4.1  4.1  4.1  72.3   7.2
+31  il_nome_e_il_freddo.md                     10.0 10.0  5.6  0.0  6.0 10.0  10.0 10.0  0.0 10.0  71.6   7.2
+32  il_tram_e_i_muri.md                        10.0 10.0 10.0  0.0  8.7 10.0  10.0  5.8  5.8  0.0  70.3   7.0
+33  il_giudice_che_non_capi.md                  6.7 10.0  3.4  0.0 10.0 10.0  10.0 10.0  3.4  6.7  70.2   7.0
+34  il_quarto_angolo.md                        10.0 10.0  8.6  0.0 10.0  3.8  10.0  6.9  4.4  6.3  69.9   7.0
+35  l_uomo_che_misuro_la_sua_tomba.md           6.4 10.0 10.0  0.0 10.0 10.0   9.6  6.4  3.2  3.2  68.9   6.9
+36  il_silenzio_delle_cose_rotte.md            10.0 10.0 10.0  0.0 10.0 10.0   4.2  0.0 10.0  4.2  68.4   6.8
+37  il_passato_e_i_morti.md                    10.0 10.0  5.5  0.0  7.3 10.0   5.5 10.0  0.0 10.0  68.4   6.8
+38  il_doppio_quarto.md                        10.0 10.0  0.0  0.0 10.0 10.0  10.0  7.1  0.0 10.0  67.1   6.7
+39  il_gioco_della_distruzione.md              10.0 10.0  6.5  1.7 10.0 10.0   6.5 10.0  2.2  0.0  66.9   6.7
+40  l_ultima_partita_a_scacchi.md               6.7 10.0 10.0  0.0 10.0 10.0  10.0 10.0  0.0  0.0  66.7   6.7
+41  la_bambina_e_il_freddo.md                  10.0 10.0 10.0  0.0  6.7 10.0  10.0 10.0  0.0  0.0  66.7   6.7
+42  la_casa_dell_ultima_cena.md                10.0 10.0 10.0  1.7 10.0 10.0   0.0  4.7 10.0  0.0  66.3   6.6
+43  la_donna_che_scriveva_sui_muri.md          10.0 10.0 10.0  0.0 10.0 10.0  10.0  6.0  0.0  0.0  66.0   6.6
+44  le_lacrime_e_i_sassi.md                     0.0 10.0  6.8  2.9  6.0 10.0  10.0 10.0  0.0 10.0  65.7   6.6
+45  il_giudice_e_il_bambino.md                 10.0 10.0 10.0  1.7  8.0 10.0   0.0  5.9 10.0  0.0  65.6   6.6
+46  il_silenzio_del_nulla.md                   10.0 10.0  0.0  0.0  7.3 10.0   6.0 10.0 10.0  0.0  63.4   6.3
+47  la_confessione_delle_cose_rotte.md          0.0 10.0  7.8  0.0 10.0 10.0   0.0 10.0  7.8  7.8  63.3   6.3
+48  la_tomba_del_bambino.md                    10.0 10.0  0.0  1.7 10.0 10.0  10.0 10.0  0.0  0.0  61.7   6.2
+49  l_angolo_della_memoria.md                  10.0 10.0  0.0  5.8 10.0 10.0   5.6  0.0 10.0  0.0  61.5   6.1
+50  l_uomo_che_cercava_il_suo_nome.md           7.8 10.0  0.0  1.7  6.7 10.0  10.0 10.0  0.0  0.0  56.1   5.6
+51  l_ultima_partita_di_morire.md               0.0 10.0  9.4  0.0  7.3 10.0  10.0  0.0  9.4  0.0  56.1   5.6
+52  il_gioco_dei_sassi.md                       0.0 10.0 10.0  1.7  8.7 10.0   7.1  7.1  0.0  0.0  54.6   5.5
+53  il_padre_senza_nome.md                      6.7 10.0  0.0  0.0  7.3 10.0  10.0 10.0  0.0  0.0  54.0   5.4
+54  il_giudice_che_non_era.md                  10.0 10.0  0.0  0.0  6.0 10.0   7.4  0.0 10.0  0.0  53.4   5.3
+55  l_uomo_che_raccoglieva_sassi.md             0.0 10.0  0.0  0.0 10.0 10.0  10.0  0.0  0.0 10.0  50.0   5.0
+56  il_palazzo_del_nulla.md                    10.0 10.0  0.0  0.0  8.7 10.0  10.0  0.0  0.0  0.0  48.7   4.9
+57  le_lacrime_dei_morti.md                     0.0 10.0  0.0  2.9  4.7 10.0   0.0 10.0  0.0 10.0  47.5   4.8
+58  l_ultimo_tram.md                            0.0 10.0  0.0  5.0 10.0 10.0   6.2  6.2  0.0  0.0  47.3   4.7
+59  la_partita_dei_fratelli.md                  7.0 10.0  0.0  1.7  8.0 10.0   0.0 10.0  0.0  0.0  46.7   4.7
+60  il_tram_all_indietro.md                     0.0 10.0  7.7  2.9  8.0 10.0   0.0  7.7  0.0  0.0  46.3   4.6
+
+================================================================================
+SINTESI STATISTICA
+================================================================================
+
+Medie per caratteristica:
+  Profondita     : 8.23
+  Polifonia      : 9.96
+  Coerenza       : 7.31
+  Originalita    : 1.10
+  Personaggi     : 8.96
+  Struttura      : 9.81
+  Smech          : 7.97
+  Domande        : 7.63
+  Intensita      : 5.47
+  Lacrime        : 4.87
+
+Totale libri valutati: 60
+Media generale assoluta: 7.13
+
+TOP 10
+----------------------------------------
+  1. la_casa_delle_lacrime_inutili.md  |  MEDIA 9.25  |  TOT 92.5
+  2. la_risa_e_la_tomba.md  |  MEDIA 9.17  |  TOT 91.7
+  3. la_bambina_che_amava_dio.md  |  MEDIA 9.06  |  TOT 90.6
+  4. la_donna_che_rise_di_dio.md  |  MEDIA 8.94  |  TOT 89.4
+  5. il_cristallo_e_la_bambina.md  |  MEDIA 8.93  |  TOT 89.3
+  6. la_donna_che_non_dimenticava.md  |  MEDIA 8.75  |  TOT 87.5
+  7. il_professore_di_nulla.md  |  MEDIA 8.59  |  TOT 85.9
+  8. l_ultima_confessione.md  |  MEDIA 8.51  |  TOT 85.1
+  9. l_ultima_cena.md  |  MEDIA 8.45  |  TOT 84.5
+  10. il_libro_incompleto_d_amore.md  |  MEDIA 8.43  |  TOT 84.3
+
+BOTTOM 10
+----------------------------------------
+  1. il_tram_all_indietro.md  |  MEDIA 4.63  |  TOT 46.3
+  2. la_partita_dei_fratelli.md  |  MEDIA 4.67  |  TOT 46.7
+  3. l_ultimo_tram.md  |  MEDIA 4.73  |  TOT 47.3
+  4. le_lacrime_dei_morti.md  |  MEDIA 4.75  |  TOT 47.5
+  5. il_palazzo_del_nulla.md  |  MEDIA 4.87  |  TOT 48.7
+  6. l_uomo_che_raccoglieva_sassi.md  |  MEDIA 5.00  |  TOT 50.0
+  7. il_giudice_che_non_era.md  |  MEDIA 5.34  |  TOT 53.4
+  8. il_padre_senza_nome.md  |  MEDIA 5.40  |  TOT 54.0
+  9. il_gioco_dei_sassi.md  |  MEDIA 5.46  |  TOT 54.6
+  10. l_ultima_partita_di_morire.md  |  MEDIA 5.61  |  TOT 56.1
+
+PODIO 'LACRIME' (massima densita' di pianto e commozione)
+----------------------------------------
+  1. la_casa_delle_lacrime_inutili.md  |  Lacrime 10.00/10
+  2. la_risa_e_la_tomba.md  |  Lacrime 10.00/10
+  3. la_bambina_che_amava_dio.md  |  Lacrime 10.00/10
+  4. la_donna_che_rise_di_dio.md  |  Lacrime 10.00/10
+  5. il_cristallo_e_la_bambina.md  |  Lacrime 10.00/10
+  6. il_professore_di_nulla.md  |  Lacrime 10.00/10
+  7. l_ultima_cena_d_amore.md  |  Lacrime 10.00/10
+  8. il_vecchio_che_insegnava_a_morire.md  |  Lacrime 10.00/10
+  9. l_ultima_lettera_d_amore.md  |  Lacrime 10.00/10
+  10. la_donna_che_non_piangiava.md  |  Lacrime 10.00/10
+
+NOTA METODOLOGICA
+----------------------------------------
+La valutazione si basa su densita' lessicali (parole-chiave per totale parole).
+I libri brevi e monolitici tendono a saturare la scala piu' facilmente.
+I libri lunghi architetturati (es. il_quarto_angolo.md) distribuiscono
+l'intensita' su molte pagine e scendono in ranking per densita'.
+Se si volesse premiare la complessita' narrativa, servirebbero pesi diversi.

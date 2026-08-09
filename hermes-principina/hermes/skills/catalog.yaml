@@ -1,0 +1,61 @@
+skills:
+  web_search:
+    description: Ricerca di fonti pubbliche e segnali recenti sul web.
+  scraping:
+    description: Estrazione strutturata di testo e dati da pagine o feed.
+  rss_analysis:
+    description: Lettura e confronto di feed recenti e fonti serializzate.
+  data_analysis:
+    description: Sintesi, ranking e interpretazione di dati raccolti.
+  code_generation:
+    description: Produzione di codice coerente con il contesto del progetto.
+  debugging:
+    description: Isolamento difetti, riproduzione problemi e proposta fix.
+  refactoring:
+    description: Miglioramento locale del codice senza cambiare il comportamento atteso.
+  testing:
+    description: Definizione o aggiornamento di test mirati e verifiche rapide.
+  qa_review:
+    description: Revisione di conformita, rischi e problemi di qualita.
+  formatting:
+    description: Uniformazione stile, headings, markdown e leggibilita.
+  editorial_review:
+    description: Controllo editoriale di flusso, chiarezza e tono.
+  release_readiness:
+    description: Valutazione finale ship or no-ship con criteri espliciti.
+  historical_research:
+    description: Ricostruzione storica con attenzione a cronologie, fonti primarie e contesto.
+  source_criticism:
+    description: Valutazione critica di provenienza, attendibilita e limiti delle fonti.
+  timeline_synthesis:
+    description: Organizzazione di eventi, svolte e dipendenze in una sequenza coerente.
+  economic_analysis:
+    description: Analisi economica di incentivi, costi, esternalita e scenari di impatto.
+  scenario_modeling:
+    description: Costruzione di scenari comparativi e trade-off decisionali.
+  policy_evaluation:
+    description: Valutazione di politiche, regolazioni o strategie operative in chiave economica.
+  legal_analysis:
+    description: Lettura di vincoli normativi, obblighi e aree di rischio con taglio non sostitutivo di consulenza legale.
+  compliance_review:
+    description: Controllo di conformita rispetto a policy, procedure e requisiti dichiarati.
+  risk_memo:
+    description: Produzione di memo sintetici sui rischi, le eccezioni e le cautele da adottare.
+  statistical_inference:
+    description: Verifica di inferenze, ipotesi, campioni e robustezza di un'analisi quantitativa.
+  experimental_design:
+    description: Disegno di esperimenti, A/B test e controlli metodologici.
+  quantitative_modeling:
+    description: Modellazione quantitativa, sintesi di metriche e lettura critica dei dati.
+  system_architecture:
+    description: Progettazione di architetture software e definizione di confini, interfacce e dipendenze.
+  tradeoff_analysis:
+    description: Valutazione strutturata di compromessi tecnici, costi e conseguenze operative.
+  scalability_planning:
+    description: Analisi di scalabilita, resilienza e capacita di evoluzione di un sistema.
+  didactic_explanation:
+    description: Spiegazione progressiva di concetti complessi con livelli di profondita e chiarezza crescente.
+  curriculum_design:
+    description: Strutturazione di percorsi didattici, outline, moduli e obiettivi di apprendimento.
+  knowledge_transfer:
+    description: Trasformazione di materiale tecnico in documentazione formativa e onboarding riusabile.

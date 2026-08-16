@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#0b0716">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="SHOTMIND — il Mastermind alcolico. Una parola segreta, sei tentativi, e chi sbaglia beve.">
+  <title>SHOTMIND 🍸 — il Mastermind Alcolico</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <h1 class="logo">SHOT<span class="mind">MIND</span> <span class="logo-emoji">🍸</span></h1>
+    <button id="btnRules" class="ghost-btn" aria-label="Regole">❓</button>
+  </header>
+
+  <!-- ============ SETUP ============ -->
+  <section id="screen-setup" class="screen active">
+    <h2 class="screen-title">Prepara la partita</h2>
+
+    <p class="field-label">1 · Scegli il pacchetto di parole</p>
+    <div id="packList" class="pack-grid"></div>
+
+    <p class="field-label">2 · Chi sceglie la parola segreta?</p>
+    <div class="mode-row">
+      <button id="modeMaker" class="mode-btn active">👑 <span>Cantiniere</span><small>uno sceglie</small></button>
+      <button id="modeApp" class="mode-btn">🎲 <span>Casuale</span><small>decide il caso</small></button>
+    </div>
+
+    <p class="field-label">3 · Chi beve (i giocatori)</p>
+    <div id="playersBox" class="players-box">
+      <form id="addPlayerForm" class="add-player">
+        <input id="playerInput" type="text" maxlength="14" placeholder="Nome giocatore" autocomplete="off">
+        <button type="submit" class="solid-btn small">Aggiungi</button>
+      </form>
+      <div id="playerChips" class="player-chips"></div>
+    </div>
+
+    <p class="field-label" id="makerLabel">4 · Chi è il Cantiniere? (sceglie la parola)</p>
+    <div id="makerList" class="player-chips"></div>
+
+    <button id="btnStart" class="big-btn" disabled>Inizia il giro 🔥</button>
+    <button id="btnBackSetup" class="ghost-btn link">← al menu</button>
+  </section>
+
+  <!-- ============ SCELTA PAROLA (Cantiniere) ============ -->
+  <section id="screen-secret" class="screen">
+    <h2 class="screen-title">Passa il telefono al Cantiniere 👑</h2>
+    <p class="muted">Tocca la parola segreta. Gli altri non guardano!</p>
+    <div id="wordList" class="word-grid"></div>
+    <details class="custom-word">
+      <summary>✍️ Scrivi la tua parola</summary>
+      <form id="customWordForm" class="add-player">
+        <input id="customWordInput" type="text" maxlength="8" placeholder="4-8 lettere, senza accenti" autocomplete="off">
+        <button type="submit" class="solid-btn small">Usa</button>
+      </form>
+    </details>
+    <button id="btnBackSecret" class="ghost-btn link">← indietro</button>
+  </section>
+
+  <!-- ============ GIOCO ============ -->
+  <section id="screen-game" class="screen">
+    <div class="game-top">
+      <div class="who">
+        <span class="who-label">Indovina</span>
+        <span id="guesserName" class="who-name">—</span>
+      </div>
+      <div class="attempts" id="attemptDots"></div>
+      <div class="who">
+        <span class="who-label">Cantiniere</span>
+        <span id="makerName" class="who-name">—</span>
+      </div>
+    </div>
+
+    <div id="board" class="board"></div>
+
+    <div id="drinkBanner" class="drink-banner" hidden>
+      <div class="glass" id="glass"></div>
+      <div id="drinkText" class="drink-text"></div>
+    </div>
+
+    <div id="keyboard" class="keyboard"></div>
+
+    <div class="score-strip" id="scoreStrip"></div>
+    <button id="btnGiveUp" class="ghost-btn link">💀 Arrendersi</button>
+  </section>
+
+  <!-- ============ FINE GIRO ============ -->
+  <section id="screen-end" class="screen">
+    <h2 id="endTitle" class="end-title"></h2>
+    <p class="muted">La parola segreta era:</p>
+    <div id="endWord" class="end-word"></div>
+    <div id="endRecap" class="end-recap"></div>
+    <div id="victimBox" class="victim-box" hidden>
+      <p class="field-label">🍻 Il Cantiniere designa il CAPRO ESPIATORIO</p>
+      <div id="victimList" class="player-chips big"></div>
+    </div>
+    <div class="end-actions">
+      <button id="btnAgain" class="big-btn">Altro giro 🍺</button>
+      <button id="btnMenu" class="ghost-btn link">← al menu</button>
+    </div>
+  </section>
+
+  <!-- ============ REGOLE ============ -->
+  <div id="modalRules" class="modal" hidden>
+    <div class="modal-card">
+      <h2>Le regole della serata 📜</h2>
+      <div class="legend">
+        <div class="lg"><span class="tile g">G</span> <b>Verde</b> — lettera giusta al posto giusto. Merito, non si beve.</div>
+        <div class="lg"><span class="tile y">Y</span> <b>Gialla</b> — lettera giusta, posto sbagliato. <b>Il Cantiniere beve</b> 1 sorso × ogni gialla.</div>
+        <div class="lg"><span class="tile b">B</span> <b>Nera</b> — lettera assente. <b>Chi indovina beve</b> 1 sorso × ogni nera.</div>
+      </div>
+      <p class="rules-text">
+        ⚖️ Più lunga è la parola, più lo sorso pesa: 4-5 lettere = sorso normale,
+        6-7 = sorso doppio, 8 = sorso triplo (contato col moltiplicatore).<br><br>
+        🏆 <b>Vince chi indovina</b>: il Cantiniere beve tanti sorsi quanti i tentativi usati.<br>
+        💀 <b>Nessuno indovina</b> in 6 tentativi: tutti (tranne il Cantiniere) bevono 1 sorso
+        e il Cantiniere sceglie un <b>capro espiatorio</b> che beve uno SHOT intero (3 sorsi).<br><br>
+        🔁 Al giro dopo, tocca al prossimo indovinare.
+      </p>
+      <button id="btnCloseRules" class="big-btn">Va bene, si beve 🍺</button>
+    </div>
+  </div>
+
+  <footer class="footer">18+ · bevi con giudizio · mai bere per scommessa di vita</footer>
+
+  <script src="game.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

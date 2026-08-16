@@ -1,0 +1,10 @@
+{
+  "name": "echoes-of-the-last-dawn",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "L'Ultimo Rintocco - JRPG a turni con parry, Three.js low-poly",
+  "scripts": {
+    "start": "node server.mjs"
+  }
+}

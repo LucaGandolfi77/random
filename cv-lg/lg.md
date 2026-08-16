@@ -1,0 +1,4 @@
+Attualmente vivo a Fidenza (Parma) in Italia ma sono disposto a lavorare su Milano da pendolare o cercando casa.
+Mi interesserebbe sia ambito aerospace che AI, non so in cosa specializzarmi ma preferisco AI.
+Ho anche due repo github in cui carico i miei progetti: https://github.com/LucaGandolfi77/portfolio e https://github.com/LucaGandolfi77/random
+Devo aggiungere nel cv che nell'ultimo anno ho anche lavorato su documentazione aerospace DO-178C e standard ECSS per thales alenia, ho fatto un refactoring di una applicazione OPLS per Leonardo e porting di environment e test sia funzionali che unit che di integrazione per schede samrh71, samrh707, polarfire con il software vectorcast usando renode emulatori e riscv per thales alenia, sempre in consulenza in alten.

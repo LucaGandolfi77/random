@@ -1,0 +1,13 @@
+{
+  "name": "shotmind",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SHOTMIND — il Mastermind alcolico (PWA)",
+  "scripts": {
+    "test": "node tools/game.test.js",
+    "test:smoke": "node tools/smoke-shotmind.js 8123 && node tools/smoke-shotmind-lose.js 8123"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^23.0.0"
+  }
+}

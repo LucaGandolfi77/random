@@ -1,0 +1,97 @@
+\documentclass[10pt,a4paper,ragged2e]{altacv}
+
+\geometry{left=1cm,right=8.4cm,marginparwidth=6.3cm,marginparsep=1.1cm,top=1cm,bottom=1cm}
+
+\ifxetexorluatex
+  \renewcommand{\familydefault}{\sfdefault}
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage[default]{lato}
+\fi
+
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{Blue}{HTML}{2457C5}
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+\definecolor{LightGrey}{HTML}{565656}
+\definecolor{DarkBlue}{HTML}{102A43}
+\colorlet{heading}{DarkBlue}
+\colorlet{accent}{Blue}
+\colorlet{emphasis}{SlateGrey}
+\colorlet{body}{LightGrey}
+
+\renewcommand{\itemmarker}{{\small\textbullet}}
+
+\begin{document}
+
+\name{Luca Gandolfi}
+\tagline{Embedded Software \& V\&V Engineer}
+
+\personalinfo{
+  \email{\href{mailto:luca.gandolfi7@hotmail.com}{luca.gandolfi7@hotmail.com}}
+  \phone{+39 333 182 7911}\\
+  \linkedin{\href{https://linkedin.com/in/luca-gandolfi7}{linkedin.com/in/luca-gandolfi7}}
+  \github{\href{https://github.com/LucaGandolfi77}{github.com/LucaGandolfi77}}\\
+  \location{Fidenza, Italy; open to Milan and relocation}
+}
+
+\begin{fullwidth}
+\makecvheader
+\end{fullwidth}
+
+\AtBeginEnvironment{itemize}{\small}
+
+\cvsection[page1sidebar]{Professional Summary}
+
+Embedded software engineer with 4+ years in aerospace and defence, specialising in software V\&V, test-environment porting, and HW/SW integration for safety-critical systems. Experience with DO-178C/ECSS, VectorCAST, Renode, RISC-V, and SAMRH/PolarFire targets. Strong C/C++, Python, and Linux foundation with hands-on virtual-platform and AI/ML projects.
+
+\cvsection{Professional Experience}
+
+\cvevent{Software Engineer -- Aerospace \& Defence}{ALTEN Italia}{June 2022 -- Present}{Italy}
+\begin{itemize}
+  \item Deliver software engineering, verification and validation, and HW/SW integration services for major aerospace and defence clients, including Thales Alenia Space and Leonardo.
+  \item Ported functional, unit, and integration test environments across SAMRH71, SAMRH707, and PolarFire using VectorCAST and Renode.
+  \item Supported repeatable RISC-V firmware verification across simulated and board-oriented workflows.
+  \item Contributed to aerospace software lifecycle documentation under DO-178C and ECSS standards for Thales Alenia Space programmes.
+  \item Refactored a Leonardo OPLS application, improving its structure and maintainability while preserving required behaviour.
+\end{itemize}
+
+\cvevent{ICT Developer -- Aerospace}{ALTEN Italia}{December 2021 -- June 2022}{Italy}
+\begin{itemize}
+  \item Performed software testing, verification and validation, and HW/SW integration for aerospace systems.
+  \item Adapted avionics software for LIDAR processing, inter-computer FTP communication, and Linux/Qt applications over AFDX.
+\end{itemize}
+
+\cvevent{University Programming Tutor}{Universit\`a degli Studi di Parma}{2019 and 2021}{Parma, Italy}
+\begin{itemize}
+  \item Taught Go, Python, and C and supported project development for courses in programming fundamentals and programming-language paradigms.
+\end{itemize}
+
+\cvsection{Selected Technical Projects}
+
+\textcolor{accent}{\textbf{PolarFire RISC-V Virtual Platform}} \hfill \href{https://github.com/LucaGandolfi77/random/tree/main/polarfire-vp}{GitHub}
+\begin{itemize}
+  \item Built a tested Python PolarFire/RISC-V functional platform with RV64I/M multi-hart execution, ELF loading, MMIO/interrupt models, and GDB remote debugging.
+\end{itemize}
+
+\textcolor{accent}{\textbf{SAMRH Linux Test Environment}} \hfill \href{https://github.com/LucaGandolfi77/random/tree/main/samrh-mplab-linux-env}{GitHub}
+\begin{itemize}
+  \item Created a Linux host/target test workflow for SAMRH71/707 firmware using C, GCC/Clang, Bash, Make, MPLAB X/XC32, and MDB simulator/hardware paths.
+\end{itemize}
+
+\textcolor{accent}{\textbf{AI/ML and LLM Engineering}} \hfill \href{https://github.com/LucaGandolfi77/random}{GitHub}
+\begin{itemize}
+  \item Compared BERT/RoBERTa emotion models and explored PySpark parallelisation; built tested Python LLM applications with structured outputs, async APIs, fallback routing, and persistent memory.
+\end{itemize}
+
+\cvsection{Education}
+
+\textbf{Master's studies in Computer Engineering}\par
+Universit\`a degli Studi di Parma, Italy \hfill 2018 -- Present\par
+\smallskip
+\textbf{Bachelor's degree in Computer, Electrical and Telecommunications Engineering}\par
+Universit\`a degli Studi di Parma, Italy \hfill 2013 -- 2018\par
+Thesis: \textit{An Overview of Internet of Things: Challenges and Opportunities}.
+
+\end{document}

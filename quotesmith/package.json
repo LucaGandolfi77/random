@@ -1,0 +1,14 @@
+{
+  "name": "quotesmith",
+  "version": "1.0.0",
+  "private": true,
+  "description": "QUOTESMITH — quiz offline 'chi ha detto questa frase?' (PWA)",
+  "scripts": {
+    "test": "node tools/engine.test.js",
+    "test:smoke": "node tools/smoke-quotesmith.js 8123",
+    "icons": "python3 tools/make_icons.py"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^23.0.0"
+  }
+}

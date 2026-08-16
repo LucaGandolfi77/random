@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1d2823">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="EV personale: la control room per misurare energia, tempo, salute, relazioni e senso.">
+  <title>EV personale — La tua azienda sei tu</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <button class="brand" data-view="overview" aria-label="Vai al quadro generale">
+        <span class="brand-mark">EV</span>
+        <span class="brand-copy">
+          <strong>EV personale</strong>
+          <small>Control room</small>
+        </span>
+      </button>
+
+      <nav class="main-nav" aria-label="Navigazione principale">
+        <p class="nav-label">Workspace</p>
+        <button class="nav-item active" data-view="overview">
+          <span class="nav-icon" aria-hidden="true">01</span>
+          <span>Quadro generale</span>
+        </button>
+        <button class="nav-item" data-view="review">
+          <span class="nav-icon" aria-hidden="true">02</span>
+          <span>Revisione settimanale</span>
+        </button>
+        <button class="nav-item" data-view="library">
+          <span class="nav-icon" aria-hidden="true">03</span>
+          <span>Libreria KPI</span>
+        </button>
+        <button class="nav-item" data-view="strategy">
+          <span class="nav-icon" aria-hidden="true">04</span>
+          <span>Piano industriale</span>
+        </button>
+        <button class="nav-item" data-view="objectives">
+          <span class="nav-icon" aria-hidden="true">05</span>
+          <span>Obiettivi e training</span>
+        </button>
+        <button class="nav-item" data-view="diet">
+          <span class="nav-icon" aria-hidden="true">06</span>
+          <span>Dieta</span>
+        </button>
+        <button class="nav-item" data-view="skills">
+          <span class="nav-icon" aria-hidden="true">07</span>
+          <span>Skill lab</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="local-status"><span class="status-dot"></span><span>Dati solo sul dispositivo</span></div>
+        <p>Ogni domenica: misura, scegli, rialloca.</p>
+      </div>
+    </aside>
+
+    <div class="mobile-topbar">
+      <button class="mobile-brand" data-view="overview" aria-label="Vai al quadro generale">
+        <span class="brand-mark">EV</span>
+        <span>EV personale</span>
+      </button>
+      <button class="icon-button" id="menuToggle" aria-label="Apri navigazione" aria-expanded="false">=</button>
+    </div>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="breadcrumb">CONTROL ROOM <span>/</span> <strong id="weekNumber">SETTIMANA --</strong></p>
+          <p class="date-line" id="todayLabel">--</p>
+        </div>
+        <div class="top-actions">
+          <button class="icon-button" id="helpButton" aria-label="Apri legenda e metodo" title="Legenda e metodo">?</button>
+          <button class="secondary-button" id="exportButton"><span aria-hidden="true">&#8595;</span> Esporta</button>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="view active" id="view-overview" aria-labelledby="overviewTitle">
+          <div class="view-heading overview-heading">
+            <div>
+              <p class="section-kicker">Weekly operating review</p>
+              <h1 id="overviewTitle">La tua azienda sei tu.</h1>
+              <p class="heading-copy">Tratta te stesso come un'azienda. Alloca meglio capitale, tempo, attenzione ed energia.</p>
+            </div>
+            <div class="heading-actions">
+              <button class="primary-button" id="reviewCta">Registra review <span aria-hidden="true">&#8594;</span></button>
+              <button class="text-button" id="checkinCta">Check-in di oggi <span aria-hidden="true">+</span></button>
+            </div>
+          </div>
+
+          <div class="overview-hero">
+            <div class="principle-block">
+              <p class="micro-label">Slogan operativo</p>
+              <p class="principle-quote">"Tratta te stesso come se fossi un'azienda."</p>
+              <div class="hero-meta">
+                <span class="meta-chip"><span class="chip-dot lime"></span> Fondatore</span>
+                <span class="meta-chip"><span class="chip-dot coral"></span> Capitale umano</span>
+                <span class="meta-chip"><span class="chip-dot cyan"></span> Cliente finale</span>
+              </div>
+            </div>
+            <article class="ev-card" aria-label="Enterprise value personale">
+              <div class="ev-card-top">
+                <div>
+                  <p class="micro-label">Enterprise value</p>
+                  <p class="ev-caption">Valore complessivo della tua impresa</p>
+                </div>
+                <span class="period-chip">WEEK 33</span>
+              </div>
+              <div class="ev-main">
+                <div class="ev-score"><span id="evValue">7.4</span><small>/10</small></div>
+                <div class="ev-ring" id="evRing" aria-hidden="true"><span>EV</span></div>
+              </div>
+              <div class="ev-footer"><span id="evStatus">Solido, con margine da costruire</span><strong id="evDelta">+0.3 vs settimana scorsa</strong></div>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="panel scorecard-panel">
+              <div class="panel-header">
+                <div>
+                  <p class="panel-kicker">01 / Scorecard</p>
+                  <h2>Come sta andando il sistema</h2>
+                </div>
+                <span class="panel-meta" id="scorecardAverage">-- / 10</span>
+              </div>
+              <div class="scorecard-head"><span>Area / KPI</span><span>Segnale</span><span>Voto</span></div>
+              <div class="scorecard-list" id="scorecardList"></div>
+              <div class="panel-footer-link"><button class="text-button" data-view="review">Apri tutti i KPI <span aria-hidden="true">&#8594;</span></button></div>
+            </article>
+
+            <div class="dashboard-side">
+              <article class="panel signal-panel" id="signalPanel"></article>
+
+              <article class="panel rhythm-panel">
+                <div class="panel-header compact">
+                  <div>
+                    <p class="panel-kicker">Ritmo operativo</p>
+                    <h2>La settimana in sette giorni</h2>
+                  </div>
+                  <span class="panel-meta">DOS</span>
+                </div>
+                <div class="rhythm-chart" id="rhythmChart"></div>
+                <div class="rhythm-legend"><span><i class="legend-line"></i> soddisfazione giornaliera</span><span id="rhythmAverage">media --</span></div>
+              </article>
+
+              <article class="panel memo-panel">
+                <div class="memo-mark">//</div>
+                <div>
+                  <p class="panel-kicker">Founder memo</p>
+                  <p class="memo-text" id="memoPreview">--</p>
+                  <p class="memo-commitment" id="commitmentPreview">--</p>
+                </div>
+                <button class="icon-button small" id="editMemoButton" aria-label="Modifica founder memo" title="Modifica memo">&#8599;</button>
+              </article>
+            </div>
+          </div>
+
+          <div class="lower-grid">
+            <article class="panel allocation-panel">
+              <div class="panel-header compact">
+                <div>
+                  <p class="panel-kicker">Allocazione del capitale</p>
+                  <h2>Dove sta andando la tua energia</h2>
+                </div>
+                <span class="panel-meta">questa settimana</span>
+              </div>
+              <div class="allocation-list" id="allocationList"></div>
+            </article>
+
+            <article class="panel watch-panel">
+              <div class="panel-header compact">
+                <div>
+                  <p class="panel-kicker">12 / Risk desk</p>
+                  <h2>Rischio esistenziale</h2>
+                </div>
+                <span class="risk-status" id="riskStatus">--</span>
+              </div>
+              <p class="watch-copy">Quale evento potrebbe mandare in crisi il tuo sistema operativo personale?</p>
+              <div class="risk-meter"><span id="riskMeterFill"></span></div>
+              <div class="risk-reading"><strong id="riskScore">--</strong><span>/ 10 esposizione</span><button class="text-button" data-view="strategy">Apri risk desk <span aria-hidden="true">&#8594;</span></button></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="view-review" aria-labelledby="reviewTitle">
+          <div class="view-heading">
+            <div>
+              <p class="section-kicker">Rituale domenicale</p>
+              <h1 id="reviewTitle">Revisione settimanale</h1>
+              <p class="heading-copy">Un voto onesto per rendere visibili i trade-off. Non serve ottenere 10.</p>
+            </div>
+            <div class="review-status" id="reviewStatus">Modifiche salvate in locale</div>
+          </div>
+
+          <div class="review-layout">
+            <article class="panel review-panel">
+              <div class="panel-header">
+                <div>
+                  <p class="panel-kicker">Scorecard completa</p>
+                  <h2>Valuta le dodici aree</h2>
+                </div>
+                <span class="panel-meta" id="reviewAverage">-- / 10</span>
+              </div>
+              <div class="review-list" id="reviewList"></div>
+            </article>
+
+            <aside class="review-aside">
+              <article class="panel review-note-panel">
+                <p class="panel-kicker">Founder memo</p>
+                <h2>Che cosa hai capito?</h2>
+                <label class="field-label" for="weeklyNote">Nota della settimana</label>
+                <textarea id="weeklyNote" rows="5" placeholder="Una frase che valga più di un report..."></textarea>
+                <label class="field-label" for="commitmentInput">Una decisione concreta</label>
+                <input id="commitmentInput" type="text" placeholder="La prossima settimana proteggo...">
+                <button class="primary-button full-width" id="saveReview">Salva review <span aria-hidden="true">&#8594;</span></button>
+              </article>
+              <article class="panel review-protocol">
+                <p class="panel-kicker">Protocollo</p>
+                <div class="protocol-step"><span>01</span><p>Misura senza negoziare con l'immagine che hai di te.</p></div>
+                <div class="protocol-step"><span>02</span><p>Individua il collo di bottiglia, non dieci problemi.</p></div>
+                <div class="protocol-step"><span>03</span><p>Trasforma il dato in una scelta per i prossimi sette giorni.</p></div>
+              </article>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="view-objectives" aria-labelledby="objectivesTitle">
+          <div class="view-heading">
+            <div>
+              <p class="section-kicker">Execution desk</p>
+              <h1 id="objectivesTitle">Obiettivi e training</h1>
+              <p class="heading-copy">Sei slot da 30 minuti per costruire massa senza trattare il recupero come un costo invisibile.</p>
+            </div>
+            <div class="review-status" id="trainingStatus">0 sessioni registrate</div>
+          </div>
+
+          <div class="objective-layout">
+            <div class="objective-main">
+              <article class="panel training-plan-panel">
+                <div class="panel-header">
+                  <div>
+                    <p class="panel-kicker">Settimana tipo</p>
+                    <h2>Il piano dei prossimi sette giorni</h2>
+                  </div>
+                  <span class="panel-meta">30 min / slot</span>
+                </div>
+                <div class="training-week" id="trainingWeek"></div>
+              </article>
+
+              <article class="panel objective-tracker-panel">
+                <div class="panel-header compact">
+                  <div>
+                    <p class="panel-kicker">Objective ledger</p>
+                    <h2>Segnali da chiudere questa settimana</h2>
+                  </div>
+                  <span class="panel-meta" id="objectiveProgress">0 / 6</span>
+                </div>
+                <div class="objective-list" id="objectiveList"></div>
+              </article>
+            </div>
+
+            <aside class="objective-side">
+              <article class="panel body-profile-panel">
+                <div class="panel-header compact">
+                  <div>
+                    <p class="panel-kicker">Profilo fisico</p>
+                    <h2>La base del piano</h2>
+                  </div>
+                  <span class="panel-meta">aggiornabile</span>
+                </div>
+                <div class="profile-stat-grid">
+                  <div><strong id="profileWeight">72</strong><span>kg</span><small>Peso</small></div>
+                  <div><strong id="profileHeight">179</strong><span>cm</span><small>Altezza</small></div>
+                  <div><strong id="profileAge">32</strong><span>anni</span><small>Eta'</small></div>
+                </div>
+                <button class="secondary-button full-width" id="editProfileButton">Modifica profilo <span aria-hidden="true">&#8599;</span></button>
+              </article>
+              <article class="panel training-principles-panel">
+                <p class="panel-kicker">Principi di carico</p>
+                <div class="principle-row"><span>01</span><p>Parte alta prioritaria, ma gambe e core restano nel sistema.</p></div>
+                <div class="principle-row"><span>02</span><p>Con 13 kg fissi: progressione su tempo, pause, ripetizioni e varianti.</p></div>
+                <div class="principle-row"><span>03</span><p>Dopo 6-7 cocktail: recupero, idratazione e nessun debito eroico.</p></div>
+              </article>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="view-diet" aria-labelledby="dietTitle">
+          <div class="view-heading">
+            <div>
+              <p class="section-kicker">Nutrition desk</p>
+              <h1 id="dietTitle">Dieta per costruire margine</h1>
+              <p class="heading-copy">Ricomporsi senza estremi: proteine costanti, carboidrati dove servono, pasti preparati in anticipo e alcol tracciato.</p>
+            </div>
+            <button class="primary-button" id="generateDietButton">Rigenera piano <span aria-hidden="true">&#8635;</span></button>
+          </div>
+
+          <div class="diet-disclaimer"><span class="disclaimer-mark">i</span><p>Stima generale personalizzata per il tuo profilo, non prescrizione clinica. Dopo 2-3 settimane usa peso medio, girovita, fame, performance e recupero per correggere le calorie.</p></div>
+
+          <div class="diet-layout">
+            <div class="diet-main">
+              <article class="panel nutrition-summary-panel">
+                <div class="panel-header compact">
+                  <div>
+                    <p class="panel-kicker">Target operativo</p>
+                    <h2 id="dietDayTitle">Giorno di allenamento</h2>
+                  </div>
+                  <span class="panel-meta" id="dietPlanLabel">ricomposizione</span>
+                </div>
+                <div class="nutrition-stats" id="nutritionStats"></div>
+                <div class="nutrition-note" id="nutritionNote"></div>
+              </article>
+
+              <article class="panel meal-plan-panel">
+                <div class="panel-header compact">
+                  <div>
+                    <p class="panel-kicker">Batch cooking</p>
+                    <h2>Pasti pronti per il microonde</h2>
+                  </div>
+                  <span class="panel-meta">2 pasti + colazione</span>
+                </div>
+                <div class="meal-tabs" id="mealTabs" role="tablist" aria-label="Tipo di giornata">
+                  <button class="meal-tab active" data-meal-day="training" role="tab">Allenamento</button>
+                  <button class="meal-tab" data-meal-day="rest" role="tab">Riposo</button>
+                  <button class="meal-tab" data-meal-day="social" role="tab">Serata sociale</button>
+                </div>
+                <div class="meal-list" id="mealList"></div>
+              </article>
+            </div>
+
+            <aside class="diet-side">
+              <article class="panel diet-profile-panel">
+                <div class="panel-header compact">
+                  <div>
+                    <p class="panel-kicker">Input del modello</p>
+                    <h2>Le tue caratteristiche</h2>
+                  </div>
+                  <span class="panel-meta">modifica e rigenera</span>
+                </div>
+                <div class="diet-form-grid">
+                  <label>Eta'<input id="dietAge" type="number" min="18" max="80"></label>
+                  <label>Altezza (cm)<input id="dietHeight" type="number" min="140" max="220"></label>
+                  <label>Peso (kg)<input id="dietWeight" type="number" min="40" max="200" step="0.1"></label>
+                  <label>Allenamenti feriali<input id="weekdaySessions" type="number" min="1" max="5"></label>
+                  <label>Cocktail / venerdi'<input id="fridayCocktails" type="number" min="0" max="12"></label>
+                  <label>Cocktail / sabato<input id="saturdayCocktails" type="number" min="0" max="12"></label>
+                </div>
+                <button class="secondary-button full-width" id="saveDietProfile">Aggiorna stima <span aria-hidden="true">&#8594;</span></button>
+              </article>
+              <article class="panel alcohol-panel">
+                <div class="panel-header compact">
+                  <div>
+                    <p class="panel-kicker">Costo del weekend</p>
+                    <h2>Alcol e recupero</h2>
+                  </div>
+                  <span class="panel-meta" id="alcoholCalories">-- kcal</span>
+                </div>
+                <p>Non saltare i pasti per compensare. Proteine, acqua e sonno restano capitale; la serata sociale va semplicemente messa a bilancio.</p>
+                <div class="alcohol-meter"><span id="alcoholMeterFill"></span></div>
+                <div class="alcohol-reading"><strong id="cocktailTotal">0</strong><span> cocktail stimati / weekend</span></div>
+              </article>
+              <article class="panel shopping-panel">
+                <div class="panel-header compact">
+                  <div>
+                    <p class="panel-kicker">Procurement</p>
+                    <h2>Lista della spesa</h2>
+                  </div>
+                </div>
+                <div class="shopping-list" id="shoppingList"></div>
+              </article>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="view-skills" aria-labelledby="skillsTitle">
+          <div class="view-heading">
+            <div>
+              <p class="section-kicker">Capability portfolio</p>
+              <h1 id="skillsTitle">Costruire capacità, senza aprire dodici fronti.</h1>
+              <p class="heading-copy">Un piano settimanale leggero e verificabile: pratica breve, continuità alta, una skill già perfetta lasciata in pace.</p>
+            </div>
+            <div class="review-status" id="skillStatus">0 sessioni completate</div>
+          </div>
+
+          <div class="skill-summary-grid">
+            <article class="skill-principle panel">
+              <p class="panel-kicker">Regola di allocazione</p>
+              <h2>La crescita non è accumulare intenzioni.</h2>
+              <p>Ogni skill ha un'azione concreta e un posto nel calendario. Quando la settimana è piena, proteggi le fondamentali: corpo, lingue, relazione e lavoro cognitivo.</p>
+              <div class="skill-principle-foot"><span><i class="chip-dot lime"></i> continuità</span><span><i class="chip-dot cyan"></i> pratica deliberata</span><span><i class="chip-dot coral"></i> margine</span></div>
+            </article>
+            <article class="skill-stat panel"><span class="panel-kicker">Sessioni chiuse</span><strong id="skillCompletedCount">0</strong><small>su <b id="skillSessionCount">0</b> in agenda</small><div class="skill-stat-bar"><i id="skillSessionBar"></i></div></article>
+            <article class="skill-stat panel"><span class="panel-kicker">Tempo investito</span><strong><span id="skillMinutes">0</span><small> min</small></strong><small>questa settimana</small><div class="skill-stat-bar cyan"><i id="skillMinuteBar"></i></div></article>
+          </div>
+
+          <div class="skill-layout">
+            <article class="panel skill-week-panel">
+              <div class="panel-header">
+                <div>
+                  <p class="panel-kicker">Weekly skill sprint</p>
+                  <h2>Il piano dei prossimi sette giorni</h2>
+                </div>
+                <span class="panel-meta">micro-sessioni</span>
+              </div>
+              <div class="skill-week" id="skillWeek"></div>
+            </article>
+            <aside class="skill-side">
+              <article class="panel skill-board-panel">
+                <div class="panel-header compact">
+                  <div>
+                    <p class="panel-kicker">Skill portfolio</p>
+                    <h2>Le aree in costruzione</h2>
+                  </div>
+                  <span class="panel-meta" id="skillBoardCount">12 skill</span>
+                </div>
+                <div class="skill-board" id="skillBoard"></div>
+              </article>
+              <article class="panel perfect-panel">
+                <div class="perfect-mark">&#10003;</div>
+                <div><p class="panel-kicker">Area già perfetta</p><h2>Amore per JB</h2><p>Non tutto ciò che conta deve essere ottimizzato. Questa voce resta nel quadro come patrimonio, non come task.</p></div>
+              </article>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="view-library" aria-labelledby="libraryTitle">
+          <div class="view-heading">
+            <div>
+              <p class="section-kicker">Sistema di misurazione</p>
+              <h1 id="libraryTitle">Libreria KPI</h1>
+              <p class="heading-copy">Dodici lenti per leggere la persona intera: rendimento, manutenzione, rischio e senso.</p>
+            </div>
+            <div class="library-count" id="libraryCount">12 metriche</div>
+          </div>
+          <div class="library-tools">
+            <label class="search-field"><span aria-hidden="true">/</span><input id="librarySearch" type="search" placeholder="Cerca un KPI, un'area o una domanda..." autocomplete="off"></label>
+            <div class="filter-tabs" id="libraryFilters" role="tablist" aria-label="Filtra KPI">
+              <button class="filter-tab active" data-filter="all" role="tab">Tutti</button>
+              <button class="filter-tab" data-filter="performance" role="tab">Performance</button>
+              <button class="filter-tab" data-filter="risk" role="tab">Rischio</button>
+            </div>
+          </div>
+          <div class="library-grid" id="libraryGrid"></div>
+        </section>
+
+        <section class="view" id="view-strategy" aria-labelledby="strategyTitle">
+          <div class="view-heading">
+            <div>
+              <p class="section-kicker">CEO office</p>
+              <h1 id="strategyTitle">Piano industriale</h1>
+              <p class="heading-copy">Il valore dell'impresa non è fatturato: è la capacità di restare intero mentre cresci.</p>
+            </div>
+            <div class="strategy-question">Rinnovi la strategia attuale?</div>
+          </div>
+
+          <div class="strategy-layout">
+            <article class="panel pillars-panel">
+              <div class="panel-header">
+                <div>
+                  <p class="panel-kicker">Enterprise value</p>
+                  <h2>I pilastri del valore</h2>
+                </div>
+                <span class="panel-meta">8 dimensioni</span>
+              </div>
+              <div class="pillar-list" id="pillarList"></div>
+              <div class="ev-equation"><span>Salute</span><b>+</b><span>Competenze</span><b>+</b><span>Relazioni</span><b>+</b><span>Senso</span><strong>= EV</strong></div>
+            </article>
+
+            <div class="strategy-side">
+              <article class="panel alignment-panel" id="alignmentPanel"></article>
+              <article class="panel risk-desk-panel">
+                <div class="panel-header compact">
+                  <div>
+                    <p class="panel-kicker">Key risk indicators</p>
+                    <h2>Risk desk</h2>
+                  </div>
+                  <span class="panel-meta" id="riskDeskMeta">--</span>
+                </div>
+                <div class="risk-list" id="riskList"></div>
+              </article>
+              <article class="panel strategy-note-panel">
+                <p class="panel-kicker">Strategia del mese</p>
+                <h2>Una frase da usare come filtro</h2>
+                <textarea id="strategyNote" rows="4" placeholder="Sto costruendo una vita che..."></textarea>
+                <button class="secondary-button" id="saveStrategy">Aggiorna strategia</button>
+              </article>
+            </div>
+          </div>
+
+          <div class="closing-line"><span>La metrica suprema</span><strong>Massimizzare il valore dell'impresa, non solo il fatturato.</strong><span>EV personale</span></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal-shell" id="modalShell" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <section class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="icon-button modal-close" id="modalClose" aria-label="Chiudi">x</button>
+      <div id="modalContent"></div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

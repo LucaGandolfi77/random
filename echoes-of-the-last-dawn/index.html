@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>L'Ultimo Rintocco</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23d4af5a%22/></svg>">
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three.module.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="app">
+
+    <div id="start-screen" class="screen active">
+      <div class="title-block">
+        <div class="title-kicker">un rintocco · una scelta · una memoria</div>
+        <h1 class="game-title">L'ULTIMO<br>RINTOCCO</h1>
+        <p class="title-sub">Nivea, la città che cancella il dolore. Tre anime in cammino verso la Torre dei Rintocchi.</p>
+        <button id="play-btn" class="btn primary big">Inizia il cammino</button>
+        <p class="title-hint">Spazio per confermare · clic sui pulsanti per agire</p>
+      </div>
+    </div>
+
+    <div id="narrative-screen" class="screen">
+      <div class="narrative-card">
+        <div class="speaker" id="narr-speaker"></div>
+        <div class="narrative-text" id="narr-text"></div>
+        <button id="narr-next" class="btn primary">Continua</button>
+      </div>
+    </div>
+
+    <div id="choice-screen" class="screen">
+      <div class="narrative-card wide">
+        <div class="speaker">Il Custode del Rintocco</div>
+        <div class="narrative-text" id="choice-text"></div>
+        <div class="choice-row">
+          <button class="btn" id="choice-a"></button>
+          <button class="btn" id="choice-b"></button>
+        </div>
+      </div>
+    </div>
+
+    <div id="ending-screen" class="screen">
+      <div class="title-block">
+        <div class="title-kicker" id="ending-kicker"></div>
+        <h1 class="game-title small" id="ending-title"></h1>
+        <p class="title-sub" id="ending-text"></p>
+        <button id="restart-btn" class="btn primary big">Ricomincia</button>
+      </div>
+    </div>
+
+    <div id="game-screen" class="screen">
+      <div id="three-container"></div>
+
+      <div id="hud">
+        <div id="party-bars"></div>
+        <div id="enemy-bar-wrap">
+          <div class="bar-label" id="enemy-name">L'Eco del Guardiano</div>
+          <div class="bar-track">
+            <div class="bar-fill enemy-fill" id="enemy-hp"></div>
+          </div>
+          <div class="bar-meta" id="enemy-meta"></div>
+        </div>
+
+        <div id="essence-wrap">
+          <span class="bar-label">Essenza</span>
+          <div class="bar-track thin">
+            <div class="bar-fill essence-fill" id="essence-hp"></div>
+          </div>
+        </div>
+
+        <div id="phase-banner"></div>
+
+        <div id="battle-log"></div>
+
+        <div id="action-grid"></div>
+        <div id="turn-hint"></div>
+      </div>
+
+      <div id="parry-overlay">
+        <canvas id="parry-canvas" width="220" height="220"></canvas>
+        <div class="parry-prompt" id="parry-prompt">PARA!</div>
+        <div class="parry-hint" id="parry-hint">Premi SPAZIO quando l'anello è dorato</div>
+        <button id="parry-btn" class="btn primary big">PARA</button>
+      </div>
+
+      <div id="joy" class="joy">
+        <div id="joy-base" class="joy-base">
+          <div id="joy-knob" class="joy-knob"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="load-note">Caricamento del mondo…</div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

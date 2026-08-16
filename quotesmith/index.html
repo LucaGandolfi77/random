@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#120a24">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="QUOTESMITH — chi ha detto questa frase? Quiz offline di citazioni famose in italiano e inglese, per categoria e difficoltà.">
+  <title>QUOTESMITH 🗣️ — Chi ha detto questa frase?</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <h1 class="logo">QUOTE<span class="mind">SMITH</span> <span class="logo-emoji">🗣️</span></h1>
+    <button id="btnHome" class="ghost-btn link" hidden>←</button>
+  </header>
+
+  <!-- ============ SETUP ============ -->
+  <section id="screen-setup" class="screen active">
+    <h2 class="screen-title" data-i18n="setupTitle">Prepara la partita</h2>
+
+    <p class="field-label" data-i18n="langLabel">1 · Scegli la lingua</p>
+    <div id="langList" class="lang-row"></div>
+
+    <p class="field-label" data-i18n="catLabel">2 · Scegli la categoria</p>
+    <div id="catGrid" class="cat-grid"></div>
+
+    <p class="field-label" data-i18n="diffLabel">3 · Scegli la difficoltà</p>
+    <div id="diffList" class="diff-row"></div>
+
+    <button id="btnStart" class="big-btn" disabled data-i18n="start">Inizia il gioco 🔥</button>
+
+    <div id="bestBox" class="best-box"></div>
+  </section>
+
+  <!-- ============ GIOCO ============ -->
+  <section id="screen-game" class="screen">
+    <div class="game-top">
+      <span id="progressText" class="progress">1 / 10</span>
+      <span id="streakChip" class="streak-chip" hidden>🔥 0</span>
+      <span id="roundBadge" class="round-badge">—</span>
+    </div>
+
+    <div class="quote-card">
+      <blockquote id="quoteText" class="quote-text">…</blockquote>
+      <button id="btnRead" class="ghost-btn link" aria-label="ascolta">🔊 Ascolta</button>
+    </div>
+
+    <p class="q-label" data-i18n="who">Chi ha detto questa frase?</p>
+    <div id="options" class="options"></div>
+
+    <div id="feedback" class="feedback" hidden></div>
+    <button id="btnNext" class="big-btn" hidden data-i18n="next">Continua ➡️</button>
+  </section>
+
+  <!-- ============ FINE ============ -->
+  <section id="screen-end" class="screen">
+    <h2 id="endTitle" class="end-title" data-i18n="endTitle">Partita finita!</h2>
+    <div id="endStars" class="end-stars"></div>
+    <div class="end-score">
+      <div class="score-num"><span id="endScore">0</span><span class="score-total">/10</span></div>
+      <div class="score-rows">
+        <div class="score-row">🔥 <span data-i18n="bestStreak">Streak migliore</span>: <b id="endStreak">0</b></div>
+        <div class="score-row">🏆 <span data-i18n="bestScore">Record personale</span>: <b id="endBest">0</b>/10</div>
+      </div>
+    </div>
+    <div id="endList" class="end-list"></div>
+    <div class="end-actions">
+      <button id="btnRetry" class="big-btn" data-i18n="retry">Rigioca 🔁</button>
+      <button id="btnMenu" class="ghost-btn link" data-i18n="menu">← menu</button>
+    </div>
+  </section>
+
+  <footer class="footer" data-i18n="footer">100% offline · il database resta sul tuo telefono</footer>
+
+  <script src="data.js"></script>
+  <script src="engine.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

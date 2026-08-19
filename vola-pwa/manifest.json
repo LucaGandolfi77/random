@@ -1,0 +1,26 @@
+{
+  "name": "Vola! Uccello 3D a braccia libere",
+  "short_name": "Vola!",
+  "description": "Vola in un mondo 3D controllando l'uccello con le braccia: su/giù per la quota, di lato per girare, una su e una giù per virare, vicine per la picchiata.",
+  "lang": "it",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#141428",
+  "theme_color": "#141428",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

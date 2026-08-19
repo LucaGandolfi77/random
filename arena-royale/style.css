@@ -1,0 +1,215 @@
+/* Arena Royale — stile mobile-first */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #0d1020;
+  font-family: -apple-system, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  color: #eef2ff;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
+#app { position: fixed; inset: 0; overflow: hidden; }
+#gameCanvas { width: 100%; height: 100%; display: block; touch-action: none; }
+
+/* ---------- HUD ---------- */
+#hud { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+
+#hpWrap {
+  position: absolute;
+  left: calc(10px + env(safe-area-inset-left));
+  top: calc(10px + env(safe-area-inset-top));
+  width: min(220px, 46vw);
+  height: 18px;
+  border-radius: 9px;
+  background: rgba(10, 12, 24, 0.6);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+}
+#hpFill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #7ce08a, #2fae4e);
+  transition: width 120ms;
+}
+#hpVal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  text-shadow: 0 1px 2px #000;
+}
+
+#statsBox {
+  position: absolute;
+  left: calc(10px + env(safe-area-inset-left));
+  top: calc(34px + env(safe-area-inset-top));
+  padding: 5px 10px;
+  border-radius: 10px;
+  background: rgba(10, 12, 24, 0.55);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+#stormBox {
+  position: absolute;
+  left: 50%;
+  top: calc(10px + env(safe-area-inset-top));
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(10, 12, 24, 0.6);
+  border: 1.5px solid rgba(255, 90, 70, 0.7);
+  font-size: 12px;
+  font-weight: 800;
+  color: #ff9a8a;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+#stormBox.warn { animation: stormPulse 0.5s ease-in-out infinite alternate; }
+@keyframes stormPulse { from { border-color: rgba(255,90,70,0.7); } to { border-color: #ff5544; transform: translateX(-50%) scale(1.08); } }
+
+#minimap {
+  position: absolute;
+  right: calc(10px + env(safe-area-inset-right));
+  top: calc(10px + env(safe-area-inset-top));
+  width: 96px;
+  height: 96px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: rgba(8, 10, 20, 0.65);
+}
+
+#powerVal {
+  position: absolute;
+  left: calc(10px + env(safe-area-inset-left));
+  top: calc(60px + env(safe-area-inset-top));
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffd97a;
+  text-shadow: 0 1px 3px #000;
+}
+
+/* barre HP nemici */
+#botBars { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+.botbar {
+  position: absolute;
+  width: 44px;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.55);
+  transform: translateX(-50%);
+  overflow: hidden;
+}
+.botbar > div { height: 100%; background: #ff6b5e; }
+
+/* ---------- Joystick ---------- */
+#joyBase {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 6;
+}
+#joyBase.hidden { display: none; }
+#joyKnob {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  transform: translate(-50%, -50%);
+}
+
+/* toast */
+#toast {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translateX(-50%);
+  padding: 9px 18px;
+  border-radius: 14px;
+  background: rgba(10, 12, 24, 0.75);
+  border: 1.5px solid rgba(255, 217, 122, 0.6);
+  font-size: 14px;
+  font-weight: 800;
+  color: #ffd97a;
+  text-align: center;
+  z-index: 8;
+  max-width: 86%;
+  pointer-events: none;
+}
+#toast.hidden { display: none; }
+
+/* ---------- Overlay ---------- */
+#startOverlay, #endOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 10, 22, 0.82);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+  padding: calc(20px + env(safe-area-inset-top)) 20px calc(20px + env(safe-area-inset-bottom));
+}
+#endOverlay { z-index: 11; }
+.hidden { display: none !important; }
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  padding: 26px 22px;
+  border-radius: 24px;
+  background: linear-gradient(160deg, #232a4d, #141a33);
+  border: 1.5px solid rgba(255, 217, 122, 0.4);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+  text-align: center;
+}
+.card h1 { margin: 0 0 4px; font-size: 32px; letter-spacing: 2px; color: #ff9a8a; text-shadow: 0 2px 0 rgba(0,0,0,0.4); }
+.card h2 { margin: 0 0 8px; font-size: 32px; color: #ff9a8a; }
+.card .sub { margin: 0 0 14px; font-size: 14px; color: rgba(238, 242, 255, 0.85); }
+.card .sub b { color: #ff9a8a; }
+
+.howto { list-style: none; margin: 0 0 16px; padding: 0; text-align: left; font-size: 14px; line-height: 1.9; color: #e8ecff; }
+.howto b { color: #ffd97a; }
+
+.status { min-height: 18px; margin: 0 0 12px; font-size: 12px; color: rgba(238, 242, 255, 0.75); }
+.final { margin: 8px 0; font-size: 18px; font-weight: 800; color: #ffd97a; }
+
+#startBtn, #restartBtn {
+  width: 100%;
+  padding: 15px;
+  border: 0;
+  border-radius: 16px;
+  background: linear-gradient(to bottom, #ff9a6a, #e05a3a);
+  color: #2a1208;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #7a2a14, 0 10px 22px rgba(0,0,0,0.4);
+  transition: transform 80ms;
+}
+#startBtn:active, #restartBtn:active { transform: translateY(3px); box-shadow: 0 3px 0 #7a2a14; }
+#startBtn:disabled { filter: grayscale(0.7); opacity: 0.6; }
+
+.card .fine { margin: 12px 0 0; font-size: 11px; color: rgba(238, 242, 255, 0.55); }
+
+@media (min-width: 820px) {
+  #app { box-shadow: 0 0 80px rgba(0,0,0,0.7); }
+  body { background: radial-gradient(circle at 50% 20%, #1b2240, #0a0c18); }
+}

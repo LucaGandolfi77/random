@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#7a5cff">
+<title>WORD CLASH — Librerie in Guerra</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <div class="res" id="res-money">🪙 0</div>
+    <div class="res" id="res-dobloni">💛 0</div>
+    <div class="res" id="res-builders">👷 0/1</div>
+    <div class="date" id="res-cap">📦 0</div>
+  </header>
+
+  <main id="view"></main>
+
+  <nav id="tabbar">
+    <button class="tab active" data-view="home">🏛️ Libreria</button>
+    <button class="tab" data-view="army">📓 Esercito</button>
+    <button class="tab" data-view="mini">🎮 Minigiochi</button>
+    <button class="tab" data-view="attack">⚔️ Attacca</button>
+    <button class="tab" data-view="shop">🏪 Mercato</button>
+  </nav>
+
+  <div id="ticker" class="ticker"></div>
+  <div id="toast"></div>
+  <div id="modal"></div>
+</div>
+
+<script src="data/balance.js"></script>
+<script src="data/buildings.js"></script>
+<script src="data/words.js"></script>
+<script src="data/rivals.js"></script>
+<script src="data/minigames.js"></script>
+<script src="data/dictionary.js"></script>
+<script src="js/state.js"></script>
+<script src="js/time.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/save.js"></script>
+<script src="js/economy.js"></script>
+<script src="js/build.js"></script>
+<script src="js/army.js"></script>
+<script src="js/minigame.js"></script>
+<script src="js/battle.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

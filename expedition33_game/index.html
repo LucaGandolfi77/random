@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letters from the Lighthouse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            background-attachment: fixed;
+        }
+        
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(10, 15, 25, 0.85);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #64ffda;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            text-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
+            letter-spacing: 2px;
+        }
+        
+        .day-display {
+            text-align: center;
+            background: rgba(30, 30, 46, 0.6);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+            color: #a8dadc;
+            border: 1px solid rgba(168, 218, 220, 0.2);
+        }
+        
+        .lighthouse {
+            position: relative;
+            height: 200px;
+            margin: 25px auto;
+            width: 120px;
+        }
+        
+        .tower {
+            width: 60px;
+            height: 180px;
+            background: linear-gradient(to top, #2c3e50, #3498db);
+            margin: 0 auto;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: inset 0 -5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .lantern {
+            width: 80px;
+            height: 40px;
+            background: linear-gradient(to bottom, #f1c40f, #f39c12);
+            margin: -10px auto 0;
+            border-radius: 50% 50% 10px 10px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(241, 196, 15, 0.7);
+        }
+        
+        .beam {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.8));
+            transform-origin: bottom center;
+            animation: rotateBeam 8s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes rotateBeam {
+            to { transform: rotate(360deg); }
+        }
+        
+        .weather {
+            text-align: center;
+            margin: 20px 0;
+            padding: 12px;
+            background: rgba(52, 73, 94, 0.3);
+            border-radius: 12px;
+            font-style: italic;
+        }
+        
+        .letter-container {
+            background: rgba(44, 62, 80, 0.4);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 4px solid #3498db;
+            min-height: 120px;
+            position: relative;
+        }
+        
+        .letter-container::before {
+            content: "✉️";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: rgba(10, 15, 25, 0.85);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .letter-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #bdc3c7;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 25px 0;
+            padding: 15px;
+            background: rgba(30, 30, 46, 0.5);
+            border-radius: 12px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .hope { color: #2ecc71; }
+        .despair { color: #e74c3c; }
+        .health { color: #f39c12; }
+        
+        .choices {
+            display: flex;
+            gap: 15px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .choice-btn {
+            background: linear-gradient(145deg, #2c3e50, #34495e);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            color: #ecf0f1;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-family: 'Georgia', serif;
+        }
+        
+        .choice-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            background: linear-gradient(145deg, #34495e, #2c3e50);
+        }
+        
+        .choice-btn:active {
+            transform: translateY(0);
+        }
+        
+        .choice-btn.hope-btn { 
+            border-left: 3px solid #2ecc71;
+        }
+        
+        .choice-btn.despair-btn {
+            border-left: 3px solid #e74c3c;
+        }
+        
+        .choice-btn.accept-btn {
+            border-left: 3px solid #f39c12;
+        }
+        
+        .maintenance-game {
+            background: rgba(44, 62, 80, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .maintenance-task {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: rgba(52, 73, 94, 0.5);
+            border-radius: 10px;
+            margin: 0 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+        
+        .maintenance-task:hover {
+            background: rgba(52, 73, 94, 0.7);
+            transform: scale(1.1);
+        }
+        
+        .maintenance-task.completed {
+            background: rgba(46, 204, 113, 0.3);
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.5);
+        }
+        
+        .end-screen {
+            text-align: center;
+            padding: 40px;
+            background: rgba(10, 15, 25, 0.9);
+            border-radius: 20px;
+            margin: 25px 0;
+            border: 1px solid rgba(100, 116, 139, 0.3);
+        }
+        
+        .end-screen h2 {
+            color: #64ffda;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .end-screen p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        
+        .restart-btn {
+            background: linear-gradient(145deg, #8e44ad, #9b59b6);
+            border: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .audio-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(44, 62, 80, 0.7);
+            border: none;
+            color: #ecf0f1;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 600px) {
+            .game-container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .choices {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .choice-btn {
+                width: 80%;
+                max-width: 300px;
+            }
+        }
+        
+        /* Subtle animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(100, 255, 218, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(150, 100, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 40% 40%, rgba(255, 100, 150, 0.03) 0%, transparent 20%);
+            animation: float 15s ease-in-out infinite;
+            z-index: -2;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <button class="audio-toggle" id="audioToggle">🔊 Sound: On</button>
+    
+    <div class="game-container">
+        <h1>Letters from the Lighthouse</h1>
+        <div class="day-display" id="dayDisplay">Day 1</div>
+        
+        <div class="lighthouse">
+            <div class="tower"></div>
+            <div class="lantern"></div>
+            <div class="beam" id="beam"></div>
+        </div>
+        
+        <div class="weather" id="weather">Calm seas, clear skies</div>
+        
+        <div class="maintenance-game" id="maintenanceGame">
+            <h3>Maintain the Lighthouse</h3>
+            <div>
+                <div class="maintenance-task" id="cleanLens">👁️</div>
+                <div class="maintenance-task" id="refillOil">⛽</div>
+                <div class="maintenance-task" id="checkGear">⚙️</div>
+            </div>
+            <p>Complete tasks to keep the light burning</p>
+        </div>
+        
+        <div class="letter-container" id="letterContainer">
+            <div class="letter-text" id="letterText">Waiting for the first letter...</div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Hope</div>
+                <div class="stat-value hope" id="hopeValue">70</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Despair</div>
+                <div class="stat-value despair" id="despairValue">30</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Health</div>
+                <div class="stat-value health" id="healthValue">100</div>
+            </div>
+        </div>
+        
+        <div class="choices" id="choicesContainer"></div>
+        
+        <div class="end-screen" id="endScreen" style="display: none;">
+            <h2 id="endTitle"></h2>
+            <p id="endText"></p>
+            <button class="restart-btn" id="restartBtn">Begin Again</button>
+        </div>
+    </div>
+
+    <script>
+        // Game state
+        const gameState = {
+            day: 1,
+            maxDays: 14,
+            hope: 70,
+            despair: 30,
+            health: 100,
+            lettersReceived: 0,
+            maintenanceDone: 0,
+            gameOver: false,
+            audioContext: null,
+            oscillator: null,
+            isAudioOn: true
+        };
+
+        // Letter content - tells the story
+        const letters = [
+            // Day 1
+            "My love,\n\nThe ship leaves at dawn. Expedition 33 has begun. I promise to write every week. The lighthouse beam will guide me home. Don't wait up too late.\n\nAll my heart,\nAlex",
+            
+            // Day 3
+            "Dearest,\n\nWe hit our first storm last night. The waves were mountains, but the ship held strong. I thought of you watching the light sweep across the water. It gave me strength.\n\nYours always,\nAlex",
+            
+            // Day 5
+            "My love,\n\nSilent seas today. Not a wave in sight. The crew is restless, but I keep thinking of your smile. Keep the light burning bright for me.\n\nForever yours,\nAlex",
+            
+            // Day 7
+            "Dear one,\n\nThe winds have turned cold. I dreamt of you last night - your hair in the sunset, your hand in mine. I miss you more than words can say. Please don't lose hope.\n\nAll that I am,\nAlex",
+            
+            // Day 10
+            "My love,\n\nNo word from supply ships in days. The captain grows concerned, but I tell him we'll make it. I think of your voice when the fog rolls in. Stay strong.\n\nYours,\nAlex",
+            
+            // Day 12 (Hopeful)
+            "My love,\n\nWe see land on the horizon! Expedition 33 has succeeded. I'm coming home to you. Keep that light burning - I need to see it to know you're waiting.\n\nComing home,\nAlex",
+            
+            // Day 12 (Despairing)
+            "My love,\n\nThe storm... it's worse than we feared. I fear this may be my last letter. Tell the waves I loved them. Tell the sky I cherished it. But most of all... tell my love I loved you beyond all stars.\n\nForever yours,\nAlex"
+        ];
+
+        // Weather descriptions by day
+        const weatherDescriptions = [
+            "Calm seas, clear skies",
+            "Gentle breeze, scattered clouds",
+            "First storm approaches",
+            "Rain lashes the tower",
+            "Waves crash against rocks",
+            "Silent fog rolls in",
+            "Gale-force winds howl",
+            "Thunder shakes the foundation",
+            "Ice forms on the lantern",
+            "Hopeful sunlight breaks through",
+            "Storm clouds gather ominously",
+            "The sea lies unnaturally still",
+            "Final tempest approaches",
+            "Dawn breaks over quiet waters"
+        ];
+
+        // Initialize game
+        function initGame() {
+            resetGame();
+            updateDisplay();
+            setupMaintenance();
+            startAudio();
+        }
+
+        // Reset game state
+        function resetGame() {
+            gameState.day = 1;
+            gameState.hope = 70;
+            gameState.despair = 30;
+            gameState.health = 100;
+            gameState.lettersReceived = 0;
+            gameState.maintenanceDone = 0;
+            gameState.gameOver = false;
+            
+            document.getElementById('endScreen').style.display = 'none';
+            document.getElementById('choicesContainer').innerHTML = '';
+            document.getElementById('maintenanceGame').style.display = 'block';
+        }
+
+        // Start background audio
+        function startAudio() {
+            if (!gameState.isAudioOn) return;
+            
+            try {
+                gameState.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                gameState.oscillator = gameState.audioContext.createOscillator();
+                const gainNode = gameState.audioContext.createGain();
+                
+                // Low, melancholic tone
+                gameState.oscillator.type = 'sine';
+                gameState.oscillator.frequency.value = 110; // A2 note
+                gainNode.gain.value = 0.01; // Very quiet
+                
+                gameState.oscillator.connect(gainNode);
+                gainNode.connect(gameState.audioContext.destination);
+                gameState.oscillator.start();
+            } catch (e) {
+                console.warn("Audio initialization failed:", e);
+            }
+        }
+
+        // Stop audio
+        function stopAudio() {
+            if (gameState.oscillator) {
+                gameState.oscillator.stop();
+                gameState.oscillator.disconnect();
+            }
+            if (gameState.audioContext) {
+                gameState.audioContext.close();
+            }
+        }
+
+        // Toggle audio
+        document.getElementById('audioToggle').addEventListener('click', () => {
+            gameState.isAudioOn = !gameState.isAudioOn;
+            const btn = document.getElementById('audioToggle');
+            
+            if (gameState.isAudioOn) {
+                btn.textContent = '🔊 Sound: On';
+                startAudio();
+            } else {
+                btn.textContent = '🔇 Sound: Off';
+                stopAudio();
+            }
+        });
+
+        // Update display
+        function updateDisplay() {
+            document.getElementById('dayDisplay').textContent = `Day ${gameState.day}`;
+            document.getElementById('weather').textContent = weatherDescriptions[Math.min(gameState.day - 1, weatherDescriptions.length - 1)];
+            document.getElementById('hopeValue').textContent = gameState.hope;
+            document.getElementById('despairValue').textContent = gameState.despair;
+            document.getElementById('healthValue').textContent = gameState.health;
+            
+            // Update letter
+            if (gameState.lettersReceived < letters.length) {
+                document.getElementById('letterText').textContent = letters[gameState.lettersReceived];
+            } else {
+                document.getElementById('letterText').textContent = "The silence grows heavier each day. No letters come anymore.";
+            }
+            
+            // Update lighthouse beam opacity based on maintenance
+            const beam = document.getElementById('beam');
+            const maintenanceRatio = Math.min(gameState.maintenanceDone / 3, 1);
+            beam.style.opacity = 0.3 + (maintenanceRatio * 0.7);
+            
+            // Change beam color based on hope/despair balance
+            if (gameState.hope > gameState.despair) {
+                beam.style.background = 'linear-gradient(to bottom, transparent, rgba(100, 255, 218, 0.8))';
+            } else if (gameState.despair > gameState.hope) {
+                beam.style.background = 'linear-gradient(to bottom, transparent, rgba(231, 76, 60, 0.8))';
+            } else {
+                beam.style.background = 'linear-gradient(to bottom, transparent, rgba(243, 156, 18, 0.8))';
+            }
+            
+            // Check for game over
+            checkGameOver();
+        }
+
+        // Handle maintenance tasks
+        function setupMaintenance() {
+            document.getElementById('cleanLens').addEventListener('click', () => {
+                completeTask('cleanLens');
+            });
+            
+            document.getElementById('refillOil').addEventListener('click', () => {
+                completeTask('refillOil');
+            });
+            
+            document.getElementById('checkGear').addEventListener('click', () => {
+                completeTask('checkGear');
+            });
+        }
+
+        function completeTask(taskId) {
+            const task = document.getElementById(taskId);
+            if (!task.classList.contains('completed')) {
+                task.classList.add('completed');
+                gameState.maintenanceDone++;
+                gameState.hope = Math.min(100, gameState.hope + 5);
+                gameState.health = Math.min(100, gameState.health + 3);
+                
+                // Small chance to find a letter fragment
+                if (Math.random() < 0.3 && gameState.lettersReceived < letters.length) {
+                    gameState.lettersReceived++;
+                    showLetterNotification();
+                }
+                
+                updateDisplay();
+                
+                // If all maintenance tasks are done, present choices for the day
+                if (gameState.maintenanceDone >= 3) {
+                    presentChoices();
+                }
+            }
+        }
+
+        function showLetterNotification() {
+            const notification = document.createElement('div');
+            notification.textContent = 'A letter fragment found!';
+            notification.style.position = 'absolute';
+            notification.style.top = '20px';
+            notification.style.left = '50%';
+            notification.style.transform = 'translateX(-50%)';
+            notification.style.background = 'rgba(46, 204, 113, 0.9)';
+            notification.style.color = 'white';
+            notification.style.padding = '8px 16px';
+            notification.style.borderRadius = '20px';
+            notification.style.fontSize = '0.9rem';
+            notification.style.zIndex = '1000';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+
+        // Present choices
+        function presentChoices() {
+            const container = document.getElementById('choicesContainer');
+            container.innerHTML = '';
+            
+            // Reset maintenance tasks for new day
+            document.querySelectorAll('.maintenance-task').forEach(task => {
+                task.classList.remove('completed');
+            });
+            gameState.maintenanceDone = 0;
+            
+            // Choices based on day and state
+            if (gameState.day === 12) {
+                // Final day - major choices
+                if (gameState.hope > gameState.despair + 20) {
+                    // Hopeful path
+                    container.innerHTML = `
+                        <button class="choice-btn hope-btn">Keep the light burning</button>
+                        <button class="choice-btn accept-btn">Prepare for their return</button>
+                    `;
+                } else if (gameState.despair > gameState.hope + 20) {
+                    // Despairing path
+                    container.innerHTML = `
+                        <button class="choice-btn despair-btn">Let the light fade</button>
+                        <button class="choice-btn hope-btn">One last hope</button>
+                    `;
+                } else {
+                    // Balanced path
+                    container.innerHTML = `
+                        <button class="choice-btn hope-btn">Wait with hope</button>
+                        <button class="choice-btn despair-btn">Accept the truth</button>
+                        <button class="choice-btn accept-btn">Find peace in the waiting</button>
+                    `;
+                }
+            } else {
+                // Regular days
+                container.innerHTML = `
+                    <button class="choice-btn hope-btn">Keep hope alive</button>
+                    <button class="choice-btn despair-btn">Let doubt creep in</button>
+                `;
+            }
+            
+            // Add event listeners to choice buttons
+            document.querySelectorAll('.choice-btn').forEach(btn => {
+                btn.addEventListener('click', handleChoice);
+            });
+        }
+
+        // Handle choice selection
+        function handleChoice(e) {
+            const choice = e.target.textContent.trim();
+            
+            switch (choice) {
+                case 'Keep the light burning':
+                case 'Keep hope alive':
+                case 'Wait with hope':
+                case 'One last hope':
+                    gameState.hope = Math.min(100, gameState.hope + 15);
+                    gameState.despair = Math.max(0, gameState.despair - 5);
+                    gameState.health = Math.min(100, gameState.health + 2);
+                    break;
+                    
+                case 'Let doubt creep in':
+                case 'Let the light fade':
+                case 'Accept the truth':
+                    gameState.despair = Math.min(100, gameState.despair + 15);
+                    gameState.hope = Math.max(0, gameState.hope - 5);
+                    gameState.health = Math.max(0, gameState.health - 3);
+                    break;
+                    
+                case 'Prepare for their return':
+                case 'Find peace in the waiting':
+                    gameState.hope = Math.min(100, gameState.hope + 10);
+                    gameState.despair = Math.max(0, gameState.despair - 10);
+                    gameState.health = Math.min(100, gameState.health + 5);
+                    break;
+            }
+            
+            // Advance day
+            gameState.day++;
+            
+            // Receive letter on certain days
+            if ([3, 5, 7, 10].includes(gameState.day) && gameState.lettersReceived < letters.length) {
+                gameState.lettersReceived++;
+            }
+            
+            updateDisplay();
+            
+            // Small delay before next day's choices
+            setTimeout(() => {
+                if (!gameState.gameOver) {
+                    presentChoices();
+                }
+            }, 500);
+        }
+
+        // Check game over conditions
+        function checkGameOver() {
+            if (gameState.day > gameState.maxDays || gameState.health <= 0) {
+                gameState.gameOver = true;
+                document.getElementById('maintenanceGame').style.display = 'none';
+                document.getElementById('choicesContainer').innerHTML = '';
+                showEnding();
+            }
+        }
+
+        // Show ending based on final state
+        function showEnding() {
+            document.getElementById('endScreen').style.display = 'block';
+            
+            let title, text;
+            
+            if (gameState.hope > gameState.despair + 10 && gameState.health > 50) {
+                // Hopeful ending - ambiguous
+                title = "The Light Remains";
+                text = "You kept the light burning through every storm. On the fourteenth dawn, a ship appears on the horizon. Its lanterns sweep across the water, searching for the beacon.\n\nAs it draws nearer, you realize it's not Expedition 33. It's a fishing vessel, lost and grateful for your light. You smile through tears, knowing your love's ship found another shore.\n\nBut sometimes, keeping the light burning is its own kind of love.";
+            } else if (gameState.despair > gameState.hope + 10) {
+                // Tragic ending
+                title = "The Light Fades";
+                text = "The storms wore you down. On the thirteenth night, you couldn't refill the oil. The lens grew dirty from sea spray. The beam weakened, then flickered, then died.\n\nAt 3:17 AM, you heard it - the terrible sound of wood splintering on rocks, screams swallowed by the sea. You never found out if it was them.\n\nYou tend the dark tower now, not for ships, but for the memory of what the light once meant.";
+            } else {
+                // Balanced/Bittersweet ending
+                title = "Peace in the Waiting";
+                text = "You maintained the light as best you could, though some days it burned low. On the fourteenth morning, you accepted that some voyages don't end in return.\n\nYou wrote one final letter you would never send, placed it in a bottle, and tossed it into the waves. The lighthouse continues its sweep, not waiting for a specific ship, but for any soul needing guidance home.\n\nLove isn't always about reunion. Sometimes it's about being the light that helps others find their way.";
+            }
+            
+            document.getElementById('endTitle').textContent = title;
+            document.getElementById('endText').textContent = text;
+        }
+
+        // Restart game
+        document.getElementById('restartBtn').addEventListener('click', () => {
+            initGame();
+        });
+
+        // Initialize game when loaded
+        window.addEventListener('load', initGame);
+    </script>
+</body>
+</html>

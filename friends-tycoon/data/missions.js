@@ -1,0 +1,27 @@
+/* MISSIONS — guida la progressione. Data-driven. */
+const MISSIONS = [
+  { id:'prima_serata', title:'La prima serata', text:'Organizza una serata (qualsiasi attività) con almeno 2 amici.',
+    check:(g)=>(g.stats.activities>=1), reward:{ money:150, rep:5, xp:10 } },
+  { id:'seconda_macchina', title:'Seconda macchina', text:'Compra una macchina nuova nel parco auto.',
+    check:(g)=>(g.vehicles.length>=2), reward:{ money:300, rep:10, xp:20 } },
+  { id:'tutti_al_mare', title:'Tutti al mare', text:'Vai al mare con almeno 4 amici.',
+    check:(g)=>(g.stats.mare>=1), reward:{ money:200, rep:15, xp:20 } },
+  { id:'casa_piu_grande', title:'Una casa più grande', text:'Compra una proprietà migliore della Stanza Studenti.',
+    check:(g)=>(g.houses.length>=2), reward:{ money:500, rep:20, xp:30 } },
+  { id:'festa_6', title:'Festa per 6', text:'Organizza una festa con almeno 6 persone.',
+    check:(g)=>(g.stats.festa6>=1), reward:{ money:300, rep:15, xp:25 } },
+  { id:'diecimila', title:'€10.000', text:'Raggiungi €10.000 sul conto.',
+    check:(g)=>(g.money>=10000), reward:{ money:500, rep:25, xp:40 } },
+  { id:'famosi', title:'I più famosi della città', text:'Raggiungi 500 punti reputazione.',
+    check:(g)=>(g.rep>=500), reward:{ money:800, rep:50, xp:60 } },
+  { id:'flotta', title:'Una piccola flotta', text:'Possiedi 3 automobili.',
+    check:(g)=>(g.vehicles.length>=3), reward:{ money:400, rep:15, xp:25 } },
+  { id:'isola', title:'Megavilla', text:'Compra la Mega Villa.',
+    check:(g)=>(g.houses.some(h=>h.id==='mega_villa')), reward:{ money:1000, rep:40, xp:80 } },
+  { id:'cinque_amici', title:'Leggenda vivente', text:'Porta un amico al livello 10: doveva solo crescere, come il gruppo.',
+    check:(g)=>(g.friends.some(f=>f.level>=10)), reward:{ money:300, rep:15, xp:30 } },
+  { id:'eventi_speciali', title:'Maestri degli eventi', text:'Organizza 15 attività in totale.',
+    check:(g)=>(g.stats.activities>=15), reward:{ money:600, rep:30, xp:50 } },
+  { id:'impero', title:'Impero del Divertimento', text:'Possiedi 4 proprietà.',
+    check:(g)=>(g.houses.length>=4), reward:{ money:1500, rep:60, xp:100 } }
+];

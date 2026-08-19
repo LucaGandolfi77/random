@@ -1,0 +1,16 @@
+{
+  "name": "Arena Royale 2 — Twin Stick Royale",
+  "short_name": "AR2",
+  "description": "Arena shooter in stile Brawl Stars con la tempesta che si restringe stile Fortnite. PWA per iPhone e Android.",
+  "lang": "it",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape-primary",
+  "background_color": "#0d1020",
+  "theme_color": "#0d1020",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

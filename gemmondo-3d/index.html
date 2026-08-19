@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="description" content="GEMMONDO: muovi Cubetto in un mondo 3D folle, raccogli gemme, guadagna Energia, potenzia i droni e sblocca nuove dimensioni." />
+  <meta name="theme-color" content="#7b2fff" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="GEMMONDO" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-180.png" />
+  <title>GEMMONDO — Raccolta Incrementale 3D</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Canvas Three.js viene appeso qui -->
+  <div id="game" aria-hidden="true"></div>
+
+  <!-- HUD -->
+  <div id="hud-top-left" class="glass">
+    <div class="energy-row">
+      <span class="energy-icon">💠</span>
+      <span id="energy" class="energy-value">0</span>
+    </div>
+    <div class="sub-line"><span id="per-sec">+0/s</span><span class="sep">·</span><span id="zone-name">Prato Felice</span></div>
+    <div class="sub-line dim">💎 <span id="gems">0</span> gemme <span class="sep">·</span> ⭐ <span id="stars">0</span></div>
+    <div id="res-bar"></div>
+  </div>
+
+  <div id="hud-top-right">
+    <button class="hud-btn glass" id="btn-shop" aria-label="Negozio">🛒<span class="btn-label">Negozio</span></button>
+    <button class="hud-btn glass" id="btn-zones" aria-label="Zone">🗺️<span class="btn-label">Zone</span></button>
+    <button class="hud-btn glass hidden" id="btn-install" aria-label="Installa">📲<span class="btn-label">Installa</span></button>
+  </div>
+
+  <div id="hud-bottom">
+    <span class="hint" id="hint">WASD / frecce per muoverti · E apre le Zone</span>
+  </div>
+
+  <!-- Pulsante azione contestuale (taglia / mina / parla) -->
+  <button id="action-btn" class="glass hidden" aria-label="Azione">🪓</button>
+
+  <!-- Tasti a schermo per touch (iPhone) -->
+  <div id="mobile-btns">
+    <button class="round-btn glass" id="btn-craft" aria-label="Craft">🧰</button>
+    <button class="round-btn glass" id="btn-merchant" aria-label="Mercante">💰</button>
+  </div>
+
+  <div id="toasts" aria-live="polite"></div>
+  <div id="floaters" aria-hidden="true"></div>
+
+  <!-- Joystick (mobile / touch) -->
+  <div id="joy-zone">
+    <div id="joy-base"><div id="joy-stick"></div></div>
+  </div>
+
+  <!-- Pannello Negozio / Zone / Rinascita -->
+  <div id="overlay" class="hidden">
+    <div id="panel" class="glass">
+      <div class="panel-head">
+        <div>
+          <div id="panel-title">Negozio</div>
+          <div class="panel-balance">Saldo: <span id="panel-energy">0</span> 💠</div>
+        </div>
+        <button id="btn-close" class="icon-btn" aria-label="Chiudi">✕</button>
+      </div>
+      <div class="tabs" id="tabs">
+        <button data-tab="shop" class="tab active">🛒 Potenziamenti</button>
+        <button data-tab="zones" class="tab">🗺️ Zone</button>
+        <button data-tab="craft" class="tab">🔨 Craft</button>
+        <button data-tab="merchant" class="tab">💰 Mercante</button>
+        <button data-tab="prestige" class="tab">🌌 Rinascita</button>
+      </div>
+      <div id="tab-shop" class="tab-body"></div>
+      <div id="tab-zones" class="tab-body hidden"></div>
+      <div id="tab-craft" class="tab-body hidden"></div>
+      <div id="tab-merchant" class="tab-body hidden"></div>
+      <div id="tab-prestige" class="tab-body hidden"></div>
+    </div>
+  </div>
+
+  <!-- Schermata iniziale -->
+  <div id="splash">
+    <div class="splash-inner">
+      <div class="logo-big">💠</div>
+      <h1 class="title">GEMMONDO</h1>
+      <p class="tagline">Raccolta Incrementale 3D · edizione folle</p>
+      <p class="desc">
+        Sei <strong>Cubetto</strong>, un cubo con un sogno: diventare il più ricco raccoglitore
+        del multiverso. Raccogli <strong>gemme</strong> 💠, taglia <strong>alberi</strong> 🪵,
+        spacca <strong>sassi</strong> 🪨, crea <strong>attrezzi</strong> e oggetti nel 🧰 Craft,
+        scambia col <strong>mercante</strong> 🤝, potenzia i <strong>droni</strong>,
+        sblocca <strong>7 dimensioni</strong> e fai <strong>esplodere l'universo</strong> per le Stelle. ✨
+      </p>
+      <div class="controls-hint">
+        <span>⌨️ WASD / frecce</span><span>🕹️ Joystick (touch)</span><span>🪓 E = azione</span><span>📱 tasti a schermo</span>
+      </div>
+      <button id="btn-play" class="big-btn">🎮 INIZIA A RACCOGLIERE</button>
+      <p class="foot">Funziona offline · installabile come app (PWA)</p>
+    </div>
+  </div>
+
+  <script src="three.min.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

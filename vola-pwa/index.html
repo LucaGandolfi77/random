@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Vola! — uccello 3D a braccia libere</title>
+<meta name="description" content="Vola in un mondo 3D controllando l'uccello con le braccia: su/giù per la quota, di lato per girare, una su e una giù per virare, vicine per la picchiata. PWA per iPhone e PC.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Vola!">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+</head>
+<body>
+<div id="app">
+
+  <!-- Parte superiore: videocamera interna -->
+  <section id="camWrap">
+    <video id="cam" playsinline muted autoplay></video>
+    <canvas id="camCanvas"></canvas>
+    <div id="camStatus">
+      <span id="handsDot" class="dot"></span>
+      <span id="handsLabel">braccia: —</span>
+    </div>
+  </section>
+
+  <!-- Parte inferiore: il mondo 3D e l'uccello -->
+  <section id="gameWrap">
+    <canvas id="gameCanvas"></canvas>
+    <div id="hud">
+      <div id="timeBox"><span id="timeVal">0s</span></div>
+      <div id="scoreBox">⭕ <span id="ringVal">0</span> · <span id="scoreVal">0</span> P<span id="comboBadge" class="hidden"></span></div>
+      <button id="trophyBtn">🏆 0/8</button>
+      <div id="altBox">
+        <div id="altFill"></div>
+        <span id="altVal">—</span>
+      </div>
+      <div id="rollBox"><span id="rollVal">—</span></div>
+      <div id="diveLabel" class="hidden">⬇ PICCHIATA!</div>
+    </div>
+    <div id="toast" class="hidden"><span id="toastText"></span></div>
+    <div id="hint">BRACCIA SU/GIU: QUOTA · DI LATO: GIRA · UNA SU: VIRATA · VICINE: PICCHIATA</div>
+  </section>
+
+  <!-- Game over -->
+  <div id="gameOverOverlay" class="hidden">
+    <div class="card over">
+      <h2>💥 GAME OVER</h2>
+      <p class="sub">L'uccello ha toccato il suolo!</p>
+      <p class="final" id="finalTime">Tempo: 0s · Punti: 0</p>
+      <p class="final" id="bestLine">Record: 0 P</p>
+      <button id="restartBtn">🔄 RIGIOCA</button>
+    </div>
+  </div>
+
+  <!-- Trofei -->
+  <div id="trophyPanel" class="hidden">
+    <div class="card trophies">
+      <h2>🏆 TROFEI <span id="trophyCount">0/8</span></h2>
+      <ul id="trophyList"></ul>
+      <button id="trophyClose">CHIUDI</button>
+    </div>
+  </div>
+
+  <!-- Overlay di avvio -->
+  <div id="startOverlay">
+    <div class="card">
+      <h1>🕊️ VOLA!</h1>
+      <p class="sub">Un mondo 3D da esplorare: l'uccello ti ubbidisce</p>
+      <ul class="howto">
+        <li>🙌 Braccia su / giù → <b>salita / discesa</b></li>
+        <li>↔️ Spostale di lato → <b>gira a destra / sinistra</b></li>
+        <li>↗️ Una su e una giù → <b>virata (roll)</b></li>
+        <li>🤝 Braccia vicine → <b>picchiata</b></li>
+      </ul>
+      <p id="status" class="status">Caricamento intelligenza...</p>
+      <button id="startBtn" disabled>TOCCA PER INIZIARE</button>
+      <p class="fine">Serve la videocamera frontale · funziona anche da PC</p>
+    </div>
+  </div>
+
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

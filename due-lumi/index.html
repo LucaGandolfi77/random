@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="I Due Lumi">
+<title>I DUE LUMI — un piccolo viaggio caldo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <canvas id="game" width="240" height="160"></canvas>
+  <div id="overlay"></div>
+
+  <div id="controls" hidden>
+    <div id="dpad">
+      <button class="pbtn" id="bUp" data-k="up">&#9650;</button>
+      <button class="pbtn" id="bLeft" data-k="left">&#9664;</button>
+      <button class="pbtn" id="bDown" data-k="down">&#9660;</button>
+      <button class="pbtn" id="bRight" data-k="right">&#9654;</button>
+    </div>
+    <div id="abbtns">
+      <button class="pbtn b-a" id="bA" data-k="A">A</button>
+      <button class="pbtn b-b" id="bB" data-k="B">B</button>
+      <button class="pbtn b-menu" id="bMenu" data-k="start">&#9776;</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/palette.js"></script>
+<script src="js/sprites.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/input.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/textui.js"></script>
+<script src="js/tiles.js"></script>
+<script src="js/items.js"></script>
+<script src="js/dialogue.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/overworld.js"></script>
+<script src="js/battle.js"></script>
+<script src="js/story.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

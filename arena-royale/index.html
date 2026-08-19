@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Arena Royale — sopravvivi alla tempesta</title>
+<meta name="description" content="Arena shooter in stile Brawl Stars con la tempesta di Fortnite che si restringe. PWA per iPhone e Android.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Arena Royale">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+</head>
+<body>
+<div id="app">
+
+  <canvas id="gameCanvas"></canvas>
+
+  <!-- HUD -->
+  <div id="hud">
+    <div id="hpWrap"><div id="hpFill"></div><span id="hpVal">100</span></div>
+    <div id="statsBox"><span id="killsVal">0</span> 💀 · <span id="aliveVal">8</span> 👥 · <span id="dmgVal">12</span> ⚔</div>
+    <div id="stormBox"><span id="stormVal">—</span></div>
+    <canvas id="minimap" width="96" height="96"></canvas>
+    <div id="powerVal"></div>
+  </div>
+
+  <!-- Barre HP fluttuanti dei nemici -->
+  <div id="botBars"></div>
+
+  <!-- Joystick -->
+  <div id="joyBase" class="hidden"><div id="joyKnob"></div></div>
+  <div id="toast" class="hidden"><span id="toastText"></span></div>
+
+  <!-- Avvio -->
+  <div id="startOverlay">
+    <div class="card">
+      <h1>🔥 ARENA ROYALE</h1>
+      <p class="sub">Ultimo in piedi vince — evita la <b>tempesta</b>!</p>
+      <ul class="howto">
+        <li>🕹️ Trascina il dito per <b>muoverti</b> (joystick ovunque)</li>
+        <li>🎯 Il tuo eroe <b>spara da solo</b> al nemico più vicino</li>
+        <li>📦 Distruggi le <b>casse</b>: potenziamenti e medikit</li>
+        <li>🔥 Il <b>cerchio di fuoco</b> si restringe: stai dentro!</li>
+      </ul>
+      <p id="status" class="status">Caricamento...</p>
+      <button id="startBtn" disabled>TOCCA PER GIOCARE</button>
+      <p class="fine">PC: WASD / frecce · iPhone · Android</p>
+    </div>
+  </div>
+
+  <!-- Fine partita -->
+  <div id="endOverlay" class="hidden">
+    <div class="card over">
+      <h2 id="endTitle">💀 GAME OVER</h2>
+      <p class="final" id="endInfo">Posizione: —</p>
+      <p class="final" id="endKills">Eliminazioni: 0</p>
+      <button id="restartBtn">🔄 RIGIOCA</button>
+    </div>
+  </div>
+
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

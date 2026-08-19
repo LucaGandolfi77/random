@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#0a0e1a">
+<title>DARK ORBIT CLONE — Simulazione spaziale</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<!-- HUD -->
+<div id="hud" class="hidden">
+  <div id="topbar">
+    <div class="tleft">
+      <div id="hudName">PILOTA</div>
+      <div id="hudShip">PHOENIX</div>
+      <div id="hudStats">LIVELLO 1 · RANK Recluta · ONORE 0</div>
+      <div id="hudDrone">DRONE <b>NESSUNO</b></div>
+      <div id="hudBoost" class="hidden"></div>
+    </div>
+    <div class="tright">
+      <div class="res" id="hudCredits">CREDITI <b>0</b></div>
+      <div class="res" id="hudUridio">URIDIO <b>0</b></div>
+      <div class="res" id="hudHull">SCOFO <b>0</b></div>
+    </div>
+  </div>
+  <div id="bars">
+    <div class="bar" id="barHp"><div class="fill hp"></div><span>HP</span></div>
+    <div class="bar" id="barShield"><div class="fill sh"></div><span>SCUDO</span></div>
+    <div class="bar" id="barEnergy"><div class="fill en"></div><span>ENERGIA</span></div>
+  </div>
+  <div id="sector">Settore X-1</div>
+  <div id="hudMission" class="hidden"></div>
+  <canvas id="minimap" width="150" height="150"></canvas>
+  <div id="tipbar">WASD: movimento · Click su nemico: seleziona (CTRL: attacca) · Click su spazio/minimappa: muovi (attacco resta attivo) · ESC: deseleziona · Click su asteroide: mina · V: configurazione · 1-4: munizioni · B: missioni · G: Galaxy Gate</div>
+  <div id="ammoBar">
+    <button class="ammo" data-a="red" title="Danno normale">1</button>
+    <button class="ammo" data-a="blue" title="Danno x2">2</button>
+    <button class="ammo" data-a="green" title="Danno x3">3</button>
+    <button class="ammo" data-a="white" title="Danno x4">4</button>
+    <span id="ammoNow"></span>
+  </div>
+  <div id="targetInfo" class="hidden"><span id="tName"></span><div id="tBar"><div id="tFill"></div></div></div>
+</div>
+
+<div id="message"></div>
+<div id="toast"></div>
+
+<!-- Login -->
+<div id="login" class="overlay">
+  <div class="panel">
+    <h1>DARK ORBIT</h1>
+    <p class="sub">Simulazione spaziale · MMO locale</p>
+    <input id="loginName" type="text" maxlength="16" placeholder="Nome pilota">
+    <button id="loginBtn">ENTRA</button>
+    <div id="accountList"></div>
+    <div class="hint">Suggerimento: prova l'account <b>admin</b> con soldi infiniti.</div>
+  </div>
+</div>
+
+<!-- Negozi -->
+<div id="shop" class="overlay hidden">
+  <div class="panel wide">
+    <h2>NEGOZIO <button id="shopClose" class="close">X</button></h2>
+    <div class="shopWallet">
+      <span id="shopCredits">CREDITI 0</span>
+      <span id="shopUridio">URIDIO 0</span>
+      <span id="shopAdmin" class="adminBadge hidden">ADMIN · SOLDI INFINITI</span>
+    </div>
+    <div class="tabs">
+      <button data-tab="nave" class="tab on">Nave</button>
+      <button data-tab="navi" class="tab">Navi</button>
+      <button data-tab="laser" class="tab">Laser</button>
+      <button data-tab="scudo" class="tab">Scudo</button>
+      <button data-tab="gen" class="tab">Generatore</button>
+      <button data-tab="batt" class="tab">Batterie</button>
+      <button data-tab="prop" class="tab">Propulsore</button>
+      <button data-tab="drone" class="tab">Droni</button>
+      <button data-tab="minerali" class="tab">Minerali</button>
+      <button data-tab="skylab" class="tab">Skylab</button>
+      <button data-tab="portale" class="tab">Portale</button>
+      <button data-tab="booster" class="tab">Booster</button>
+    </div>
+    <div id="shopItems"></div>
+  </div>
+</div>
+
+<!-- Mappa -->
+<div id="map" class="overlay hidden">
+  <div class="panel wide">
+    <h2>MAPPA GALATTICA <button id="mapClose" class="close">X</button></h2>
+    <canvas id="mapCanvas" width="760" height="560"></canvas>
+  </div>
+</div>
+
+<!-- Missioni -->
+<div id="missions" class="overlay hidden">
+  <div class="panel wide">
+    <h2>BACHECA MISSIONI <button id="missionsClose" class="close">X</button></h2>
+    <div id="missionsItems"></div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/sprites.js"></script>
+<script src="js/save.js"></script>
+<script src="js/world.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/game.js"></script>
+<script>
+window.addEventListener('load', function () { GAME.init(); });
+</script>
+</body>
+</html>

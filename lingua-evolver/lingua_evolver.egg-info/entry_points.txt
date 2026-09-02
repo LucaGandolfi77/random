@@ -1,2 +1,0 @@
-[console_scripts]
-lingua-evolver = lingua_evolver.cli:app

@@ -1,2 +1,0 @@
-[console_scripts]
-quantum-sim = quantum_simulator.ui.main:main

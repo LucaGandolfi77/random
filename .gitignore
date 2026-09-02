@@ -1,16 +1,71 @@
+# ============ OS / editors ============
 .DS_Store
-openrouter-free-model-comparator/output/
+Thumbs.db
+Desktop.ini
+*~
+*.swp
+*.swo
+.idea/
+.vscode/
 
-# Python
+# ============ Environment / secrets (never on GitHub) ============
+.env
+*.env
+.env.*
+!*.env.example
+!*.env.sample
+*.pem
+*.key
+*.p12
+
+# ============ Python ============
 __pycache__/
 *.py[cod]
+*$py.class
 *.egg-info/
 .venv/
+venv/
+env/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.ipynb_checkpoints/
 
-# secrets — never track API keys
-.env
-**/.env
-*.env
-!*.env.example
+# ============ Node / frontend build ============
+node_modules/
+.next/
+out/
+dist/
+dist-ssr/
+.parcel-cache/
+.turbo/
+*.tsbuildinfo
+*.local
 
+# ============ C / C++ / CMake build artifacts ============
+/build/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+compile_commands.json
+
+# ============ Logs / runtime ============
+logs/
+*.log
+
+# ============ Generated binaries / project outputs ============
+gba-expedition-33/*.gba
+gba-expedition-33/*.elf
+gba-expedition-33/src/*.o
+polarfire-vp/examples/firmware/**/build/
+
+# ============ Project-specific ============
+openrouter-free-model-comparator/output/
+
+# ============ Archives ============
 *.zip

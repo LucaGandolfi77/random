@@ -1,2 +1,0 @@
-[console_scripts]
-holographic-story-builder = holographic_story_builder.main:main

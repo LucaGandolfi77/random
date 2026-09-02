@@ -1,0 +1,21 @@
+{
+  "backend_version": "1.0.0-rc.1",
+  "build_timestamp": "2026-09-02T12:47:44.098313+00:00",
+  "content_version": "portfolio-v1",
+  "database_schema_version": "portfolio-tables",
+  "frontend_version": "1.0.0-rc.1",
+  "included_projects": [
+    "PRJ-TAD-001",
+    "PRJ-QNT-001",
+    "PRJ-SEU-001",
+    "PRJ-LLS-001"
+  ],
+  "known_limitations_ref": "docs/known-limitations.md",
+  "note": "RC.1 engineering release; not certified; demo data synthetic.",
+  "quality_gate_verdict": "PASS",
+  "release_decision": "RELEASE_WITH_LIMITATIONS",
+  "release_type": "rc",
+  "release_version": "1.0.0-rc.1",
+  "security_review_ref": "docs/SECURITY_REVIEW.md",
+  "source_commit": "local (not committed)"
+}

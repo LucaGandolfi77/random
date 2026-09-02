@@ -1,0 +1,46 @@
+[
+  {
+    "details": {
+      "logit_bounds": [
+        0.25740245623626035,
+        0.5669351931598404
+      ]
+    },
+    "elapsed_s": 0.0001,
+    "evidence": "neural-network-formal-verification/evidence/evidence_PROP-ALT-SAFE-001_e550c608.json",
+    "message": "interval bound proves constraint on logit (order-equivalent)",
+    "method": "interval-propagation",
+    "property_id": "PROP-ALT-SAFE-001",
+    "reproducibility": {
+      "model_hash": "05cba0e3c24fc371",
+      "property_hash": "df931b196b0500bb",
+      "repeatable": true,
+      "seed": 20260903
+    },
+    "status": "Verified",
+    "timeout_s": 5.0,
+    "tolerance": 0.0001
+  },
+  {
+    "details": {
+      "logit_bounds": [
+        0.4855246671266777,
+        0.5746985444728318
+      ]
+    },
+    "elapsed_s": 0.0001,
+    "evidence": "neural-network-formal-verification/evidence/evidence_PROP-CMD-FORBIDDEN-001_e88443ca.json",
+    "message": "interval bound shows constraint violated",
+    "method": "interval-propagation",
+    "property_id": "PROP-CMD-FORBIDDEN-001",
+    "reproducibility": {
+      "model_hash": "05cba0e3c24fc371",
+      "property_hash": "d186d8dee7dd8574",
+      "repeatable": true,
+      "seed": 20260903
+    },
+    "status": "Falsified",
+    "timeout_s": 5.0,
+    "tolerance": 0.0001
+  }
+]

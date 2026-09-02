@@ -1,0 +1,71 @@
+issues: []
+{
+  "changed": "SR-01",
+  "affected": [
+    "CMP-01",
+    "DATA-01",
+    "DEC-01",
+    "EV-01",
+    "FN-01",
+    "MLR-01",
+    "MOD-01",
+    "MON-01",
+    "ODD-01",
+    "RSK-01",
+    "SR-01",
+    "ST-01",
+    "SUB-01",
+    "SWR-01",
+    "T-01"
+  ],
+  "affected_by_kind": {
+    "risk": [
+      "RSK-01"
+    ],
+    "deployment_decision": [
+      "DEC-01"
+    ],
+    "subsystem_requirement": [
+      "SUB-01"
+    ],
+    "ml_requirement": [
+      "MLR-01"
+    ],
+    "test_case": [
+      "T-01"
+    ],
+    "evidence": [
+      "EV-01"
+    ],
+    "software_requirement": [
+      "SWR-01"
+    ],
+    "state": [
+      "ST-01"
+    ],
+    "odd_condition": [
+      "ODD-01"
+    ],
+    "model_version": [
+      "MOD-01"
+    ],
+    "dataset_property": [
+      "DATA-01"
+    ],
+    "component": [
+      "CMP-01"
+    ],
+    "monitoring_metric": [
+      "MON-01"
+    ],
+    "system_requirement": [
+      "SR-01"
+    ],
+    "function": [
+      "FN-01"
+    ]
+  },
+  "upstream": [
+    "SH-01"
+  ]
+}

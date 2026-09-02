@@ -1,0 +1,24 @@
+{
+  "altitude_bounded_safe": {
+    "property_id": "PROP-ALT-SAFE-001",
+    "model_id": "PRJ-RT-001-model-v1.2",
+    "model_version": "1.2",
+    "input_lower": [0.0, 24.0, 1200.0],
+    "input_upper": [0.05, 29.0, 1550.0],
+    "output_constraint": {"relation": "lt", "value": 0.9},
+    "method": "interval-propagation",
+    "timeout_s": 5.0,
+    "tolerance": 0.0001
+  },
+  "forbidden_high_command": {
+    "property_id": "PROP-CMD-FORBIDDEN-001",
+    "model_id": "PRJ-RT-001-model-v1.2",
+    "model_version": "1.2",
+    "input_lower": [0.9, 31.0, 1900.0],
+    "input_upper": [1.0, 32.0, 2000.0],
+    "output_constraint": {"relation": "lt", "value": 0.30},
+    "method": "interval-propagation",
+    "timeout_s": 5.0,
+    "tolerance": 0.0001
+  }
+}

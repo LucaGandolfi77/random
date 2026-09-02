@@ -1,0 +1,12 @@
+{
+  "project_id": "PRJ-FMV-001",
+  "slug": "neural-network-formal-verification",
+  "name": "Neural Network Property Verifier (formal bounds demo)",
+  "source_root": "../../projects/neural-network-formal-verification",
+  "stack": ["Python", "numpy", "interval bound propagation"],
+  "model": "reused from real-time-embedded-ai (v1.2 header)",
+  "statuses": ["Verified", "Falsified", "Unknown", "Tested by Sampling", "Unsupported"],
+  "results": ["PROP-ALT-SAFE-001 Verified", "PROP-CMD-FORBIDDEN-001 Falsified"],
+  "limitations": ["host-only", "single hidden layer", "no SMT/MILP engine"],
+  "integration": "Workbench property registry import pending."
+}

@@ -1,0 +1,3 @@
+Gap ID,Category,Description,Priority,Blocking,Recommended action,Owner,Status,Closure evidence
+GAP-SVERP-MISSING-001,Prerequisite,SVerP non identificato: Authoritative ECSS SVerP not found in repository.,P0,True,"Register/provide authoritative SVerP (document ID, version, approval).",Not assigned,Open,To be provided
+GAP-WEEK1-MISSING-002,Prerequisite,SVR Preparation Baseline non disponibile: Week-1 SVR Preparation Baseline not found.,P0,True,Provide Week-1 baseline or confirm scope elsewhere.,Not assigned,Open,To be provided

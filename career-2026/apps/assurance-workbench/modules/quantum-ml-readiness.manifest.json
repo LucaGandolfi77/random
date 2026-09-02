@@ -1,0 +1,11 @@
+{
+  "project_id": "PRJ-QML-001",
+  "slug": "quantum-ml-readiness",
+  "name": "Classical vs Quantum-Inspired Readiness Benchmark",
+  "source_root": "../../projects/quantum-ml-readiness",
+  "stack": ["Python", "numpy", "classical emulation"],
+  "evidence": ["7 tests PASS", "experiment JSON (equal split/seed)"],
+  "readiness": "No Demonstrated Benefit (on this small synthetic problem)",
+  "limitations": ["emulation only", "no quantum hardware", "small scale", "no advantage claim"],
+  "integration": "Workbench experiment manifest import pending."
+}

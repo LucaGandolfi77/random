@@ -1,0 +1,35 @@
+[project]
+name = "ecss-ml-assurance-workbench-backend"
+version = "0.1.0"
+description = "ECSS ML Assurance Workbench backend - Data Readiness Inspector (week 1)"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --tb=short"
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+src = ["app", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP", "B", "SIM", "C4", "RUF"]
+ignore = ["B008", "B019", "SIM117", "RUF012"]
+
+[tool.ruff.lint.per-file-ignores]
+"app/portfolio/datadefs/*.py" = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+mypy_path = "."
+plugins = []
+ignore_missing_imports = true
+warn_unused_ignores = false
+check_untyped_defs = false
+disallow_untyped_defs = false
+exclude = ["tests/"]
+
+[tool.coverage.run]
+source = ["app"]

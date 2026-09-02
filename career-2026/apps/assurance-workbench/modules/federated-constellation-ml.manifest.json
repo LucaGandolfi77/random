@@ -1,0 +1,10 @@
+{
+  "project_id": "PRJ-FED-001",
+  "slug": "federated-constellation-ml",
+  "name": "Federated Constellation Health Monitor",
+  "source_root": "../../projects/federated-constellation-ml",
+  "stack": ["Python", "numpy", "federated averaging simulation"],
+  "evidence": ["6 tests PASS", "round evidence JSON"],
+  "limitations": ["no privacy guarantee", "synthetic non-IID", "no real constellation"],
+  "integration": "Workbench round-evidence import pending."
+}

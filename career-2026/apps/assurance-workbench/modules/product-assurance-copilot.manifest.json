@@ -1,0 +1,10 @@
+{
+  "project_id": "PRJ-PAC-001",
+  "slug": "product-assurance-copilot",
+  "name": "Local Assurance Copilot",
+  "source_root": "../../projects/product-assurance-copilot",
+  "stack": ["Python", "deterministic retrieval", "source-grounded answers"],
+  "evidence": ["8 tests PASS", "guardrail audit log"],
+  "limitations": ["no external LLM", "corpus limited to allowed dirs", "no approval"],
+  "integration": "Workbench chat/query panel import pending."
+}

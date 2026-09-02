@@ -1,0 +1,22 @@
+{
+  "details": {
+    "logit_bounds": [
+      0.25740245623626035,
+      0.5669351931598404
+    ]
+  },
+  "elapsed_s": 0.0001,
+  "evidence": null,
+  "message": "interval bound proves constraint on logit (order-equivalent)",
+  "method": "interval-propagation",
+  "property_id": "PROP-ALT-SAFE-001",
+  "reproducibility": {
+    "model_hash": "05cba0e3c24fc371",
+    "property_hash": "df931b196b0500bb",
+    "repeatable": true,
+    "seed": 20260903
+  },
+  "status": "Verified",
+  "timeout_s": 5.0,
+  "tolerance": 0.0001
+}

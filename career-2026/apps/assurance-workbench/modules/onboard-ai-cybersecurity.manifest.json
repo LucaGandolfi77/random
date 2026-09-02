@@ -1,0 +1,11 @@
+{
+  "project_id": "PRJ-CYB-001",
+  "slug": "onboard-ai-cybersecurity",
+  "name": "Onboard ML Threat Model and Security Lab",
+  "source_root": "../../projects/onboard-ai-cybersecurity",
+  "stack": ["Python", "SHA-256", "fixture-based defensive tests"],
+  "status": "UNDER_VERIFICATION",
+  "evidence": ["8 defensive tests PASS", "threat coverage 12/12"],
+  "limitations": ["checksum-based integrity only (no keys)", "lab fixtures", "no external targets"],
+  "integration": "Workbench threat/control register import pending."
+}

@@ -1,0 +1,11 @@
+{
+  "project_id": "PRJ-HMC-001",
+  "slug": "human-ai-mission-console",
+  "name": "Mission Operator AI Decision Console",
+  "source_root": "../../projects/human-ai-mission-console",
+  "stack": ["Python", "decision-support model", "audit + workload metrics"],
+  "scenarios": ["lunar landing cage", "telemetry anomaly / FDIR assistant"],
+  "evidence": ["8 tests PASS", "audit export JSON"],
+  "limitations": ["synthetic", "no emotion inference", "no real operations"],
+  "integration": "Workbench HITL review view import pending."
+}

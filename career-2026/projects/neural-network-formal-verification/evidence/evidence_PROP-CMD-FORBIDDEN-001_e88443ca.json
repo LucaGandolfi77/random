@@ -1,0 +1,22 @@
+{
+  "details": {
+    "logit_bounds": [
+      0.4855246671266777,
+      0.5746985444728318
+    ]
+  },
+  "elapsed_s": 0.0001,
+  "evidence": null,
+  "message": "interval bound shows constraint violated",
+  "method": "interval-propagation",
+  "property_id": "PROP-CMD-FORBIDDEN-001",
+  "reproducibility": {
+    "model_hash": "05cba0e3c24fc371",
+    "property_hash": "d186d8dee7dd8574",
+    "repeatable": true,
+    "seed": 20260903
+  },
+  "status": "Falsified",
+  "timeout_s": 5.0,
+  "tolerance": 0.0001
+}

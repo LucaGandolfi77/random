@@ -1,0 +1,11 @@
+{
+  "project_id": "PRJ-DT-001",
+  "slug": "digital-twin-hil",
+  "name": "Space AI V&V Test Bench (Digital Twin / HIL-oriented)",
+  "source_root": "../../projects/digital-twin-hil",
+  "stack": ["Python", "deterministic plant", "SimClock"],
+  "levels": {"MIL": "Executed", "SIL": "Executed", "PIL": "Not Executed", "HIL": "Not Executed"},
+  "evidence": ["tests", "evidences/evidence_SIL_*.json"],
+  "limitations": ["no real hardware", "in-process IPC only", "synthetic"],
+  "integration": "Workbench connector pending (protocol v1.0)."
+}

@@ -1,0 +1,3 @@
+Action ID,Source,Description,Priority,Owner,Due date,Status,Closure criteria
+ACT-SVR2-001,gap,"Register/provide authoritative SVerP (document ID, version, approval).",P0,Not assigned,Not defined,Open,Authoritative artefact provided and referenced.
+ACT-SVR2-002,gap,Provide Week-1 baseline or confirm scope elsewhere.,P0,Not assigned,Not defined,Open,Authoritative artefact provided and referenced.

@@ -1,0 +1,74 @@
+{
+  "blocking_failures": [],
+  "checks": [
+    {
+      "blocking": true,
+      "check": "backend-ruff",
+      "duration_s": 0.0,
+      "exit_code": 0,
+      "log_tail": "All checks passed!\n",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "check": "backend-mypy",
+      "duration_s": 4.4,
+      "exit_code": 0,
+      "log_tail": "Success: no issues found in 85 source files\n",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "check": "backend-pytest",
+      "duration_s": 33.0,
+      "exit_code": 0,
+      "log_tail": ".....................................................................    [100%]\n=============================== warnings summary ===============================\ntests/helpers.py:15\n  /workspaces/random/career-2026/ecss-ml-assurance-workbench/backend/tests/helpers.py:15: PytestCollectionWarning: cannot collect test class 'TestEnv' because it has a __init__ constructor (from: tests/continuous/test_continuous_week7.py)\n    @dataclass\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "check": "frontend-lint",
+      "duration_s": 4.8,
+      "exit_code": 0,
+      "log_tail": "\n> ecss-ml-assurance-workbench-frontend@1.0.0-rc.1 lint\n> eslint . --ext ts,tsx --max-warnings 0\n\n",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "check": "frontend-tsc",
+      "duration_s": 10.8,
+      "exit_code": 0,
+      "log_tail": "",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "check": "content-validation",
+      "duration_s": 0.0,
+      "exit_code": 0,
+      "log_tail": "Content validation passed: profile (12 competencies, 4 projects) and 4 articles OK.\n",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "check": "frontend-vitest",
+      "duration_s": 11.8,
+      "exit_code": 0,
+      "log_tail": "ojectsPage > renders the empty state and opens the create modal 310ms\n   \u2713 ProjectsPage > creates a project via POST and navigates into it 327ms\n \u2713 src/pages/__tests__/portfolio.test.tsx (2 tests) 652ms\n   \u2713 PortfolioProjectPage > shows requirements, risk and deployment sections and filters failed tests 435ms\n \u2713 src/pages/__tests__/assurance.test.tsx (2 tests) 327ms\n \u2713 src/pages/site/__tests__/site.test.tsx (6 tests) 850ms\n   \u2713 Week-4 professional site > homepage shows the professional title and all four project cards 346ms\n \u2713 src/components/features/__tests__/FindingsExplorer.test.tsx (2 tests) 269ms\n\n Test Files  5 passed (5)\n      Tests  17 passed (17)\n   Start at  12:48:44\n   Duration  10.78s (transform 933ms, setup 391ms, collect 3.05s, tests 2.88s, environment 2.85s, prepare 497ms)\n\n_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.\n\u26a0\ufe0f React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.\n\n",
+      "status": "PASS"
+    },
+    {
+      "blocking": true,
+      "check": "production-build",
+      "duration_s": 19.2,
+      "exit_code": 0,
+      "log_tail": "\n> ecss-ml-assurance-workbench-frontend@1.0.0-rc.1 build\n> tsc -b && vite build && node scripts/postbuild.mjs\n\nvite v5.4.11 building for production...\ntransforming...\n\u2713 2473 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.57 kB \u2502 gzip:   0.35 kB\ndist/assets/index-Bsj2OZsk.css   31.27 kB \u2502 gzip:   6.38 kB\ndist/assets/index-C43eYGu0.js   816.20 kB \u2502 gzip: 226.53 kB\n\u2713 built in 8.72s\nVITE_SITE_URL not set \u2014 sitemap.xml skipped (domain is configurable, not hardcoded).\n\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n",
+      "status": "PASS"
+    }
+  ],
+  "commit": "local (not committed)",
+  "execution_time": "2026-09-02T12:49:14.595706+00:00",
+  "final_verdict": "PASS",
+  "release_version": "1.0.0-rc.1",
+  "warnings": []
+}

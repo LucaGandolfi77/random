@@ -1,0 +1,18 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:local-sbom-workbench-0.7.0",
+  "metadata": {
+    "component": { "type": "application", "name": "ecss-ml-assurance-workbench", "version": "0.7.0" },
+    "timestamp": "2026-09-02T00:00:00Z",
+    "generation": { "tool": { "name": "local-inventory-script" }, "note": "Local dependency inventory; audit status: Audit incomplete (npm audit not executed)." }
+  },
+  "components": [
+    { "type": "library", "name": "fastapi", "version": "pinned-in-requirements" },
+    { "type": "library", "name": "sqlalchemy", "version": "pinned-in-requirements" },
+    { "type": "library", "name": "pandas", "version": "pinned-in-requirements" },
+    { "type": "library", "name": "react", "version": "pinned-in-package-lock" },
+    { "type": "library", "name": "typescript", "version": "pinned-in-package-lock" },
+    { "type": "library", "name": "vite", "version": "pinned-in-package-lock" }
+  ]
+}

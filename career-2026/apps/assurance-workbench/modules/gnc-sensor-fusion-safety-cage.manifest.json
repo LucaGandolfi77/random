@@ -1,0 +1,14 @@
+{
+  "project_id": "PRJ-GNC-001",
+  "slug": "gnc-sensor-fusion-safety-cage",
+  "name": "GNC Sensor-Fusion Safety Cage (Navigation Safety Cage with Kalman Filter)",
+  "source_root": "../../projects/gnc-sensor-fusion-safety-cage",
+  "stack": ["Python", "numpy", "EKF", "deterministic safety cage"],
+  "scenario": "lunar descent (vertical profile)",
+  "lifecycle_status": "UNDER_VERIFICATION",
+  "assurance_status": "PARTIALLY_SUPPORTED",
+  "deployment_decision": "CONDITIONAL_GO (host demonstration)",
+  "evidence": ["tests (11 PASS, seed 20260902)", "docs/BENCHMARK-like fault campaign numbers"],
+  "limitations": ["synthetic host simulation", "single-sensor reference", "no hardware timing"],
+  "integration": "Import via Workbench project adapter when available."
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["meta", "requirements", "tests", "evidence"],
+  "properties": {
+    "meta": { "type": "object", "required": ["id", "name", "version"] },
+    "requirements": { "type": "array", "items": { "type": "object", "required": ["requirement_id", "title"] } },
+    "tests": { "type": "array", "items": { "type": "object", "required": ["test_id"] } },
+    "evidence": { "type": "array", "items": { "type": "object", "required": ["evidence_id"] } }
+  }
+}

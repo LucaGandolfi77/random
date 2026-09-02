@@ -1,0 +1,10 @@
+{
+  "project_id": "PRJ-GOV-001",
+  "slug": "ai-governance-crosswalk",
+  "name": "AI Assurance Crosswalk Engine",
+  "source_root": "../../projects/ai-governance-crosswalk",
+  "stack": ["Python", "framework registry", "mapping engine"],
+  "evidence": ["9 tests PASS", "JSON/CSV exports"],
+  "limitations": ["engineering aid only", "no legal advice/conformity", "source versions recorded"],
+  "integration": "Workbench governance view import pending."
+}

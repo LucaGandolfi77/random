@@ -1,0 +1,10 @@
+{
+  "project_id": "PRJ-MLOPS-001",
+  "slug": "space-mlops",
+  "name": "Mission-Grade Model Registry and Safe Deployment Lab",
+  "source_root": "../../projects/space-mlops",
+  "stack": ["Python", "registry", "shadow/canary simulation"],
+  "evidence": ["9 tests PASS", "audit trail events"],
+  "limitations": ["local simulation", "no public deployment", "synthetic"],
+  "integration": "Workbench registry/deployment-gate import pending."
+}

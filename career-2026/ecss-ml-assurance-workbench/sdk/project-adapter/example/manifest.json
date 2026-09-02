@@ -1,0 +1,7 @@
+{
+  "syntheticDemoData": true,
+  "meta": { "id": "PRJ-EX-001", "slug": "example-assurance-project", "name": "Example Assurance Project", "version": "0.1.0", "model_version": "m0", "dataset_version": "d0" },
+  "requirements": [ { "requirement_id": "REQ-F-001", "title": "Example requirement", "verification_method": "TEST" } ],
+  "tests": [ { "test_id": "TEST-EX-001", "title": "Example test", "result": { "verdict": "PASS", "test_run_id": "RUN-EX-001", "environment": "fixture" } } ],
+  "evidence": [ { "evidence_id": "EVID-EX-001", "title": "Example evidence", "evidence_type": "DOCUMENT", "source": "sdk example" } ]
+}

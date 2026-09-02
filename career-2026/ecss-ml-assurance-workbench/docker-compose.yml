@@ -1,0 +1,72 @@
+services:
+  backend:
+    build: ./backend
+    image: ecss-ml-assurance-workbench-backend:0.1.0
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: sqlite:////data/workbench.db
+      STORAGE_DIR: /data/storage
+      MAX_UPLOAD_SIZE_MB: ${MAX_UPLOAD_SIZE_MB:-50}
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+    volumes:
+      - workbench-data:/data
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=4).status==200 else 1)"]
+      interval: 15s
+      timeout: 5s
+      start_period: 15s
+      retries: 5
+
+  frontend:
+    build: ./frontend
+    image: ecss-ml-assurance-workbench-frontend:0.1.0
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${FRONTEND_PORT:-8080}:8080"
+
+  backend-tests:
+    build: ./backend
+    image: ecss-ml-assurance-workbench-backend-tests:0.1.0
+    profiles: ["test"]
+    environment:
+      PYTHONPATH: /srv/backend
+    volumes:
+      - ./backend/tests:/srv/backend/tests:ro
+      - ./backend/pyproject.toml:/srv/backend/pyproject.toml:ro
+    command: ["python", "-m", "pytest", "tests", "-q"]
+
+  backend-quality:
+    build: ./backend
+    image: ecss-ml-assurance-workbench-backend-quality:0.1.0
+    profiles: ["test"]
+    working_dir: /srv/backend
+    volumes:
+      - ./backend/app:/srv/backend/app:ro
+      - ./backend/tests:/srv/backend/tests:ro
+      - ./backend/pyproject.toml:/srv/backend/pyproject.toml:ro
+    command: ["sh", "-c", "ruff check app tests && mypy app"]
+
+  # Runs frontend unit tests inside the node builder stage.
+  frontend-tests:
+    build:
+      context: ./frontend
+      target: builder
+    profiles: ["test"]
+    command: ["npm", "test"]
+
+  frontend-quality:
+    build:
+      context: ./frontend
+      target: builder
+    profiles: ["test"]
+    command: ["sh", "-c", "npm run lint && npm run typecheck"]
+
+volumes:
+  workbench-data:

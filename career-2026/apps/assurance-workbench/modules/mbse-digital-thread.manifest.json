@@ -1,0 +1,11 @@
+{
+  "project_id": "PRJ-MBSE-001",
+  "slug": "mbse-digital-thread",
+  "name": "AI Assurance Digital Thread (MBSE subset)",
+  "source_root": "../../projects/mbse-digital-thread",
+  "stack": ["Python", "JSON model", "DOT export"],
+  "demo": "Lunar Landing ML case",
+  "evidence": ["8 tests PASS", "impact analysis output"],
+  "limitations": ["SysML subset only", "no XMI", "synthetic"],
+  "integration": "Workbench traceability import pending."
+}

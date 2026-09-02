@@ -1,0 +1,1 @@
+"""MBSE digital thread (subset)."""

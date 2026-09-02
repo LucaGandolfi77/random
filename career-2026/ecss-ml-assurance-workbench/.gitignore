@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node / frontend
+node_modules/
+dist/
+dist-ssr/
+.next/
+playwright-report/
+test-results/
+
+# Storage (runtime data; keep the placeholder)
+storage/*
+!storage/.gitkeep
+
+# Environment / secrets
+.env
+.env.*
+!*.env.example
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Logs
+*.log
+logs/
+
+# Archives
+*.zip
+
+# Tooling caches
+.ruff_cache/
+*.tsbuildinfo

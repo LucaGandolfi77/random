@@ -1,0 +1,816 @@
+{
+  "final": {
+    "actuator_cmd": 0.0,
+    "alt": 2017.618,
+    "cage_ok": true,
+    "mode": "SIL",
+    "ts": 9.99999999999998,
+    "vel": 3.503
+  },
+  "level": "SIL",
+  "protocol_version": "1.0",
+  "rows": [
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.004,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 0.1,
+      "vel": 0.036
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.011,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 0.2,
+      "vel": 0.07
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.021,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 0.30000000000000004,
+      "vel": 0.105
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.035,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 0.4,
+      "vel": 0.141
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.053,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 0.5,
+      "vel": 0.176
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.074,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 0.6,
+      "vel": 0.212
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.099,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 0.7,
+      "vel": 0.246
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.127,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 0.7999999999999999,
+      "vel": 0.28
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.158,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 0.8999999999999999,
+      "vel": 0.316
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.193,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 0.9999999999999999,
+      "vel": 0.352
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.232,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 1.0999999999999999,
+      "vel": 0.386
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.274,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 1.2,
+      "vel": 0.42
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.32,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 1.3,
+      "vel": 0.456
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.369,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 1.4000000000000001,
+      "vel": 0.491
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.421,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 1.5000000000000002,
+      "vel": 0.525
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.477,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 1.6000000000000003,
+      "vel": 0.559
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.537,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 1.7000000000000004,
+      "vel": 0.594
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.599,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 1.8000000000000005,
+      "vel": 0.626
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.665,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 1.9000000000000006,
+      "vel": 0.66
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.735,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 2.0000000000000004,
+      "vel": 0.694
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.808,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 2.1000000000000005,
+      "vel": 0.73
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.884,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 2.2000000000000006,
+      "vel": 0.765
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2000.964,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 2.3000000000000007,
+      "vel": 0.799
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2001.048,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 2.400000000000001,
+      "vel": 0.835
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2001.135,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 2.500000000000001,
+      "vel": 0.869
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2001.225,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 2.600000000000001,
+      "vel": 0.905
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2001.319,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 2.700000000000001,
+      "vel": 0.94
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2001.416,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 2.800000000000001,
+      "vel": 0.973
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2001.517,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 2.9000000000000012,
+      "vel": 1.007
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2001.621,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 3.0000000000000013,
+      "vel": 1.041
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2001.729,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 3.1000000000000014,
+      "vel": 1.076
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2001.84,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 3.2000000000000015,
+      "vel": 1.111
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2001.954,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 3.3000000000000016,
+      "vel": 1.146
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2002.072,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 3.4000000000000017,
+      "vel": 1.181
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2002.194,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 3.5000000000000018,
+      "vel": 1.216
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2002.319,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 3.600000000000002,
+      "vel": 1.252
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2002.448,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 3.700000000000002,
+      "vel": 1.284
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2002.58,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 3.800000000000002,
+      "vel": 1.318
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2002.715,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 3.900000000000002,
+      "vel": 1.353
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2002.854,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 4.000000000000002,
+      "vel": 1.388
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2002.996,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 4.100000000000001,
+      "vel": 1.422
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2003.141,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 4.200000000000001,
+      "vel": 1.456
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2003.291,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 4.300000000000001,
+      "vel": 1.491
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2003.443,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 4.4,
+      "vel": 1.525
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2003.599,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 4.5,
+      "vel": 1.562
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2003.759,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 4.6,
+      "vel": 1.596
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2003.922,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 4.699999999999999,
+      "vel": 1.631
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2004.088,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 4.799999999999999,
+      "vel": 1.665
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2004.258,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 4.899999999999999,
+      "vel": 1.699
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2004.432,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 4.999999999999998,
+      "vel": 1.733
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2004.609,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 5.099999999999998,
+      "vel": 1.768
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2004.789,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 5.1999999999999975,
+      "vel": 1.804
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2004.973,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 5.299999999999997,
+      "vel": 1.839
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2005.16,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 5.399999999999997,
+      "vel": 1.873
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2005.351,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 5.4999999999999964,
+      "vel": 1.909
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2005.545,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 5.599999999999996,
+      "vel": 1.945
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2005.743,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 5.699999999999996,
+      "vel": 1.98
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2005.945,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 5.799999999999995,
+      "vel": 2.016
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2006.15,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 5.899999999999995,
+      "vel": 2.052
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2006.359,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 5.999999999999995,
+      "vel": 2.086
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2006.571,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 6.099999999999994,
+      "vel": 2.122
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2006.787,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 6.199999999999994,
+      "vel": 2.157
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2007.006,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 6.299999999999994,
+      "vel": 2.192
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2007.229,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 6.399999999999993,
+      "vel": 2.229
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2007.455,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 6.499999999999993,
+      "vel": 2.263
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2007.685,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 6.5999999999999925,
+      "vel": 2.301
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2007.919,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 6.699999999999992,
+      "vel": 2.336
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2008.156,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 6.799999999999992,
+      "vel": 2.372
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2008.397,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 6.8999999999999915,
+      "vel": 2.408
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2008.641,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 6.999999999999991,
+      "vel": 2.442
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2008.889,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 7.099999999999991,
+      "vel": 2.479
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2009.141,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 7.19999999999999,
+      "vel": 2.517
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2009.396,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 7.29999999999999,
+      "vel": 2.553
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2009.655,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 7.39999999999999,
+      "vel": 2.588
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2009.917,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 7.499999999999989,
+      "vel": 2.624
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2010.183,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 7.599999999999989,
+      "vel": 2.659
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2010.453,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 7.699999999999989,
+      "vel": 2.695
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2010.726,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 7.799999999999988,
+      "vel": 2.73
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2011.002,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 7.899999999999988,
+      "vel": 2.764
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2011.282,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 7.999999999999988,
+      "vel": 2.8
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2011.566,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 8.099999999999987,
+      "vel": 2.834
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2011.852,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 8.199999999999987,
+      "vel": 2.869
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2012.143,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 8.299999999999986,
+      "vel": 2.903
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2012.436,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 8.399999999999986,
+      "vel": 2.938
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2012.734,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 8.499999999999986,
+      "vel": 2.973
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2013.035,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 8.599999999999985,
+      "vel": 3.008
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2013.339,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 8.699999999999985,
+      "vel": 3.044
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2013.647,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 8.799999999999985,
+      "vel": 3.081
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2013.959,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 8.899999999999984,
+      "vel": 3.115
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2014.274,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 8.999999999999984,
+      "vel": 3.149
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2014.592,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 9.099999999999984,
+      "vel": 3.185
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2014.914,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 9.199999999999983,
+      "vel": 3.221
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2015.24,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 9.299999999999983,
+      "vel": 3.257
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2015.569,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 9.399999999999983,
+      "vel": 3.292
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2015.902,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 9.499999999999982,
+      "vel": 3.328
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2016.238,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 9.599999999999982,
+      "vel": 3.363
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2016.578,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 9.699999999999982,
+      "vel": 3.397
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2016.921,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 9.799999999999981,
+      "vel": 3.433
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2017.268,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 9.89999999999998,
+      "vel": 3.467
+    },
+    {
+      "actuator_cmd": 0.0,
+      "alt": 2017.618,
+      "cage_ok": true,
+      "mode": "SIL",
+      "ts": 9.99999999999998,
+      "vel": 3.503
+    }
+  ],
+  "seed": 20260905,
+  "steps": 100
+}

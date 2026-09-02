@@ -1,0 +1,297 @@
+{
+  "title": "Testing an ML Spacecraft Anomaly Detector Beyond Accuracy",
+  "slug": "testing-spacecraft-anomaly-detector",
+  "description": "Why accuracy, precision and F1 are not enough for a spacecraft anomaly detector — and which tests reveal drift, unseen anomalies, sensor dropouts and latency risks.",
+  "publicationDate": "2026-09-09",
+  "updatedDate": "2026-09-10",
+  "author": "Embedded AI & ML Verification Engineer (portfolio author)",
+  "category": "ML Verification",
+  "tags": [
+    "anomaly detection",
+    "testing",
+    "drift",
+    "telemetry"
+  ],
+  "readingTime": 11,
+  "featuredProject": "PRJ-TAD-001",
+  "status": "published",
+  "featured": true,
+  "seoTitle": "Testing a Spacecraft Anomaly Detector Beyond Accuracy — Engineering Note",
+  "seoDescription": "Operational testing of ML anomaly detection: unseen anomalies, drift, sensor dropout, latency and fallback.",
+  "content": [
+    {
+      "type": "h2",
+      "id": "problem",
+      "title": "1. The Problem with Accuracy"
+    },
+    {
+      "type": "p",
+      "text": "Accuracy is meaningless on strongly imbalanced telemetry: a detector that always says 'nominal' can still score 97%. Accuracy, precision and recall summarize a single operating point on one dataset; they say nothing about drift, novel anomalies or degraded sensors."
+    },
+    {
+      "type": "h2",
+      "id": "fp",
+      "title": "2. Operational Impact of False Positives"
+    },
+    {
+      "type": "p",
+      "text": "False positives drain operator attention and can trigger unnecessary FDIR reactions. The acceptance criterion must be an explicit false-positive budget per unit of time."
+    },
+    {
+      "type": "h2",
+      "id": "fn",
+      "title": "3. Operational Impact of False Negatives"
+    },
+    {
+      "type": "p",
+      "text": "A missed anomaly can propagate through the platform undetected. False negatives are the reason anomaly detectors need fallback, ground review and drift monitoring rather than silent autonomy."
+    },
+    {
+      "type": "h2",
+      "id": "delay",
+      "title": "4. Detection Delay"
+    },
+    {
+      "type": "p",
+      "text": "A detector that flags an anomaly ten minutes late may be operationally useless. Measure detection delay in windows, not only binary recall."
+    },
+    {
+      "type": "h2",
+      "id": "split",
+      "title": "5. Time-Series Splitting"
+    },
+    {
+      "type": "p",
+      "text": "Random splits on ordered telemetry leak future samples into training. Split chronologically or by campaign so verification measures generalization forward in time."
+    },
+    {
+      "type": "h2",
+      "id": "unseen",
+      "title": "6. Unseen Anomalies"
+    },
+    {
+      "type": "p",
+      "text": "Hold out whole anomaly families, not just random rows. In the Telemetry Anomaly Detector, known-anomaly recall reached 0.97 while an unseen family dropped to 0.61 — a difference no single score would reveal."
+    },
+    {
+      "type": "h2",
+      "id": "dropout",
+      "title": "7. Sensor Dropout"
+    },
+    {
+      "type": "p",
+      "text": "Verify behaviour when an entire channel disappears, including whether the detector flags the condition explicitly."
+    },
+    {
+      "type": "h2",
+      "id": "missing",
+      "title": "8. Missing Telemetry"
+    },
+    {
+      "type": "p",
+      "text": "Test missing-sample rates inside the declared tolerance and confirm graceful, bounded degradation."
+    },
+    {
+      "type": "h2",
+      "id": "noise",
+      "title": "9. Noise Injection"
+    },
+    {
+      "type": "p",
+      "text": "Inject expected sensor noise and confirm recall and false-positive behaviour remain inside budget."
+    },
+    {
+      "type": "h2",
+      "id": "drift",
+      "title": "10. Gradual Drift"
+    },
+    {
+      "type": "p",
+      "text": "Slow sensor ageing changes input distributions. In the TAD campaign, drift was flagged only after 38% of the run and FPR grew to 3.1× nominal — a FAIL against the requirement, and the reason drift threshold tuning is an open mitigation."
+    },
+    {
+      "type": "h2",
+      "id": "shift",
+      "title": "11. Sudden Distribution Shift"
+    },
+    {
+      "type": "p",
+      "text": "A mode change or new software version can shift telemetry instantly. Test abrupt shifts separately from gradual ramps."
+    },
+    {
+      "type": "h2",
+      "id": "ood",
+      "title": "12. OOD Inputs"
+    },
+    {
+      "type": "p",
+      "text": "Out-of-distribution inputs must be detected or conservatively flagged, never scored silently with full confidence."
+    },
+    {
+      "type": "h2",
+      "id": "burst",
+      "title": "13. Burst Anomalies"
+    },
+    {
+      "type": "p",
+      "text": "High-rate bursts stress detection cadence and logging. Confirm a bounded fraction of burst events is caught."
+    },
+    {
+      "type": "h2",
+      "id": "latency",
+      "title": "14. Latency and Resource Consumption"
+    },
+    {
+      "type": "p",
+      "text": "An anomaly flag that arrives after the FDIR window is worthless. Measure p95 latency on the target, plus CPU and memory headroom — not only on the development host."
+    },
+    {
+      "type": "h2",
+      "id": "logging",
+      "title": "15. Logging and Traceability"
+    },
+    {
+      "type": "p",
+      "text": "Every flag, score, latency sample and drift indicator must be logged with the input context needed for later review."
+    },
+    {
+      "type": "h2",
+      "id": "threshold",
+      "title": "16. Threshold Selection"
+    },
+    {
+      "type": "p",
+      "text": "Document how thresholds are chosen and which operating point they produce. Thresholds are parameters of the deployed system, not of the model card only."
+    },
+    {
+      "type": "h2",
+      "id": "monitor",
+      "title": "17. Runtime Monitoring"
+    },
+    {
+      "type": "p",
+      "text": "Monitor false-alarm trends, anomaly-rate drift, sensor distribution drift and the missed-anomaly review queue."
+    },
+    {
+      "type": "h2",
+      "id": "fallback",
+      "title": "18. Fallback Strategy"
+    },
+    {
+      "type": "p",
+      "text": "Define what happens on low confidence or OOD: deterministic threshold checks, ground-analysis request, or safe state."
+    },
+    {
+      "type": "h2",
+      "id": "risk",
+      "title": "19. Residual Risk"
+    },
+    {
+      "type": "p",
+      "text": "After testing, the residual risk is explicit: for TAD, rare unseen anomalies remain the main accepted-with-limitations risk, with drift monitoring as a condition."
+    },
+    {
+      "type": "h2",
+      "id": "campaign",
+      "title": "20. Test Campaign Example"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "Failure mode",
+        "Test",
+        "Metric",
+        "Acceptance criterion",
+        "Residual risk"
+      ],
+      "rows": [
+        [
+          "Unseen anomaly",
+          "TEST-TAD-003",
+          "Recall",
+          "≥ 0.95 in ODD",
+          "FAILED — recall 0.61; monitoring + ground review"
+        ],
+        [
+          "Gradual drift",
+          "TEST-TAD-004",
+          "FPR vs nominal",
+          "≤ 2× nominal",
+          "FAILED — 3.1×; retune drift threshold"
+        ],
+        [
+          "Sensor dropout",
+          "TEST-TAD-005",
+          "Graceful flag",
+          "Explicit missing flag",
+          "PASS"
+        ],
+        [
+          "Target latency",
+          "TEST-TAD-008",
+          "p95",
+          "< 50 ms on target",
+          "BLOCKED — environment unavailable"
+        ],
+        [
+          "OOD input",
+          "TEST-TAD-011",
+          "OOD detection rate",
+          "≥ 0.90",
+          "PASS — 0.93"
+        ]
+      ]
+    },
+    {
+      "type": "h2",
+      "id": "limits",
+      "title": "21. Limitations"
+    },
+    {
+      "type": "p",
+      "text": "This campaign uses synthetic telemetry in a simulated environment; it does not validate behaviour on a real spacecraft or flight computer. Target latency could not be measured (environment unavailable). Drift and unseen-anomaly results reflect the demonstration datasets and should not be extrapolated to other platforms without new data."
+    },
+    {
+      "type": "h2",
+      "id": "checklist",
+      "title": "22. Practical Checklist"
+    },
+    {
+      "type": "checklist",
+      "items": [
+        "Baseline FP budget defined per time unit",
+        "Unseen-anomaly families held out",
+        "Chronological or grouped splits used",
+        "Sensor dropout and missing-data tested",
+        "Noise and drift campaigns executed",
+        "OOD inputs detected, not silently scored",
+        "Burst scenario tested",
+        "Target latency and resources measured",
+        "Logs verified for review support",
+        "Fallback and residual risk documented"
+      ]
+    },
+    {
+      "type": "h2",
+      "id": "conclusion",
+      "title": "23. Conclusion"
+    },
+    {
+      "type": "p",
+      "text": "Verification of an anomaly detector is operational, not statistical. The tests that matter are the ones that simulate how the system will be used and misused: drift, dropouts, novel patterns and deadlines."
+    },
+    {
+      "type": "h2",
+      "id": "references",
+      "title": "References"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Portfolio project: Telemetry Anomaly Detector (PRJ-TAD-001) — test results, drift evidence and residual risk.",
+        "Workbench evidence package for PRJ-TAD-001.",
+        "Related note: How to Perform a Data Readiness Review for Space ML."
+      ]
+    }
+  ]
+}

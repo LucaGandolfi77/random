@@ -1,0 +1,10 @@
+{
+  "project_id": "PRJ-RL-001",
+  "slug": "shielded-rl-autonomy",
+  "name": "Shielded RL for Safe Autonomy",
+  "source_root": "../../projects/shielded-rl-autonomy",
+  "stack": ["Python", "simulated lunar descent", "deterministic runtime shield"],
+  "evidence": ["8 tests PASS", "policy comparison"],
+  "limitations": ["synthetic", "proxy linear policy (no trained checkpoint)", "no real vehicle"],
+  "integration": "Workbench shield/evidence import pending."
+}

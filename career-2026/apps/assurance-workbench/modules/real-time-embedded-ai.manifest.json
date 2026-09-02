@@ -1,0 +1,13 @@
+{
+  "project_id": "PRJ-RT-001",
+  "slug": "real-time-embedded-ai",
+  "name": "Real-Time Embedded AI (Deterministic C++ Inference Runtime)",
+  "source_root": "../../projects/real-time-embedded-ai",
+  "stack": ["C++17", "Make/CMake", "SHA-256 self-contained"],
+  "lifecycle_status": "UNDER_VERIFICATION",
+  "assurance_status": "PARTIALLY_SUPPORTED",
+  "deployment_decision": "CONDITIONAL_GO (host demo)",
+  "evidence": ["docs/BENCHMARK_REPORT.md", "tests (ALL TESTS PASSED, host)"],
+  "limitations": ["Linux x86_64 host only", "no WCET claim", "synthetic inputs"],
+  "integration": "Import via Workbench project adapter when available."
+}

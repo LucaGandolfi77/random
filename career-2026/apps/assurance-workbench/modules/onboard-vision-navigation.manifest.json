@@ -1,0 +1,11 @@
+{
+  "project_id": "PRJ-VBN-001",
+  "slug": "onboard-vision-navigation",
+  "name": "Embedded Vision-Based Navigation (safe landing zone demo)",
+  "source_root": "../../projects/onboard-vision-navigation",
+  "stack": ["Python", "numpy", "synthetic frames", "FP32/INT8 emulation"],
+  "scenario": "terrain safe-zone classification (synthetic)",
+  "evidence": ["7 tests PASS", "quantization regression bound", "robustness slices"],
+  "limitations": ["synthetic only", "host latency", "no real target"],
+  "integration": "Model Card/ODD/test import pending in Workbench."
+}

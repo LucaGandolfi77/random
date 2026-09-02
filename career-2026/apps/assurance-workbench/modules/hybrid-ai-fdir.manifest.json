@@ -1,0 +1,10 @@
+{
+  "project_id": "PRJ-FDIR-001",
+  "slug": "hybrid-ai-fdir",
+  "name": "Hybrid AI FDIR Assistant",
+  "source_root": "../../projects/hybrid-ai-fdir",
+  "stack": ["Python", "deterministic limits", "rule/expert logic", "fault catalog"],
+  "evidence": ["7 tests PASS", "scenario matrix (drift/stuck/thermal/power)"],
+  "limitations": ["synthetic", "no RUL estimate", "operator authority required"],
+  "integration": "Workbench FDIR/failure-mode import pending."
+}

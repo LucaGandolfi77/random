@@ -1,0 +1,158 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "newsroom-news-object",
+  "title": "NEWS OBJECT",
+  "description": "Rappresentazione interna di ogni storia della redazione autonoma.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string" },
+    "topic": { "type": "string" },
+    "category": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["discovered", "researched", "verified", "writing", "ready", "published", "updated", "retracted", "blocked", "monitoring"]
+    },
+    "urgency": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "importance": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "audience_relevance": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "news_score": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "overall_confidence": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "duplicate_policy": {
+      "type": "string",
+      "enum": ["NEW_STORY", "EXISTING_STORY_UPDATE", "DUPLICATE", "RELATED_STORY"]
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "url": { "type": "string" },
+          "name": { "type": "string" },
+          "kind": { "type": "string" },
+          "primary": { "type": "boolean" },
+          "independent": { "type": "boolean" }
+        },
+        "required": ["url", "name"]
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "claim": { "type": "string" },
+          "type": { "enum": ["FACT", "DECLARATION", "ANALYSIS", "RUMOR", "UNCONFIRMED", "OPINION"] },
+          "source": { "type": "string" },
+          "evidence": { "type": "string" },
+          "confidence": { "type": "integer", "minimum": 0, "maximum": 100 }
+        },
+        "required": ["claim", "type"]
+      }
+    },
+    "verified_claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "claim": { "type": "string" },
+          "verification_status": { "enum": ["verified", "partially_verified", "unverified", "disputed", "false"] },
+          "confidence_score": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "reason": { "type": "string" },
+          "source_independence": { "type": "string" },
+          "corrected_fact": { "type": "string" }
+        },
+        "required": ["claim", "verification_status", "confidence_score"]
+      }
+    },
+    "unverified_claims": { "type": "array", "items": { "type": "string" } },
+    "contradictions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "description": { "type": "string" },
+          "severity": { "enum": ["critical", "major", "minor"] },
+          "evidence": { "type": "string" },
+          "resolution": { "type": "string" }
+        },
+        "required": ["description", "severity"]
+      }
+    },
+    "story_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "timestamp": { "type": "string" },
+          "event": { "type": "string" },
+          "detail": { "type": "string" }
+        },
+        "required": ["timestamp", "event"]
+      }
+    },
+    "article": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "headline": { "type": "string" },
+        "subheadline": { "type": "string" },
+        "body": { "type": "string" }
+      },
+      "required": ["headline", "body"]
+    },
+    "seo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "slug": { "type": "string" },
+        "keywords": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["title", "slug"]
+    },
+    "media": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "role": { "enum": ["main", "secondary", "chart", "embed"] },
+          "description": { "type": "string" },
+          "caption": { "type": "string" },
+          "alt_text": { "type": "string" }
+        },
+        "required": ["role", "description"]
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "research": { "type": "boolean" },
+        "fact_check": { "type": "boolean" },
+        "contradiction_check": { "type": "boolean" },
+        "editor": { "type": "boolean" },
+        "publish": { "type": "boolean" }
+      }
+    },
+    "timestamps": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "discovered": { "type": "string" },
+        "researched": { "type": "string" },
+        "verified": { "type": "string" },
+        "published": { "type": "string" },
+        "updated": { "type": "string" }
+      }
+    }
+  },
+  "required": ["id", "topic", "status", "timestamps"]
+}

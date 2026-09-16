@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="1440" height="900" font-family="ui-monospace, Menlo, Consolas, monospace">
+  <defs>
+    <style>
+      .wire{stroke:#1a2430;stroke-width:2;fill:none}
+      .wire24{stroke:#2b6cb0;stroke-width:2;fill:none}
+      .pe{stroke:#38a169;stroke-width:2.4;fill:none}
+      .safe{stroke:#c53030;stroke-width:2.2;fill:none;stroke-dasharray:5 4}
+      .box{fill:#fff;stroke:#33475b;stroke-width:1.4}
+      .boxF{fill:#eef3f8;stroke:#33475b;stroke-width:1.4}
+      .lbl{font-size:11px;fill:#12212e;font-weight:700}
+      .ts{font-size:9.5px;fill:#4a5b6c}
+      .tb{font-size:14px;font-weight:700;fill:#12212e}
+      .zf{fill:#fff7ed;stroke:#c05621;stroke-width:1.2;stroke-dasharray:4 3}
+    </style>
+  </defs>
+  <rect width="1440" height="900" fill="#fbfdff"/>
+
+  <rect x="20" y="14" width="1400" height="46" rx="6" class="box"/>
+  <text x="36" y="36" class="tb">GreenBatch GB-8S — schema elettrico unifilare (quadro QGB-01)</text>
+  <text x="36" y="52" class="ts">Disegno GB-8S-ELE-001 · rev. A · 400/230 V 50 Hz TN-S · comando 24 VDC · IEC 60204-1 · quadro IP55 / IK08</text>
+
+  <!-- rete di alimentazione -->
+  <text x="40" y="92" class="lbl">Rete 400 V 3F + N + PE</text>
+  <path class="wire" d="M60 100 V150"/>
+  <path class="wire" d="M72 100 V150"/>
+  <path class="wire" d="M84 100 V150"/>
+  <path class="pe" d="M96 100 V150"/>
+  <text x="104" y="112" class="ts">PE</text>
+
+  <rect x="40" y="150" width="80" height="40" class="boxF"/>
+  <text x="52" y="168" class="ts">QS1 sez.</text>
+  <text x="52" y="182" class="ts">QF1 32A</text>
+
+  <!-- busbar -->
+  <path class="wire" d="M120 170 H1380"/>
+  <text x="1240" y="162" class="ts">busbar L1/L2/L3/N</text>
+
+  <!-- feeder 1: VFD soffiante -->
+  <g>
+    <path class="wire" d="M240 170 V210"/>
+    <rect x="200" y="210" width="80" height="40" class="box"/>
+    <text x="210" y="228" class="ts">QF2 16A</text>
+    <text x="210" y="242" class="ts">curva D</text>
+    <path class="wire" d="M240 250 V290"/>
+    <rect x="190" y="290" width="100" height="60" class="boxF"/>
+    <text x="200" y="312" class="lbl">VFD-01</text>
+    <text x="200" y="328" class="ts">7,5 kW · 0-10 V</text>
+    <text x="200" y="342" class="ts">filtro EMC C2</text>
+    <path class="wire" d="M240 350 V400"/>
+    <circle cx="240" cy="420" r="20" class="boxF"/>
+    <text x="240" y="424" class="ts" text-anchor="middle">M</text>
+    <text x="240" y="458" class="ts" text-anchor="middle">BL-01 soffiante 7,5 kW</text>
+    <text x="240" y="472" class="ts" text-anchor="middle">cavo schermato 4G2,5 mm²</text>
+  </g>
+
+  <!-- feeder 2: valvola rotativa -->
+  <g>
+    <path class="wire" d="M480 170 V210"/>
+    <rect x="440" y="210" width="80" height="40" class="box"/>
+    <text x="450" y="228" class="ts">QF3 6A</text>
+    <text x="450" y="242" class="ts">+ KM1</text>
+    <path class="wire" d="M480 250 V300"/>
+    <rect x="430" y="300" width="100" height="46" class="boxF"/>
+    <text x="442" y="320" class="ts">contattore KM1</text>
+    <text x="442" y="334" class="ts">relè termico F1</text>
+    <path class="wire" d="M480 346 V390"/>
+    <circle cx="480" cy="410" r="18" class="boxF"/>
+    <text x="480" y="414" class="ts" text-anchor="middle">M</text>
+    <text x="480" y="444" class="ts" text-anchor="middle">M-101 rotativa 0,55 kW</text>
+  </g>
+
+  <!-- feeder 3: 24 VDC + UPS -->
+  <g>
+    <path class="wire" d="M720 170 V206"/>
+    <rect x="678" y="206" width="84" height="40" class="box"/>
+    <text x="688" y="224" class="ts">QF4 4A</text>
+    <text x="688" y="238" class="ts">QF5 6A (HMI)</text>
+    <path class="wire" d="M720 246 V286"/>
+    <rect x="660" y="286" width="120" height="64" class="boxF"/>
+    <text x="670" y="306" class="lbl">PS1 24 VDC 10 A</text>
+    <text x="670" y="322" class="ts">230 VAC → 24 VDC</text>
+    <text x="670" y="336" class="ts">+ UPS 24 V 7 Ah</text>
+    <path class="wire24" d="M720 350 V420"/>
+    <text x="730" y="392" class="ts">24 VDC distribuzione</text>
+    <rect x="620" y="420" width="200" height="30" class="box"/>
+    <text x="630" y="440" class="ts">morsettiere 24 V / 0 V (protette 2 A)</text>
+  </g>
+
+  <!-- feeder 4: servizi -->
+  <g>
+    <path class="wire" d="M980 170 V206"/>
+    <rect x="940" y="206" width="80" height="40" class="box"/>
+    <text x="950" y="232" class="ts">QF6 4A</text>
+    <path class="wire" d="M980 246 V300"/>
+    <rect x="920" y="300" width="120" height="90" class="boxF"/>
+    <text x="930" y="320" class="ts">EV-104 pulizia filtro</text>
+    <text x="930" y="336" class="ts">BEACON-01 segnalatore</text>
+    <text x="930" y="352" class="ts">HMI panel PC 24 V</text>
+    <text x="930" y="368" class="ts">switch PROFINET</text>
+  </g>
+
+  <!-- circuito di sicurezza -->
+  <g>
+    <rect x="1130" y="206" width="270" height="300" class="zf" rx="8"/>
+    <text x="1144" y="228" class="lbl">Catena di sicurezza (cat. 3 / PL d)</text>
+    <rect x="1150" y="244" width="120" height="40" class="box"/>
+    <text x="1160" y="262" class="ts">ESTOP-01 canale 1</text>
+    <text x="1160" y="276" class="ts">ESTOP-01-B canale 2</text>
+    <path class="safe" d="M1270 264 H1310"/>
+    <rect x="1310" y="238" width="76" height="52" class="boxF"/>
+    <text x="1318" y="258" class="ts">K1 relè</text>
+    <text x="1318" y="272" class="ts">di sicurezza</text>
+    <path class="safe" d="M1348 290 V330 H1180"/>
+    <rect x="1150" y="330" width="150" height="54" class="box"/>
+    <text x="1160" y="350" class="ts">consenso KM1 (M-101)</text>
+    <text x="1160" y="364" class="ts">+ elettrovalvole 24 V</text>
+    <text x="1160" y="378" class="ts">(dump in mancanza aria)</text>
+    <text x="1150" y="410" class="ts">▸ In emergenza: stop soffiante,</text>
+    <text x="1150" y="424" class="ts">  chiusura valvole, EV-101 chiusa</text>
+    <text x="1150" y="446" class="ts">Riavvio manuale con riarmo e reset.</text>
+    <text x="1150" y="470" class="ts">MODE-LOCAL e PANEL-DOOR in catena.</text>
+    <text x="1150" y="492" class="ts">Test funzionale a ogni avvio (FAT/SAT).</text>
+  </g>
+
+  <!-- PLC rack -->
+  <g transform="translate(40,520)">
+    <rect x="0" y="0" width="820" height="200" class="boxF" rx="8"/>
+    <text x="14" y="24" class="lbl">Armadio QGB-01 · rack PLC + isola valvole</text>
+    <rect x="14" y="40" width="86" height="60" class="box"/><text x="22" y="64" class="ts">PS 24 V</text><text x="22" y="80" class="ts">CPU 1512SP</text>
+    <rect x="108" y="40" width="86" height="60" class="box"/><text x="116" y="64" class="ts">DI-01..04</text><text x="116" y="80" class="ts">56 punti</text>
+    <rect x="202" y="40" width="86" height="60" class="box"/><text x="210" y="64" class="ts">DQ-01..03</text><text x="210" y="80" class="ts">33 punti</text>
+    <rect x="296" y="40" width="86" height="60" class="box"/><text x="304" y="64" class="ts">AI-01</text><text x="304" y="80" class="ts">4 punti</text>
+    <rect x="390" y="40" width="86" height="60" class="box"/><text x="398" y="64" class="ts">AQ-01</text><text x="398" y="80" class="ts">2 punti</text>
+    <rect x="484" y="40" width="96" height="60" class="box"/><text x="492" y="64" class="ts">CM PtP</text><text x="492" y="80" class="ts">Modbus RTU</text>
+    <rect x="590" y="40" width="110" height="60" class="box"/><text x="598" y="64" class="ts">isola valvole</text><text x="598" y="80" class="ts">18 solenoidi</text>
+    <rect x="710" y="40" width="96" height="60" class="box"/><text x="718" y="64" class="ts">K1 safety</text><text x="718" y="80" class="ts">+ relè ausiliari</text>
+
+    <text x="14" y="128" class="ts">Ingressi: finecorsa valvole, LS livello, ESTOP, pressostato aria, termici motori</text>
+    <text x="14" y="146" class="ts">Uscite: solenoidi EV/DV, contattori/KM, riferimento VFD, beacon</text>
+    <text x="14" y="164" class="ts">Analogiche: PI-102 vuoto, PDT-103 ΔP filtro, CT-01 corrente, EV-260 posizione</text>
+    <text x="14" y="182" class="ts">Modbus: 8× WT-20x (peso silo), WT-250 (tramoggia), LC-01..03, diagnostica</text>
+  </g>
+
+  <!-- pesatura -->
+  <g transform="translate(900,520)">
+    <rect x="0" y="0" width="500" height="200" class="boxF" rx="8"/>
+    <text x="14" y="24" class="lbl">Catena di pesatura (classe III)</text>
+    <rect x="14" y="40" width="120" height="54" class="box"/><text x="24" y="62" class="ts">3 celle 100 kg</text><text x="24" y="78" class="ts">350 Ω · 2 mV/V</text>
+    <path class="wire24" d="M134 67 H184"/>
+    <rect x="184" y="40" width="130" height="54" class="box"/><text x="194" y="62" class="ts">scatola di</text><text x="194" y="78" class="ts">somma + trim</text>
+    <path class="wire24" d="M314 67 H364"/>
+    <rect x="364" y="40" width="120" height="54" class="box"/><text x="374" y="62" class="ts">WT-250</text><text x="374" y="78" class="ts">Modbus RTU</text>
+    <text x="14" y="118" class="ts">Cavo celle 6 fili schermato · schermo a terra solo lato quadro</text>
+    <text x="14" y="136" class="ts">Alimentazione celle da PS di misura stabilizzato (derivato 24 V)</text>
+    <text x="14" y="154" class="ts">Verifica con pesi campione a ogni manutenzione (taratura annuale)</text>
+    <text x="14" y="172" class="ts">Filtro digitale 0,5 Hz + anti-vibrazione (soffiante in marcia)</text>
+  </g>
+
+  <!-- messa a terra / ATEX -->
+  <g transform="translate(40,740)">
+    <rect x="0" y="0" width="1360" height="130" class="boxF" rx="8"/>
+    <text x="14" y="24" class="lbl">Messa a terra, equipotenzialità e ATEX</text>
+    <path class="pe" d="M20 60 H300"/>
+    <rect x="300" y="46" width="14" height="28" fill="#38a169"/>
+    <text x="324" y="66" class="ts">barra PE quadro · R &lt; 10 Ω verso terra</text>
+    <text x="20" y="92" class="ts">Equipotenzialità (bonding) di silos, telaio, tubazioni, ciclone e filtro: conduttori ≥ 6 mm², resistenza di collegamento &lt; 0,1 Ω.</text>
+    <text x="20" y="110" class="ts">Zona 22 polveri (interno silos, ciclone, filtro): apparecchiature cat. 3D, pannelli di sfogo, filtro antistatico, divieto di accumulo polveri.</text>
+    <text x="750" y="92" class="ts">Cavi: FG16OR16 / N07V-K in canale · passaggi con pressacavi IP68 · separazione potenza/segnali ≥ 200 mm.</text>
+    <text x="750" y="110" class="ts">Conformità: LVD 2014/35/UE · EMC 2014/30/UE · ATEX 2014/34/UE · IEC 60204-1 · IEC 61439-1/2 · IEC 62443 (OT).</text>
+  </g>
+</svg>

@@ -115,6 +115,180 @@ function shadeColor(hex, pct) {
   return 'rgb(' + r + ',' + g + ',' + b + ')';
 }
 
+// --- Nemici (sprite procedurali dedicati) ---------------------------------
+// Ogni tipo di nemico ha una sagoma diversa (`sprite` nei dati NPC):
+// pirati = navi agili, cristalli = alieni geometrici, elites = corazzate.
+// Il muso punta lungo +X ad angolo 0 (come drawShip). `scale` ~ lunghezza.
+SPRITE.drawNpc = function (ctx, kind, x, y, angle, color, scale, thrust) {
+  var s = scale;
+  var dark = shadeColor(color, -30);
+  var light = shadeColor(color, 28);
+
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+
+  // fiamma propulsore comune (dietro, lungo -X)
+  if (thrust) {
+    var fl = s * (0.4 + 0.4 * Math.random());
+    ctx.beginPath();
+    ctx.moveTo(-s * 0.75, -s * 0.14);
+    ctx.lineTo(-s * 0.75 - fl, 0);
+    ctx.lineTo(-s * 0.75, s * 0.14);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(255,180,60,0.9)';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(-s * 0.75, -s * 0.08);
+    ctx.lineTo(-s * 0.75 - fl * 0.55, 0);
+    ctx.lineTo(-s * 0.75, s * 0.08);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(255,240,180,0.85)';
+    ctx.fill();
+  }
+
+  var i;
+  switch (kind) {
+    // --- STREUNER: piccolo caccia a freccia ---------------------------------
+    case 'streuner':
+      SPRITE._poly(ctx, [[1.05 * s, 0], [0.3 * s, -0.32 * s], [-0.95 * s, -0.5 * s], [-0.6 * s, 0], [-0.95 * s, 0.5 * s], [0.3 * s, 0.32 * s]]);
+      ctx.fillStyle = color; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(0.3 * s, 0, 0.14 * s, 0, Math.PI * 2);
+      ctx.fillStyle = light; ctx.fill();
+      break;
+
+    // --- LORDAKIA: caccia con doppia forcella anteriore ----------------------
+    case 'lordakia':
+      SPRITE._poly(ctx, [[1.25 * s, -0.5 * s], [0.15 * s, -0.4 * s], [-0.85 * s, -0.3 * s], [-0.95 * s, 0], [-0.85 * s, 0.3 * s], [0.15 * s, 0.4 * s], [1.25 * s, 0.5 * s], [0.55 * s, 0]]);
+      ctx.fillStyle = dark; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.fillStyle = color;
+      ctx.fillRect(0.15 * s, -0.14 * s, 0.5 * s, 0.28 * s);
+      ctx.beginPath();
+      ctx.moveTo(0.4 * s, -0.24 * s); ctx.lineTo(0.7 * s, -0.34 * s); ctx.lineTo(0.7 * s, 0.34 * s); ctx.lineTo(0.4 * s, 0.24 * s);
+      ctx.closePath(); ctx.fillStyle = light; ctx.fill();
+      break;
+
+    // --- SAIMON: raider spinato (forma a X) ---------------------------------
+    case 'saimon':
+      SPRITE._poly(ctx, [[1.1 * s, 0], [0.1 * s, -0.5 * s], [-0.9 * s, -0.7 * s], [-0.3 * s, 0], [-0.9 * s, 0.7 * s], [0.1 * s, 0.5 * s]]);
+      ctx.fillStyle = color; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 1; ctx.stroke();
+      for (i = -1; i <= 1; i += 2) {
+        SPRITE._poly(ctx, [[0.25 * s, 0.12 * s * i], [0.55 * s, 0.3 * s * i], [0.1 * s, 0.3 * s * i]]);
+        ctx.fillStyle = dark; ctx.fill();
+      }
+      ctx.beginPath(); ctx.arc(-0.1 * s, 0, 0.16 * s, 0, Math.PI * 2); ctx.fillStyle = light; ctx.fill();
+      break;
+
+    // --- DEVOLARIUM: cacciatore esagonale con becco -------------------------
+    case 'devolarium':
+      SPRITE._poly(ctx, [[1.15 * s, 0], [0.5 * s, -0.45 * s], [-0.4 * s, -0.5 * s], [-0.9 * s, -0.25 * s], [-0.9 * s, 0.25 * s], [-0.4 * s, 0.5 * s], [0.5 * s, 0.45 * s]]);
+      ctx.fillStyle = color; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0.7 * s, -0.1 * s); ctx.lineTo(1.15 * s, 0); ctx.lineTo(0.7 * s, 0.1 * s); ctx.closePath();
+      ctx.fillStyle = light; ctx.fill();
+      ctx.beginPath(); ctx.arc(-0.15 * s, 0, 0.15 * s, 0, Math.PI * 2); ctx.fillStyle = '#0a0e1a'; ctx.fill();
+      break;
+
+    // --- SIBELON: fregata pesante ad ali larghe ------------------------------
+    case 'sibelon':
+      SPRITE._poly(ctx, [[1.1 * s, 0], [0.3 * s, -0.35 * s], [-0.4 * s, -0.35 * s], [-1.1 * s, -0.75 * s], [-0.7 * s, 0], [-1.1 * s, 0.75 * s], [-0.4 * s, 0.35 * s], [0.3 * s, 0.35 * s]]);
+      ctx.fillStyle = dark; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(0.95 * s, 0); ctx.lineTo(0.1 * s, -0.28 * s); ctx.lineTo(-0.5 * s, 0); ctx.lineTo(0.1 * s, 0.28 * s);
+      ctx.closePath(); ctx.fillStyle = color; ctx.fill();
+      ctx.beginPath(); ctx.arc(0.55 * s, 0, 0.13 * s, 0, Math.PI * 2); ctx.fillStyle = light; ctx.fill();
+      break;
+
+    // --- KRISTALLIN: frammento cristallino a losanga --------------------------
+    case 'kristallin':
+      SPRITE._poly(ctx, [[1.1 * s, 0], [0.35 * s, -0.6 * s], [-0.9 * s, -0.1 * s], [-0.9 * s, 0.1 * s], [0.35 * s, 0.6 * s]]);
+      ctx.fillStyle = color; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,0.5)'; ctx.lineWidth = 1.2; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0.35 * s, -0.6 * s); ctx.lineTo(-0.4 * s, 0); ctx.lineTo(0.35 * s, 0.6 * s); ctx.strokeStyle = 'rgba(255,255,255,0.3)'; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(1.1 * s, 0); ctx.lineTo(-0.9 * s, 0); ctx.strokeStyle = 'rgba(0,0,0,0.25)'; ctx.stroke();
+      ctx.beginPath(); ctx.arc(0.15 * s, 0, 0.12 * s, 0, Math.PI * 2); ctx.fillStyle = light; ctx.fill();
+      break;
+
+    // --- KRISTALLON: cristallo grande con spuntoni ----------------------------
+    case 'kristallon':
+      SPRITE._poly(ctx, [[1.15 * s, 0], [0.4 * s, -0.55 * s], [-0.2 * s, -0.85 * s], [-0.5 * s, -0.25 * s], [-1.0 * s, -0.15 * s], [-1.0 * s, 0.15 * s], [-0.5 * s, 0.25 * s], [-0.2 * s, 0.85 * s], [0.4 * s, 0.55 * s]]);
+      ctx.fillStyle = color; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,0.55)'; ctx.lineWidth = 1.3; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0.4 * s, -0.55 * s); ctx.lineTo(-0.5 * s, 0); ctx.lineTo(0.4 * s, 0.55 * s); ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(-0.2 * s, -0.85 * s); ctx.lineTo(0.3 * s, 0); ctx.lineTo(-0.2 * s, 0.85 * s); ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.stroke();
+      ctx.beginPath(); ctx.arc(-0.15 * s, 0, 0.14 * s, 0, Math.PI * 2); ctx.fillStyle = light; ctx.fill();
+      break;
+
+    // --- PALLADION: incrociatore con doppi bracci -----------------------------
+    case 'palladion':
+      SPRITE._poly(ctx, [[1.3 * s, -0.4 * s], [0.5 * s, -0.4 * s], [-0.5 * s, -0.35 * s], [-1.0 * s, 0], [-0.5 * s, 0.35 * s], [0.5 * s, 0.4 * s], [1.3 * s, 0.4 * s], [0.7 * s, 0]]);
+      ctx.fillStyle = color; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.fillStyle = dark;
+      ctx.fillRect(-0.7 * s, -0.15 * s, 1.0 * s, 0.3 * s);
+      ctx.beginPath(); ctx.arc(-0.15 * s, 0, 0.16 * s, 0, Math.PI * 2); ctx.fillStyle = light; ctx.fill();
+      break;
+
+    // --- HALON: nave con anello energetico -----------------------------------
+    case 'halon':
+      SPRITE._poly(ctx, [[0.9 * s, 0], [0.25 * s, -0.3 * s], [-0.7 * s, -0.25 * s], [-0.7 * s, 0.25 * s], [0.25 * s, 0.3 * s]]);
+      ctx.fillStyle = color; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.beginPath();
+      ctx.ellipse(0, 0, 0.85 * s, 0.5 * s, 0, 0, Math.PI * 2);
+      ctx.strokeStyle = light; ctx.lineWidth = 1.6; ctx.stroke();
+      ctx.beginPath(); ctx.arc(-0.15 * s, 0, 0.13 * s, 0, Math.PI * 2); ctx.fillStyle = '#0a0e1a'; ctx.fill();
+      break;
+
+    // --- DESMO: distruttore a punta di freccia con denti ----------------------
+    case 'desmo':
+      SPRITE._poly(ctx, [[1.2 * s, 0], [0.4 * s, -0.5 * s], [-0.5 * s, -0.4 * s], [-1.0 * s, -0.8 * s], [-0.7 * s, 0], [-1.0 * s, 0.8 * s], [-0.5 * s, 0.4 * s], [0.4 * s, 0.5 * s]]);
+      ctx.fillStyle = color; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,0.45)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.fillStyle = dark;
+      ctx.fillRect(-0.45 * s, -0.22 * s, 0.7 * s, 0.44 * s);
+      ctx.beginPath(); ctx.arc(0.15 * s, 0, 0.15 * s, 0, Math.PI * 2); ctx.fillStyle = light; ctx.fill();
+      break;
+
+    // --- STREUNER (elite): intercettore a muso lungo ---------------------------
+    case 'elite':
+      SPRITE._poly(ctx, [[1.5 * s, 0], [0.6 * s, -0.3 * s], [-0.4 * s, -0.35 * s], [-1.0 * s, -0.15 * s], [-1.0 * s, 0.15 * s], [-0.4 * s, 0.35 * s], [0.6 * s, 0.3 * s]]);
+      ctx.fillStyle = color; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,0.45)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(1.35 * s, 0); ctx.lineTo(0.7 * s, -0.14 * s); ctx.lineTo(0.7 * s, 0.14 * s); ctx.closePath();
+      ctx.fillStyle = dark; ctx.fill();
+      ctx.beginPath(); ctx.arc(0.1 * s, 0, 0.17 * s, 0, Math.PI * 2); ctx.fillStyle = light; ctx.fill();
+      ctx.beginPath(); ctx.arc(0.1 * s, 0, 0.08 * s, 0, Math.PI * 2); ctx.fillStyle = '#0a0e1a'; ctx.fill();
+      break;
+
+    // --- BOSS (Mindfire Behemoth): bestia demoniaca ----------------------------
+    case 'boss':
+      SPRITE._poly(ctx, [[1.2 * s, 0], [0.5 * s, -0.45 * s], [-0.6 * s, -0.5 * s], [-1.2 * s, -0.7 * s], [-0.9 * s, 0], [-1.2 * s, 0.7 * s], [-0.6 * s, 0.5 * s], [0.5 * s, 0.45 * s]]);
+      ctx.fillStyle = color; ctx.fill(); ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 1.2; ctx.stroke();
+      // corna frontali
+      SPRITE._poly(ctx, [[1.1 * s, -0.28 * s], [1.5 * s, -0.5 * s], [0.75 * s, -0.3 * s]]);
+      ctx.fillStyle = dark; ctx.fill();
+      SPRITE._poly(ctx, [[1.1 * s, 0.28 * s], [1.5 * s, 0.5 * s], [0.75 * s, 0.3 * s]]);
+      ctx.fillStyle = dark; ctx.fill();
+      // occhi incandescenti
+      ctx.fillStyle = '#ffd54a';
+      ctx.beginPath(); ctx.arc(0.55 * s, -0.18 * s, 0.1 * s, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(0.55 * s, 0.18 * s, 0.1 * s, 0, Math.PI * 2); ctx.fill();
+      // fauci
+      SPRITE._poly(ctx, [[0.9 * s, -0.1 * s], [1.2 * s, 0], [0.9 * s, 0.1 * s]]);
+      ctx.fillStyle = '#0a0e1a'; ctx.fill();
+      break;
+
+    default:
+      SPRITE.drawShip(ctx, 0, 0, 0, color, scale, false);
+      break;
+  }
+
+  ctx.restore();
+};
+
+// Helper: disegna un poligono chiuso dalla lista di punti [[x,y],...]
+SPRITE._poly = function (ctx, pts) {
+  ctx.beginPath();
+  ctx.moveTo(pts[0][0], pts[0][1]);
+  for (var i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+  ctx.closePath();
+};
+
 // --- Asteroide -------------------------------------------------------------
 SPRITE.drawAsteroid = function (ctx, x, y, r, oreColor) {
   ctx.save();

@@ -1,0 +1,16 @@
+N;Da;A;Tipo cavo;Sezione;LunghezzaM;Note
+1;Quadro QGB-01;Soffiante BL-01 (VFD);FG16OR16 4G2,5 schermato;2,5 mm²;22;schermo a terra lato quadro, filtro EMC
+2;Quadro QGB-01;Motore M-101 rotativa;FG16OR16 4G1,5;1,5 mm²;14;protezione termica in quadro
+3;Quadro QGB-01;Isola valvole (solenoidi);N07V-K 2x1 in canale;1 mm²;18;comando 24 VDC
+4;Quadro QGB-01;Sensoristica livelli LS-20xH/L;N07V-K 2x1 schermato;1 mm²;45;16 segnali
+5;Quadro QGB-01;Celle silo G1-G8;6x0,22 schermato (bus celle);0,22 mm²;60;9 scatole di somma
+6;Quadro QGB-01;Trasmettitori peso WT (RS-485);BELDEN 3105A (RS-485);0,5 mm²;70;daisy-chain 9 nodi, terminazione 120 Ω
+7;Quadro QGB-01;PI-102 vuoto;2x0,75 schermato;0,75 mm²;28;4-20 mA
+8;Quadro QGB-01;PDT-103 ΔP filtro;2x0,75 schermato;0,75 mm²;26;4-20 mA
+9;Quadro QGB-01;CT-01 corrente soffiante;2x0,75 schermato;0,75 mm²;20;4-20 mA
+10;Quadro QGB-01;EV-260 posizionatore;4x0,75 schermato;0,75 mm²;24;riferimento 0-10 V + feedback
+11;Quadro QGB-01;Pulsanti emergenza ESTOP;2x1 schermato (sicurezza);1 mm²;12;doppio canale
+12;Quadro QGB-01;HMI panel PC;CAT6 SF/UTP;—;8;PROFINET
+13;Quadro QGB-01;Switch OT / postazione engineering;CAT6 SF/UTP;—;6;VLAN 10/20
+14;Quadro QGB-01;Barra equipotenziale telaio/silos;GV 1x16 giallo-verde;16 mm²;35;bonding ATEX <0,1 Ω
+15;Rete;Quadro QGB-01;Barra di terra impianto;GV 1x25 giallo-verde;25 mm²;15;R < 10 Ω

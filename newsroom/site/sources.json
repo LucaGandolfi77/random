@@ -1,0 +1,13 @@
+{
+  "default_sources": [
+    { "domain": "ansa.it", "name": "ANSA", "lang": "it", "kind": "agenzia" },
+    { "domain": "reuters.com", "name": "Reuters", "lang": "en", "kind": "agenzia" },
+    { "domain": "apnews.com", "name": "AP", "lang": "en", "kind": "agenzia" },
+    { "domain": "corriere.it", "name": "Corriere della Sera", "lang": "it", "kind": "quotidiano" },
+    { "domain": "repubblica.it", "name": "la Repubblica", "lang": "it", "kind": "quotidiano" },
+    { "domain": "ilsole24ore.com", "name": "Il Sole 24 Ore", "lang": "it", "kind": "quotidiano" },
+    { "domain": "bbc.com", "name": "BBC", "lang": "en", "kind": "quotidiano" },
+    { "domain": "theguardian.com", "name": "The Guardian", "lang": "en", "kind": "quotidiano" }
+  ],
+  "_note": "Fonti usate dagli agenti di sourcing (site-scout). L'orchestratore passa 'sources' al workflow come args; il workflow lancia un site-scout per ogni fonte. Le agenzie (Reuters, AP) richiedono accordi di licenza per la redistribuzione: si usano solo come riferimento fattuale, mai copiandone i testi."
+}

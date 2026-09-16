@@ -1,0 +1,4 @@
+{
+  "articles": [],
+  "_note": "Articoli pubblicati. Ogni voce: { id, headline, slug, url (se presente), published_at, updated_at, status, metrics }."
+}

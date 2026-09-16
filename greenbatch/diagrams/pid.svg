@@ -1,0 +1,226 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1480 940" width="1480" height="940" font-family="ui-monospace, Menlo, Consolas, monospace">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 z" fill="#2b6cb0"/>
+    </marker>
+    <style>
+      .t{font-size:11px;fill:#1a2430}
+      .ts{font-size:9px;fill:#5a6b7c}
+      .tt{font-size:10px;fill:#2b6cb0}
+      .pipe{stroke:#2b6cb0;stroke-width:2.4;fill:none}
+      .pipeAir{stroke:#7a8a99;stroke-width:2;fill:none;stroke-dasharray:6 5}
+      .steel{stroke:#33475b;stroke-width:1.8;fill:#eef3f8}
+      .steelD{stroke:#33475b;stroke-width:1.6;fill:#dbe6f0}
+      .valve{stroke:#c05621;stroke-width:1.8;fill:#fff5e6}
+      .alarm{fill:#c53030}
+      .box{fill:#fff;stroke:#c3d0dd}
+      .grid{stroke:#e6edf4;stroke-width:1}
+      .h{font-size:15px;font-weight:700;fill:#12212e}
+      .lbl{font-size:12px;font-weight:700;fill:#12212e}
+    </style>
+  </defs>
+
+  <rect width="1480" height="940" fill="#fbfdff"/>
+  <g class="grid">
+    <path d="M0 40H1480M0 140H1480M0 240H1480M0 340H1480M0 440H1480M0 540H1480M0 640H1480M0 740H1480M0 840H1480"/>
+  </g>
+
+  <!-- title block -->
+  <rect x="24" y="16" width="1432" height="52" class="box" rx="6"/>
+  <text x="40" y="40" class="h">GreenBatch GB-8S — P&amp;ID: banco silos caffè verde, trasporto in depressione, dosaggio a lotti</text>
+  <text x="40" y="58" class="ts">Disegno GB-8S-PID-001 · rev. A · foglio 1/1 · unità: kg, kPa, m · scala NTS</text>
+  <text x="1180" y="40" class="ts">Fluido: caffè verde (granella)</text>
+  <text x="1180" y="56" class="ts">Vettore: aria in depressione −42 kPa</text>
+
+  <!-- ═══ linea di caricamento (aspirazione) ═══ -->
+  <text x="60" y="100" class="lbl">① CARICAMENTO SILOS — aspirazione (sottovuoto)</text>
+  <path class="pipe" d="M1250 150 H300 L120 150"/>
+  <text x="140" y="142" class="ts">da ricezione big-bag / fossa (aspirazione)</text>
+  <path class="pipeAir" d="M1330 190 H1250"/>
+
+  <!-- soffiante + filtro + ciclone -->
+  <g>
+    <rect x="1300" y="150" width="130" height="80" rx="6" class="steel"/>
+    <circle cx="1365" cy="190" r="22" fill="none" stroke="#33475b" stroke-width="1.8"/>
+    <path d="M1365 172 L1380 190 L1365 208" fill="none" stroke="#33475b" stroke-width="1.6"/>
+    <text x="1310" y="146" class="ts">BL-01 soffiante 7,5 kW</text>
+    <text x="1310" y="248" class="tt">aria pulita aspirata</text>
+
+    <rect x="1130" y="150" width="120" height="80" rx="6" class="steel"/>
+    <text x="1140" y="182" class="ts">FL-101 filtro</text>
+    <text x="1140" y="198" class="ts">PDT-103 ΔP</text>
+    <text x="1140" y="214" class="ts">EV-104 pulizia</text>
+
+    <path class="pipe" d="M1300 190 H1250"/>
+    <path class="pipeAir" d="M1250 190 H1130"/>
+
+    <path class="steel" d="M1010 150 h90 v80 h-90 z"/>
+    <path class="steel" d="M1010 230 L1055 270 L1100 230 z"/>
+    <text x="1018" y="176" class="ts">CY-101 ciclone</text>
+    <text x="1018" y="192" class="ts">decelerazione</text>
+    <circle cx="1080" cy="240" r="13" class="valve"/>
+    <text x="1098" y="244" class="ts">LSL-151</text>
+    <path class="pipeAir" d="M1100 190 H1130"/>
+    <text x="1112" y="182" class="tt">vuoto</text>
+
+    <!-- ghigliottina + valvola rotativa -->
+    <rect x="1040" y="278" width="30" height="16" class="valve"/>
+    <text x="1078" y="290" class="ts">EV-101 ghigliottina</text>
+    <circle cx="1055" cy="316" r="16" class="steelD"/>
+    <path d="M1043 316 h24 M1055 304 v24" stroke="#33475b" stroke-width="1.6"/>
+    <text x="1078" y="320" class="ts">M-101 valvola rotativa (airlock)</text>
+    <path class="pipe" d="M1055 270 V334"/>
+    <path class="pipe" d="M1055 334 V360 H340"/>
+  </g>
+
+  <!-- ═══ manifold di distribuzione + deviatrici + silos ═══ -->
+  <path class="pipe" d="M120 150 V400"/>
+  <text x="60" y="300" class="ts">linea di carico DN100 (v. nota sizing)</text>
+
+  <g id="silos">
+    <!-- generati a mano: 8 silos G1..G8 -->
+    <g transform="translate(120,400)">
+      <!-- G1 -->
+      <rect x="0" y="0" width="86" height="170" class="steel"/>
+      <path class="steel" d="M0 170 L43 220 L86 170 z"/>
+      <text x="43" y="-10" class="lbl" text-anchor="middle">G1</text>
+      <text x="43" y="-24" class="ts" text-anchor="middle">R Exc Cauca (W)</text>
+      <text x="43" y="235" class="ts" text-anchor="middle">WT-201 · 1000 kg</text>
+      <rect x="30" y="228" width="26" height="14" class="valve"/>
+      <text x="43" y="256" class="ts" text-anchor="middle">EV-201</text>
+      <circle cx="70" cy="12" r="7" class="alarm"/>
+      <text x="80" y="10" class="ts">LS-201H</text>
+      <circle cx="12" cy="12" r="6" fill="#38a169"/>
+      <text x="-4" y="10" class="ts">L</text>
+    </g>
+    <g transform="translate(280,400)">
+      <rect x="0" y="0" width="86" height="170" class="steel"/>
+      <path class="steel" d="M0 170 L43 220 L86 170 z"/>
+      <text x="43" y="-10" class="lbl" text-anchor="middle">G2</text>
+      <text x="43" y="-24" class="ts" text-anchor="middle">Brazil SD (N)</text>
+      <text x="43" y="235" class="ts" text-anchor="middle">WT-202 · 1000 kg</text>
+      <rect x="30" y="228" width="26" height="14" class="valve"/>
+      <text x="43" y="256" class="ts" text-anchor="middle">EV-202</text>
+      <circle cx="70" cy="12" r="7" class="alarm"/>
+      <text x="80" y="10" class="ts">LS-202H</text>
+      <circle cx="12" cy="12" r="6" fill="#38a169"/>
+    </g>
+    <g transform="translate(440,400)">
+      <rect x="0" y="0" width="86" height="170" class="steel"/>
+      <path class="steel" d="M0 170 L43 220 L86 170 z"/>
+      <text x="43" y="-10" class="lbl" text-anchor="middle">G3</text>
+      <text x="43" y="-24" class="ts" text-anchor="middle">Yirgacheffe M (N)</text>
+      <text x="43" y="235" class="ts" text-anchor="middle">WT-203 · 1000 kg</text>
+      <rect x="30" y="228" width="26" height="14" class="valve"/>
+      <text x="43" y="256" class="ts" text-anchor="middle">EV-203</text>
+      <circle cx="70" cy="12" r="7" class="alarm"/>
+      <text x="80" y="10" class="ts">LS-203H</text>
+    </g>
+    <g transform="translate(600,400)">
+      <rect x="0" y="0" width="86" height="170" class="steel"/>
+      <path class="steel" d="M0 170 L43 220 L86 170 z"/>
+      <text x="43" y="-10" class="lbl" text-anchor="middle">G4</text>
+      <text x="43" y="-24" class="ts" text-anchor="middle">Colombia Supremo (W)</text>
+      <text x="43" y="235" class="ts" text-anchor="middle">WT-204 · 1000 kg</text>
+      <rect x="30" y="228" width="26" height="14" class="valve"/>
+      <text x="43" y="256" class="ts" text-anchor="middle">EV-204</text>
+    </g>
+    <g transform="translate(760,400)">
+      <rect x="0" y="0" width="86" height="170" class="steel"/>
+      <path class="steel" d="M0 170 L43 220 L86 170 z"/>
+      <text x="43" y="-10" class="lbl" text-anchor="middle">G5</text>
+      <text x="43" y="-24" class="ts" text-anchor="middle">Guatemala SHB (W)</text>
+      <text x="43" y="235" class="ts" text-anchor="middle">WT-205 · 1000 kg</text>
+      <rect x="30" y="228" width="26" height="14" class="valve"/>
+      <text x="43" y="256" class="ts" text-anchor="middle">EV-205</text>
+    </g>
+    <g transform="translate(920,400)">
+      <rect x="0" y="0" width="86" height="170" class="steel"/>
+      <path class="steel" d="M0 170 L43 220 L86 170 z"/>
+      <text x="43" y="-10" class="lbl" text-anchor="middle">G6</text>
+      <text x="43" y="-24" class="ts" text-anchor="middle">Ethiopia Guji (N)</text>
+      <text x="43" y="235" class="ts" text-anchor="middle">WT-206 · 1000 kg</text>
+      <rect x="30" y="228" width="26" height="14" class="valve"/>
+      <text x="43" y="256" class="ts" text-anchor="middle">EV-206</text>
+    </g>
+    <g transform="translate(1080,400)">
+      <rect x="0" y="0" width="86" height="170" class="steel"/>
+      <path class="steel" d="M0 170 L43 220 L86 170 z"/>
+      <text x="43" y="-10" class="lbl" text-anchor="middle">G7</text>
+      <text x="43" y="-24" class="ts" text-anchor="middle">Kenya AA (W)</text>
+      <text x="43" y="235" class="ts" text-anchor="middle">WT-207 · 1000 kg</text>
+      <rect x="30" y="228" width="26" height="14" class="valve"/>
+      <text x="43" y="256" class="ts" text-anchor="middle">EV-207</text>
+    </g>
+    <g transform="translate(1240,400)">
+      <rect x="0" y="0" width="86" height="170" class="steel"/>
+      <path class="steel" d="M0 170 L43 220 L86 170 z"/>
+      <text x="43" y="-10" class="lbl" text-anchor="middle">G8</text>
+      <text x="43" y="-24" class="ts" text-anchor="middle">Decaf Colombia (W)</text>
+      <text x="43" y="235" class="ts" text-anchor="middle">WT-208 · 1000 kg</text>
+      <rect x="30" y="228" width="26" height="14" class="valve"/>
+      <text x="43" y="256" class="ts" text-anchor="middle">EV-208</text>
+    </g>
+  </g>
+
+  <!-- deviatrici superiori sul manifold -->
+  <g>
+    <rect x="150" y="386" width="26" height="14" class="valve"/><text x="163" y="380" class="ts" text-anchor="middle">DV-101</text>
+    <rect x="310" y="386" width="26" height="14" class="valve"/><text x="323" y="380" class="ts" text-anchor="middle">DV-102</text>
+    <rect x="470" y="386" width="26" height="14" class="valve"/><text x="483" y="380" class="ts" text-anchor="middle">DV-103</text>
+    <rect x="630" y="386" width="26" height="14" class="valve"/><text x="643" y="380" class="ts" text-anchor="middle">DV-104</text>
+    <rect x="790" y="386" width="26" height="14" class="valve"/><text x="803" y="380" class="ts" text-anchor="middle">DV-105</text>
+    <rect x="950" y="386" width="26" height="14" class="valve"/><text x="963" y="380" class="ts" text-anchor="middle">DV-106</text>
+    <rect x="1110" y="386" width="26" height="14" class="valve"/><text x="1123" y="380" class="ts" text-anchor="middle">DV-107</text>
+    <rect x="1270" y="386" width="26" height="14" class="valve"/><text x="1283" y="380" class="ts" text-anchor="middle">DV-108</text>
+    <path class="pipe" d="M120 393 H1350"/>
+  </g>
+
+  <!-- ═══ collettore di raccolta e linea di dosaggio ═══ -->
+  <text x="60" y="700" class="lbl">② DOSAGGIO A LOTTI — linea in depressione con valvola di regolazione</text>
+  <path class="pipe" d="M163 665 V690 H760 V730"/>
+  <path class="pipe" d="M323 665 V690"/>
+  <path class="pipe" d="M483 665 V690"/>
+  <path class="pipe" d="M643 665 V690"/>
+  <path class="pipe" d="M803 665 V690"/>
+  <path class="pipe" d="M963 665 V690"/>
+  <path class="pipe" d="M1123 665 V690"/>
+  <path class="pipe" d="M1283 665 V690"/>
+  <text x="140" y="686" class="ts">COLLECTION MANIFOLD DN80</text>
+
+  <rect x="735" y="730" width="50" height="16" class="valve"/>
+  <text x="796" y="742" class="ts">DV-109 deviatrice dosaggio</text>
+  <rect x="735" y="756" width="50" height="16" class="valve"/>
+  <text x="796" y="768" class="ts">EV-260 valvola di regolazione (100% / 12% / 6%)</text>
+
+  <!-- tramoggia di pesa con 3 celle -->
+  <g transform="translate(680,790)">
+    <path class="steelD" d="M0 0 H140 L110 70 H30 z"/>
+    <text x="70" y="-24" class="lbl" text-anchor="middle">WEIGH_SCALE_HOPPER (120 kg)</text>
+    <text x="70" y="-10" class="ts" text-anchor="middle">WT-250 peso netto · risoluzione 0,05 kg</text>
+    <rect x="8" y="76" width="22" height="12" fill="#33475b"/>
+    <rect x="59" y="76" width="22" height="12" fill="#33475b"/>
+    <rect x="110" y="76" width="22" height="12" fill="#33475b"/>
+    <text x="19" y="102" class="ts" text-anchor="middle">LC-01</text>
+    <text x="70" y="102" class="ts" text-anchor="middle">LC-02</text>
+    <text x="121" y="102" class="ts" text-anchor="middle">LC-03</text>
+    <path d="M132 50 H180" class="pipe"/>
+    <rect x="150" y="42" width="30" height="16" class="valve"/>
+    <text x="165" y="32" class="ts" text-anchor="middle">EV-250</text>
+    <path class="pipe" d="M180 50 H240"/>
+    <text x="246" y="54" class="ts">→ torrefattrice</text>
+  </g>
+
+  <!-- ═══ legenda ═══ -->
+  <g transform="translate(24,820)">
+    <rect x="0" y="0" width="620" height="96" class="box" rx="6"/>
+    <text x="12" y="20" class="lbl">Legenda</text>
+    <rect x="12" y="32" width="26" height="14" class="valve"/><text x="46" y="43" class="ts">valvola pneumatica (EV/DV)</text>
+    <path class="pipe" d="M212 39 H260"/><text x="268" y="43" class="ts">linea prodotto (depressione)</text>
+    <path class="pipeAir" d="M470 39 H520"/><text x="528" y="43" class="ts">aria</text>
+    <circle cx="25" cy="68" r="7" class="alarm"/><text x="46" y="72" class="ts">allarme livello alto (LS-20xH)</text>
+    <circle cx="225" cy="68" r="6" fill="#38a169"/><text x="246" y="72" class="ts">livello basso (LS-20xL)</text>
+    <text x="430" y="72" class="ts">WT = trasmettitore peso (Modbus RTU)</text>
+  </g>
+  <text x="700" y="900" class="ts">Nota: il trasporto è in ASPIRAZIONE — la soffiante è a valle di ciclone e filtro, sul lato aria pulita.</text>
+</svg>

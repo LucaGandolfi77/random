@@ -1,0 +1,5 @@
+{
+  "cycles": [],
+  "articles": [],
+  "_note": "Dati di performance: per ogni ciclo { timestamp, mode, decision, priority, confidence, agents_used, cost_estimate }; per ogni articolo { id, decision, quality_gate_passed, issues }."
+}

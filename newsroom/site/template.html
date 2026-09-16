@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{SEO_TITLE}}</title>
+  <meta name="description" content="{{SEO_DESCRIPTION}}">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <style>
+    :root { --fg:#1a1a1a; --bg:#fdfdfd; --accent:#b3002d; --muted:#666; --line:#e5e5e5; }
+    * { box-sizing: border-box; }
+    body { margin:0; font: 17px/1.65 Georgia, 'Times New Roman', serif; color:var(--fg); background:var(--bg); }
+    header.site { border-bottom: 3px solid var(--accent); padding: 1rem 1.25rem; }
+    header.site .brand { font-weight:700; letter-spacing:.02em; text-decoration:none; color:var(--fg); }
+    main { max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    .kicker { color:var(--accent); font-size:.85rem; text-transform:uppercase; letter-spacing:.08em; margin-bottom:.5rem; }
+    h1 { font-size: 2.1rem; line-height:1.2; margin: .2rem 0 .4rem; }
+    .subheadline { font-size: 1.2rem; color:#333; margin-bottom:1rem; }
+    .meta { color:var(--muted); font-size:.9rem; border-bottom:1px solid var(--line); padding-bottom:1rem; margin-bottom:1.5rem; }
+    .media { background:#f4f4f2; border-left:3px solid var(--accent); padding:.75rem 1rem; margin:1rem 0; font-size:.9rem; color:#333; }
+    article p { margin: 0 0 1.1rem; }
+    .sources { font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); margin-top:2rem; padding-top:1rem; }
+    .correction { background:#fff7e6; border:1px solid #f0d9a0; padding:.75rem 1rem; margin:1rem 0; font-size:.9rem; }
+    footer.site { border-top:1px solid var(--line); padding:1rem 1.25rem; color:var(--muted); font-size:.85rem; }
+    @media (max-width: 600px) { h1 { font-size:1.6rem; } }
+  </style>
+</head>
+<body>
+  <header class="site"><a class="brand" href="{{SITE_URL}}">{{SITE_NAME}}</a></header>
+  <main>
+    <div class="kicker">{{CATEGORY}}</div>
+    <h1>{{HEADLINE}}</h1>
+    {{SUBTITLE_BLOCK}}
+    <div class="meta">{{AUTHOR}} · {{DATE}} · {{STATUS_LABEL}}</div>
+    {{CORRECTION_BLOCK}}
+    {{MEDIA_BLOCK}}
+    <article>
+      {{BODY_PARAGRAPHS}}
+    </article>
+    {{SOURCES_BLOCK}}
+  </main>
+  <footer class="site">{{SITE_NAME}} — redazione autonoma. Testi originali; fatti e citazioni attribuiti alle fonti citate.</footer>
+</body>
+</html>

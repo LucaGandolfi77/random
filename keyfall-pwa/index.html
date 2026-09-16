@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0d16">
+  <meta name="description" content="Keyfall — carica un file .mid o .midi e guarda le note cadere sui tasti come in Synthesia. PWA offline, tutto nel browser.">
+  <title>Keyfall — MIDI falling keys</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Keyfall">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    <i class="orb orb-a"></i><i class="orb orb-b"></i><i class="orb orb-c"></i>
+    <i class="grid"></i>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22"><g fill="currentColor"><rect x="3" y="13" width="3" height="8" rx="1"/><rect x="8" y="9" width="3" height="12" rx="1"/><rect x="13" y="5" width="3" height="16" rx="1"/><rect x="18" y="11" width="3" height="10" rx="1"/></g></svg>
+      </span>
+      <span class="brand-name">keyfall</span>
+      <span class="brand-sub">midi&nbsp;·&nbsp;falling&nbsp;keys</span>
+    </div>
+    <div class="top-actions">
+      <button id="btn-panel" class="btn ghost icon-only" aria-label="Dettagli e aiuto" title="Dettagli">
+        <svg viewBox="0 0 24 24" width="18" height="18"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="8" r="1" fill="currentColor" stroke="none"/></g></svg>
+      </button>
+      <button id="btn-demo" class="btn ghost" title="Prova senza un file">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2l2.4 6.2L21 9l-5 4.1 1.6 6.9L12 16.5 6.4 20l1.6-6.9L3 9l6.6-.8z"/></svg>
+        Demo
+      </button>
+      <button id="btn-open" class="btn primary">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>
+        Apri MIDI
+      </button>
+      <input type="file" id="file" accept=".mid,.midi,audio/midi,audio/x-midi,audio/mid" hidden>
+    </div>
+  </header>
+
+  <div id="songcard" class="songcard" hidden>
+    <h1 id="song-title"></h1>
+    <p id="meta"></p>
+  </div>
+
+  <main id="stage" class="stage">
+    <canvas id="scene" class="scene"></canvas>
+    <canvas id="fx" class="fx"></canvas>
+
+    <!-- empty state -->
+    <section id="empty" class="empty">
+      <div class="empty-card">
+        <div class="empty-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <h1>Le tue note, in caduta.</h1>
+        <p class="empty-lead">Carica un file <strong>.mid</strong> o <strong>.midi</strong> e guarda la partitura diventare tasti che cadono, come in Synthesia.</p>
+        <div class="empty-actions">
+          <button id="empty-open" class="btn primary big">Scegli un file MIDI</button>
+          <button id="empty-demo" class="btn ghost big">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2l2.4 6.2L21 9l-5 4.1 1.6 6.9L12 16.5 6.4 20l1.6-6.9L3 9l6.6-.8z"/></svg>
+            Ascolta la demo
+          </button>
+        </div>
+        <ul class="empty-points">
+          <li><span>◆</span> Il file non lascia mai il tuo dispositivo</li>
+          <li><span>◆</span> Pianoforte sintetizzato incluso — nessun download</li>
+          <li><span>◆</span> Funziona offline, installabile come app</li>
+        </ul>
+        <p class="empty-stats" id="empty-stats"></p>
+      </div>
+    </section>
+
+    <!-- drag overlay -->
+    <div id="drop" class="drop-veil" aria-hidden="true">
+      <div class="drop-card">
+        <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M12 16V4m0 0L7 9m5-5l5 5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        <p>Rilascia il tuo file MIDI qui</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- transport + controls dock -->
+  <section class="dock" aria-label="Controlli">
+    <div class="dock-group transport">
+      <button id="btn-play" class="btn round primary" aria-label="Riproduci" disabled>
+        <svg class="ic-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
+        <svg class="ic-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/></svg>
+      </button>
+      <button id="btn-stop" class="btn ghost icon-only" aria-label="Stop" disabled>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><rect x="6.5" y="6.5" width="11" height="11" rx="1.5"/></svg>
+      </button>
+      <div class="time">
+        <span id="time-cur">0:00</span>
+        <span class="time-sep">/</span>
+        <span id="time-tot">0:00</span>
+      </div>
+      <input type="range" id="seek" class="seek" min="0" max="1000" value="0" step="1" aria-label="Posizione" disabled>
+    </div>
+
+    <div class="dock-group settings">
+      <label class="ctl">
+        <span class="ctl-label">Tempo <b id="tempo-val">1.00×</b></span>
+        <input type="range" id="tempo" min="0.4" max="2" step="0.02" value="1">
+      </label>
+      <label class="ctl slim">
+        <span class="ctl-label"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M4 9v6h4l5 4V5L8 9H4z"/></svg></span>
+        <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8">
+      </label>
+      <span class="divider" aria-hidden="true"></span>
+      <button id="btn-loop" class="btn pill" title="Ripeti">↻ Loop</button>
+      <button id="btn-reverb" class="btn pill" title="Riverbero">≋ Ambiente</button>
+      <button id="btn-fit" class="btn pill" title="Adatta la tastiera alle note">⌗ Adatta</button>
+      <button id="btn-labels" class="btn pill" title="Etichette delle note C">C°</button>
+      <label class="ctl select">
+        <select id="scheme" aria-label="Tema colori">
+          <option value="aurora">Aurora</option>
+          <option value="ember">Ember</option>
+          <option value="ice">Ice</option>
+        </select>
+      </label>
+      <label class="ctl select">
+        <select id="transpose" aria-label="Trasposizione">
+          <option value="0">Trasposizione 0</option>
+          <option value="12">+1 ottava</option>
+          <option value="-12">−1 ottava</option>
+        </select>
+      </label>
+    </div>
+  </section>
+
+  <!-- info side panel -->
+  <aside id="panel" class="sidepanel" aria-label="Dettagli">
+    <div class="panel-head">
+      <h2>Dettagli</h2>
+      <button id="panel-close" class="btn ghost icon-only" aria-label="Chiudi">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="panel-body">
+      <h3>Canali e colori</h3>
+      <div id="legend" class="legend"><p class="muted">Apri un file per vedere i canali.</p></div>
+      <h3>Scorciatoie</h3>
+      <ul class="shortcuts">
+        <li><kbd>Spazio</kbd> play / pausa</li>
+        <li><kbd>click sui tasti</kbd> prova una nota</li>
+      </ul>
+      <h3>Note legali</h3>
+      <p class="muted small">I file MIDI restano sul tuo dispositivo: nessun caricamento, nessun tracker. Il suono è un pianoforte sintetizzato via Web Audio; per un timbro campionato collega un soundfont a piacere.</p>
+      <p class="muted small">Keyfall — PWA · funziona offline · <span id="ver"></span></p>
+    </div>
+  </aside>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="js/midi.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

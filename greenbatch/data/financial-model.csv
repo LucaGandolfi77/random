@@ -1,0 +1,34 @@
+sezione;voce;anno1;anno2;anno3;anno4;anno5
+Unit economics;prezzo_listino;219000
+Unit economics;prezzo_netto;205860
+Unit economics;costo_unitario;154850
+Unit economics;margine_contribuzione;51010
+Unit economics;margine_pct;24.8
+Unit economics;break_even_unita;7
+Investimenti;capex_anno0;180000
+Indicatori;npv10;510013
+Indicatori;irr_pct;57.3
+Indicatori;payback_anni;2.45
+P&L;unita_vendute;4;7;11;14;16
+P&L;parco_installato;4;11;22;36;52
+P&L;ricavi_unita;823440;1441020;2264460;2882040;3293760
+P&L;ricavi_service;33320;91630;183260;299880;433160
+P&L;ricavi_totali;856760;1532650;2447720;3181920;3726920
+P&L;costi_variabili;646746;1146799;1819784;2346077;2721928
+P&L;margine_lordo;210014;385851;627936;835843;1004992
+P&L;rnd;90000;110000;130000;150000;160000
+P&L;sales_marketing;70000;95000;130000;160000;185000
+P&L;gna;55000;70000;90000;105000;120000
+P&L;ebitda;-4986;110851;277936;420843;539992
+P&L;ammortamenti;36000;36000;36000;36000;36000
+P&L;ebit;-40986;74851;241936;384843;503992
+P&L;imposte;0;20883;67500;107371;140614
+P&L;utile_netto;-40986;53968;174436;277472;363378
+P&L;cash_flow;-4986;89968;210436;313472;399378
+Sensitivity;Base;277936
+Sensitivity;Volumi −30%;120425
+Sensitivity;Volumi +30%;435447
+Sensitivity;Prezzo −10%;54887
+Sensitivity;Prezzo +10%;500985
+Sensitivity;BOM +10%;165516
+Sensitivity;BOM −10%;390356

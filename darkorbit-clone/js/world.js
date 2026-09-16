@@ -29,10 +29,11 @@ WORLD.sectorIndexAt = function (x, y) {
 };
 
 WORLD.newGalaxy = function () {
-  var g = { asteroids: [], npcs: [] }, i, x, y, r, type, count, secIdx, sec;
-  // Asteroidi: 90 distribuiti, 2/3 in Alpha/Beta (facili), 1/3 in Gamma/Delta (ricchi)
+  var g = { version: DATA.WORLD_VERSION, asteroids: [], npcs: [] }, i, x, y, r, type, count, secIdx, sec;
+  // Asteroidi: ~135 distribuiti, 2/3 nelle mappe facili (Alpha/Beta/Gamma),
+  // il resto nelle mappe avanzate (Delta/Epsilon/Zeta, ricche di osmio/arkon/xenodium)
   var arr = [];
-  for (i = 0; i < 90; i++) {
+  for (i = 0; i < 135; i++) {
     x = 120 + Math.random() * (DATA.WORLD_W - 240);
     y = 120 + Math.random() * (DATA.WORLD_H - 240);
     secIdx = WORLD.sectorIndexAt(x, y);
@@ -41,8 +42,8 @@ WORLD.newGalaxy = function () {
     arr.push({ x: x, y: y, r: r, res: 30 + Math.floor(Math.random() * 40), uri: Math.random() < DATA.ASTEROID_URIDIUM_CHANCE, ore: WORLD.pickOre(sec) });
   }
   g.asteroids = arr;
-  // NPC: fascia di tier in base al settore
-  count = 26;
+  // NPC: fascia di tier in base al settore. Piu' mappe, piu' nemici.
+  count = 44;
   for (i = 0; i < count; i++) {
     x = 200 + Math.random() * (DATA.WORLD_W - 400);
     y = 200 + Math.random() * (DATA.WORLD_H - 400);
@@ -57,7 +58,8 @@ WORLD.newGalaxy = function () {
 // --- Carica / salva galassia ------------------------------------------------
 WORLD.load = function () {
   WORLD.galaxy = SAVE.loadWorld();
-  if (!WORLD.galaxy || !WORLD.galaxy.asteroids || WORLD.galaxy.asteroids.length === 0) {
+  if (!WORLD.galaxy || !WORLD.galaxy.asteroids || WORLD.galaxy.asteroids.length === 0 ||
+      WORLD.galaxy.version !== DATA.WORLD_VERSION) {
     WORLD.galaxy = WORLD.newGalaxy();
     SAVE.saveWorld(WORLD.galaxy);
   }
@@ -95,6 +97,7 @@ WORLD.buildRuntime = function () {
       range: npc.range,
       color: npc.color,
       size: npc.size,
+      sprite: npc.sprite || 'streuner',
       ep: npc.ep,
       honor: npc.honor,
       alive: true,
@@ -208,6 +211,7 @@ WORLD.gateSpawnWave = function (count, tierMin, tierMax) {
       speed: npc.speed, dmg: npc.dmg,
       aggro: npc.aggro, range: npc.range,
       color: npc.color, size: npc.size,
+      sprite: npc.sprite || 'streuner',
       ep: npc.ep, honor: npc.honor,
       isGate: true,
       alive: true,
@@ -230,6 +234,7 @@ WORLD.gateSpawnBoss = function () {
     speed: b.speed, dmg: b.dmg,
     aggro: b.aggro, range: b.range,
     color: b.color, size: b.size,
+    sprite: b.sprite || 'boss',
     ep: 5000, honor: 800,
     isGate: true, isBoss: true,
     alive: true,

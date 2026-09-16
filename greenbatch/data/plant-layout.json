@@ -1,0 +1,430 @@
+{
+  "meta": {
+    "product": "GreenBatch",
+    "model": "GB-8S",
+    "description": "Sistema di stoccaggio, dosaggio a lotti e tracciabilità per caffè verde (8 silos, trasporto pneumatico in depressione).",
+    "revision": "A",
+    "date": "2025-01-15",
+    "plant": "Torrefazione — linea verde"
+  },
+  "parametri": {
+    "silo": {
+      "capacityKg": 1000,
+      "highAlarmPct": 97,
+      "lowAlarmPct": 8,
+      "coneDeg": 60,
+      "cylinderMm": 1000,
+      "coneHeightMm": 866,
+      "cylinderHeightMm": 2000
+    },
+    "blower": {
+      "vacuumSetpointKpa": 42,
+      "vacuumMaxKpa": 55,
+      "spinUpTauS": 1.1,
+      "motorKw": 7.5,
+      "currentNoLoadA": 4.2,
+      "currentFullA": 13.6
+    },
+    "conveying": {
+      "loadRateKgSPerKpa": 0.026,
+      "batchRateKgSPerKpa": 0.018,
+      "transportDelayS": 0.8,
+      "saltationMinKpa": 22,
+      "throttle": {
+        "coarsePct": 100,
+        "finePct": 12,
+        "topoffPct": 6
+      }
+    },
+    "cyclone": {
+      "bufferCapacityKg": 25,
+      "airlockRateKgS": 3
+    },
+    "filter": {
+      "dpCleanKpa": 0.4,
+      "dpAlarmKpa": 3.5,
+      "cleanIntervalS": 300,
+      "cleanDurationS": 6
+    },
+    "weigher": {
+      "capacityKg": 120,
+      "resolutionKg": 0.05,
+      "tolerancePct": 0.5,
+      "toleranceMinKg": 0.1,
+      "inflightInitialKg": 0.08,
+      "inflightAdapt": 0.35,
+      "settleTimeS": 1.2,
+      "dischargeRateKgS": 1.4,
+      "overloadPct": 102
+    },
+    "roaster": {
+      "hopperCapacityKg": 80,
+      "lowAlarmKg": 5
+    },
+    "batch": {
+      "maxComponents": 6,
+      "timeoutS": 180
+    }
+  },
+  "layout_3d": {
+    "frame": {
+      "id": "FRAME_01",
+      "position_3d": {
+        "x": 4,
+        "y": 0,
+        "z": 0
+      },
+      "size": {
+        "x": 12.4,
+        "y": 4.4,
+        "z": 2.2
+      }
+    },
+    "silos": [
+      {
+        "id": "G1",
+        "position_3d": {
+          "x": 0,
+          "y": 0.9,
+          "z": 0
+        }
+      },
+      {
+        "id": "G2",
+        "position_3d": {
+          "x": 1.55,
+          "y": 0.9,
+          "z": 0
+        }
+      },
+      {
+        "id": "G3",
+        "position_3d": {
+          "x": 3.1,
+          "y": 0.9,
+          "z": 0
+        }
+      },
+      {
+        "id": "G4",
+        "position_3d": {
+          "x": 4.65,
+          "y": 0.9,
+          "z": 0
+        }
+      },
+      {
+        "id": "G5",
+        "position_3d": {
+          "x": 6.2,
+          "y": 0.9,
+          "z": 0
+        }
+      },
+      {
+        "id": "G6",
+        "position_3d": {
+          "x": 7.75,
+          "y": 0.9,
+          "z": 0
+        }
+      },
+      {
+        "id": "G7",
+        "position_3d": {
+          "x": 9.3,
+          "y": 0.9,
+          "z": 0
+        }
+      },
+      {
+        "id": "G8",
+        "position_3d": {
+          "x": 10.85,
+          "y": 0.9,
+          "z": 0
+        }
+      }
+    ],
+    "distributionManifold": {
+      "id": "DISTRIBUTION_MANIFOLD",
+      "position_3d": {
+        "x": 6.2,
+        "y": 4.55,
+        "z": 0
+      },
+      "length_m": 12
+    },
+    "collectionManifold": {
+      "id": "COLLECTION_MANIFOLD",
+      "position_3d": {
+        "x": 6.2,
+        "y": 0.95,
+        "z": 0
+      },
+      "length_m": 12
+    },
+    "cyclone": {
+      "id": "CYCLONE_101",
+      "position_3d": {
+        "x": 10.6,
+        "y": 4.1,
+        "z": 0
+      },
+      "size": {
+        "diameter_m": 0.9,
+        "height_m": 2.1
+      }
+    },
+    "filter": {
+      "id": "FL-101",
+      "position_3d": {
+        "x": 12,
+        "y": 4.4,
+        "z": 0
+      }
+    },
+    "blower": {
+      "id": "BLOWER_01",
+      "position_3d": {
+        "x": 13.6,
+        "y": 4.15,
+        "z": 0
+      }
+    },
+    "airlock": {
+      "id": "M-101",
+      "position_3d": {
+        "x": 10.6,
+        "y": 2.75,
+        "z": 0
+      }
+    },
+    "knifeGate": {
+      "id": "EV-101",
+      "position_3d": {
+        "x": 10.6,
+        "y": 3.15,
+        "z": 0
+      }
+    },
+    "weighHopper": {
+      "id": "WEIGH_SCALE_HOPPER",
+      "position_3d": {
+        "x": 2,
+        "y": 0.5,
+        "z": 0
+      },
+      "size": {
+        "capacity_kg": 120
+      }
+    },
+    "roasterHopper": {
+      "id": "ROASTER_LOADING_HOPPER",
+      "position_3d": {
+        "x": 0.2,
+        "y": 0.5,
+        "z": 1.8
+      }
+    }
+  },
+  "piping_network_connections": [
+    {
+      "source": "BLOWER_01",
+      "destination": "CYCLONE_101",
+      "medium": "Air Flow / Vacuum",
+      "via": "FL-101 (filter, clean side)"
+    },
+    {
+      "source": "CYCLONE_101",
+      "destination": "DISTRIBUTION_MANIFOLD",
+      "via": "EV-101 (knife gate) -> M-101 (rotary airlock)"
+    },
+    {
+      "source": "DISTRIBUTION_MANIFOLD",
+      "destination": "SILO_BANK (G1-G8)",
+      "via": "Top diverter valves DV-101..DV-108"
+    },
+    {
+      "source": "SILO_BANK (G1-G8)",
+      "destination": "COLLECTION_MANIFOLD",
+      "via": "Bottom discharge valves EV-201..EV-208"
+    },
+    {
+      "source": "COLLECTION_MANIFOLD",
+      "destination": "WEIGH_SCALE_HOPPER",
+      "medium": "Pneumatic Transport Line (vacuum batch line)",
+      "via": "DV-109 batch diverter"
+    },
+    {
+      "source": "WEIGH_SCALE_HOPPER",
+      "destination": "Roaster Loading Hopper",
+      "via": "Discharge valve EV-250"
+    }
+  ],
+  "silos": [
+    {
+      "id": "G1",
+      "variety": "R Exc Cauca",
+      "process": "W",
+      "grade": "Excelso",
+      "origin": "Colombia, Cauca",
+      "lot": "L-2401",
+      "weightKg": 974.5,
+      "capacityKg": 1000,
+      "highAlarm": true
+    },
+    {
+      "id": "G2",
+      "variety": "Brazil SD",
+      "process": "N",
+      "grade": "SD",
+      "origin": "Brasile, Cerrado",
+      "lot": "L-2402",
+      "weightKg": 985.5,
+      "capacityKg": 1000,
+      "highAlarm": true
+    },
+    {
+      "id": "G3",
+      "variety": "Yirgacheffe M",
+      "process": "N",
+      "grade": "M",
+      "origin": "Etiopia, Yirgacheffe",
+      "lot": "L-2403",
+      "weightKg": 976.6,
+      "capacityKg": 1000,
+      "highAlarm": true
+    },
+    {
+      "id": "G4",
+      "variety": "Colombia Supremo",
+      "process": "W",
+      "grade": "Supremo",
+      "origin": "Colombia, Huila",
+      "lot": "L-2404",
+      "weightKg": 540,
+      "capacityKg": 1000,
+      "highAlarm": false
+    },
+    {
+      "id": "G5",
+      "variety": "Guatemala SHB",
+      "process": "W",
+      "grade": "SHB",
+      "origin": "Guatemala, Antigua",
+      "lot": "L-2405",
+      "weightKg": 720,
+      "capacityKg": 1000,
+      "highAlarm": false
+    },
+    {
+      "id": "G6",
+      "variety": "Ethiopia Guji",
+      "process": "N",
+      "grade": "Grade 1",
+      "origin": "Etiopia, Guji",
+      "lot": "L-2406",
+      "weightKg": 610,
+      "capacityKg": 1000,
+      "highAlarm": false
+    },
+    {
+      "id": "G7",
+      "variety": "Kenya AA",
+      "process": "W",
+      "grade": "AA",
+      "origin": "Kenya, Nyeri",
+      "lot": "L-2407",
+      "weightKg": 430,
+      "capacityKg": 1000,
+      "highAlarm": false
+    },
+    {
+      "id": "G8",
+      "variety": "Decaf Colombia",
+      "process": "W",
+      "grade": "Decaffeinato",
+      "origin": "Colombia",
+      "lot": "L-2408",
+      "weightKg": 355,
+      "capacityKg": 1000,
+      "highAlarm": false
+    }
+  ],
+  "ricette": [
+    {
+      "id": "RCP-ESP-01",
+      "name": "Espresso House Blend",
+      "batchKg": 50,
+      "tolerancePct": 0.5,
+      "components": [
+        {
+          "silo": "G2",
+          "kg": 30
+        },
+        {
+          "silo": "G4",
+          "kg": 15
+        },
+        {
+          "silo": "G1",
+          "kg": 5
+        }
+      ]
+    },
+    {
+      "id": "RCP-FIL-02",
+      "name": "Filter Single Origin",
+      "batchKg": 25,
+      "tolerancePct": 0.5,
+      "components": [
+        {
+          "silo": "G3",
+          "kg": 25
+        }
+      ]
+    },
+    {
+      "id": "RCP-MOK-03",
+      "name": "Moka Classica",
+      "batchKg": 40,
+      "tolerancePct": 0.5,
+      "components": [
+        {
+          "silo": "G1",
+          "kg": 20
+        },
+        {
+          "silo": "G5",
+          "kg": 10
+        },
+        {
+          "silo": "G7",
+          "kg": 10
+        }
+      ]
+    },
+    {
+      "id": "RCP-DEC-04",
+      "name": "Decaf Blend",
+      "batchKg": 30,
+      "tolerancePct": 0.75,
+      "components": [
+        {
+          "silo": "G8",
+          "kg": 21
+        },
+        {
+          "silo": "G2",
+          "kg": 9
+        }
+      ]
+    }
+  ],
+  "note_modellazione_3d": {
+    "structure": "Telaio in acciaio a due livelli con 8 silos cilindrici verticali (Ø1000 mm, corpo 2000 mm, cono 60° alto 866 mm).",
+    "pipes": "Tubazioni in acciaio inox AISI 304 DN80 con curve a raggio lungo, valvole deviatrici pneumatiche e serrande a ghigliottina.",
+    "scale": "Tramoggia di pesa su 3 celle di carico posta sotto il collettore di raccolta, con valvola di scarico EV-250 verso la torrefattrice."
+  }
+}

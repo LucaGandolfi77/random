@@ -1,0 +1,74 @@
+{
+  "$schema": "newsroom-editorial-config",
+  "description": "Configurazione editoriale della redazione autonoma. Ogni valore numerico è una scala 0-100 salvo diversa indicazione.",
+  "language": "it",
+  "weights": {
+    "news_score": {
+      "importance": 0.3,
+      "recency": 0.25,
+      "source_reliability": 0.2,
+      "audience_relevance": 0.15,
+      "trend_velocity": 0.1
+    },
+    "overall_confidence": {
+      "source_reliability": 0.25,
+      "source_independence": 0.2,
+      "evidence_quality": 0.25,
+      "recency": 0.15,
+      "internal_consistency": 0.15
+    }
+  },
+  "confidence_policy": [
+    { "min": 0, "max": 39, "action": "BLOCK" },
+    { "min": 40, "max": 59, "action": "MORE_RESEARCH" },
+    { "min": 60, "max": 79, "action": "PUBLISH_WITH_CAUTION" },
+    { "min": 80, "max": 94, "action": "PUBLISH" },
+    { "min": 95, "max": 100, "action": "HIGH_CONFIDENCE" }
+  ],
+  "decisions": [
+    "IGNORE",
+    "MONITOR",
+    "RESEARCH",
+    "WRITE",
+    "UPDATE",
+    "URGENT_PUBLISH",
+    "PUBLISH",
+    "CORRECT",
+    "RETRACT"
+  ],
+  "source_hierarchy": [
+    "documenti ufficiali",
+    "comunicati ufficiali",
+    "documenti governativi",
+    "paper scientifici",
+    "dichiarazioni dirette",
+    "testate giornalistiche affidabili",
+    "agenzie di stampa",
+    "fonti secondarie",
+    "social media",
+    "forum e fonti anonime"
+  ],
+  "claim_types": ["FACT", "DECLARATION", "ANALYSIS", "RUMOR", "UNCONFIRMED", "OPINION"],
+  "verification_statuses": ["verified", "partially_verified", "unverified", "disputed", "false"],
+  "duplicate_policy": ["NEW_STORY", "EXISTING_STORY_UPDATE", "DUPLICATE", "RELATED_STORY"],
+  "quality_gate": [
+    "Tutti i claim principali sono verificati",
+    "Le fonti sono presenti",
+    "Non esistono contraddizioni irrisolte",
+    "Le date sono corrette",
+    "I numeri sono corretti",
+    "Le citazioni sono attribuite correttamente",
+    "Il titolo rappresenta realmente il contenuto",
+    "Non è un duplicato",
+    "Le immagini sono pertinenti",
+    "Il SEO è completo",
+    "L'articolo ha un chiaro valore per il lettore"
+  ],
+  "urgency_thresholds": {
+    "breaking": 80,
+    "urgent_publish_min_confidence": 60,
+    "monitor_importance_min": 40,
+    "research_importance_min": 55,
+    "publish_importance_min": 60
+  }
+}

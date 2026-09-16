@@ -1,0 +1,19 @@
+{
+  "name": "Keyfall — MIDI falling keys",
+  "short_name": "Keyfall",
+  "description": "Carica un file .mid/.midi e guarda le note cadere sui tasti come in Synthesia. Pianoforte integrato, 100% nel browser, offline.",
+  "id": "keyfall",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b0d16",
+  "theme_color": "#0b0d16",
+  "lang": "it",
+  "categories": ["music", "utilities", "productivity"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

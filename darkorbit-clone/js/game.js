@@ -1168,7 +1168,7 @@ GAME.render = function () {
     if (!n.alive) continue;
     var nx = n.x - camX, ny = n.y - camY;
     if (nx < -60 || nx > W + 60 || ny < -60 || ny > H + 60) continue;
-    SPRITE.drawShip(ctx, nx, ny, n.angle, n.color, n.size, true);
+    SPRITE.drawNpc(ctx, n.sprite || 'streuner', nx, ny, n.angle, n.color, n.size, true);
     // barra hp
     ctx.fillStyle = 'rgba(0,0,0,0.5)';
     ctx.fillRect(nx - n.size, ny - n.size - 8, n.size * 2, 3);
@@ -1192,7 +1192,7 @@ GAME.render = function () {
     if (!gn.alive) continue;
     var gx = gn.x - camX, gy = gn.y - camY;
     if (gx < -60 || gx > W + 60 || gy < -60 || gy > H + 60) continue;
-    SPRITE.drawShip(ctx, gx, gy, gn.angle, gn.color, gn.size, true);
+    SPRITE.drawNpc(ctx, gn.sprite || 'streuner', gx, gy, gn.angle, gn.color, gn.size, true);
     ctx.fillStyle = 'rgba(0,0,0,0.5)';
     ctx.fillRect(gx - gn.size, gy - gn.size - 8, gn.size * 2, 3);
     ctx.fillStyle = '#ff2d4d';

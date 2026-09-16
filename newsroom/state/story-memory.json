@@ -1,0 +1,5 @@
+{
+  "stories": [],
+  "last_cycle": null,
+  "_note": "Memoria storica della redazione. Ogni voce: NEWS OBJECT (schema/news-object.schema.json). L'orchestratore aggiorna questo file dopo ogni ciclo."
+}

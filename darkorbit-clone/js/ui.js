@@ -202,27 +202,25 @@ UI.drawGalaxyMap = function () {
   // sfondo
   ctx.fillStyle = '#05070d';
   ctx.fillRect(0, 0, W, H);
-  // settori
+  // settori (griglia data-driven)
   ctx.strokeStyle = '#2a3a5c';
   ctx.lineWidth = 1;
-  ctx.strokeRect(0, 0, W, H);
-  ctx.strokeRect(W / 2, 0, W / 2, H / 2);
-  ctx.strokeRect(0, H / 2, W / 2, H / 2);
-  ctx.strokeRect(W / 2, H / 2, W / 2, H / 2);
   ctx.fillStyle = '#6b7fa3';
   ctx.font = 'bold 12px sans-serif';
   ctx.textAlign = 'left';
-  ctx.fillText('ALPHA', 10, 20);
-  ctx.fillText('BETA', W / 2 + 10, 20);
-  ctx.fillText('GAMMA', 10, H / 2 + 20);
-  ctx.fillText('DELTA', W / 2 + 10, H / 2 + 20);
+  var sec, short;
+  for (i = 0; i < DATA.SECTORS.length; i++) {
+    sec = DATA.SECTORS[i];
+    ctx.strokeRect(sec.x0 * sx, sec.y0 * sy, (sec.x1 - sec.x0) * sx, (sec.y1 - sec.y0) * sy);
+    short = sec.name.replace('Settore ', '');
+    ctx.fillText(short, sec.x0 * sx + 10, sec.y0 * sy + 20);
+  }
   // livello richiesto per settore
-  var sec;
   ctx.font = '10px sans-serif';
   for (i = 0; i < DATA.SECTORS.length; i++) {
     sec = DATA.SECTORS[i];
     ctx.fillStyle = (p.level >= sec.reqLevel) ? '#46e0a0' : '#ff5b6a';
-    ctx.fillText('LIVELLO ' + sec.reqLevel, (sec.x0 / DATA.WORLD_W) * W + 10, (sec.y0 / DATA.WORLD_H) * H + 34);
+    ctx.fillText('LIVELLO ' + sec.reqLevel, sec.x0 * sx + 10, sec.y0 * sy + 34);
   }
   // asteroidi
   ctx.fillStyle = '#6b5b4e';

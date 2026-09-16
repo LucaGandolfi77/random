@@ -1,0 +1,23 @@
+{
+  "site": {
+    "name": "La Mia Redazione",
+    "url": "https://example.com",
+    "language": "it",
+    "default_author": "Redazione",
+    "categories": ["tecnologia", "politica", "economia", "scienza", "salute", "cronaca", "mondo"]
+  },
+  "publishing": {
+    "mode": "file",
+    "out_dir": "out",
+    "inbox_dir": "inbox",
+    "registry_file": "registry.json",
+    "template_file": "template.html",
+    "index_file": "index.html",
+    "api": {
+      "endpoint": "",
+      "token_env": "SITE_API_TOKEN",
+      "_note": "Se mode è 'api', publish.js pubblica via REST su endpoint (POST /posts) con token da variabile d'ambiente. Per ora mode è 'file': genera pagine statiche in out/."
+    }
+  },
+  "_note": "Configura il tuo sito qui: name, url, autore, categorie. Il SITE MANAGER (prompts/site-manager.md) usa questo file come fonte di verità per l'infrastruttura."
+}

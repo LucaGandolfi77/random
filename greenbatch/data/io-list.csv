@@ -1,0 +1,108 @@
+Tag;Descrizione;Tipo;Segnale;Area;Modulo;Canale;Note
+BL-01-RUN;Soffiante BL-01 — comando marcia;DO;24 VDC / relè;Trasporto;DQ-01;00;Avvio da sequenza o manuale
+BL-01-FB;Soffiante BL-01 — feedback marcia;DI;24 VDC;Trasporto;DI-01;00;Contattore/ausiliario
+BL-01-FLT;Soffiante BL-01 — allarme termico/inverter;DI;24 VDC;Trasporto;DI-01;01;NC, apre su guasto
+VFD-01-REF;Inverter soffiante — riferimento velocità;AO;0/10 V;Trasporto;AQ-01;00;Regolazione vuoto
+CT-01;Corrente motore soffiante;AI;4-20 mA;Trasporto;AI-01;00;0-20 A
+PI-102;Trasmettitore vuoto linea;AI;4-20 mA;Trasporto;AI-01;01;-100..0 kPa
+PDT-103;Pressione differenziale filtro;AI;4-20 mA;Trasporto;AI-01;02;0-6 kPa, allarme intasamento
+EV-104;Elettrovalvola pulizia filtro (controsoffio);DO;24 VDC;Trasporto;DQ-01;01;Ciclo temporizzato
+LSL-151;Ciclone CY-101 — livello basso (passaggio libero);DI;24 VDC;Trasporto;DI-01;02;Sonda capacitiva
+EV-101-O;Valvola ghigliottina EV-101 — apri;DO;24 VDC;Trasporto;DQ-01;02;Isolamento ciclone
+EV-101-C;Valvola ghigliottina EV-101 — chiudi;DO;24 VDC;Trasporto;DQ-01;03;Bistabile
+EV-101-OP;EV-101 — feedback aperta;DI;24 VDC;Trasporto;DI-01;03;Finecorsa
+EV-101-CL;EV-101 — feedback chiusa;DI;24 VDC;Trasporto;DI-01;04;Finecorsa
+M-101-RUN;Valvola rotativa M-101 — marcia;DO;24 VDC / relè;Trasporto;DQ-01;04;Airlock, mantiene il vuoto
+M-101-FB;M-101 — feedback marcia;DI;24 VDC;Trasporto;DI-01;05;
+M-101-FLT;M-101 — allarme termico;DI;24 VDC;Trasporto;DI-01;06;NC
+DV-101;Deviatrice superiore silo G1;DO;24 VDC;Silos;DQ-01;05;Un solo deviatore aperto per volta
+DV-101-OP;Deviatrice G1 — feedback aperta;DI;24 VDC;Silos;DI-01;07;
+LS-201H;Livello alto silo G1;DI;24 VDC;Silos;DI-01;08;Blocca deviatore (intangibile)
+LS-201L;Livello basso silo G1;DI;24 VDC;Silos;DI-01;09;Consenso dosaggio
+DV-102;Deviatrice superiore silo G2;DO;24 VDC;Silos;DQ-01;06;Un solo deviatore aperto per volta
+DV-102-OP;Deviatrice G2 — feedback aperta;DI;24 VDC;Silos;DI-01;10;
+LS-202H;Livello alto silo G2;DI;24 VDC;Silos;DI-01;11;Blocca deviatore (intangibile)
+LS-202L;Livello basso silo G2;DI;24 VDC;Silos;DI-01;12;Consenso dosaggio
+DV-103;Deviatrice superiore silo G3;DO;24 VDC;Silos;DQ-01;07;Un solo deviatore aperto per volta
+DV-103-OP;Deviatrice G3 — feedback aperta;DI;24 VDC;Silos;DI-01;13;
+LS-203H;Livello alto silo G3;DI;24 VDC;Silos;DI-01;14;Blocca deviatore (intangibile)
+LS-203L;Livello basso silo G3;DI;24 VDC;Silos;DI-01;15;Consenso dosaggio
+DV-104;Deviatrice superiore silo G4;DO;24 VDC;Silos;DQ-01;08;Un solo deviatore aperto per volta
+DV-104-OP;Deviatrice G4 — feedback aperta;DI;24 VDC;Silos;DI-02;00;
+LS-204H;Livello alto silo G4;DI;24 VDC;Silos;DI-02;01;Blocca deviatore (intangibile)
+LS-204L;Livello basso silo G4;DI;24 VDC;Silos;DI-02;02;Consenso dosaggio
+DV-105;Deviatrice superiore silo G5;DO;24 VDC;Silos;DQ-01;09;Un solo deviatore aperto per volta
+DV-105-OP;Deviatrice G5 — feedback aperta;DI;24 VDC;Silos;DI-02;03;
+LS-205H;Livello alto silo G5;DI;24 VDC;Silos;DI-02;04;Blocca deviatore (intangibile)
+LS-205L;Livello basso silo G5;DI;24 VDC;Silos;DI-02;05;Consenso dosaggio
+DV-106;Deviatrice superiore silo G6;DO;24 VDC;Silos;DQ-01;10;Un solo deviatore aperto per volta
+DV-106-OP;Deviatrice G6 — feedback aperta;DI;24 VDC;Silos;DI-02;06;
+LS-206H;Livello alto silo G6;DI;24 VDC;Silos;DI-02;07;Blocca deviatore (intangibile)
+LS-206L;Livello basso silo G6;DI;24 VDC;Silos;DI-02;08;Consenso dosaggio
+DV-107;Deviatrice superiore silo G7;DO;24 VDC;Silos;DQ-01;11;Un solo deviatore aperto per volta
+DV-107-OP;Deviatrice G7 — feedback aperta;DI;24 VDC;Silos;DI-02;09;
+LS-207H;Livello alto silo G7;DI;24 VDC;Silos;DI-02;10;Blocca deviatore (intangibile)
+LS-207L;Livello basso silo G7;DI;24 VDC;Silos;DI-02;11;Consenso dosaggio
+DV-108;Deviatrice superiore silo G8;DO;24 VDC;Silos;DQ-01;12;Un solo deviatore aperto per volta
+DV-108-OP;Deviatrice G8 — feedback aperta;DI;24 VDC;Silos;DI-02;12;
+LS-208H;Livello alto silo G8;DI;24 VDC;Silos;DI-02;13;Blocca deviatore (intangibile)
+LS-208L;Livello basso silo G8;DI;24 VDC;Silos;DI-02;14;Consenso dosaggio
+WT-201;Peso silo G1 (somma 3 celle);MB;Modbus RTU 9600 8E1;Silos;MB-01;addr 2;Risoluzione 0.1 kg, classe III
+EV-201-O;Valvola scarico silo G1 — apri;DO;24 VDC;Silos;DQ-01;13;
+EV-201-C;Valvola scarico silo G1 — chiudi;DO;24 VDC;Silos;DQ-01;14;
+EV-201-OP;Scarico G1 — feedback aperta;DI;24 VDC;Silos;DI-02;15;
+EV-201-CL;Scarico G1 — feedback chiusa;DI;24 VDC;Silos;DI-03;00;
+WT-202;Peso silo G2 (somma 3 celle);MB;Modbus RTU 9600 8E1;Silos;MB-01;addr 3;Risoluzione 0.1 kg, classe III
+EV-202-O;Valvola scarico silo G2 — apri;DO;24 VDC;Silos;DQ-01;15;
+EV-202-C;Valvola scarico silo G2 — chiudi;DO;24 VDC;Silos;DQ-02;00;
+EV-202-OP;Scarico G2 — feedback aperta;DI;24 VDC;Silos;DI-03;01;
+EV-202-CL;Scarico G2 — feedback chiusa;DI;24 VDC;Silos;DI-03;02;
+WT-203;Peso silo G3 (somma 3 celle);MB;Modbus RTU 9600 8E1;Silos;MB-01;addr 4;Risoluzione 0.1 kg, classe III
+EV-203-O;Valvola scarico silo G3 — apri;DO;24 VDC;Silos;DQ-02;01;
+EV-203-C;Valvola scarico silo G3 — chiudi;DO;24 VDC;Silos;DQ-02;02;
+EV-203-OP;Scarico G3 — feedback aperta;DI;24 VDC;Silos;DI-03;03;
+EV-203-CL;Scarico G3 — feedback chiusa;DI;24 VDC;Silos;DI-03;04;
+WT-204;Peso silo G4 (somma 3 celle);MB;Modbus RTU 9600 8E1;Silos;MB-01;addr 5;Risoluzione 0.1 kg, classe III
+EV-204-O;Valvola scarico silo G4 — apri;DO;24 VDC;Silos;DQ-02;03;
+EV-204-C;Valvola scarico silo G4 — chiudi;DO;24 VDC;Silos;DQ-02;04;
+EV-204-OP;Scarico G4 — feedback aperta;DI;24 VDC;Silos;DI-03;05;
+EV-204-CL;Scarico G4 — feedback chiusa;DI;24 VDC;Silos;DI-03;06;
+WT-205;Peso silo G5 (somma 3 celle);MB;Modbus RTU 9600 8E1;Silos;MB-01;addr 6;Risoluzione 0.1 kg, classe III
+EV-205-O;Valvola scarico silo G5 — apri;DO;24 VDC;Silos;DQ-02;05;
+EV-205-C;Valvola scarico silo G5 — chiudi;DO;24 VDC;Silos;DQ-02;06;
+EV-205-OP;Scarico G5 — feedback aperta;DI;24 VDC;Silos;DI-03;07;
+EV-205-CL;Scarico G5 — feedback chiusa;DI;24 VDC;Silos;DI-03;08;
+WT-206;Peso silo G6 (somma 3 celle);MB;Modbus RTU 9600 8E1;Silos;MB-01;addr 7;Risoluzione 0.1 kg, classe III
+EV-206-O;Valvola scarico silo G6 — apri;DO;24 VDC;Silos;DQ-02;07;
+EV-206-C;Valvola scarico silo G6 — chiudi;DO;24 VDC;Silos;DQ-02;08;
+EV-206-OP;Scarico G6 — feedback aperta;DI;24 VDC;Silos;DI-03;09;
+EV-206-CL;Scarico G6 — feedback chiusa;DI;24 VDC;Silos;DI-03;10;
+WT-207;Peso silo G7 (somma 3 celle);MB;Modbus RTU 9600 8E1;Silos;MB-01;addr 8;Risoluzione 0.1 kg, classe III
+EV-207-O;Valvola scarico silo G7 — apri;DO;24 VDC;Silos;DQ-02;09;
+EV-207-C;Valvola scarico silo G7 — chiudi;DO;24 VDC;Silos;DQ-02;10;
+EV-207-OP;Scarico G7 — feedback aperta;DI;24 VDC;Silos;DI-03;11;
+EV-207-CL;Scarico G7 — feedback chiusa;DI;24 VDC;Silos;DI-03;12;
+WT-208;Peso silo G8 (somma 3 celle);MB;Modbus RTU 9600 8E1;Silos;MB-01;addr 9;Risoluzione 0.1 kg, classe III
+EV-208-O;Valvola scarico silo G8 — apri;DO;24 VDC;Silos;DQ-02;11;
+EV-208-C;Valvola scarico silo G8 — chiudi;DO;24 VDC;Silos;DQ-02;12;
+EV-208-OP;Scarico G8 — feedback aperta;DI;24 VDC;Silos;DI-03;13;
+EV-208-CL;Scarico G8 — feedback chiusa;DI;24 VDC;Silos;DI-03;14;
+DV-109;Deviatrice linea dosaggio verso bilancia;DO;24 VDC;Dosaggio;DQ-02;13;
+DV-109-OP;DV-109 — feedback aperta;DI;24 VDC;Dosaggio;DI-03;15;
+EV-260-REF;Valvola di regolazione linea dosaggio — riferimento apertura;AO;0/10 V;Dosaggio;AQ-01;01;Dosaggio grossolano/fine (100%/12%)
+EV-260-POS;EV-260 — posizione reale;AI;4-20 mA;Dosaggio;AI-01;03;0-100 %
+LC-01;Cella di carico 1 tramoggia di pesa;MB;Modbus RTU;Dosaggio;MB-01;addr 10;3 punti, 100 kg cad.
+LC-02;Cella di carico 2 tramoggia di pesa;MB;Modbus RTU;Dosaggio;MB-01;addr 11;
+LC-03;Cella di carico 3 tramoggia di pesa;MB;Modbus RTU;Dosaggio;MB-01;addr 12;
+WT-250;Peso netto tramoggia (somma celle);MB;Modbus RTU;Dosaggio;MB-01;addr 13;Risoluzione 0.05 kg
+EV-250-O;Valvola scarico tramoggia EV-250 — apri;DO;24 VDC;Dosaggio;DQ-02;14;Verso torrefattrice
+EV-250-C;EV-250 — chiudi;DO;24 VDC;Dosaggio;DQ-02;15;
+EV-250-OP;EV-250 — feedback aperta;DI;24 VDC;Dosaggio;DI-04;00;
+EV-250-CL;EV-250 — feedback chiusa;DI;24 VDC;Dosaggio;DI-04;01;
+LS-301H;Tramoggia torrefattrice — livello alto;DI;24 VDC;Dosaggio;DI-04;02;Blocca scarico EV-250
+ESTOP-01;Pulsante emergenza (categoria 1, doppio canale);DI;24 VDC sicuro;Sicurezza;DI-04;03;Safety relay, cat. 3 PL d
+ESTOP-01-B;Emergenza — secondo canale;DI;24 VDC sicuro;Sicurezza;DI-04;04;Ridondanza
+MODE-LOCAL;Selettore locale/remoto quadro;DI;24 VDC;Sicurezza;DI-04;05;
+PANEL-DOOR;Contatto porta quadro elettrico;DI;24 VDC;Sicurezza;DI-04;06;
+BEACON-01;Segnalatore luminoso/acustico allarmi;DO;24 VDC;Sicurezza;DQ-03;00;
+AIR-PRESS;Pressione aria strumenti (pressostato);DI;24 VDC;Sicurezza;DI-04;07;Consenso valvole pneumatiche

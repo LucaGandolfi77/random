@@ -1,0 +1,41 @@
+Categoria;Voce;Qty;UM;PrezzoUnitarioEUR;Note
+Automazione;CPU PLC S7-1512SP-1 PN;1;pz;1150;alternativa ControlLogix 5069-L306ER
+Automazione;Modulo DI 16x24VDC;4;pz;180;56 punti totali
+Automazione;Modulo DQ 16x24VDC/0,5A;3;pz;220;33 punti totali
+Automazione;Modulo AI 8xI;1;pz;480;4 punti usati
+Automazione;Modulo AQ 4xI;1;pz;430;2 punti usati
+Automazione;Modulo CM PtP (Modbus RTU);1;pz;390;12 dispositivi
+Automazione;Relè di sicurezza cat.3 PL d + pulsanti emergenza;1;pz;410;doppio canale
+Automazione;Isola valvole 20 uscite + solenoidi;1;pz;1150;bistabili + dump
+Automazione;Alimentatore 24VDC 10A + UPS 24V 7Ah;1;pz;680;backup >=30 min
+Automazione;Switch gestito 8 porte + cablaggio PROFINET;1;pz;690;VLAN + anello MRP
+Automazione;HMI panel PC 15" IP65;1;pz;1850;GreenBatch Control preinstallato
+Automazione;Quadro elettrico QGB-01 800x600x300 IP55;1;pz;2200;assemblato e collaudato
+Potenza;Inverter VFD 11 kW con filtro EMC C2;1;pz;1450;controllo vuoto
+Potenza;Soffiante a canale 11 kW (depressione);1;pz;6800;7,5 kW se portata <=3 t/h
+Potenza;Valvola rotativa M-101 + motoriduttore 0,55 kW;1;pz;1900;airlock
+Potenza;Ghigliottina pneumatica EV-101 + attuatore;1;pz;780;isolamento ciclone
+Processo;Valvola deviatrice DV-101..108;8;pz;640;pneumatiche, feedback
+Processo;Valvola scarico silo EV-201..208;8;pz;520;bistabili, feedback
+Processo;Valvola di regolazione EV-260 + posizionatore;1;pz;890;dosaggio fine 12%/6%
+Processo;Valvola scarico tramoggia EV-250;1;pz;560;verso torrefattrice
+Processo;Filtro FL-101 antistatico con controsoffio;1;pz;2400;cartucce + EV-104
+Processo;Ciclone CY-101 AISI304;1;pz;1600;separatore primario
+Strumentazione;Cella di carico 100 kg (silos);24;pz;180;3 per silo, classe III
+Strumentazione;Cella di carico 100 kg (tramoggia);3;pz;240;classe III, 0,05 kg
+Strumentazione;Trasmettitore di peso Modbus RTU;9;pz;320;8 silos + tramoggia
+Strumentazione;Scatola di somma + trim celle;9;pz;180;6 fili schermati
+Strumentazione;Interruttore di livello alto/basso;17;pz;120;16 silos + LSL-151
+Strumentazione;Trasmettitore di vuoto PI-102 4-20mA;1;pz;350;-100..0 kPa
+Strumentazione;Trasmettitore ΔP filtro PDT-103;1;pz;350;0-6 kPa
+Strumentazione;Trasduttore di corrente CT-01;1;pz;350;0-20 A
+Meccanica;Telaio di supporto silos in acciaio verniciato;1;pz;4500;8 postazioni
+Meccanica;Tubazioni AISI304 DN100 + raccorderia (30 m);1;pz;5800;curve raggio lungo
+Meccanica;Tubazioni AISI304 DN80 linea dosaggio (12 m);1;pz;2100;con DV-109/EV-260
+Installazione;Cavi, pressacavi, morsetti, canale, minuteria;1;pz;2400;scherniti per analogiche
+Installazione;Montaggio meccanico e idraulico in campo;1;pz;6500;manodopera
+Installazione;Cablaggio e collaudo elettrico;1;pz;4800;manodopera
+Installazione;Messa in servizio, taratura celle, FAT/SAT;1;pz;7200;include formazione
+Software;Licenza GreenBatch Control (HMI + dosaggio);1;pz;9800;una linea
+Software;Licenza GreenBatch Trace (lotti + report);1;pz;4600;tracciabilità
+Software;Integrazione ERP/MES (opzionale);1;pz;5400;ricette master + ordini

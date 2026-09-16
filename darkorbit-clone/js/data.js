@@ -4,7 +4,10 @@
 var DATA = {};
 
 // --- Mappa ---------------------------------------------------------------
-DATA.WORLD_W = 3000;
+// La galassia è divisa in settori su una griglia 3x2 (cella 1500x1200).
+// Ogni settore è una "mappa" con la propria fascia di nemici e minerali.
+DATA.WORLD_VERSION = 3;            // aumenta per rigenerare il mondo persistente
+DATA.WORLD_W = 4500;
 DATA.WORLD_H = 2400;
 DATA.BASE = { x: 1500, y: 1200 };   // base di partenza / respawn
 
@@ -13,10 +16,12 @@ DATA.BASE = { x: 1500, y: 1200 };   // base di partenza / respawn
 // tierMin/tierMax = fascia di NPC che popolano il settore
 // ores = pool di minerali estraibili dagli asteroidi del settore
 DATA.SECTORS = [
-  { name: 'Settore Alpha', x0: 0,      y0: 0,      x1: 1500, y1: 1200, reqLevel: 1,  tierMin: 0, tierMax: 1, ores: ['prometium', 'prometium', 'prometium', 'endurium', 'endurium', 'terbium'] },
-  { name: 'Settore Beta',  x0: 1500,   y0: 0,      x1: 3000, y1: 1200, reqLevel: 3,  tierMin: 1, tierMax: 3, ores: ['endurium', 'endurium', 'terbium', 'terbium', 'prometid', 'duranium'] },
-  { name: 'Settore Gamma', x0: 0,      y0: 1200,   x1: 1500, y1: 2400, reqLevel: 5,  tierMin: 3, tierMax: 5, ores: ['prometid', 'prometid', 'duranium', 'duranium', 'promerium', 'seprom'] },
-  { name: 'Settore Delta', x0: 1500,   y0: 1200,   x1: 3000, y1: 2400, reqLevel: 8,  tierMin: 5, tierMax: 6, ores: ['promerium', 'promerium', 'seprom', 'seprom', 'seprom', 'osmium'] }
+  { name: 'Settore Alpha',   x0: 0,    y0: 0,    x1: 1500, y1: 1200, reqLevel: 1,  tierMin: 0,  tierMax: 1,  ores: ['prometium', 'prometium', 'prometium', 'endurium', 'endurium', 'terbium'] },
+  { name: 'Settore Beta',    x0: 1500, y0: 0,    x1: 3000, y1: 1200, reqLevel: 3,  tierMin: 1,  tierMax: 3,  ores: ['endurium', 'endurium', 'terbium', 'terbium', 'prometid', 'duranium'] },
+  { name: 'Settore Gamma',   x0: 0,    y0: 1200, x1: 1500, y1: 2400, reqLevel: 5,  tierMin: 3,  tierMax: 5,  ores: ['prometid', 'prometid', 'duranium', 'duranium', 'promerium', 'seprom'] },
+  { name: 'Settore Delta',   x0: 1500, y0: 1200, x1: 3000, y1: 2400, reqLevel: 8,  tierMin: 5,  tierMax: 6,  ores: ['promerium', 'promerium', 'seprom', 'seprom', 'seprom', 'osmium'] },
+  { name: 'Settore Epsilon', x0: 3000, y0: 0,    x1: 4500, y1: 1200, reqLevel: 11, tierMin: 7,  tierMax: 8,  ores: ['osmium', 'osmium', 'arkon', 'arkon', 'xenodium', 'xenodium'] },
+  { name: 'Settore Zeta',    x0: 3000, y0: 1200, x1: 4500, y1: 2400, reqLevel: 14, tierMin: 9,  tierMax: 10, ores: ['arkon', 'arkon', 'xenodium', 'xenodium', 'xenodium', 'xenodium'] }
 ];
 
 // --- Navi ----------------------------------------------------------------
@@ -90,14 +95,19 @@ DATA.ENGINES = {
 // hp, speed, dmg, aggro = raggio di inseguimento, range = gittata di tiro,
 // color, reward = crediti drop, uridiumChance, size, ep = punti esperienza,
 // honor = punti onore (economia indiretta: migliora il prezzo dei minerali)
+// sprite = sagoma procedurale usata da SPRITE.drawNpc (ogni nemico ha la sua)
 DATA.NPCS = [
-  { name: 'Streuner',       hp: 60,   speed: 55,  dmg: 8,  aggro: 260, range: 200, color: '#e8546a', reward: 200,   uridiumChance: 0.04, size: 16, ep: 8,    honor: 2 },
-  { name: 'Lordakia',       hp: 110,  speed: 68,  dmg: 15, aggro: 280, range: 220, color: '#ff8a5b', reward: 600,   uridiumChance: 0.08, size: 17, ep: 25,   honor: 5 },
-  { name: 'Saimon',         hp: 180,  speed: 78,  dmg: 24, aggro: 300, range: 240, color: '#d06bff', reward: 1400,  uridiumChance: 0.14, size: 18, ep: 70,   honor: 12 },
-  { name: 'Devolarium',     hp: 280,  speed: 86,  dmg: 34, aggro: 320, range: 260, color: '#5be0a0', reward: 3000,  uridiumChance: 0.22, size: 20, ep: 190,  honor: 30 },
-  { name: 'Sibelon',        hp: 420,  speed: 95,  dmg: 48, aggro: 340, range: 280, color: '#ffd54a', reward: 6000,  uridiumChance: 0.30, size: 22, ep: 480,  honor: 70 },
-  { name: 'Kristallin',     hp: 650,  speed: 100, dmg: 65, aggro: 360, range: 300, color: '#7df0ff', reward: 12000, uridiumChance: 0.40, size: 23, ep: 1100, honor: 150 },
-  { name: 'Kristallon',     hp: 1000, speed: 105, dmg: 85, aggro: 380, range: 320, color: '#ff6ec7', reward: 25000, uridiumChance: 0.50, size: 25, ep: 2600, honor: 350 }
+  { name: 'Streuner',       hp: 60,   speed: 55,  dmg: 8,   aggro: 260, range: 200, color: '#e8546a', reward: 200,    uridiumChance: 0.04, size: 16, ep: 8,     honor: 2,    sprite: 'streuner' },
+  { name: 'Lordakia',       hp: 110,  speed: 68,  dmg: 15,  aggro: 280, range: 220, color: '#ff8a5b', reward: 600,    uridiumChance: 0.08, size: 17, ep: 25,    honor: 5,    sprite: 'lordakia' },
+  { name: 'Saimon',         hp: 180,  speed: 78,  dmg: 24,  aggro: 300, range: 240, color: '#d06bff', reward: 1400,   uridiumChance: 0.14, size: 18, ep: 70,    honor: 12,   sprite: 'saimon' },
+  { name: 'Devolarium',     hp: 280,  speed: 86,  dmg: 34,  aggro: 320, range: 260, color: '#5be0a0', reward: 3000,   uridiumChance: 0.22, size: 20, ep: 190,   honor: 30,   sprite: 'devolarium' },
+  { name: 'Sibelon',        hp: 420,  speed: 95,  dmg: 48,  aggro: 340, range: 280, color: '#ffd54a', reward: 6000,   uridiumChance: 0.30, size: 22, ep: 480,   honor: 70,   sprite: 'sibelon' },
+  { name: 'Kristallin',     hp: 650,  speed: 100, dmg: 65,  aggro: 360, range: 300, color: '#7df0ff', reward: 12000,  uridiumChance: 0.40, size: 23, ep: 1100,  honor: 150,  sprite: 'kristallin' },
+  { name: 'Kristallon',     hp: 1000, speed: 105, dmg: 85,  aggro: 380, range: 320, color: '#ff6ec7', reward: 25000,  uridiumChance: 0.50, size: 25, ep: 2600,  honor: 350,  sprite: 'kristallon' },
+  { name: 'Palladion',      hp: 1600, speed: 110, dmg: 105, aggro: 400, range: 340, color: '#ffb347', reward: 50000,  uridiumChance: 0.55, size: 26, ep: 6000,  honor: 800,  sprite: 'palladion' },
+  { name: 'Halon',          hp: 2400, speed: 115, dmg: 130, aggro: 420, range: 360, color: '#47c7ff', reward: 90000,  uridiumChance: 0.60, size: 28, ep: 12000, honor: 1600, sprite: 'halon' },
+  { name: 'Desmo',          hp: 3500, speed: 120, dmg: 160, aggro: 440, range: 380, color: '#9dff4f', reward: 150000, uridiumChance: 0.65, size: 30, ep: 25000, honor: 3200, sprite: 'desmo' },
+  { name: 'StreuneR',       hp: 5000, speed: 125, dmg: 200, aggro: 460, range: 400, color: '#ff2d4d', reward: 250000, uridiumChance: 0.70, size: 32, ep: 50000, honor: 6000, sprite: 'elite' }
 ];
 
 // --- Asteroidi ------------------------------------------------------------
@@ -110,14 +120,16 @@ DATA.ASTEROID_URIDIUM_CHANCE = 0.06;
 // tier: raw = grezzo, sec = raffinato di II grado, prime = III grado, adv = avanzato
 // value = prezzo base di vendita in crediti (migliorato dall'Honor)
 DATA.ORES = {
-  prometium: { name: 'Prometium', tier: 'raw',   value: 10,   color: '#8ae0ff' },
-  endurium:  { name: 'Endurium',  tier: 'raw',   value: 15,   color: '#ffb35b' },
-  terbium:   { name: 'Terbium',   tier: 'raw',   value: 25,   color: '#b9f06a' },
-  prometid:  { name: 'Prometid',  tier: 'sec',   value: 200,  color: '#7de8f5' },
-  duranium:  { name: 'Duranium',  tier: 'sec',   value: 200,  color: '#ff8a9a' },
-  promerium: { name: 'Promerium', tier: 'prime', value: 500,  color: '#ffd54a' },
-  seprom:    { name: 'Seprom',    tier: 'prime', value: 750,  color: '#c58bff' },
-  osmium:    { name: 'Osmium',    tier: 'adv',   value: 3000, color: '#ffffff' }
+  prometium: { name: 'Prometium', tier: 'raw',   value: 10,    color: '#8ae0ff' },
+  endurium:  { name: 'Endurium',  tier: 'raw',   value: 15,    color: '#ffb35b' },
+  terbium:   { name: 'Terbium',   tier: 'raw',   value: 25,    color: '#b9f06a' },
+  prometid:  { name: 'Prometid',  tier: 'sec',   value: 200,   color: '#7de8f5' },
+  duranium:  { name: 'Duranium',  tier: 'sec',   value: 200,   color: '#ff8a9a' },
+  promerium: { name: 'Promerium', tier: 'prime', value: 500,   color: '#ffd54a' },
+  seprom:    { name: 'Seprom',    tier: 'prime', value: 750,   color: '#c58bff' },
+  osmium:    { name: 'Osmium',    tier: 'adv',   value: 3000,  color: '#ffffff' },
+  arkon:     { name: 'Arkon',     tier: 'elite', value: 8000,  color: '#ff9e2c' },
+  xenodium:  { name: 'Xenodium',  tier: 'elite', value: 20000, color: '#9dff4f' }
 };
 
 // --- Ricette di raffinazione --------------------------------------------------
@@ -128,7 +140,9 @@ DATA.RECIPES = {
   duranium:  { name: 'Duranium',  out: 'duranium',  cost: { endurium: 3, terbium: 2 } },
   promerium: { name: 'Promerium', out: 'promerium', cost: { prometid: 3, duranium: 1 } },
   seprom:    { name: 'Seprom',    out: 'seprom',    cost: { duranium: 3, promerium: 1 } },
-  osmium:    { name: 'Osmium',    out: 'osmium',    cost: { seprom: 3, promerium: 1 } }
+  osmium:    { name: 'Osmium',    out: 'osmium',    cost: { seprom: 3, promerium: 1 } },
+  arkon:     { name: 'Arkon',     out: 'arkon',     cost: { osmium: 2, seprom: 2 } },
+  xenodium:  { name: 'Xenodium',  out: 'xenodium',  cost: { arkon: 2, osmium: 2 } }
 };
 
 // --- Configurazioni nave ------------------------------------------------------
@@ -199,15 +213,18 @@ DATA.MISSION_POOL = [
   { type: 'collect', gen: { oreTier: 'raw',       n: [6, 10] } },
   { type: 'collect', gen: { oreTier: 'sec',       n: [3, 5] } },
   { type: 'collect', gen: { oreTier: 'prime',     n: [2, 4] } },
+  { type: 'collect', gen: { oreTier: 'elite',     n: [1, 3] } },
   { type: 'reach',   gen: { } },
   { type: 'survive', gen: { secs: [25, 50] } }
 ];
 
 // Soglie di livello per i "tier" dei nemici (usate nelle missioni kill)
 DATA.NPC_TIER_RANGE = function (level) {
-  if (level >= 10) return [2, 6];
-  if (level >= 6) return [1, 5];
-  if (level >= 3) return [0, 3];
+  if (level >= 14) return [9, 10];
+  if (level >= 11) return [7, 8];
+  if (level >= 8) return [5, 8];
+  if (level >= 6) return [3, 6];
+  if (level >= 3) return [1, 4];
   return [0, 2];
 };
 
@@ -222,15 +239,16 @@ DATA.GATE = {
   boss: {
     name: 'MINDIFIRE BEHEMOTH', hp: 2500, speed: 88, dmg: 90,
     aggro: 420, range: 340, color: '#ff2d4d', size: 30, reward: 40000,
-    uridiumChance: 1
+    uridiumChance: 1, sprite: 'boss'
   }
 };
 
 // Fascia di tier dei nemici nel gate, per livello
 DATA.GATE_TIERS = function (level) {
-  if (level >= 14) return [3, 6];
-  if (level >= 9) return [2, 5];
-  if (level >= 6) return [1, 4];
+  if (level >= 16) return [7, 10];
+  if (level >= 12) return [5, 8];
+  if (level >= 9) return [3, 6];
+  if (level >= 6) return [2, 5];
   return [0, 3];
 };
 

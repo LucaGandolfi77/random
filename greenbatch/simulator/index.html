@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GreenBatch GB-8S — SCADA dosaggio caffè verde</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="tb-left">
+      <span class="logo">GB</span>
+      <div class="plant">
+        <strong>GreenBatch GB-8S</strong>
+        <span>Banco silos caffè verde · dosaggio a lotti · rev. A</span>
+      </div>
+      <nav class="tb-icons">
+        <button id="btn-green" class="icon-btn" title="Scheda caffè verde"><span class="ic green">◉</span> Green</button>
+        <button id="btn-alarms" class="icon-btn" title="Allarmi"><span class="ic red">▲</span> Alarms</button>
+        <button id="btn-login" class="icon-btn" title="Accesso"><span class="ic amber">⚿</span> Login</button>
+        <button id="btn-print" class="icon-btn" title="Stampa report lotto"><span class="ic blue">⎙</span> Print</button>
+      </nav>
+    </div>
+    <div class="tb-right">
+      <span class="role">Utente: <b id="role-label">Operatore</b></span>
+      <span class="badge ok" id="mode-badge">AUTO</span>
+      <span class="clock" id="clock">--:--:--</span>
+      <span class="alarm-pill">Allarmi <b id="alarm-count" class="pill-count">0</b></span>
+      <button id="btn-reset" class="btn small">Riarmo</button>
+      <button id="btn-estop" class="btn danger">EMERGENZA</button>
+    </div>
+  </header>
+
+  <div class="alarm-banner" id="alarm-banner">Nessun allarme attivo</div>
+
+  <main class="grid">
+
+    <!-- viste -->
+    <section class="panel views">
+      <div class="panel-head">
+        <h3>Vista impianto</h3>
+        <div class="seg">
+          <button data-view="iso" class="on">Isometrico 3D</button>
+          <button data-view="mimic">Mimic P&amp;ID</button>
+        </div>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="view-iso"></canvas>
+        <canvas id="view-mimic" style="display:none"></canvas>
+      </div>
+      <div class="toolbar">
+        <button id="btn-blower" class="btn">Soffiante BL-01</button>
+        <button id="btn-airlock" class="btn">Rotativa M-101</button>
+        <button id="btn-gate" class="btn">Ghigliottina EV-101</button>
+        <button id="btn-line" class="btn">Linea dosaggio DV-109</button>
+        <button id="btn-discharge" class="btn">Scarico EV-250</button>
+        <button id="btn-roaster" class="btn">Torrefattrice: consumo</button>
+        <label class="sel">Velocità
+          <select id="speed">
+            <option value="1">1×</option>
+            <option value="2" selected>2×</option>
+            <option value="5">5×</option>
+            <option value="10">10×</option>
+          </select>
+        </label>
+        <button id="btn-pause" class="btn">❚❚ Pausa</button>
+      </div>
+    </section>
+
+    <!-- colonna destra: SCALE + lotto -->
+    <aside class="side">
+      <section class="panel scale">
+        <div class="panel-head"><h3>SCALE — tramoggia di pesa</h3><span class="hint">3 celle di carico</span></div>
+        <div class="scale-display">
+          <div class="scale-row"><span>Actual</span><b id="scale-actual">+0.0 Kg</b></div>
+          <div class="scale-row"><span>Target</span><b id="scale-target">+0.0 Kg</b></div>
+          <div class="scale-status stopped" id="scale-status">STOPPED</div>
+        </div>
+        <div class="scale-bar"><i id="scale-bar"></i></div>
+        <div class="lc-grid">
+          <div><span>LC-01</span><b id="lc1">0.00</b></div>
+          <div><span>LC-02</span><b id="lc2">0.00</b></div>
+          <div><span>LC-03</span><b id="lc3">0.00</b></div>
+        </div>
+        <div class="valve closed" id="ev250">EV-250 CHIUSA</div>
+      </section>
+
+      <section class="panel batch">
+        <div class="panel-head"><h3>Lotto / ricetta</h3><span class="hint" id="batch-count">0 lotti completati</span></div>
+        <div class="batch-controls">
+          <select id="recipe"></select>
+          <button id="btn-start-batch" class="btn primary">Avvia lotto</button>
+          <button id="btn-abort-batch" class="btn">Annulla</button>
+        </div>
+        <div id="batch-body" class="batch-body"></div>
+      </section>
+    </aside>
+
+    <!-- banco silos -->
+    <section class="panel silos-panel">
+      <div class="panel-head"><h3>Banco silos G1–G8</h3><span class="hint">clicca un silo per i comandi</span></div>
+      <div class="silos-layout">
+        <div id="silos" class="silos"></div>
+        <div class="silo-side">
+          <div id="silo-detail" class="silo-detail"></div>
+          <div id="silo-actions" class="silo-actions"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- trend -->
+    <section class="panel trends">
+      <div class="panel-head"><h3>Trend (ultimi 180 s)</h3><span class="hint">vuoto · peso · corrente · ΔP filtro</span></div>
+      <canvas id="view-trend"></canvas>
+    </section>
+
+    <!-- allarmi -->
+    <section class="panel alarms" id="panel-alarms">
+      <div class="panel-head"><h3>Allarmi attivi</h3><button id="btn-ack" class="btn small">Riconosci tutti</button></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Cod.</th><th>Classe</th><th>Tag</th><th>Descrizione</th><th>Dalle</th></tr></thead>
+          <tbody id="alarm-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- monitor I/O -->
+    <section class="panel io">
+      <div class="panel-head"><h3>Monitor I/O (PLC)</h3><span class="hint">107 tag · DI/DO/AI/AO/Modbus</span></div>
+      <div class="table-wrap scroll">
+        <table>
+          <thead><tr><th>Tag</th><th>Tipo</th><th>Descrizione</th><th>Valore</th></tr></thead>
+          <tbody id="io-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- log -->
+    <section class="panel log">
+      <div class="panel-head"><h3>Eventi e tracciabilità</h3><span class="hint">log di processo</span></div>
+      <div id="log" class="log"></div>
+    </section>
+
+    <!-- legenda -->
+    <section class="panel legend-panel">
+      <div class="panel-head"><h3>Tipologia caffè verde</h3><span class="hint">la lavorazione cambia densità e colore</span></div>
+      <div id="legend" class="legend"></div>
+    </section>
+
+  </main>
+
+  <!-- modal login -->
+  <div id="login-modal" class="modal">
+    <div class="modal-card">
+      <h2>Accesso operatore</h2>
+      <p class="muted">I permessi cambiano le azioni consentite (avvio lotti, comandi manuali, configurazione).</p>
+      <div class="roles">
+        <button data-role="operator" class="btn"><b>Operatore</b><span>avvio lotti, comandi manuali</span></button>
+        <button data-role="supervisor" class="btn"><b>Supervisore</b><span>+ configurazione ricette</span></button>
+        <button data-role="admin" class="btn"><b>Amministratore</b><span>+ gestione impianto</span></button>
+      </div>
+      <button id="login-close" class="btn ghost">Chiudi</button>
+    </div>
+  </div>
+
+  <!-- modal report -->
+  <div id="report-modal" class="modal">
+    <div class="modal-card wide">
+      <div id="report-body"></div>
+      <div class="modal-actions">
+        <button class="btn primary" onclick="window.print()">Stampa</button>
+        <button id="report-close" class="btn ghost">Chiudi</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+</div>
+
+<script src="js/tags.js"></script>
+<script src="js/plant.js"></script>
+<script src="js/hmi.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

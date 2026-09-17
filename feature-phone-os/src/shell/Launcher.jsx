@@ -1,25 +1,44 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import registry from '../os/registry.js'
 
-export default function Launcher({ onLaunchApp, onKeyRef }) {
+export default function Launcher({ onLaunchApp, onKeyRef, kernel }) {
   const [cursor, setCursor] = useState(0)
+  const [now, setNow] = useState(new Date())
+  const [imeiPopup, setImei] = useState(null)
+  const seqRef = useRef('')
   const cols = 3
 
   useEffect(() => {
+    const t = setInterval(() => setNow(new Date()), 1000)
+    return () => clearInterval(t)
+  }, [])
+
+  useEffect(() => {
     onKeyRef.current = (key) => {
-      if (key === 'up') setCursor(c => Math.max(0, c - cols))
-      if (key === 'down') setCursor(c => Math.min(registry.length - 1, c + cols))
-      if (key === 'left') setCursor(c => Math.max(0, c - 1))
-      if (key === 'right') setCursor(c => Math.min(registry.length - 1, c + 1))
+      // Easter egg IMEI: digita *#06# come sui veri Nokia
+      if (/^[0-9*#]$/.test(key)) {
+        seqRef.current = (seqRef.current + key).slice(-8)
+        if (seqRef.current.endsWith('*#06#')) {
+          setImei(kernel.getImei())
+          seqRef.current = ''
+          return
+        }
+      }
+      if (imeiPopup) { setImei(null); return }
+      if (key === 'call') { onLaunchApp('dialer'); return }
+      if (key === 'up') setCursor(c => (c - cols + registry.length * cols) % registry.length)
+      if (key === 'down') setCursor(c => (c + cols) % registry.length)
+      if (key === 'left') setCursor(c => (c - 1 + registry.length) % registry.length)
+      if (key === 'right') setCursor(c => (c + 1) % registry.length)
       if (key === 'ok') onLaunchApp(registry[cursor].id)
     }
     return () => { onKeyRef.current = null }
-  }, [cursor, onLaunchApp, onKeyRef])
+  }, [cursor, onLaunchApp, onKeyRef, kernel, imeiPopup])
 
   return (
     <div className="launcher">
       <div className="launcher-time">
-        <span>{new Date().toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
+        <span>{now.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
       </div>
       <div className="launcher-grid">
         {registry.map((app, i) => (
@@ -34,6 +53,13 @@ export default function Launcher({ onLaunchApp, onKeyRef }) {
           </button>
         ))}
       </div>
+      {imeiPopup && (
+        <div className="imei-popup">
+          <div className="imei-title">IMEI</div>
+          <div className="imei-value">{imeiPopup}</div>
+          <div className="imei-hint">Ora vai a dormire. 😴</div>
+        </div>
+      )}
     </div>
   )
 }

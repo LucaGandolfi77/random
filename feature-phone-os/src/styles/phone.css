@@ -22,6 +22,36 @@ body {
 
 #root { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
 
+/**
+ * --- NOTIF POPUP (live, sopra tutto) --- */
+.notif-popup {
+  position: absolute;
+  top: 30px;
+  left: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.92);
+  border: 1px solid var(--theme-accent);
+  border-radius: 6px;
+  padding: 8px 10px;
+  z-index: 100;
+  animation: popup-in 0.25s ease-out;
+}
+@keyframes popup-in {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.notif-popup-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #7fbfff;
+  margin-bottom: 2px;
+}
+.notif-popup-text {
+  font-size: 11px;
+  color: var(--theme-fg);
+  opacity: 0.85;
+}
+
 /* --- BOOT --- */
 .boot-screen {
   display: flex;
@@ -35,10 +65,39 @@ body {
 .boot-text {
   color: #5f9fff;
   font-family: 'Courier New', monospace;
-  font-size: 14px;
-  line-height: 1.5;
-  text-align: center;
+  font-size: 11px;
+  line-height: 1.45;
+  text-align: left;
+  white-space: pre;
 }
+
+/* --- IMEI POPUP --- */
+.imei-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid var(--theme-accent);
+  border-radius: 8px;
+  padding: 16px 24px;
+  text-align: center;
+  z-index: 100;
+}
+.imei-title { font-size: 11px; opacity: 0.6; letter-spacing: 2px; }
+.imei-value {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: #7fbfff;
+  margin: 8px 0;
+}
+.imei-hint { font-size: 10px; opacity: 0.5; }
+
+/* --- BATTERY --- */
+.batt-ok { color: #5f5; }
+.batt-low { color: #ff5; }
+.batt-crit { color: #f55; animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: 0.3; } }
 
 /* --- PHONE FRAME --- */
 .phone-frame {
@@ -261,8 +320,19 @@ body {
   cursor: pointer;
 }
 .msg-conv-row:hover { background: rgba(255,255,255,0.05); }
+.msg-conv-row-focus { background: var(--theme-accent); }
 .msg-conv-name { font-weight: 600; }
 .msg-conv-preview { font-size: 11px; opacity: 0.6; }
+.msg-mode-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 8px;
+  font-size: 10px;
+  background: rgba(0,0,0,0.25);
+  flex-shrink: 0;
+}
+.msg-mode { color: #7fbfff; font-weight: 700; letter-spacing: 1px; }
+.msg-count { opacity: 0.4; }
 .msg-thread {
   flex: 1;
   overflow-y: auto;
@@ -357,6 +427,7 @@ body {
   margin-right: 8px;
   flex-shrink: 0;
 }
+.contact-info { flex: 1; min-width: 0; }
 .contact-name { font-weight: 600; }
 .contact-number { font-size: 10px; opacity: 0.5; }
 .contacts-add-hint {
@@ -431,6 +502,12 @@ body {
 }
 .calc-btn:hover { background: rgba(255,255,255,0.15); }
 .calc-btn:active { background: rgba(255,255,255,0.25); }
+.calc-hint {
+  text-align: center;
+  font-size: 9px;
+  opacity: 0.35;
+  padding: 6px 0 2px;
+}
 .calc-op { background: var(--theme-accent); color: #fff; }
 .calc-clear { background: #5a1a1a; color: #f88; }
 .calc-eq {
@@ -508,6 +585,14 @@ body {
   padding: 16px;
   font-size: 16px;
 }
+.volume-display { font-size: 20px; font-family: 'Courier New', monospace; }
+.volume-bar {
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  color: #7fbfff;
+  letter-spacing: 2px;
+}
 .settings-hint {
   text-align: center;
   padding: 8px;
@@ -558,3 +643,319 @@ body {
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--theme-accent); border-radius: 2px; }
+
+/* --- DIALER --- */
+.app-dialer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-size: 12px;
+}
+.dialer-number {
+  text-align: center;
+  font-size: 28px;
+  font-family: 'Courier New', monospace;
+  padding: 10px 4px 2px;
+  letter-spacing: 2px;
+  min-height: 42px;
+  color: var(--theme-fg);
+}
+.dialer-match {
+  text-align: center;
+  font-size: 11px;
+  color: #7fbfff;
+  min-height: 18px;
+  padding-bottom: 4px;
+}
+.dialer-grid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 4px 12px;
+}
+.dialer-row { display: flex; gap: 6px; }
+.dialer-btn {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--theme-fg);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  transition: background 0.1s;
+}
+.dialer-btn:hover { background: rgba(255, 255, 255, 0.15); }
+.dialer-btn:active { background: var(--theme-accent); }
+.dialer-hint {
+  text-align: center;
+  font-size: 10px;
+  opacity: 0.4;
+  padding: 6px 0;
+}
+.call-dir { font-size: 16px; width: 24px; text-align: center; flex-shrink: 0; }
+.call-dir.out { color: #5f5; }
+.call-dir.in { color: #7fbfff; }
+.call-dir.missed { color: #f55; }
+
+/* --- CALL SCREEN --- */
+.app-call {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 16px;
+  gap: 8px;
+}
+.app-call.call-incoming {
+  animation: call-flash 1s infinite;
+}
+@keyframes call-flash {
+  0%, 100% { background: rgba(0, 0, 0, 0); }
+  50% { background: rgba(90, 200, 90, 0.08); }
+}
+.call-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--theme-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+}
+.call-avatar.incoming { animation: pulse 0.8s infinite; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3); }
+  50% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(255, 255, 255, 0); }
+}
+.call-name { font-size: 20px; font-weight: 600; }
+.call-number { font-size: 12px; opacity: 0.5; font-family: 'Courier New', monospace; }
+.call-state { font-size: 14px; color: #7fbfff; }
+.call-state.incoming { color: #5f5; font-weight: 700; }
+.call-ringing { font-size: 18px; color: #5f5; animation: blink 0.5s infinite; }
+.call-hint { font-size: 10px; opacity: 0.4; margin-top: 12px; }
+
+/* --- CLOCK TABS --- */
+.clock-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 6px 8px 0;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.clock-tab {
+  padding: 4px 12px;
+  border: none;
+  border-radius: 4px 4px 0 0;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--theme-fg);
+  font-size: 11px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+.clock-tab-active {
+  background: var(--theme-accent);
+  opacity: 1;
+  font-weight: 600;
+}
+.clock-alarm { color: #f55; animation: blink 0.5s infinite; }
+.clock-alarm-text { color: #f55; font-size: 11px; font-weight: 700; animation: blink 0.5s infinite; }
+.clock-timer-dur { font-size: 10px; opacity: 0.5; margin-top: 8px; }
+
+/* --- NOTIFICATIONS APP --- */
+.app-notifications {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-size: 12px;
+}
+.notif-list { flex: 1; overflow-y: auto; }
+.notif-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 8px;
+}
+.notif-row-focus { background: var(--theme-accent); }
+.notif-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.notif-body { flex: 1; min-width: 0; }
+.notif-row-title { font-weight: 600; font-size: 12px; }
+.notif-row-text { font-size: 11px; opacity: 0.6; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.notif-time { font-size: 10px; opacity: 0.4; flex-shrink: 0; }
+.msg-empty {
+  padding: 16px;
+  font-size: 11px;
+  opacity: 0.5;
+  text-align: center;
+}
+
+/* --- NOTES --- */
+.app-notes {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-size: 12px;
+}
+.note-editor {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--theme-fg);
+  font-size: 12px;
+  font-family: 'Courier New', monospace;
+  padding: 8px;
+  resize: none;
+  outline: none;
+  line-height: 1.5;
+}
+.note-editor::placeholder { color: rgba(255, 255, 255, 0.3); }
+.note-status {
+  padding: 4px 8px;
+  font-size: 10px;
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+.note-avatar-note { font-size: 14px; }
+
+/* --- CONTACTS DETAIL --- */
+.contact-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  gap: 6px;
+}
+.contact-detail-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--theme-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+.contact-detail-name { font-size: 18px; font-weight: 600; }
+.contact-detail-number { font-size: 13px; opacity: 0.6; font-family: 'Courier New', monospace; }
+.contact-detail-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.contact-confirm {
+  text-align: center;
+  padding: 12px 16px;
+  font-size: 12px;
+}
+.contact-confirm-hint { font-size: 10px; opacity: 0.4; margin-top: 8px; }
+.contact-row-focus { background: var(--theme-accent); }
+.field-active { color: #7fbfff; font-weight: 700; }
+
+/* --- TERMINAL --- */
+.app-terminal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+}
+.terminal-out {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 8px;
+}
+.terminal-line {
+  line-height: 1.5;
+  word-break: break-all;
+  color: var(--theme-fg);
+}
+.terminal-prompt { color: #5f5; }
+.terminal-input-row {
+  display: flex;
+  align-items: center;
+  padding: 5px 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+  gap: 6px;
+}
+.terminal-prompt-inline { color: #5f5; flex-shrink: 0; }
+.terminal-input {
+  color: var(--theme-fg);
+  word-break: break-all;
+  min-height: 16px;
+}
+.terminal-cursor { color: #5f5; animation: blink 0.8s infinite; }
+
+/* --- MUSIC --- */
+.app-music {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 10px 8px;
+  gap: 4px;
+}
+.music-title {
+  font-size: 11px;
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.music-track-name { font-size: 17px; font-weight: 600; text-align: center; }
+.music-track-artist { font-size: 10px; opacity: 0.5; }
+.music-visualizer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  height: 56px;
+  margin: 10px 0 4px;
+}
+.music-bar {
+  width: 8px;
+  height: 12px;
+  background: var(--theme-accent);
+  border-radius: 2px 2px 0 0;
+}
+.music-visualizer.playing .music-bar {
+  animation: bounce ease-in-out infinite alternate;
+}
+@keyframes bounce {
+  from { height: 10px; }
+  to { height: 48px; background: #5f5; }
+}
+.music-note {
+  font-size: 16px;
+  font-family: 'Courier New', monospace;
+  color: #5f5;
+  min-height: 22px;
+}
+.music-progress {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 16px;
+}
+.music-dot { font-size: 7px; opacity: 0.3; }
+.music-dot-active { opacity: 1; color: #5f5; }
+.music-controls { display: flex; gap: 8px; margin-top: 8px; }
+.music-bg-hint { font-size: 9px; opacity: 0.4; animation: blink 2s infinite; }
+
+/* --- SETTINGS RESET --- */
+.settings-resetting { align-items: center; justify-content: center; gap: 10px; }
+.reset-title { font-size: 16px; font-weight: 700; color: #f55; }
+.reset-sub { font-size: 11px; opacity: 0.6; }
+.reset-bar { font-family: 'Courier New', monospace; font-size: 14px; color: #ff5; }
+.reset-fun { font-size: 11px; opacity: 0.5; }

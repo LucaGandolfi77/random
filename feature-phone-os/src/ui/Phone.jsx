@@ -3,6 +3,7 @@ import Screen from './Screen.jsx'
 import StatusBar from './StatusBar.jsx'
 import SoftkeyBar from './SoftkeyBar.jsx'
 import Keypad from './Keypad.jsx'
+import sound from '../os/sound.js'
 
 const KEY_MAP = {
   'ArrowUp': 'up',
@@ -10,8 +11,9 @@ const KEY_MAP = {
   'ArrowLeft': 'left',
   'ArrowRight': 'right',
   'Enter': 'ok',
+  'NumpadEnter': 'ok',
   'Escape': 'end',
-  'Backspace': 'end',
+  'Backspace': 'back',
   'F1': 'softLeft',
   'F2': 'softRight',
   ' ': 'space',
@@ -31,8 +33,8 @@ KEY_MAP['Comma'] = ','
 KEY_MAP['Slash'] = '/'
 KEY_MAP['Minus'] = '-'
 KEY_MAP['Equal'] = '+'
+KEY_MAP['Backslash'] = '#'   // cambio modalità input (T9/multitap/123)
 KEY_MAP['KeyC'] = 'c'
-KEY_MAP['KeyS'] = 's'
 
 export default function Phone({ children, kernel, onKey, softkeys }) {
   const keyHandlerRef = useRef(onKey)
@@ -45,13 +47,15 @@ export default function Phone({ children, kernel, onKey, softkeys }) {
       const mapped = KEY_MAP[code]
       if (mapped) {
         e.preventDefault()
+        sound.keyTone()
         keyHandlerRef.current(mapped)
         return
       }
       if (code.startsWith('Key')) {
         const letter = code[3].toLowerCase()
-        if (/^[a-zA-Z]$/.test(letter)) {
+        if (/^[a-z]$/.test(letter)) {
           e.preventDefault()
+          sound.keyTone()
           keyHandlerRef.current(letter)
         }
         return
@@ -69,7 +73,7 @@ export default function Phone({ children, kernel, onKey, softkeys }) {
         <Screen>{children}</Screen>
         <SoftkeyBar left={softkeys?.left} center={softkeys?.center} right={softkeys?.right} />
       </div>
-      <Keypad onKey={onKey} />
+      <Keypad onKey={(k) => { sound.keyTone(); onKey(k) }} />
     </div>
   )
 }

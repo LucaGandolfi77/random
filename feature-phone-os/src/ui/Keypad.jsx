@@ -1,13 +1,13 @@
 const LABELS = {
-  'softLeft': 'Seleziona',
-  'softRight': 'Opzioni',
-  'up': '\u25B2',
-  'down': '\u25BC',
-  'left': '\u25C0',
-  'right': '\u25B6',
+  'softLeft': 'Sel',
+  'softRight': 'Opz',
+  'up': '▲',
+  'down': '▼',
+  'left': '◀',
+  'right': '▶',
   'ok': 'OK',
-  'call': 'Call',
-  'end': 'End',
+  'call': '✆',
+  'end': '✕',
 }
 
 export default function Keypad({ onKey }) {

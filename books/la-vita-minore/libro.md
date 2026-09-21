@@ -7,9 +7,9 @@
 
 ## Stato
 
-- Parole totali: **~8.700** / obiettivo: **70.000**
-- Capitoli completati: **8 / 14** (prologo + capp. 1–7 ✅)
-- Prossima scadenza: cap. 8 — *La bellezza salverà il mondo*
+- Parole totali: **~10.500** / obiettivo: **70.000**
+- Capitoli completati: **10 / 14** (prologo + capp. 1–9 ✅)
+- Prossima scadenza: cap. 10 — *Il buio di maggio*
 
 ---
 
@@ -33,8 +33,8 @@
 | 5 | Lucia | `capitoli/05.md` | primo punto di svolta: la morte della madre | ✅ |
 | 6 | Tutto il resto è rumore | `capitoli/06.md` | funerale, lutto, disperazione; Nora resta; Proust (paradiso perduto, eco del prologo) | ✅ |
 | 7 | Le notti dei vivi | `capitoli/07.md` | convivenza; Ivo va in pensione; la vita ricostruita; Dostoevskij (le notti bianche) | ✅ |
-| 8 | La bellezza salverà il mondo | `capitoli/08.md` | la gravidanza; la verità detta a Dario; Dostoevskij (L'idiot) | ⬜ |
-| 9 | Fieno | `capitoli/09.md` | falso trionfo: impegno, preparativi, lavori con le mani; Tolstoj (Levin) | ⬜ |
+| 8 | La bellezza salverà il mondo | `capitoli/08.md` | la gravidanza; la verità detta a Dario; Dostoevskij (L'idiot) | ✅ |
+| 9 | Fieno | `capitoli/09.md` | falso trionfo: impegno, preparativi, lavori con le mani; Tolstoj (Levin) | ✅ |
 | 10 | Il buio di maggio | `capitoli/10.md` | crisi: la perdita del bambino; Proust (il tempo perduto) | ⬜ |
 | 11 | Le due tazze | `capitoli/11.md` | secondo punto di svolta: Teo assiste Nora; il libro del padre aperto | ⬜ |
 | 12 | Dove comincia il mare | `capitoli/12.md` | climax: Varigotti, alba, riscatto; Tolstoj (il cielo di Austerlitz) | ⬜ |

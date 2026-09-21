@@ -18,7 +18,6 @@
 - **Perché questo libro? Perché ora?**: perché viviamo nell'epoca in cui emergere è un privilegio e restare è il mestiere di tutti; voglio raccontare chi resta, con dignità, e dimostrare che una vita minore può contenere un amore enorme.
 - **Lettore ideale**: 25–50 anni, lettori di narrativa intimista, chi ha vissuto precarietà e lutti, chi cerca profondità più che trama.
 - **Libri "cugini"**: *Normal People* (Rooney), *La vita interessante* (Trevisan), *La morte di Ivan Il'ič* (Tolstoj), *Le notti bianche* (Dostoevskij).
-
 ---
 
 ## 2. Personaggi
@@ -122,10 +121,11 @@
 |------------|-----------|----------|-------------|
 | La malattia di Lucia | Lucia, Teo | cap. 1 | cap. 5 |
 | Ivo e la filosofia del caffè | Ivo, Teo | cap. 1 | cap. 7 (va in pensione, lascia la cuffia) |
-| Dario, la vita "normale" | Dario, Teo | cap. 4 | cap. 8 (Teo gli dice la verità) |
+| Dario, la vita "normale" | Dario, Teo | cap. 4 | ✅ cap. 8 (Teo gli dice la verità: "No. Non sto bene.") |
 | Il libro del padre | Teo, Alberto | cap. 1 | cap. 11 (Teo lo apre e lo legge a Nora) |
 | La voce che legge ai morenti | Nora | cap. 3 | cap. 11 (Teo prende il suo posto) |
 | La camicia incompiuta sotto lo spillo | Teo, Lucia | cap. 6 | cap. 12 o epilogo: Teo la finisce con il ditale — "le cose vanno rifatte, non buttate" |
+| I due nomi sulle liste | Teo, Nora | cap. 9 | cap. 10 (il lutto li rende insopportabili) |
 
 ---
 
@@ -172,7 +172,7 @@
 | Allusione | Tolstoj, *La morte di Ivan Il'ič* (la vita per apparenza) | cap. 4 | "un uomo qualunque che ha vissuto per la convenienza" |
 | Allusione | Proust (il paradiso perduto/ritrovato) | cap. 6 | epigrafe con eco deliberata del prologo + l'odore che riporta indietro: "il paradiso perduto si riconosce soltanto dopo, e il dopo è fatto di odori" |
 | Allusione | Dostoevskij, *L'idiot* («La bellezza salverà il mondo») | cap. 8 | epigrafe + battuta di Nora sulla bellezza delle cose piccole |
-| Allusione | Tolstoj, *Guerra e pace* (Levin e il fieno, l'impegno fisico come salvezza) | cap. 9 | Teo che lavora con le mani ai preparativi |
+| Allusione | Tolstoj, *Guerra e pace* (Levin e il fieno, l'impegno fisico come salvezza) | cap. 9 | Teo scopre il lavoro con le mani ai preparativi: "l'unica cosa che non fa paura" — Nora legge la falciatura di Levin |
 | Allusione | Proust (il tempo che si perde e si ritrova) | cap. 10 | il buio di maggio |
 | Allusione | Tolstoj, *Guerra e pace* (il cielo di Austerlitz) | cap. 12 | il cielo sopra il mare all'alba |
 | Allusione | Proust (ricominciare con occhi nuovi) | Epilogo | le cose piccole viste come se fossero nuove |

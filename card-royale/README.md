@@ -4,8 +4,8 @@ A cozy, beautifully illustrated card-battle PWA played against the charming AI *
 
 ## 🎮 Current Features
 
-- **31 unique cards** across 5 rarities (Common, Uncommon, Rare, Epic, Legendary) with magical forest creatures
-- **16 fusion recipes** including epic tier fusions (Shadow Frost, Nature's Shield, Storm Assassin, Moon Serpent, Wyrm Golem, Serpent Phoenix)
+- **41 unique cards** across 5 rarities (Common, Uncommon, Rare, Epic, Legendary) with magical forest creatures
+- **26 fusion recipes** including epic tier fusions (Shadow Frost, Nature's Shield, Storm Assassin, Moon Serpent, Wyrm Golem, Serpent Phoenix, Glow Beetle, Forest Guardian, Storm Phoenix, Merchant Prince, Star Fairy, Crystal Ancient, Star Elder, Fortune Fox, Phoenix Pixie, Turtle Guardian)
 - **3 difficulty tiers**: Sproutling (Easy), Whisper (Medium), Shadow (Hard)
 - **AI opponent** with personality and dialogue
 - **Cozy garden aesthetic** with warm pastel colors, fireflies, and falling petals

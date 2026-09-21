@@ -29,7 +29,17 @@ const CARD_DATA = [
   {"id":"crystal_golem","name":"Crystal Golem","emoji":"💎","elixir":4,"hp":150,"dmg":18,"speed":0.4,"range":0,"target":"none","ability":"taunt","rarity":"rare","color":"#74b9ff"},
   {"id":"shadow_assassin","name":"Shadow Assassin","emoji":"🔪","elixir":4,"hp":55,"dmg":40,"speed":3.0,"range":1,"target":"nearest","ability":"phase","rarity":"rare","color":"#2d3436"},
   {"id":"phoenix_queen","name":"Phoenix Queen","emoji":"🔥","elixir":6,"hp":130,"dmg":45,"speed":1.5,"range":1,"target":"nearest","ability":"supernova","rarity":"legendary","color":"#ff6b6b"},
-  {"id":"ancient_wyrm","name":"Ancient Wyrm","emoji":"🐲","elixir":6,"hp":200,"dmg":35,"speed":0.8,"range":1,"target":"nearest","ability":"aoe_stun","rarity":"legendary","color":"#6c5ce7"}
+  {"id":"ancient_wyrm","name":"Ancient Wyrm","emoji":"🐲","elixir":6,"hp":200,"dmg":35,"speed":0.8,"range":1,"target":"nearest","ability":"aoe_stun","rarity":"legendary","color":"#6c5ce7"},
+  {"id":"glowworm","name":"Glowworm","emoji":"🌟","elixir":1,"hp":25,"dmg":8,"speed":2.0,"range":1,"target":"nearest","ability":"heal_ally","rarity":"common","color":"#a29bfe"},
+  {"id":"acorn_archer","name":"Acorn Archer","emoji":"🏹","elixir":1,"hp":22,"dmg":28,"speed":2.5,"range":1,"target":"nearest","ability":"first_strike","rarity":"common","color":"#e17055"},
+  {"id":"moss_knight","name":"Moss Knight","emoji":"🛡️","elixir":2,"hp":75,"dmg":8,"speed":0.4,"range":0,"target":"none","ability":"taunt","rarity":"common","color":"#55a372"},
+  {"id":"thunder_cap","name":"Thunder Cap","emoji":"⚡","elixir":2,"hp":45,"dmg":18,"speed":1.2,"range":1,"target":"nearest","ability":"burn","rarity":"uncommon","color":"#fdcb6e"},
+  {"id":"star_blossom","name":"Star Blossom","emoji":"🌸","elixir":3,"hp":70,"dmg":12,"speed":0.7,"range":1,"target":"nearest","ability":"heal_radius","rarity":"uncommon","color":"#ff7675"},
+  {"id":"crystal_frog","name":"Crystal Frog","emoji":"🐸","elixir":3,"hp":95,"dmg":16,"speed":1.0,"range":1,"target":"nearest","ability":"ice_barrier","rarity":"rare","color":"#74b9ff"},
+  {"id":"shadow_moth","name":"Shadow Moth","emoji":"🦋","elixir":3,"hp":50,"dmg":32,"speed":3.0,"range":1,"target":"nearest","ability":"phase","rarity":"rare","color":"#636e72"},
+  {"id":"phoenix_chick","name":"Phoenix Chick","emoji":"🐣","elixir":4,"hp":80,"dmg":30,"speed":1.8,"range":1,"target":"nearest","ability":"burn","rarity":"epic","color":"#ff6b6b"},
+  {"id":"ancient_turtle","name":"Ancient Turtle","emoji":"🐢","elixir":5,"hp":220,"dmg":15,"speed":0.3,"range":0,"target":"none","ability":"taunt","rarity":"legendary","color":"#00b894"},
+  {"id":"market_fox","name":"Market Fox","emoji":"💰","elixir":4,"hp":70,"dmg":25,"speed":2.0,"range":1,"target":"nearest","ability":"phase","rarity":"epic","color":"#e17055"}
 ];
 
 export const ESSENCES = {

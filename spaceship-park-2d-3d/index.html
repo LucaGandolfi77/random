@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a0a2e">
+<meta name="description" content="StarDock - Spaceship Parking Simulator">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="StarDock">
+<title>StarDock - Parcheggio Astronavi</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+<div id="app">
+  <div id="menu-screen" class="screen">
+    <div class="menu-content">
+      <h1>⭐ STARDOCK ⭐</h1>
+      <p class="subtitle">Simulatore Parcheggio Astronavi</p>
+      <div class="ship-select">
+        <label>Seleziona Astronave:</label>
+        <div id="ship-options" class="ship-options"></div>
+      </div>
+      <div class="level-select">
+        <label>Livello:</label>
+        <div id="level-options" class="level-options"></div>
+      </div>
+      <button id="start-btn" class="btn-primary">LANCIA</button>
+      <button id="howto-btn" class="btn-secondary">COME SI GIOCA</button>
+    </div>
+  </div>
+
+  <div id="game-screen" class="screen hidden">
+    <div id="hud">
+      <div id="hud-level">Livello 1</div>
+      <div id="hud-fuel">⛽ 100</div>
+      <div id="hud-time">⏱ 0:00</div>
+      <div id="hud-score">⭐ 0</div>
+      <button id="pause-btn" class="hud-btn">⏸</button>
+      <button id="view-btn" class="hud-btn">3D</button>
+    </div>
+    <div id="canvas-container">
+      <canvas id="canvas2d"></canvas>
+      <canvas id="canvas3d" class="hidden"></canvas>
+    </div>
+    <div id="mobile-controls">
+      <div class="dpad">
+        <button id="ctrl-up" class="ctrl-btn">▲</button>
+        <div class="horiz">
+          <button id="ctrl-left" class="ctrl-btn">◀</button>
+          <button id="ctrl-down" class="ctrl-btn">▼</button>
+          <button id="ctrl-right" class="ctrl-btn">▶</button>
+        </div>
+      </div>
+      <button id="ctrl-brake" class="ctrl-btn brake">🔴 FRENATA</button>
+    </div>
+  </div>
+
+  <div id="pause-screen" class="screen hidden">
+    <div class="pause-content">
+      <h2>PAUSA</h2>
+      <button id="resume-btn" class="btn-primary">RIPRENDI</button>
+      <button id="restart-btn" class="btn-secondary">RICOMINCIA</button>
+      <button id="quit-btn" class="btn-secondary">MENU</button>
+    </div>
+  </div>
+
+  <div id="howto-screen" class="screen hidden">
+    <div class="howto-content">
+      <h2>COME SI GIOCA</h2>
+      <div class="howto-grid">
+        <div class="howto-item"><span class="key">W / ▲</span><span>Spingi avanti</span></div>
+        <div class="howto-item"><span class="key">S / ▼</span><span>Retromarcia</span></div>
+        <div class="howto-item"><span class="key">A / ◀</span><span>Ruota sinistra</span></div>
+        <div class="howto-item"><span class="key">D / ▶</span><span>Ruota destra</span></div>
+        <div class="howto-item"><span class="key">SPAZIO</span><span>Frenata</span></div>
+        <div class="howto-item"><span class="key">SHIFT</span><span>Boost!</span></div>
+        <div class="howto-item"><span class="key">C</span><span>Cambia visuale (2D/3D)</span></div>
+        <div class="howto-item"><span class="key">V</span><span>Cockpit View</span></div>
+        <div class="howto-item"><span class="key">R</span><span>Riposiziona</span></div>
+        <div class="howto-item"><span class="key">P / ESC</span><span>Pausa</span></div>
+      </div>
+      <p class="physics-info"><strong>Fisica:</strong> Inerzia, attrito, collisioni reali, pozzi gravitazionali!</p>
+      <p class="tip">⭐ Parcheggia nelle zone illuminate per completare il livello!</p>
+      <p class="tip">🔥 Riempi il boost raccogliendo carburante!</p>
+      <p class="tip">🔧 Apri il Level Editor con E dal menu!</p>
+      <button id="howto-back" class="btn-primary">INDIETRO</button>
+    </div>
+  </div>
+
+  <div id="victory-screen" class="screen hidden">
+    <div class="victory-content">
+      <h2>🎉 PARCHEGGIO COMPLETATO! 🎉</h2>
+      <div id="victory-stats"></div>
+      <button id="next-level-btn" class="btn-primary">PROSSIMO LIVELLO</button>
+      <button id="victory-menu" class="btn-secondary">MENU</button>
+    </div>
+  </div>
+
+  <div id="gameover-screen" class="screen hidden">
+    <div class="gameover-content">
+      <h2>💥 FUEL ESAURITO!</h2>
+      <button id="retry-btn" class="btn-primary">RIPROVA</button>
+      <button id="gameover-menu" class="btn-secondary">MENU</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/levels.js"></script>
+<script src="js/economy.js"></script>
+<script src="js/physics.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/renderer2d.js"></script>
+<script src="js/renderer3d.js"></script>
+<script src="js/shop.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/game.js"></script>
+<script src="js/ui.js"></script>
+<script>
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(function(reg) {
+    console.log('SW registered:', reg.scope);
+  }).catch(function(err) {
+    console.log('SW registration failed:', err);
+  });
+}
+</script>
+</body>
+</html>

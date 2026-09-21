@@ -1,6 +1,8 @@
 """Analysis execution and results endpoints."""
 
-from fastapi import APIRouter, Query, status
+import csv
+import io
+from fastapi import APIRouter, Query, Response, status
 from sqlalchemy import case, func, select
 
 from app.api.deps import AppSettings, DbSession
@@ -16,6 +18,7 @@ from app.repositories.base import (
 )
 from app.schemas.api import FindingRead, FindingsPage, RunSummary, ScoreCategory, ScoreRead
 from app.services.analysis import AnalysisError, DataReadinessService
+from app.tasks.analysis import run_analysis_task
 
 _SEVERITY_RANK = {
     "CRITICAL": 5,
@@ -62,17 +65,17 @@ def _score_to_read(score: ScoreResult) -> ScoreRead:
     )
 
 
-@router.post("/projects/{project_id}/analysis", response_model=RunSummary, status_code=status.HTTP_201_CREATED)
+@router.post("/projects/{project_id}/analysis", response_model=RunSummary, status_code=status.HTTP_202_ACCEPTED)
 def run_analysis(project_id: str, db: DbSession, settings: AppSettings) -> RunSummary:
     project = get_project(db, project_id)
     if project is None:
         raise not_found("project")
     if get_active_dataset_for_project(db, project_id) is None:
         raise ApiException("NO_DATASET", "Upload a dataset before running the analysis.", status.HTTP_409_CONFLICT)
-    try:
-        run = DataReadinessService(db, settings).run(project)
-    except AnalysisError as exc:
-        raise ApiException("ANALYSIS_FAILED", str(exc)) from exc
+    run = DataReadinessService(db, settings).create_run(project)
+    task = run_analysis_task.delay(project_id, run.id)
+    run.celery_task_id = task.id
+    db.commit()
     summary = serialize_run_summary(db, run)
     assert summary is not None
     return summary
@@ -96,6 +99,19 @@ def get_analysis(run_id: str, db: DbSession) -> RunSummary:
     summary = serialize_run_summary(db, run)
     assert summary is not None
     return summary
+
+
+@router.get("/analysis/{run_id}/status")
+def get_analysis_status(run_id: str, db: DbSession) -> dict:
+    run = _run_or_404(db, run_id)
+    return {
+        "task_id": run.celery_task_id,
+        "status": run.status,
+        "progress": None,
+        "error_message": run.error_message,
+        "started_at": run.started_at.isoformat() if run.started_at else None,
+        "completed_at": run.completed_at.isoformat() if run.completed_at else None,
+    }
 
 
 @router.get("/analysis/{run_id}/findings", response_model=FindingsPage)
@@ -179,3 +195,49 @@ def get_run_score(run_id: str, db: DbSession) -> ScoreRead:
             "NO_SCORE", "Score not available for this run (analysis may have failed).", status.HTTP_404_NOT_FOUND
         )
     return _score_to_read(score)
+
+
+@router.get("/analysis/{run_id}/findings/export")
+def export_findings_csv(
+    run_id: str,
+    db: DbSession,
+    status_filter: str | None = Query(default=None, alias="status"),
+    severity: str | None = Query(default=None),
+    category: str | None = Query(default=None),
+) -> Response:
+    """Export findings as CSV with optional filters."""
+    _run_or_404(db, run_id)
+    stmt = select(Finding).where(Finding.run_id == run_id)
+    if status_filter:
+        stmt = stmt.where(Finding.status == status_filter.upper())
+    if severity:
+        stmt = stmt.where(Finding.severity == severity.upper())
+    if category:
+        stmt = stmt.where(Finding.category == category)
+    stmt = stmt.order_by(Finding.severity.desc(), Finding.created_at.asc())
+    findings = list(db.execute(stmt).scalars())
+
+    buf = io.StringIO()
+    writer = csv.writer(buf)
+    writer.writerow([
+        "check_id", "title", "category", "status", "severity",
+        "description", "columns", "observed_value", "threshold", "recommendation",
+    ])
+    for f in findings:
+        writer.writerow([
+            f.check_id,
+            f.title,
+            f.category,
+            f.status,
+            f.severity,
+            f.description,
+            "|".join(f.columns) if f.columns else "",
+            f.observed_value or "",
+            f.threshold or "",
+            f.recommendation or "",
+        ])
+    return Response(
+        content=buf.getvalue(),
+        media_type="text/csv",
+        headers={"Content-Disposition": f"attachment; filename=findings-{run_id[:8]}.csv"},
+    )

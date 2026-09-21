@@ -12,6 +12,7 @@ from app.core.config import get_settings
 from app.core.logging import configure_logging
 from app.core.version import TOOL_VERSION
 from app.database.session import init_db
+from app.tasks import run_analysis_task
 
 logger = logging.getLogger(__name__)
 

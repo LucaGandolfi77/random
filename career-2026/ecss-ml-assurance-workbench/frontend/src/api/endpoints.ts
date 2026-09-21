@@ -68,6 +68,14 @@ export const endpoints = {
   getFindings: (runId: string, query: FindingQuery = {}) =>
     api.get<FindingsPage>(`/analysis/${runId}/findings${toQueryString(query as Record<string, string | number | undefined>)}`),
   getScore: (runId: string) => api.get<ScoreResult>(`/analysis/${runId}/score`),
+  exportFindingsCsvUrl: (runId: string, filters?: { status?: string; severity?: string; category?: string }) => {
+    const params = new URLSearchParams();
+    if (filters?.status) params.set("status", filters.status);
+    if (filters?.severity) params.set("severity", filters.severity);
+    if (filters?.category) params.set("category", filters.category);
+    const qs = params.toString();
+    return `${API_BASE}/analysis/${runId}/findings/export${qs ? `?${qs}` : ""}`;
+  },
 
   // Reports
   listReports: (projectId: string) => api.get<ReportInfo[]>(`/projects/${projectId}/reports`),

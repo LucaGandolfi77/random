@@ -60,6 +60,29 @@ class DataReadinessService:
         self.db = db
         self.settings = settings or get_settings()
 
+    def create_run(self, project: Project) -> AnalysisRun:
+        from app.repositories.base import get_active_dataset_for_project
+
+        dataset = get_active_dataset_for_project(self.db, project.id)
+        if dataset is None:
+            raise AnalysisError("No dataset uploaded for this project yet.")
+        config = ensure_config(self.db, project.id)
+        config_snapshot = config.to_snapshot()
+        config_snapshot["recorded_row_count"] = dataset.row_count
+        config_snapshot["dataset_id"] = dataset.id
+
+        run = AnalysisRun(
+            id=str(uuid4()),
+            project_id=project.id,
+            dataset_id=dataset.id,
+            status=RunStatus.QUEUED.value,
+            config_snapshot=config_snapshot,
+        )
+        self.db.add(run)
+        self.db.flush()
+        self.db.commit()
+        return run
+
     def run(self, project: Project) -> AnalysisRun:
         from app.repositories.base import get_active_dataset_for_project
 

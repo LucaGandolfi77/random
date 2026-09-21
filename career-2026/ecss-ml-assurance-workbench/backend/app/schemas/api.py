@@ -184,6 +184,7 @@ class RunSummary(BaseModel):
     project_id: str
     dataset_id: str
     status: RunStatus
+    celery_task_id: str | None = None
     error_message: str = ""
     started_at: datetime
     completed_at: datetime | None = None

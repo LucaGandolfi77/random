@@ -36,7 +36,7 @@ def get_db() -> Generator[Session, None, None]:
 def init_db() -> None:
     """Create tables idempotently. Import models so metadata is populated."""
     from app.database.base import Base
-    from app.models import analysis, audit, dataset, project  # noqa: F401
+    from app.models import analysis, audit, dataset, project, user  # noqa: F401
 
     if _settings.database_url.startswith("sqlite"):
         from sqlalchemy import event

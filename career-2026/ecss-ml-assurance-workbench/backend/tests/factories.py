@@ -67,5 +67,5 @@ def upload(
 
 def run_analysis(client, project_id: str) -> dict:
     response = client.post(f"/api/projects/{project_id}/analysis")
-    assert response.status_code == 201, response.text
+    assert response.status_code == 202, response.text
     return response.json()

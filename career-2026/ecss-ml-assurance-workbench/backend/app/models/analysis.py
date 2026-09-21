@@ -19,6 +19,7 @@ class AnalysisRun(Base):
         String(36), ForeignKey("datasets.id", ondelete="SET NULL"), nullable=True, index=True
     )
     status: Mapped[str] = mapped_column(String(20), default=RunStatus.PENDING.value, index=True)
+    celery_task_id: Mapped[str | None] = mapped_column(String(100), nullable=True, index=True)
     config_snapshot: Mapped[dict] = mapped_column(JSON, default=dict)
     error_message: Mapped[str] = mapped_column(Text, default="")
     started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)

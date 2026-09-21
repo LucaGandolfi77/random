@@ -1,0 +1,822 @@
+{
+  "info": {
+    "name": "ECSS ML Assurance Workbench API",
+    "description": "Full API collection for the ECSS ML Assurance Workbench backend.\n\nBase URL: http://localhost:8000\n\nFeatures:\n- Data Readiness Inspector\n- Portfolio Management\n- Assurance Engine\n- Continuous Assurance",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000"
+    },
+    {
+      "key": "projectId",
+      "value": ""
+    },
+    {
+      "key": "runId",
+      "value": ""
+    },
+    {
+      "key": "reportId",
+      "value": ""
+    },
+    {
+      "key": "packageId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/health",
+            "description": "Full health check with database status"
+          }
+        },
+        {
+          "name": "Liveness Probe",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/health/live",
+            "description": "Simple liveness check"
+          }
+        },
+        {
+          "name": "Readiness Probe",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/health/ready",
+            "description": "Readiness check with dependency status"
+          }
+        },
+        {
+          "name": "Version Info",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/version",
+            "description": "Tool and analyzer version"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "List Projects",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/projects",
+            "description": "Get all projects"
+          }
+        },
+        {
+          "name": "Create Project",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/projects",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"My ML Project\",\n  \"description\": \"A sample ML project for testing\"\n}"
+            },
+            "description": "Create a new project"
+          }
+        },
+        {
+          "name": "Get Project",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/projects/{{projectId}}",
+            "description": "Get project by ID"
+          }
+        },
+        {
+          "name": "Update Project",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/projects/{{projectId}}",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Project Name\"\n}"
+            },
+            "description": "Update project fields"
+          }
+        },
+        {
+          "name": "Delete Project",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/projects/{{projectId}}",
+            "description": "Delete project and associated data"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Datasets",
+      "item": [
+        {
+          "name": "Upload Dataset",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/projects/{{projectId}}/datasets",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/path/to/your/dataset.csv"
+                }
+              ]
+            },
+            "description": "Upload CSV dataset (max 50MB)"
+          }
+        },
+        {
+          "name": "Get Current Dataset",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/projects/{{projectId}}/dataset",
+            "description": "Get active dataset metadata"
+          }
+        },
+        {
+          "name": "Get Dataset Preview",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/projects/{{projectId}}/dataset/preview?limit=100",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "projects", "{{projectId}}", "dataset", "preview"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Number of rows (1-500)"
+                }
+              ]
+            },
+            "description": "Preview dataset (max 500 rows)"
+          }
+        },
+        {
+          "name": "Delete Dataset",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/projects/{{projectId}}/dataset",
+            "description": "Delete current dataset"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Analysis Config",
+      "item": [
+        {
+          "name": "Get Config",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/projects/{{projectId}}/config",
+            "description": "Get analysis configuration"
+          }
+        },
+        {
+          "name": "Update Config",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/projects/{{projectId}}/config",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"target_column\": \"target\",\n  \"timestamp_column\": \"timestamp\",\n  \"id_column\": \"id\"\n}"
+            },
+            "description": "Update analysis configuration"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Analysis",
+      "item": [
+        {
+          "name": "Run Analysis",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/projects/{{projectId}}/analysis",
+            "description": "Execute data readiness analysis"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.run_id) {",
+                  "    pm.collectionVariables.set('runId', jsonData.run_id);",
+                  "    console.log('Run ID saved: ' + jsonData.run_id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Latest Analysis",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/projects/{{projectId}}/analysis/latest",
+            "description": "Get latest analysis run"
+          }
+        },
+        {
+          "name": "Get Analysis by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/analysis/{{runId}}",
+            "description": "Get analysis run details"
+          }
+        },
+        {
+          "name": "Get Analysis Score",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/analysis/{{runId}}/score",
+            "description": "Get data readiness score"
+          }
+        },
+        {
+          "name": "List Findings",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/analysis/{{runId}}/findings?status=FAIL&severity=HIGH&limit=100",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "analysis", "{{runId}}", "findings"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "FAIL",
+                  "description": "PASS|WARNING|FAIL|NOT_APPLICABLE|NOT_EVALUATED"
+                },
+                {
+                  "key": "severity",
+                  "value": "HIGH",
+                  "description": "CRITICAL|HIGH|MEDIUM|LOW|INFO"
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Max results"
+                }
+              ]
+            },
+            "description": "List findings with filters"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "Generate Report",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/analysis/{{runId}}/report",
+            "description": "Generate JSON report from analysis"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.id) {",
+                  "    pm.collectionVariables.set('reportId', jsonData.id);",
+                  "    console.log('Report ID saved: ' + jsonData.id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "List Project Reports",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/projects/{{projectId}}/reports",
+            "description": "List all reports for project"
+          }
+        },
+        {
+          "name": "Get Report Content",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/reports/{{reportId}}",
+            "description": "Get report JSON content"
+          }
+        },
+        {
+          "name": "Download Report",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/reports/{{reportId}}/download",
+            "description": "Download report as JSON file"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Audit",
+      "item": [
+        {
+          "name": "Get Global Audit Log",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/audit?limit=200",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "audit"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "200",
+                  "description": "Max events (1-1000)"
+                }
+              ]
+            },
+            "description": "Get global audit events"
+          }
+        },
+        {
+          "name": "Get Project Audit Log",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/projects/{{projectId}}/audit",
+            "description": "Get audit events for project"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Portfolio",
+      "item": [
+        {
+          "name": "List Portfolio Projects",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects",
+            "description": "List all portfolio projects"
+          }
+        },
+        {
+          "name": "Portfolio Projects Summary",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects/summary",
+            "description": "Summary of all portfolio projects"
+          }
+        },
+        {
+          "name": "Get Portfolio Project",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}",
+            "description": "Get portfolio project details"
+          }
+        },
+        {
+          "name": "Get Project Requirements",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}/requirements",
+            "description": "List project requirements"
+          }
+        },
+        {
+          "name": "Get Traceability Matrix",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}/traceability",
+            "description": "Get requirements traceability matrix"
+          }
+        },
+        {
+          "name": "Get Project Evidence",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}/evidence",
+            "description": "List project evidence"
+          }
+        },
+        {
+          "name": "Get Project Tests",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}/tests",
+            "description": "List project tests with coverage"
+          }
+        },
+        {
+          "name": "Get FMEA Analysis",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}/fmea",
+            "description": "Get FMEA/FMECA analysis"
+          }
+        },
+        {
+          "name": "Get Project Risks",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}/risks",
+            "description": "List project risks"
+          }
+        },
+        {
+          "name": "Get Project Limitations",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}/limitations",
+            "description": "List project limitations"
+          }
+        },
+        {
+          "name": "Get Deployment Decision",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}/deployment-decision",
+            "description": "Get deployment decision status"
+          }
+        },
+        {
+          "name": "Get Monitoring Status",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}/monitoring",
+            "description": "Get monitoring readiness"
+          }
+        },
+        {
+          "name": "Get ODD Configuration",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}/odd",
+            "description": "Get Operational Design Domain"
+          }
+        },
+        {
+          "name": "Get Package Completeness",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}/completeness",
+            "description": "Get package completeness metrics"
+          }
+        },
+        {
+          "name": "List Evidence Packages",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}/evidence-packages",
+            "description": "List evidence packages"
+          }
+        },
+        {
+          "name": "Generate Evidence Package",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/portfolio/projects/{{projectId}}/evidence-packages",
+            "description": "Generate new evidence package"
+          }
+        },
+        {
+          "name": "Download Evidence Package",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/evidence-packages/{{packageId}}/download",
+            "description": "Download evidence package ZIP"
+          }
+        },
+        {
+          "name": "Verify Evidence Package",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/portfolio/evidence-packages/{{packageId}}/verify",
+            "description": "Verify package integrity"
+          }
+        },
+        {
+          "name": "Get Completeness Categories",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/portfolio/meta/completeness-categories",
+            "description": "List completeness categories"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assurance Registry",
+      "item": [
+        {
+          "name": "List Assurance Projects",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/assurance/projects",
+            "description": "List all assurance registry projects"
+          }
+        },
+        {
+          "name": "Assurance Projects Summary",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/assurance/projects/summary",
+            "description": "Summary of assurance projects"
+          }
+        },
+        {
+          "name": "Get Assurance Project",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/assurance/projects/{{projectId}}",
+            "description": "Get assurance project details"
+          }
+        },
+        {
+          "name": "List Artefact Types",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/assurance/artefact-types",
+            "description": "List available artefact types"
+          }
+        },
+        {
+          "name": "Create Evidence Package",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/assurance/projects/{{projectId}}/evidence-packages",
+            "description": "Generate evidence package for assurance project"
+          }
+        },
+        {
+          "name": "Download Assurance Package",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/assurance/evidence-packages/{{packageId}}/download",
+            "description": "Download assurance evidence package"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assurance Engine",
+      "item": [
+        {
+          "name": "Analyze Gaps",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/assurance-engine/projects/{{projectId}}/gaps",
+            "description": "Run gap analysis (26 rules)"
+          }
+        },
+        {
+          "name": "Get Traceability Issues",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/assurance-engine/projects/{{projectId}}/traceability-issues",
+            "description": "Check traceability orphans"
+          }
+        },
+        {
+          "name": "Get Assurance Dimensions",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/assurance-engine/projects/{{projectId}}/dimensions",
+            "description": "Get 15 assurance dimensions"
+          }
+        },
+        {
+          "name": "Evaluate Deployment Gate",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/assurance-engine/projects/{{projectId}}/deployment-gate",
+            "description": "Evaluate deployment readiness gate"
+          }
+        },
+        {
+          "name": "Get Monitoring Readiness",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/assurance-engine/projects/{{projectId}}/monitoring",
+            "description": "Get monitoring readiness normalizer"
+          }
+        },
+        {
+          "name": "Generate Assurance Report",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/assurance-engine/projects/{{projectId}}/assurance-report",
+            "description": "Generate comprehensive assurance report"
+          }
+        },
+        {
+          "name": "Validate Evidence Package",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/assurance-engine/evidence-packages/{{packageId}}/validate",
+            "description": "Full validation of evidence package"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Continuous Assurance",
+      "item": [
+        {
+          "name": "Ingest CI Results",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/continuous/projects/{{projectId}}/ingest",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/path/to/test-results.xml"
+                },
+                {
+                  "key": "source_type",
+                  "value": "junit_xml",
+                  "type": "text"
+                }
+              ]
+            },
+            "description": "Ingest JUnit XML or JSON test results"
+          }
+        },
+        {
+          "name": "Create Snapshot",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/continuous/projects/{{projectId}}/snapshots",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Pre-release snapshot\",\n  \"role\": \"Release Candidate\",\n  \"created_by\": \"user\"\n}"
+            },
+            "description": "Create immutable assurance snapshot"
+          }
+        },
+        {
+          "name": "List Snapshots",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/continuous/projects/{{projectId}}/snapshots",
+            "description": "List all snapshots for project"
+          }
+        },
+        {
+          "name": "Compare Snapshots",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/continuous/snapshots/compare",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"baseline_a\": \"snapshot-id-1\",\n  \"baseline_b\": \"snapshot-id-2\"\n}"
+            },
+            "description": "Compare two snapshots"
+          }
+        },
+        {
+          "name": "Detect Regressions",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/continuous/projects/{{projectId}}/regressions",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"baseline_a\": \"snapshot-id-1\",\n  \"baseline_b\": \"snapshot-id-2\"\n}"
+            },
+            "description": "Detect regressions between snapshots"
+          }
+        },
+        {
+          "name": "List Regressions",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/continuous/projects/{{projectId}}/regressions",
+            "description": "List all regressions for project"
+          }
+        },
+        {
+          "name": "List Action Items",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/continuous/projects/{{projectId}}/actions",
+            "description": "List all action items"
+          }
+        },
+        {
+          "name": "Export Actions CSV",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/continuous/projects/{{projectId}}/actions/export",
+            "description": "Export actions as CSV"
+          }
+        },
+        {
+          "name": "Close Action Item",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/continuous/actions/{{actionId}}/close",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resolution\": \"Fixed in commit abc123\",\n  \"closing_evidence\": \"link-to-proof\"\n}"
+            },
+            "description": "Close an action item"
+          }
+        },
+        {
+          "name": "Generate Issue Draft",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/continuous/actions/{{actionId}}/issue-draft",
+            "description": "Generate GitHub issue draft"
+          }
+        },
+        {
+          "name": "Create Reproducibility Record",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/continuous/projects/{{projectId}}/reproducibility",
+            "description": "Generate reproducibility record"
+          }
+        },
+        {
+          "name": "Generate Review Pack",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/continuous/projects/{{projectId}}/review-pack",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"review_type\": \"Portfolio Demonstration Review\"\n}"
+            },
+            "description": "Generate Technical Review Pack ZIP"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Enchanted Clash — Card Battle PWA</title>
+  <meta name="description" content="A cozy card battle PWA against the Forest Guardian AI. Summon magical creatures and defeat the Hollow!">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Enchanted Clash">
+  <meta name="theme-color" content="#fff7e6">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <div id="app">
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- MENU SCREEN -->
+    <div id="menu-screen" class="screen active">
+      <div class="menu-content">
+        <h1 class="game-title">🌿 Enchanted Clash</h1>
+        <p class="game-subtitle">A cozy card battle against the Forest Guardian</p>
+        <div class="menu-buttons">
+          <button id="btn-play" class="btn-primary">🎮 Play</button>
+          <button id="btn-deck" class="btn-secondary">🃏 Deck</button>
+          <button id="btn-collection" class="btn-secondary">📚 Collection</button>
+          <button id="btn-leaderboard" class="btn-secondary">🏅 Leaderboard</button>
+          <button id="btn-achievements" class="btn-secondary">🏆 Achievements</button>
+        </div>
+        <div class="stats-bar">
+          <span id="menu-wins">Wins: 0</span>
+          <span id="menu-games">Games: 0</span>
+          <span id="menu-stars">⭐ 0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIFFICULTY SCREEN -->
+    <div id="difficulty-screen" class="screen hidden">
+      <div class="difficulty-content">
+        <h2>Choose Your Opponent</h2>
+        <p class="diff-sub">The Forest Guardian awaits...</p>
+        <div class="difficulty-cards">
+          <button id="btn-easy" class="diff-card">
+            <span class="diff-emoji">🌱</span>
+            <span class="diff-name">Sproutling</span>
+            <span class="diff-desc">A friendly beginner</span>
+          </button>
+          <button id="btn-medium" class="diff-card">
+            <span class="diff-emoji">🌿</span>
+            <span class="diff-name">Whisper</span>
+            <span class="diff-desc">A cunning strategist</span>
+          </button>
+          <button id="btn-hard" class="diff-card">
+            <span class="diff-emoji">🌑</span>
+            <span class="diff-name">Shadow</span>
+            <span class="diff-desc">The ultimate challenge</span>
+          </button>
+        </div>
+        <button id="back-difficulty" class="btn-back">← Back</button>
+      </div>
+    </div>
+
+    <!-- ACHIEVEMENTS SCREEN -->
+    <div id="achievements-screen" class="screen hidden">
+      <div class="achievements-content">
+        <h2>🏆 Achievements</h2>
+        <p class="companion-sub"><span id="achieve-count">0</span>/12 unlocked</p>
+        <div class="achievements-list" id="achievements-list"></div>
+        <button id="back-achievements" class="btn-back">← Back</button>
+      </div>
+    </div>
+
+    <!-- COMPANION SELECT SCREEN -->
+    <div id="companion-screen" class="screen hidden">
+      <div class="companion-content">
+        <h2>Choose Your Spirit</h2>
+        <p class="companion-sub">Your companion fights beside you!</p>
+        <div class="companion-grid" id="companion-grid"></div>
+        <button id="back-companion" class="btn-back">← Back</button>
+      </div>
+    </div>
+
+    <!-- BATTLE SCREEN -->
+    <div id="battle-screen" class="screen hidden">
+      <div id="battle-hud">
+        <div id="enemy-hud">
+          <div id="enemy-struct">🪵 <span id="enemy-struct-hp">200</span></div>
+          <div id="enemy-hand" style="display:none">🤫</div>
+        </div>
+        <div id="elixir-bar">⚡ <span id="elixir-value">2/4</span></div>
+        <div id="turn-indicator">Turn <span id="turn-count">0</span></div>
+        <div id="emotion-indicator" style="display:flex;align-items:center;gap:4px;font-size:0.85rem;font-weight:800;color:#ffd93d"></div>
+        <div id="weather-indicator" style="display:flex;align-items:center;gap:4px;font-size:0.85rem;font-weight:800;color:#ffe066;padding:4px 12px;border-radius:999px;background:rgba(255,217,61,0.1);border:1.5px solid rgba(255,217,61,0.3);transition:all 300ms"></div>
+        <div id="season-display" style="font-size:0.8rem;font-weight:700;color:#9b6dff"></div>
+        <div id="companion-hud" style="display:none;align-items:center;gap:4px;font-size:0.8rem;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.15)"></div>
+        <div id="boss-hud" style="display:none;align-items:center;gap:6px;font-size:0.8rem;padding:4px 10px;border-radius:999px;background:rgba(255,107,107,0.1);border:1.5px solid rgba(255,107,107,0.3)"></div>
+        <button id="pause-btn" class="pause-btn">⏸</button>
+      </div>
+      <div id="battle-field" class="battle-field"></div>
+      <div id="player-hand" class="player-hand"></div>
+      <div id="fusion-bar" class="fusion-bar"></div>
+      <button id="ultimate-btn" class="ultimate-btn" style="display:none">🌿 NATURE WRATH</button>
+    </div>
+
+    <!-- DECK SCREEN -->
+    <div id="deck-screen" class="screen hidden">
+      <div class="deck-content">
+        <h2>🃏 Your Deck</h2>
+        <div class="deck-stats" id="deck-stats"></div>
+        <div id="deck-list" class="deck-list"></div>
+        <h2 style="margin-top:20px">⚙️ Crafting</h2>
+        <div id="crafting-area" class="crafting-area"></div>
+        <button id="back-deck" class="btn-back">← Back</button>
+      </div>
+    </div>
+
+    <!-- COLLECTION SCREEN -->
+    <div id="collection-screen" class="screen hidden">
+      <div class="collection-content">
+        <h2>📚 Collection</h2>
+        <p class="companion-sub"><span id="collection-count">0</span>/20 cards owned</p>
+        <div class="collection-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="common">Common</button>
+          <button class="filter-btn" data-filter="uncommon">Uncommon</button>
+          <button class="filter-btn" data-filter="rare">Rare</button>
+          <button class="filter-btn" data-filter="legendary">Legendary</button>
+        </div>
+        <div id="collection-list" class="collection-list"></div>
+        <button id="back-collection" class="btn-back">← Back</button>
+      </div>
+    </div>
+
+    <!-- LEADERBOARD SCREEN -->
+    <div id="leaderboard-screen" class="screen hidden">
+      <div class="leaderboard-content">
+        <h2>🏅 Leaderboard</h2>
+        <div id="leaderboard-list" class="leaderboard-list"></div>
+        <button id="back-leaderboard" class="btn-back">← Back</button>
+      </div>
+    </div>
+
+    <!-- END OVERLAY -->
+    <div id="end-overlay" class="hidden overlay">
+      <div class="end-card">
+        <h2 id="end-title">🌿 Victory!</h2>
+        <p id="end-info">The Forest Guardian has fallen!</p>
+        <p id="end-kills">Turns survived: 0</p>
+        <button id="restart-btn" class="btn-primary">🔄 Play Again</button>
+      </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="hidden"><span id="toastText"></span></div>
+
+    <!-- SETTINGS SCREEN -->
+    <div id="settings-screen" class="screen hidden">
+      <div class="settings-content">
+        <h2>⚙️ Settings</h2>
+        <div class="setting-item">
+          <span>🔊 Sound Volume</span>
+          <input type="range" id="volume-slider" min="0" max="100" value="80" class="volume-slider">
+        </div>
+        <div class="setting-item">
+          <span>🔇 Mute</span>
+          <button id="mute-btn" class="btn-secondary">Unmute</button>
+        </div>
+        <button id="back-settings" class="btn-back">← Back</button>
+      </div>
+    </div>
+
+    <!-- PAUSE OVERLAY -->
+    <div id="pause-overlay" class="hidden overlay">
+      <div class="pause-card">
+        <h2>⏸ Paused</h2>
+        <button id="resume-btn" class="btn-primary">▶ Resume</button>
+        <button id="settings-btn" class="btn-secondary">⚙️ Settings</button>
+        <button id="quit-btn" class="btn-secondary">🏠 Quit to Menu</button>
+      </div>
+    </div>
+</body>
+</html>

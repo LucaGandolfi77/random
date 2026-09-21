@@ -1,11 +1,14 @@
 """Dataset upload, preview and deletion endpoints."""
 
-from fastapi import APIRouter, File, Query, UploadFile, status
+from typing import Annotated
 
-from app.api.deps import AppSettings, DbSession
+from fastapi import APIRouter, Depends, File, Query, UploadFile, status
+
+from app.api.deps import AppSettings, DbSession, require_editor, require_viewer
 from app.api.errors import ApiException, not_found
 from app.api.serializers import serialize_dataset
 from app.models.project import Project
+from app.models.user import User
 from app.repositories.base import get_active_dataset_for_project, get_project
 from app.schemas.api import DatasetPreview, DatasetRead
 from app.services.datasets import DatasetValidationError
@@ -30,6 +33,7 @@ def upload_dataset(
     project_id: str,
     db: DbSession,
     settings: AppSettings,
+    current_user: Annotated[User, Depends(require_editor)],
     file: UploadFile = File(...),
 ) -> DatasetRead:
     project = _project(db, project_id)
@@ -41,7 +45,11 @@ def upload_dataset(
 
 
 @router.get("/projects/{project_id}/dataset", response_model=DatasetRead)
-def get_current_dataset(project_id: str, db: DbSession) -> DatasetRead:
+def get_current_dataset(
+    project_id: str,
+    db: DbSession,
+    current_user: Annotated[User, Depends(require_viewer)],
+) -> DatasetRead:
     _project(db, project_id)
     dataset = get_active_dataset_for_project(db, project_id)
     if dataset is None:
@@ -54,6 +62,7 @@ def get_dataset_preview(
     project_id: str,
     db: DbSession,
     settings: AppSettings,
+    current_user: Annotated[User, Depends(require_viewer)],
     limit: int = Query(default=100, ge=1, le=500),
 ) -> DatasetPreview:
     _project(db, project_id)
@@ -64,7 +73,12 @@ def get_dataset_preview(
 
 
 @router.delete("/projects/{project_id}/dataset", status_code=status.HTTP_204_NO_CONTENT)
-def delete_current_dataset(project_id: str, db: DbSession, settings: AppSettings) -> None:
+def delete_current_dataset(
+    project_id: str,
+    db: DbSession,
+    settings: AppSettings,
+    current_user: Annotated[User, Depends(require_editor)],
+) -> None:
     _project(db, project_id)
     dataset = get_active_dataset_for_project(db, project_id)
     if dataset is None:

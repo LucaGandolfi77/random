@@ -38,9 +38,20 @@ class Settings(BaseSettings):
     # CORS: comma separated list of allowed origins (empty = allow all in dev)
     cors_origins: str = Field(default="*")
 
+    # Authentication / JWT
+    jwt_secret_key: str = Field(default="super-secret-key-change-in-production")
+    jwt_algorithm: str = Field(default="HS256")
+    jwt_access_token_expire_minutes: int = Field(default=30, ge=5, le=1440)
+    jwt_refresh_token_expire_days: int = Field(default=7, ge=1, le=90)
+
     # Analysis defaults (server side safety caps; per-project config may be stricter)
     default_missing_threshold_pct: float = Field(default=10.0, ge=0, le=100)
     iqr_multiplier: float = Field(default=1.5, ge=0.1, le=10)
+
+    # Celery / Redis
+    redis_url: str = Field(default="redis://localhost:6379/0")
+    celery_broker_url: str = Field(default="redis://localhost:6379/0")
+    celery_result_backend: str = Field(default="redis://localhost:6379/0")
 
     @field_validator("storage_dir", mode="before")
     @classmethod

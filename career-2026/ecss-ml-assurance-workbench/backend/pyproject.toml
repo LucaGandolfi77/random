@@ -1,8 +1,33 @@
 [project]
 name = "ecss-ml-assurance-workbench-backend"
-version = "0.1.0"
-description = "ECSS ML Assurance Workbench backend - Data Readiness Inspector (week 1)"
+version = "1.0.0-rc.1"
+description = "ECSS ML Assurance Workbench backend - ML assurance engineering support platform"
 requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "pydantic>=2.9.0",
+    "pydantic-settings>=2.7.0",
+    "sqlalchemy>=2.0.35",
+    "pandas>=2.2.0",
+    "numpy>=2.2.0",
+    "python-multipart>=0.0.18",
+    "python-jose[cryptography]>=3.3.0",
+    "passlib[bcrypt]>=1.7.4",
+    "bcrypt>=4.0.0,<5.0.0",
+    "celery[redis]>=5.4.0",
+    "redis>=5.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=6.0.0",
+    "httpx>=0.28.0",
+    "ruff>=0.9.0",
+    "mypy>=1.15.0",
+    "bandit>=1.7.0",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

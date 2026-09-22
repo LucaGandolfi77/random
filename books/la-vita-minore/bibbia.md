@@ -110,8 +110,8 @@
 1. **Incidente scatenante** — la chiamata della madre (cap. 1) e l'incontro con Nora al quarto piano (cap. 3): amore e morte nella stessa settimana.
 2. **Primo punto di svolta** — Teo sceglie di stare: con la madre, con Nora. Lucia muore (cap. 5).
 3. **Punto di mezzo** — falso trionfo: convivono, la vita sembra guarita, Nora è incinta (capp. 7–9). Ma il lutto non passato riaffiora.
-4. **Crisi** — la perdita del bambino, in maggio (cap. 10). Desperazione totale; entrambi si chiudono nel silenzio; Teo quasi perde anche Nora.
-5. **Secondo punto di svolta** — Teo rompe il silenzio con un gesto: legge ad alta voce ad Anna Karenina, come Nora faceva ai pazienti. Il rovesciamento: ora assiste lei (cap. 11).
+4. **Crisi** — la perdita della figlia, in maggio (cap. 10). Desperazione totale; entrambi si chiudono nel silenzio; Teo quasi perde anche Nora.
+5. **Secondo punto di svolta** — ✅ Teo rompe il silenzio con un gesto: legge ad alta voce la pagina del padre (cap. 11). Il rovesciamento: ora assiste lei.
 6. **Climax** — al mare di Varigotti, all'alba: finalmente parlando del bambino e di David; lasciano andare (non dimenticare); riscatto emotivo (cap. 12).
 7. **Risoluzione** — la nuova normalità: Nora di nuovo incinta, affrontata con paura e coraggio; le cose piccole diventate vita vera (Epilogo).
 
@@ -123,9 +123,9 @@
 | Ivo e la filosofia del caffè | Ivo, Teo | cap. 1 | cap. 7 (va in pensione, lascia la cuffia) |
 | Dario, la vita "normale" | Dario, Teo | cap. 4 | ✅ cap. 8 (Teo gli dice la verità: "No. Non sto bene.") |
 | Il libro del padre | Teo, Alberto | cap. 1 | cap. 11 (Teo lo apre e lo legge a Nora) |
-| La voce che legge ai morenti | Nora | cap. 3 | cap. 11 (Teo prende il suo posto) |
+| La voce che legge ai morenti | Nora | cap. 3 | ✅ cap. 11 (Teo prende il suo posto: legge la pagina del padre) |
 | La camicia incompiuta sotto lo spillo | Teo, Lucia | cap. 6 | cap. 12 o epilogo: Teo la finisce con il ditale — "le cose vanno rifatte, non buttate" |
-| I due nomi sulle liste | Teo, Nora | cap. 9 | cap. 10 (il lutto li rende insopportabili) |
+| I due nomi sulle liste | Teo, Nora | cap. 9 | ✅ cap. 10–11 (il nome sussurrato alla figlia, mai scritto; poi detto a voce alta) |
 
 ---
 
@@ -138,7 +138,7 @@
 | Ottobre 2023 | La chiamata della madre; la verità; l'incontro con Nora | capp. 1–3 |
 | Autunno 2023 | Visite, la relazione che nasce, la morte di Lucia | capp. 4–6 |
 | Inverno 2023–24 | Convivenza; Ivo va in pensione; la gravidanza | capp. 7–9 |
-| Maggio 2024 | La perdita del bambino | cap. 10 |
+| Maggio 2024 | La perdita della figlia (il nome non scritto nel libro) | cap. 10 |
 | Giugno 2024 | Il mare di Varigotti; il riscatto | cap. 12 |
 | Primavera 2025 | Epilogo: la nuova normalità, la nuova gravidanza; Teo scrive il libro | Epilogo |
 
@@ -173,9 +173,9 @@
 | Allusione | Proust (il paradiso perduto/ritrovato) | cap. 6 | epigrafe con eco deliberata del prologo + l'odore che riporta indietro: "il paradiso perduto si riconosce soltanto dopo, e il dopo è fatto di odori" |
 | Allusione | Dostoevskij, *L'idiot* («La bellezza salverà il mondo») | cap. 8 | epigrafe + battuta di Nora sulla bellezza delle cose piccole |
 | Allusione | Tolstoj, *Guerra e pace* (Levin e il fieno, l'impegno fisico come salvezza) | cap. 9 | Teo scopre il lavoro con le mani ai preparativi: "l'unica cosa che non fa paura" — Nora legge la falciatura di Levin |
-| Allusione | Proust (il tempo che si perde e si ritrova) | cap. 10 | il buio di maggio |
-| Allusione | Tolstoj, *Guerra e pace* (il cielo di Austerlitz) | cap. 12 | il cielo sopra il mare all'alba |
-| Allusione | Proust (ricominciare con occhi nuovi) | Epilogo | le cose piccole viste come se fossero nuove |
+| Allusione | Proust (il tempo che si perde e si ritrova) | cap. 10 | epigrafe da *I piaceri e i giorni* ("un vaso pieno di progetti") + il tempo fermo di maggio: "lo si attraversa, e basta" |
+| Allusione | Tolstoj, *Guerra e pace* (il cielo di Austerlitz) | cap. 12 | epigrafe ("Come mai non avevo mai visto prima quel cielo alto?") + in-text: "un principe ferito che guardava il cielo sopra una battaglia persa" — "il cielo non si conta: si guarda" |
+| Allusione | Proust (ricominciare con occhi nuovi) | Epilogo | le cose piccole viste come se fossero nuove: "non era perduto. Eriamo noi che non guardavamo." |
 
 ---
 

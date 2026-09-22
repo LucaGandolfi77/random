@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0a0e1a">
+  <meta name="description" content="Lanterni - La città delle lettere di carta. Costruisci una città sospesa tra le nuvole di lanterne di carta.">
+  <title>Lanterni</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <noscript>
+    <div style="color:#e0d8c8;background:#0a0e1a;padding:40px;text-align:center;font-family:system-ui">
+      <h1>Lanterni</h1>
+      <p>Abilita JavaScript per giocare.</p>
+    </div>
+  </noscript>
+  <canvas id="game" role="application" aria-label="Lanterni game canvas"></canvas>
+
+  <div id="ui-overlay" role="region" aria-label="Game interface">
+    <div id="hud" aria-live="polite" aria-atomic="true">
+      <div id="hud-left">
+        <span id="level-display" aria-label="Level">Lv. 1</span>
+        <span id="lantern-count" aria-label="Lantern count">🏮 0</span>
+      </div>
+      <div id="hud-right">
+        <button id="btn-menu" aria-label="Menu">☰</button>
+      </div>
+    </div>
+
+    <div id="power-indicator" class="hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Throw power">
+      <div id="power-bar"></div>
+    </div>
+
+    <div id="menu-screen" class="screen hidden" role="dialog" aria-modal="true" aria-label="Main menu">
+      <div class="menu-content">
+        <h1>Lanterni</h1>
+        <p class="subtitle">la città delle lettere di carta</p>
+        <button id="btn-play" class="menu-btn">Gioca</button>
+        <button id="btn-continue" class="menu-btn hidden">Continua</button>
+        <div class="menu-footer">
+          <button id="install-btn" class="hidden menu-btn">Installa App</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="dawn-screen" class="screen hidden" role="dialog" aria-modal="true" aria-label="Dawn summary">
+      <div class="dawn-content">
+        <h2>L'Alba Arriva</h2>
+        <p id="dawn-stats"></p>
+        <div id="stars-preview"></div>
+        <div class="btn-group">
+          <button id="btn-new-day" class="menu-btn">Nuovo Giorno</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="error-screen" class="screen hidden" role="alertdialog" aria-modal="true" aria-label="Error occurred">
+      <div class="error-content">
+        <h2>Qualcosa è andato storto</h2>
+        <p id="error-message">Si è verificato un errore imprevisto.</p>
+        <button id="btn-retry" class="menu-btn">Riprova</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

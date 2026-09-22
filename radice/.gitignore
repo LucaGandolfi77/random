@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.test.js
+*.spec.js
+coverage/
+.env
+.git

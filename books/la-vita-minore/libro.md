@@ -7,9 +7,13 @@
 
 ## Stato
 
-- Parole totali: **~13.700** / obiettivo: **70.000**
+- Parole totali: **~17.300** / obiettivo: **70.000**
 - Capitoli completati: **14 / 14** — **PRIMA BOZZA COMPLETA** ✅
-- Prossima scadenza: revisione strutturale (checklist, fase 2)
+- **FASE 2 — REVISIONE STRUTTURALE IN CORSO** (vedi `note/revisione.md`)
+  - ✅ Diagnosi della lettura completa + piano di espansione
+  - ✅ Riscrittura: prologo (~990), capp. 1–2 (~2.890), capp. 3–5 (~4.590), capp. 6–8 (~3.510), capp. 9–11 (~3.280)
+  - ⬜ Riscrittura: cap. 12, epilogo
+- Prossima scadenza: riscrittura cap. 12 + epilogo — chiusura revisione
 
 ---
 

@@ -72,6 +72,8 @@
 | **friends-tycoon** | Idle tycoon game with custom 3D engine | JavaScript | Custom Canvas 3D renderer, 8 characters, 18 activities, offline progress |
 | **pokopia-clone** | Pokemon Pokopia fan game (Dittopia) | JavaScript | 16 species, day/night cycle, chiptune music, Pokedex, crafting |
 | **coop-game** | Cooperative satirical board game | HTML/CSS/JS | 3-6 players, character talents, event cards, PWA |
+| **radice** | Cozy library tree PWA - read books to build an ancient tree | HTML/CSS/JS | Gacha system, reading mechanic, Canvas 2D tree, owl librarian, PWA |
+| **expedition33_game** | Narrative text adventure (lighthouse keeper) | HTML/CSS/JS | Choice-based, Web Audio ambient, CSS beam animation, 3 endings |
 | **expedition33_game** | Narrative text adventure (lighthouse keeper) | HTML/CSS/JS | Choice-based, Web Audio ambient, CSS beam animation, 3 endings |
 | **card-games** | 12 multiplayer card games (Scopa, Briscola, etc.) | Node.js | LAN multiplayer, AI bots, Socket.IO, server-authoritative |
 | **memory_clash** | Multiplayer memory-matching card game | Python | Pygame client, WebSocket server, Redis persistence |
@@ -109,6 +111,7 @@
 | **ev-personale** | Personal dashboard (existential KPIs) | HTML/CSS/JS | 7 views, training plans, diet tracking, localStorage, PWA |
 | **voice-fact-check-pwa** | Real-time speech fact-checker | JavaScript | Web Speech API, OpenRouter, multi-language, PWA |
 | **shhh-reader** | Noise-sensitive reading app | JavaScript | Mic monitoring, PDF/ePub reader, silence stats, PWA |
+| **radice** | Cozy library tree PWA - read books to build an ancient tree | HTML/CSS/JS | Gacha, reading stories, Canvas 2D tree, owl librarian, PWA, Web Share, Push, haptic, dark mode |
 | **tailssh-pwa** | SSH/SFTP/VNC client PWA for iPhone | JavaScript | WebSocket relay, xterm.js, noVNC, Tailscale integration |
 | **pixel-stretch-app** | Pixel stretch art + AI background removal | TypeScript | React 19, ONNX, WebGPU, layers, PWA |
 

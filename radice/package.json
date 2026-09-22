@@ -1,0 +1,35 @@
+{
+  "name": "radice-pwa",
+  "version": "1.0.0",
+  "description": "Radice - La biblioteca nell'albero - Cozy PWA game",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve . -l 8080",
+    "build": "npx rollup -c rollup.config.js",
+    "test": "node --experimental-vm-modules src/__tests__/run-tests.js",
+    "test:watch": "node --watch --experimental-vm-modules src/__tests__/run-tests.js",
+    "lint": "npx eslint js/ src/ 2>/dev/null || true",
+    "lint:fix": "npx eslint js/ src/ --fix 2>/dev/null || true",
+    "format": "npx prettier --write src/ js/ 2>/dev/null || true",
+    "build:analyze": "npx rollup -c rollup.config.js --environment analyze",
+    "serve": "python3 -m http.server 8080"
+  },
+  "devDependencies": {
+    "@rollup/plugin-alias": "^6.0.0",
+    "@rollup/plugin-commonjs": "^29.0.3",
+    "@rollup/plugin-node-resolve": "^15.2.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.0",
+    "rollup": "^4.9.0",
+    "rollup-plugin-visualizer": "^5.12.0"
+  },
+  "keywords": [
+    "pwa",
+    "game",
+    "cozy",
+    "reading",
+    "mobile"
+  ],
+  "license": "MIT"
+}

@@ -182,5 +182,6 @@
 ## 7. Domande aperte
 
 - [x] Epilogo: nuovo figlio o gatto? → **Risolto: nuova gravidanza, affrontata con paura e coraggio.**
-- [ ] Titolo definitivo: *La vita minore* — confermare a fine prima bozza.
-- [ ] Quanto peso dare alle crisi di panico: disclose all'inizio o solo accennate? → per ora solo accennate, rivelate a Dario nel cap. 8.
+- [x] Titolo definitivo: *La vita minore* — **confermato a fine prima bozza** (la chiusura del cap. 12/epilogo ne risolve il tema).
+- [x] Quanto peso dare alle crisi di panico → **Risolto: accennate fino al cap. 7, rivelate a Dario e a Nora nel cap. 8.**
+- [ ] Età di Teo: 33 anni da ottobre 2023 a primavera 2024 → coerente se il compleanno cade tra aprile e ottobre. Da tenere a mente nella stesura integrale.

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#1a3c20">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Radice">
+  <meta name="description" content="Radice — La biblioteca nell'albero. Un gioco cozy PWA dove leggi per costruire. Gacha, storie, e un gufo bibliotecario sonnolento.">
+  <meta name="application-name" content="Radice">
+  <meta name="msapplication-TileColor" content="#1a3c20">
+  <meta name="msapplication-TileImage" content="icons/icon-192.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%231a3c20'/%3E%3Ctext x='256' y='310' font-family='Georgia,serif' font-size='280' font-weight='bold' text-anchor='middle' fill='%23f5a623'%3E%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="mask-icon" href="icons/icon-192.svg" color="#f5a623">
+  <title>Radice — La biblioteca nell'albero</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" role="application" aria-label="Radice - La biblioteca nell'albero">
+    <canvas id="tree-canvas" aria-hidden="true"></canvas>
+
+    <header id="topbar" role="banner">
+      <div class="res" id="res-seme" aria-label="Semi disponibili">🌱 <span>0</span></div>
+      <div class="res" id="res-libri" aria-label="Storie lette">📖 <span>0</span></div>
+      <div class="res" id="res-capitoli" aria-label="Capitoli rari collezionati">⭐ <span>0</span></div>
+      <div class="owl-indicator" id="owl-status" aria-live="polite">
+        <span class="owl-emoji" aria-hidden="true">🦉</span>
+        <span class="owl-mood" id="owl-mood">Sonno</span>
+      </div>
+    </header>
+
+    <main id="view" role="main" aria-label="Contenuto principale">
+    </main>
+
+    <nav id="tabbar" role="navigation" aria-label="Navigazione principale">
+      <button class="tab active" data-view="home" aria-label="Casa" aria-current="page">🏠 Casa</button>
+      <button class="tab" data-view="gacha" aria-label="Gacha">🎲 Gacha</button>
+      <button class="tab" data-view="reader" aria-label="Leggi">📖 Leggi</button>
+      <button class="tab" data-view="tree" aria-label="Albero">🌳 Albero</button>
+      <button class="tab" data-view="owl" aria-label="Gufo">🦉 Gufo</button>
+    </nav>
+
+    <div id="toast" role="status" aria-live="polite" hidden></div>
+    <div id="modal" role="dialog" aria-modal="true" aria-label="Dialog" hidden></div>
+  </div>
+
+  <script src="data/books.js"></script>
+  <script src="data/rooms.js"></script>
+  <script src="data/chapters.js"></script>
+  <script src="data/owl.js"></script>
+  <script src="js/helpers.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/save.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/gacha.js"></script>
+  <script src="js/reader.js"></script>
+  <script src="js/tree.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/pwa.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

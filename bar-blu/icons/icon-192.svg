@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="bg192" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a3a5c"/>
+      <stop offset="1" stop-color="#0f1923"/>
+    </linearGradient>
+    <linearGradient id="wood192" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c4a050"/>
+      <stop offset="1" stop-color="#8b6914"/>
+    </linearGradient>
+    <linearGradient id="mug192" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a7ab5"/>
+      <stop offset="1" stop-color="#1a3a5c"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="24" fill="url(#bg192)"/>
+  <rect x="0" y="130" width="192" height="62" rx="0" fill="url(#wood192)"/>
+  <rect x="0" y="128" width="192" height="4" fill="#a08040" opacity="0.5"/>
+  <ellipse cx="96" cy="100" rx="40" ry="34" fill="url(#mug192)"/>
+  <rect x="56" y="82" width="80" height="36" rx="8" fill="url(#mug192)"/>
+  <path d="M136 90 Q158 88 158 110 Q158 132 136 130" fill="none" stroke="#3a7ab5" stroke-width="8" stroke-linecap="round"/>
+  <ellipse cx="96" cy="84" rx="32" ry="10" fill="#f5e6cc" opacity="0.3"/>
+    <ellipse cx="96" cy="84" rx="28" ry="8" fill="#d4a056" opacity="0.6"/>
+  <circle cx="84" cy="76" r="4" fill="#fff" opacity="0.35"/>
+  <circle cx="104" cy="72" r="3" fill="#fff" opacity="0.25"/>
+  <circle cx="92" cy="80" r="2.5" fill="#fff" opacity="0.2"/>
+</svg>

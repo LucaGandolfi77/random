@@ -1,0 +1,24 @@
+{
+  "name": "Bar Blu",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Cozy game mobile PWA — Bar Blu di Luca Zheng",
+  "scripts": {
+    "start": "npx serve .",
+    "serve": "npx serve .",
+    "serve:python": "python3 -m http.server 8000",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "echo \"No tests yet\" && exit 0",
+    "verify": "npx serve . & pid=$!; sleep 2; curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/; kill $pid"
+  },
+  "keywords": ["cozy", "game", "pwa", "mobile", "bar"],
+  "license": "MIT",
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18"
+  }
+}

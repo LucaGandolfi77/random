@@ -1,0 +1,1 @@
+{"parser": "babel-eslint", "env": {"browser": true, "es2022": true}, "sourceType": "module", "globals": {"window": false, "document": false, "navigator": false, "localStorage": false, "matchMedia": false, "URL": false, "AudioContext": false}, "rules": {"no-eval": "error", "no-undef": "error", "no-unused-vars": "warn", "no-console": "off"}}

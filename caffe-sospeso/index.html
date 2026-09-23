@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#c97b4a">
+<meta name="description" content="Caff\u00e8 Sospeso \u2014 un cozy game da bar di quartiere.">
+<title data-i18n="app_title">Caff\u00e8 Sospeso</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="icon" type="image/svg+xml" href="./icons/icon-192.svg">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon-180.png">
+<link rel="apple-touch-icon" type="image/svg+xml" href="./icons/icon-192.svg">
+<link rel="stylesheet" href="./styles.css">
+<script type="module" src="./js/app.js"></script>
+</head>
+<body>
+<div id="app" role="application" aria-label="Caff\u00e8 Sospeso">
+
+  <div id="live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ===== HOME ===== -->
+  <section data-screen="home" class="screen" id="screen-home" aria-label="Home">
+    <header class="top">
+      <h1 class="title" data-i18n="app_title">Caff\u00e8 Sospeso</h1>
+      <p class="tagline" data-i18n="app_tagline">Un caff\u00e8 caldo, una storia in pi\u00f9</p>
+    </header>
+    <main class="card home">
+      <div class="cup-art" aria-hidden="true">&#9749;</div>
+      <p id="home-progress" class="home-progress" aria-live="polite"></p>
+      <div class="home-actions">
+        <button id="btn-start" class="btn btn-primary btn-block" type="button" data-i18n="start">Inizia</button>
+        <button id="btn-continue" class="btn btn-secondary btn-block" type="button" data-i18n="continue">Continua</button>
+      </div>
+      <nav class="home-nav" aria-label="Home">
+        <button class="btn btn-ghost" type="button" data-action="howto" data-i18n="howto">Come si gioca</button>
+        <button class="btn btn-ghost" type="button" data-action="settings" data-i18n="settings">Impostazioni</button>
+      </nav>
+    </main>
+  </section>
+
+  <!-- ===== TUTORIAL ===== -->
+  <section data-screen="tutorial" class="screen hidden" id="screen-tutorial" aria-label="Tutorial">
+    <main class="card tutorial">
+      <h2 data-i18n="howto_title">Come si gioca</h2>
+      <ol class="tutorial-list" id="tutorial-list">
+        <li><strong>Accogli</strong> un cliente al bancone.</li>
+        <li><strong>Componi</strong> la bevanda scegliendo origine, latte e dolcezza.</li>
+        <li><strong>Macina</strong> (tasta) e <strong>versa</strong> (tieni), poi <strong>Servi</strong>.</li>
+        <li>Scopri <strong>aromi</strong> e lascia un <strong>caff\u00e8 sospeso</strong> per chi verr\u00e0 dopo.</li>
+      </ol>
+      <button id="tutorial-start" class="btn btn-primary btn-block" type="button" data-i18n="play">Inizia!</button>
+    </main>
+  </section>
+
+  <!-- ===== GAME ===== -->
+  <section data-screen="game" class="screen hidden" id="screen-game" aria-label="Gioco">
+    <header class="top top-game">
+      <div id="resources" class="resources" aria-label="Risorse"></div>
+      <nav class="top-nav" aria-label="Menu">
+        <button class="btn btn-ghost btn-sm" type="button" data-action="inventory" aria-label="Collezione">Collezione</button>
+        <button class="btn btn-ghost btn-sm" type="button" data-action="achievements" aria-label="Traguardi">Traguardi</button>
+        <button class="btn btn-ghost btn-sm" type="button" data-action="settings" aria-label="Impostazioni">Impost.</button>
+        <button id="btn-save" class="btn btn-ghost btn-sm" type="button" aria-label="Salva">Salva</button>
+      </nav>
+    </header>
+
+    <div id="chalkboard" class="chalkboard" aria-label="Lavagna"></div>
+
+    <main class="counter">
+      <div id="customer" class="customer" aria-live="polite"></div>
+
+      <div id="compose" class="compose" aria-label="Composizione bevanda"></div>
+
+      <div id="machine" class="machine-area" aria-label="Macchina del caff\u00e8"></div>
+
+      <div id="actions" class="actions" aria-label="Azioni"></div>
+
+      <div class="extras">
+        <button id="btn-water" class="btn btn-small btn-secondary" type="button">Annaffia</button>
+        <button id="btn-sospeso" class="btn btn-small btn-secondary hidden" type="button">Sospeso</button>
+      </div>
+    </main>
+
+    <footer class="top">
+      <button class="btn btn-ghost btn-sm" type="button" data-action="back">Home</button>
+    </footer>
+  </section>
+
+  <!-- ===== SETTINGS ===== -->
+  <section data-screen="settings" class="screen hidden" id="screen-settings" aria-label="Impostazioni">
+    <main class="card">
+      <header class="screen-head">
+        <h2 data-i18n="settings">Impostazioni</h2>
+        <button class="btn btn-ghost btn-sm" type="button" data-action="back">Indietro</button>
+      </header>
+      <div class="setting">
+        <label for="btn-music">Musica</label>
+        <button id="btn-music" class="btn btn-small" type="button">Musica</button>
+      </div>
+      <div class="setting">
+        <label for="btn-sfx">Effetti</label>
+        <button id="btn-sfx" class="btn btn-small" type="button">Effetti</button>
+      </div>
+      <div class="setting">
+        <label for="range-volume">Volume <span id="vol-val">50%</span></label>
+        <input id="range-volume" type="range" min="0" max="1" step="0.05" value="0.5">
+      </div>
+      <div class="setting">
+        <label for="select-lang">Lingua</label>
+        <select id="select-lang">
+          <option value="it">Italiano</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+      <div class="setting">
+        <label for="toggle-motion">Riduzione movimento</label>
+        <input id="toggle-motion" type="checkbox">
+      </div>
+      <div class="setting">
+        <button id="btn-install" class="btn btn-secondary" type="button" data-i18n="install">Installa</button>
+      </div>
+      <hr>
+      <button id="btn-reset" class="btn btn-danger btn-block" type="button" data-i18n="reset_title">Resetta il gioco</button>
+      <div class="setting">
+        <button id="btn-share" class="btn btn-secondary btn-block" type="button" data-i18n="share">Condividi il tuo caff\u00e8</button>
+      </div>
+    </main>
+  </section>
+
+  <!-- ===== HOW TO PLAY ===== -->
+  <section data-screen="howto" class="screen hidden" id="screen-howto" aria-label="Come si gioca">
+    <main class="card">
+      <header class="screen-head">
+        <h2 data-i18n="howto_title">Come si gioca</h2>
+        <button class="btn btn-ghost btn-sm" type="button" data-action="back">Indietro</button>
+      </header>
+      <ol class="howto">
+        <li><strong>Accogli</strong> un cliente e leggi la sua richiesta.</li>
+        <li><strong>Componi</strong> la bevanda: scegli origine, latte e dolcezza nel bancone.</li>
+        <li><strong>Macina</strong> toccando, <strong>versa</strong> tenendo premuto, poi <strong>Servi</strong>.</li>
+        <li>Se la bevanda \u00e8 quella che cerca, il cliente sorride e lascia un aroma.</li>
+        <li>Lascia un <strong>caff\u00e8 sospeso</strong>: chi verr\u00e0 dopo lo ritrover\u00e0.</li>
+        <li>Riguadagna i gettoni per <strong>arredare</strong> e annaffiare la pianta.</li>
+      </ol>
+    </main>
+  </section>
+
+  <!-- ===== INVENTORY ===== -->
+  <section data-screen="inventory" class="screen hidden" id="screen-inventory" aria-label="Collezione">
+    <main class="card">
+      <header class="screen-head">
+        <h2 id="inv-title">Collezione</h2>
+        <button class="btn btn-ghost btn-sm" type="button" data-action="back">Indietro</button>
+      </header>
+      <div id="inv-list" class="inv-grid"></div>
+    </main>
+  </section>
+
+  <!-- ===== ACHIEVEMENTS ===== -->
+  <section data-screen="achievements" class="screen hidden" id="screen-achievements" aria-label="Traguardi">
+    <main class="card">
+      <header class="screen-head">
+        <h2 id="ach-title">Traguardi</h2>
+        <button class="btn btn-ghost btn-sm" type="button" data-action="back">Indietro</button>
+      </header>
+      <div id="ach-list" class="ach-list"></div>
+      <h3 data-i18n="decorazioni">Decorazioni</h3>
+      <div id="decor-list" class="ach-list"></div>
+      <h3 data-i18n="caffe_sospeso_section">Caff\u00e8 sospeso</h3>
+      <div id="sosp-list" class="ach-list"></div>
+    </main>
+  </section>
+
+  <!-- ===== RESET CONFIRM ===== -->
+  <div id="reset-confirm" class="modal hidden" role="alertdialog" aria-modal="true" aria-labelledby="reset-title">
+    <div class="modal-card">
+      <h2 id="reset-title">Resetta il gioco</h2>
+      <p data-i18n="reset_confirm">Vuoi davvero resettare il salvataggio? Questa azione non pu\u00f2 essere annullata.</p>
+      <div class="modal-actions">
+        <button id="reset-confirm-no" class="btn btn-secondary" type="button" data-i18n="reset_cancel">Annulla</button>
+        <button id="reset-confirm-yes" class="btn btn-danger" type="button" data-i18n="reset_ok">Resetta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+</div>
+</body>
+</html>

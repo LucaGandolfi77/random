@@ -1,0 +1,17 @@
+export const CONFIG = Object.freeze({
+  appNameIT: 'Stellaria — La Piazza dei Riflessi',
+  appNameEN: 'Stellaria — The Plaza of Reflections',
+  version: '1.0.0',
+  storageKey: 'stellaria-save',
+  storageVersion: 1,
+  maxFame: 6,
+  defaultStars: 5,
+  defaultRiflesso: 0,
+  defaultFame: 1,
+  maxAffinity: 100,
+  voteBase: 1,
+  autosaveMs: 1200,
+  saveLangKey: 'stellaria-lang',
+  inflation: 0.15,
+  storageVersion: 2,
+});

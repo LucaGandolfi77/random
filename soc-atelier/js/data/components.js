@@ -1,0 +1,58 @@
+export const COMPONENTS = Object.freeze([
+  {
+    id: 'core_alba', nameIT: 'Core Alba', nameEN: 'Dawn Core',
+    descIT: 'Un singolo nucleo serioso. Ottimo per i compiti che non si dividono.',
+    descEN: 'A single steady core. Great for work that refuses to split.',
+    icon: '◈', kind: 'cpu', tier: 1,
+    stats: { power: 8, cost: 10, area: 6, clock: 1.0, ipc: 1.0, cores: 1 },
+  },
+  {
+    id: 'core_gemello', nameIT: 'Core Gemello', nameEN: 'Twin Core',
+    descIT: 'Due cuori che lavorano insieme. Utile quando il lavoro si può dividere.',
+    descEN: 'Two hearts working together. Helpful when work can be shared.',
+    icon: '✸', kind: 'cpu', tier: 1,
+    stats: { power: 16, cost: 18, area: 11, clock: 0.95, ipc: 1.0, cores: 2 },
+  },
+  {
+    id: 'core_coro', nameIT: 'Core Coro', nameEN: 'Chorus Core',
+    descIT: 'Un coro di nuclei per i compiti che danzano in parallelo.',
+    descEN: 'A chorus of cores for work that dances in parallel.',
+    icon: '❋', kind: 'cpu', tier: 4,
+    stats: { power: 40, cost: 45, area: 26, clock: 0.9, ipc: 1.05, cores: 8 },
+  },
+  {
+    id: 'cache_lunaria', nameIT: 'Cache Lunaria', nameEN: 'Lunar Cache',
+    descIT: 'Ricorda spesso i dati che servono davvero, così il resto non aspetta.',
+    descEN: 'Remembers what is truly needed, so the rest need not wait.',
+    icon: '◍', kind: 'cache', tier: 2,
+    stats: { power: 4, cost: 15, area: 4, capacity: 256 },
+  },
+  {
+    id: 'ram_fiume', nameIT: 'RAM Fiume', nameEN: 'River RAM',
+    descIT: 'Un grande lago di memoria per i compiti che vogliono portare molti dati.',
+    descEN: 'A great lake of memory for jobs that carry lots of data.',
+    icon: '≈', kind: 'ram', tier: 2,
+    stats: { power: 6, cost: 14, area: 8, capacity: 8, bandwidth: 12 },
+  },
+  {
+    id: 'bus_via_lattea', nameIT: 'Bus Via Lattea', nameEN: 'Milky Bus',
+    descIT: 'La grande strada che collega tutti i pezzi. Senza di essa, tutto si ferma.',
+    descEN: 'The great road linking every piece. Without it, all stands still.',
+    icon: '⌇', kind: 'bus', tier: 4,
+    stats: { power: 5, cost: 20, area: 5, bandwidth: 20 },
+  },
+  {
+    id: 'gpu_prisma', nameIT: 'GPU Prisma', nameEN: 'Prism GPU',
+    descIT: 'Mille luci che dipingono insieme perfetti per immagini e numeri paralleli.',
+    descEN: 'A thousand lights painting in unison, perfect for images and numbers.',
+    icon: '✦', kind: 'gpu', tier: 5,
+    stats: { power: 30, cost: 55, area: 22, units: 64, clock: 1.0 },
+  },
+  {
+    id: 'npu_sussurro', nameIT: 'NPU Sussurro', nameEN: 'Whisper NPU',
+    descIT: 'Sussurra i numeri dellintelligenza con poca energia e grande pazienza.',
+    descEN: 'Whispers the numbers of intelligence with little power and great patience.',
+    icon: '✧', kind: 'npu', tier: 6,
+    stats: { power: 12, cost: 48, area: 14, tops: 8 },
+  },
+]);

@@ -1,0 +1,146 @@
+const CACHE = 'stellaria-v3';
+const PRECACHE = [
+  './',
+  './index.html',
+  './styles.css',
+  './manifest.webmanifest',
+  './offline.html',
+  './js/app.js',
+  './js/core/config.js',
+  './js/core/i18n.js',
+  './js/core/utils.js',
+  './js/core/state.js',
+  './js/core/bus.js',
+  './js/domain/world.js',
+  './js/domain/scoring.js',
+  './js/domain/model.js',
+  './js/ui/view.js',
+    './js/ui/controller.js',
+    './js/features/index.js',
+    './js/ui/avatar.js',
+  './js/services/storage.js',
+  './js/services/audio.js',
+  './js/services/pwa.js',
+  './js/services/share.js',
+  './js/services/backup.js',
+  './js/services/ambient.js',
+  './js/services/auth.js',
+  './js/domain/data/tagMeta.js',
+  './js/domain/data/citizens.js',
+  './js/domain/data/rooms.js',
+  './js/domain/data/items.js',
+  './js/domain/data/achievements.js',
+  './js/domain/data/unlockables.js',
+  './js/domain/data/events.js',
+  './js/domain/data/ambient.js',
+  './js/domain/data/tutorial.js',
+  './icons/icon-192.svg',
+  './icons/icon-512.svg',
+  './icons/maskable-512.svg',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  './icons/maskable-512.png',
+  './icons/apple-touch-icon-180.png',
+];
+
+self.addEventListener('install', (e) => {
+  e.waitUntil(
+    caches.open(CACHE).then((cache) => cache.addAll(PRECACHE).catch(() => {
+      PRECACHE.forEach((u) => fetch(u).then((r) => { if (r.ok) cache.put(u, r); }).catch(() => {}));
+    }))
+  ).then(() => self.skipWaiting());
+});
+
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
+    caches.keys().then((keys) => Promise.all(
+      keys.filter((k) => k !== CACHE && k.startsWith('stellaria')).map((k) => caches.delete(k))
+    ))
+  ).then(() => self.clients.claim());
+});
+
+function isNavigation(request) {
+  return request.mode === 'navigate' || (request.headers.get('accept') || '').includes('text/html');
+}
+
+async function shareTargetHandler(request) {
+  try {
+    const form = await request.formData();
+    const text = (form.get('text') || '').toString();
+    if (text) {
+      const clients = self.clients;
+      const c = await clients.matchAll({ type: 'window', includeUncontrolled: true });
+      const target = c[0] || await clients.openWindow('./');
+      if (target) {
+        target.postMessage({ type: 'share-target', text });
+        const page = await clients.matchAll({ type: 'window' }).then(list => list[0]);
+        if (page) page.focus();
+      }
+      return new Response('OK', { status: 200 });
+    }
+  } catch {}
+  return new Response('Bad Request', { status: 400 });
+}
+
+self.addEventListener('fetch', (e) => {
+  if (e.request.method !== 'GET') {
+    if (e.request.method === 'POST' && e.request.url.endsWith('/share-target')) {
+      e.respondWith(shareTargetHandler(e.request));
+    }
+    return;
+  }
+  const url = new URL(e.request.url);
+  if (url.pathname === '/share-target') {
+    if (e.request.method === 'GET') {
+      e.respondWith((async () => {
+        try {
+          const params = new URL(e.request.url).searchParams;
+          const text = params.get('text') || params.get('title') || '';
+          if (text) {
+            const cache = await caches.open('share-target');
+            await cache.put('/pending', new Response(text));
+          }
+        } catch {}
+        return Response.redirect('./', 303);
+      })());
+      return;
+    }
+    e.respondWith(shareTargetHandler(e.request)); return;
+  }
+
+  if (isNavigation(e.request)) {
+    e.respondWith(
+      fetch(e.request).catch(() => caches.match('./index.html'))
+    );
+    return;
+  }
+  if (e.request.url.startsWith('http://localhost') || e.request.url.startsWith('http://127.0.0.1')) {
+    return fetch(e.request).catch(() => caches.match('./offline.html'));
+  }
+  // Stale-While-Revalidate per asset statici
+  e.respondWith(
+    caches.match(e.request).then((hit) => {
+      if (hit) {
+        fetch(e.request).then((r) => {
+          if (r && r.ok && r.type !== 'opaque') {
+            const cp = r.clone();
+            caches.open(CACHE).then((cache) => cache.put(e.request, cp)).catch(() => {});
+          }
+          return r;
+        }).catch(() => {});
+        return hit;
+      }
+      return fetch(e.request).then((r) => {
+        if (r && r.ok && r.type !== 'opaque') {
+          const cp = r.clone();
+          caches.open(CACHE).then((cache) => cache.put(e.request, cp)).catch(() => {});
+        }
+        return r;
+      }).catch(() => caches.match('./offline.html'));
+    })
+  );
+});
+
+self.addEventListener('message', (e) => {
+  if (e.data && e.data.type === 'SKIP_WAITING') self.skipWaiting();
+});

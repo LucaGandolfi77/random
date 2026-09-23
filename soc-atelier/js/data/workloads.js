@@ -1,0 +1,58 @@
+export const WORKLOADS = Object.freeze({
+  serial_hello: {
+    id: 'serial_hello', nameIT: 'Saluto Seriale', nameEN: 'Serial Greeting',
+    type: 'serial', descIT: 'Un messaggio che va scritto un passo alla volta.',
+    descEN: 'A message written one step at a time.',
+    instructions: 400, parallelFraction: 0.0, bytes: 0, ops: 0,
+    goal: { perfMin: 0.6, powerMax: 999, latencyMax: 999 },
+  },
+  memory_stream: {
+    id: 'memory_stream', nameIT: 'Flusso di Memoria', nameEN: 'Memory Stream',
+    type: 'memory', descIT: 'Tanti dati che scorrono e vogliono essere letti in fretta.',
+    descEN: 'So much data flowing and wanting to be read fast.',
+    instructions: 100, parallelFraction: 0.0, bytes: 64, ops: 0,
+    goal: { perfMin: 0.5, powerMax: 999, latencyMax: 999 },
+  },
+  cache_working: {
+    id: 'cache_working', nameIT: 'Labirinto di Cache', nameEN: 'Cache Labyrinth',
+    type: 'cached', descIT: 'Un labirinto che premia chi ricorda i passaggi giusti.',
+    descEN: 'A labyrinth that rewards those who remember the right turns.',
+    instructions: 300, parallelFraction: 0.0, bytes: 512, ops: 0, workingSet: 128,
+    goal: { perfMin: 0.7, powerMax: 999, latencyMax: 999 },
+  },
+  parallel_wave: {
+    id: 'parallel_wave', nameIT: 'Onda Parallela', nameEN: 'Parallel Wave',
+    type: 'parallel', descIT: 'Una grande onda che si spezza in mille piccole onde insieme.',
+    descEN: 'A great wave that breaks into a thousand small ones together.',
+    instructions: 1000, parallelFraction: 0.85, bytes: 0, ops: 0,
+    goal: { perfMin: 0.8, powerMax: 999, latencyMax: 999 },
+  },
+  image_render: {
+    id: 'image_render', nameIT: 'Incanto dImmagine', nameEN: 'Image Enchantment',
+    type: 'dataparallel', descIT: 'Dipingere un quadro grande, pixel per pixel, tutti insieme.',
+    descEN: 'Painting a big picture, pixel by pixel, all together.',
+    instructions: 0, parallelFraction: 0.0, bytes: 0, ops: 8000, workUnits: 1.0,
+    goal: { perfMin: 0.7, powerMax: 999, latencyMax: 999 },
+  },
+  ai_infer: {
+    id: 'ai_infer', nameIT: 'Sussurro dellIntelligenza', nameEN: 'Whisper of Intelligence',
+    type: 'ai', descIT: 'Fare indovinare al cristallo cosa cè nellimmagine.',
+    descEN: 'Making the crystal guess what is in the image.',
+    instructions: 0, parallelFraction: 0.0, bytes: 0, ops: 6000, workUnits: 1.0,
+    goal: { perfMin: 0.7, powerMax: 999, latencyMax: 999 },
+  },
+  thermal_quest: {
+    id: 'thermal_quest', nameIT: 'Impresa della Fornace', nameEN: 'Furnace Quest',
+    type: 'serial', descIT: 'Un lavoro veloce che non deve surriscaldare la fonderia.',
+    descEN: 'A quick job that must not overheat the foundry.',
+    instructions: 600, parallelFraction: 0.0, bytes: 0, ops: 0,
+    goal: { perfMin: 0.7, powerMax: 45, latencyMax: 999 },
+  },
+  grand_designment: {
+    id: 'grand_designment', nameIT: 'Grande Disegno', nameEN: 'Grand Design',
+    type: 'dataparallel', descIT: 'Troppi compiti, troppe richieste: solo un bilanciamento perfetto salverà il cristallo.',
+    descEN: 'Too many jobs, too many asks: only perfect balance will save the crystal.',
+    instructions: 800, parallelFraction: 0.6, bytes: 64, ops: 4000, workUnits: 1.0,
+    goal: { perfMin: 1.0, powerMax: 70, latencyMax: 999 },
+  },
+});

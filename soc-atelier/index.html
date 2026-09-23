@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f0a26">
+<meta name="description" content="SoC Atelier — La Fonderia dei Cristalli. Costruisci piccoli cervelli di cristallo.">
+<title>SoC Atelier — La Fonderia dei Cristalli</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon-180.png">
+</head>
+<body>
+<div id="app" role="application" aria-label="SoC Atelier">
+
+  <div id="ambient" aria-hidden="true"></div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <header id="topbar" class="screen hidden">
+    <button id="btn-home" class="icon-btn" aria-label="Torna alla schermata iniziale">⌂</button>
+    <h1 id="topbar-title" class="topbar-title"></h1>
+    <button id="btn-settings-top" class="icon-btn" aria-label="Impostazioni">⚙</button>
+  </header>
+
+  <main id="main">
+
+    <section id="screen-home" class="screen">
+      <div class="hero">
+        <div class="hero-glyph" aria-hidden="true">◈✸✧</div>
+        <h2 id="home-title"></h2>
+        <p id="home-tagline" class="tagline" data-i18n="appTagline"></p>
+      </div>
+      <div class="hero-meta">
+        <span id="home-fragments"></span>
+        <span id="home-phase"></span>
+      </div>
+      <div class="actions">
+        <button id="btn-start" class="btn primary" data-i18n="start"></button>
+        <button id="btn-continue" class="btn" data-i18n="continue"></button>
+        <button id="btn-howto-home" class="btn ghost" data-i18n="howTo"></button>
+      </div>
+      <p class="tiny">SoC Atelier · <span data-i18n="appTagline"></span></p>
+    </section>
+
+    <section id="screen-tutorial" class="screen hidden">
+      <div class="tutorial" id="tutorial-card"></div>
+      <div class="tutorial-nav">
+        <button id="btn-tut-skip" class="btn ghost" data-i18n="tutorialSkip"></button>
+        <button id="btn-tut-next" class="btn primary" data-i18n="next"></button>
+      </div>
+    </section>
+
+    <section id="screen-game" class="screen hidden">
+      <div id="game-hud" class="hud">
+        <span id="hud-chapter" class="hud-chip"></span>
+        <span id="hud-fragments" class="hud-chip"></span>
+        <span id="hud-weather" class="hud-chip"></span>
+      </div>
+      <div id="brief-card" class="brief-card">
+        <div class="brief-head">
+          <span id="brief-character" class="character-chip"></span>
+          <div>
+            <h3 id="brief-title"></h3>
+            <p id="brief-text" class="brief-text"></p>
+          </div>
+        </div>
+        <p id="brief-goal" class="brief-goal"></p>
+      </div>
+      <div class="workspace">
+        <aside id="palette" class="palette" aria-label="Palette moduli"></aside>
+        <div id="die-wrap">
+          <div id="die" class="die" aria-label="Il die"></div>
+          <div id="die-tip" class="die-tip" data-i18n="addModule"></div>
+        </div>
+      </div>
+      <div id="control-bar" class="control-bar">
+        <div id="metrics-panel" class="metrics-panel" aria-label="Metriche" aria-live="polite"></div>
+        <div class="control-actions">
+          <button id="btn-finish" class="btn primary" data-i18n="finish"></button>
+          <button id="btn-clear" class="btn ghost" data-i18n="clear"></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-chapter-end" class="screen hidden">
+      <div class="panel">
+        <div id="end-glyph" class="end-glyph"></div>
+        <h2 id="end-title"></h2>
+        <p id="end-text"></p>
+        <div id="end-rewards" class="rewards"></div>
+        <div class="actions">
+          <button id="btn-end-next" class="btn primary" data-i18n="next"></button>
+          <button id="btn-end-home" class="btn ghost" data-i18n="goBackHome"></button>
+          <button id="btn-share" class="btn ghost" data-i18n="share"></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-sandbox" class="screen hidden">
+      <div class="panel panel-head">
+        <h2 id="sandbox-title" data-i18n="sandbox"></h2>
+        <p id="sandbox-desc" data-i18n="freePlay"></p>
+        <div class="sandbox-controls">
+          <label><span data-i18n="runBrief">Workload</span>
+            <select id="sandbox-workload" aria-label="Scegli workload"></select>
+          </label>
+          <label>Budget potenza
+            <input id="sandbox-budget" type="number" min="20" max="200" step="5">
+          </label>
+        </div>
+      </div>
+      <div class="workspace">
+        <aside id="palette-sandbox" class="palette" aria-label="Palette moduli sandbox"></aside>
+        <div id="die-wrap-sandbox">
+          <div id="die-sandbox" class="die" aria-label="Sandbox die"></div>
+        </div>
+      </div>
+      <div class="control-bar">
+        <div id="metrics-panel-sandbox" class="metrics-panel" aria-label="Metriche sandbox" aria-live="polite"></div>
+        <div class="control-actions">
+          <button id="btn-sandbox-run" class="btn primary" data-i18n="runBrief"></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-inventory" class="screen hidden">
+      <h2 data-i18n="inventory"></h2>
+      <div id="inventory-grid" class="inventory-grid"></div>
+    </section>
+
+    <section id="screen-achievements" class="screen hidden">
+      <h2 data-i18n="achievements"></h2>
+      <div id="achievements-list" class="achievements-list"></div>
+    </section>
+
+    <section id="screen-howto" class="screen hidden">
+      <div id="howto-content"></div>
+      <button id="btn-howto-close" class="btn primary" data-i18n="close"></button>
+    </section>
+
+    <section id="screen-settings" class="screen hidden">
+      <div class="panel">
+        <h2 id="settings-title" data-i18n="settings"></h2>
+        <div class="settings-list">
+          <div class="setting">
+            <span data-i18n="language"></span>
+            <div class="seg">
+              <button id="lang-it" class="seg-btn" aria-label="Italiano">IT</button>
+              <button id="lang-en" class="seg-btn" aria-label="English">EN</button>
+            </div>
+          </div>
+          <div class="setting"><span data-i18n="sound"></span>
+            <div class="seg">
+              <button id="snd-on" class="seg-btn" aria-label="Suoni accesi" data-i18n="on">●</button>
+              <button id="snd-off" class="seg-btn" aria-label="Suoni spenti" data-i18n="off">○</button>
+            </div>
+          </div>
+          <div class="setting"><span data-i18n="music"></span>
+            <div class="seg">
+              <button id="mus-on" class="seg-btn" data-i18n="on">●</button>
+              <button id="mus-off" class="seg-btn" data-i18n="off">○</button>
+            </div>
+          </div>
+          <div class="setting"><span data-i18n="volume"></span>
+            <input id="volume-slider" type="range" min="0" max="100" value="60" aria-label="Volume">
+          </div>
+        </div>
+        <div class="settings-extra">
+          <button id="btn-export" class="btn ghost" data-i18n="export"></button>
+          <button id="btn-import" class="btn ghost" data-i18n="import"></button>
+          <input id="file-import" type="file" accept="application/json" hidden>
+        </div>
+        <div class="settings-extra">
+          <button id="btn-reset-confirm" class="btn danger" data-i18n="reset"></button>
+        </div>
+        <div id="reset-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="reset-modal-title" hidden>
+          <div class="modal-card">
+            <h3 id="reset-modal-title"></h3>
+            <p id="reset-modal-text"></p>
+            <div class="actions">
+              <button id="btn-reset-cancel" class="btn ghost" data-i18n="cancel"></button>
+              <button id="btn-reset-confirm2" class="btn danger" data-i18n="reset"></button>
+            </div>
+          </div>
+        </div>
+        <div class="settings-actions">
+          <button id="btn-back-settings" class="btn ghost" data-i18n="back"></button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="install-banner" class="install-banner" role="status" aria-live="polite" hidden>
+    <span id="install-text" data-i18n="installApp"></span>
+    <button id="btn-install" class="btn primary tiny" data-i18n="installApp"></button>
+  </div>
+
+  <div id="confirm-modal" class="modal" role="dialog" aria-modal="true" hidden>
+    <div class="modal-card">
+      <h3></h3>
+      <p></p>
+      <div class="actions">
+        <button id="confirm-cancel" class="btn ghost" data-i18n="cancel"></button>
+        <button id="confirm-ok" class="btn danger"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="./js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+# Capitolo nove — Adrien (il nome)
+
+La domenica, con la pioggia, e la pioggia sulla tettoia di latta faceva il suono diverso, più piccolo e più grande allo stesso tempo, come le lacrime nelle cattedrali, e Margot, a venticinque anni e undici mesi e quattro giorni, aveva lo stand che funzionava, la matita, il quaderno e il cuore che bussava piano piano — il preavviso, non il panico: il panico era ancora in trasferta, e le trasferte, a volte, portano a casa.
+
+Claire Delaunay arrivò alle tre. Una donna di cinquant'anni, con l'impermeabile chiaro e gli occhi di chi ha letto tutto e non se ne è pentita — o sì, pentita, ma di altre cose — e si sedette allo stand, e lesse l'insegna tre volte — contare è la preghiera povera — e disse: «Le scrivano, di solito, non stanno in piedi.» «Io sto in piedi», disse Margot, «le scrivane sedute sono quelle che pubblicano. Io do.» (E Claire Delaunay ci pensò per anni: *io do* — e la scrivana di venticinque anni aveva capito il mestiere meglio di tutti gli editori che Claire aveva conosciuto in trent'anni di salotti, e se ne era accorta, e per quello era lì.) Parlarono. Parlarono del romanzo — centoundici pagine e mezza, la mezza era la verità — e Claire disse la frase, la frase che i rifiuti non avevano mai detto: «Il suo romanzo ha una voce rara, signorina Aubry. E una voce rara non è una voce che il mercato non sa ascoltare: è una voce che il mercato non sa che esiste. E noi, le voci, le ascoltiamo per mestiere. Ci piacerebbe pubblicarlo. Con le nostre regole: piccola tiratura, la copertina che vuole lei, e il titolo che vuole lei.» «E il titolo vuole *L'ora venticinquesima*», disse Margot. «Allora sarà *L'ora venticinquesima*», disse Claire, e si strinse le mani, e le mani di Claire erano calde, e le mani calde, capì Margot, sono l'unica cosa del mondo che si dà senza che te ne accorga.
+
+E fu in quel momento — mentre le mani di Claire si stringevano le sue, e la pioggia faceva il suono diverso, e Théo spense i pancake, e Béhémot dormì sui fogli del contratto — che Margot lo vide.
+
+Un uomo sotto la tettoia. Un uomo con il cappotto scuro e un libro in mano, e non lo aveva visto arrivare — le persone che ti cambiano la vita, a volte, non arrivano: sono lì da un'ora, e non le hai viste, perché le vedi solo quando ti cambiano la vita — e l'uomo era fermo davanti allo stand, con la pioggia addosso, e il libro in mano era un libro di quelli con la copertina flessibile piegata, e il dorso era donato, e la copertina aveva una macchia di cioccolato a pagina nove.
+
+Margot rise. Rise come si abbracciano i naufraghi: male, e tutto. «Adrien», disse.
+
+(I nomi, capì Margot in quel momento, sono la parte più fragile e più forte della memoria — Proust l'aveva capito: i nomi, diceva Proust, sono le cose più fragili e le più forti, si consumano quando li dici, e si rimboccano quando li senti. E il nome di Adrien Lemaître, che non aveva detto a voce alta da otto anni, le rimase in bocca come la caramella alla menta, e la caramella era il suono dell'acqua non d'aria.)
+
+«Margot», disse l'uomo, e la sua voce era quella del fiume in autunno, e gli otto anni si fecero in un quarto di secondo. «Sei tu.» «Sono io», disse Margot, «e tu sei lì da un'ora, e non ti ho vista. Le persone che ti cambiano la vita non si vedono finché non ti cambiano la vita.» «Sono lì da un'ora», disse Adrien, e la vergogna gli si versò addosso come la pioggia, «sono lì dalla mattina. Ho letto l'articolo. La scrivana delle pulci. E ho pensato: Margot Aubry. E sono venuto. E poi non sono riuscito ad avvicinarmi, e sono rimasto lì, con la pioggia, e ho pensato: e adesso? E poi ho pensato: non ho niente da dire, e ho tutto da dire, e le due cose insieme sono l'unica cosa che si dice, e non l'ho mai detta.» «E allora dilla», disse Margot, e la voce le tremava, perché la verità fa tremare le voci, è un effetto noto.
+
+E Adrien Lemaître — il ragazzo che le prestava i libri e annotava i margini, che si sedeva due file dietro di lei al liceo di Reims, che l'aveva baciata una volta sola, la fiera di settembre, dietro la giostra, con la mano sul muro di legno — aprì il libro che aveva in mano. *Du côté de chez Swann*. L'edizione scolastica. Quella del liceo. Con la copertina piegata e la macchia di cioccolato a pagina nove. La sua.
+
+«L'ho tenuta», disse. «Otto anni. L'ho tenuta in tutti gli appartamenti — gli appartamenti si susseguono, a Parigi, come i quaderni — e l'ho tenuta nel cassetto, e la teneva come si tengono i documenti, e i documenti sono caldi e i documenti sono veri. E ogni volta che cambiavo appartamento la rimettevo nel cassetto, e la rimettevo con la matita, e la matita era la tua.» «E perché me l'hai lasciata nel settembre scorsò?» — disse Margot, e gli otto anni le fecero in un quarto d'ora — «nel settembre della fiera, dietro la giostra, mi hai detto: il tempo perduto si trova solo dalla parte di Swann. E non ho capito niente, e ho capito tutto otto anni dopo, leggendo i margini nel tè freddo.» «E che hai capito?» «Che Swann era lei», disse Margot, «che il tempo perduto si trova dalla parte di lei. E tu l'hai scritto a sedici anni, a matita, come si scrivono le lettere d'amore, che non si firmavano mai. E io non ho capito niente, e tu sei andato via a facoltà di medicina, e il silenzio si è fatto. E il silenzio non è niente, Adrien: il silenzio è tutto ciò che non è stato detto.»
+
+E Adrien si sedette — si sedette allo stand, sullo sgabello di Théo, con il cappotto bagnato e il libro in mano — e disse la frase, la frase che aveva tutto da dire e niente da dire, e le frasi con tutto e niente insieme sono l'unica cosa del mondo che si dice, e non l'aveva mai detta: «Ho fatto medicina. Faccio il medico d'urgenza all'Hôtel-Dieu — sì, esatto, di fronte a Notre-Dame, la cattedrale di pietra, e ogni mattina la guardo, e ogni mattina penso che una cattedrale è un libro di pietra, e il libro di pietra non ha mai fatto niente per me: il libro di carta, il tuo, sì. Ho avuto una fidanzata per sette anni, e non ci siamo sposati, e non ci siamo lasciati male — ci siamo lasciati bene, ed è peggio: le lasciatezze buone si fanno per necessità, e sono quelle che non si possono odiare, perché odiarle è come odiare il fiume. E ho lavorato le notti, e le notti dei medici sono notti in cui le persone muoiono e le persone nascono, e tu le vedi entrambe, e le due cose insieme fanno un suono diverso, più piccolo e più grande allo stesso tempo, come le lacrime nelle cattedrali. E ho pensato, tutte le notti, che Dostoevskij diceva che gli idioti sono i santi — l'idiot, il principe Myshkin, l'uomo buono che il mondo non sa cosa farci — e i miei pazienti erano tutti idioti e santi allo stesso tempo, ed era la cosa più bella che avessi mai visto. E ho pensato: e Margot? E Margot dove è? E Margot cosa fa? E poi ho letto l'articolo, e l'articolo diceva: una ragazza che scrive lettere d'amore, lettere di morte e tutto il resto. E ho pensato: è lei. È lei che scrive tutto il resto.»
+
+«E io sono diventata...», disse Margot, e si fermò.
+
+«Vera», disse Adrien. «Lo so. Si vede.»
+
+«Lo so», disse Margot, «il panico è un buon maestro.»
+
+E Adrien rise — e il riso di Adrien era un riso che sembrava fatto di fiume — e disse: «Lemaître. Il maestro. A volte i cognomi sono profezie.»
+
+(E Margot ci pensò per anni: *il panico è un buon maestro* — e il panico, capì Margot, non è il boia: è il medico. È il medico che schiaffeggia l'annegata per farla respirare. E i maestri, quando arrivano, non si presentano: si riconoscono, e il riconoscimento è più raro del presentarsi. E ci pensò anche, che il suo vecchio fiamma delle superiori portava il maestro nel cognome, e le profezie, quando le porti nel cognome, si adempieno a matita, come si scrivono le lettere d'amore, che non si firmavano mai.)
+
+«Posso tornare la domenica prossima?» disse Adrien, alzandosi, con il libro in mano — il libro di lei, la copertina con la macchia di cioccolato a pagina nove.
+
+«Forse», disse Margot.
+
+(Forse: parola che a venticinque anni era una ferita, e a venticinque anni e undici mesi e quattro giorni era una porta. E le porte, quando le apri, non si chiudono più, è una questione di principio: la verità entra in visita, e le visite, quando sono vere, si fermano.)
+
+E Adrien se ne andò sotto la pioggia, e Claire Delaunay guardava, e Théo rispettò il silenzio — il silenzio non è niente, il silenzio è tutto ciò che non è stato detto — e Béhémot dormì sui fogli del contratto, e i fogli del contratto erano caldi e i fogli del contratto erano veri.
+
+E Margot, quella sera, scrisse sul quaderno, in matita, sempre:
+
+*Il nome è tornato. E il libro c'era. E il libro aveva la macchia di cioccolato a pagina nove, e la macchia di cioccolato a pagina nove, adesso, sa di prima. E io sono una scrivana, e un amico mi ha dato un tavolo, e un'editrice mi ha dato una matita lunga, e un uomo mi ha dato un forse. E i forse, quando li apri, non si chiudono più. E se il cuore bussa, aprire: è la verità che entra in visita, non il boia.*
+
+Chiuso il quaderno. E Béhémot dormì sopra. E la pioggia, per una notte, non piovve.

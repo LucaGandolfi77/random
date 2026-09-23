@@ -1,0 +1,39 @@
+# Capitolo sette — Le pulci
+
+Théo, il giorno dopo, al bar, col tè freddo e una madeleine, disse la follia. E le follie, quando le dicono le persone buone, non si chiamano follie: si chiamano piani.
+
+«Il mercato delle pulci», disse Théo, «ha uno stand libero. Fuori dal bar, la domenica, sotto la tettoia di latta. Il vecchio che vendeva i dischi è morto in febbraio — morti, non li reclamo, nel sistema — e il posto è libero, e lo zio me lo dà, e a te lo dò io. Un tavolo, una sedia, un'insegna. Tu scrivi, io faccio i pancake, vedrai.»
+
+«E cosa scrivo?» disse Margot, e la voce le arrivò come dall'altra parte del fiume.
+
+«Tutto», disse Théo. «Tu sei una scrivana, Margot. Non lo sapevi, e lo sai da sempre. Il mondo crudele ha dei buchi — lo diceva un filosofo — e nei buchi ci sono le persone che hanno bisogno di scrivere le cose e non sanno scriverele. E tu sai scriverle. Lettere d'amore, lettere di scuse, lettere di dimissioni, discorsi di nozze, eulogie, biglietti di compleanno per i nonni, lettere ai morti. Tutto. Tu sei una scrivana pubblica, e la scrivana pubblica è il mestiere più antico del mondo, e nessuno lo sa, e nessuno lo sa perché il mondo ha sempre confuso scrivere con pubblicare. Scrivere non è pubblicare: scrivere è dare. E dare, Margot, è l'unica cosa che non si vende e si compra sempre.»
+
+(E Margot ci pensò per anni: *scrivere è dare* — Théo aveva studiato il niente per quattro anni, e aveva capito il mondo meglio di tutti gli editori che lei aveva servito, e non se ne era mai accorto, e non se ne accorse mai. E ci pensò anche, che Gogol' — Gogol', *Le anime morte* — aveva scritto il signor Chichikov che viaggiava di paese in paese a comprare i morti, e Chichikov era geniale e folle, e la follia geniale di Chichikov era comprare le cose che non esistevano; e la follia geniale di Margot era vendere le cose che esistevano da sempre e che nessuno sapeva che esistevano: le lettere. Le due follie si somigliano, e le follie che si somigliano sono l'unica cosa del mondo che funziona sempre.)
+
+La domenica seguente Margot andò al mercato delle pulci con il tavolo, la sedia, l'insegna, il quaderno, le matite e Béhémot — Béhémot nel cestino, perché i gatti demòni viaggiano in cestino, e il cestino era di vimini, e il vimini sapeva di casa di sei anni. L'insegna la aveva scritta lei, a mano, con il corsivo da ragazza di campagna, e diceva:
+
+**SCRIVANA PUBBLICA — lettere d'amore, lettere di morte, tutto il resto.**
+
+(Lettere d'amore, lettere di morte, tutto il resto: e Margot ci pensò per anni, che era la migliore divisione geografica che il mondo le avesse mai dato, meglio dell'ora buona, meglio della linea quattro: la vita da una parte, la morte dall'altra, e il resto in mezzo, e il resto era tutto.)
+
+La prima domenica piovve. Piovve, e la tettoia di latta faceva un suono diverso, più piccolo e più grande allo stesso tempo, come le lacrime nelle cattedrali, e per tre ore non venne nessuno — e Théo faceva i pancake, e i pancake sapevano di nulla, e il nulla, capì Margot, è il suono del violino prima che cominci — e al quarto arrivò il vecchio.
+
+Un vecchio di ottantaquattro anni, con il cappotto marrone e il cappello in mano, che si chiamava monsieur Toussaint, e si fermò davanti allo stand, e lesse l'insegna tre volte — contare è la preghiera povera — e disse: «Signorina. Lei scrive le lettere ai morti?» «Sì, monsieur», disse Margot, «e alle vive. Tutto il resto.» «E quanto costa?» «Quanto le sembra. Sono i prezzi dell'insegna.» (I prezzi dell'insegna: e Margot non lo disse per snobismo, lo disse per principio, perché il prezzo, quando lo stabilisci tu, è una questione di dignità, e la dignità è l'unica cosa del mondo che non si compra e non si vende, si stabilisce.) Il vecchio si sedette. Posò il cappello in grembo. E disse la cosa — la disse come si danno i bambini i disegni, timida, e le cose timide sono l'unica cosa del mondo che è vera:
+
+«Mia moglie si chiamava Jeanne. È morta in febbraio, sessant'anni di matrimonio, e non le ho mai scritto una lettera. Mai. Non perché non l'amavo — l'amavo come si amano le cattedrali, pagina dopo pagina, senza capire il monumento — ma perché le lettere si scrivono alle persone lontane, e Jeanne non è mai stata lontana. E adesso è lontana. E io non so scriverele.»
+
+(E Margot ci pensò per anni: *le lettere si scrivono alle persone lontane* — e Jeanne non era mai stata lontana, e adesso era lontana, e la distanza, capì Margot, non è un luogo: è una condizione. E ci pensò anche, che la signora di Rouen si chiamava Jeanne Vasquez — Jeanne, la dattiloscritta, centosessanta pagine, *l'ho lasciato crescere per dimostrargli che qualcuno lo lascia vivere* — e il mondo, quando vuole essere geniale, è geniale per caso: due Jeanne, una viva nella scrittura e una morta nella vita, e Margot in mezzo, con la matita.)
+
+Margot scrisse la lettera. La scrisse lì, sul tavolo, davanti al vecchio, con la matita, e la scrisse in trenta minuti — non la scrisse come si scrivono le lettere dei pagliai, la scrisse come si scrivono le lacrime: una per volta — e la scrisse, e il vecchio la guardava scrivere, e Béhémot dormì sui fogli, e i pancake di Théo cominciarono a saper di qualcosa. E la lettera diceva, tra le altre cose:
+
+*Jeanne. Sessant'anni, e non ti ho mai scritto una lettera, perché le lettere si scrivono alle persone lontane, e tu non sei mai stata lontana. Adesso sei lontana, e ti scrivo. E ti scrivo le cose che non ti ho mai detto, che sono tutte: mi piaceva come versavi il tè. Mi piaceva come cantavi in cucina, stonata, e come lo stonare tuo era un modo di parlare. Mi piaceva che mi lasciassi crescere. Ti scrivo adesso perché la distanza è una condizione, e la condizione si scrive. E se la morte è lontana, ti scrivo da lontano. E se non è lontana, ti scrivo da qui, che è la stessa cosa.*
+
+(Il vecchio la lesse ad alta voce, lì, sul tavolo, sotto la tettoia di latta, e la lesse con la voce che tremava, perché la verità fa tremare le voci, è un effetto noto, e alla frase *mi piaceva che mi lasciassi crescere* si fermò, e si fermò un minuto, e il minuto durò un'ora, e nessuno lo spezzò — e Théo spense il fuoco dei pancake, e Béhémot aprì gli occhi gialli, e la tettoia fece il suono diverso — e il vecchio pianse. Pianse come si pianono i vecchi: piano piano, con la dignità addosso, e le lacrime nei solchi delle facce come l'acqua nei solchi delle pietre.) E il vecchio disse: «Quanto le devo?» E Margot disse: «Venti euro, monsieur Toussaint. Il resto è dell'insegna.» E il vecchio pagò venti euro, e i venti euro, capì Margot, erano i primi euro che aveva mai guadagnato scrivendo, e la prima cosa che aveva mai venduto: una lettera d'amore, e la morte non era l'acquirente, era la destinataria.
+
+(E Margot ci pensò per anni: *la prima cosa che ho mai venduto: una lettera d'amore, e la morte non era l'acquirente, era la destinataria* — e ci pensò anche, che Proust diceva, o lo diceva qualcuno per lui, che i veri paradisi sono i paradisi che abbiamo dovuto lasciare; e il paradiso di Margot, quello dei post-it nel mucchio dei disperati, l'aveva dovuto lasciare, e il paradiso nuovo era un tavolo da tre soldi sotto una tettoia di latta, e il paradiso nuovo, capì Margot, non è più bello: è più vero. E i paradisi veri non si perdono, si stabiliscono.)
+
+Tornò a casa la domenica sera, con venti euro, il quaderno e il gatto, e scrisse sul quaderno, in matita, sempre:
+
+*Ho venduto la prima lettera. La morte non era l'acquirente, era la destinataria. E Théo fa i pancake, e i pancake cominciano a saper di qualcosa. E se il mondo non legge i margini, allora io scrivo i margini nel mondo — e i margini nel mondo si chiamano lettere, e le lettere si scrivono alle persone lontane, e le persone lontane sono tutte, prima o poi, e io sono una scrivana, e lo sai da sempre.*
+
+Chiuso il quaderno. E Béhémot dormì sui fogli. E la follia geniale cominciava.

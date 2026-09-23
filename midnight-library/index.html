@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Lumina — un cozy game PWA nella biblioteca di Mezzanotte. Offline, installabile, in italiano e inglese.">
+  <meta name="theme-color" content="#141834">
+  <meta name="color-scheme" content="dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Lumina">
+  <title>Lumina — La Biblioteca di Mezzanotte</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="./icons/icon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="./icons/icon-180.png">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="modulepreload" href="./src/app.js">
+  <link rel="modulepreload" href="./src/controller.js">
+  <link rel="modulepreload" href="./src/view.js">
+  <link rel="modulepreload" href="./src/model/actions.js">
+  <link rel="modulepreload" href="./src/model/state.js">
+  <link rel="modulepreload" href="./src/i18n.js">
+</head>
+<body>
+  <a class="skip-link" href="#room">Salta al gioco</a>
+
+  <noscript>
+    <div class="noscript" role="alert">
+      <p>Lumina richiede JavaScript per funzionare.</p>
+      <p lang="en">Lumina requires JavaScript to run.</p>
+    </div>
+  </noscript>
+
+  <!-- Schermata iniziale -->
+  <section id="welcome" class="welcome" aria-label="Schermata iniziale">
+    <div class="welcome-card">
+      <div class="welcome-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="72" height="72">
+          <rect x="8" y="14" width="48" height="40" rx="6" fill="#2a3158"/>
+          <rect x="14" y="20" width="36" height="28" rx="4" fill="#141834"/>
+          <circle cx="32" cy="34" r="9" fill="#f0b96b"/>
+          <rect x="30" y="16" width="4" height="10" rx="2" fill="#8a6f4a"/>
+          <path d="M20 54 q12 -8 24 0" stroke="#c9d2ff" stroke-width="2" fill="none" opacity=".5"/>
+        </svg>
+      </div>
+      <h1 data-i18n="title">Lumina</h1>
+      <p class="tagline" data-i18n="subtitle">La Biblioteca di Mezzanotte</p>
+      <p class="promise" data-i18n="promise">Ogni libro attende il suo lettore.</p>
+      <button id="startBtn" class="btn btn-primary" type="button">Apri la biblioteca</button>
+      <button id="newBtn" class="btn btn-ghost" type="button" hidden data-i18n="newGame">Nuova partita</button>
+    </div>
+  </section>
+
+  <!-- Aggiornamento disponibile -->
+  <div id="updateHint" class="update-hint" hidden role="status">
+    <span data-i18n="updateReady">Nuova versione pronta.</span>
+    <button id="reloadBtn" class="btn btn-small btn-primary" type="button" data-i18n="reload">Ricarica</button>
+  </div>
+
+  <!-- Gioco -->
+  <main id="game" class="game" hidden>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span data-i18n="title">Lumina</span>
+        <span id="catAreaName" class="cat-area-name" aria-live="polite"></span>
+      </div>
+      <div class="resources" role="group" aria-label="Risorse">
+        <div class="res">
+          <span class="res-icon" aria-hidden="true">✦</span>
+          <span class="res-label" data-i18n="luce">Luce</span>
+          <span id="luceVal" class="res-val">0</span>
+          <div class="res-bar"><div id="luce" class="res-fill f-luce" role="progressbar"></div></div>
+        </div>
+        <div class="res">
+          <span class="res-icon" aria-hidden="true">◌</span>
+          <span class="res-label" data-i18n="calma">Calma</span>
+          <span id="calmaVal" class="res-val">0</span>
+          <div class="res-bar"><div id="calma" class="res-fill f-calma" role="progressbar"></div></div>
+        </div>
+        <div class="res">
+          <span class="res-icon" aria-hidden="true">✎</span>
+          <span class="res-label" data-i18n="inchiostro">Inchiostro</span>
+          <span id="inchiostroVal" class="res-val">0</span>
+          <div class="res-bar"><div id="inchiostro" class="res-fill f-ink" role="progressbar"></div></div>
+        </div>
+      </div>
+    </header>
+
+    <div id="offline" class="offline-badge" hidden data-i18n="offline">Offline — giocabile</div>
+    <div id="eventLayer" class="event-layer" role="status" aria-live="polite"></div>
+    <p id="ambient" class="ambient" aria-live="polite"></p>
+    <p id="moonName" class="moon-name"></p>
+
+    <!-- Stanza -->
+    <nav id="roomNav" class="room-nav" data-i18n-aria="rooms" aria-label="Stanze" role="tablist"></nav>
+    <section id="room" class="room" data-room="hall" aria-label="Area di gioco">
+      <!-- Finestra con luna reale (fase calcolata offline) -->
+      <div id="parallaxWindow" class="window" data-room-panel="hall">
+        <div class="window-sky" data-phase="night" aria-hidden="true">
+          <span id="moon" class="moon" aria-hidden="true"></span>
+          <span class="star s1"></span><span class="star s2"></span><span class="star s3"></span>
+          <span class="star s4"></span><span class="star s5"></span>
+          <span id="skylight" class="skylight-glow" hidden></span>
+        </div>
+        <div id="rain" class="rain" aria-hidden="true" hidden>
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div id="hallPanel" data-room-panel="hall">
+      <!-- Scaffali -->
+      <div class="shelves-wrap">
+        <div class="shelf-unit" aria-hidden="true">
+          <div class="shelf-board"></div>
+          <div id="shelves" class="shelf-books" data-count="0"></div>
+          <div class="shelf-board"></div>
+        </div>
+        <div id="curiosityShelf" class="curiosity" hidden>
+          <button id="catBtn" class="btn btn-small btn-amber" type="button" data-action="open-collection">
+            <span aria-hidden="true">❧</span>
+            <span data-i18n="catalogTitle">Scaffale delle Curiosità</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tavolo con libri -->
+      <button id="tableArea" class="table-area" type="button" data-action="shelve" aria-label="Tavolo: tocca o scorri per riporre un libro">
+        <span id="tableBooks" class="table-books" aria-hidden="true"></span>
+        <span id="bookCount" class="book-count">0 sul tavolo</span>
+      </button>
+
+      <!-- Lanterne -->
+      <div id="lanterns" class="lantern-row" role="group" aria-label="Lanterne">
+        <button class="lantern" data-action="lantern" data-index="0" type="button" aria-pressed="false" aria-label="Lanterna 1"><span class="flame"></span></button>
+        <button class="lantern" data-action="lantern" data-index="1" type="button" aria-pressed="false" aria-label="Lanterna 2"><span class="flame"></span></button>
+        <button class="lantern" data-action="lantern" data-index="2" type="button" aria-pressed="false" aria-label="Lanterna 3"><span class="flame"></span></button>
+        <button class="lantern" data-action="lantern" data-index="3" type="button" aria-pressed="false" aria-label="Lanterna 4"><span class="flame"></span></button>
+      </div>
+
+      <!-- Camino / bollitore / gatto -->
+      <div class="hearth" id="hearth">
+        <div class="fireplace" aria-hidden="true">
+          <span class="fire f1"></span><span class="fire f2"></span><span class="fire f3"></span>
+        </div>
+        <button id="kettle" class="kettle" type="button" data-action="tea" aria-label="Bollitore: prepara il tè">
+          <span class="kettle-body" aria-hidden="true">♨</span>
+          <span class="kettle-label">Tè</span>
+        </button>
+        <div id="wellRoom" class="well-badge" hidden aria-hidden="true">◈</div>
+        <span id="catArea" class="cat" data-zone="hearth" aria-hidden="true">𓃠</span>
+      </div>
+
+      <!-- Zona lettore + dialogo procedurale (Fase 2) -->
+      <div id="readerZone" class="reader-zone" data-action="reader">
+        <div id="readerCard" class="reader-card" hidden>
+          <p id="readerMeta" class="reader-meta"></p>
+          <p id="readerFav" class="reader-fav"></p>
+          <div id="readerChoices" class="reader-choices" role="group" aria-label="Dialogo"></div>
+          <p id="readerReply" class="reader-reply" hidden></p>
+          <button id="reader" class="reader" type="button" data-action="reader">
+            <span class="reader-ghost" aria-hidden="true">☾</span>
+            <span class="reader-hint" data-i18n="tapReader">Accogli il lettore</span>
+          </button>
+        </div>
+      </div>
+      <p id="shareHint" class="share-hint" data-i18n="helpShare" hidden></p>
+      <p id="weatherBadge" class="weather-badge" aria-live="polite" hidden></p>
+      </div><!-- /hallPanel -->
+
+      <!-- Soppalco (sbloccato con wellRoom) -->
+      <div id="atticPanel" class="side-room" data-room-panel="attic" hidden>
+        <div class="side-room-art" aria-hidden="true">
+          <span class="crate c1"></span><span class="crate c2"></span><span class="crate c3"></span>
+          <span class="dust"></span>
+        </div>
+        <h3 data-i18n="roomAttic">Soppalco</h3>
+        <p class="side-room-hint" data-i18n="sortArchiveHint">Guadagna Inchiostro dal disordine dei faldoni.</p>
+        <button id="sortArchiveBtn" class="btn btn-primary" type="button" data-action="sort-archive" data-i18n="sortArchive">
+          Riordina gli archivi
+        </button>
+        <p id="archiveStats" class="side-room-stats" aria-live="polite"></p>
+      </div>
+
+      <!-- Giardino d'inverno (sbloccato con curiosityShelf) -->
+      <div id="gardenPanel" class="side-room" data-room-panel="winterGarden" hidden>
+        <div class="side-room-art garden-art" aria-hidden="true">
+          <span class="pot p1"></span><span class="pot p2"></span><span class="leaf l1"></span>
+          <span class="leaf l2"></span><span class="leaf l3"></span>
+        </div>
+        <h3 data-i18n="roomWinterGarden">Giardino d'Inverno</h3>
+        <p class="side-room-hint" data-i18n="tendPlantsHint">La quiete vegetale dona Calma.</p>
+        <button id="tendPlantsBtn" class="btn btn-primary" type="button" data-action="tend-plants" data-i18n="tendPlants">
+          Cura le serre
+        </button>
+        <p id="gardenStats" class="side-room-stats" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- Lettere sotto la porta (Fase G1) -->
+    <section class="letters" aria-labelledby="lettersTitle">
+      <header class="letters-head">
+        <h2 id="lettersTitle" data-i18n="lettersTitle">Lettere</h2>
+        <div class="letters-actions">
+          <button id="pasteLetterBtn" class="btn btn-small btn-ghost" type="button" data-i18n="pasteLetter">Incolla una lettera</button>
+          <button id="shareCardBtn" class="btn btn-small btn-ghost" type="button" data-i18n="sharePostcard">Condividi cartolina</button>
+          <button id="exportBtn" class="btn btn-small btn-ghost" type="button" data-i18n="exportSave">Esporta salvataggio</button>
+          <button id="importBtn" class="btn btn-small btn-ghost" type="button" data-i18n="importSave">Importa salvataggio</button>
+        </div>
+      </header>
+      <p id="lettersEmpty" class="empty" data-i18n="lettersEmpty">Nessuna lettera ancora. Condividi un testo da altre app per lasciarne una sulla soglia.</p>
+      <ul id="lettersList" class="letters-list"></ul>
+    </section>
+
+    <!-- Tutorial -->
+    <div id="tut" class="tutorial" role="status" aria-live="polite" hidden>
+      <p id="tutText"></p>
+      <div id="tutDots" class="tut-dots" aria-hidden="true"></div>
+      <button id="tutSkip" class="btn btn-ghost btn-small" type="button" data-i18n="tutSkip">Salta</button>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- Descrizione stanza per screen-reader (Fase 3) -->
+    <p id="roomDesc" class="sr-only" role="status" aria-live="polite" data-i18n-aria="roomDesc" aria-label="Descrizione stanza"></p>
+
+    <!-- Navigazione -->
+    <nav class="bottomnav" aria-label="Navigazione">
+      <button id="navCollection" class="nav-btn" type="button">
+        <span class="nav-icon" aria-hidden="true">▤</span>
+        <span data-i18n="collect">Collezione</span>
+      </button>
+      <button id="helpBtn" class="nav-btn" type="button">
+        <span class="nav-icon" aria-hidden="true">?</span>
+        <span data-i18n="help">Come si gioca</span>
+      </button>
+      <button id="settingsBtn" class="nav-btn" type="button">
+        <span class="nav-icon" aria-hidden="true">⚙</span>
+        <span data-i18n="settings">Impostazioni</span>
+      </button>
+    </nav>
+  </main>
+
+  <!-- Pannello: Collezione -->
+  <div id="collectionPanel" class="panel" hidden role="dialog" aria-modal="true" aria-labelledby="collTitle">
+    <div class="panel-card">
+      <header class="panel-head">
+        <h2 id="collTitle" data-i18n="collect">Collezione</h2>
+        <button class="btn btn-icon" data-action="close-panel" data-panel="collectionPanel" type="button" aria-label="Chiudi">✕</button>
+      </header>
+      <p id="collectionCount" class="panel-sub">0/8 catalogati</p>
+      <div id="progress" class="progress"><div class="progress-fill" style="--pct: 0"></div></div>
+      <ul id="rareList" class="book-grid"></ul>
+
+      <h3 data-i18n="milestones">Traguardi</h3>
+      <ul id="milestones" class="stat-list"></ul>
+      <h3 data-i18n="unlocks">Sblocchi</h3>
+      <ul id="unlocks" class="stat-list"></ul>
+      <h3 data-i18n="stats">Statistiche</h3>
+      <ul id="stats" class="num-list"></ul>
+      <h3 data-i18n="almanac">Almanacco delle Lune</h3>
+      <ul id="almanacList" class="stat-list"></ul>
+      <button class="btn btn-ghost" data-action="close-panel" data-panel="collectionPanel" type="button" data-i18n="close">Chiudi</button>
+    </div>
+  </div>
+
+  <!-- Pannello: Come si gioca -->
+  <div id="helpPanel" class="panel" hidden role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <div class="panel-card">
+      <header class="panel-head">
+        <h2 id="helpTitle" data-i18n="help">Come si gioca</h2>
+        <button id="helpClose" class="btn btn-icon" data-action="close-panel" data-panel="helpPanel" type="button" aria-label="Chiudi">✕</button>
+      </header>
+      <div id="helpPanelBody" class="help-list"></div>
+      <button class="btn btn-ghost" data-action="close-panel" data-panel="helpPanel" type="button" data-i18n="close">Chiudi</button>
+    </div>
+  </div>
+
+  <!-- Pannello: Impostazioni -->
+  <div id="settingsPanel" class="panel" hidden role="dialog" aria-modal="true" aria-labelledby="setTitle">
+    <div class="panel-card">
+      <header class="panel-head">
+        <h2 id="setTitle" data-i18n="settings">Impostazioni</h2>
+        <button id="settingsClose" class="btn btn-icon" data-action="close-panel" data-panel="settingsPanel" type="button" aria-label="Chiudi">✕</button>
+      </header>
+      <div class="field field-toggle">
+        <span data-i18n="lang">Lingua</span>
+        <button id="langBtn" class="btn btn-small" type="button" aria-label="Cambia lingua">IT → EN</button>
+      </div>
+      <div class="field field-toggle">
+        <label for="musicToggle" data-i18n="music">Musica</label>
+        <input type="checkbox" id="musicToggle" role="switch" checked>
+      </div>
+      <div class="field field-toggle">
+        <label for="sfxToggle" data-i18n="sfx">Effetti sonori</label>
+        <input type="checkbox" id="sfxToggle" role="switch" checked>
+      </div>
+      <div class="field field-toggle">
+        <label for="motionToggle" data-i18n="motion">Riduci movimento</label>
+        <input type="checkbox" id="motionToggle" role="switch">
+      </div>
+      <div class="field field-toggle">
+        <label for="hapticsToggle" data-i18n="haptics">Feedback aptico</label>
+        <input type="checkbox" id="hapticsToggle" role="switch" checked>
+      </div>
+      <div class="field field-toggle">
+        <label for="wakeToggle" data-i18n="wakeLock">Tieni lo schermo acceso</label>
+        <input type="checkbox" id="wakeToggle" role="switch">
+      </div>
+          <div class="field field-toggle">
+        <label for="parallaxToggle" data-i18n="parallax">Parallasse della finestra</label>
+        <input type="checkbox" id="parallaxToggle" role="switch">
+      </div>
+      <div class="field field-toggle">
+        <label for="archiveIdbToggle" data-i18n="archiveIdb">Archivio lettere esteso (IndexedDB)</label>
+        <input type="checkbox" id="archiveIdbToggle" role="switch">
+      </div>
+      <div class="field field-toggle">
+        <label for="highContrastToggle" data-i18n="highContrast">Alto contrasto</label>
+        <input type="checkbox" id="highContrastToggle" role="switch">
+      </div>
+      <div class="field field-toggle">
+        <label for="voiceToggle" data-i18n="voiceCommands">Comandi vocali</label>
+        <input type="checkbox" id="voiceToggle" role="switch">
+      </div>
+      <p class="panel-sub" data-i18n="voiceHint">Dim: lanterna, tè, lettore, libro, aiuto…</p>
+
+      <!-- Mods (Fase 3) -->
+      <div class="field">
+        <span data-i18n="modsTitle">Pacchetti mod</span>
+        <button id="loadModBtn" class="btn btn-small" type="button" data-i18n="loadMod">Carica .luminapack</button>
+      </div>
+      <ul id="modList" class="stat-list"></ul>
+
+      <!-- Multiplayer locale (Fase 3) -->
+      <h3 data-i18n="multiTitle">Multiplayer locale</h3>
+      <p class="panel-sub" data-i18n="multiHint">Copia il codice sull'altro dispositivo sulla stessa Wi‑Fi (WebRTC manuale).</p>
+      <div class="settings-actions">
+        <button id="multiCreateBtn" class="btn btn-secondary" type="button" data-i18n="multiCreate">Crea invito</button>
+        <button id="multiAnswerBtn" class="btn btn-secondary" type="button" data-i18n="multiAnswer">Crea risposta</button>
+      </div>
+      <textarea id="multiSignal" class="save-editor" rows="3" spellcheck="false" aria-label="WebRTC signal" placeholder="…"></textarea>
+      <div class="settings-actions">
+        <button id="multiAcceptBtn" class="btn btn-primary" type="button" data-i18n="multiAccept">Unisciti con invito</button>
+        <button id="multiConnectBtn" class="btn btn-primary" type="button" data-i18n="multiConnect">Connetti con risposta</button>
+      </div>
+      <div class="settings-actions">
+        <button id="multiSendLetterBtn" class="btn btn-small" type="button" data-i18n="multiSendLetter">Invia lettera</button>
+        <button id="multiSendStatusBtn" class="btn btn-small" type="button" data-i18n="multiSendStatus">Invia stato</button>
+      </div>
+      <p id="multiStatus" class="panel-sub" role="status" aria-live="polite"></p>
+
+      <div class="settings-actions">
+        <button id="saveBtn" class="btn btn-primary" type="button" data-i18n="saveNow">Salva</button>
+        <button id="editSaveBtn" class="btn btn-secondary" type="button" data-i18n="editSave">Modifica salvataggio</button>
+        <button id="resetBtn" class="btn btn-danger" type="button" data-i18n="reset">Azzera salvataggio</button>
+      </div>
+      <button class="btn btn-ghost" data-action="close-panel" data-panel="settingsPanel" type="button" data-i18n="close">Chiudi</button>
+    </div>
+  </div>
+
+  <!-- Editor salvataggio con diff preview (Fase 1) -->
+  <div id="saveEditorPanel" class="panel" hidden role="dialog" aria-modal="true" aria-labelledby="saveEditorTitle">
+    <div class="panel-card">
+      <header class="panel-head">
+        <h2 id="saveEditorTitle" data-i18n="editSaveTitle">Modifica salvataggio</h2>
+        <button class="btn btn-icon" data-action="close-panel" data-panel="saveEditorPanel" type="button" aria-label="Chiudi">✕</button>
+      </header>
+      <p class="panel-sub" data-i18n="editSaveHint">Incolla il JSON. Valida per vedere il diff, poi applica.</p>
+      <textarea id="saveEditorText" class="save-editor" spellcheck="false" rows="12" aria-label="Save JSON"></textarea>
+      <div class="settings-actions">
+        <button id="saveEditPreview" class="btn btn-secondary" type="button" data-i18n="editSavePreview">Anteprima diff</button>
+        <button id="saveEditApply" class="btn btn-primary" type="button" disabled data-i18n="editSaveApply">Applica</button>
+        <button class="btn btn-ghost" data-action="close-panel" data-panel="saveEditorPanel" type="button" data-i18n="close">Chiudi</button>
+      </div>
+      <p id="saveEditStatus" class="panel-sub" role="status" aria-live="polite"></p>
+      <ul id="saveEditDiff" class="stat-list save-diff" hidden></ul>
+    </div>
+  </div>
+
+  <!-- Barra conferma reset (B18: non un panel modale separato) -->
+  <div id="confirmBar" class="confirm-bar" hidden role="alertdialog" aria-modal="true" aria-labelledby="confirmMsg">
+    <p id="confirmMsg">Cancellare il salvataggio e ricominciare?</p>
+    <div class="settings-actions">
+      <button id="confirmNo" class="btn btn-ghost" type="button" data-i18n="cancel">Annulla</button>
+      <button id="confirmYes" class="btn btn-danger" type="button" data-i18n="confirm">Sì, azzera</button>
+    </div>
+  </div>
+
+  <!-- Traguardo raggiunto -->
+  <div id="milestoneCard" class="panel" hidden role="dialog" aria-modal="true" aria-labelledby="milestoneTitle">
+    <div class="panel-card panel-narrow milestone">
+      <span class="milestone-star" aria-hidden="true">✦</span>
+      <h2 id="milestoneTitle">Traguardo</h2>
+      <p id="milestoneDesc"></p>
+      <button id="milestoneOk" class="btn btn-primary" type="button">OK</button>
+    </div>
+  </div>
+
+  <!-- Alba completamento -->
+  <div id="dawnCard" class="panel" hidden role="dialog" aria-modal="true" aria-labelledby="dawnTitle">
+    <div class="panel-card panel-narrow dawn">
+      <span class="milestone-star" aria-hidden="true">☀</span>
+      <h2 id="dawnTitle" data-i18n="milestones">Alba</h2>
+      <p data-i18n="dawnIt">Tutti i volumi rari sono in catalogo. La biblioteca respira la prima luce — e resta aperta per te.</p>
+      <p data-i18n="dawnEn" lang="en">Every rare volume is catalogued. The library breathes the first light — and stays open for you.</p>
+      <button id="dawnOk" class="btn btn-primary" type="button">OK</button>
+    </div>
+  </div>
+
+  <!-- Suggerimento installazione -->
+  <div id="installBanner" class="install-hint" hidden role="status">
+    <span data-i18n="install">Installa app</span>
+    <button id="installBtn" class="btn btn-small btn-primary" type="button">Install</button>
+    <button id="installDismiss" class="btn btn-small btn-ghost" type="button" data-i18n="installDismiss">Non ora</button>
+    <p id="iosInstall" class="ios-install" hidden data-i18n="iosInstall">Usa Condividi → Aggiungi a Home.</p>
+  </div>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

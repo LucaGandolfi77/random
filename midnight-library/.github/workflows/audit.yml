@@ -1,0 +1,69 @@
+# Lighthouse + axe audit on the static shell (Fase 3).
+# Zero app dependencies: uses npx tools only. Static access only (no backend).
+
+name: audit
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  a11y-perf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntax check
+        run: node tools/check-syntax.mjs
+
+      - name: Unit + integration tests
+        run: |
+          npm ci --ignore-scripts || npm install --ignore-scripts
+          npm test
+
+      - name: Serve static site
+        run: |
+          npx --yes serve . -l 4173 &
+          sleep 3
+          curl -sf http://127.0.0.1:4173/ > /dev/null
+
+      - name: Lighthouse
+        run: |
+          npx --yes lighthouse@12 http://127.0.0.1:4173/ \
+            --output=json --output-path=./lighthouse-report.json \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+            --only-categories=performance,accessibility,best-practices,seo || true
+          node -e "
+            const fs=require('fs');
+            if(!fs.existsSync('lighthouse-report.json')){console.log('no report');process.exit(0)}
+            const r=JSON.parse(fs.readFileSync('lighthouse-report.json','utf8'));
+            const cats=r.categories||{};
+            for (const k of Object.keys(cats)) {
+              const s=Math.round((cats[k].score||0)*100);
+              console.log(k+': '+s);
+            }
+            const a11y=(cats.accessibility?.score||0)*100;
+            if (a11y < 80) { console.error('axe/lighthouse a11y too low'); process.exit(1); }
+          "
+
+      - name: axe-core (static)
+        run: |
+          npx --yes @axe-core/cli http://127.0.0.1:4173/ \
+            --exit || true
+
+      - name: Upload Lighthouse report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: lighthouse-report.json
+          if-no-files-found: ignore

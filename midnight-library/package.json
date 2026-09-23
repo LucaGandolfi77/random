@@ -1,0 +1,25 @@
+{
+  "name": "lumina-midnight-library",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Lumina — La Biblioteca di Mezzanotte: cozy game PWA installabile e offline-first, in HTML/CSS/JavaScript vanilla.",
+  "type": "module",
+  "scripts": {
+    "start": "npx --yes serve .",
+    "check": "node tools/check-syntax.mjs",
+    "test": "node tests/model.test.mjs && node tests/migration.test.mjs && node tests/integration.test.mjs",
+    "http": "node tools/http-check.mjs",
+    "icons": "node tools/gen-icons.mjs"
+  },
+  "keywords": [
+    "pwa",
+    "cozy-game",
+    "vanilla-js",
+    "offline-first",
+    "mvc"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "jsdom": "^29.1.1"
+  }
+}

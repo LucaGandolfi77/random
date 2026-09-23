@@ -1,0 +1,270 @@
+{
+  "version": 2,
+  "messages": {
+    "it": [
+      "L'orologio di mezzanotte non ha lancette, ma punta sempre al tuo arrivo.",
+      "Le pagine sussurrano meglio quando la stanza è calma.",
+      "Un raggio di luna si posa sempre sul libro giusto.",
+      "Le lanterne ricordano ogni mano che le ha accese.",
+      "Prima dell'alba, anche i fantasmi chiudono un occhio.",
+      "Il camino sa il nome di chi legge ad alta voce.",
+      "Nel soppalco la polvere è solo sonno di carta.",
+      "Il giardino d'inverno non ha stagione: solo attesa."
+    ],
+    "en": [
+      "Midnight's clock has no hands, yet always points to your arrival.",
+      "Pages whisper best when the room is calm.",
+      "A moonbeam always rests on the right book.",
+      "Lanterns remember every hand that lit them.",
+      "Before dawn, even ghosts close an eye.",
+      "The hearth knows the names of those who read aloud.",
+      "In the attic, dust is only paper-sleep.",
+      "The winter garden has no season: only waiting."
+    ]
+  },
+  "tutorialSteps": {
+    "it": [
+      { "text": "Tocca una lanterna per accenderla.", "target": "lanterns" },
+      { "text": "Tocca un libro del tavolo per riporlo sullo scaffale.", "target": "tableArea" },
+      { "text": "Prepara il tè per guadagnare Calma.", "target": "kettle" },
+      { "text": "Quando un lettore arriva, toccalo per accoglierlo.", "target": "readerZone" }
+    ],
+    "en": [
+      { "text": "Tap a lantern to light it.", "target": "lanterns" },
+      { "text": "Tap a book on the table to shelve it.", "target": "tableArea" },
+      { "text": "Brew tea to gain Calm.", "target": "kettle" },
+      { "text": "When a reader arrives, tap to welcome them.", "target": "readerZone" }
+    ]
+  },
+  "milestones": {
+    "firstLight": {
+      "it": { "title": "Prima Luce", "desc": "Quattro lanterne accese insieme." },
+      "en": { "title": "First Light", "desc": "Four lanterns lit at once." },
+      "unlock": "curiosityShelf"
+    },
+    "firstGuest": {
+      "it": { "title": "Primo Ospite", "desc": "Il primo lettore è stato accolto." },
+      "en": { "title": "First Guest", "desc": "The first reader was welcomed." },
+      "unlock": "skylight"
+    },
+    "dawn": {
+      "it": { "title": "Alba", "desc": "Tutti i volumi rari sono in catalogo." },
+      "en": { "title": "Dawn", "desc": "Every rare volume is catalogued." },
+      "unlock": null
+    }
+  },
+  "unlocks": {
+    "curiosityShelf": {
+      "it": { "name": "Scaffale delle Curiosità", "desc": "Permette di catalogare i volumi rari." },
+      "en": { "name": "Curiosity Shelf", "desc": "Allows rare volumes to be catalogued." }
+    },
+    "skylight": {
+      "it": { "name": "Lucernario", "desc": "La luce notturna filtra dentro: +Luce passiva." },
+      "en": { "name": "Skylight", "desc": "Night light filters in: +passive Light." }
+    },
+    "wellRoom": {
+      "it": { "name": "Sala del Pozzo", "desc": "Il tè porta più calma e attira più lettori." },
+      "en": { "name": "Well Room", "desc": "Tea brings more calm and draws more readers." }
+    },
+    "attic": {
+      "it": { "name": "Soppalco", "desc": "Archivi polverosi da riordinare per l'Inchiostro." },
+      "en": { "name": "Attic", "desc": "Dusty archives to sort for Ink." }
+    },
+    "winterGarden": {
+      "it": { "name": "Giardino d'Inverno", "desc": "Serre silenziose che curano la Calma." },
+      "en": { "name": "Winter Garden", "desc": "Quiet greenhouses that tend Calm." }
+    }
+  },
+  "rareBooks": [
+    {
+      "id": "almanacco",
+      "it": { "title": "L'Almanacco delle Lune", "desc": "Dodici lune che nessuno ha mai visto due volte." },
+      "en": { "title": "Almanac of Moons", "desc": "Twelve moons no one has ever seen twice." },
+      "cover": "#5b6bbf",
+      "glyph": "☾"
+    },
+    {
+      "id": "giardino",
+      "it": { "title": "Il Giardino che Ricorda", "desc": "Ogni fiore conserva un pensiero dimenticato." },
+      "en": { "title": "The Garden That Remembers", "desc": "Every flower keeps a forgotten thought." },
+      "cover": "#4f9e7a",
+      "glyph": "❀"
+    },
+    {
+      "id": "te",
+      "it": { "title": "Cronache del Tè Perduto", "desc": "Ricette di bevande che sciolgono i silenzi." },
+      "en": { "title": "Chronicles of Lost Tea", "desc": "Recipes for drinks that soften silences." },
+      "cover": "#c9863f",
+      "glyph": "♨"
+    },
+    {
+      "id": "bestiario",
+      "it": { "title": "Bestiario delle Ombre Gentili", "desc": "Creature morbide che dormono sugli scaffali." },
+      "en": { "title": "Bestiary of Gentle Shadows", "desc": "Soft creatures that sleep on the shelves." },
+      "cover": "#8a6bbf",
+      "glyph": "✦"
+    },
+    {
+      "id": "sogni",
+      "it": { "title": "Mappa dei Sogni Corti", "desc": "Percorsi per dormire anche con gli occhi aperti." },
+      "en": { "title": "Map of Short Dreams", "desc": "Paths for sleeping with your eyes open." },
+      "cover": "#b26b9e",
+      "glyph": "◇"
+    },
+    {
+      "id": "violino",
+      "it": { "title": "Il Violino di Vetro", "desc": "Suona solo quando la stanza è vuota." },
+      "en": { "title": "The Glass Violin", "desc": "It only plays when the room is empty." },
+      "cover": "#5f9fb5",
+      "glyph": "♪"
+    },
+    {
+      "id": "piogge",
+      "it": { "title": "Manuale delle Piogge", "desc": "Sette modi di ascoltare l'acqua sui vetri." },
+      "en": { "title": "Manual of Rains", "desc": "Seven ways to listen to water on glass." },
+      "cover": "#5a86c9",
+      "glyph": "☂"
+    },
+    {
+      "id": "alberi",
+      "it": { "title": "Libro dei Primi Alberi", "desc": "Il primo bosco, raccontato dalle radici." },
+      "en": { "title": "Book of First Trees", "desc": "The first forest, told by the roots." },
+      "cover": "#6f9e4f",
+      "glyph": "♠"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "hall",
+      "name": { "it": "Aula Centrale", "en": "Main Hall" },
+      "icon": "✦",
+      "requires": null,
+      "zones": ["lanterns", "tableArea", "kettle", "shelves", "hearth", "readerZone"],
+      "activities": ["lantern", "shelve", "tea", "reader", "catalog"]
+    },
+    {
+      "id": "attic",
+      "name": { "it": "Soppalco", "en": "Attic" },
+      "icon": "▤",
+      "requires": { "unlock": "wellRoom" },
+      "zones": ["archive"],
+      "activities": ["sortArchive"]
+    },
+    {
+      "id": "winterGarden",
+      "name": { "it": "Giardino d'Inverno", "en": "Winter Garden" },
+      "icon": "❀",
+      "requires": { "unlock": "curiosityShelf" },
+      "zones": ["greenhouse"],
+      "activities": ["tendPlants"]
+    }
+  ],
+  "activities": {
+    "sortArchive": {
+      "it": { "label": "Riordina gli archivi", "hint": "Guadagna Inchiostro dal disordine dei faldoni." },
+      "en": { "label": "Sort the archives", "hint": "Earn Ink from the chaos of file piles." },
+      "cost": null,
+      "gain": { "inchiostro": 1, "calma": 0.25 },
+      "cooldownMs": 4000
+    },
+    "tendPlants": {
+      "it": { "label": "Cura le serre", "hint": "La quiete vegetale dona Calma." },
+      "en": { "label": "Tend the greenhouses", "hint": "Plant quiet grants Calm." },
+      "cost": null,
+      "gain": { "calma": 1, "luce": 0.25 },
+      "cooldownMs": 5000
+    }
+  },
+  "readers": {
+    "names": {
+      "it": ["Elia", "Mara", "Tom", "Iris", "Nico", "Sofia", "Luca", "Bia"],
+      "en": ["Elia", "Mara", "Tom", "Iris", "Nico", "Sofia", "Luca", "Bia"]
+    },
+    "moods": {
+      "it": {
+        "shy": "timo",
+        "curious": "curioso",
+        "dreamy": "sognante"
+      },
+      "en": {
+        "shy": "shy",
+        "curious": "curious",
+        "dreamy": "dreamy"
+      }
+    },
+    "dialogue": {
+      "choices": [
+        {
+          "id": "offerTea",
+          "it": { "label": "Offri una tazza", "reply": "«Il profumo mi ha guidato fin qui.»" },
+          "en": { "label": "Offer a cup", "reply": "“The scent guided me here.”" },
+          "rareMod": 0.12,
+          "calmaMod": -0.5,
+          "inkMod": 0
+        },
+        {
+          "id": "askTitle",
+          "it": { "label": "Chiedi del libro preferito", "reply": "«Cerco da tempo un titolo che non ricordo.»" },
+          "en": { "label": "Ask about their favourite", "reply": "“I have sought a title I cannot recall.”" },
+          "rareMod": 0.18,
+          "calmaMod": 0,
+          "inkMod": 0
+        },
+        {
+          "id": "quietNod",
+          "it": { "label": "Sorridi in silenzio", "reply": "«Qui si respira come in un sogno.»" },
+          "en": { "label": "Smile in silence", "reply": "“It breathes here like a dream.”" },
+          "rareMod": 0.05,
+          "calmaMod": 0.5,
+          "inkMod": 1
+        }
+      ]
+    }
+  },
+  "moonAlmanac": {
+    "achievements": {
+      "firstFull": {
+        "it": { "title": "Prima Piena", "desc": "Hai visto una luna piena dalla biblioteca." },
+        "en": { "title": "First Full", "desc": "You watched a full moon from the library." },
+        "require": { "full": 1 }
+      },
+      "tripleFull": {
+        "it": { "title": "Tre Piene", "desc": "Tre lune piene osservate nella sessione di gioco." },
+        "en": { "title": "Three Fulls", "desc": "Three full moons observed in your play." },
+        "require": { "full": 3 }
+      },
+      "newMoonNight": {
+        "it": { "title": "Notte Senza Luna", "desc": "Hai visto una luna nuova." },
+        "en": { "title": "Moonless Night", "desc": "You watched a new moon." },
+        "require": { "new": 1 }
+      },
+      "allPhases": {
+        "it": { "title": "Almanacco Completo", "desc": "Tutte le otto fasi lunari osservate." },
+        "en": { "title": "Full Almanac", "desc": "All eight lunar phases observed." },
+        "require": { "phases": 8 }
+      }
+    }
+  },
+  "daily": {
+    "letters": {
+      "it": [
+        "Diario del giorno: la polvere danza più lenta quando piove.",
+        "Biglietto del dì: chi arriva di notte porta sempre una domanda.",
+        "Appunto quotidiano: una pagina aperta aspetta solo di essere vista.",
+        "Nota del giorno: anche le lanterne sognano un po'.",
+        "Messaggio ombra: il gatto ha già scelto il suo angolo.",
+        "Riga del calendario: oggi le stelle sembrano più vicine.",
+        "Sospiro di carta: un libro chiuse gli occhi un istante."
+      ],
+      "en": [
+        "Daily note: dust dances slower when it rains.",
+        "Today's slip: whoever arrives at night always brings a question.",
+        "Day memo: an open page only waits to be seen.",
+        "Quiet note: even the lanterns dream a little.",
+        "Shadow message: the cat has already chosen its corner.",
+        "Calendar line: the stars feel closer tonight.",
+        "Paper sigh: a book closed its eyes for a moment."
+      ]
+    }
+  }
+}

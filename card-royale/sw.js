@@ -1,4 +1,4 @@
-const CACHE = 'enchanted-clash-v1';
+const CACHE = 'enchanted-clash-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -12,7 +12,13 @@ const ASSETS = [
   './js/audio.js',
   './js/save.js',
   './js/utils.js',
-  './data/cards.json',
+  './data/cards.js',
+  './data/fusions.js',
+  './data/weather.js',
+  './data/companions.js',
+  './data/bosses.js',
+  './data/nature.js',
+  './data/achievements.js',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
@@ -36,8 +42,16 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-  if (e.request.url.startsWith('http') && !e.request.url.includes(self.location.origin)) return;
+  if (e.request.method !== 'GET') return;
+  if (new URL(e.request.url).origin !== self.location.origin) return;
   e.respondWith(
-    caches.match(e.request).then((hit) => hit || fetch(e.request))
+    caches.match(e.request).then((hit) => hit || fetch(e.request).then((res) => {
+      // Cache successful same-origin responses for offline use
+      if (res && res.status === 200 && res.type === 'basic') {
+        const copy = res.clone();
+        caches.open(CACHE).then((c) => c.put(e.request, copy));
+      }
+      return res;
+    }).catch(() => caches.match('./index.html')))
   );
 });

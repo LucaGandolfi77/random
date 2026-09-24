@@ -1,5 +1,11 @@
 // services/backup.js — File System Access + OPFS fallback. Nessun backend.
-import { serializeState, deserializeState, storageKey } from '../core/state.js';
+import { serializeState, deserializeState, storageKey, validateSave, migrate } from '../core/state.js';
+
+function parseSave(text) {
+  const parsed = deserializeState(text);
+  if (!parsed || !validateSave(parsed)) return null;
+  return migrate(parsed);
+}
 
 async function opfsRoot() {
   try {
@@ -51,7 +57,7 @@ export async function importFromFS() {
       });
       const file = await handle.getFile();
       const text = await file.text();
-      const parsed = deserializeState(text);
+      const parsed = parseSave(text);
       if (parsed) return { ok: true, state: parsed, via: 'fssync' };
       return { ok: false, reason: 'invalid' };
     } catch { /* cancelled */ }
@@ -61,7 +67,7 @@ export async function importFromFS() {
     try {
       const file = await handle.getFile();
       const text = await file.text();
-      const parsed = deserializeState(text);
+      const parsed = parseSave(text);
       if (parsed) return { ok: true, state: parsed, via: 'opfs' };
       return { ok: false, reason: 'invalid' };
     } catch { /* continue */ }

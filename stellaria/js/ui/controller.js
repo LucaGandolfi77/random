@@ -18,7 +18,10 @@ import { isWebAuthnAvailable, registerProfilePin, verifyProfilePin, clearProfile
 import { debounce, pick, qs, qsa, safeLocalStorage } from '../core/utils.js';
 import { extractPalette } from './avatar.js';
 import { avatarSVG } from './avatar.js';
-import { haptic, HAPTICS, ritualAvailable, performRitual, generateDiary, oracleForUI } from '../features/index.js';
+import {
+  haptic, HAPTICS, ritualAvailable, performRitual, generateDiary, oracleForUI,
+  requestNotificationPermission, sendGentleNotification,
+} from '../features/index.js';
 import { GESTURES } from '../domain/data/items.js';
 import { ALL_ITEMS as ITEMS, OUTFIT_SLOTS } from '../domain/data/items.js';
 import { UNLOCKABLES } from '../domain/data/unlockables.js';
@@ -55,6 +58,8 @@ export async function boot() {
   ambientProfile(state);
   if (pinRegistered) pinVerified = true;
   setupSaveLifecycle();
+  currentCallbacks = api();
+  startClock();
   renderStart(hasSave());
 }
 
@@ -134,23 +139,25 @@ function onGreet(id) {
   if (!c) return;
   world.tickTime(state);
   if (state.soundOn) startAudio();
-  const txt = (c.greet && c.greet.IT) || c.greet || '';
-  showToast(txt);
-  state.lastMsgText = txt;
-  maybeLaugh(c);
+  const def = citizenDef(id);
+  const greet = (def.greet && def.greet.IT) || (typeof def.greet === 'string' ? def.greet : '') || '';
+  showToast(greet || `${citizenName(id)} ti saluta.`);
+  state.lastMsgText = greet;
+  maybeLaugh(id);
   saveNow(); render(state, currentCallbacks);
 }
 
 function onPose(id) {
   const gesture = pick(GESTURES).id;
   const res = model.performGesture(state, state.roomId, gesture, id);
+  const name = citizenName(id);
   if (state.soundOn) { playVote(); playSuccess(); }
   if (res.stars > 0) showToast(t('starsEarned').replace('{n}', res.stars));
   if (res.reflex > 0) showToast(t('reflectionEarned'));
   if (res.vibe < 0.3 && state.citizens[id].repetition > 3) showToast(t('repeatWarning'));
-  else if (res.liked) showToast(t('voteNice').replace('{name}', res.citizen.nameIT));
-  else showToast(t('voteMeh').replace('{name}', res.citizen.nameIT));
-  state.lastMsgText = res.liked ? t('voteNice').replace('{name}', res.citizen.nameIT) : t('voteMeh').replace('{name}', res.citizen.nameIT);
+  else if (res.liked) showToast(t('voteNice').replace('{name}', name));
+  else showToast(t('voteMeh').replace('{name}', name));
+  state.lastMsgText = res.liked ? t('voteNice').replace('{name}', name) : t('voteMeh').replace('{name}', name);
   maybeEvent();
   checkProgression();
   saveNow(); render(state, currentCallbacks);
@@ -158,16 +165,18 @@ function onPose(id) {
 
 function onHelp(id) {
   const c = model.helpCitizen(state, id);
+  const name = citizenName(id);
   if (state.soundOn) playSuccess();
-  showToast(`${c.nameIT} — ${t('reflectionEarned')}`);
-  state.lastMsgText = `${c.nameIT}: "Grazie per essere qui."`;
+  showToast(`${name} — ${t('reflectionEarned')}`);
+  state.lastMsgText = `${name}: "Grazie per essere qui."`;
   checkProgression(); saveNow(); render(state, currentCallbacks);
 }
 
 function onCompliment(id) {
-  const c = model.complimentCitizen(state, id);
+  model.complimentCitizen(state, id);
+  const name = citizenName(id);
   if (state.soundOn) playClick();
-  showToast(`${c.nameIT} sorride.`);
+  showToast(`${name} sorride.`);
   saveNow(); render(state, currentCallbacks);
 }
 
@@ -178,9 +187,11 @@ async function onShare() {
   else showToast(t('shareCancelled'));
 }
 
-function maybeLaugh(c) {
+function maybeLaugh(id) {
+  const c = state.citizens[id];
+  if (!c) return;
   if (state.riflesso > 20 && c.affinity >= 80) {
-    setTimeout(() => showToast(`${c.nameIT}: "Mi piaci davvero."`), 1200);
+    setTimeout(() => showToast(`${citizenName(id)}: "Mi piaci davvero."`), 1200);
   }
 }
 
@@ -212,8 +223,20 @@ let toastQuiet = true;
 // ─── Pannelli ──────────────────────────────────────
 function tutCallbacks() {
   return {
-    tutNext: () => { state._tutStep = (state._tutStep || 0) + 1; renderTutorial(state._tutStep, tutCallbacks()); },
-    tutDone: () => { state.tutorialDone = true; state._tutStep = 0; saveNow(); render(state, currentCallbacks); },
+    tutNext: () => {
+      const step = clamp((state._tutStep || 0) + 1, 0, 3);
+      state._tutStep = step;
+      renderTutorial(step, tutCallbacks());
+    },
+    tutDone: () => {
+      const box = document.getElementById('tutorial-box');
+      if (box && box.dataset.step) state._tutStep = 0;
+      state.tutorialDone = true;
+      state._tutStep = 0;
+      saveNow();
+      if (!currentCallbacks) currentCallbacks = api();
+      render(state, currentCallbacks);
+    },
   };
 }
 
@@ -267,9 +290,15 @@ export function openSettings() {
 function pinSetup() {
   if (!hasPin()) {
     registerProfilePin().then((r) => {
-      showToast(t('pinActive')); pinVerified = true; persistState(state); }
-      else if (r.reason === 'unsupported' || r.reason === 'unavailable') showToast(t('pinUnavailable'));
-      else showToast(t('cancelled'));
+      if (r.ok) {
+        showToast(t('pinActive'));
+        pinVerified = true;
+        persistState(state);
+      } else if (r.reason === 'unsupported' || r.reason === 'unavailable') {
+        showToast(t('pinUnavailable'));
+      } else {
+        showToast(t('cancelled'));
+      }
     });
   } else {
     openModal({ title: t('pinTitle'), body: t('pinBody'), buttons: [
@@ -288,8 +317,13 @@ async function exportFS() {
 }
 async function importFS() {
   const res = await importFromFS();
-  if (res.ok) { state = res.state; bindRefs(state); persistState(state); render(state, currentCallbacks); showToast(t('imported')); }
-    else showToast(t('importFailed'));
+  if (res.ok) {
+    state = model.normalize(model.migrate(res.state));
+    bindRefs(state);
+    persistState(state);
+    render(state, currentCallbacks);
+    showToast(t('imported'));
+  } else showToast(t('importFailed'));
 }
 async function shareFromPanel() {
   const res = await shareProfile(state);
@@ -430,7 +464,6 @@ function openOutfit() {
     if (!alreadyOwned) {
       const res = model.buy(state, itemId);
       if (!res.ok) { showToast(t('notEnough')); return; }
-      state.ownedOutfits.push(itemId);
     }
     model.setOutfit(state, slot, itemId);
     if (state.soundOn) playClick();
@@ -445,7 +478,7 @@ function openInventory() {
   const coll = state.collectibles || [];
   const upg = model.availableUpgrades(state);
   let body = `<h3>${t('collectibles') || 'Collezionabili'}</h3>`;
-  body += `<div class="inv-grid">${coll.length ? coll.map((c) => `<div class="inv-item">${c}</div>`).join('') : '<em>Nessun collezionabile ancora.</em>'}</div>`;
+  body += `<div class="inv-grid">${coll.length ? coll.map((c) => `<div class="inv-item">${escapeHtml(String(c))}</div>`).join('') : '<em>Nessun collezionabile ancora.</em>'}</div>`;
   body += `<h3>${t('upgrades') || 'Miglioramenti'}</h3>`;
   body += upg.map((it) => `<div class="shop-row"><div><b>${it.nameIT}</b><br><small>Fama ${it.requireFame || '?'}</small></div><button data-buy="${it.id}">${t('buy')} ${model.priceOf(it, state)}✧</button></div>`).join('');
   openPanel('inventory', t('panelInventoryTitle'), body);
@@ -487,6 +520,19 @@ function setupGlobalEvents() {
   window.addEventListener('appinstalled', () => showToast(t('installed')));
   window.addEventListener('storage:quota', () => { if (state) { persistState(state); showToast(t('storageQuota')); } });
   window.addEventListener('beforeunload', () => { if (state) persistState(state); });
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.addEventListener('message', (e) => {
+      const data = e.data;
+      if (!data || data.type !== 'share-target') return;
+      const text = String(data.text || '').slice(0, 80);
+      if (state) {
+        state.lastMsgText = `Messaggio condiviso: ${text}`;
+        render(state, currentCallbacks);
+      } else {
+        safeLocalStorage('set', PENDING_KEY, String(data.text || '').slice(0, 5000));
+      }
+    });
+  }
   setupSwipe();
   setupViewDelegation();
   setupAvatarDrag();
@@ -546,9 +592,10 @@ function setupViewDelegation() {
       else if (act === 'pose') currentCallbacks.onPose(id);
       else if (act === 'help') currentCallbacks.onHelp(id);
       else if (act === 'compliment') currentCallbacks.onCompliment(id);
-      else if (act === 'speak') {
-        const c = state.citizens[id];
-        if (c) speak(c.greet && c.greet.IT ? c.greet.IT : c.nameIT, getLang());
+      else       if (act === 'speak') {
+        const def = citizenDef(id);
+        const line = (def.greet && def.greet.IT) || citizenName(id);
+        speak(line, getLang());
       }
     });
   }
@@ -578,13 +625,38 @@ function setupViewDelegation() {
 }
 
 function escapeAttr(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function escapeHtml(s) { return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+
+function citizenDef(id) {
+  return world.CITIZENS.find((x) => x.id === id) || {};
+}
+function citizenName(id) {
+  const def = citizenDef(id);
+  if (def.name && typeof def.name === 'object') return def.name.IT || def.name.EN || id;
+  return def.nameIT || id;
+}
 
 function startNew() {
-  state = model.defaultState();
-  bindRefs(state);
-  saveNow();
-  renderTutorial(0, tutCallbacks());
-  if (state.soundOn) startAudio(0.3);
+  const begin = () => {
+    state = model.defaultState();
+    bindRefs(state);
+    saveNow();
+    renderTutorial(0, tutCallbacks());
+    if (state.soundOn) startAudio(0.3);
+  };
+  if (hasSave()) {
+    openModal({
+      title: t('resetConfirm'),
+      body: '',
+      buttons: [
+        { label: t('cancel'), action: 'cancel' },
+        { label: t('newGame') || t('start'), action: 'confirm', cls: 'danger' },
+      ],
+    });
+    window.__modalHandler = { cancel: closeModal, confirm: () => { closeModal(); begin(); } };
+    return;
+  }
+  begin();
 }
 
 function openHowTo() {

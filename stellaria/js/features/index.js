@@ -48,7 +48,7 @@ export function clearBadge() {
   } catch {}
 }
 export async function requestNotificationPermission() {
-  if (!('Notification' in window)) return 'unsupported';
+  if (typeof window === 'undefined' || !('Notification' in window)) return 'unsupported';
   if (Notification.permission === 'granted') return 'granted';
   if (Notification.permission === 'denied') return 'denied';
   try {
@@ -57,7 +57,7 @@ export async function requestNotificationPermission() {
   } catch { return 'unsupported'; }
 }
 export function sendGentleNotification(title, body) {
-  if (!('Notification' in window) || Notification.permission !== 'granted') return false;
+  if (typeof window === 'undefined' || !('Notification' in window) || Notification.permission !== 'granted') return false;
   try {
     new Notification(title, { body, icon: './icons/icon-192.png', silent: true });
     return true;
@@ -74,7 +74,17 @@ export function generateDiary(state) {
   entries.push(`## Oggi\n`);
   entries.push(`- Stelle: ${s.stars || 0} ◈ Riflesso: ${s.riflesso || 0} ✧ Fama: ${s.fame || 1}/6\n`);
   entries.push(`- Gestualità: ${stats.gestures || 0} esibizioni, ${stats.helps || 0} aiuti, ${stats.moves || 0} spostamenti\n`);
-  const friends = Object.values(s.citizens || {}).filter((c) => (c.affinity || 0) >= 80).map((c) => c.nameIT || c.name);
+  const citizensRef = (s.citizens && typeof s.citizens === 'object') ? s.citizens : {};
+  const friends = Object.values(citizensRef)
+    .filter((c) => (c.affinity || 0) >= 80)
+    .map((c) => {
+      if (c.name && typeof c.name === 'object') return c.name.IT || c.name.EN || '';
+      if (c.nameIT) return c.nameIT;
+      if (c.name && typeof c.name === 'string') return c.name;
+      if (c.id) return c.id;
+      return '';
+    })
+    .filter(Boolean);
   if (friends.length) entries.push(`- Amici stretti: ${friends.join(', ')}\n`);
   const season = getSeason(s);
   entries.push(`- Stagione attuale: ${season.emoji} ${season.nameIT}\n`);

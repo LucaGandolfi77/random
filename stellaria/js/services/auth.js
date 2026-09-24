@@ -22,17 +22,37 @@ function saveCredential() {
 loadCredential();
 
 export async function isWebAuthnAvailable() {
-  return !!(window.PublicKey && (navigator.credentials || {}).create && (navigator.credentials || {}).get);
+  return !!(window.PublicKeyCredential
+    && navigator.credentials
+    && navigator.credentials.create
+    && navigator.credentials.get);
 }
 
 export async function isBiometricPlatform() {
   try {
-    if (!window.PublicKey) return false;
-    const supports = window.PublicKey?.isUserVerifyingPlatformAuthenticatorAvailable
-      ? await window.PublicKey.isUserVerifyingPlatformAuthenticatorAvailable()
+    if (!window.PublicKeyCredential) return false;
+    const supports = window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable
+      ? await window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()
       : false;
     return !!supports;
   } catch { return false; }
+}
+
+function serializeCredential(cred) {
+  if (!cred || !cred.rawId) return null;
+  let rawId;
+  if (cred.rawId instanceof ArrayBuffer) rawId = Array.from(new Uint8Array(cred.rawId));
+  else if (ArrayBuffer.isView(cred.rawId)) rawId = Array.from(new Uint8Array(cred.rawId.buffer, cred.rawId.byteOffset, cred.rawId.byteLength));
+  else if (Array.isArray(cred.rawId)) rawId = cred.rawId.slice();
+  else return null;
+  let transports = ['platform'];
+  try {
+    if (cred.response && typeof cred.response.getTransports === 'function') {
+      const t = cred.response.getTransports();
+      if (Array.isArray(t) && t.length) transports = t;
+    }
+  } catch {}
+  return { rawId, type: cred.type || 'public-key', transports };
 }
 
 // Crea una credenziale locale (pin/biometria) per "chiudere a chia" il profilo.
@@ -40,7 +60,7 @@ export async function registerProfilePin() {
   if (!await isWebAuthnAvailable()) return { ok: false, reason: 'unsupported' };
   try {
     const challenge = crypto.getRandomValues(new Uint8Array(32));
-    credential = await navigator.credentials.create({
+    const created = await navigator.credentials.create({
       publicKey: {
         challenge,
         rp: { id: RP_ID, name: 'Stellaria' },
@@ -50,6 +70,9 @@ export async function registerProfilePin() {
         timeout: 60000,
       },
     });
+    const serialized = serializeCredential(created);
+    if (!serialized) return { ok: false, reason: 'unavailable' };
+    credential = serialized;
     saveCredential();
     bus.emit('auth:registered', true);
     return { ok: true };
@@ -65,9 +88,10 @@ export async function verifyProfilePin() {
   if (!await isWebAuthnAvailable()) return { ok: false, reason: 'unsupported' };
   try {
     const challenge = crypto.getRandomValues(new Uint8Array(32));
-    const allow = [credential.rawId ? {
-      type: 'public-key', id: new Uint8Array(credential.rawId), transports: credential.transports || ['platform'],
-    } : credential];
+    const rawId = Array.isArray(credential.rawId) ? new Uint8Array(credential.rawId) : credential.rawId;
+    const allow = rawId ? [{
+      type: 'public-key', id: rawId, transports: credential.transports || ['platform'],
+    }] : [];
     const assertion = await navigator.credentials.get({
       publicKey: {
         challenge,

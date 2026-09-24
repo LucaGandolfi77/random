@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#07090f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Ceneri" />
+  <meta name="description" content="Le Ceneri del Registro: una storia triste e malinconica per imparare il mondo delle blockchain, dai blocchi ai contratti intelligenti. PWA offline." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="icons/icon-96.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Le Ceneri del Registro</title>
+</head>
+<body>
+  <div id="fx" aria-hidden="true">
+    <canvas id="fx-canvas"></canvas>
+  </div>
+
+  <div id="app">
+    <section id="screen-boot" class="screen active" aria-live="polite">
+      <div class="boot-mark">
+        <div class="boot-ring"></div>
+        <div class="boot-blocks"><i></i><i></i><i></i></div>
+      </div>
+      <p class="boot-label">ricostruzione del registro…</p>
+    </section>
+
+    <section id="screen-title" class="screen">
+      <div class="title-wrap">
+        <p class="title-kicker">una storia sul ricordo che non possediamo</p>
+        <h1 class="title-logo">Le Ceneri<br/><span>del Registro</span></h1>
+        <p class="title-sub">Impara il mondo delle blockchain mentre cerchi l’ultima traccia di chi ti è sfuggita.</p>
+        <div class="title-actions">
+          <button id="btn-new" class="btn primary big">Inizia la storia</button>
+          <button id="btn-continue" class="btn ghost big" hidden>Riprendi</button>
+          <button id="btn-title-codex" class="btn link">Apri il codice</button>
+        </div>
+        <div class="title-meta">
+          <span id="title-progress">0 / 12 capitoli</span>
+          <span class="dot"></span>
+          <span>offline-first</span>
+        </div>
+      </div>
+      <button id="btn-settings-title" class="icon-btn corner-tr" aria-label="Impostazioni">⚙</button>
+    </section>
+
+    <section id="screen-map" class="screen">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-btn" id="btn-map-home" aria-label="Titolo">⌂</button>
+          <div class="topbar-title">
+            <h2>La catena dei giorni</h2>
+            <p id="map-subtitle">12 blocchi di memoria</p>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="icon-btn" id="btn-map-codex" aria-label="Codice">⌘</button>
+          <button class="icon-btn" id="btn-map-settings" aria-label="Impostazioni">⚙</button>
+        </div>
+      </header>
+      <div class="hud-strip">
+        <div class="hud-item"><span class="hud-k">Frammenti</span><span class="hud-v" id="hud-fragments">0/24</span></div>
+        <div class="hud-item"><span class="hud-k">Quiz</span><span class="hud-v" id="hud-quizzes">0/12</span></div>
+        <div class="hud-item"><span class="hud-k">Sfide</span><span class="hud-v" id="hud-games">0/30</span></div>
+        <div class="hud-item"><span class="hud-k">Termini</span><span class="hud-v" id="hud-glossary">0/40</span></div>
+      </div>
+      <div id="map-chain" class="map-chain" role="list"></div>
+      <div id="map-footer-note" class="map-note"></div>
+    </section>
+
+    <section id="screen-story" class="screen">
+      <header class="topbar story-topbar">
+        <div class="topbar-left">
+          <button class="icon-btn" id="btn-story-back" aria-label="Torna alla mappa">‹</button>
+          <div class="topbar-title compact">
+            <p class="chapter-kicker" id="story-chapter-kicker">Capitolo I</p>
+            <h2 id="story-chapter-title">—</h2>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="scene-progress" aria-hidden="true"><i id="scene-progress-bar"></i></div>
+          <button class="icon-btn" id="btn-story-codex" aria-label="Codice">⌘</button>
+        </div>
+      </header>
+
+      <div id="story-stage" class="story-stage">
+        <div id="scene-card" class="scene-card"></div>
+      </div>
+
+      <div id="story-controls" class="story-controls">
+        <button id="btn-advance" class="btn primary wide" hidden>Continua</button>
+      </div>
+    </section>
+
+    <section id="screen-codex" class="screen">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-btn" id="btn-codex-back" aria-label="Indietro">‹</button>
+          <div class="topbar-title">
+            <h2>Codex Memoriae</h2>
+            <p>glossario, frammenti, successi</p>
+          </div>
+        </div>
+      </header>
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-tab="glossary" role="tab">Glossario</button>
+        <button class="tab" data-tab="fragments" role="tab">Frammenti</button>
+        <button class="tab" data-tab="diary" role="tab">Diario</button>
+        <button class="tab" data-tab="achievements" role="tab">Successi</button>
+      </nav>
+      <div id="codex-body" class="codex-body"></div>
+    </section>
+
+    <div id="sheet-root"></div>
+    <div id="toast-root" aria-live="polite"></div>
+    <div id="modal-root"></div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

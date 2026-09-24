@@ -2,13 +2,15 @@ export class Deck {
   constructor() {
     this.cards = [];
     this.hand = [];
+    this.discard = [];
   }
 
-  shuffle() {
-    for (let i = this.cards.length - 1; i > 0; i--) {
+  shuffle(arr = this.cards) {
+    for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
+    return arr;
   }
 
   drawInitial() {
@@ -20,8 +22,14 @@ export class Deck {
 
   draw() {
     if (this.cards.length === 0) {
-      this.shuffle();
-      if (this.cards.length === 0) return null;
+      // Recycle discard pile
+      if (this.discard && this.discard.length > 0) {
+        this.cards = this.discard;
+        this.discard = [];
+        this.shuffle(this.cards);
+      } else {
+        return null;
+      }
     }
     const card = this.cards.pop();
     this.hand.push(card);
@@ -30,7 +38,17 @@ export class Deck {
 
   play(index) {
     if (index < 0 || index >= this.hand.length) return null;
-    return this.hand.splice(index, 1)[0];
+    const card = this.hand.splice(index, 1)[0];
+    if (!this.discard) this.discard = [];
+    this.discard.push(card);
+    return card;
+  }
+
+  unplay(index, card) {
+    if (!card) return;
+    const di = this.discard ? this.discard.indexOf(card) : -1;
+    if (di >= 0) this.discard.splice(di, 1);
+    this.hand.splice(Math.min(index, this.hand.length), 0, card);
   }
 
   getHand() {

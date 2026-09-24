@@ -3,14 +3,21 @@ import { storageKey, validateSave, migrate, serializeState, deserializeState, de
 import { safeLocalStorage, safeJSON } from '../core/utils.js';
 import { CONFIG } from '../core/config.js';
 
-const STORAGE = { get: (k) => safeLocalStorage('get', k), set: (k, v) => safeLocalStorage('set', k, v) };
+const STORAGE = {
+  get: (k) => safeLocalStorage('get', k),
+  set: (k, v) => safeLocalStorage('set', k, v),
+  remove: (k) => safeLocalStorage('remove', k),
+};
 
 export async function loadState() {
   const raw = STORAGE.get(storageKey());
-  if (!raw) return defaultState();
+  if (!raw || raw === 'null') {
+    if (raw === 'null') STORAGE.remove(storageKey());
+    return defaultState();
+  }
   const parsed = safeJSON(raw, null);
   if (!parsed || !validateSave(parsed)) {
-    STORAGE.set(storageKey(), null);
+    STORAGE.remove(storageKey());
     return defaultState();
   }
   return migrate(parsed);
@@ -18,7 +25,11 @@ export async function loadState() {
 
 export async function persistState(state) {
   try {
-    STORAGE.set(storageKey(), serializeState(state));
+    const ok = STORAGE.set(storageKey(), serializeState(state));
+    if (ok === false) {
+      try { window.dispatchEvent(new CustomEvent('storage:quota')); } catch {}
+      return false;
+    }
     return true;
   } catch (e) {
     if (e && e.name === 'QuotaExceededError') {
@@ -41,7 +52,7 @@ export async function importFromFile(file) {
   const text = await file.text();
   const parsed = safeJSON(text, null);
   if (!parsed || !validateSave(parsed)) return false;
-  await persistState(parsed);
+  await persistState(migrate(parsed));
   return true;
 }
 

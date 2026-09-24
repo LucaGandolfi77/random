@@ -3,6 +3,7 @@ import { t, getLang } from '../core/i18n.js';
 import { TAG_COLORS, TAG_LABELS } from '../domain/data/tagMeta.js';
 import { qsa, clamp } from '../core/utils.js';
 import * as world from '../domain/world.js';
+import { getSeason } from '../services/ambient.js';
 import { avatarSVG } from './avatar.js';
 
 export function initView() {
@@ -99,7 +100,7 @@ function renderRoom(state, callbacks) {
   const tokens = present.map((c) => {
     const pos = npcTokenPos(c.id);
     const near = nearest && nearest.id === c.id ? ' near' : '';
-    return `<div class="npc-token${near}" data-citizen="${c.id}" style="left:${pos.x}%;top:${pos.y}%" title="${c.nameIT}">${c.portrait}</div>`;
+    return `<div class="npc-token${near}" data-citizen="${c.id}" style="left:${pos.x}%;top:${pos.y}%" title="${escapeHtml(resolveName(c))}">${c.portrait}</div>`;
   }).join('');
   const avPos = state.avatarPos || { x: 0.5, y: 0.72 };
   scene.innerHTML = `
@@ -139,11 +140,12 @@ function citizensPresent(state) {
   const { citizens, time, roomId } = state;
   const ref = state._citizensRef || world.CITIZENS;
   const out = [];
-  for (const ci of Object.values(citizens)) {
-    const def = ref.find((x) => x.id === ci.id) || ci;
+  for (const [key, ci] of Object.entries(citizens)) {
+    const def = ref.find((x) => x.id === (ci.id || key)) || ref.find((x) => x.id === key) || { id: ci.id || key, hours: [0, 24], home: roomId, ...ci };
+    const id = def.id || ci.id || key;
     const home = world.roomOfCitizen(def, time.hour);
-    if (home !== roomId || !isActive(def.hours, time.hour)) continue;
-    out.push({ ...def, affinity: ci.affinity || 0, _room: home });
+    if (home !== roomId || !isActive(def.hours || [0, 24], time.hour)) continue;
+    out.push({ ...def, id, affinity: ci.affinity || 0, _room: home });
   }
   return out;
 }
@@ -165,8 +167,21 @@ function roomIcon(roomId) {
   return `<span class="room-hero">${map[roomId] || '✦'}</span>`;
 }
 
+function resolveName(c) {
+  if (c.name && typeof c.name === 'object') return c.name.IT || c.name.EN || c.id || '';
+  return c.nameIT || c.id || '';
+}
+function resolveGreet(c) {
+  if (c.greet && typeof c.greet === 'object') return c.greet.IT || c.greet.EN || '';
+  return c.greet || '';
+}
+function resolvePersonality(c) {
+  if (c.personality && typeof c.personality === 'object') return c.personality.IT || c.personality.EN || '';
+  return c.personalityIT || '';
+}
+
 function seasonBadge(state) {
-  const season = world.getSeason ? world.getSeason(state) : null;
+  const season = getSeason(state);
   if (!season) return '';
   return `<span class="season-badge">${season.emoji} ${season.nameIT}</span>`;
 }
@@ -176,22 +191,24 @@ function npcCard(c) {
   const friend = aff >= 80;
   const tagsHtml = (c.tags || []).slice(0, 3).map((tg) =>
     `<span class="tag" style="background:${color(tg)}">${label(tg)}</span>`).join('');
-  const greet = c.greet && c.greet.IT ? c.greet.IT : c.greet || '';
+  const greet = resolveGreet(c);
+  const name = resolveName(c);
+  const personality = resolvePersonality(c);
   return `
-    <div class="npc-card ${friend ? 'friend' : ''}" data-citizen="${c.id}" role="group" aria-label="${c.nameIT}">
+    <div class="npc-card ${friend ? 'friend' : ''}" data-citizen="${c.id}" role="group" aria-label="${escapeHtml(name)}">
       <span class="npc-avatar" aria-hidden="true">${c.portrait}</span>
       <div class="npc-meta">
-        <b>${c.nameIT}</b>
-        <span class="npc-personality">${c.personalityIT}</span>
+        <b>${escapeHtml(name)}</b>
+        <span class="npc-personality">${escapeHtml(personality)}</span>
         <div class="npc-tags">${tagsHtml}</div>
         <div class="affinity" aria-label="Affinità ${aff}"><span class="affinity-bar" style="width:${aff}%"></span></div>
         <div class="npc-saludo" data-saludo>${escapeHtml(greet)}</div>
         <div class="npc-acts">
-          <button data-act="greet" aria-label="${t('greet')} ${c.nameIT}">${t('greet')}</button>
-          <button data-act="pose" aria-label="${t('pose')} ${c.nameIT}">${t('pose')}</button>
-          <button data-act="compliment" aria-label="${t('compliment')} ${c.nameIT}">${t('compliment')}</button>
-          <button data-act="help" aria-label="${t('help')} ${c.nameIT}">${t('help')}</button>
-          <button data-act="speak" aria-label="Ascolta ${c.nameIT}" title="Ascolta">🔊</button>
+          <button data-act="greet" aria-label="${t('greet')} ${escapeHtml(name)}">${t('greet')}</button>
+          <button data-act="pose" aria-label="${t('pose')} ${escapeHtml(name)}">${t('pose')}</button>
+          <button data-act="compliment" aria-label="${t('compliment')} ${escapeHtml(name)}">${t('compliment')}</button>
+          <button data-act="help" aria-label="${t('help')} ${escapeHtml(name)}">${t('help')}</button>
+          <button data-act="speak" aria-label="Ascolta ${escapeHtml(name)}" title="Ascolta">🔊</button>
         </div>
       </div>
     </div>
@@ -323,7 +340,7 @@ export function renderTutorial(step, callbacks) {
   showScreen('tutorial');
   const box = document.getElementById('tutorial-box');
   const steps = ['tutorial1', 'tutorial2', 'tutorial3', 'tutorial4'];
-  const idx = clamp(step, 0, steps.length - 1);
+  const idx = clamp(step | 0, 0, steps.length - 1);
   box.innerHTML = `
     <div class="tut-step">
       <h2>${t('tutorialTitle')}</h2>
@@ -336,13 +353,16 @@ export function renderTutorial(step, callbacks) {
       </div>
     </div>
   `;
-  box.querySelector('[data-tut="next"]').onclick = () => { state_tutStep = (state_tutStep || 0) + 1; renderTutorial(state_tutStep, callbacks); };
+  const next = box.querySelector('[data-tut="next"]');
+  if (next) next.onclick = () => renderTutorial(idx + 1, callbacks);
   const prev = box.querySelector('[data-tut="prev"]');
-  if (prev) prev.onclick = () => { state_tutStep = Math.max(0, (state_tutStep || 0) - 1); renderTutorial(state_tutStep, callbacks); };
-  box.querySelector('[data-tut="done"]').onclick = callbacks.tutDone;
-  box.querySelector('[data-tut="skip"]').onclick = callbacks.tutDone;
+  if (prev) prev.onclick = () => renderTutorial(idx - 1, callbacks);
+  const done = box.querySelector('[data-tut="done"]');
+  if (done) done.onclick = () => callbacks.tutDone();
+  const skip = box.querySelector('[data-tut="skip"]');
+  if (skip) skip.onclick = () => callbacks.tutDone();
+  box.dataset.step = String(idx);
 }
-let state_tutStep = 0;
 
 function color(tag) { return TAG_COLORS[tag] || '#c8b6ff'; }
 function label(tag) { return (TAG_LABELS[tag] && TAG_LABELS[tag][getLang()]) || tag; }

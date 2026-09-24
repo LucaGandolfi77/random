@@ -258,7 +258,7 @@ export function getFusablePairs(units) {
   const alive = units.filter(u => u.alive);
   for (let i = 0; i < alive.length; i++) {
     for (let j = i + 1; j < alive.length; j++) {
-      const recipe = getFusionRecipe(alive[i], alive[j]);
+      const recipe = getFusionRecipe(alive[i].cardId || alive[i].id, alive[j].cardId || alive[j].id);
       if (recipe) {
         pairs.push({ card1: alive[i], card2: alive[j], recipe });
       }

@@ -1,4 +1,4 @@
-const CACHE = 'stellaria-v3';
+const CACHE = 'stellaria-v4';
 const PRECACHE = [
   './',
   './index.html',
@@ -11,13 +11,14 @@ const PRECACHE = [
   './js/core/utils.js',
   './js/core/state.js',
   './js/core/bus.js',
+  './js/core/qr.js',
   './js/domain/world.js',
   './js/domain/scoring.js',
   './js/domain/model.js',
   './js/ui/view.js',
-    './js/ui/controller.js',
-    './js/features/index.js',
-    './js/ui/avatar.js',
+  './js/ui/controller.js',
+  './js/features/index.js',
+  './js/ui/avatar.js',
   './js/services/storage.js',
   './js/services/audio.js',
   './js/services/pwa.js',
@@ -25,14 +26,15 @@ const PRECACHE = [
   './js/services/backup.js',
   './js/services/ambient.js',
   './js/services/auth.js',
+  './js/services/oracle.js',
   './js/domain/data/tagMeta.js',
   './js/domain/data/citizens.js',
   './js/domain/data/rooms.js',
   './js/domain/data/items.js',
+  './js/domain/data/market.js',
   './js/domain/data/achievements.js',
   './js/domain/data/unlockables.js',
   './js/domain/data/events.js',
-  './js/domain/data/ambient.js',
   './js/domain/data/tutorial.js',
   './icons/icon-192.svg',
   './icons/icon-512.svg',
@@ -43,20 +45,29 @@ const PRECACHE = [
   './icons/apple-touch-icon-180.png',
 ];
 
+async function precacheAll(cache) {
+  await Promise.all(PRECACHE.map(async (u) => {
+    try {
+      const r = await fetch(u, { cache: 'reload' });
+      if (r && r.ok) await cache.put(u, r);
+    } catch { /* skip missing */ }
+  }));
+}
+
 self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(CACHE).then((cache) => cache.addAll(PRECACHE).catch(() => {
-      PRECACHE.forEach((u) => fetch(u).then((r) => { if (r.ok) cache.put(u, r); }).catch(() => {}));
-    }))
-  ).then(() => self.skipWaiting());
+  e.waitUntil((async () => {
+    const cache = await caches.open(CACHE);
+    await precacheAll(cache);
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys().then((keys) => Promise.all(
-      keys.filter((k) => k !== CACHE && k.startsWith('stellaria')).map((k) => caches.delete(k))
-    ))
-  ).then(() => self.clients.claim());
+  e.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter((k) => k !== CACHE && k.startsWith('stellaria')).map((k) => caches.delete(k)));
+    await self.clients.claim();
+  })());
 });
 
 function isNavigation(request) {
@@ -73,8 +84,7 @@ async function shareTargetHandler(request) {
       const target = c[0] || await clients.openWindow('./');
       if (target) {
         target.postMessage({ type: 'share-target', text });
-        const page = await clients.matchAll({ type: 'window' }).then(list => list[0]);
-        if (page) page.focus();
+        if (c[0] && typeof c[0].focus === 'function') c[0].focus();
       }
       return new Response('OK', { status: 200 });
     }
@@ -115,7 +125,7 @@ self.addEventListener('fetch', (e) => {
     return;
   }
   if (e.request.url.startsWith('http://localhost') || e.request.url.startsWith('http://127.0.0.1')) {
-    return fetch(e.request).catch(() => caches.match('./offline.html'));
+    return;
   }
   // Stale-While-Revalidate per asset statici
   e.respondWith(

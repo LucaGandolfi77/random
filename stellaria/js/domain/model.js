@@ -16,6 +16,7 @@ export const defaultCitizens = stateCore.defaultCitizens;
 export const defaultUnlockedRooms = stateCore.defaultUnlockedRooms;
 export const validateSave = stateCore.validate;
 export const migrate = stateCore.migrate;
+export const normalize = stateCore.normalize;
 export const serializeState = stateCore.serialize;
 export const deserializeState = stateCore.deserialize;
 export const storageKey = stateCore.storageKey;
@@ -26,19 +27,32 @@ export { vibeScore, voteFor, canUnlockRoom } from './scoring.js';
 export function getRoom(id) { return ROOMS.find((r) => r.id === id); }
 export function getRooms() { return ROOMS; }
 
+function currencyKey(currency) {
+  if (currency === 'stelle') return 'stars';
+  if (currency === 'riflesso') return 'riflesso';
+  return currency;
+}
+
 function canAfford(state, item) {
-  if (item.type === 'upgrade' && item.requireFame && state.fame < item.requireFame) return false;
-  const currency = item.currency || 'stelle';
-  if (state[currency] < priceOf(item, state)) return false;
-  return true;
+  if (item.requireFame && state.fame < item.requireFame) return false;
+  const key = currencyKey(item.currency || 'stelle');
+  const balance = typeof state[key] === 'number' ? state[key] : 0;
+  return balance >= priceOf(item, state);
 }
 
 export function buy(state, itemId) {
   const item = ITEMS.find((it) => it.id === itemId) || null;
-  if (!item || !canAfford(state, item)) return { ok: false, reason: 'not-affordable' };
-  const currency = item.currency || 'stelle';
-  state[currency] -= priceOf(item, state);
+  if (!item) return { ok: false, reason: 'not-affordable' };
+  if (item.isOutfit && (state.ownedOutfits || []).includes(item.id)) {
+    state.outfit[item.slot] = item.id;
+    return { ok: true, kind: 'outfit', name: item.nameIT };
+  }
+  if (!canAfford(state, item)) return { ok: false, reason: 'not-affordable' };
+  const key = currencyKey(item.currency || 'stelle');
+  state[key] -= priceOf(item, state);
   if (item.isOutfit) {
+    if (!Array.isArray(state.ownedOutfits)) state.ownedOutfits = [];
+    if (!state.ownedOutfits.includes(item.id)) state.ownedOutfits.push(item.id);
     state.outfit[item.slot] = item.id;
     return { ok: true, kind: 'outfit', name: item.nameIT };
   }
@@ -102,9 +116,9 @@ export function tickTime(state) { world.tickTime(state); }
 export function computeFame(state) { return scoring.computeFame(state); }
 export { applyEvent } from './world.js';
 
-export function availableOutfitItems() { return ITEMS.filter((it) => it.type === 'outfit'); }
-export function availableFurnitureFor(roomId) { return ITEMS.filter((it) => it.type === 'furniture' && it.room === roomId); }
-export function availableUpgrades(state) { return ITEMS.filter((it) => it.type === 'upgrade' && (!it.requireFame || state.fame >= it.requireFame)); }
+export function availableOutfitItems() { return ITEMS.filter((it) => it.isOutfit); }
+export function availableFurnitureFor(roomId) { return ITEMS.filter((it) => !it.isOutfit && it.room === roomId && it.slot !== 'upgrade'); }
+export function availableUpgrades(state) { return ITEMS.filter((it) => it.slot === 'upgrade' && (!it.requireFame || state.fame >= it.requireFame)); }
 
 export function priceOf(item, state) {
   const inflation = Math.max(0, (state.fame - 1) * (CONFIG.inflation || 0.15));
@@ -136,8 +150,8 @@ export function buyMarket(state, itemId) {
   const stock = marketStock(state);
   if (!stock.find((s) => s.id === itemId)) return { ok: false, reason: 'sold-out' };
   if (!canAfford(state, item)) return { ok: false, reason: 'not-affordable' };
-  const currency = item.currency || 'stelle';
-  state[currency] -= priceOf(item, state);
+  const key = currencyKey(item.currency || 'stelle');
+  state[key] -= priceOf(item, state);
   if (item.kind === 'outfit') {
     state.outfit[item.slot] = item.id;
     if (!state.ownedOutfits.includes(item.id)) state.ownedOutfits.push(item.id);

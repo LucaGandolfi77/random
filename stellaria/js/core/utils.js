@@ -15,13 +15,14 @@ export function safeLocalStorage(op, key, value = undefined) {
       return localStorage.getItem(key);
     }
     if (op === 'set') {
-      localStorage.setItem(key, value === undefined ? null : String(value));
+      localStorage.setItem(key, value === undefined ? '' : String(value));
       return true;
     }
     if (op === 'remove') {
       localStorage.removeItem(key);
       return true;
     }
+    return false;
   } catch {
     return op === 'get' ? null : false;
   }

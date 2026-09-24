@@ -41,11 +41,28 @@ export function saveStats(stats) {
 export function loadStats() {
   try {
     const raw = localStorage.getItem('enchanted_clash_stats');
-    if (!raw) return getDefaultStats();
-    statsCache = JSON.parse(raw);
+    if (!raw) {
+      statsCache = getDefaultStats();
+      return statsCache;
+    }
+    const parsed = JSON.parse(raw);
+    statsCache = { ...getDefaultStats(), ...parsed };
+    // Ensure nested defaults
+    statsCache.essences = statsCache.essences || {};
+    statsCache.weatherTypes = statsCache.weatherTypes || [];
+    statsCache.companionsUsed = statsCache.companionsUsed || [];
+    statsCache.achievementsUnlocked = statsCache.achievementsUnlocked || [];
+    statsCache.cardsPlayed = statsCache.cardsPlayed || {};
+    if (!Array.isArray(statsCache.currentDeck) || statsCache.currentDeck.length === 0) {
+      statsCache.currentDeck = getDefaultStats().currentDeck;
+    }
+    if (!Array.isArray(statsCache.unlockedCards) || statsCache.unlockedCards.length === 0) {
+      statsCache.unlockedCards = getAllDefaultUnlocked();
+    }
     return statsCache;
   } catch (e) {
-    return getDefaultStats();
+    statsCache = getDefaultStats();
+    return statsCache;
   }
 }
 
@@ -87,23 +104,24 @@ function getAllDefaultUnlocked() {
 }
 
 export function addWinToStats(stats) {
-  stats.gamesPlayed++;
-  stats.wins++;
+  stats.gamesPlayed = (stats.gamesPlayed || 0) + 1;
+  stats.wins = (stats.wins || 0) + 1;
   saveStats(stats);
 }
 
 export function addLossToStats(stats) {
-  stats.gamesPlayed++;
-  stats.losses++;
+  stats.gamesPlayed = (stats.gamesPlayed || 0) + 1;
+  stats.losses = (stats.losses || 0) + 1;
   saveStats(stats);
 }
 
 export function addThreeStarWin(stats) {
-  stats.threeStarWins++;
+  stats.threeStarWins = (stats.threeStarWins || 0) + 1;
   saveStats(stats);
 }
 
 export function trackCardPlay(stats, cardId) {
+  if (!stats.cardsPlayed) stats.cardsPlayed = {};
   if (!stats.cardsPlayed[cardId]) {
     stats.cardsPlayed[cardId] = 0;
   }

@@ -12,14 +12,18 @@ Funziona su **iPhone** (Safari, anche installata come app) e su **PC**.
 | Gesto (con le braccia)       | Effetto                                |
 |------------------------------|----------------------------------------|
 | 🙌 **Su / giù**              | salita / discesa (quota)               |
-| ↔️ **Spostale di lato**       | gira a destra / sinistra (yaw)         |
-| ↗️ **Una su e una giù**       | virata (roll + bank-to-turn)           |
+| ↔️ **Spostale di lato**       | l'uccello va verso **quel lato** (yaw) |
+| ↗️ **Una su e una giù**       | virata: si inclina e gira dal lato del braccio alzato |
 | 🤝 **Braccia vicine**         | **picchiata** (becco in giù, velocità) |
 
 Il volo è libero in 3D: quota, direzione e inclinazione si combinano; la
 **camera insegue l'uccello** da dietro inclinandosi leggermente in virata.
+In **virata l'ala del lato della curva si abbassa** (bank-to-turn) e la
+**portanza sotto le ali** cala, come in volo reale: più vai veloce e le ali
+reggono di più, in inclinazione la quota tende a scendere.
 Vedi lo **scheletro di spalle/gomiti/polsi** come feedback sulla videocamera.
-Una sola braccia visibile è sufficiente per quota e direzione.
+Una sola braccia visibile è sufficiente per quota e direzione; se perdi le
+braccia dall'inquadratura i comandi si rilasciano da soli.
 
 ## 💥 Game over
 
@@ -61,9 +65,9 @@ anche chiudendo la PWA.
 
 ## 🐣 Avvio sicuro
 
-L'uccello **spawna molto in alto** (160 m) con un breve periodo di
-protezione: niente schianti appena aperto il gioco, anche se il terreno è
-accidentato.
+L'uccello **spawna in quota** (120 m, sotto la soglia del trofeo ALTA
+QUOTA) con un breve periodo di protezione: niente schianti appena aperto il
+gioco, anche se il terreno è accidentato.
 
 ## 🗺️ Il mondo
 
@@ -136,8 +140,14 @@ INIZIARE"*.
 - **MediaPipe PoseLandmarker** (`@mediapipe/tasks-vision` da CDN) con modello
   `pose_landmarker_full`, 1 persona, modalità VIDEO, fallback GPU→CPU.
 - **Controllo braccia**: alzata = spalla→polso (Y, specchiato); yaw = offset
-  laterale dei polsi; roll = differenza di altezza tra braccio sinistro e
-  destro; picchiata = polsi vicini tra loro.
+  laterale dei polsi (l'uccello va dal lato in cui muovi le braccia); roll =
+  differenza di altezza tra braccio sinistro e destro con **bank-to-turn**
+  (l'ala del lato della curva si abbassa); picchiata = polsi vicini tra loro.
+  Se la pose o le braccia spariscono, i comandi decadono a zero.
+- **Fisica di volo**: portanza `K·v²·comando_ali·cos(bank)·cos(pitch)` contro
+  la gravità, con smorzamento della velocità verticale: volo neutro in quota,
+  braccia su = salita, braccia giù = discesa, in virata la componente
+  verticale della portanza cala, in picchiata le ali non spingono.
 - **Three.js 0.160** (import map, da CDN): mondo low-poly grande — terreno
   2400×2400 a colline + **catena montuosa** diagonale e vette (colori per
   altezza: sabbia→erba→roccia→neve), laghi, 240 abeti (InstancedMesh), rocce,

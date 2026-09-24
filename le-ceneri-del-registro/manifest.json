@@ -1,0 +1,24 @@
+{
+  "name": "Le Ceneri del Registro",
+  "short_name": "Ceneri",
+  "description": "Una storia malinconica per imparare il mondo delle blockchain, dai blocchi ai contratti intelligenti.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#07090f",
+  "theme_color": "#07090f",
+  "lang": "it",
+  "categories": ["education", "games", "story"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-384.png", "sizes": "384x384", "type": "image/png" },
+    { "src": "icons/icon-96.png", "sizes": "96x96", "type": "image/png" }
+  ],
+  "shortcuts": [
+    { "name": "Riprendi la storia", "url": "./index.html#resume" },
+    { "name": "Codice", "url": "./index.html#codex" }
+  ]
+}

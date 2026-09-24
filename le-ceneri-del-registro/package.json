@@ -1,0 +1,12 @@
+{
+  "name": "le-ceneri-del-registro",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "PWA narrativa malinconica per imparare le blockchain — offline, mobile-first",
+  "scripts": {
+    "start": "node server.mjs",
+    "icons": "node tools/make-icons.mjs",
+    "test": "node test/run.mjs"
+  }
+}

@@ -97,13 +97,26 @@ async function startCamera() {
 /* ---------- Controllo (braccia -> comandi) ---------- */
 const ctrl = { arms: 0, climb: 0, yaw: 0, roll: 0, dive: false };
 let currentPose = null;
+let lastPoseAt = -1e9;
+const TRACK_TIMEOUT = 500;   /* ms senza pose -> comandi rilasciati */
 
 const smooth = (cur, target, rate, dt) => cur + (target - cur) * (1 - Math.exp(-rate * dt));
 
+function decayControls(rate) {
+  ctrl.climb = smooth(ctrl.climb, 0, rate, lastDt);
+  ctrl.yaw = smooth(ctrl.yaw, 0, rate, lastDt);
+  ctrl.roll = smooth(ctrl.roll, 0, rate, lastDt);
+  ctrl.dive = false;
+}
+
 function updateControl(poses) {
+  lastPoseAt = performance.now();
   currentPose = poses && poses.length ? poses[0] : null;
-  ctrl.arms = currentPose ? 1 : 0;
-  if (!currentPose) return;
+  if (!currentPose) {
+    ctrl.arms = 0;
+    decayControls(3);
+    return;
+  }
 
   const p = currentPose;
   const mx = (i) => 1 - p[i].x;   /* specchia X come sullo schermo */
@@ -119,7 +132,13 @@ function updateControl(poses) {
       y: my(wr),
     });
   }
-  if (arms.length === 0) return;
+  if (arms.length === 0) {
+    /* pose presente ma braccia non utilizzabili: rilascia i comandi */
+    ctrl.arms = 0;
+    decayControls(3);
+    return;
+  }
+  ctrl.arms = arms.length;
 
   let c = 0;
   for (const a of arms) c += a.up;
@@ -448,7 +467,8 @@ function makeGlowTexture() {
 function randomRingPos() {
   const x = (Math.random() - 0.5) * 1700;
   const z = (Math.random() - 0.5) * 1700;
-  const y = Math.max(terrainH(x, z) + 10, WATER_Y + 8) + Math.random() * 55;
+  let y = Math.max(terrainH(x, z) + 10, WATER_Y + 8) + Math.random() * 55;
+  y = Math.min(y, MAX_Y - 12);   /* sempre raggiungibile (MAX_Y = 190) */
   return new THREE.Vector3(x, y, z);
 }
 
@@ -478,6 +498,7 @@ function buildRings() {
 function collectRing(r) {
   r.active = false;
   r.respawnT = 3;
+  r.mesh.visible = false;   /* sparisce subito, riappare al respawn */
   /* bonus anelli consecutivi: ogni anello vale 100 x combo */
   combo = comboTimer > 0 ? combo + 1 : 1;
   comboTimer = COMBO_WINDOW;
@@ -511,6 +532,7 @@ function updateRings(dt) {
       r.respawnT -= dt;
       if (r.respawnT <= 0) {
         r.mesh.position.copy(randomRingPos());
+        r.mesh.visible = true;
         r.active = true;
       }
       continue;
@@ -613,7 +635,7 @@ function buildBird() {
   tail.position.set(0, 0.1, -1.75);
   birdGroup.add(tail);
 
-  birdGroup.position.set(0, 42, 0);
+  birdGroup.position.set(0, SPAWN_Y, 0);
   scene.add(birdGroup);
 }
 
@@ -643,12 +665,17 @@ function initThree() {
   resize();
 }
 
-/* ---------- Uccello (volo libero) ---------- */
+/* ---------- Uccello (volo libero con portanza) ---------- */
+const GRAVITY = 9.8;      /* m/s^2 */
+const LIFT_K = 0.0222;    /* portanza = K * v^2 * comando ali * cos(bank) * cos(pitch) */
+const VY_DRAG = 0.8;      /* smorzamento velocita verticale */
+const SPAWN_Y = 120;      /* quota spawn (sotto la soglia trofeo 150 m) */
+
 const bird = {
-  pos: new THREE.Vector3(0, 160, 0),   /* spawn molto in alto */
-  yaw: 0, pitch: 0, roll: 0, speed: 16, flap: 0,
+  pos: new THREE.Vector3(0, SPAWN_Y, 0),
+  yaw: 0, pitch: 0, roll: 0, speed: 16, flap: 0, vy: 0,
 };
-const camPos = new THREE.Vector3(0, 165, -16);
+const camPos = new THREE.Vector3(0, SPAWN_Y + 5, -16);
 
 let gameOver = false;
 let gameOverShown = false;
@@ -662,7 +689,9 @@ function applyBirdMesh() {
   birdGroup.rotation.order = "YXZ";
   birdGroup.rotation.y = bird.yaw;
   birdGroup.rotation.x = -bird.pitch;
-  birdGroup.rotation.z = -bird.roll;
+  /* roll>0 (virata destra) -> rotation.z>0 -> ala destra schermo giu:
+     il bank segue sempre la direzione della virata */
+  birdGroup.rotation.z = bird.roll;
 }
 
 function updateBird(dt) {
@@ -709,7 +738,17 @@ function updateBird(dt) {
     Math.cos(bird.yaw) * Math.cos(bird.pitch)
   );
   bird.pos.addScaledVector(fwd, bird.speed * dt);
-  bird.pos.y += ctrl.climb * 9 * dt;
+
+  /* PORTANZA sotto le ali: dipende da velocita^2, comando braccia,
+     inclinazione (in virata la componente verticale cala) e pitch
+     (in picchiata le ali non spingono verso l'alto). */
+  const wingCmd = 1 + ctrl.climb * 0.55;
+  const lift =
+    LIFT_K * bird.speed * bird.speed * wingCmd *
+    Math.cos(bird.roll) * Math.max(0.15, Math.cos(bird.pitch));
+  bird.vy += (lift - GRAVITY) * dt;
+  bird.vy *= Math.exp(-VY_DRAG * dt);
+  bird.pos.y += bird.vy * dt;
 
   /* statistiche per i trofei */
   stats.dist += bird.speed * dt;
@@ -721,13 +760,22 @@ function updateBird(dt) {
   /* collisioni col suolo -> GAME OVER (con grazia all'avvio) */
   const th = terrainH(bird.pos.x, bird.pos.z);
   const ground = Math.max(th, WATER_Y - 0.4);
-  if (spawnGrace <= 0 && bird.pos.y <= ground + 1.2) {
-    bird.pos.y = ground + 0.5;
-    gameOver = true;
-    crashT = 0;
-    return;
+  if (bird.pos.y <= ground + 1.2) {
+    if (spawnGrace <= 0) {
+      bird.pos.y = ground + 0.5;
+      bird.vy = 0;
+      gameOver = true;
+      crashT = 0;
+      return;
+    }
+    /* durante la grazia resta sopra il terreno invece di affondarci */
+    bird.pos.y = ground + 0.7;
+    if (bird.vy < 0) bird.vy = 0;
   }
-  bird.pos.y = Math.min(bird.pos.y, MAX_Y);
+  if (bird.pos.y >= MAX_Y) {
+    bird.pos.y = MAX_Y;
+    if (bird.vy > 0) bird.vy = 0;
+  }
 
   /* confini morbidi del mondo */
   const d = Math.hypot(bird.pos.x, bird.pos.z);
@@ -757,7 +805,7 @@ function updateCamera(dt) {
   camPos.lerp(behind, 1 - Math.exp(-4.5 * dt));
   camera.position.copy(camPos);
   camera.lookAt(look);
-  camera.rotateZ(bird.roll * 0.16);
+  camera.rotateZ(-bird.roll * 0.16);   /* segue il bank dell'uccello */
 }
 
 function updateClouds(dt) {
@@ -794,6 +842,12 @@ function drawCam() {
   const sw = cw / sc, sh = ch / sc;
   const sx = (vw - sw) / 2, sy = (vh - sh) / 2;
 
+  /* mappa le coordinate normalizzate MediaPipe sul canvas specchiato
+     tenendo conto del ritaglio cover (altrimenti lo scheletro non
+     coincide con le braccia visibili) */
+  const mapX = (nx) => cw * (1 - (nx * vw - sx) / sw);
+  const mapY = (ny) => ch * ((ny * vh - sy) / sh);
+
   ctx.save();
   ctx.translate(cw, 0);
   ctx.scale(-1, 1);
@@ -805,14 +859,14 @@ function drawCam() {
     ctx.strokeStyle = "rgba(255, 217, 122, 0.9)";
     for (const [a, b] of POSE_CONN) {
       ctx.beginPath();
-      ctx.moveTo((1 - currentPose[a].x) * cw, currentPose[a].y * ch);
-      ctx.lineTo((1 - currentPose[b].x) * cw, currentPose[b].y * ch);
+      ctx.moveTo(mapX(currentPose[a].x), mapY(currentPose[a].y));
+      ctx.lineTo(mapX(currentPose[b].x), mapY(currentPose[b].y));
       ctx.stroke();
     }
     for (const i of [LS, RS, LE, RE, LW, RW]) {
       ctx.fillStyle = "#ffd97a";
       ctx.beginPath();
-      ctx.arc((1 - currentPose[i].x) * cw, currentPose[i].y * ch, Math.max(3, cw / 200), 0, Math.PI * 2);
+      ctx.arc(mapX(currentPose[i].x), mapY(currentPose[i].y), Math.max(3, cw / 200), 0, Math.PI * 2);
       ctx.fill();
     }
   }
@@ -828,7 +882,7 @@ function updateHud() {
   els.diveLabel.classList.toggle("hidden", !ctrl.dive);
   const on = ctrl.arms > 0;
   els.handsDot.classList.toggle("on", on);
-  els.handsLabel.textContent = "braccia: " + (ctrl.arms ? "1" : "—");
+  els.handsLabel.textContent = "braccia: " + (ctrl.arms || "—");
   els.timeVal.textContent = Math.round(flightTime) + "s";
   els.ringVal.textContent = runRings;
   els.scoreVal.textContent = runScore;
@@ -865,6 +919,9 @@ function loop(now) {
       updateControl(res.landmarks);
     } catch (e) { /* frame saltato */ }
   }
+  /* nessun aggiornamento pose da troppo tempo (video bloccato/app in
+     background): non lasciare i vecchi comandi attivi */
+  if (now - lastPoseAt > TRACK_TIMEOUT) decayControls(4);
 
   if (!gameOver) {
     flightTime += dt;
@@ -889,16 +946,16 @@ function setStatus(msg) {
 }
 
 function resetGame() {
-  bird.pos.set(0, 160, 0);      /* spawn molto in alto */
+  bird.pos.set(0, SPAWN_Y, 0);
   bird.yaw = 0; bird.pitch = 0; bird.roll = 0;
-  bird.speed = 16; bird.flap = 0;
+  bird.speed = 16; bird.flap = 0; bird.vy = 0;
   ctrl.climb = 0; ctrl.yaw = 0; ctrl.roll = 0; ctrl.dive = false;
   prevDive = false;
   gameOver = false; gameOverShown = false; crashT = 0; flightTime = 0;
   spawnGrace = 3.0;
   runScore = 0; runRings = 0; combo = 0; comboTimer = 0;
   stats.runs++;
-  camPos.set(0, 165, -16);
+  camPos.set(0, SPAWN_Y + 5, -16);
   els.gameOverOverlay.classList.add("hidden");
   showToast("🕊️ DECOLLA! Raccogli gli anelli!", 1800);
 }
@@ -945,7 +1002,12 @@ els.startBtn.addEventListener("click", async () => {
   try {
     initThree();
   } catch (e) {
+    /* libera la webcam e riabilita il pulsante: l'utente puo riprovare */
+    const stream = els.cam.srcObject;
+    if (stream) stream.getTracks().forEach((t) => t.stop());
+    els.cam.srcObject = null;
     setStatus("WebGL non disponibile su questo dispositivo.");
+    els.startBtn.disabled = false;
     return;
   }
   started = true;

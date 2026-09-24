@@ -51,6 +51,12 @@ export class Game {
      this.volume = 0.8;
      this.muted = false;
      this.paused = false;
+     this.battleLog = [];
+     this.lastFrameTime = 0;
+     this.secondAccum = 0;
+     this.turnDiscountReady = false;
+     this.superElixirTurnMark = 0;
+     this.gameOverHandled = false;
   }
 
   init(canvas) {
@@ -63,42 +69,63 @@ export class Game {
   }
 
   animateMenu() {
-    const loop = () => {
-      if (this.gameState !== 'menu') return;
-      if (!this.particles) return;
-      this.particles.update();
-      this.particles.draw();
-      this.menuAnims = requestAnimationFrame(loop);
-    };
-    loop();
+    // Particle rendering runs continuously via particles.start();
+    // this only ensures any stale menu animation handle is cleared.
+    if (this.menuAnims) {
+      cancelAnimationFrame(this.menuAnims);
+      this.menuAnims = null;
+    }
   }
 
   startGame(difficulty, companionId = null) {
     if (this.menuAnims) { cancelAnimationFrame(this.menuAnims); this.menuAnims = null; }
     this.difficulty = difficulty;
-    this.selectedCompanion = companionId;
+    this.selectedCompanion = companionId || this.selectedCompanion || null;
     this.audio.init();
     this.gameState = 'playing';
     this.turnCount = 0;
     this.elixir = 2;
     this.superElixir = 0;
+    this.superElixirTurnMark = 0;
     this.isProcessing = false;
     this.fusionSlots = [null, null];
     this.fusionActive = false;
     this.natureMeter = 0;
-    this.selectedCompanion = null;
     this.weather = getNextWeather('SUNNY', 0);
     this.season = getSeason(0);
     this.weatherTimer = 0;
+    this.battleLog = [];
+    this.lastFrameTime = 0;
+    this.secondAccum = 0;
+    this.turnDiscountReady = false;
+    this.ultimateCooldown = 0;
+    this.fusionBoost = 0;
+    this.bossActive = false;
+    this.boss = null;
+    this.bossShield = 0;
+    this.bossPowerLevel = 0;
+    this.bossStolenCard = null;
+    this.gameOverHandled = false;
 
     this.ai = new AIController(difficulty);
     this.ai.hand = [];
+    this.ai.elixir = 2;
     this.ai.refillHand(this.ai.hand);
 
     this.playerDeck = new Deck();
-    this.playerDeck.cards = this.stats.currentDeck.map(id => {
-      return getAllCards().find(c => c.id === id);
-    }).filter(c => c);
+    const deckIds = (this.stats && this.stats.currentDeck && this.stats.currentDeck.length)
+      ? this.stats.currentDeck
+      : ['moss_wisp', 'spore_sprout', 'dartling', 'starling_scout', 'elder_tree', 'moon_fox', 'acorn_bomber', 'breeze_lark'];
+    this.playerDeck.cards = deckIds
+      .map(id => getAllCards().find(c => c.id === id))
+      .filter(c => c);
+    if (this.playerDeck.cards.length === 0) {
+      this.playerDeck.cards = getAllCards().slice(0, 8);
+    }
+    this.playerDeck.shuffle();
+    this.playerDeck.hand = [];
+    this.playerDeck.drawInitial();
+    this.playerDeck.discard = [];
 
     this.arena.reset();
 
@@ -116,9 +143,12 @@ export class Game {
     this.positionUnits();
 
     this.gameLoop();
-    setTimeout(() => this.refillHands(), 600);
+    this.renderHand();
+    this.renderAIHand();
     this.renderHUD();
     this.renderArena();
+    this.renderFusionBar();
+    this.renderBossHUD();
   }
 
   positionUnits() {
@@ -136,9 +166,9 @@ export class Game {
 
   refillHands() {
     if (this.gameState !== 'playing') return;
-    this.ai.refillHand(this.ai.hand);
-    while (this.playerDeck.getHandSize() < 4 && this.playerDeck.cards.length > 0) {
-      this.playerDeck.draw();
+    if (this.ai) this.ai.refillHand(this.ai.hand);
+    while (this.playerDeck.getHandSize() < 4 && (this.playerDeck.cards.length > 0 || (this.playerDeck.discard && this.playerDeck.discard.length > 0))) {
+      if (!this.playerDeck.draw()) break;
     }
     this.renderHand();
     this.renderAIHand();
@@ -146,19 +176,29 @@ export class Game {
 
   async playCard(index) {
     if (this.gameState !== 'playing' || this.isProcessing) return;
+    if (this.paused) return;
 
     const card = this.playerDeck.play(index);
-    if (!card || this.elixir < card.elixir) {
-      if (card) this.playerDeck.cards.push(card);
+    if (!card) return;
+
+    let cost = card.elixir;
+    if (this.selectedCompanion === 'moon_spirit' && this.turnDiscountReady) {
+      cost = Math.max(0, cost - 1);
+    }
+
+    if (this.elixir < cost) {
+      this.playerDeck.unplay(index, card);
       return;
     }
 
-    this.elixir -= card.elixir;
+    this.elixir -= cost;
+    if (this.selectedCompanion === 'moon_spirit') this.turnDiscountReady = false;
     this.audio.cardPlay();
     trackCardPlay(this.stats, card.id);
 
     const lane = this.chooseLane();
     const unit = createUnit(card, 'player', lane);
+    this.applyWeatherToUnit(unit);
     unit.x = [100, 200, 300][lane] || 200;
     unit.y = 420;
     this.arena.addUnit(unit, 'player');
@@ -173,19 +213,27 @@ export class Game {
     this.turnCount++;
     this.natureMeter = Math.min(100, this.natureMeter + 8);
 
-    if (this.fusionActive) {
-      this.handleFusionSelection(card);
-      return;
-    }
-
-    this.checkFusions();
-    this.ai.updateEmotion('damage', { enemyTauntCount: 0, playedCards: [] });
+    this.ai.updateEmotion(card.ability && card.ability.includes('heal') ? 'heal' : 'damage', { enemyTauntCount: 0, playedCards: [] });
     this.isProcessing = true;
     await this.handleAIturn();
     this.isProcessing = false;
+    this.turnDiscountReady = true;
+    this.refillHands();
+    this.checkFusions();
     this.renderHand();
     this.renderHUD();
+    this.renderFusionBar();
     this.renderArena();
+  }
+
+  applyWeatherToUnit(unit) {
+    const src = getAllCards().find(c => c.id === unit.cardId);
+    if (!src) return;
+    const eff = applyWeatherEffect(src, this.weather);
+    unit.dmg = eff.dmg;
+    unit.hp = eff.hp;
+    unit.maxHp = eff.hp;
+    unit.speed = eff.speed;
   }
 
   chooseLane() {
@@ -201,7 +249,9 @@ export class Game {
     this.isProcessing = true;
     await this.sleep(600);
 
-    while (this.ai.canPlay(this.ai.hand, this.elixir) && this.ai.hand.length > 0) {
+    let safety = 0;
+    while (this.gameState === 'playing' && this.ai.canPlay(this.ai.hand, this.ai.elixir) && this.ai.hand.length > 0 && safety < 10) {
+      safety++;
       this.ai.updateEmotion('damage', { enemyTauntCount: 0, playedCards: [] });
       const card = this.ai.chooseCard(this.ai.hand, {
         enemyUnits: this.arena.playerUnits.filter(u => u.alive),
@@ -209,11 +259,12 @@ export class Game {
         playedCards: []
       });
 
-      if (!card || this.elixir < card.elixir) break;
+      if (!card || this.ai.elixir < card.elixir) break;
 
-      this.elixir -= card.elixir;
-      const lane = this.ai.chooseLane([0, 1, 2], { enemyUnits: [], enemyTauntCount: 0, playedCards: [] });
+      this.ai.elixir -= card.elixir;
+      const lane = this.ai.chooseLane([0, 1, 2], { enemyUnits: this.arena.playerUnits.filter(u => u.alive), enemyTauntCount: 0, playedCards: [] });
       const unit = createUnit(card, 'enemy', lane);
+      this.applyWeatherToUnit(unit);
       unit.x = [100, 200, 300][lane] || 200;
       unit.y = 140;
       this.arena.addUnit(unit, 'enemy');
@@ -221,14 +272,26 @@ export class Game {
       applyAbility(card.ability, unit, allUnits);
       this.ai.hand.splice(this.ai.hand.indexOf(card), 1);
 
+      // Thorn Spirit: enemy takes damage when entering a lane with a player taunt
+      if (this.selectedCompanion === 'thorn_spirit') {
+        const tauntInLane = this.arena.playerUnits.find(u => u.alive && u.lane === lane && u.ability === 'taunt');
+        if (tauntInLane) {
+          unit.hp -= 5;
+          this.particles.addFloatText(unit.x, unit.y - 20, '-5', '#ffd93d');
+          if (unit.hp <= 0) unit.alive = false;
+        }
+      }
+
       this.particles.addBurst(unit.x, unit.y, unit.color, 8);
       this.audio.unitAttack();
       this.battleLog.push(`AI played ${card.name}`);
+      if (this.gameState !== 'playing') break;
       await this.sleep(400);
     }
 
     this.ai.refillHand(this.ai.hand);
     this.isProcessing = false;
+    if (this.gameState !== 'playing') return;
     // Show emotion dialogue periodically
     if (Math.random() < 0.3 && this.ai) {
       const emo = this.ai.getEmotion();
@@ -241,20 +304,25 @@ export class Game {
     if (this.bossActive && this.boss) {
       this.updateBossMechanics();
     }
+    this.arena.clearDead();
     this.checkBattleState();
     this.renderAIHand();
     this.renderHUD();
     this.renderArena();
   }
 
-   gameLoop() {
-     if (this.gameState !== 'playing' || this.paused) return;
+   gameLoop(timestamp = 0) {
+     if (this.gameState !== 'playing') return;
+     if (this.paused) {
+       this.lastFrameTime = timestamp;
+       requestAnimationFrame((t) => this.gameLoop(t));
+       return;
+     }
 
-     // Elixir regen
-    this.elixir = Math.min(EMAX, this.elixir + 0.25);
-    if (this.turnCount > 0 && this.turnCount % 5 === 0) {
-      this.superElixir = Math.min(SUPER_EMAX, this.superElixir + 1);
-    }
+    if (!this.lastFrameTime) this.lastFrameTime = timestamp;
+    const dt = Math.min(250, timestamp - this.lastFrameTime);
+    this.lastFrameTime = timestamp;
+    this.secondAccum += dt;
 
     // Move units
     this.moveUnits();
@@ -263,17 +331,46 @@ export class Game {
     this.doCombat();
     // Clean dead
     this.arena.clearDead();
-    // Apply companion passive effects
-    this.applyCompanionEffects();
+    // Apply companion passive effects (once per second)
     // Check for boss encounter
     this.checkBossEncounter();
+
+    // Once-per-second balance ticks
+    while (this.secondAccum >= 1000) {
+      this.secondAccum -= 1000;
+      this.tickSecond();
+      if (this.gameState !== 'playing') return;
+    }
+
+    // Check game over
+    this.checkBattleState();
+    if (this.gameState !== 'playing') return;
+    // Render
+    this.renderArena();
+    this.renderHUD();
+    this.renderFusionBar();
+    this.renderBossHUD();
+
+    requestAnimationFrame((t) => this.gameLoop(t));
+  }
+
+  tickSecond() {
+    // Elixir regen for both sides
+    this.elixir = Math.min(EMAX, this.elixir + 0.5);
+    if (this.ai) this.ai.elixir = Math.min(this.ai.maxElixir, this.ai.elixir + 0.5);
+
+    // Companion passives
+    this.applyCompanionEffects();
+
     // Ultimate cooldown
     if (this.ultimateCooldown > 0) {
       this.ultimateCooldown--;
     }
-    // Nature meter decay
-    this.natureMeter = Math.max(0, this.natureMeter - 0.5);
-    // Weather cycle
+
+    // Nature meter decay (slow)
+    this.natureMeter = Math.max(0, this.natureMeter - 1);
+
+    // Weather cycle (every 8 seconds)
     this.weatherTimer++;
     if (this.weatherTimer >= 8) {
       const newWeather = getNextWeather(this.weather, this.turnCount);
@@ -288,14 +385,12 @@ export class Game {
       }
       this.weatherTimer = 0;
     }
-    // Check game over
-    this.checkBattleState();
-    // Render
-    this.renderArena();
-    this.renderHUD();
-    this.renderFusionBar();
 
-    requestAnimationFrame(() => this.gameLoop());
+    // Super elixir: gain 1 whenever turn count crosses a multiple of 5
+    if (this.turnCount > 0 && Math.floor(this.turnCount / 5) > this.superElixirTurnMark) {
+      this.superElixirTurnMark = Math.floor(this.turnCount / 5);
+      this.superElixir = Math.min(SUPER_EMAX, this.superElixir + 1);
+    }
   }
 
   moveUnits() {
@@ -338,29 +433,33 @@ export class Game {
   }
 
   doCombat() {
+    const now = performance.now();
     [this.arena.playerUnits, this.arena.enemyUnits].forEach(units => {
       units.forEach(u => {
-        if (!u.alive || u.attacking) return;
-        u.attacking = true;
+        if (!u.alive) return;
+        if (!u.nextAttackAt) u.nextAttackAt = 0;
+        if (now < u.nextAttackAt) return;
 
-        const target = units === this.arena.playerUnits
-          ? this.findEnemyInLane(u)
-          : this.findPlayerUnitInLane(u);
+        const isPlayer = units === this.arena.playerUnits;
+        const target = isPlayer ? this.findEnemyInLane(u) : this.findPlayerUnitInLane(u);
 
         if (!target || !target.alive) {
-          // Attack structure
-          const struct = units === this.arena.playerUnits ? this.arena.enemyStructure : this.arena.playerStructure;
-          if (struct.alive) {
-            const dmg = u.dmg;
-            struct.hp = Math.max(0, struct.hp - dmg);
-            this.audio.unitAttack();
-            this.particles.addFloatText(struct === this.arena.enemyStructure ? 500 : 100, struct === this.arena.enemyStructure ? 80 : 80, `-${dmg}`, '#ff6b6b');
-            if (struct.hp <= 0) {
-              struct.alive = false;
-              this.checkBattleState();
+          // Attack structure only when close enough
+          const struct = isPlayer ? this.arena.enemyStructure : this.arena.playerStructure;
+          const structX = isPlayer ? 500 : 0;
+          const distToStruct = Math.abs(structX - u.x);
+          if (struct.alive && distToStruct <= u.range * 40 + 30) {
+            let dmg = u.dmg;
+            if (isPlayer) dmg = this.applyBossDamage(dmg);
+            if (dmg > 0) {
+              struct.hp = Math.max(0, struct.hp - dmg);
+              this.audio.unitAttack();
+              const labelX = isPlayer ? 500 : 0;
+              this.particles.addFloatText(labelX, 80, `-${dmg}`, '#ff6b6b');
+              if (struct.hp <= 0) struct.alive = false;
             }
+            u.nextAttackAt = now + this.attackInterval(u);
           }
-          u.attacking = false;
           return;
         }
 
@@ -376,8 +475,8 @@ export class Game {
             this.audio.unitDeath();
             this.particles.addBurst(target.x, target.y, target.color, 8);
           }
+          u.nextAttackAt = now + this.attackInterval(u);
         }
-        u.attacking = false;
       });
     });
     if (this.bossActive && this.boss && !this.bossAttackProcessed) {
@@ -386,16 +485,32 @@ export class Game {
     }
   }
 
+  attackInterval(unit) {
+    // Faster units attack faster; base 900ms
+    const speed = Math.max(0.2, unit.speed || 1);
+    return Math.max(350, 900 / speed);
+  }
+
   processBossAttack() {
+    if (!this.boss || this.gameState !== 'playing') return;
     const playerAlive = this.arena.playerUnits.filter(u => u.alive);
-    if (playerAlive.length === 0) return;
-    const target = playerAlive[Math.floor(Math.random() * playerAlive.length)];
-    const bossDmg = this.applyBossDamage(this.boss.attackDmg || 12);
-    if (bossDmg > 0 && this.arena.playerStructure.hp > 0) {
+    const bossDmg = this.boss.attackDmg || 12;
+    if (playerAlive.length > 0) {
+      const target = playerAlive[Math.floor(Math.random() * playerAlive.length)];
+      target.hp -= bossDmg;
+      this.audio.bossAttack();
+      this.particles.addFloatText(target.x, target.y - 20, '-' + bossDmg, '#ff6b6b');
+      if (target.hp <= 0) {
+        target.alive = false;
+        this.audio.unitDeath();
+        this.particles.addBurst(target.x, target.y, target.color, 8);
+      }
+    } else if (this.arena.playerStructure.hp > 0) {
       this.arena.playerStructure.hp = Math.max(0, this.arena.playerStructure.hp - bossDmg);
       this.audio.bossAttack();
-      this.particles.addFloatText(300, 60, '-' + bossDmg, '#ff6b6b');
+      this.particles.addFloatText(0, 60, '-' + bossDmg, '#ff6b6b');
     }
+    this.arena.clearDead();
   }
 
   checkBattleState() {
@@ -406,8 +521,15 @@ export class Game {
   }
 
   endGame(winner) {
+    if (this.gameOverHandled || this.gameState === 'over') return;
+    this.gameOverHandled = true;
     this.gameState = 'over';
-    const dialogue = this.ai.getDialogue();
+    const dialogue = this.ai ? this.ai.getDialogue() : { win: 'Victory!', lose: 'Defeat...' };
+
+    // Record boss defeat BEFORE clearing boss state
+    if (this.bossActive && this.boss && winner === 'player' && this.stats) {
+      this.stats.bossesDefeated = (this.stats.bossesDefeated || 0) + 1;
+    }
 
     if (winner === 'player') {
       this.audio.victory();
@@ -416,7 +538,7 @@ export class Game {
       if (stars === 3) addThreeStarWin(this.stats);
       addWinToStats(this.stats);
       showToast(`${dialogue.win} ${stars}⭐!`, 3000);
-      this.particles.addBurst(window.innerWidth / 2, window.innerHeight / 2, '#ffd93d', 50);
+      if (this.particles) this.particles.addBurst(window.innerWidth / 2, window.innerHeight / 2, '#ffd93d', 50);
     } else {
       this.audio.defeat();
       addLossToStats(this.stats);
@@ -442,11 +564,13 @@ export class Game {
     const hand = this.playerDeck.getHand();
     hand.forEach((card, index) => {
       const div = this.makeCardEl(card, index);
-      if (this.fusionActive) {
-        div.style.borderColor = this.fusionSlots[0] ? '#ffd93d' : '#4ecdc4';
-        div.style.boxShadow = this.fusionSlots[0] ? '0 0 15px rgba(255,217,61,0.5)' : 'var(--shadow)';
-        div.style.cursor = 'pointer';
+      let cost = card.elixir;
+      if (this.selectedCompanion === 'moon_spirit' && this.turnDiscountReady) {
+        cost = Math.max(0, cost - 1);
+        div.style.borderColor = '#9b6dff';
+        div.style.boxShadow = '0 0 12px rgba(155,109,255,0.45)';
       }
+      if (this.elixir < cost) div.style.opacity = '0.55';
       div.addEventListener('click', () => this.playCard(index));
       handContainer.appendChild(div);
     });
@@ -581,10 +705,7 @@ export class Game {
     }
 
     if (restartBtn) {
-      restartBtn.onclick = () => {
-        overlay.classList.add('hidden');
-        this.startGame(this.difficulty);
-      };
+      restartBtn.onclick = null;
     }
   }
 
@@ -600,23 +721,49 @@ export class Game {
   }
 
   checkBossEncounter() {
+    if (!this.stats) return;
     if (this.stats.wins % 5 === 4 && !this.bossActive) {
       const boss = getNextBoss(this.stats.wins);
       if (boss) {
         this.bossActive = true;
-        this.boss = boss;
+        this.boss = { ...boss };
         this.bossShield = boss.shield || 0;
         this.bossPowerLevel = 0;
-        this.audio.bossEncounter(boss);
-        showToast('WARNING: BOSS BATTLE: ' + boss.emoji + ' ' + boss.name + '!', 3000);
-        this.arena.enemyStructure.hp = boss.hp;
-        this.arena.enemyStructure.maxHp = boss.hp;
+        this.audio.bossEncounter(this.boss);
+        showToast('WARNING: BOSS BATTLE: ' + this.boss.emoji + ' ' + this.boss.name + '!', 3000);
+        this.arena.enemyStructure.hp = this.boss.hp;
+        this.arena.enemyStructure.maxHp = this.boss.hp;
         this.arena.enemyStructure.alive = true;
         this.renderArena();
         this.renderHUD();
         this.renderBossHUD();
       }
     }
+  }
+
+  updateBossMechanics() {
+    if (!this.boss || this.gameState !== 'playing') return;
+
+    if (this.boss.id === 'shadow_queen') {
+      // Steal a random card from the player's hand
+      if (this.playerDeck && this.playerDeck.hand.length > 0) {
+        const idx = Math.floor(Math.random() * this.playerDeck.hand.length);
+        const stolen = this.playerDeck.hand.splice(idx, 1)[0];
+        this.bossStolenCard = stolen;
+        showToast(`👸 The Shadow Queen stole ${stolen.emoji} ${stolen.name}!`, 2500);
+        this.renderHand();
+      }
+    } else if (this.boss.id === 'ancient_dragon') {
+      // Doubles attack power every 3 boss turns
+      this.bossPowerLevel++;
+      if (this.bossPowerLevel % 3 === 0) {
+        this.boss.attackDmg = (this.boss.attackDmg || 12) * 2;
+        showToast(`🐉 ${this.boss.name} doubles its power! (ATK ${this.boss.attackDmg})`, 2500);
+        this.audio.bossAttack();
+      }
+    }
+    // thorn_king shield is handled in applyBossDamage
+    this.renderBossHUD();
   }
 
   applyBossDamage(damage) {
@@ -717,9 +864,6 @@ export class Game {
       }
     }
     this.stats.essences = essences;
-    if (this.bossActive && this.boss) {
-      this.stats.bossesDefeated = (this.stats.bossesDefeated || 0) + 1;
-    }
     // Track essences from card rarity
     if (!this.stats.essences) this.stats.essences = {};
     if (this.weather && (!this.stats.weatherTypes || !this.stats.weatherTypes.includes(this.weather))) {
@@ -776,15 +920,18 @@ export class Game {
     const comp = getCompanion(this.selectedCompanion);
     if (!comp) return;
 
-    // Apply passive effects to player units
     if (comp.ability === 'center_boost') {
-      const centerUnits = this.arena.playerUnits.filter(u => u.lane === 1 && u.alive);
-      centerUnits.forEach(u => { u.dmg = Math.floor(u.dmg * 1.15); });
+      this.arena.playerUnits.forEach(u => {
+        if (!u.alive) return;
+        if (u.baseDmg === undefined) u.baseDmg = u.dmg;
+        u.dmg = u.lane === 1 ? Math.floor(u.baseDmg * 1.15) : u.baseDmg;
+      });
     } else if (comp.ability === 'regen') {
       this.arena.playerUnits.forEach(u => {
-        if (u.alive) { u.hp = Math.min(u.maxHp, u.hp + 2); }
+        if (u.alive) u.hp = Math.min(u.maxHp, u.hp + 2);
       });
     }
+    // first_discount / thorn_retaliation / fusion_boost are handled in playCard / handleAIturn / activateFusion
   }
 
   renderCompanionHUD() {
@@ -801,47 +948,86 @@ export class Game {
 
   sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-  handleFusionSelection(card) {
-    if (!this.fusionSlots[0]) {
-      this.fusionSlots[0] = card;
-      this.audio.fusionReady();
-    } else if (!this.fusionSlots[1] && card.id !== this.fusionSlots[0].id) {
-      this.fusionSlots[1] = card;
-      const recipe = getFusionRecipe(this.fusionSlots[0], this.fusionSlots[1]);
-      if (recipe && this.elixir >= recipe.elixir) {
-        this.elixir -= recipe.elixir;
-        this.activateFusion(recipe);
-      } else if (!recipe) {
-        showToast('These creatures cannot fuse!', 1500);
-        this.fusionSlots = [this.fusionSlots[0], null];
-      }
-    } else {
-      this.fusionSlots[0] = card;
+  activateFusion(recipe, pair = null) {
+    if (this.gameState !== 'playing' || this.isProcessing) return false;
+    if (this.elixir < recipe.elixir) {
+      showToast(`Need ⚡${recipe.elixir} elixir to fuse!`, 1500);
+      return false;
     }
-    this.fusionActive = this.fusionSlots[0] !== null && this.fusionSlots[1] === null;
-    this.renderHand(); this.renderFusionBar(); this.renderHUD();
-  }
 
-  activateFusion(recipe) {
+    let ingredients = pair
+      ? [pair.card1, pair.card2]
+      : getFusablePairs(this.arena.playerUnits).find(p => p.recipe.id === recipe.id) ? [
+          getFusablePairs(this.arena.playerUnits).find(p => p.recipe.id === recipe.id).card1,
+          getFusablePairs(this.arena.playerUnits).find(p => p.recipe.id === recipe.id).card2
+        ] : null;
+
+    if (!ingredients || ingredients.length < 2) return false;
+
+    this.elixir -= recipe.elixir;
     this.fusionsThisGame++;
-    const lane = this.chooseLane();
-    const evolvedUnit = createEvolvedUnit(recipe, 'player', lane, 200, 300);
+
+    // Remove ingredient units from the field
+    ingredients.forEach(ing => {
+      ing.alive = false;
+    });
+    this.arena.clearDead();
+
+    const lane = ingredients[0].lane;
+    const evolvedUnit = createEvolvedUnit(recipe, 'player', lane, ingredients[0].x, ingredients[1].x);
+    this.applyWeatherToUnit(evolvedUnit);
+
+    // Star Spirit / ultimate fusion boost
+    let boost = 0;
+    if (this.selectedCompanion === 'star_spirit') boost += 1;
+    if (this.fusionBoost > 0) {
+      boost += this.fusionBoost;
+      this.fusionBoost = 0;
+    }
+    if (boost > 0) {
+      const mult = 1 + 0.1 * boost;
+      evolvedUnit.dmg = Math.floor(evolvedUnit.dmg * mult);
+      evolvedUnit.hp = Math.floor(evolvedUnit.hp * mult);
+      evolvedUnit.maxHp = evolvedUnit.hp;
+    }
+
     this.arena.addUnit(evolvedUnit, 'player');
     applyAbility(recipe.ability, evolvedUnit, this.arena.playerUnits.concat(this.arena.enemyUnits));
     this.particles.addFusionBurst(evolvedUnit.x, evolvedUnit.y, recipe.color, 30);
     this.particles.addFusionRing(evolvedUnit.x, evolvedUnit.y);
     this.particles.addFloatText(evolvedUnit.x, evolvedUnit.y - 30, recipe.emoji + '!', recipe.color);
+    this.audio.fusion && this.audio.fusion();
+
     this.fusionSlots = [null, null];
     this.fusionActive = false;
-    this.turnCount++; this.natureMeter = Math.min(100, this.natureMeter + 15);
-    this.ai.updateEmotion('heal', { enemyTauntCount: 0, playedCards: [] });
-    this.arena.clearDead(); this.checkBattleState();
+    this.turnCount++;
+    this.natureMeter = Math.min(100, this.natureMeter + 15);
+    if (this.ai) this.ai.updateEmotion('fuse', { enemyTauntCount: 0, playedCards: [] });
+    this.battleLog.push(`Fused into ${recipe.name}`);
+
+    this.checkBattleState();
+    if (this.gameState !== 'playing') return true;
+
+    // AI gets a turn after fusion
+    this.isProcessing = true;
+    this.handleAIturn().finally(() => {
+      this.isProcessing = false;
+      this.turnDiscountReady = true;
+      if (this.gameState === 'playing') {
+        this.renderHand();
+        this.renderHUD();
+        this.renderFusionBar();
+        this.renderArena();
+      }
+    });
+    return true;
   }
 
   checkFusions() {
-    if (getFusablePairs(this.arena.playerUnits).length > 0) {
-      this.fusionActive = true;
-      showToast('🔥 Tap a card, then another to fuse them!', 2000);
+    const pairs = getFusablePairs(this.arena.playerUnits);
+    if (pairs.length > 0) {
+      showToast('🔥 Fusion available! Tap the result in the fuse bar.', 2000);
+      this.renderFusionBar();
     }
   }
 
@@ -853,39 +1039,29 @@ export class Game {
     label.className = 'fusion-label';
     label.textContent = '⚡ FUSE:';
     bar.appendChild(label);
-    for (let i = 0; i < 2; i++) {
-      const slot = document.createElement('div');
-      slot.className = 'fusion-slot' + (this.fusionSlots[i] ? ' has-card' : '');
-      if (this.fusionSlots[i]) {
-        const c = this.fusionSlots[i];
-        slot.innerHTML = `<span class="fusion-emoji">${c.emoji}</span><span class="fusion-name">${c.name}</span><span class="fusion-elixir">⚡${c.elixir}</span>`;
-      } else {
-        slot.innerHTML = '<span style="font-size:1.2rem;opacity:0.3">+</span>';
-      }
-      slot.addEventListener('click', () => { this.fusionSlots[i] = null; this.renderFusionBar(); this.renderHand(); });
-      bar.appendChild(slot);
-    }
-    if (this.fusionSlots[0] && !this.fusionSlots[1]) {
-      const arrow = document.createElement('span');
-      arrow.className = 'fusion-arrow';
-      arrow.textContent = '→';
-      bar.appendChild(arrow);
-    }
-    if (this.fusionSlots[0] && this.fusionSlots[1]) {
-      const recipe = getFusionRecipe(this.fusionSlots[0], this.fusionSlots[1]);
-      if (recipe && this.elixir >= recipe.elixir) {
+
+    const pairs = this.playerDeck ? getFusablePairs(this.arena.playerUnits) : [];
+    if (pairs.length === 0) {
+      const empty = document.createElement('span');
+      empty.style.cssText = 'font-size:0.7rem;opacity:0.45;font-weight:700';
+      empty.textContent = 'no pairs on field';
+      bar.appendChild(empty);
+    } else {
+      pairs.slice(0, 3).forEach(pair => {
+        const recipe = pair.recipe;
+        const affordable = this.elixir >= recipe.elixir;
         const result = document.createElement('div');
-        result.className = 'fusion-result';
+        result.className = 'fusion-result' + (affordable ? '' : ' disabled');
         result.innerHTML = `<span class="fusion-emoji">${recipe.emoji}</span><span class="fusion-name">${recipe.name}</span><span class="fusion-elixir">⚡${recipe.elixir}</span>`;
-        result.addEventListener('click', () => { this.activateFusion(recipe); this.renderHand(); this.renderFusionBar(); this.renderHUD(); this.renderArena(); });
+        if (affordable) {
+          result.addEventListener('click', () => this.activateFusion(recipe, pair));
+        } else {
+          result.title = `Need ${recipe.elixir} elixir`;
+        }
         bar.appendChild(result);
-      } else if (recipe) {
-        const info = document.createElement('span');
-        info.className = 'fusion-info';
-        info.textContent = `Need ⚡${recipe.elixir} more!`;
-        bar.appendChild(info);
-      }
+      });
     }
+
     if (this.natureMeter > 0) {
       const nd = document.createElement('div');
       nd.style.cssText = 'margin-left:12px;display:flex;align-items:center;gap:4px;';
@@ -897,7 +1073,7 @@ export class Game {
       ultBtn.style.display = 'block';
       ultBtn.disabled = this.natureMeter < 100 || this.ultimateCooldown > 0;
       ultBtn.classList.toggle('ready', this.natureMeter >= 100 && this.ultimateCooldown <= 0);
-      ultBtn.textContent = this.ultimateCooldown > 0 ? '🌿 Ready in ' + this.ultimateCooldown + 't' : '🌿 NATURE WRATH';
+      ultBtn.textContent = this.ultimateCooldown > 0 ? '🌿 Ready in ' + this.ultimateCooldown + 's' : '🌿 NATURE WRATH';
     }
     if (this.fusionBoost > 0) {
       const fb = document.createElement('span');
@@ -923,8 +1099,8 @@ export class Game {
   setVolume(vol) {
     this.volume = vol;
     this.muted = vol <= 0;
-    if (this.audio.ctx) {
-      this.audio.ctx.volume = vol;
+    if (this.audio && typeof this.audio.setVolume === 'function') {
+      this.audio.setVolume(vol);
     }
   }
 

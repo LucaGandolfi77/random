@@ -84,7 +84,7 @@ const EMOTION_EMOJIS = {
 export class AIController {
   constructor(difficulty = 'medium') {
     this.difficulty = difficulty;
-    this.dialogue = AI_DIALOGUE[difficulty];
+    this.dialogue = AI_DIALOGUE[difficulty] || AI_DIALOGUE.medium;
     this.deck = this.buildDeck(difficulty);
     this.hand = [];
     this.elixir = 0;
@@ -207,6 +207,9 @@ export class AIController {
   }
 
   refillHand(hand) {
+    if (this.deck.length === 0) {
+      this.deck = this.buildDeck(this.difficulty);
+    }
     while (hand.length < 4 && this.deck.length > 0) {
       hand.push(this.drawCard());
     }
@@ -323,9 +326,10 @@ export class AIController {
     if (!gameState || !gameState.enemyUnits || gameState.enemyUnits.length === 0) {
       return lanes[Math.floor(Math.random() * lanes.length)];
     }
+    // Lower score = better: empty lanes score 0, occupied lanes score their avg HP
     const laneScores = lanes.map(lane => {
       const enemyInLane = gameState.enemyUnits.filter(u => u.lane === lane && u.alive);
-      if (enemyInLane.length === 0) return { lane, score: 100 };
+      if (enemyInLane.length === 0) return { lane, score: 0 };
       const avgHp = enemyInLane.reduce((s, u) => s + u.hp, 0) / enemyInLane.length;
       return { lane, score: avgHp };
     });

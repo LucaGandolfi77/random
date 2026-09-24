@@ -1,0 +1,23 @@
+{
+  "name": "scala-b-civico-0",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Scala B, Civico 0 — Il Condominio dei Fenomeni Impossibili, cozy gacha PWA",
+  "scripts": {
+    "start": "python3 -m http.server 8090",
+    "test": "node test/logic.test.js && node test/static.test.js && node test/ui.test.js",
+    "test:logic": "node test/logic.test.js",
+    "test:ui": "node test/ui.test.js",
+    "test:static": "node test/static.test.js",
+    "test:browser": "node test/browser.test.js",
+    "test:all": "npm test && npm run test:browser",
+    "audit": "node tools/lighthouse.mjs",
+    "icons": "python3 tools/make_icons.py"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1",
+    "lighthouse": "^13.5.0",
+    "playwright": "^1.63.0"
+  }
+}

@@ -10,6 +10,7 @@ Template in Markdown per pianificare, scrivere e pubblicare un libro.
 | [`template-libro.md`](template-libro.md) | Fase 2 — Bozza: scheletro completo del libro (parti, capitoli, front/back matter) |
 | [`template-capitolo.md`](template-capitolo.md) | Fase 2 — Bozza: template per scrivere un singolo capitolo |
 | [`template-checklist-pubblicazione.md`](template-checklist-pubblicazione.md) | Fase 3 — Revisione e pubblicazione: revisione, editing, formattazione, pubblicazione |
+| [`proposte-temi-sociali.md`](proposte-temi-sociali.md) | 26 pitch su temi sociali nel stile della raccolta (6 pazzissime) |
 
 ## Come usarlo
 

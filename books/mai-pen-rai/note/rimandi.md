@@ -40,6 +40,14 @@
 
 ## Filo della morale (epilogo)
 
-- [ ] "In Occidente lavoriamo tanto, ma abbiamo un obiettivo e stiamo bene" — detto in modo pieno, nella voce di Ludo
-- [ ] La siepe ritrovata: l'obiettivo non è una gabbia, è la misura che rende possibile l'infinito
-- [ ] Il prezzo non è mai solo un prezzo: il pad thai a 9 euro a Milano, pagato volentieri
+- [x] "In Occidente lavoriamo tanto, ma abbiamo un obiettivo e stiamo bene" — detto in modo pieno, nella voce di Ludo
+- [x] La siepe ritrovata: l'obiettivo non è una gabbia, è la misura che rende possibile l'infinito
+- [x] Il prezzo non è mai solo un prezzo: il pad thai a 9 euro a Milano, pagato volentieri
+
+## Revisione 1 — aggiunte tematiche
+
+- [x] cap. 4 — il "gratis" come la rata più lunga del mondo (il timbro gratis di Somchai)
+- [x] cap. 5 — Mikkel: "un motivo per alzarmi alle nove invece che alle undici"
+- [x] cap. 7 — la prima prenotazione ("the garden photo"): qualcosa succede a causa mia
+- [x] cap. 8 — Ploy: "mandare i soldi a mia madre" (lo specchio al contrario)
+- [x] cap. 12 — Patcha: "la cucina non si legge: si assaggia"

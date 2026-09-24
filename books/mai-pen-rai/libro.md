@@ -7,10 +7,18 @@
 
 ## Stato
 
-- Parole totali: **~15.600** / obiettivo: 55.000 (prima bozza)
-- Capitoli completati: **14 / 14** — **PRIMA BOZZA COMPLETA** ✅
-- Prossima scadenza: riposo della bozza (2–4 settimane), poi revisione strutturale
-> Nota: la prima bozza è compressa rispetto all'obiettivo — l'espansione in revisione porti i capitoli sotto i 6 e il finale verso i 2.000–2.500 parole.
+- Parole totali: **~17.600** / obiettivo: 55.000 (prima bozza)
+- Capitoli completati: **14 / 14** — prima bozza completa ✅ · **REVISIONE 1 COMPLETA** ✅
+  - Diagnosi della lettura completa + piano di espansione (vedi `note/revisione.md`)
+  - Riscrittura: prologo (~850), capp. 1–2 (~3.000), capp. 3–4 (~2.550), capp. 5–7 (~4.050), capp. 8–10 (~3.650)
+  - Riscrittura: cap. 11, cap. 12, epilogo (~3.550)
+  - Verifica finale coerenza: timeline (visa 30 giorni, 12 novembre), cifre unificate, "mia madre/mio padre" — ✅
+- Prossima scadenza: riposo della bozza (2–4 settimane), poi revisione di linea e proofreading (checklist § 3)
+- **FASE 3 — EDITING DI LINEA** ✅ (6 correzioni, scansione formule — vedi `note/revisione.md` § 5)
+- **FASE 4 — FORMATTAZIONE** ✅ parziale: `manoscritto.md` (EPUB-ready) + `manoscritto.html` generati; copertina e EPUB binario da fare
+- Manoscritto: `manoscritto.md` · Versione HTML: `manoscritto.html`
+- **FASE 5 — PUBBLICAZIONE** 🟨: quarta di copertina, sinossi, metadati, prezzo pronti (`note/pubblicazione.md`); mancano ISBN e caricamento
+- **FASE 6 — PROMOZIONE** 🟨: pagina autore e annuncio pronti; copie di recensione da inviare
 
 ---
 

@@ -1,7 +1,7 @@
 # Epilogo — La nebbia
 
-**POV:** Ludovica · **Luogo:** Milano (Sesto San Giovanni, via Borsieri) · **Tempo nella storia:** autunno 2026
-**Parole:** 1260 / prima bozza ✅
+**POV:** Ludovica · **Luogo:** Milano (Sesto San Giovanni, via Borsieri) · **Tempo nella storia:** inverno 2026 (novembre)
+**Parole:** 1345 / revisione 1 ✅
 
 ## Obiettivo del capitolo
 
@@ -13,7 +13,7 @@
 
 ## Beat del capitolo
 
-1. Milano, autunno 2026: il lavoro trovato al museo delle fabbriche di Sesto San Giovanni.
+1. Milano, inverno 2026: il lavoro trovato al museo delle fabbriche di Sesto San Giovanni.
 2. Il padre e la Falck: la fabbrica che era una gabbia, ma era una fabbrica.
 3. Il nuovo calcolo: novanta euro — e il prezzo che non è mai solo un prezzo.
 4. La domenica con Martina: il pad thai a 9 euro; le chiamate diventate vere.
@@ -34,6 +34,12 @@ Il lavoro lo faccio a contratto, e il contratto si rinnova ogni anno, e l'anno, 
 
 La domenica, alle sei, c'è il pad thai con Martina, al ristorante thai di via Savona, che non è il pad thai a sessanta baht: è il pad thai a nove euro. Nove euro, a Milano, per lo stesso piatto di sempre, con lo stesso sapore di sempre. Lo pago volentieri, e il volentieri, di domenica, è la cosa più ricca: il prezzo, a trent'anni, non è mai solo un prezzo. Il prezzo è il senso, e il senso, di domenica, è Martina: Martina, al pad thai, parla del mutuo con la voce di chi ha appena vinto qualcosa, e il mutuo, a trent'anni, è la casa che si vince. La vince, e la vince per trent'anni, e la casa, di domenica, è un obiettivo.
 
+— E il Natale, quest'anno? — disse Martina, una domenica di quelle, con il pad thai in mano.
+
+— A Milano — dissi. — Con voi. —
+
+Era la verità, e la verità, al pad thai, si sente come si sente l'umidità nei muri: non la si vede. Si sente. Martina la sentì, e non chiese niente: le cose pesanti non si chiedono, e le verità delle amiche, dette per la prima volta, sono le cose che non si chiedono: si ascoltano, e restano.
+
 Le chiamate della domenica sono diventate vere. Le faccio tutte, alle sei, e le sei, a Milano, sono le sei più belle: la pioggia, il pad thai, la telefonata. Martina parla del mutuo, e Sara parla del matrimonio: il matrimonio a Ostia, in giugno, era pieno di cose che si mettono, e il *save the date*, per telefono, mi era arrivato con la posta elettronica. Il matrimonio me lo sono persa, e la perdita, a trent'anni, è la cosa che non si recupera: si ripara. La riparai con una lettera, e la lettera era la seconda che non spedivo, e le lettere che non si spediscono, di solito, sono le lettere che si tengono. Sara la sentì, o non la sentì, e non chiese: le cose pesanti non si chiedono. Giulia, a Berlino, parla del contratto, e il contratto, a trent'anni, è la cosa che si rinnova: lo rinnova, e la fuga, diceva, è fatta bene quando hai un lavoro e un piano. La fuga di Giulia è fatta bene. La mia non era fatta bene, e lo sapevo, e lo so: le fughe senza obiettivo, a trent'anni, sono le fughe che si ripagano. Le ripagai con un referto, e il referto, a trent'anni, è la cosa che si tiene: non si usa, si mostra.
 
 Ploy è arrivata a Milano in settembre, e Ploy ha diciannove anni, e l'università, a Milano, è la cosa che Patcha paga in piedi dalle cinque del mattino. Ploy studia comunicazione, come studiavo io, e il pad thai, per Ploy, è a nove euro, e i nove euro, per Ploy, sono la cosa più cara: non lo sapeva. A diciannove anni si crede che là si spende poco, e là si spende poco, e il poco, a diciannove anni, non è la cosa che tiene: la cosa che tiene è l'obiettivo. Ploy ha l'obiettivo: costruire qualcosa. Lo ha, e lo ha con la speranza in mano, e la speranza, a diciannove anni, è la cosa più ricca.
@@ -52,9 +58,10 @@ E le cose che si tengono, di sera, non si contano. Si tengono.
 
 ## Note post-scrittura
 
+- [x] Espansione revisione: la verità a Martina al pad thai ("A Milano. Con voi."); il Natale
 - [x] La morale, detta in pieno: "In Occidente lavoriamo tanto, ma abbiamo un obiettivo e stiamo bene."
 - [x] La siepe ritrovata (Leopardi, L'infinito); il prezzo che non è mai solo un prezzo
 - [x] Le chiamate diventate vere; il matrimonio di Sara; Ploy a Milano
 - [x] "Mai pen rai" per le cose piccole; Ludo scrive il libro (questo)
 - [x] Chiusura: "le cose che si tengono non si contano. Si tengono."
-- [ ] Note per la revisione: la morale — verificare che non sia troppo spiegata (qui è spiegata, ed è voluto)
+- [x] Fix header: "inverno 2026 (novembre)" — coerente con "Sono a Milano da sei mesi"

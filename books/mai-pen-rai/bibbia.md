@@ -140,9 +140,9 @@
 | Estate 2023 | Viaggio in Thailandia: il pad thai a 60 baht | cap. 1 (ricordo) |
 | 2020–2025 | Milano: la Mercurio, cinque anni, 13.500 euro risparmiati | cap. 1 |
 | Settembre 2025 | Il -30%; le dimissioni | cap. 2 |
-| Ottobre 2025 | Volo, arrivo, la guesthouse di Patcha | cap. 3 |
-| Fine ottobre 2025 | Visa run a Penang; condo a Hang Dong; lo scooter | cap. 4 |
-| Novembre–dicembre 2025 | La noia; Mikkel; il prezzo farang; le chiamate | capp. 5–6 |
+| Ottobre 2025 | Volo (12 ottobre), arrivo, la guesthouse di Patcha | cap. 3 |
+| 12 novembre 2025 | Visa run a Penang (esenzione 30 giorni); condo a Hang Dong; lo scooter | cap. 4 |
+| Dicembre 2025 | Estensione a Chiang Mai; la noia; Mikkel; il prezzo farang; le chiamate | capp. 5–6 |
 | Gennaio–febbraio 2026 | Falso trionfo: le lezioni, le foto per Patcha, il report dei 90 giorni (l'assicurazione lasciata scadere) | cap. 7 |
 | Marzo 2026 | La stagione del bruciamento; Marcello; Ploy | cap. 8 |
 | 13–15 aprile 2026 | Il Songkran; Ludo compie 30 anni | cap. 9 |

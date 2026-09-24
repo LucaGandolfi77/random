@@ -66,6 +66,7 @@ polarfire-vp/examples/firmware/**/build/
 
 # ============ Project-specific ============
 openrouter-free-model-comparator/output/
+condominio-pwa/lighthouse-report.json
 
 # ============ Archives ============
 *.zip

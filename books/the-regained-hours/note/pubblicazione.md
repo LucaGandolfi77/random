@@ -27,7 +27,11 @@ A novel about the hours that come back — and about the time that was regained 
 
 ## 2. Final blurb (for the platform, ~150 words)
 
-Iris Vaughan, 38, senior analyst at a London insurance firm: 1,600 billable hours a year, a daughter, a father in Yorkshire with a garden. The firm deploys an assistant — the machine — and the industry says the machine takes the hours. Iris gives it hers, and the hours come back: twelve a week, six hundred a year, and nobody asks what they are for. The machine doesn't ask. You choose. The first thing she does with them is give them back to the firm, and the firm eats them: she becomes the top biller. Then her father has a stroke on a Sunday, the train is too late, and Iris counts the hours she had been given and had given away. A novel about the hours that come back — and about the time that was regained not in the past, but in the machine. Proust looked for it in a madeleine; she found it in an assistant.
+Iris Vaughan, 38, senior analyst at a London insurance firm: 1,600 billable hours a year, a daughter, a father in Yorkshire with a garden. The firm deploys an assistant — the machine — and the industry says the machine takes the hours. Iris gives it hers, and the hours come back: twelve a week, six hundred a year, and nobody asks what they are for. The machine doesn't ask. You choose.
+
+The first thing she does with them is give them back to the firm, and the firm eats them: she becomes the top biller. Then her father has a stroke on a Sunday, the train is too late, and Iris counts the hours she had been given and had given away: six hundred given, zero kept. She takes them back — for the play, the garden, the Sundays, the bread.
+
+A novel about the hours that come back — and about the time that was regained not in the past, but in the machine. Proust looked for it in a madeleine; she found it in an assistant. With Dostoevsky, Tolstoy and Leopardi in parentheses — and with the people behind the numbers: the claimant from Hull whose sewing machine was lost, the nurse who asks, the junior who asks the question nobody asks.
 
 ---
 
@@ -44,7 +48,7 @@ Iris Vaughan, 38, senior analyst at a London insurance firm: 1,600 billable hour
 | BISAC 2 | FIC066000 — Fiction / Contemporary Women |
 | Keywords | artificial intelligence, time management, london, working mother, work-life balance, proust, regained time, office, delegation, technology |
 | Target reader | 30–60; knowledge workers; parents; anyone who fears the machine and wants the other story |
-| Length | ~15,100 words · ~40,000 characters · ~80 print pages estimated |
+| Length | ~17,800 words · ~48,000 characters · ~95 print pages estimated |
 | Sibling books | *In Search of Lost Time* (Proust); *The Death of Ivan Ilyich* (Tolstoy); *Normal People* (Rooney) |
 | Extra content | Real epigraphs (Proust, Dostoevsky, Tolstoy, Leopardi); subtle allusions in parentheses |
 

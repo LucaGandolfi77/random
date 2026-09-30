@@ -25,7 +25,12 @@
 
 ## 3. Status
 
-- [x] Structural review complete
+- [x] Structural review complete (revision 1)
+- [x] **Expansion (revision 2) complete: ~14,600 words** (+5,400 vs the first draft)
+  - 6 new characters: Sam (the junior with the question), Joan Whitfield (the claimant from Hull), Priya (the nurse who asks), Miss Rowe, Margaret (the dead mother — in the streams), Mark (developed)
+  - 4 new subplots: the claim that is a story; the dead mother in the madeleine; Sam's question; Mark's weekends
+  - Streams of consciousness (Woolf-style) in 12 of 14 chapters: the pipes of the building, the bread, the kitchen, the ward at night, the writing
+  - Descriptions: the ninth floor, the meeting room (the river), the school hall, the garden in April, the ward, Joan's kitchen
 - [ ] Line editing and proofreading (a pass with a beta reader, out of the project)
-- [x] Formatting: `manoscritto.md` + `manoscritto.html` (see below)
-- [x] Publication notes: `note/pubblicazione.md`
+- [x] Formatting: `manoscritto.md` + `manoscritto.html` recompiled with the expansion
+- [x] Publication notes: `note/pubblicazione.md` (updated: blurb, length ~17,800 words)

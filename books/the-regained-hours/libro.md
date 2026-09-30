@@ -7,13 +7,11 @@
 
 ## Status
 
-- Total words: **~9.200** / target: 40.000 (first draft)
-- Chapters completed: **14 / 14** — **FIRST DRAFT COMPLETE** ✅
-- Next deadline: rest, then structural revision (checklist § 2)
-- **PHASE 3 — LINE EDITING** ✅ (light pass: the Italian remnant removed, coherence verified — see `note/revisione.md`)
-- **PHASE 4 — FORMATTING** ✅: `manoscritto.md` (EPUB-ready) + `manoscritto.html` generated; cover and EPUB binary to do
-- **PHASE 5 — PUBLICATION** 🟨: back cover, blurb, metadata, price ready (`note/pubblicazione.md`); ISBN and upload missing
-- **PHASE 6 — PROMOTION** 🟨: author page and announcement ready; review copies to send
+- Total words: **~14.600** / target: 40.000
+- Chapters completed: **14 / 14** — first draft complete ✅ · **REVISION 1** ✅ · **EXPANSION (REVISION 2) COMPLETE** ✅
+  - Structural review: numbers and timeline coherent (see `note/revisione.md`)
+  - **Expansion (+5,400 words)**: 6 new characters (Sam, Joan Whitfield, Priya, Miss Rowe, Margaret — the dead mother, Mark developed); 4 new subplots (the claim that is a story; the dead mother; Sam's question; Mark's weekends); streams of consciousness in 12 of 14 chapters (Woolf-style, in the pipes-of-the-building register); descriptions (the ninth floor, the hall, the garden, the ward, the kitchen)
+- Next deadline: line editing with a beta reader (out of the project)
 - Manuscript: `manoscritto.md` · HTML version: `manoscritto.html`
 > Note: first draft compressed vs target — the revision takes the chapters to 1.000–1.400 words and the ending to 1.500.
 

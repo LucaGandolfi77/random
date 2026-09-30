@@ -7,9 +7,15 @@
 
 ## Status
 
-- Total words: **~14.000** / target: 45.000 (first draft)
-- Chapters completed: **14 / 14** — first draft complete ✅ · **REVISION 1 COMPLETE** ✅
-- Next deadline: line editing (checklist § 3)
+- Total words: **~9.200** / target: 40.000 (first draft)
+- Chapters completed: **14 / 14** — **FIRST DRAFT COMPLETE** ✅
+- Next deadline: rest, then structural revision (checklist § 2)
+- **PHASE 3 — LINE EDITING** ✅ (light pass: the Italian remnant removed, coherence verified — see `note/revisione.md`)
+- **PHASE 4 — FORMATTING** ✅: `manoscritto.md` (EPUB-ready) + `manoscritto.html` generated; cover and EPUB binary to do
+- **PHASE 5 — PUBLICATION** 🟨: back cover, blurb, metadata, price ready (`note/pubblicazione.md`); ISBN and upload missing
+- **PHASE 6 — PROMOTION** 🟨: author page and announcement ready; review copies to send
+- Manuscript: `manoscritto.md` · HTML version: `manoscritto.html`
+> Note: first draft compressed vs target — the revision takes the chapters to 1.000–1.400 words and the ending to 1.500.
 
 ---
 

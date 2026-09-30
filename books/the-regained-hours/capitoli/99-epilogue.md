@@ -1,7 +1,7 @@
 # Epilogue — Time Regained
 
 **POV:** Iris · **Place:** London (Islington, Meridian) · **Story time:** winter 2026–27
-**Words:** ~1.000 / target: 1.000 ✅
+**Words:** 673 / first draft ✅
 
 ## Chapter objective
 

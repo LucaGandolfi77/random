@@ -13,6 +13,16 @@ Template in Markdown per pianificare, scrivere e pubblicare un libro.
 | [`proposte-temi-sociali.md`](proposte-temi-sociali.md) | 26 pitch su temi sociali nel stile della raccolta (6 pazzissime) |
 | [`proposte-consumismo-capitalismo-tecnologia.md`](proposte-consumismo-capitalismo-tecnologia.md) | 20 pitch che esaltano consumismo, capitalismo e tecnologia (superficie critica, fondo esaltante) |
 
+## Libri completati
+
+| Libro | Lingua | Stato |
+|-------|--------|-------|
+| [`la-vita-minore/`](la-vita-minore/) | IT | prima bozza ✅ + revisione in corso |
+| [`mai-pen-rai/`](mai-pen-rai/) | IT | fino a Fase 6 🟨 (testi di pubblicazione pronti) |
+| [`lattraversamento/`](lattraversamento/) | IT | fino a Fase 6 🟨 (testi di pubblicazione pronti) |
+| [`il-permesso/`](il-permesso/) | IT | revisione strutturale ✅ (fino a Fase 2) |
+| [`the-regained-hours/`](the-regained-hours/) | EN | fino a Fase 6 🟨 (primo romanzo in inglese) |
+
 ## Come usarlo
 
 1. **Copia i template** in una nuova cartella dedicata al tuo libro, ad esempio:

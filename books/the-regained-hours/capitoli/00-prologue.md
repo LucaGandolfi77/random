@@ -1,7 +1,7 @@
 # Prologue — The Hours Counter
 
 **POV:** Iris · **Place:** London (Meridian, ninth floor) · **Story time:** September 2025
-**Words:** ~950 / target: 1.000 ✅
+**Words:** 578 / first draft ✅
 
 ## Chapter objective
 

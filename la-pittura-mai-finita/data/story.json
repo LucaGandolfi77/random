@@ -1,0 +1,1022 @@
+{
+  "meta": {
+    "titolo": "La Pittura Mai Finita",
+    "sottotitolo": "atto primo · il ritratto della fidanzata",
+    "protagonista": "Ada Sartori",
+    "regola": "Ogni pennellata che copre brucia un ricordo. Non tornano."
+  },
+  "frammenti": {
+    "fr-1": "schizzo 1 di 4 · cielo, alto a sinistra",
+    "fr-2": "schizzo 2 di 4 · cielo, con una nuvola sola",
+    "fr-3": "schizzo 3 di 4 · cielo alla rovescia, come visto dal basso",
+    "fr-4": "schizzo 4 di 4 · cielo di sera, quasi finito"
+  },
+  "schede": [
+    {
+      "id": "madre-mano",
+      "persona": "madre",
+      "titolo": "La mano della mamma sulla tela",
+      "nome": "la mano della tua madre sulla tela",
+      "versi": [
+        "Aveva le mani sempre fredde e non le nascondeva mai.",
+        "Diceva: la stoffa sente.",
+        "Tu non ci hai mai creduto.",
+        "Adesso la stoffa è lei."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "madre-fazzoletto",
+      "persona": "madre",
+      "titolo": "Il fazzoletto col brodo",
+      "nome": "il fazzoletto col brodo",
+      "versi": [
+        "Quattro macchie, mai stirate.",
+        "Le guardavi ogni volta che era malata,",
+        "per capire se ricrescevano."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "madre-risata",
+      "persona": "madre",
+      "titolo": "La risota che finiva prima",
+      "nome": "la risata di tua madre, che finiva prima",
+      "versi": [
+        "Rideva e poi si fermava,",
+        "quasi che ridere costasse,",
+        "e non sapesse chi glielo avesse insegnato."
+      ],
+      "chiavi": [
+        "parla"
+      ]
+    },
+    {
+      "id": "tecla-gomito",
+      "persona": "tecla",
+      "titolo": "Il gomito di Tecla sul tuo braccio",
+      "nome": "il gomito di Tecla sul tuo braccio",
+      "versi": [
+        "Lo appoggiava lì senza chiedere, tutto il peso.",
+        "Tu non ti spostavi.",
+        "Ora ti sposti."
+      ],
+      "chiavi": [
+        "lavora"
+      ]
+    },
+    {
+      "id": "tecla-sta-zitta",
+      "persona": "tecla",
+      "titolo": "La voce quando dice «sta' zitta»",
+      "nome": "la voce di Tecla quando dice «sta' zitta»",
+      "versi": [
+        "Lo diceva anche scherzando,",
+        "e per questo era la frase",
+        "che ti ha salvata più volte."
+      ],
+      "chiavi": [
+        "parata"
+      ],
+      "valori": {
+        "parata": 120
+      }
+    },
+    {
+      "id": "tecla-mani-acqua",
+      "persona": "tecla",
+      "titolo": "Le mani di Tecla nell'acqua fredda",
+      "nome": "le mani di Tecla nell'acqua fredda",
+      "versi": [
+        "Le tenne dentro fino all'unghia.",
+        "Tornarono rosse e spellate.",
+        "Disse: «adesso sono le mie»."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "tecla-trementina",
+      "persona": "tecla",
+      "titolo": "Il profumo di trementina",
+      "nome": "il profumo di trementina di Tecla",
+      "versi": [
+        "Addosso, nei capelli, perfino sul cuscino.",
+        "Una volta gli hai detto: puzzi di ospedale.",
+        "Ti ha tirato l'orecchio."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "tecla-ride",
+      "persona": "tecla",
+      "titolo": "Tecla che ride di te, per primo",
+      "nome": "Tecla che ride di te, per primo",
+      "versi": [
+        "Rideva di te prima di tutti,",
+        "la prima,",
+        "per non dirlo a nessun altro."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "tecla-tetto",
+      "persona": "tecla",
+      "titolo": "La promessa del tetto",
+      "nome": "la promessa del tetto",
+      "versi": [
+        "«Quando finisce, andiamo su quel tetto.»",
+        "L'hai detto tu.",
+        "Era il tetto più alto del paese",
+        "e non c'era modo di arrivarci."
+      ],
+      "chiavi": [
+        "parla"
+      ]
+    },
+    {
+      "id": "tecla-schiena",
+      "persona": "tecla",
+      "titolo": "La schiena che si allontana",
+      "nome": "la schiena di Tecla che si allontana",
+      "versi": [
+        "Sei metà destra, metà sinistra.",
+        "Una metà cammina, l'altra guarda ancora.",
+        "Questa sera vince la prima."
+      ],
+      "chiavi": [
+        "inchiostro"
+      ],
+      "valori": {
+        "memoriaPerParata": 1
+      }
+    },
+    {
+      "id": "tecla-nome",
+      "persona": "tecla",
+      "titolo": "Il modo in cui dici il suo nome",
+      "nome": "il modo in cui dici il nome di Tecla",
+      "versi": [
+        "Due sillabe. La seconda arriva alta.",
+        "Ti hanno detto che è un vezzo,",
+        "che lo dici come chi non ha paura."
+      ],
+      "chiavi": [
+        "parla"
+      ]
+    },
+    {
+      "id": "aurelio-polso",
+      "persona": "aurelio",
+      "titolo": "La mano del maestro sul tuo polso",
+      "nome": "la mano del maestro sul tuo polso",
+      "versi": [
+        "«Non tieni il pennello: tieni il peso.»",
+        "Lo diceva con la mano già chiusa",
+        "sul tuo braccio."
+      ],
+      "chiavi": [
+        "lavora"
+      ],
+      "valori": {
+        "danno": 0.08
+      }
+    },
+    {
+      "id": "aurelio-acqua-forte",
+      "persona": "aurelio",
+      "titolo": "L'acqua forte del maestro",
+      "nome": "l'acqua forte del maestro",
+      "versi": [
+        "Una goccia e mezza, e la mattina era pulita.",
+        "Ne faceva pentolino tutti i giorni.",
+        "Non l'hai mai visto berla."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "aurelio-fischio",
+      "persona": "aurelio",
+      "titolo": "Il maestro che fischia stonando",
+      "nome": "il maestro che fischiava stonato",
+      "versi": [
+        "Sbagliava sempre la terza.",
+        "Tu avevi imparato a sbagliare la terza",
+        "insieme a lui."
+      ],
+      "chiavi": [],
+      "valori": {
+        "parata": 180
+      }
+    },
+    {
+      "id": "aurelio-cielo",
+      "persona": "aurelio",
+      "titolo": "Lo schizzo del cielo",
+      "nome": "lo schizzo del cielo del maestro",
+      "versi": [
+        "Quattro fogli sciolti, piegati a quattro.",
+        "Solo cielo, in alto a sinistra.",
+        "Diceva: «non è un dettaglio. È la parte»."
+      ],
+      "chiavi": [
+        "vedere"
+      ],
+      "frammento": "fr-1"
+    },
+    {
+      "id": "aurelio-occhi",
+      "persona": "aurelio",
+      "titolo": "Gli occhi del maestro nella tela",
+      "nome": "gli occhi del maestro nella tela",
+      "versi": [
+        "Li hai rifatti quattro volte.",
+        "Alla quarta hai capito che non ci riuscivi",
+        "e li hai lasciati male, apposta."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "ansi-pennello",
+      "persona": "ansi",
+      "titolo": "Il modo in cui Ansi tiene il pennello",
+      "nome": "il modo in cui Ansi tiene il pennello",
+      "versi": [
+        "A tre dita, mai di più.",
+        "Diceva che il quarto è l'orgoglio",
+        "e l'orgoglio sulla tela si vede."
+      ],
+      "chiavi": [],
+      "valori": {
+        "danno": 0.05
+      }
+    },
+    {
+      "id": "ansi-figlio",
+      "persona": "ansi",
+      "titolo": "Il figlio di Ansi che legge",
+      "nome": "il figlio di Ansi che leggeva ad alta voce",
+      "versi": [
+        "Leggeva sbieco e gli piaceva.",
+        "Poi non ha più letto.",
+        "La sedia è ancora quella."
+      ],
+      "chiavi": [
+        "parla"
+      ]
+    },
+    {
+      "id": "ansi-mattino",
+      "persona": "ansi",
+      "titolo": "Ansi che beve al mattino",
+      "nome": "Ansi che beveva al mattino, di nascosto",
+      "versi": [
+        "Credeva che nessuno si accorgesse.",
+        "Tu ti accorgevi.",
+        "Non hai mai detto niente, e lo dicevi ogni giorno."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "ansi-mani",
+      "persona": "ansi",
+      "titolo": "Le mani che tremano dal freddo",
+      "nome": "le mani di Ansi che tremavano dal freddo",
+      "versi": [
+        "Diceva che era l'età.",
+        "Non era l'età.",
+        "Era l'inverno del '41, in una stazione, in piedi."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "ansi-tardi",
+      "persona": "ansi",
+      "titolo": "«Non è mai troppo tardi»",
+      "nome": "Ansi che diceva «non è mai troppo tardi»",
+      "versi": [
+        "Lo diceva ogni mattina, e ogni mattina era falso.",
+        "Poi è diventato vero,",
+        "e lui non l'ha detto."
+      ],
+      "chiavi": [
+        "fuga"
+      ],
+      "valori": {
+        "asciugatura": 350
+      }
+    },
+    {
+      "id": "brizio-nerone",
+      "persona": "brizio",
+      "titolo": "Brizio che sputa il nerone",
+      "nome": "il nerone che Brizio si sputava addosso",
+      "versi": [
+        "Dice che così ingrassa.",
+        "Non ha mai chiesto se è vero."
+      ],
+      "chiavi": [
+        "nudo"
+      ],
+      "valori": {
+        "danno": 0.06
+      }
+    },
+    {
+      "id": "brizio-naso",
+      "persona": "brizio",
+      "titolo": "Il naso di Brizio",
+      "nome": "il naso di Brizio",
+      "versi": [
+        "Rotto tre volte dalla stessa porta.",
+        "La quarta ha imparato ad aprire con la mano."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "brizio-dorme",
+      "persona": "brizio",
+      "titolo": "Brizio che dorme sul bancone",
+      "nome": "Brizio che dormiva sul bancone",
+      "versi": [
+        "Sopra il braccio, ogni pomeriggio.",
+        "Sognava a voce alta",
+        "e si sentiva da due stanze."
+      ],
+      "chiavi": [
+        "dono"
+      ]
+    },
+    {
+      "id": "brizio-perche",
+      "persona": "brizio",
+      "titolo": "Brizio che dice «perché»",
+      "nome": "Brizio che diceva «perché»",
+      "versi": [
+        "Dodici volte al giorno, per undici anni.",
+        "Nessuno gli ha mai risposto bene.",
+        "È lui che ti ha fatto capire il male."
+      ],
+      "chiavi": [
+        "vedere"
+      ]
+    },
+    {
+      "id": "donata-bordi",
+      "persona": "donata",
+      "titolo": "Le mani di Donata sui bordi",
+      "nome": "le mani di Donata sui bordi",
+      "versi": [
+        "Controlla i bordi con l'unghia.",
+        "Dice che è l'unica parte",
+        "che vede chi guarda."
+      ],
+      "chiavi": [
+        "lente"
+      ],
+      "valori": {
+        "asciugatura": 400
+      }
+    },
+    {
+      "id": "donata-nessuno",
+      "persona": "donata",
+      "titolo": "«Nessuno guarda»",
+      "nome": "la voce di Donata: «nessuno guarda»",
+      "versi": [
+        "«Nessuno guarda un quadro finito.",
+        "Si guarda la promessa.»",
+        "Lo diceva del mestiere.",
+        "E non aveva torto."
+      ],
+      "chiavi": [
+        "dono"
+      ]
+    },
+    {
+      "id": "ada-viso",
+      "persona": "ada",
+      "titolo": "Il tuo viso, che non hai mai dipinto bene",
+      "nome": "il tuo viso, che non hai mai dipinto bene",
+      "versi": [
+        "Te l'ha chiesto una volta e hai detto: domani.",
+        "Il domani è durato quattro anni.",
+        "Il domani è durato sempre."
+      ],
+      "chiavi": [
+        "parla"
+      ]
+    }
+  ],
+  "atti": [
+    {
+      "id": "a0",
+      "ordine": 0,
+      "titolo": "Il peso della carta",
+      "epigrafe": "Prima di imparare a ricoprire, impari a sporcarti.",
+      "premessa": "Lo studio è come l'hai lasciato: quattro anni fa. La finestra è ancora sulla sinistra. La tela è sulla cavalletto. Il maestro non c'è, ma ha lasciato quattro parole, e sono: «ricopri, e non guardare».",
+      "dai": [],
+      "scena": [
+        {
+          "id": "a0-s1",
+          "chi": "",
+          "battute": [
+            {
+              "chi": "",
+              "testo": "La tela è grande quanto un armadio. Dentro c'è una figura a metà: le spalle, il collo, e poi niente. Il maestro si è fermato lì.\n\nNon si è fermato per mancanza di tempo. Si è fermato perché non voleva finire il viso, e non voleva finire il viso perché finendolo avrebbe dovuto guardarlo, e guardandolo avrebbe dovuto ricordare come lo faceva."
+            },
+            {
+              "chi": "",
+              "testo": "Sotto la tela, un foglio piegato a quattro. La calligrafia è quella di sempre, quella che taglia le {c}lettere{/} e le {a}vocali{/}.\n\n> «Ricopri.\n> Non guardare il volto.\n> Quando non ti resta più nodo da sciogliere,\n> la finestra.»\n\nNon c'è firma. Non ce n'è bisogno."
+            },
+            {
+              "chi": "",
+              "testo": "Prendi il pennello. pesa in mano.\n\nÈ più leggero di come te lo ricordavi."
+            }
+          ],
+          "scelte": [
+            {
+              "id": "a0-s1-a",
+              "testo": "Guardare la finestra, per capire l'ultima riga.",
+              "nota": "Il cielo è basso e non finisce.",
+              "imposta": {
+                "a0_guardata": "si"
+              }
+            },
+            {
+              "id": "a0-s1-b",
+              "testo": "Non guardare. Lui ha detto di non guardare.",
+              "nota": "Qualcosa di pesante si sposta in basso, nelle gambe.",
+              "imposta": {
+                "a0_guardata": "no"
+              }
+            }
+          ]
+        }
+      ],
+      "combattimento": "tela-bianca",
+      "dopo": [
+        {
+          "id": "a0-d1",
+          "chi": "",
+          "battute": [
+            {
+              "chi": "",
+              "testo": "La copre. Non c'era nessun {b}colore{/} sotto: solo l'ombra di un gomito, e una macchia di mordente.\n\nAdesso lo sai. Coprire funziona. Coprire funziona anche quando non dovrebbe."
+            },
+            {
+              "chi": "",
+              "testo": "Sul bancone, in un bicchiere con l'acqua torbida, c'è un foglio piegato a quattro. È tuo. Riconosci la calligrafia perché l'hai guardata ogni giorno per quattro anni.\n\nL'hai scritto tu. Non ricordi quando."
+            }
+          ],
+          "dai": [
+            "ada-viso"
+          ],
+          "nota": "Ricordi: il tuo viso, che non hai mai dipinto bene."
+        }
+      ]
+    },
+    {
+      "id": "a1",
+      "ordine": 1,
+      "titolo": "Il ritratto della fidanzata",
+      "epigrafe": "I quadri che il maestro non ha finito si vendono a metà.",
+      "premessa": "Arriva un impegno: il ritratto di una ragazza che aspetta da quattro anni. Il maestro aveva cominciato. Il viso, no.\n\nSuona il telefono. Dall'altra parte c'è qualcuno che si chiama Donata e che non ha nome per nessuno.",
+      "dai": [
+        "madre-mano",
+        "madre-risata",
+        "aurelio-polso"
+      ],
+      "scena": [
+        {
+          "id": "a1-s1",
+          "chi": "Donata",
+          "battute": [
+            {
+              "chi": "Donata",
+              "testo": "Non ti chiedo come stai. Non me lo chiederei neanche se lo sapessi."
+            },
+            {
+              "chi": "Ada",
+              "testo": "Il maestro è—"
+            },
+            {
+              "chi": "Donata",
+              "testo": "Lo so. Mi ha avvertito prima, con la stessa chiarezza con cui avvisa di un rubinetto che perde. «Se non vengo io, non vieni nessuno. Non vieni te, non viene la ragazza.»\n\nAccidenti a lui. Ha sempre avuto le mani più pulite della testa. Certo, non l'ha detto così. Ma è quello che intendeva."
+            },
+            {
+              "chi": "Donata",
+              "testo": "Il ritratto. La ragazza si chiama {a}Elisa{/}. Ventidue anni. Sta al quinto piano, guarda dalla finestra quando suona il telefono, e ha smesso di chiedere perché suona.\n\nLa finestra è questa. Suona da quattro anni. Io vendo finestre, e so cosa significa aspettare che qualcuno smetta di suonare."
+            }
+          ],
+          "scelte": [
+            {
+              "id": "a1-s1-a",
+              "testo": "«Finirò il viso.»",
+              "nota": "Lo dici per lui, non per lei.",
+              "imposta": {
+                "a1_promise": "finiro"
+              },
+              "richiede": null
+            },
+            {
+              "id": "a1-s1-b",
+              "testo": "«Il maestro non ha finito il viso. Non lo finisco neanch'io.»",
+              "nota": "La verità, detta a qualcuno che la compra.",
+              "imposta": {
+                "a1_promise": "non_finiro"
+              }
+            },
+            {
+              "id": "a1-s1-c",
+              "testo": "Non rispondere. Guardare la tela, e aspettare che se ne vada.",
+              "nota": "Donata aspetta. Donata sa aspettare: è il mestiere.",
+              "imposta": {
+                "a1_promise": "silenzio"
+              },
+              "costa": [
+                "madre-mano"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "a1-s2",
+          "chi": "Ansi",
+          "battute": [
+            {
+              "chi": "Ansi",
+              "testo": "Anselmo Ferraris. Ho restaurato quadri per quarant'anni e adesso apro porte. Sono il modo più economico di avere le mani ferme davanti alla gente, e il maestro mi ha messo qui per quello, non per l'arte. Non credere che sia qui per l'arte."
+            }
+          ],
+          "scelte": []
+        }
+      ],
+      "combattimento": "il-commiato",
+      "dopo": [
+        {
+          "id": "a1-d1",
+          "chi": "",
+          "battute": [
+            {
+              "chi": "",
+              "testo": "Il ritratto è chiuso. Il {c}Commiato{/} non c'è più dentro.\n\nSotto, dove c'era la testa, resta un alone più scuro: il segno della pressione, come di un dito che ha premuto a lungo e poi è andato via.\n\nÈ la parte che non si può ricoprire bene. Ci metti sopra, e il segno resta."
+            },
+            {
+              "chi": "",
+              "testo": "Suona il telefono. Non è Donata: è un numero che non hai in rubrica, e la voce che risponde non si annuncia.\n\n«Senta. Ho saputo che il maestro non c'è più. Volevo dirle che va bene così. Aveva finito quello che aveva da finire. Solo che nessuno glielo diceva, e allora glielo dico io.»\n\nPoi la linea cade, e resta solo il rumore di una televisione lontana."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a2",
+      "ordine": 2,
+      "titolo": "Il ritratto del figlio",
+      "epigrafe": "C'è un ragazzo che non torna, e un quadro che aspetta.",
+      "premessa": "Il secondo impegno è di Ansi. Non ti ha chiesto nessun ritratto: ti ha portato una tela.\n\nDice che gliel'ha data una donna, al mercato, per trenta lire, e che l'ha riconosciuta solo dal modo in cui teneva il pennello.",
+      "dai": [
+        "ansi-figlio",
+        "ansi-pennello",
+        "madre-fazzoletto",
+        "aurelio-acqua-forte"
+      ],
+      "scena": [
+        {
+          "id": "a2-s1",
+          "chi": "Ansi",
+          "battute": [
+            {
+              "chi": "Ansi",
+              "testo": "Questa l'ha comprata una signora al mercato del sabato. Trenta lire. Non sa chi l'ha dipinta e non le ha chiesto: dice che le sembrava una cosa privata, quella di un quadro.\n\nE ha ragione. I quadri sono le cose più private che esistono, e si vendono a quattro soldi."
+            },
+            {
+              "chi": "Ada",
+              "testo": "È incompiuta. Manca il viso."
+            },
+            {
+              "chi": "Ansi",
+              "testo": "Manca sempre il viso. Il viso è l'unica parte che non si fa per mestiere: si fa per qualcuno.\n\nQuesta l'hanno fatta per qualcuno che non è più lì. E adesso la donna che l'ha comprata aspetta che torni, e non torna, perché non lo conosceva nemmeno. Aspetta uno sconosciuto che le ha lasciato mezzo quadro."
+            },
+            {
+              "chi": "Ansi",
+              "testo": "Ti dico una cosa, e poi non te ne dico un'altra. Mio figlio leggeva ad alta voce, di sera, perché io vedevo male e mi faceva piacere sentirmi dire le cose da qualcun altro.\n\nAdesso non legge. Non perché non sappia. Perché io ho smesso di chiedere.\n\nE non giudicare: lo so che è una cosa che si fa per non sentire il rumore della casa. Vedremo il resto."
+            }
+          ],
+          "scelte": [
+            {
+              "id": "a2-s1-a",
+              "testo": "«Lo faccio finire. Il viso.»",
+              "nota": "Non è la tua promessa. È la sua.",
+              "imposta": {
+                "a2_promise": "finiro_volto"
+              }
+            },
+            {
+              "id": "a2-s1-b",
+              "testo": "«Le dico alla donna che l'ha comprata che aspetta uno sconosciuto.»",
+              "nota": "La verità costa meno di un inchiostro.",
+              "imposta": {
+                "a2_promise": "verita"
+              }
+            },
+            {
+              "id": "a2-s1-c",
+              "testo": "«Ansi, tu lo sai rifare il viso. Perché non lo fai tu?»",
+              "nota": "Glielo hai detto davvero.",
+              "imposta": {
+                "a2_promise": "duro"
+              },
+              "costa": [
+                "ansi-pennello"
+              ],
+              "dai": [
+                "ansi-mattino"
+              ]
+            }
+          ]
+        }
+      ],
+      "combattimento": "l-attesa",
+      "frammento": "fr-2",
+      "dopo": [
+        {
+          "id": "a2-d1",
+          "chi": "Ansi",
+          "battute": [
+            {
+              "chi": "",
+              "testo": "La donna prende il quadro e non dice grazie. Dice: «adesso è mio». E lo appoggia contro la parete, in cucina, dove le si vede tutti i giorni.\n\nAnsi guarda quel pezzo di stoffa appoggiato alla parete e dice, piano: «avrà la sua vergogna, come tutti.»"
+            },
+            {
+              "chi": "",
+              "testo": "Ansi ripiega lo schizzo e lo mette in tasca senza guardarlo. Poi si ferma, e tira fuori quello che c'era piegato dentro: un foglio con quattro pezzi di cielo.\n\n«Me l'ha dato lui. Due settimane prima. Diceva: «Se non ci arrivo io, questo lo finisci tu.»\n\nNon ci sei arrivata. L'hai trovato tu."
+            }
+          ],
+          "nota": "Schizzo del cielo · 1 di 4"
+        }
+      ]
+    },
+    {
+      "id": "a3",
+      "ordine": 3,
+      "titolo": "Il ritratto del maestro",
+      "epigrafe": "Ogni volta che ricoprivi, il buio si spostava di un centimetro.",
+      "premessa": "Tocca al maestro. Non è un impegno: è l'obbligo. Il Male ha smesso di aspettare la fine dell'anno e ha cominciato a entrare dalla porta.\n\nLa tela sulla cavalletto ha una macchia che non è di colore. Non si sa cosa sia, e non si chiede.",
+      "dai": [
+        "tecla-gomito",
+        "tecla-schiena",
+        "tecla-trementina",
+        "aurelio-fischio"
+      ],
+      "scena": [
+        {
+          "id": "a3-s1",
+          "chi": "Tecla",
+          "battute": [
+            {
+              "chi": "Tecla",
+              "testo": "Sei stato qui due giorni senza mangiare e senza dormire, e quando sei sceso a comprare il pane ti ho visto dalla finestra e ho pensato: adesso si mette a dipingere per finire, e quando ha finito va a Salire sul tetto come gli ho detto io, e io non ci sarò perché sono già partita."
+            },
+            {
+              "chi": "Tecla",
+              "testo": "Sono qui. Sono venuta a Dirtelo. È l'unica cosa che mi restava da dirti, e se non la dico diventa una delle altre."
+            },
+            {
+              "chi": "Ada",
+              "testo": "Il tetto più alto del paese."
+            },
+            {
+              "chi": "Tecla",
+              "testo": "Il tetto più alto del paese.\n\nC'è un modo, c'è sempre un modo, e non te lo sto dicendo perché te lo diresti da sola e poi non torni più su, e io ho bisogno che tu torni su."
+            },
+            {
+              "chi": "Tecla",
+              "testo": "Devi andare a guardare la tela del maestro. Lui ci ha messo dentro quello che non ha mai detto a nessuno, e adesso lo dice a te, e lo dice male, e lo dice per me. Non guardare il viso. Guardiamo il resto. Vai. Non fare la faccia."
+            }
+          ],
+          "scelte": [
+            {
+              "id": "a3-s1-a",
+              "testo": "«Siediti. Guarda la tela insieme a me.»",
+              "nota": "Venti minuti. Ti costano un pezzo di qualcosa.",
+              "imposta": {
+                "a3_seduta": "si"
+              },
+              "dai": [
+                "tecla-ride"
+              ],
+              "costa": [
+                "tecla-trementina"
+              ]
+            },
+            {
+              "id": "a3-s1-b",
+              "testo": "«Il tetto aspetta. Vai pure.»",
+              "nota": "Non le guardi in faccia, e lei lo sa.",
+              "imposta": {
+                "a3_seduta": "no"
+              }
+            }
+          ]
+        }
+      ],
+      "combattimento": "il-male-in-figura",
+      "frammento": "fr-3",
+      "dopo": [
+        {
+          "id": "a3-d1",
+          "chi": "",
+          "battute": [
+            {
+              "chi": "",
+              "testo": "Sotto la macchia non c'è un volto. C'è una {b}stanza{/}: quattro linee storte, un tavolo, due sedie, una finestra.\n\nE nella stanza, in basso a destra, una figura piccola che guarda fuori. Non è un dettaglio. Il maestro non faceva dettagli. Il maestro faceva {c}prove{/}.\n\nÈ la prova che la stoffa sente. Era sua madre a dirglielo, o forse la tua."
+            },
+            {
+              "chi": "",
+              "testo": "Il {c}Male{/} si è ritirato di un centimetro. Lo senti: un rumore di sabbia che si allontana, sotto la porta, in fondo al corridoio.\n\nNon è stato sconfitto. È stato rimandato. C'è una differenza, e la differenza la paga qualcun altro."
+            }
+          ],
+          "nota": "Schizzo del cielo · 2 di 4"
+        }
+      ]
+    },
+    {
+      "id": "a4",
+      "ordine": 4,
+      "titolo": "Il ritratto di Tecla",
+      "epigrafe": "Guardare la faccia è la parte facile.",
+      "premessa": "La tela sulla cavalletto è di Tecla. Tecla l'ha iniziata tre giorni fa, di notte, con la chiarezza che si usa per le cose che non si dichiarano.\n\nHa il braccio teso verso chi guarda. Guarda verso di te.",
+      "dai": [
+        "tecla-tetto",
+        "tecla-sta-zitta",
+        "tecla-mani-acqua",
+        "tecla-nome"
+      ],
+      "scena": [
+        {
+          "id": "a4-s1",
+          "chi": "Tecla",
+          "battute": [
+            {
+              "chi": "",
+              "testo": "Il tetto. Siamo sul tetto, e fa il freddo che fa sui tetti, che è un freddo diverso: viene dal pavimento.\n\nLei è seduta sulla grondaia con le gambe dentro e il cappotto di te addosso, perché è più grande di lei di due misure e non ha portato nient'altro."
+            },
+            {
+              "chi": "Tecla",
+              "testo": "Sai cosa ho dipinto stanotte. Sai cosa vuol dire dipingere qualcuno con il braccio teso verso chi guarda.\n\nVol dire che lo sto chiedendo. Ma non a voce, perché a voce non me l’avresti detto. E non lo sto chiedendo a te, che sei sulla tela: lo sto chiedendo al {b}buio{/}, che è l'unico che non ha da fare altro."
+            },
+            {
+              "chi": "Ada",
+              "testo": "Perché non lo finisci, il tuo?"
+            },
+            {
+              "chi": "Tecla",
+              "testo": "Perché finendolo divento qualcosa di preciso, e adesso sono ancora tutte le cose.\n\nAda. Il Male ha preso il tuo nome la settimana scorsa. Non l'hai sentito perché ti eri messa a dipingere, e va bene così, va bene che sia andata così.\n\nSe tu finisci me, il Male non prende il tuo nome. Se io non mi finisco, il Male prende il mio, e il mio gli basta, perché è già un nome forte."
+            },
+            {
+              "chi": "Tecla",
+              "testo": "Tu puoi fermarlo. Puoi fermarlo davvero. Coprendo la figura intera, sotto la mia, sotto tutto.\n\nTi sto chiedendo di fare l’unica cosa che non sopporto, ma è l'unica che funziona, e tu non sei il tipo di persona che lascia stare le cose, e io non sono il tipo di persona che smette di chiedere."
+            },
+            {
+              "chi": "Tecla",
+              "testo": "Adesso guarda la tela. Non guardare il volto, va bene? Non guardare il volto."
+            }
+          ],
+          "scelte": [
+            {
+              "id": "a4-s1-a",
+              "testo": "«Tecla.» — dirle il nome come lo dici sempre.",
+              "nota": "Due sillabe. La seconda arriva alta.",
+              "imposta": {
+                "a4_nome": "detto"
+              },
+              "dai": [
+                "tecla-ride"
+              ]
+            },
+            {
+              "id": "a4-s1-b",
+              "testo": "Non dirlo. Andare alla tela.",
+              "nota": "Il nome rimane in gola, e ci resta.",
+              "imposta": {
+                "a4_nome": "non_detto"
+              },
+              "costa": [
+                "tecla-nome"
+              ]
+            },
+            {
+              "id": "a4-s1-c",
+              "testo": "«Resta.» — chiederle di restare, e non coprirla.",
+              "nota": "Non puoi. L'hai appena capito che non puoi.",
+              "imposta": {
+                "a4_nome": "resta"
+              },
+              "costa": [
+                "tecla-tetto"
+              ]
+            }
+          ]
+        }
+      ],
+      "combattimento": "tecla",
+      "frammento": "fr-4",
+      "dopo": [
+        {
+          "id": "a4-d1",
+          "chi": "",
+          "battute": [
+            {
+              "chi": "",
+              "testo": "È finito.\n\nIl braccio teso è sotto il tuo inchiostro. Il cappotto che era di te è sotto il tuo inchiostro. La mano, che aveva ancora le unghie rosse dall'acqua fredda di tre giorni prima, è sotto il tuo inchiostro.\n\nHai ricoperto tutto, come ti aveva chiesto. Il buio si è fermato a metà del corridoio, e fa un rumore di sabbia che non va da nessuna parte."
+            },
+            {
+              "chi": "",
+              "testo": "Sul gradino, sotto la grondaia, c'è il fazzoletto che avevi dato a lei. È piegato a quattro, come i fogli di questo maestro.\n\nDentro, non c'è niente. È stato usato per asciugare qualcosa che non era acqua, e una cosa asciutta non si lascia in giro.\n\nLo tieni. Adesso è tuo. Non ti ricordi di cosa."
+            }
+          ],
+          "nota": "Schizzo del cielo · 3 di 4"
+        }
+      ]
+    },
+    {
+      "id": "a5",
+      "ordine": 5,
+      "titolo": "Il Male",
+      "epigrafe": "Resta la cornice, e la cornice ha pazienza.",
+      "premessa": "Non c'è più nessuno da ritrarre. Non c'è più nessuno da ricordare che si ricordava.\n\nQuello che resta sul cavalletto è una tela con dentro una cornice, e nient'altro dentro la cornice. Il maestro l'ha lasciata così apposta.",
+      "dai": [
+        "aurelio-cielo",
+        "brizio-perche",
+        "brizio-dorme",
+        "donata-bordi",
+        "donata-nessuno",
+        "aurelio-occhi",
+        "ansi-mattino",
+        "ansi-mani",
+        "ansi-tardi",
+        "brizio-nerone",
+        "brizio-naso"
+      ],
+      "scena": [
+        {
+          "id": "a5-s1",
+          "chi": "",
+          "battute": [
+            {
+              "chi": "",
+              "testo": "È l'alba sul tetto, ed è il cielo che il maestro non finì mai.\n\nNon perché non ne avesse il tempo. Perché era lì che finiva ogni quadro, e finire un quadro vuol dire smettere di guardarlo, e lui non voleva smettere di guardarlo. Così l'ha lasciato a metà per un altro, e poi non è arrivato l'altro, e adesso tocca a te."
+            },
+            {
+              "chi": "",
+              "testo": "Nella tasca del cappotto che non era tuo trovi quattro fogli piegati a quattro. Cielo, in alto a sinistra. Cielo con una nuvola sola. Cielo alla rovescia, come visto dal basso.\n\nE cielo di sera, quasi finito. L'unico dei quattro che ha dentro qualcosa che non è cielo: una finestra, disegnata in piccolo, con una tenda alzata."
+            },
+            {
+              "chi": "",
+              "testo": "Brizio ti ha seguito tutto il tempo. Non l’ho notato perché era l’unico che non faceva rumore. Te lo dico io, perché se non te lo dico nessuno. Stai fermo. Non guardare il volto.\n\nVai."
+            }
+          ],
+          "scelte": [
+            {
+              "id": "a5-s1-a",
+              "testo": "Prendere il pennello e non pensare a niente.",
+              "nota": "È la cosa più difficile che ti sia mai capitata.",
+              "imposta": {
+                "a5_come": "dritta"
+              }
+            },
+            {
+              "id": "a5-s1-b",
+              "testo": "Parlare ad alta voce, così non ci pensa.",
+              "nota": "Dici un nome. Non te lo ricordi subito: è già da un po' che non ti ricordi.",
+              "imposta": {
+                "a5_come": "parlata"
+              },
+              "costa": [
+                "ada-viso"
+              ]
+            }
+          ]
+        }
+      ],
+      "combattimento": "il-male",
+      "finale": true
+    }
+  ],
+  "finali": {
+    "voce": {
+      "nome": "La Voce",
+      "condizione": "Ti restano tredici ricordi o più.",
+      "quadro": "studio-pieno",
+      "righe": [
+        "Hai finito la cornice per prima, perché una cornice si finisce in tre minuti, e poi hai passato quattro ore a dipingere il cielo, e il cielo non è mai finito, perché non è mai finito per nessuno.",
+        "Il {c}Male{/} non è morto. È tornato indietro di cent'anni, di là da dove era venuto, e ci tornerà, e qualcun altro dovrà ricoprire qualcosa. È così che funziona: non si vince, si sta avanti.",
+        "Hai ancora la voce di {a}Tecla{/}. Non quella di adesso, quella di prima: quella che diceva «sta' zitta» scherzando, e che ti ha salvata quattro volte.",
+        "Per questo alla fine ti sei potuta permettere la parte che fa più male di tutte: ricordarti."
+      ],
+      "sotto": "Sei tornata in studio l'indomani. Il pennello era ancora bagnato. Non ricordi perché: di solito non usi l'acqua forte a metà giornata.",
+      "azioni": [
+        {
+          "id": "quaderno",
+          "testo": "Il Quaderno"
+        },
+        {
+          "id": "ricomincia",
+          "testo": "Ricomincia da un'altra parte"
+        }
+      ]
+    },
+    "studio": {
+      "nome": "Lo Studio del Cielo",
+      "condizione": "Quattro schizzi di cielo, e almeno otto ricordi.",
+      "quadro": "studio-pieno",
+      "righe": [
+        "Hai capito a metà strada, e ti sei fermata, e per la prima volta in due settimane hai fatto qualcosa che non era urgente.",
+        "I quattro fogli piegati a quattro erano il {b}regalo{/}. Non il quadro: il metodo. «Se non ci arrivo io, questo lo finisci tu» non voleva dire finire il quadro. Voleva dire imparare a guardare.",
+        "Hai finito il cielo in alto a sinistra, che è il pezzo che nessuno ritiene importante. Poi la nuvola sola. Poi il cielo alla rovescia. E alla fine hai preso il più vicino alla finestra, quello di sera, e ci hai messo dentro la finestra con la tenda alzata, perché quello era il suo posto, e adesso è anche tuo.",
+        "Non hai ricoperto la cornice. L'hai ridipinta. È un'altra differenza, e stavolta la fa la differenza.",
+        "Qualcuno, in una stanza che non hai mai visto, guarda un quadro finito. Non sa che è l'unico, e non lo saprà mai, e va bene così: è esattamente il tipo di quadro che si guarda e non si ricorda il giorno dopo.\n\nEppure tu lo ricordi. È l'unica cosa che resta, e resta intera."
+      ],
+      "sotto": "Nel registro delle opere c'è una riga nuova, con la data di oggi e due parole: «cielo, alto».",
+      "azioni": [
+        {
+          "id": "quaderno",
+          "testo": "Il Quaderno"
+        },
+        {
+          "id": "ricomincia",
+          "testo": "Ricomincia da un'altra parte"
+        }
+      ]
+    },
+    "calore": {
+      "nome": "Il Calore",
+      "condizione": "Ti restano da cinque a dodici ricordi.",
+      "quadro": "studio-vuoto",
+      "righe": [
+        "Hai finito il cielo. Non ricordi di averlo finito: ricordi di averlo finito, che sono due cose diverse, e la seconda è più buona.",
+        "Non ricordi più le parole. Ricordi il caldo di una cosa: il modo in cui qualcuno appoggiava il gomito su di te, tutto il peso, senza chiedere.",
+        "Non sai più come si chiama chi ti faceva questa cosa. Ma il peso è ancora lì, e pesa {b}verso destra{/}, e se ti metti così ti torna qualcosa che non ha nome.",
+        "È così che si rimane: non con la storia, ma con la direzione in cui il peso poggia."
+      ],
+      "sotto": "Ti chiamano Ada. Rispondi, ogni volta, con un attimo di ritardo. Non ti hanno mai rimproverato: tutti hanno avuto l’attimo di ritardo, quest'anno, e sanno cosa si prova.",
+      "azioni": [
+        {
+          "id": "quaderno",
+          "testo": "Il Quaderno"
+        },
+        {
+          "id": "ricomincia",
+          "testo": "Ricomincia da un'altra parte"
+        }
+      ]
+    },
+    "cielo": {
+      "nome": "Il Cielo",
+      "condizione": "Ti restano da una a quattro schede.",
+      "quadro": "vuoto",
+      "righe": [
+        "Hai finito il cielo. È l'unica cosa che ti restava da fare, e l'hai fatta bene, e non ti ricordi di averla fatta bene: te lo dicevano gli occhi, e gli occhi non hanno memoria.",
+        "Non ricordi nessun nome. Non il tuo, non il suo, non quello del maestro. Ti rispondi quando ti chiamano, e la voce che risponde è la tua, e questa è la prova che qualcuno dentro c’è ancora. Il Quaderno è lì, con i bordi scottati, e dentro c'è scritto il perché di tutto, ma non sai chi ha scritto il perché.",
+        "Non hai ricoperto la cornice. Non hai ricoperto nuno. Hai dipinto il cielo sopra il cielo, che è l'unica cosa che si può fare quando non c'è più niente sotto, ed è anche l'unica che vale.",
+        "La finestra è aperta. Fuori c'è il cielo, ed è bellissimo, ed è anche la prova che qualcuno, in qualche parte di questa città, ha guardato in alto e ha deciso che era meglio così.",
+        "Vivere senza la storia è possibile. È la morte, che è la cosa che fa la storia."
+      ],
+      "sotto": "Il registro delle opere è pieno di nomi che non conosci. C'è anche il tuo, in fondo, con una data che non ricordi.",
+      "azioni": [
+        {
+          "id": "quaderno",
+          "testo": "Il Quaderno"
+        },
+        {
+          "id": "ricomincia",
+          "testo": "Ricomincia da un'altra parte"
+        }
+      ]
+    },
+    "cenere": {
+      "nome": "La Cenere",
+      "condizione": "Non ti resta niente. È un finale, non una sconfitta.",
+      "quadro": "cenere",
+      "righe": [
+        "Il {b}Male{/} è entrato, e ha fatto il suo lavoro con la sollecitudine di chi mette in ordine una casa in cui nessuno abita più. Non ha fatto male. Non fa male a niente: toglie, e basta.",
+        "Non ricordi niente. Non c'è niente da ricordare: non un volto, non una voce, non la ragione per cui una mattina ti sei alzata e sei salita su un tetto che non era il più alto.",
+        "La tela è ancora lì. Non è coperta: è svuotata. È la stessa tela di prima, con dentro la stessa cornice, e la cornice non sa che cosa le è successo, perché le cornici non sanno niente, e per questo sono le uniche cose in questo paese che non hanno paura.",
+        "Il nome della persona che ha dipinto tutto questo è su un registro, in fondo a un armadio, in un paese dove non guardano più quei registri.\n\nSe tornasse qualcuno e ti facesse leggere quella riga, tu la sapresti dire. La sai dire adesso. La sai dire meglio di chiunque altro in questo momento, perché è l'unica cosa che ti resta e non è una cosa che si può dimenticare.",
+        "La finestra è chiusa. L'hai chiusa tu, prima, quando hai deciso che era meglio. Non ricordi perché fosse meglio. Era meglio."
+      ],
+      "sotto": "Venti giorni dopo, qualcuno aprirà le finestre di questo studio, e troverà una tela, e non saprà che cosa farne, e la darà a un mercante.",
+      "azioni": [
+        {
+          "id": "ricomincia",
+          "testo": "Ricomincia. Il Quaderno tornerà tutto."
+        },
+        {
+          "id": "torna",
+          "testo": "Torna al Quaderno"
+        }
+      ]
+    }
+  }
+}

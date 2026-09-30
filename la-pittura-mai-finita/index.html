@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2a2320">
+<meta name="description" content="JRPG a turni dove dipingi il nemico col dito e ogni pennellata cancella un ricordo tuo. 5 atti, 28 memorie, 5 finali. Offline.">
+<title>La Pittura Mai Finita</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Pittura">
+<meta name="color-scheme" content="dark">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-mano="destra">
+
+<div id="app">
+
+  <!-- ═══ COPERTINA ═══════════════════════════════════════ -->
+  <section id="view-copertina" class="view attiva" aria-label="Copertina">
+    <canvas id="fondo" aria-hidden="true"></canvas>
+    <div class="copertina-interno">
+      <p class="occhiello" aria-hidden="true">atto primo · il ritratto della fidanzata</p>
+      <h1>La Pittura<br>Mai Finita</h1>
+      <p class="sommario">
+        Il maestro è morto a metà tela. Ti ha lasciato i pennelli e una parola:
+        <em>ricopri</em>. Ogni pennellata che metti sopra la figura brucia un
+        ricordo tuo. Alla fine della partita non saprai più perché hai dipinto.
+      </p>
+      <div class="copertina-azioni">
+        <button type="button" class="grande" id="btn-continua" disabled>Continua</button>
+        <button type="button" class="fantasma" id="btn-nuova">Nuova partita</button>
+      </div>
+      <div class="copertina-piccolo">
+        <button type="button" class="fantasma piccolo" id="btn-quaderno-home">Il Quaderno</button>
+        <button type="button" class="fantasma piccolo" id="btn-installa">Installa</button>
+        <button type="button" class="fantasma piccolo" id="btn-impostazioni">Impostazioni</button>
+      </div>
+      <p class="avviso-installa" id="avviso-installa" hidden></p>
+      <p class="crediti">un JRGB a turni · offline · nessun account · <span id="crediti-memorie">28</span> memorie</p>
+    </div>
+  </section>
+
+  <!-- ═══ ATTO ════════════════════════════════════════════ -->
+  <section id="view-atto" class="view" aria-label="Atto">
+    <header class="barra">
+      <button type="button" class="icona" id="btn-atto-home" aria-label="Torna alla copertina">⌂</button>
+      <h2 id="atto-titolo">Atto</h2>
+      <span class="pillola" id="atto-memorie" aria-live="polite">28 memorie</span>
+    </header>
+    <div class="atto-interno">
+      <p class="epigrafe" id="atto-epigrafe"></p>
+      <p class="premessa" id="atto-premessa"></p>
+      <ol class="stanze" id="atto-stanze"></ol>
+      <!-- I due pulsanti di ascolto e rammendo sono qui dentro e vengono
+           ricreati a ogni disegno; btn-prosegui sta FUORI, altrimenti
+           verrebbe cancellato insieme a loro. -->
+      <div class="atto-strumenti" id="atto-strumenti"></div>
+      <div class="atto-azioni">
+        <button type="button" class="grande" id="btn-prosegui">Comincia</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SCENA (dialogo) ══════════════════════════════════ -->
+  <section id="view-scena" class="view scena" aria-label="Scena">
+    <header class="barra">
+      <button type="button" class="icona" id="btn-scena-quit" aria-label="Interrompi e torna all'atto">‹</button>
+      <span class="pillola" id="scena-chi">Ada</span>
+      <span class="pillola tenue" id="scena-memorie">28</span>
+    </header>
+    <div class="scena-interno">
+      <p class="narrazione" id="scena-texto"></p>
+      <div class="scena-scelte" id="scena-scelte"></div>
+      <button type="button" class="grande pieno" id="btn-scena-avanti">Continua</button>
+    </div>
+  </section>
+
+  <!-- ═══ COMBATTIMENTO ═══════════════════════════════════ -->
+  <section id="view-combattimento" class="view combattimento" aria-label="Tela">
+    <header class="hud" id="cb-hud">
+      <div class="hud-riga uno">
+        <div class="nemico">
+          <b id="cb-nemico">Il Commiato</b>
+          <span id="cb-titolo" class="tenue">ritratto di ignoto</span>
+        </div>
+        <div class="ansia" id="cb-ansia-wrap" aria-label="Ansia del nemico">
+          <span class="tenue">ansia</span>
+          <div class="pips" id="cb-ansia" role="img" aria-label="ansia 0 su 6"></div>
+        </div>
+      </div>
+      <div class="hud-riga due">
+        <div class="inchiostro">
+          <span class="tenue">inchiostro</span>
+          <div class="barra-inchiostro"><i id="cb-inchiostro"></i></div>
+          <span id="cb-inchiostro-n" aria-live="off">0</span>
+        </div>
+        <div class="resto">
+          <span class="tenue">resta</span>
+          <b id="cb-resto" aria-label="percentuale di ritratto scoperto">100%</b>
+        </div>
+        <div class="resto">
+          <span class="tenue">memorie</span>
+          <b id="cb-memorie">28</b>
+        </div>
+        <button type="button" class="icona" id="btn-cb-quaderno" aria-label="Apri il Quaderno">▤</button>
+      </div>
+      <div class="palette" id="cb-palette" role="group" aria-label="Inchiostro"></div>
+    </header>
+
+    <div class="tela-r incassa" id="cb-rincassa">
+      <canvas id="cb-tela" aria-label="Tela: traccia il dito per ricoprire il ritratto" role="img"></canvas>
+      <canvas id="cb-effetti" aria-hidden="true"></canvas>
+      <p class="istruzione" id="cb-istruzione">traccia sopra il ritratto</p>
+      <p class="avviso-pennello" id="cb-avviso" role="status" aria-live="polite"></p>
+      <div class="intento" id="cb-intento" hidden></div>
+    </div>
+
+    <footer class="menu" id="cb-menu" role="group" aria-label="Mosse"></footer>
+  </section>
+
+  <!-- ═══ FINALE ══════════════════════════════════════════ -->
+  <section id="view-finale" class="view" aria-label="Finale">
+    <header class="barra">
+      <button type="button" class="icona" id="btn-finale-home" aria-label="Torna alla copertina">⌂</button>
+      <h2 id="finale-nome">Finale</h2>
+      <span class="pillola tenue" id="finale-memorie"></span>
+    </header>
+    <div class="finale-interno" id="finale-interno"></div>
+  </section>
+
+  <!-- ═══ QUADERNO ════════════════════════════════════════ -->
+  <section id="view-quaderno" class="view" aria-label="Il Quaderno">
+    <header class="barra">
+      <button type="button" class="icona" id="btn-quaderno-indietro" aria-label="Chiudi il Quaderno">‹</button>
+      <h2>Il Quaderno</h2>
+      <span class="pillola" id="quaderno-conto">28 / 28</span>
+    </header>
+    <div class="quaderno-interno">
+      <p class="premessa" id="quaderno-premessa">
+        Ogni scheda è un ricordo. Le carte che bruci non le rivedi più: restano
+        solo i bordi scottati.
+      </p>
+      <div class="filtri" id="quaderno-filtri" role="group" aria-label="Filtra per persona"></div>
+      <div class="schede" id="quaderno-schede"></div>
+      <div class="bruciate" id="quaderno-bruciate"></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ OVERLAY: scelta delle schede da bruciare ══════════ -->
+<div id="overlay-schede" class="overlay" hidden>
+  <div class="overlay-interno" role="dialog" aria-modal="true" aria-labelledby="overlay-schede-tit">
+    <h3 id="overlay-schede-tit">Cosa bruci?</h3>
+    <p class="overlay-nota">Non torna. Scegli due carte, poi non saprai più cosa avevi scelto.</p>
+    <div class="scelte-schede" id="overlay-schede-lista"></div>
+    <button type="button" class="fantasma" id="overlay-schede-annulla">Rinuncia</button>
+  </div>
+</div>
+
+<!-- ═══ OVERLAY: impostazioni ═════════════════════════════ -->
+<div id="overlay-impostazioni" class="overlay" hidden>
+  <div class="overlay-interno" role="dialog" aria-modal="true" aria-labelledby="overlay-imp-tit">
+    <h3 id="overlay-imp-tit">Impostazioni</h3>
+    <div class="opzioni">
+      <label class="opzione"><input type="checkbox" id="opt-suono" checked><span>Suono</span></label>
+      <label class="opzione"><input type="checkbox" id="opt-narrazione"><span>Lettura ad alta voce dei testi</span></label>
+      <label class="opzione"><input type="checkbox" id="opt-meno-veloce"><span>Movimento ridotto</span></label>
+      <div class="opzione solo-testa">
+        <span>Colpo mano</span>
+        <div class="segmenti" role="group" aria-label="Colpo mano">
+          <button type="button" class="segmento" data-mano="sinistra">Sinistra</button>
+          <button type="button" class="segmento attivo" data-mano="destra">Destra</button>
+        </div>
+      </div>
+      <div class="opzione solo-testa">
+        <span>Pennello</span>
+        <div class="segmenti" role="group" aria-label="Spessore pennello">
+          <button type="button" class="segmento" data-pennello="sottile">Sottile</button>
+          <button type="button" class="segmento attivo" data-pennello="medio">Medio</button>
+          <button type="button" class="segmento" data-pennello="largo">Largo</button>
+        </div>
+      </div>
+      <div class="opzione solo-testa">
+        <span>Luminosità tela</span>
+        <div class="segmenti" role="group" aria-label="Luminosità">
+          <button type="button" class="segmento" data-lume="chiaro">Chiara</button>
+          <button type="button" class="segmento attivo" data-lume="media">Media</button>
+          <button type="button" class="segmento" data-lume="scura">Scura</button>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="grande pieno" id="overlay-imp-chiudi">Chiudi</button>
+    <p class="overlay-nota"><button type="button" class="link" id="btn-cancella">Cancella la partita</button></p>
+  </div>
+</div>
+
+<!-- ═══ TOAST ═════════════════════════════════════════════ -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<p class="sr-only" id="sr-stato" role="status" aria-live="polite"></p>
+
+<script src="js/save.js"></script>
+<script src="js/memoria.js"></script>
+<script src="js/epitaffio.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/tela.js"></script>
+<script src="js/combat.js"></script>
+<script src="js/nemici.js"></script>
+<script src="js/scena.js"></script>
+<script src="js/app.js"></script>
+<script src="js/pwa.js"></script>
+</body>
+</html>

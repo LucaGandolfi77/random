@@ -1,0 +1,63 @@
+{
+  "id": "/la-pittura-mai-finita",
+  "name": "La Pittura Mai Finita",
+  "short_name": "Pittura",
+  "description": "JRPG a turni dove dipingi il nemico col dito e ogni pennellata cancella un ricordo tuo. 5 atti, 28 memorie, 5 finali, un epitaffio scritto alla fine. Offline.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait",
+  "background_color": "#12100e",
+  "theme_color": "#2a2320",
+  "lang": "it",
+  "dir": "ltr",
+  "categories": ["games", "entertainment", "books"],
+  "prefer_related_applications": false,
+  "icons": [
+    { "src": "icons/icon-72.png",     "sizes": "72x72",     "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-96.png",     "sizes": "96x96",     "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-128.png",    "sizes": "128x128",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-144.png",    "sizes": "144x144",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-152.png",    "sizes": "152x152",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/apple-touch-icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-192.png",    "sizes": "192x192",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-256.png",    "sizes": "256x256",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-384.png",    "sizes": "384x384",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png",    "sizes": "512x512",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-192.png", "sizes": "192x192",  "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512",  "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    {
+      "src": "icons/screenshot-narrow.png",
+      "sizes": "540x960",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Schermata di combattimento: la tela con il ritratto da ricoprire e la barra delle memorie"
+    },
+    {
+      "src": "icons/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Il Quaderno aperto a lato, tela al centro su desktop"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Riprendi la tela",
+      "short_name": "Continua",
+      "description": "Torna all'ultimo atto lasciato",
+      "url": "./?view=gioco",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Il Quaderno",
+      "short_name": "Quaderno",
+      "description": "I ricordi che ti restano",
+      "url": "./?view=quaderno",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

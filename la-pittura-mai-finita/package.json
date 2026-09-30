@@ -1,0 +1,21 @@
+{
+  "name": "la-pittura-mai-finita",
+  "version": "1.0.0",
+  "private": true,
+  "description": "La Pittura Mai Finita - JRPG a turni dove dipingi col dito e ogni pennellata cancella un ricordo. PWA offline, zero dipendenze.",
+  "keywords": ["pwa", "jrpg", "turn-based", "canvas", "grief", "italian", "service-worker"],
+  "license": "MIT",
+  "type": "commonjs",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node serve.js",
+    "dev": "HOST=0.0.0.0 node serve.js",
+    "test": "node --test",
+    "check": "node tools/check.mjs",
+    "check:fast": "node tools/check.mjs --fast",
+    "icons": "node tools/gen-icons.mjs",
+    "contrast": "node tools/contrast.mjs --check"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

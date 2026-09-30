@@ -9,11 +9,11 @@
 | Language | Count | Projects |
 |----------|-------|----------|
 | **Python** | 30+ | agent-library-wrapper, agents-writers-02/03, ai-courtroom-cli, atlas-editorial-house, cat-translator, ctrl-fabric, dynasty-sim, eco_simulator, ecosystem-evolution-simulator, graveyard-chorus, hermes, hermes-principina, holographic-story-builder, interview-coach, italian-startup-simulator, life-operating-system, lingua-evolver, local-llm-run, lunar-mining-simulator, memory_clash, ml-patterns, mlxcli, polarfire-vp, qiskit, quantum-circuit-simulator, rave, sims-ai-city, trend-meme-factory, vertest, whispering_archive, edge-load-balancer-platform |
-| **JavaScript/TypeScript** | 35+ | agents-writers, agents-writers-faster, audio-editor-pwa, candy-crush, card-games, coop-game, due-lumi, echoes-of-the-last-dawn, ev-personale, expedition33_game, friends-tycoon, instable-country-generator, interactive-world-map, multi-screen-streamer, openrouter-free-model-comparator, orto-magico, photo-editor-web, pixel-stretch-app, pokopia-clone, quotesmith, reel-boost, reel-tv, shhh-reader, shotmind, slot-*, tailssh-pwa, tarot-app, termux-web-app, voice-fact-check-pwa, wurstverse, ultimo-sveglio |
+| **JavaScript/TypeScript** | 35+ | agents-writers, agents-writers-faster, audio-editor-pwa, candy-crush, card-games, coop-game, due-lumi, echoes-of-the-last-dawn, ev-personale, expedition33_game, friends-tycoon, instable-country-generator, interactive-world-map, la-pittura-mai-finita, multi-screen-streamer, openrouter-free-model-comparator, orto-magico, photo-editor-web, pixel-stretch-app, pokopia-clone, quotesmith, reel-boost, reel-tv, shhh-reader, shotmind, slot-*, tailssh-pwa, tarot-app, termux-web-app, voice-fact-check-pwa, wurstverse, ultimo-sveglio |
 | **C/C++** | 4 | ai-dj-internet-radio, esp32-os, photoshop-clone, samrh-mplab-linux-env |
 | **Rust** | 1 | edge-load-balancer-platform (auth sidecar) |
 | **LaTeX/Markdown** | 2 | cv-jb, cv-lg |
-| **HTML/CSS** | 20+ | candy-crush, coop-game, ev-personale, expedition33_game, friends-tycoon, openrouter-free-model-comparator, quotesmith, slot-*, etc. |
+| **HTML/CSS** | 20+ | candy-crush, coop-game, la-pittura-mai-finita, ev-personale, expedition33_game, friends-tycoon, openrouter-free-model-comparator, quotesmith, slot-*, etc. |
 
 ---
 
@@ -67,6 +67,7 @@
 | Project | Description | Languages | Key Features |
 |---------|-------------|------------|--------------|
 | **due-lumi** | Pixel art retro adventure RPG | JavaScript | Procedural sprites/music, 4 endings, turn-based combat, zero external assets |
+| **la-pittura-mai-finita** | Turn-based JRPG where you paint the enemy with your finger | JavaScript | Canvas 2D, every brushstroke burns a memory, timed parry recovers one, 6 acts, 28 memories, generated epitaph, PWA iPhone-first, zero deps |
 | **echoes-of-the-last-dawn** | 3D JRPG browser game | JavaScript | Three.js low-poly, timed parry, 5 zones, 5 bosses, philosophical story |
 | **candy-crush** | Match-3 puzzle game | HTML/CSS/JS | 20 levels, jelly mode, SVG sprites, combo system |
 | **friends-tycoon** | Idle tycoon game with custom 3D engine | JavaScript | Custom Canvas 3D renderer, 8 characters, 18 activities, offline progress |

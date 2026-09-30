@@ -1,5 +1,8 @@
 /* board.js — motore match-3 swap 8x8, touch-first */
+(function () {
 'use strict';
+/* Spazi di valore: [0..TILE_COUNT) semplice · +BLOOM_BASE bocciolo · +FROZEN_BASE gelo · INK */
+const BLOOM_BASE = 10, FROZEN_BASE = 20, INK = 30;
 class MHBoard {
   constructor(el, opts = {}) {
     this.el = el;
@@ -29,59 +32,103 @@ class MHBoard {
     this.build();
     this.seedInk();
   }
-  isPlain(v) { return v >= 0 && v < 10; } // 10+t = 🌱 bocciolo, 20+t = 🧊 gelo, 30 = ⬛ inchiostro
-  isFrozen(v) { return v >= 20 && v < 26; }
-  isInk(v) { return v === 30; }
-  movable(v) { return v >= 0 && v < 20; } // gelo e inchiostro non si spostano
+  isBloom(v) { return v >= BLOOM_BASE && v < BLOOM_BASE + window.MHTiles.TILE_COUNT; }
+  isPlain(v) { return v >= 0 && v < window.MHTiles.TILE_COUNT; }
+  isFrozen(v) { return v >= FROZEN_BASE && v < FROZEN_BASE + window.MHTiles.TILE_COUNT; }
+  isInk(v) { return v === INK; }
+  movable(v) { return v >= 0 && v < FROZEN_BASE; } // solo i boccioli si spostano; gelo e inchiostro no
   rnd() {
     if ((this.mechanic === 'bloom' || this.mechanic === 'mix') && Math.random() < this.bloomRate) {
-      return 10 + Math.floor(Math.random() * window.MHTiles.TILE_COUNT);
+      return BLOOM_BASE + Math.floor(Math.random() * window.MHTiles.TILE_COUNT);
     }
     if ((this.mechanic === 'gelo' || this.mechanic === 'mix') && Math.random() < this.frozenRate) {
-      return 20 + Math.floor(Math.random() * window.MHTiles.TILE_COUNT);
+      return FROZEN_BASE + Math.floor(Math.random() * window.MHTiles.TILE_COUNT);
     }
     if (this.biasTile >= 0 && Math.random() < 0.28) return this.biasTile;
     return Math.floor(Math.random() * window.MHTiles.TILE_COUNT);
   }
   build() {
     this.el.innerHTML = '';
-    this.cells = [];
+    this.cells = []; this.rows = [];
     do { this.grid = Array.from({ length: this.size }, () => Array.from({ length: this.size }, () => this.rnd())); }
     while (this.findMatches().length > 0);
+    /* role="grid" esige che i gridcell siano dentro role="row": senza righe
+       reali l'ARIA è invalido e gli screen reader annunciano una tabella
+       non operabile. E le celle devono essere navigabili da tastiera. */
     for (let r = 0; r < this.size; r++) {
+      const row = document.createElement('div');
+      row.className = 'board-row'; row.setAttribute('role', 'row');
       for (let c = 0; c < this.size; c++) {
         const d = document.createElement('div');
         d.className = 'tile'; d.setAttribute('role', 'gridcell');
+        d.tabIndex = (r === 0 && c === 0) ? 0 : -1;
         d.dataset.r = r; d.dataset.c = c;
-        d.addEventListener('pointerdown', (e) => this.tap(r, c, e));
-        this.el.appendChild(d); this.cells.push(d);
+        row.appendChild(d); this.cells.push(d);
       }
+      this.rows.push(row); this.el.appendChild(row);
     }
+    this.cur = { r: 0, c: 0 };
     this.render(); this.bindSwipe(); this.onUpdate(this.state());
   }
   cell(r, c) { return this.cells[r * this.size + c]; }
+  glyphOf(v, set) {
+    if (v === -1) return '';
+    if (this.isBloom(v)) return '🌱';
+    if (this.isFrozen(v)) return '🧊';
+    if (this.isInk(v)) return '⬛';
+    return (set[v] && set[v].emoji) || '❓';
+  }
   render() {
     const set = (window.MHTiles.SKINS && window.MHTiles.SKINS[this.skin]) || window.MHTiles.TILES;
     for (let r = 0; r < this.size; r++) for (let c = 0; c < this.size; c++) {
       const d = this.cell(r, c), v = this.grid[r][c];
-      d.textContent = v === -1 ? '' : (v >= 10 && v < 16 ? '🌱' : (this.isFrozen(v) ? '🧊' : (v === 30 ? '⬛' : set[v].emoji)));
+      const g = this.glyphOf(v, set);
+      d.textContent = g;
+      d.setAttribute('aria-label', `${r + 1},${c + 1} ${g || 'vuota'}`);
       d.style.background = v === -1 ? 'transparent' : '';
-      d.classList.toggle('sel', this.sel && this.sel.r === r && this.sel.c === c);
+      const on = this.sel && this.sel.r === r && this.sel.c === c;
+      d.classList.toggle('sel', !!on);
+      d.setAttribute('aria-selected', on ? 'true' : 'false');
     }
+  }
+  /* --- tastiera: navigazione a griglia roving tabindex --- */
+  moveCur(dr, dc) {
+    const r = Math.min(this.size - 1, Math.max(0, this.cur.r + dr));
+    const c = Math.min(this.size - 1, Math.max(0, this.cur.c + dc));
+    if (r === this.cur.r && c === this.cur.c) return;
+    const from = this.cell(this.cur.r, this.cur.c);
+    from.tabIndex = -1;
+    this.cur = { r, c };
+    const to = this.cell(r, c);
+    to.tabIndex = 0;
+    to.focus({ preventScroll: true });
+  }
+  bindKeys() {
+    const on = (key, fn, opts) => { this.el.addEventListener(key, fn, opts); this._off.push(() => this.el.removeEventListener(key, fn, opts)); };
+    on('keydown', (e) => {
+      if (this.over) return;
+      const k = e.key;
+      if (k === 'ArrowUp') { e.preventDefault(); this.moveCur(-1, 0); return; }
+      if (k === 'ArrowDown') { e.preventDefault(); this.moveCur(1, 0); return; }
+      if (k === 'ArrowLeft') { e.preventDefault(); this.moveCur(0, -1); return; }
+      if (k === 'ArrowRight') { e.preventDefault(); this.moveCur(0, 1); return; }
+      if (k === 'Enter' || k === ' ' || k === 'Spacebar') { e.preventDefault(); this.tap(this.cur.r, this.cur.c); return; }
+      if (k === 'Escape' && this.sel) { e.preventDefault(); this.sel = null; this.render(); }
+    });
   }
   seedInk() {
     // macchie d'inchiostro iniziali sparse, mai adiacenti tra loro
     let placed = 0, guard = 0;
     while (placed < this.inkCount && guard++ < 300) {
       const r = Math.floor(Math.random() * this.size), c = Math.floor(Math.random() * this.size);
-      if (this.grid[r][c] === 30) continue;
+      if (this.grid[r][c] === INK) continue;
       let adj = false;
       for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
         const nr = r + dr, nc = c + dc;
-        if (this.inBounds(nr, nc) && this.grid[nr][nc] === 30) { adj = true; break; }
+        if (this.inBounds(nr, nc) && this.grid[nr][nc] === INK) { adj = true; break; }
       }
       if (adj) continue;
-      this.grid[r][c] = 30; placed++;
+      this.grid[r][c] = INK; placed++;
     }
     if (placed) this.render();
   }
@@ -89,35 +136,56 @@ class MHBoard {
     // ogni inkEvery mosse l'inchiostro macchia un vicino (mai oltre inkMax)
     const inks = [];
     for (let r = 0; r < this.size; r++) for (let c = 0; c < this.size; c++) {
-      if (this.grid[r][c] === 30) inks.push([r, c]);
+      if (this.grid[r][c] === INK) inks.push([r, c]);
     }
     if (!inks.length || inks.length >= this.inkMax) return;
     const [r, c] = inks[Math.floor(Math.random() * inks.length)];
     const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]].sort(() => Math.random() - 0.5);
     for (const [dr, dc] of dirs) {
       const nr = r + dr, nc = c + dc;
-      if (this.inBounds(nr, nc) && this.isPlain(this.grid[nr][nc])) { this.grid[nr][nc] = 30; break; }
+      if (this.inBounds(nr, nc) && this.isPlain(this.grid[nr][nc])) { this.grid[nr][nc] = INK; break; }
     }
     this.render();
   }
+  /* B3: #board è un nodo persistente e veniva ri-bindato a ogni livello.
+     Le arrow function erano nuove a ogni build() → nessun dedupe di
+     addEventListener → 1 swipe lanciava N trySwap(), e le copie eccedenti
+     annullavano lo swap valido. Qui: un solo set di handler, rimosso
+     esplicitamente a ogni ri-bind e in destroy(). */
   bindSwipe() {
+    this.unbindSwipe();
+    const off = (this._off = []);
     let start = null;
-    this.el.onpointermove = null;
-    this.el.addEventListener('pointerdown', (e) => {
-      const t = e.target.closest('.tile'); if (!t) return;
+    const on = (type, fn, opts) => { this.el.addEventListener(type, fn, opts); off.push(() => this.el.removeEventListener(type, fn, opts)); };
+    const tileAt = (t) => (t && t.closest ? t.closest('.tile') : null);
+
+    on('pointerdown', (e) => {
+      const t = tileAt(e.target); if (!t) return;
       start = { r: +t.dataset.r, c: +t.dataset.c, x: e.clientX, y: e.clientY };
+      this.tap(+t.dataset.r, +t.dataset.c);
     });
-    this.el.addEventListener('pointerup', (e) => {
+    on('pointerup', (e) => {
       if (!start) return;
-      const t = e.target.closest('.tile');
       const dx = e.clientX - start.x, dy = e.clientY - start.y;
-      if (Math.abs(dx) > 18 || Math.abs(dy) > 18) {
-        let r = start.r, c = start.c;
-        if (Math.abs(dx) > Math.abs(dy)) c += dx > 0 ? 1 : -1; else r += dy > 0 ? 1 : -1;
-        this.trySwap(start.r, start.c, r, c);
-      }
+      const r = start.r, c = start.c;
       start = null;
+      if (Math.abs(dx) > 18 || Math.abs(dy) > 18) {
+        let nr = 0, nc = 0;
+        if (Math.abs(dx) > Math.abs(dy)) nc = dx > 0 ? 1 : -1; else nr = dy > 0 ? 1 : -1;
+        this.sel = null; this.render();       // uno swipe non lascia selezione pendente
+        this.trySwap(r, c, r + nr, c + nc);
+      }
     });
+    on('pointercancel', () => { start = null; });
+    this.bindKeys();
+  }
+  unbindSwipe() {
+    if (this._off) { this._off.forEach((fn) => fn()); this._off = null; }
+  }
+  destroy() {
+    this.unbindSwipe();
+    this.over = true;
+    this.sel = null;
   }
   tap(r, c) {
     if (this.over) return;
@@ -196,17 +264,17 @@ class MHBoard {
             const nr = r + dr, nc = c + dc;
             if (!this.inBounds(nr, nc)) continue;
             const nv = this.grid[nr][nc];
-            if (nv >= 10 && nv < 16 && (this.mechanic === 'bloom' || this.mechanic === 'mix')) {
-              const hid = nv - 10;
+            if (this.isBloom(nv) && (this.mechanic === 'bloom' || this.mechanic === 'mix')) {
+              const hid = nv - BLOOM_BASE;
               this.grid[nr][nc] = hid;
               if (hid === this.targetTile) this.collected += 2;
               hatched++;
             } else if (this.isFrozen(nv) && (this.mechanic === 'gelo' || this.mechanic === 'mix')) {
-              const hid = nv - 20;
+              const hid = nv - FROZEN_BASE;
               this.grid[nr][nc] = hid;
               if (hid === this.targetTile) this.collected += 1;
               thawed++;
-            } else if (nv === 30 && this.mechanic === 'ink') {
+            } else if (this.isInk(nv) && this.mechanic === 'ink') {
               this.grid[nr][nc] = Math.floor(Math.random() * window.MHTiles.TILE_COUNT);
               cleaned++;
             }
@@ -233,7 +301,7 @@ class MHBoard {
     }
     this.combo = 0;
   }
-  state() { return { moves: this.moves, collected: this.collected, need: this.targetCount, score: this.score, over: this.over }; }
+  state() { return { moves: this.moves, collected: this.collected, need: this.targetCount, score: this.score, over: this.over, quota: this.quota, quotaMet: this.score >= (this.quota || 0) }; }
   checkEnd() {
     const q = this.quota || 0;
     if (this.collected >= this.targetCount && this.score >= q) { this.over = true; window.MHAudio.chime(); this.onWin(this.state()); }
@@ -241,16 +309,22 @@ class MHBoard {
   }
   booster(kind) {
     if (this.over) return false;
+    const S = this.size;
     if (kind === 'chasen') {
-      // trasforma 8 tessere casuali nel target
-      let n = 0;
-      while (n < 8) { const r = Math.floor(Math.random() * 8), c = Math.floor(Math.random() * 8); if (this.grid[r][c] !== this.targetTile) { this.grid[r][c] = this.targetTile; n++; } }
+      /* B4: guardia esplicita — il while precedente non terminava mai
+         su un board già saturo di targetTile (freeze della UI). */
+      let n = 0, guard = 0;
+      while (n < 8 && guard++ < 200) {
+        const r = Math.floor(Math.random() * S), c = Math.floor(Math.random() * S);
+        if (this.grid[r][c] !== this.targetTile) { this.grid[r][c] = this.targetTile; n++; }
+      }
+      if (n === 0) return false;
       window.MHAudio.whisk();
     } else {
-      const r = Math.floor(Math.random() * 8), c = Math.floor(Math.random() * 8);
+      const r = Math.floor(Math.random() * S), c = Math.floor(Math.random() * S);
       this.grid[r][c] = this.targetTile;
-      this.grid[(r + 3) % 8][c] = this.targetTile;
-      this.grid[r][(c + 3) % 8] = this.targetTile;
+      this.grid[(r + 3) % S][c] = this.targetTile;
+      this.grid[r][(c + 3) % S] = this.targetTile;
       window.MHAudio.chime();
     }
     this.render();
@@ -261,3 +335,4 @@ class MHBoard {
   }
 }
 window.MHBoard = MHBoard;
+})();

@@ -1,11 +1,40 @@
-/* minigames.js — Awa, Latte-Art, Respiro. Ritornano {grade, bonus} */
+/* minigames.js — Awa, Latte-Art, Respiro. Ritornano {grade, bonus, aborted} */
+(function () {
 'use strict';
 function toast(m){ window.MHToast?.(m); }
-function runAwa(canvas, status) {
+
+/* B5: ogni rito è cancellabile via AbortSignal.
+   Prima: chiudere il modale a metà lasciava il rAF girare su un canvas
+   nascosto e, al resolve, regalava comunque +2 mosse / +1 cuore senza
+   aver finito. E miniBusy restava true senza alcun feedback. */
+function onAbort(signal, fn) {
+  if (!signal) return () => {};
+  if (signal.aborted) { fn(); return () => {}; }
+  signal.addEventListener('abort', fn, { once: true });
+  return () => signal.removeEventListener('abort', fn);
+}
+const ABORTED = () => ({ grade: '—', bonus: 0, aborted: true });
+
+function runAwa(canvas, status, signal) {
+  if (signal && signal.aborted) return Promise.resolve(ABORTED());
   return new Promise((resolve) => {
     const ctx = canvas.getContext('2d');
     let angle = 0, speed = 0, last = performance.now(), foam = 0, t0 = performance.now();
     let cx = 220, cy = 150, R = 90, px = null, py = null, active = false;
+    let raf = 0, done = false, off = () => {};
+
+    const settle = (res) => {
+      if (done) return;
+      done = true; off();
+      canvas.onpointerdown = canvas.onpointermove = canvas.onpointerup = null;
+      if (raf) cancelAnimationFrame(raf);
+      resolve(res);
+    };
+    off = onAbort(signal, () => {
+      status.textContent = 'Rito interrotto — nessun bonus 🍵';
+      settle(ABORTED());
+    });
+
     status.textContent = '🌀 Ruota il dito in cerchio, velocità media! 12 secondi.';
     function draw() {
       ctx.clearRect(0,0,440,300);
@@ -19,33 +48,48 @@ function runAwa(canvas, status) {
       ctx.strokeStyle = speed>2&&speed<9 ? '#4a6b4f' : '#e9c46a'; ctx.lineWidth=6;
       ctx.beginPath(); ctx.arc(cx,cy,R+14,angle-1,angle+1); ctx.stroke();
     }
+    function finish() {
+      const grade = foam>75?'S':foam>50?'A':foam>28?'B':'C';
+      status.textContent = `Schiuma ${Math.round(foam)}% → voto ${grade} ${grade==='S'?'✨ perfetta! +4 mosse al prossimo livello':grade==='C'?'· un po’ amara, ma va bene così ♥':'+2 mosse bonus'}`;
+      window.MHAudio.chime();
+      settle({ grade, bonus: grade==='S'?4:grade==='C'?0:2 });
+    }
     function loop(now) {
+      if (done) return;
       const dt=(now-last)/1000; last=now;
       speed*=0.94;
       if (active && speed>2&&speed<9) foam+=dt*14; else if (active && speed>=9) foam-=dt*8;
       foam=Math.max(0,Math.min(100,foam));
       angle+=speed*dt; draw();
       if (now-t0>12000) { finish(); return; }
-      requestAnimationFrame(loop);
+      raf = requestAnimationFrame(loop);
     }
-    function finish() {
-      canvas.onpointermove=null; canvas.onpointerdown=null; canvas.onpointerup=null;
-      const grade = foam>75?'S':foam>50?'A':foam>28?'B':'C';
-      status.textContent = `Schiuma ${Math.round(foam)}% → voto ${grade} ${grade==='S'?'✨ perfetta! +4 mosse al prossimo livello':grade==='C'?'· un po’ amara, ma va bene così ♥':'+2 mosse bonus'}`;
-      window.MHAudio.chime();
-      resolve({ grade, bonus: grade==='S'?4:grade==='C'?0:2 });
-    }
-    canvas.onpointerdown=(e)=>{active=true; const r=canvas.getBoundingClientRect(); px=(e.clientX-r.left)*(440/r.width); py=(e.clientY-r.top)*(300/r.height);};
-    canvas.onpointerup=()=>{active=false; speed=0;};
-    canvas.onpointermove=(e)=>{ if(!active) return; const r=canvas.getBoundingClientRect(); const x=(e.clientX-r.left)*(440/r.width), y=(e.clientY-r.top)*(300/r.height); const dx=x-px, dy=y-py; speed=Math.min(14,Math.hypot(dx,dy)/3); px=x; py=y; window.MHAudio.rainTick(); };
-    draw(); requestAnimationFrame(loop);
+    const pos = (e) => { const r=canvas.getBoundingClientRect(); return { x:(e.clientX-r.left)*(440/r.width), y:(e.clientY-r.top)*(300/r.height) }; };
+    canvas.onpointerdown=(e)=>{ active=true; const p=pos(e); px=p.x; py=p.y; };
+    canvas.onpointerup=canvas.onpointercancel=()=>{ active=false; speed=0; };
+    canvas.onpointermove=(e)=>{ if(!active) return; const p=pos(e); const dx=p.x-px, dy=p.y-py; speed=Math.min(14,Math.hypot(dx,dy)/3); px=p.x; py=p.y; window.MHAudio.rainTick(); };
+    draw(); raf = requestAnimationFrame(loop);
   });
 }
-function runLatte(canvas, status) {
+
+function runLatte(canvas, status, signal) {
+  if (signal && signal.aborted) return Promise.resolve(ABORTED());
   return new Promise((resolve) => {
     const ctx = canvas.getContext('2d');
     status.textContent = '🌸 Trascina per disegnare un cuore senza uscire dalla tazza! Hai 20s.';
-    const t0=performance.now(); let path=[], drawing=false, out=0;
+    const t0=performance.now(); let path=[], drawing=false, out=0, timer=0, done=false, off=() => {};
+
+    const settle = (res) => {
+      if (done) return;
+      done = true; off(); if (timer) clearTimeout(timer);
+      canvas.onpointerdown = canvas.onpointermove = canvas.onpointerup = canvas.ondblclick = null;
+      resolve(res);
+    };
+    off = onAbort(signal, () => {
+      status.textContent = 'Rito interrotto — nessun bonus 🍵';
+      settle(ABORTED());
+    });
+
     function draw() {
       ctx.clearRect(0,0,440,300);
       ctx.fillStyle='#fffdf7'; ctx.fillRect(0,0,440,300);
@@ -62,31 +106,53 @@ function runLatte(canvas, status) {
     }
     function inside(x,y){ const dx=(x-220)/112, dy=(y-155)/87; return dx*dx+dy*dy<=1; }
     function finish() {
-      canvas.onpointerdown=canvas.onpointermove=canvas.onpointerup=null;
       // voto: copertura + stare dentro
       const cover=Math.min(100,path.length/3);
       const penalty=out*2;
       const score=Math.max(0,cover-penalty);
       const grade=score>70?'S':score>45?'A':score>22?'B':'C';
       status.textContent=`Latte-art ${Math.round(score)} → ${grade} ${grade==='S'?'💘 Ren si commuove! Sblocchi CG sakura +4 mosse':grade==='C'?'· storta ma tenera ♥ +0':'+2 mosse'}`;
-      window.MHAudio.chime(); resolve({grade,bonus:grade==='S'?4:grade==='C'?0:2});
+      window.MHAudio.chime();
+      settle({grade,bonus:grade==='S'?4:grade==='C'?0:2});
     }
-    canvas.onpointerdown=(e)=>{drawing=true;};
-    canvas.onpointerup=()=>{drawing=false;};
-    canvas.onpointermove=(e)=>{ if(!drawing) return; const r=canvas.getBoundingClientRect(); const x=(e.clientX-r.left)*(440/r.width), y=(e.clientY-r.top)*(300/r.height); path.push({x,y}); if(!inside(x,y)) out++; draw(); if(performance.now()-t0>20000) finish(); };
+    canvas.onpointerdown=()=>{ drawing=true; };
+    canvas.onpointerup=canvas.onpointercancel=()=>{ drawing=false; };
+    canvas.onpointermove=(e)=>{
+      if(!drawing||done) return;
+      const r=canvas.getBoundingClientRect();
+      const x=(e.clientX-r.left)*(440/r.width), y=(e.clientY-r.top)*(300/r.height);
+      path.push({x,y}); if(!inside(x,y)) out++;
+      draw();
+      if(performance.now()-t0>20000) finish();
+    };
     draw();
-    setTimeout(()=>{ if(canvas.onpointerdown) finish(); },21000);
-    // chiudi anticipato: doppio tap = fine
+    timer = setTimeout(finish, 21000);
+    // chiusura anticipata: doppio tap = fine
     canvas.ondblclick=()=>finish();
   });
 }
-function runBreath(canvas, status) {
+
+function runBreath(canvas, status, signal) {
+  if (signal && signal.aborted) return Promise.resolve(ABORTED());
   return new Promise((resolve) => {
     const ctx=canvas.getContext('2d');
     status.textContent='🌊 Segui il cerchio: inspira 4s · trattieni 7s · espira 8s. Un ciclo = +1 ♥ / +2 mosse.';
     const phases=[{n:'inspira…',d:4,c:'#7a9e7e'},{n:'trattieni…',d:7,c:'#e9c46a'},{n:'espira…',d:8,c:'#7aa0c4'}];
-    let pi=0, pt=performance.now();
+    let pi=0, pt=performance.now(), raf=0, done=false, off=() => {};
+
+    const settle = (res) => {
+      if (done) return;
+      done = true; off();
+      if (raf) cancelAnimationFrame(raf);
+      resolve(res);
+    };
+    off = onAbort(signal, () => {
+      status.textContent = 'Rito interrotto — respira comunque, riprova quando vuoi 🌊';
+      settle(ABORTED());
+    });
+
     function draw(now) {
+      if (done) return;
       const ph=phases[pi], el=(now-pt)/1000, k=Math.min(1,el/ph.d);
       const R = pi===2 ? 100-60*k : 40+60*(pi===0?k:1);
       ctx.clearRect(0,0,440,300);
@@ -96,16 +162,18 @@ function runBreath(canvas, status) {
       ctx.fillStyle='#fff'; ctx.font='800 26px system-ui'; ctx.textAlign='center'; ctx.fillText(ph.n,220,158);
       ctx.fillStyle='#2e2a24'; ctx.font='700 14px system-ui'; ctx.fillText(`fase ${pi+1}/3 · ${Math.ceil(ph.d-el)}s`,220,28);
       if(el>=ph.d){ pi++; pt=now; window.MHAudio.pop(pi+1); if(navigator.vibrate) try{navigator.vibrate(40);}catch{} if(pi>=3){finish();return;} }
-      requestAnimationFrame(draw);
+      raf = requestAnimationFrame(draw);
     }
-    function finish(){ status.textContent='✨ Calma ritrovata. +1 ♥ e +2 mosse al livello. Hana è fiera.'; window.MHAudio.chime(); resolve({grade:'S',bonus:2,heart:1}); }
-    requestAnimationFrame(draw);
+    function finish(){ status.textContent='✨ Calma ritrovata. +1 ♥ e +2 mosse al livello. Hana è fiera.'; window.MHAudio.chime(); settle({grade:'S',bonus:2,heart:1}); }
+    raf = requestAnimationFrame(draw);
   });
 }
-async function playMini(kind, canvas, status) {
+
+async function playMini(kind, canvas, status, signal) {
   window.MHAudio.whisk();
-  if (kind==='awa') return runAwa(canvas,status);
-  if (kind==='latte') return runLatte(canvas,status);
-  return runBreath(canvas,status);
+  if (kind==='awa') return runAwa(canvas, status, signal);
+  if (kind==='latte') return runLatte(canvas, status, signal);
+  return runBreath(canvas, status, signal);
 }
 window.MHMinis={playMini};
+})();

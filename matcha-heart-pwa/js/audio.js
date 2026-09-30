@@ -1,4 +1,5 @@
 /* audio.js — synth cozy WebAudio, zero asset */
+(function () {
 'use strict';
 let ctx = null;
 function ac() {
@@ -25,3 +26,4 @@ function chime() { [523, 659, 784, 1046].forEach((f, i) => tone(f, .5, 'sine', .
 function whisk() { for (let i = 0; i < 6; i++) tone(900 + Math.random() * 600, .05, 'square', .03, i * .05); }
 function rainTick() { tone(2000 + Math.random() * 2000, .03, 'sine', .015); }
 window.MHAudio = { pop, swapSnd, badSnd, chime, whisk, rainTick, ac };
+})();

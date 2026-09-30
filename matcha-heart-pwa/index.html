@@ -7,38 +7,44 @@
 <meta name="description" content="Matcha Heart — cozy matcha match-3: 100 livelli tra Pioggia, Sakura Eterna, Notte Yokai e Marea d'Estate. Offline, mobile-first.">
 <title>Matcha Heart — cozy matcha match-3</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icons/icon-192.png" type="image/png">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Matcha Heart">
+<meta name="color-scheme" content="light dark">
+<meta name="format-detection" content="telephone=no">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <canvas id="rain" aria-hidden="true"></canvas>
 <canvas id="petals" aria-hidden="true"></canvas>
 <div class="app">
-  <div class="topbar">
-    <div class="brand"><span class="cup">🍵</span><span>Matcha Heart<small>chashitsu · kyoto</small></span></div>
+  <header class="topbar">
+    <div class="brand"><span class="cup" aria-hidden="true">🍵</span><span>Matcha Heart<small>chashitsu · kyoto</small></span></div>
     <div class="hud">
-      <span class="pill" id="hud-hearts">♥ 5</span>
-      <span class="pill" id="hud-stars">★ 0</span>
-      <button class="iconbtn" id="btn-sound" aria-label="Audio">🔔</button>
-      <button class="iconbtn" id="btn-night" aria-label="Notte">🌙</button>
+      <span class="pill" id="hud-hearts" role="status" aria-live="polite" aria-label="Cuori">♥ 5</span>
+      <span class="pill" id="hud-stars" role="status" aria-live="polite" aria-label="Stelle">★ 0</span>
+      <button class="iconbtn" id="btn-sound" aria-label="Audio" aria-pressed="true">🔔</button>
+      <button class="iconbtn" id="btn-night" aria-label="Modalità notte" aria-pressed="false">🌙</button>
     </div>
-  </div>
+  </header>
 
   <main>
-    <section id="view-home" class="view active">
-      <div class="card tama-card" id="tama-card" role="button" tabindex="0" aria-label="Coccola il tuo frullino-cucciolo">
-        <div class="tama-face" id="tama-face">🌱😊</div>
+    <p class="sr-only" id="sr-status" role="status" aria-live="polite"></p>
+
+    <section id="view-home" class="view active" aria-label="Casa">
+      <div class="card tama-card" id="tama-card">
+        <button type="button" class="tama-cuddle" id="btn-tama-cuddle" aria-label="Coccola il tuo frullino-cucciolo">
+          <span class="tama-face" id="tama-face" aria-hidden="true">🌱😊</span>
+        </button>
         <div class="tama-info"><b id="tama-name">Mugi · Germoglio</b><span class="meter" id="tama-meta">0 xp</span></div>
-        <button class="iconbtn" id="btn-tama-name" aria-label="Rinomina">✏️</button>
+        <button type="button" class="iconbtn" id="btn-tama-name" aria-label="Rinomina il tuo frullino-cucciolo">✏️</button>
       </div>
       <div class="card yuki-art" id="yuki-art" style="display:none">🎨 Yuki ti ha lasciato un disegno: tre tazze intere sotto sette soli rosa. "Per la settimana più bella." 🌸</div>
-      <div class="card univ-card" id="univ-card" aria-label="Universo attuale">
-        <div class="univ-face" id="univ-face">🌧️</div>
+      <div class="card univ-card" id="univ-card" role="group" aria-label="Universo attuale">
+        <div class="univ-face" id="univ-face" aria-hidden="true">🌧️</div>
         <div class="univ-info"><b id="univ-name">Pioggia</b><span class="meter" id="univ-desc"></span></div>
         <div class="univ-btns" id="univ-row"></div>
       </div>
@@ -48,100 +54,125 @@
         <p class="lead">Sei <b>Aoi</b>. Tua nonna Hana ti ha lasciato 25 lettere, un chasen consumato e un debito d'affitto. Ogni tazza che servi bene riapre una memoria. Ogni tazza fredda la chiude.</p>
         <div class="tea-bar" aria-hidden="true"><i id="home-tea"></i></div>
         <p class="meter" id="home-progress">0 / 30 episodi · 0 ★</p>
-        <div class="mood" id="mood-row" aria-label="Come stai oggi?">
+        <div class="mood" id="mood-row" role="group" aria-label="Come stai oggi?">
           <span class="meter">Come stai? </span>
-          <button class="iconbtn moodbtn" data-mood="ansiosa" aria-label="Ansiosa">😰</button>
-          <button class="iconbtn moodbtn" data-mood="malinconica" aria-label="Malinconica">🥺</button>
-          <button class="iconbtn moodbtn" data-mood="bene" aria-label="Bene">🌸</button>
+          <button type="button" class="iconbtn moodbtn" data-mood="ansiosa" aria-label="Ansiosa" aria-pressed="false">😰</button>
+          <button type="button" class="iconbtn moodbtn" data-mood="malinconica" aria-label="Malinconica" aria-pressed="false">🥺</button>
+          <button type="button" class="iconbtn moodbtn" data-mood="bene" aria-label="Bene" aria-pressed="false">🌸</button>
         </div>
         <p class="meter" id="mood-week"></p>
-        <button class="btn primary" id="btn-start">🍵 Apri il locale</button>
+        <button type="button" class="btn primary" id="btn-start">🍵 Apri il locale</button>
         <div class="row">
-          <button class="btn ghost small" id="btn-oracle">🔮 Oracolo del tè</button>
-          <button class="btn ghost small" id="btn-breath-home">🌊 Respiro 4-7-8</button>
+          <button type="button" class="btn ghost small" id="btn-oracle">🔮 Oracolo del tè</button>
+          <button type="button" class="btn ghost small" id="btn-breath-home">🌊 Respiro 4-7-8</button>
         </div>
         <div class="row">
-          <button class="btn ghost small" id="btn-install">📲 Installa app</button>
-          <button class="btn ghost small" id="btn-reset">🧹 Ricomincia</button>
+          <button type="button" class="btn ghost small" id="btn-install">📲 Installa app</button>
+          <button type="button" class="btn ghost small" id="btn-rain">🌧️ Tocca la pioggia</button>
+          <button type="button" class="btn ghost small" id="btn-reset">🧹 Ricomincia</button>
         </div>
-        <p class="meter">100% offline · nessun account · il matcha ti ricorda. Tocca le gocce di pioggia sullo sfondo: portano fortuna (+1 mossa).</p>
+        <p class="meter">100% offline · nessun account · il matcha ti ricorda. Tocca le gocce di pioggia sullo sfondo (o il bottone 🌧️): portano fortuna (+1 mossa).</p>
       </div>
     </section>
 
-    <section id="view-map" class="view">
+    <section id="view-map" class="view" aria-label="Mappa dei capitoli">
       <div class="card"><h2>🗺️ Mappa dei capitoli</h2><p class="lead" id="map-lead">30 tazze = 30 memorie. 4 finali + 1 segreto <i>Matcha Eterno</i> (60★).</p></div>
       <div id="chapters" class="mapgrid" style="margin-top:10px"></div>
     </section>
 
-    <section id="view-game" class="view">
+    <section id="view-game" class="view" aria-label="Tavola di gioco">
       <div class="board-wrap">
         <div class="meta"><span id="level-label">Cap.1-1</span><span id="level-goal">🎯 15 🍵 in 22 mosse</span></div>
-        <div class="tea-bar"><i id="tea-fill"></i></div>
+        <div class="tea-bar" aria-hidden="true"><i id="tea-fill"></i></div>
         <div class="meta"><span class="meter" id="moves-label">mosse: 22</span><span class="meter" id="score-label">schiuma: 0%</span></div>
-        <div id="board" class="board" role="grid" aria-label="Tavola matcha"></div>
+        <div id="board" class="board" role="grid" tabindex="-1" aria-label="Tavola matcha 8 per 8. Usa le frecce per muoverti, Invio per selezionare e scambiare."></div>
         <div class="row">
-          <button class="btn ghost small" id="btn-booster-chasen">🌀 Chasen +</button>
-          <button class="btn ghost small" id="btn-booster-cup">🌈 Tazza +</button>
-          <button class="btn ghost small" id="btn-minigame">🎮 Rito</button>
+          <button type="button" class="btn ghost small" id="btn-booster-chasen">🌀 Chasen +</button>
+          <button type="button" class="btn ghost small" id="btn-booster-cup">🌈 Tazza +</button>
+          <button type="button" class="btn ghost small" id="btn-minigame">🎮 Rito</button>
         </div>
-        <button class="btn primary" id="btn-story-after" style="display:none">📖 Servi la tazza → leggi la memoria</button>
+        <button type="button" class="btn primary" id="btn-story-after" style="display:none">📖 Servi la tazza → leggi la memoria</button>
       </div>
     </section>
 
-    <section id="view-diary" class="view">
-      <div class="card"><h2>📔 Diario di Hana</h2><p class="lead">Lettere sbloccate servendo bene. Rileggile quando hai ansia.</p><div id="diary"></div></div>
+    <section id="view-diary" class="view" aria-label="Diario di Hana">
+      <div class="card">
+        <h2>📔 Diario di Hana</h2>
+        <p class="lead">Lettere sbloccate servendo bene. Rileggile quando hai ansia.</p>
+        <div class="row">
+          <button type="button" class="btn ghost small" id="btn-quaderno">📖 Il Quaderno</button>
+        </div>
+        <div id="diary"></div>
+      </div>
     </section>
   </main>
 </div>
 
-<nav class="tabbar" aria-label="Navigazione">
-  <button data-tab="view-home" class="on">🏠<br>Casa</button>
-  <button data-tab="view-map">🗺️<br>Tazze</button>
-  <button data-tab="view-game">🍵<br>Servi</button>
-  <button data-tab="view-diary">📔<br>Diario</button>
+<nav class="tabbar" id="tabbar" aria-label="Navigazione principale">
+  <button type="button" data-tab="view-home" class="on" aria-current="page">🏠<br>Casa</button>
+  <button type="button" data-tab="view-map">🗺️<br>Tazze</button>
+  <button type="button" data-tab="view-game">🍵<br>Servi</button>
+  <button type="button" data-tab="view-diary">📔<br>Diario</button>
 </nav>
 
-<div class="combo" id="combo"></div>
+<div class="combo" id="combo" aria-hidden="true"></div>
 
 <div id="fessura" aria-hidden="true"><div class="vortice"></div></div>
 
-<div class="modal" id="story-modal"><div class="sheet">
+<div class="modal" id="story-modal" role="dialog" aria-modal="true" aria-labelledby="story-title"><div class="sheet">
   <div class="pill" id="story-kicker">Cap.1-1</div>
   <h2 id="story-title"></h2>
   <div class="story-text" id="story-text"></div>
   <div id="story-choices"></div>
-  <button class="btn primary" id="story-continue" style="display:none">🍵 Vai a servire la tazza</button>
+  <button type="button" class="btn primary" id="story-continue" style="display:none">🍵 Vai a servire la tazza</button>
 </div></div>
 
-<div class="modal" id="mini-modal"><div class="sheet">
+<div class="modal" id="mini-modal" role="dialog" aria-modal="true" aria-labelledby="mini-title"><div class="sheet">
   <div class="pill" id="mini-kicker">Rito</div>
   <h2 id="mini-title"></h2>
   <p class="lead" id="mini-desc"></p>
-  <canvas class="mini" id="mini-canvas" width="440" height="300"></canvas>
-  <p class="meter" id="mini-status"></p>
-  <button class="btn primary" id="mini-start">Inizia</button>
-  <button class="btn ghost" id="mini-close">Chiudi</button>
+  <canvas class="mini" id="mini-canvas" width="440" height="300" role="img" aria-label="Tavola del rito"></canvas>
+  <p class="meter" id="mini-status" role="status" aria-live="polite"></p>
+  <button type="button" class="btn primary" id="mini-start">Inizia</button>
+  <button type="button" class="btn ghost" id="mini-close">Chiudi</button>
 </div></div>
 
-<div class="modal" id="oracle-modal"><div class="sheet">
+<div class="modal" id="oracle-modal" role="dialog" aria-modal="true" aria-labelledby="oracle-title"><div class="sheet">
   <div class="pill">🔮 oracolo giornaliero</div>
   <h2 id="oracle-title"></h2>
   <p class="story-text" id="oracle-text"></p>
-  <button class="btn primary" id="oracle-close">Accogli il responso</button>
+  <button type="button" class="btn primary" id="oracle-close">Accogli il responso</button>
 </div></div>
 
-<div class="toast" id="toast" role="status"></div>
+<div class="modal" id="quaderno-modal" role="dialog" aria-modal="true" aria-labelledby="quaderno-title"><div class="sheet">
+  <div class="pill">📖 quaderno</div>
+  <h2 id="quaderno-title">Il Quaderno</h2>
+  <p class="lead" id="quaderno-count"></p>
+  <div id="quaderno-list"></div>
+  <button type="button" class="btn ghost" id="quaderno-close">Chiudi</button>
+</div></div>
 
-<script src="js/save.js"></script>
-<script src="js/tiles.js"></script>
-<script src="js/audio.js"></script>
-<script src="js/board.js"></script>
-<script src="js/story.js"></script>
-<script src="js/universes.js"></script>
-<script src="js/minigames.js"></script>
-<script src="js/tama.js"></script>
-<script src="js/eggs.js"></script>
-<script src="js/app.js"></script>
-<script src="js/pwa.js"></script>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<noscript>
+  <div style="max-width:420px;margin:20vh auto;padding:24px;text-align:center;font:16px system-ui">
+    <div style="font-size:48px">🍵</div>
+    <h1 style="font-size:20px">Serve una tazza di JavaScript</h1>
+    <p style="color:#5c5245;line-height:1.6">Matcha Heart è un gioco interamente nel browser: attiva JavaScript per servire il tè. Nessun dato lascia comunque il tuo dispositivo.</p>
+  </div>
+</noscript>
+
+<script src="js/save.js" defer></script>
+<script src="js/tiles.js" defer></script>
+<script src="js/audio.js" defer></script>
+<script src="js/board.js" defer></script>
+<script src="js/story.js" defer></script>
+<script src="js/universes.js" defer></script>
+<script src="js/quaderno.js" defer></script>
+<script src="js/minigames.js" defer></script>
+<script src="js/tama.js" defer></script>
+<script src="js/eggs.js" defer></script>
+<script src="js/app.js" defer></script>
+<script src="js/pwa.js" defer></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 /* tama.js — Chasen Tama, cucciolo-frullino che non muore mai */
+(function () {
 'use strict';
 const TAMA_STAGES = [
   { name: 'Germoglio', emoji: '🌱', need: 0, bonus: 'nessuno, solo amore' },
@@ -76,3 +77,4 @@ function dailyChasen() {
   return true;
 }
 window.MHTama = { feed, cuddle, rename, renderTama, dailyChasen, sanitizeName, TAMA_STAGES };
+})();

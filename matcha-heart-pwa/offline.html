@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Matcha Heart — offline 🍵</title>
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<style>
+  :root{--paper:#f6f1e5;--ink:#2e2a24;--muted:#5c5245;--matcha:#4a6b4f;--line:#e2d7bd;--card:#fffdf7}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px;
+       background:radial-gradient(1200px 600px at 50% -10%,#e8f0da 0%,var(--paper) 55%) fixed,var(--paper);
+       color:var(--ink);font-family:ui-rounded,"Hiragino Maru Gothic ProN",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-align:center}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 22px;max-width:380px;box-shadow:0 10px 30px rgba(74,107,79,.15)}
+  .cup{font-size:52px;line-height:1}
+  h1{font-size:22px;margin:.4em 0 .2em}
+  p{color:var(--muted);line-height:1.55;margin:.2em 0}
+  button{margin-top:18px;border:none;border-radius:14px;padding:14px 20px;min-height:48px;width:100%;
+         font:inherit;font-weight:800;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--matcha),#3c5a41)}
+  button:focus-visible{outline:3px solid #2e2a24;outline-offset:3px}
+  .spill{margin-top:14px;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+  <main class="box">
+    <div class="cup" aria-hidden="true">🍵</div>
+    <h1>Il vapore non è arrivato</h1>
+    <p>Sei offline e questa schermata non era ancora in cache. Il chashitsu ti aspetta: appena torna la rete, ricarica e troverai tutte le tue tazze al loro posto.</p>
+    <button type="button" onclick="location.reload()">Riprova 🍃</button>
+    <p class="spill">Nessun dato lascia il tuo dispositivo.</p>
+  </main>
+</body>
+</html>

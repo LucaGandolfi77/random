@@ -1,4 +1,5 @@
 /* tiles.js — le 6 tazze-tessere */
+(function () {
 'use strict';
 const TILES = [
   { id: 0, name: 'Usucha',  emoji: '🍵', color: '#8fbf7a' },
@@ -37,3 +38,4 @@ const SKINS = { canon: TILES, sakura: SAKURA,
   ],
 };
 window.MHTiles = { TILES, TILE_COUNT, SAKURA, SKINS };
+})();

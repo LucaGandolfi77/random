@@ -1,4 +1,5 @@
 /* eggs.js — 10 easter egg, tutti leggeri e cozy */
+(function () {
 'use strict';
 const HAIKU = [
   'Pioggia di notte — / anche la luna / beve matcha.',
@@ -10,14 +11,23 @@ const HAIKU = [
 function stats() { return window.MH.save.stats; }
 function persist() { window.MHSave.writeSave(window.MH.save); }
 function toast(m) { window.MHToast?.(m); }
-/* lettere dell’universo attivo (fallback canone piatto pre-migrazione) */
-function PL() { try { return window.P().letters; } catch { return window.MH.save.letters; } }
+/* lettere dell’universo attivo.
+   Prima-era: window.P() — una funzione di app.js che finiva su window solo
+   per caso (hoisting di una dichiarazione top-level in script classico).
+   Ora si chiede direttamente a chi possiede i dati. */
+function PL() {
+  try { return window.MHU.prog().letters; } catch {}
+  try { return window.MH.save.progress?.pioggia?.letters || []; } catch {}
+  return [];
+}
 function badge(name) {
   const s = stats();
   s.badges = s.badges || [];
   if (s.badges.includes(name)) return false;
   s.badges.push(name); persist();
-  try { document.getElementById('diary'); } catch {}
+  /* B7: la riga originale era `document.getElementById('diary')` senza uso —
+     il distintivo non compariva fino al prossimo renderDiary(). */
+  try { window.MHRenderDiary?.(); } catch {}
   toast(`🏅 Distintivo: ${name}! (vedi Diario)`);
   return true;
 }
@@ -53,7 +63,7 @@ function initChecks() {
     const t = document.getElementById('oracle-title'), x = document.getElementById('oracle-text');
     if (t && x) {
       t.textContent = '🌙 Haiku di mezzanotte'; x.textContent = hk + '\n\n— Hana, per chi non dorme.';
-      document.getElementById('oracle-modal').classList.add('open');
+      try { window.MHOpenModal?.('oracle-modal'); } catch { document.getElementById('oracle-modal').classList.add('open'); }
     }
   }
   // compleanno del locale (anniversario firstPlay)
@@ -139,3 +149,4 @@ function tick() {
 }
 function init() { initKonami(); initChecks(); initHanaTap(); }
 window.MHEggs = { init, tick, onRainTap, onLoss, onRite };
+})();

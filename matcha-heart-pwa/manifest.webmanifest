@@ -1,19 +1,70 @@
 {
-  "name": "Matcha Heart — un cozy matcha match-3 romantico",
+  "id": "/matcha-heart",
+  "name": "Matcha Heart — cozy matcha match-3",
   "short_name": "Matcha Heart",
-  "description": "Salva l'ultimo chashitsu di Kyoto: matcha 3 tazze, vivi 25 episodi struggenti, 3 finali, 3 minigiochi cozy. Offline, mobile-first.",
-  "id": "matcha-heart",
-  "start_url": "./index.html",
+  "description": "Salva l'ultimo chashitsu di Kyoto: 100 tazze matcha-3 tra Pioggia, Sakura Eterna, Notte Yokai e Marea d'Estate. 9 finali, 18 personaggi, 3 riti. 100% offline, nessun account.",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
   "orientation": "portrait",
   "background_color": "#f6f1e5",
   "theme_color": "#7a9e7e",
   "lang": "it",
+  "dir": "ltr",
   "categories": ["games", "entertainment", "lifestyle"],
+  "prefer_related_applications": false,
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    { "src": "icons/icon-72.png",   "sizes": "72x72",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-96.png",   "sizes": "96x96",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-128.png",  "sizes": "128x128", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-144.png",  "sizes": "144x144", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-152.png",  "sizes": "152x152", "type": "image/png", "purpose": "any" },
+    { "src": "icons/apple-touch-icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-192.png",  "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-256.png",  "sizes": "256x256", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-384.png",  "sizes": "384x384", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png",  "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    {
+      "src": "icons/screenshot-narrow.png",
+      "sizes": "540x960",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Schermata di gioco: la tavola matcha 8x8 con le tazze da servire"
+    },
+    {
+      "src": "icons/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Mappa dei capitoli a lato, tavola di gioco a lato su desktop"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Apri il locale",
+      "short_name": "Gioca",
+      "description": "Riprendi la tazza più recente",
+      "url": "./?view=game",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Diario di Hana",
+      "short_name": "Diario",
+      "description": "Rileggi le lettere sbloccate",
+      "url": "./?view=diary",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Respiro 4-7-8",
+      "short_name": "Respiro",
+      "description": "Un ciclo di respiro per calmarsi e ricaricare un cuore",
+      "url": "./?view=game&mini=respiro",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
   ]
 }

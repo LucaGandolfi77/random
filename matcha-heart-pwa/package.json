@@ -1,0 +1,25 @@
+{
+  "name": "matcha-heart",
+  "version": "1.7.1",
+  "private": true,
+  "description": "Matcha Heart — cozy matcha match-3 PWA: 100 tazze, 9 finali, 4 universi. 100% offline, nessun account, zero dipendenze.",
+  "keywords": ["pwa", "match-3", "offline", "canvas", "cozy", "italian", "service-worker"],
+  "license": "MIT",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node serve.js",
+    "dev": "HOST=0.0.0.0 node serve.js",
+    "test": "node --test",
+    "check": "node tools/check.mjs",
+    "check:fast": "node tools/check.mjs --fast",
+    "icons": "node tools/gen-icons.mjs",
+    "icons:preview": "node tools/gen-icons.mjs --preview",
+    "contrast": "node tools/contrast.mjs --check",
+    "contrast:fix": "node tools/contrast.mjs"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

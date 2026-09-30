@@ -1,0 +1,15 @@
+# Matcha Heart — niente build, niente dipendenze, niente segreti.
+# Le icone e i mockup sono generati da tools/gen-icons.mjs: si versionano,
+# ma il generatore resta la fonte di verità.
+node_modules/
+npm-debug.log*
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.env
+.env.*
+coverage/
+lcov.info
+.tmp/
+*.log

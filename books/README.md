@@ -11,6 +11,7 @@ Template in Markdown per pianificare, scrivere e pubblicare un libro.
 | [`template-capitolo.md`](template-capitolo.md) | Fase 2 — Bozza: template per scrivere un singolo capitolo |
 | [`template-checklist-pubblicazione.md`](template-checklist-pubblicazione.md) | Fase 3 — Revisione e pubblicazione: revisione, editing, formattazione, pubblicazione |
 | [`proposte-temi-sociali.md`](proposte-temi-sociali.md) | 26 pitch su temi sociali nel stile della raccolta (6 pazzissime) |
+| [`proposte-consumismo-capitalismo-tecnologia.md`](proposte-consumismo-capitalismo-tecnologia.md) | 20 pitch che esaltano consumismo, capitalismo e tecnologia (superficie critica, fondo esaltante) |
 
 ## Come usarlo
 

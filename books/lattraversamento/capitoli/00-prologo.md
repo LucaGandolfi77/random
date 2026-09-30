@@ -1,7 +1,7 @@
 # Prologo — Il foglio piegato
 
 **POV:** Amadou · **Luogo:** Milano (Questura) · **Tempo nella storia:** inverno 2026–27
-**Parole:** ~850 / obiettivo: 1.000 ✅
+**Parole:** 903 / revisione 1 ✅
 
 ## Obiettivo del capitolo
 
@@ -30,11 +30,13 @@
 
 L'ufficio della Questura di Milano apre alle otto e mezza, e alle nove la coda arriva già al cancello. Stando in fila con il foglio piegato in mano, come si tiene in mano un referto: con la cura di chi sa che dentro ci sono i numeri della propria vita, e che i numeri non sono mai buoni. Il foglio è piegato in quattro, ed è piegato da così tanto che si apre da solo: è la cosa più saggia che mi abbiano dato da quattro anni. Un pezzo di carta con la mia faccia stampata, il mio nome pronunciato male, e la scritta: *permesso di soggiorno provvisorio*. Provvisorio. A quattro anni, provvisorio.
 
-Davanti a me c'era un uomo che era venuto dal Bangladesh, e parlava del rinnovo con la voce di chi ha smesso da tempo di spiegare. Dietro, una donna che era venuta dall'Ecuador, con il figlio che dormiva in braccio, e il figlio, in coda, dormiva come si dormono le cose: per davvero. Io non parlavo con nessuno. Tenevo il foglio e guardavo i numeri del display: B047, B048, B049. Il mio era il B052, e i numeri, in coda, salgono tutti come gli affitti.
+Davanti a me c'era un uomo che era venuto dal Bangladesh, e parlava del rinnovo con la voce di chi ha smesso da tempo di spiegare. Dietro, una donna che era venuta dall'Ecuador, con il figlio che dormiva in braccio, e il figlio, in coda, dormiva come si dormono le cose: per davvero. A un tratto la donna lo coprì con la sciarpa, e la sciarpa, in coda, è la cosa che le madri fanno: si fanno senza chiedere. Io non parlavo con nessuno. Tenevo il foglio e guardavo i numeri del display: B047, B048, B049. Il mio era il B052, e i numeri, in coda, salgono tutti come gli affitti.
 
-Le impronte digitali mi sono state fatte a Lampedusa, il primo giorno, e le impronte non si cancellano: è la loro legge. Le impronte non dicono i giorni: dicono il posto. Il timbro, nei libri di una ragazza che ho letto, diceva trenta giorni; le impronte dicono: qui. E qui, a quattro anni, è il posto che non si cancella. A Joal avevo un mare che si cancellava tutte le sere, e tutte le sere tornava: è la legge del mare. Le impronte sono l'opposto del mare: non tornano, e non si cancellano. Si tengono.
+A metà coda c'era la macchinetta del caffè, e il caffè della Questura costava cinquanta centesimi, e i cinquanta centesimi, alla Questura, sono il prezzo più onesto della città: lo pagai, e lo pagai volentieri, e il volentieri, di mattina, era la cosa più ricca che avevo. Il caffè era corto, e tiepido, e nessuno lo sceglie: ti tocca. Nei libri della ragazza che ho letto c'era un caffè così, in una fabbrica di voci: lunghi, tiepidi, nessuno li sceglie. Era lo stesso caffè. Il mondo, di mattina, ha un solo caffè, e nessuno lo sceglie.
 
-Sono venuto qui perché dovevo. Non perché volevo. Lo ripetevo a tutti, i primi mesi, con la voce di chi non si lamenta: il padre che vende la pirogue, il pesce che non c'è, la sorella che va a scuola. Non l'ho mai detto così: l'ho detto con il calcolo, a casa, al telefono: *manderò trecento euro al mese*. E il calcolo diceva una cosa che non ho detto a nessuno, nemmeno a me stessa — nemmeno a me stesso, in quattro anni: che là, a Joal, non c'era più niente da avere. Il mare si era svuotato, e i cantieri di Dakar davano cinquanta euro al giorno, e cinquanta euro al giorno sono il pesce che non c'è: si guadagnano e non bastano.
+Le impronte digitali mi sono state fatte a Lampedusa, il primo giorno, e le impronte non si cancellano: è la loro legge. Le impronte non dicono i giorni: dicono il posto. Il timbro, nei libri della ragazza che ho letto, diceva trenta giorni; le impronte dicono: qui. E qui, a quattro anni, è il posto che non si cancella. A Joal avevo un mare che si cancellava tutte le sere, e tutte le sere tornava: è la legge del mare. Le impronte sono l'opposto del mare: non tornano, e non si cancellano. Si tengono.
+
+Sono venuto qui perché dovevo. Non perché volevo. Lo ripetevo a tutti, i primi mesi, con la voce di chi non si lamenta: il padre che vende la pirogue, il pesce che non c'è, la sorella che va a scuola. Non l'ho mai detto così: l'ho detto con il calcolo, a casa, al telefono: *manderò trecento euro al mese*. E il calcolo diceva una cosa che non ho detto a nessuno, nemmeno a me stesso, in quattro anni: che là, a Joal, non c'era più niente da avere. Il mare si era svuotato, e i cantieri di Dakar davano cinquanta euro al giorno, e cinquanta euro al giorno sono il pesce che non c'è: si guadagnano e non bastano.
 
 Perché il calcolo contava tutto, tranne la cosa principale: che qui, a Milano, pago tutto il doppio. Il letto in quadrupla a trecento euro — un letto, non una camera —, il dieci per cento di ogni invio a casa, la lingua che non si piega, il prezzo farang del negozio di sotto. A Joal la casa del padre non costava niente, e il pesce era del padre, e il mare era di tutti. Qui niente è di tutti, e tutto costa il doppio, e io pago il doppio da quattro anni, e non posso tornare. Si può pagare il doppio per anni, e mi sembrava che fosse il contrario della libertà: la ragazza del libro scappava per non pagare più. Io sono venuto per pagare. Non posso tornare: è la cosa che non si dice a casa, e non si dice a Milano.
 
@@ -50,8 +52,7 @@ Comincio dall'inizio, che era a Joal, e non costava niente: e costava tutto il r
 
 ## Note post-scrittura
 
-- [x] Gancio iniziale: la coda, il foglio piegato, "lo scopo della permanenza"
-- [x] Le impronte vs il timbro: il rovescio di Mai pen rai dichiarato ("la ragazza del libro")
-- [x] Il doppio introdotto (letto in quadrupla, il dieci per cento, il prezzo farang)
+- [x] Espansione revisione: la sciarpa della madre in coda; la macchinetta del caffè (l'eco della fabbrica di voci di *Mai pen rai*)
+- [x] Le impronte vs il timbro; il doppio introdotto
 - [x] Chiusura con gancio verso il cap. 1
-- [x] Coerenza numeri: 300 €, 50 € al giorno, trenta giorni (il timbro di Mai pen rai)
+- [x] Coerenza numeri: 300 €, 50 € al giorno, trenta giorni

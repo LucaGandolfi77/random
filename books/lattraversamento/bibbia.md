@@ -34,7 +34,7 @@
 | Obiettivo (cosa vuole) | mandare 300 € al mese a casa; la scuola di Fatou; il permesso |
 | Bisogno profondo | appartenere a un posto che resti; essere visto come uno che lavora, non come uno che arriva |
 | Ferita / passato | il mare che si svuota; la pirogue del padre venduta; la morte del padre (cap. 9–10) e il funerale perso |
-| Difetto principale | conta tutto; non si lamenta; tuck le cose dentro ("le cose pesanti non si dicono") |
+| Difetto principale | conta tutto; non si lamenta; tiene le cose dentro ("le cose pesanti non si dicono") |
 | Virtù principale | il lavoro, la lealtà, la serenità; impara a chiedere |
 | Come cambia (arco) | da uno che non si lamenta a uno che fa la domanda; impara che il problema non era il prezzo ma il posto che non resta |
 | Voce / modo di parlare | piana, asciutta, colta senza pedanteria; sentenze brevi; i rimandi tra parentesi; "inshallah" |
@@ -49,7 +49,7 @@
 | Età | 58 anni quando muore |
 | Professione | pescatore, trent'anni di mare, la pirogue "Fatou" (col nome della nipote) |
 | Caratteristica | le mani di chi ha pescato per trent'anni; l'inshallah come risposta a tutto; parla del futuro con l'inshallah |
-| Segreto | la malattia del cuore (la medicina da 50 € al mese che non prende: il mare si paga prima) |
+| Segreto | la malattia del cuore (la medicina da 50 € al mese che non prende da due anni: il mare si paga prima) |
 
 ### Secondari
 
@@ -78,7 +78,7 @@
   - *Il deserto* — il camion, l'acqua, la notte.
   - *La spiaggia di notte* — il barcone, 120 persone, tre giorni di mare.
   - *L'hotspot di Lampedusa* — le impronte, la coda, il filo.
-  - *La quadrupla di via Padova* — trecento euro al mese, quattro letti, il luime di sempre.
+  - *La quadrupla di via Padova* — trecento euro al mese, quattro letti, il rumore di sempre.
   - *Il cantiere* — le dieci ore, le mani, il nero.
   - *Il magazzino* — le scansioni, l'orario, il regolare.
   - *La Questura* — la coda, i numeri, il foglio piegato.

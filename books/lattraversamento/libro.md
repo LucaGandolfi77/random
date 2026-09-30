@@ -7,9 +7,17 @@
 
 ## Stato
 
-- Parole totali: **~18.000** / obiettivo: 55.000 (prima bozza)
+- Parole totali: **~15.000** / obiettivo: 55.000 (prima bozza)
 - Capitoli completati: **14 / 14** — prima bozza completa ✅ · **REVISIONE 1 COMPLETA** ✅
-- Prossima scadenza: editing di linea (checklist § 3)
+  - Diagnosi della lettura completa + piano di espansione (vedi `note/revisione.md`)
+  - Fix di coerenza: 10.800 € (36 mesi, non 14.400), medicina 1.200 € (non 1.120), il telefono di Moussa il venerdì (non la domenica), la domanda in tre versioni distinte
+  - Nove scene aggiunte: il caffè della Questura, le famiglie di Joal, il gommone ("il vuoto non pesa, pesa la gente"), il cantiere intero, la fila di chi invia, "jërëjëf" detto da quattro, il cartoncino con il nome giusto, il segreto del padre (la medicina non presa), la tomba e il thieboudienne (il padre non lo mangiò)
+- Prossima scadenza: riposo della bozza (2–4 settimane), poi revisione di linea e proofreading (checklist § 3)
+- **FASE 3 — EDITING DI LINEA** ✅ (formula-voce diradata, 8 correzioni — vedi `note/revisione.md` § 5)
+- **FASE 4 — FORMATTAZIONE** ✅ parziale: `manoscritto.md` (EPUB-ready) + `manoscritto.html` generati; copertina e EPUB binario da fare
+- Manoscritto: `manoscritto.md` · Versione HTML: `manoscritto.html`
+- **FASE 5 — PUBBLICAZIONE** 🟨: quarta di copertina, sinossi, metadati, prezzo pronti (`note/pubblicazione.md`); mancano ISBN e caricamento
+- **FASE 6 — PROMOZIONE** 🟨: pagina autore e annuncio pronti; copie di recensione da inviare
 
 ---
 

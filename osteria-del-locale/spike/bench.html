@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drowned Ox — narrator spike</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #14110e;
+        --panel: #1d1915;
+        --ink: #e8e0d2;
+        --dim: #9c9182;
+        --line: #322b23;
+        --ok: #7fa650;
+        --bad: #b85450;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: 1.25rem;
+        background: var(--bg);
+        color: var(--ink);
+        font: 15px/1.5 ui-serif, Georgia, serif;
+      }
+      h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+      h2 { font-size: 1rem; margin: 0 0 0.5rem; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; }
+      .intro { max-width: 70ch; color: var(--dim); }
+      .note { color: var(--dim); font-size: 0.9rem; max-width: 70ch; }
+      .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 0.85rem; margin: 0.85rem 0; }
+      .panel ul { margin: 0; padding-left: 1.1rem; }
+      .row { display: flex; align-items: center; gap: 0.5rem; padding: 0.2rem 0; flex-wrap: wrap; }
+      .row.case .look { color: var(--dim); font-size: 0.85rem; font-style: italic; }
+      .row.case.adversarial { border-left: 2px solid var(--bad); padding-left: 0.5rem; }
+      .row.case.stress { border-left: 2px solid #8a6d3b; padding-left: 0.5rem; }
+      .buttons { display: flex; gap: 0.5rem; margin: 0.85rem 0; flex-wrap: wrap; }
+      button {
+        background: #2a231c; color: var(--ink); border: 1px solid var(--line);
+        border-radius: 4px; padding: 0.45rem 0.85rem; font: inherit; cursor: pointer;
+      }
+      button:hover { border-color: var(--dim); }
+      button.primary { background: #3d4a2c; border-color: #55663a; }
+      button[disabled] { opacity: 0.4; cursor: not-allowed; }
+      button.inline { padding: 0.15rem 0.5rem; font-size: 0.85rem; }
+      .status { color: var(--dim); font-variant: small-caps; letter-spacing: 0.05em; }
+      .log {
+        background: #0e0c0a; border: 1px solid var(--line); border-radius: 6px;
+        padding: 0.75rem; max-height: 18rem; overflow: auto; font: 12px/1.45 ui-monospace, monospace;
+        color: var(--dim); white-space: pre-wrap;
+      }
+      .bar { height: 6px; background: #0e0c0a; border-radius: 3px; overflow: hidden; margin: 0.25rem 0 0.5rem; }
+      .fill { height: 100%; width: 0; background: var(--ok); transition: width 0.2s; }
+      table { border-collapse: collapse; width: 100%; font-size: 0.85rem; margin: 0.5rem 0 1rem; }
+      th, td { border-bottom: 1px solid var(--line); padding: 0.3rem 0.4rem; text-align: left; vertical-align: top; }
+      th { color: var(--dim); font-weight: normal; text-transform: uppercase; font-size: 0.75rem; }
+      td.out { color: var(--dim); max-width: 40ch; }
+      tr.ok td:nth-child(6) { color: var(--ok); }
+      tr.bad td:nth-child(6) { color: var(--bad); }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./bench.ts"></script>
+  </body>
+</html>

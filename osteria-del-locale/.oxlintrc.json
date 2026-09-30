@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "typescript",
+    "oxc"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn"
+  },
+  "ignorePatterns": [
+    "spike/run-headless.mjs",
+    "tools/playtest.mjs",
+    "tools/playtest-entry.js",
+    "public/coi-sw.js",
+    "tools/smoke.mjs",
+    "tools/demo.mjs"
+  ]
+}

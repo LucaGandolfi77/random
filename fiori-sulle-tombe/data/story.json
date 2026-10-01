@@ -1,0 +1,1193 @@
+{
+  "meta": {
+    "titolo": "Fiori sulle Tombe",
+    "sottotitolo": "una telenovela che finisce nel cimitero",
+    "protagonista": "Nadia Ferro",
+    "regola": "Non attacchi: offri. Un fiore guarisce il nemico e ti ferisce quanto lui. Vince chi arriva a zero spese per primo."
+  },
+  "cast": [
+    {
+      "id": "nadia",
+      "nome": "Nadia",
+      "ruolo": "tu, e l'unica che non è un vaso",
+      "vaso": false,
+      "arco": [
+        "chi non chiede niente",
+        "chi ha cominciato a chiedere",
+        "chi ha dato via le risposte"
+      ]
+    },
+    {
+      "id": "betta",
+      "nome": "Betta",
+      "ruolo": "la sorella, partita con metà di tutto",
+      "vaso": true,
+      "arco": [
+        "chi è partita e non ha scritto",
+        "che hai perso in silenzio",
+        "che ti ha piantato il vaso"
+      ]
+    },
+    {
+      "id": "ansi",
+      "nome": "Anselmo",
+      "ruolo": "il testimone, che ha firmato per primo",
+      "vaso": true,
+      "arco": [
+        "il giuramento, non ancora rotto",
+        "il complice, che sa e non parla",
+        "chi ha dato il nome per primo"
+      ]
+    },
+    {
+      "id": "orielia",
+      "nome": "Orielia",
+      "ruolo": "la madre, che ha smesso di aspettare",
+      "vaso": true,
+      "arco": [
+        "chi ha smesso di aspettare",
+        "che fiorisce perché tu continui a dargliele",
+        "che è fiorita tutta insieme"
+      ]
+    },
+    {
+      "id": "donata",
+      "nome": "Donata",
+      "ruolo": "la venditrice, che ha fatto mercato",
+      "vaso": true,
+      "arco": [
+        "chi ha un prezzo e te lo dice",
+        "la creditrice, che aspetta il conto",
+        "chi ha venduto anche te"
+      ]
+    },
+    {
+      "id": "sauro",
+      "nome": "Sauro",
+      "ruolo": "il marito, o la tomba, o il giardino",
+      "vaso": true,
+      "arco": [
+        "l'uomo sotto l'aiuola, che non si chiama",
+        "chi è sotto da sempre, e non lo sai",
+        "il primo fiore, piantato su di sé"
+      ]
+    },
+    {
+      "id": "brizio",
+      "nome": "Brizio",
+      "ruolo": "il giardiniere, l'unico che non è un vaso",
+      "vaso": false,
+      "arco": [
+        "chi non chiede niente",
+        "che tace e continua a piantare",
+        "che è rimasto a guardare gli altri fiorire"
+      ]
+    }
+  ],
+  "schede": [
+    {
+      "id": "nadia-orecchio",
+      "persona": "nadia",
+      "titolo": "L'orecchio che non sente",
+      "nome": "l'orecchio che non sente",
+      "versi": [
+        "Da bambina, un inverno e un'idraulica già aperta.",
+        "Il sinistro non sente niente, e da allora ride storto.",
+        "Non l'ha detto a nessuno, e tu lo dirai a un orto."
+      ],
+      "chiavi": [
+        "parla"
+      ]
+    },
+    {
+      "id": "nadia-prima-fioritura",
+      "persona": "nadia",
+      "titolo": "La prima fioritura, che hai contato",
+      "nome": "la prima fioritura, che hai contato",
+      "versi": [
+        "Avevi ventitré anni.",
+        "Hai contato quattro volte, perché la prima non ti sembrava vera.",
+        "Le altre tre sì."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "nadia-mani",
+      "persona": "nadia",
+      "titolo": "Le mani che non hai mai fatte visitare",
+      "nome": "le mani che non hai mai fatte visitare",
+      "versi": [
+        "Sono mani che sanno solo piantare.",
+        "Non sanno firmare una lettera e non sanno accarezzare.",
+        "Lo sai perché le hai guardate stanotte, e non le riconoscevi."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "betta-partenza",
+      "persona": "betta",
+      "titolo": "La partenza, che non ti ha detto niente",
+      "nome": "la partenza, che non ti ha detto niente",
+      "versi": [
+        "È partita con due valigie e un biglietto solo.",
+        "Il giardino è restato, e tu, e la abitudine del cane.",
+        "Ti ha scritto tre parole su un biglietto di partenza, e tu le hai conservate per trent'anni come se fossero una regola."
+      ],
+      "chiavi": [
+        "parla"
+      ]
+    },
+    {
+      "id": "betta-lettera",
+      "persona": "betta",
+      "titolo": "La lettera che arrivava il giovedì",
+      "nome": "la lettera che arrivava il giovedì",
+      "versi": [
+        "Quattro righe, il giovedì.",
+        "La calligrafia andava peggiorando, di settimana in settimana.",
+        "Poi non è arrivata più, e tu hai smesso di aspettarla il giovedì, che è una cosa che si impara in un pomeriggio."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "betta-tornata",
+      "persona": "betta",
+      "titolo": "Betta sulla porta, con la chiave di sempre",
+      "nome": "betta sulla porta, con la chiave di sempre",
+      "versi": [
+        "La stessa chiave di sempre, che non hai mai cambiato.",
+        "Cambiarla avrebbe voluto dire che se n'era andata sul serio.",
+        "E se n'era andata sul serio per sei mesi."
+      ],
+      "chiavi": [
+        "accarezza"
+      ]
+    },
+    {
+      "id": "betta-gravidanza",
+      "persona": "betta",
+      "titolo": "La notte in cui te l'ha saputo",
+      "nome": "la notte in cui te l'ha saputo",
+      "versi": [
+        "Non l'ha detto lei. L'ha saputo, e ha aspettato che lo dicessi tu.",
+        "Ha aspettato undici mesi.",
+        "Alla dodicesima ha scritto quattro righe, e non erano quelle del giovedì."
+      ],
+      "chiavi": [
+        "mazzo",
+        "parla"
+      ]
+    },
+    {
+      "id": "betta-pelle",
+      "persona": "betta",
+      "titolo": "La pelle del suo ginocchio destro",
+      "nome": "la pelle del suo ginocchio destro",
+      "versi": [
+        "Si spalla dopo la pioggia, da sempre.",
+        "Glielo guardi da vent'anni e non gli hai mai detto niente.",
+        "È l'unica cosa di lei che il giardino non è riuscito a prendere."
+      ],
+      "chiavi": [
+        "parla"
+      ]
+    },
+    {
+      "id": "ansi-giuramento",
+      "persona": "ansi",
+      "titolo": "Il giuramento che hai sentito da dietro la porta",
+      "nome": "il giuramento che hai sentito da dietro la porta",
+      "versi": [
+        "Ha giurato sulla tua testa. Tu eri già nell'altra stanza.",
+        "E l'hai sentito lo stesso, perché la stoffa sente,",
+        "e perché certe frasi si sentono anche a due stanze di distanza."
+      ],
+      "chiavi": [
+        "parla"
+      ]
+    },
+    {
+      "id": "ansi-testimone",
+      "persona": "ansi",
+      "titolo": "Il giorno che ha firmato",
+      "nome": "il giorno che ha firmato",
+      "versi": [
+        "Davanti a un notaio, in un ufficio che odorava di legno.",
+        "Ti ha guardato due volte.",
+        "La seconda non ti ha guardato: ha guardato la porta."
+      ],
+      "chiavi": [],
+      "valori": {
+        "cura": 0.06
+      }
+    },
+    {
+      "id": "ansi-bambina",
+      "persona": "ansi",
+      "titolo": "La bambina che nessuno ha mai nominato",
+      "nome": "la bambina che nessuno ha mai nominato",
+      "versi": [
+        "Trent'anni, e nessuno l'ha nominata.",
+        "Con Betta dicevi «la cosa di allora», con Anselmo «quella volta»,",
+        "e con tua madre «l'estate». Dodici modi di non dirlo, tutti scelti."
+      ],
+      "chiavi": [
+        "mazzo",
+        "parla"
+      ]
+    },
+    {
+      "id": "ansi-pelle",
+      "persona": "ansi",
+      "titolo": "Il palmo della sua mano destra",
+      "nome": "il palmo della sua mano destra",
+      "versi": [
+        "Screpolato dal lavoro, e la pelle buona sulle dita.",
+        "Gliel'ho fatto notare una volta, e lui ha rise.",
+        "Adesso non rido, ma me lo ricordo ogni volta che do un fiore."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "ansi-luna",
+      "persona": "ansi",
+      "titolo": "La luna del funerale",
+      "nome": "la luna del funerale",
+      "versi": [
+        "C'era la luna, ma era gibbosa, e lui ha detto «non viene».",
+        "E si è messo in auto, e non è venuto.",
+        "È la cosa più gentile che abbia fatto per qualcuno, e non lo sapeva."
+      ],
+      "chiavi": [
+        "accarezza",
+        "parla"
+      ]
+    },
+    {
+      "id": "orielia-attesa",
+      "persona": "orielia",
+      "titolo": "Undici anni di finestra",
+      "nome": "undici anni di finestra",
+      "versi": [
+        "La finestra era la sua, e guardava la strada, non te.",
+        "Undici volte ha chiesto «arriva stasera» a qualcuno che non c'era.",
+        "Alla dodicesima non ha chiesto, e tu non hai capito che era un segno."
+      ],
+      "chiavi": [
+        "mazzo",
+        "parla"
+      ]
+    },
+    {
+      "id": "orielia-malattia",
+      "persona": "orielia",
+      "titolo": "La malattia, che non era una malattia",
+      "nome": "la malattia, che non era una malattia",
+      "versi": [
+        "Quattro mesi. Il medico ha detto «anno buono».",
+        "Poi ha detto un'altra parola, e quella era giusta.",
+        "Tu hai comprato i fiori senza chiedere a chi, e li hai dati al primo."
+      ],
+      "chiavi": [
+        "accarezza"
+      ]
+    },
+    {
+      "id": "orielia-prima-pioggia",
+      "persona": "orielia",
+      "titolo": "La prima pioggia, che le fece male e bene",
+      "nome": "la prima pioggia, che le fece male e bene",
+      "versi": [
+        "Aveva ventidue anni e non aveva l'ombrello.",
+        "Tornò bagnata e rise, e rise per tre giorni di fila.",
+        "Morì con le mani di un giardiniere, e tu ci hai messo un anno a capire che era lo stesso lavoro."
+      ],
+      "chiavi": [
+        "parla",
+        "rinnovo"
+      ]
+    },
+    {
+      "id": "orielia-lettera-senza",
+      "persona": "orielia",
+      "titolo": "La lettera senza mittente",
+      "nome": "la lettera senza mittente",
+      "versi": [
+        "Arrivava ogni anno, con la tua calligrafia e un indirizzo diverso.",
+        "Non sapevi quale.",
+        "Alla fine era sempre l'ultimo, e l'ultimo era il suo, e tu non avevi scritto niente."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "donata-prezzo",
+      "persona": "donata",
+      "titolo": "Il prezzo, che era onesto",
+      "nome": "il prezzo, che era onesto",
+      "versi": [
+        "Non ha mai alzato il prezzo e non ha mai fatto sconti a chi piangeva.",
+        "Ti ha detto una volta: «io non vendo fiori, vendo terra».",
+        "Aveva ragione, non lo sapeva, e tu non gliel'hai mai detto."
+      ],
+      "chiavi": [
+        "parla"
+      ]
+    },
+    {
+      "id": "donata-sacchetto",
+      "persona": "donata",
+      "titolo": "Il sacchetto di carta marrone",
+      "nome": "il sacchetto di carta marrone",
+      "versi": [
+        "Bordi che si rompevano sempre nello stesso punto.",
+        "Quell'estate ne hai comprati duecento.",
+        "Non ricordi nessuno degli acquisti. Ricordi il punto in cui si rompeva."
+      ],
+      "chiavi": [
+        "lento"
+      ]
+    },
+    {
+      "id": "donata-commissione",
+      "persona": "donata",
+      "titolo": "La commissione, detta a tavola",
+      "nome": "la commissione, detta a tavola",
+      "versi": [
+        "«Se muore qualcuno della tua parte, tu mi avvisi.»",
+        "Lo disse col cucchiaio in mano, davanti a tutti, e tu ridestti.",
+        "Nessuno rise, e nessuno chiese chi fosse «qualcuno»."
+      ],
+      "chiavi": [
+        "accarezza"
+      ]
+    },
+    {
+      "id": "donata-niente",
+      "persona": "donata",
+      "titolo": "L'anno in cui non vendette niente",
+      "nome": "l'anno in cui non vendette niente",
+      "versi": [
+        "Un anno intero: banco aperto, vetrina piena, niente semi.",
+        "«Non si semina d'estate», diceva.",
+        "Ci hai creduto per vent'anni, e adesso è troppo tardi per accorgerti che era una bugia."
+      ],
+      "chiavi": []
+    },
+    {
+      "id": "sauro-primo",
+      "persona": "sauro",
+      "titolo": "Il primo fiore, piantato su di sé",
+      "nome": "il primo fiore, piantato su di sé",
+      "versi": [
+        "Il primo fiore di questa città l'ha piantato un uomo, e l'ha piantato addosso a sé.",
+        "Per questo la terra ha cominciato a fiorire, e non l'ha smesso mai.",
+        "Nei titoli di coda c'è scritto «fondatore del giardino», e non c'è nessun nome."
+      ],
+      "chiavi": [
+        "mazzo"
+      ]
+    },
+    {
+      "id": "sauro-giardino",
+      "persona": "sauro",
+      "titolo": "Il giardino che ha fatto lui, di notte",
+      "nome": "il giardino che ha fatto lui, di notte",
+      "versi": [
+        "L'ha disegnato con la torcia, e il mattino era un giardino.",
+        "Non un progetto: un giardino.",
+        "È stato il primo e non ne ha fatto un secondo, e tu non hai mai chiesto perché."
+      ],
+      "chiavi": [
+        "nudo"
+      ]
+    },
+    {
+      "id": "sauro-sotto",
+      "persona": "sauro",
+      "titolo": "La lastra, che non porta un nome",
+      "nome": "la lastra, che non porta un nome",
+      "versi": [
+        "Sulla lastra c'è scritto solo «chi ha piantato».",
+        "Non un nome, non una data.",
+        "Te l'ha fatta leggere a sei anni, e tu hai pensato che fosse un modo di dire."
+      ],
+      "chiavi": [
+        "parla"
+      ]
+    },
+    {
+      "id": "sauro-nome",
+      "persona": "sauro",
+      "titolo": "Il nome, che era anche il tuo",
+      "nome": "il nome, che era anche il tuo",
+      "versi": [
+        "Sauro Ferro. Ferro come ferro battuto, diceva lui, e non gli ho mai creduto.",
+        "Ma il nome è suo, e anche l'orto è suo,",
+        "e anche tu, che porti il nome di un'orto: il ferro dei giardini è la rastrelliera."
+      ],
+      "chiavi": [],
+      "valori": {
+        "resa": 180
+      }
+    },
+    {
+      "id": "brizio-pianta",
+      "persona": "brizio",
+      "titolo": "Il melo che non ha mai fruttato",
+      "nome": "il melo che non ha mai fruttato",
+      "versi": [
+        "L'ha piantato l'anno che te n sei andata.",
+        "Ha fruttato una volta sola, e dietro il garage, e nessuno l'ha visto.",
+        "Tu lo hai saputo da un vicino, e ci sei andata, e non c'era più niente."
+      ],
+      "chiavi": [],
+      "valori": {
+        "cura": 0.04
+      }
+    },
+    {
+      "id": "brizio-secchio",
+      "persona": "brizio",
+      "titolo": "Il secchio di rame",
+      "nome": "il secchio di rame",
+      "versi": [
+        "Tutti si prestavano il secchio di rame e nessuno lo restituiva.",
+        "Brizio diceva: «l'orto ha bisogno che qualcuno abbia paura di ruttornarlo».",
+        "L'hai perso nel '94, o nel '90, e non hai mai chiesto."
+      ],
+      "chiavi": [
+        "dono"
+      ]
+    },
+    {
+      "id": "brizio-perche",
+      "persona": "brizio",
+      "titolo": "La domanda che non gli hai mai fatto",
+      "nome": "la domanda che non gli hai mai fatto",
+      "versi": [
+        "Gli hai dato fiori per ventisette anni.",
+        "Gli hai mai chiesto perché li dava?",
+        "No. E adesso che l'hai chiesto non risponde, perché è un vaso anche lui."
+      ],
+      "chiavi": [
+        "vedere"
+      ]
+    }
+  ],
+  "atti": [
+    {
+      "id": "a0",
+      "ordine": 0,
+      "titolo": "Il vaso di terra",
+      "epigrafe": "Prima di imparare a dare, impari che dare costa.",
+      "premessa": "Il giardino è come l'hai lasciato. L'aiuola è in fondo, quella dove non hai mai piantato niente, e il vaso è vuoto da trent'anni. La terra dentro è nera, e ha un odore che conosci senza ricordare perché.\n\nQualcuno ha lasciato l'orto acceso, e una torcia accanto, e la torcia è calda.",
+      "dai": [
+        "nadia-prima-fioritura"
+      ],
+      "scena": [
+        {
+          "id": "a0-s1",
+          "chi": "",
+          "battute": [
+            {
+              "testo": "Dietro l'orto c'è una lastra di marmo alta quanto un uomo seduto, e sulla lastra non c'è un nome. C'è scritto solo: {c}«chi ha piantato»{/}.\n\nCi sei passata davanti ventisette volte. Non una hai letta."
+            },
+            {
+              "testo": "I vasi sono sei. Cinque hanno un nome scritto a matita sulla ceramica, e la matita è la tua calligrafia.\n\nIl sesto è pulito. Il sesto è quello che hai davanti."
+            },
+            {
+              "testo": "Quello che ha insegnato a te — e che non ha mai accettato di essere chiamato maestro, perché diceva che le piante non hanno bisogno di titoli — ti ha detto una cosa sola, e te l'ha detta senza guardarti:\n\n> «Quando riempi un vaso, da' tutto.\n> Chi guarda, metà muore.»\n\nE poi è andato a spannare il melo."
+            }
+          ],
+          "scelte": [
+            {
+              "id": "a0-s1-a",
+              "testo": "Vai dietro l'orto. Guarda la lastra, e leggi quello che c'è scritto.",
+              "nota": "È la cosa che non hai mai fatto in ventisette passate. Dopo non si torna indietro, ma si comincia a leggere.",
+              "imposta": {
+                "a0_porta": "aperta"
+              }
+            },
+            {
+              "id": "a0-s1-b",
+              "testo": "Torna indietro. Il vaso è davanti e il vaso è pulito, e tu non sai ancora perché questo ti tranquillizza.",
+              "nota": "Non è codardia: è che un nome letto troppo presto non si può più dimenticare, e tu di dimenticare ne hai lavoro.",
+              "imposta": {
+                "a0_porta": "chiusa"
+              }
+            }
+          ]
+        }
+      ],
+      "combattimento": "il-vaso",
+      "dopo": [
+        {
+          "id": "a0-d1",
+          "chi": "",
+          "battute": [
+            {
+              "testo": "Il vaso è pieno. La terra dentro è salita, e ha fatto quello che fa la terra quando ha ricevuto: si è aperta, e dentro c'era una radice.\n\nLe radici non salgono. Scendono."
+            },
+            {
+              "testo": "La radice è bianca, e ha la forma di una mano.\n\nBrizio guarda, e dice: «questo è il segno». Tu gli chiedi di quale segno, e lui dice: {a}«del fatto che hai iniziato»{/} — e poi cambia discorso, come fa lui."
+            }
+          ],
+          "dai": [
+            "nadia-mani"
+          ],
+          "nota": "Ricordi: le mani che non hai mai fatte visitare."
+        }
+      ]
+    },
+    {
+      "id": "a1",
+      "ordine": 1,
+      "titolo": "Betta, o la porta di Betta",
+      "epigrafe": "La prima persona che hai nutrito non era una persona: era un'assenza.",
+      "premessa": "Sono passati sei mesi. Il giardino ha messo tre fiori senza che tu li abbia piantati, e sono sbocciati dove hai camminato, e tu non hai chiesto niente a nessuno.\n\nPoi è arrivata una lettera. Non è una delle quattro righe del giovedì: sono undici righe, e sono scritte a macchina.",
+      "dai": [
+        "betta-partenza",
+        "betta-lettera",
+        "ansi-testimone",
+        "donata-sacchetto"
+      ],
+      "scena": [
+        {
+          "id": "a1-s1",
+          "chi": "",
+          "battute": [
+            {
+              "testo": "La lettera dice: «Sono alla stazione. Non chiedermi perché. Se chiedi perché, non aprirò. Se non chiedi, suono il campanello come ho sempre fatto, e tu apri, perché hai sempre aperto.»\n\nIn fondo c'è una riga che non sta con le altre: {b}«sono incinta, e non è di Anselmo, e non è tuo fratello, e so che non è di nessuno»{/}."
+            }
+          ]
+        },
+        {
+          "id": "a1-s2",
+          "chi": "",
+          "battute": [
+            {
+              "testo": "Brizio legge la lettera prima di te, perché è lì dietro e ha l'abitudine di leggere. Poi te la ridà piegata e dice: «questa non la puoi rispondere».\n\nTu dici che è una lettera. Lui dice: {b}«è una sconfitta. E le sconfitte si rispondono solo con i fatti»{/}."
+            },
+            {
+              "testo": "Sulla ceramica del secondo vaso c'è un nome che non avevi notato: {b}Betta{/}.\n\nLo avevi scritto tu, sei mesi fa, senza pensarci, perché quel vaso è suo dal giorno che sei nata."
+            },
+            {
+              "testo": "Se le apri, oggi. Se le apri domani, avrai la scusa di domani, e la scusa di domani è una forma di casa che a te non serve, perché tu non abiti qui da molto."
+            },
+            {
+              "chi": "",
+              "testo": "La lastra è dietro l'orto, e dietro la lastra c'è un nome che non hai scritto tu. L'hai letto stamattina, prima ancora di guardare i vasi, e adesso non ti ricordi se era un nome o una data.",
+              "se": {
+                "a0_porta": "aperta"
+              }
+            },
+            {
+              "chi": "",
+              "testo": "Dietro l'orto c'è una lastra, e sulla lastra non c'è niente, perché non ci sei mai andata. Lo decidi in un secondo e lo porti dietro per quattro atti.",
+              "se": {
+                "a0_porta": "chiusa"
+              }
+            }
+          ]
+        }
+      ],
+      "combattimento": "betta",
+      "dopo": [
+        {
+          "id": "a1-d1",
+          "chi": "",
+          "battute": [
+            {
+              "testo": "Il vaso è pieno. Betta è fiorita tutta insieme, come fanno le cose che avevano fretta, e la rosa che le avevi comprato al mercato è la stessa che ha fatto lei.\n\nSono la stessa rosa. Questo è un fatto che nessuno dei due commenterà."
+            },
+            {
+              "testo": "Il campanello suona. Suona come suona sempre, che è un suono che hai sentito ventimila volte e che riconosceresti nella morte.\n\nApri. È Brizio. Dice: «è il momento giusto per scegliere se quella porta si apre o no»."
+            }
+          ],
+          "scelte": [
+            {
+              "id": "a1-d1-a",
+              "testo": "Apri. E le prometti che l'aiuola la finisci tu.",
+              "nota": "Una promessa è un debito: ti dà qualcosa da portare avanti, e qualcosa da portare avanti.",
+              "imposta": {
+                "a1_promise": "finiro"
+              }
+            },
+            {
+              "id": "a1-d1-b",
+              "testo": "Non apri. E le scrivi che non hai letto.",
+              "nota": "Senza una promessa, almeno non devi mantenerla.",
+              "imposta": {
+                "a1_promise": "non_finiro"
+              }
+            },
+            {
+              "id": "a1-d1-c",
+              "testo": "Non apri. E le scrivi quattro righe, e sono quelle del giovedì.",
+              "nota": "Le scrivi bene. È per questo che le costa.",
+              "imposta": {
+                "a1_promise": "silenzio"
+              },
+              "costa": [
+                "betta-lettera"
+              ]
+            }
+          ],
+          "nota": "Se scegli il campanello, l'aiuola la finisci. Se scegli il silenzio, è un'altra puntata, non un'altra punizione."
+        }
+      ]
+    },
+    {
+      "id": "a2",
+      "ordine": 2,
+      "titolo": "Il giuramento di Anselmo",
+      "epigrafe": "Secondo atto: la persona che sa. E la persona che sa è la più economica da comprare.",
+      "premessa": "Anselmo era al funerale. Non era venuto, perché la luna era gibbosa, e lui aveva detto «non viene» con la faccia di chi constata un fatto.\n\nAdesso è seduto nella tua aiuola. Non ha bussato: era già lì quando sei uscita, e aveva le mani in terra, e ti ha detto «ho finito la fila».\n\nFila di che. Non hai chiesto.",
+      "dai": [
+        "betta-tornata",
+        "betta-pelle",
+        "ansi-pelle",
+        "orielia-lettera-senza",
+        "brizio-secchio"
+      ],
+      "scena": [
+        {
+          "id": "a2-s1",
+          "chi": "",
+          "battute": [
+            {
+              "testo": "Anselmo è più magro di come l'hai visto l'ultima volta, e ha la stessa voce, e la stessa abitudine di dire «va bene» prima di dire qualcosa che non va bene.\n\nDice: «Betta è qui. È nel vaso da martedì. Io l'ho vista entrare e non ho fatto niente, perché sono un testimone, e i testimoni non fanno niente, e se facessero qualcosa non sarebbero testimoni»."
+            },
+            {
+              "chi": "",
+              "testo": "Anselmo guarda dietro di sé, verso l'orto, e poi guarda te, e non chiede niente. Ha capito che ci sei andata, e che quella cosa che hai letto l'hai già dimenticata, e ha deciso che è una buona cosa.",
+              "se": {
+                "a0_porta": "aperta"
+              }
+            },
+            {
+              "chi": "",
+              "testo": "Anselmo guarda dietro di sé, verso l'orto, e poi guarda te, e chiede: «ci sei andata, dietro?». Tu gli dici di no, e lui dice «va bene», e non lo chiede un'altra volta.",
+              "se": {
+                "a0_porta": "chiusa"
+              }
+            },
+            {
+              "testo": "Poi dice: «c'è una bambina. Non c'è mai stata. E l'unica persona che l'ha detta prima di te è tua madre, undici mesi prima del funerale».\n\nE poi tace, perché ha finito la frase, e la frase era già troppo."
+            },
+            {
+              "se": {
+                "a1_promise": "finiro"
+              },
+              "testo": "Nel mezzo dell'aiuola, dove lui ha finito la «fila», la terra è più scura. Non è concime: è terra che ha già ricevuto, e che ha già dimenticato da chi."
+            },
+            {
+              "se": {
+                "a1_promise": "non_finiro"
+              },
+              "testo": "Il mezzo dell'aiuola è ancora chiaro. Nessuno ci ha lavorato, e nessuno ci lavorerà stanotte, e tu non chiedi perché lui non l'ha fatto, e domattina non chiederai neanche."
+            },
+            {
+              "se": {
+                "a1_promise": "silenzio"
+              },
+              "testo": "Il mezzo dell'aiuola è più scuro del resto, e ha la forma di quattro righe, e tu capisci che è una lettera che ha piantato. Non ti ricordi di avergliela data: te la ricordi come si ricordano le cose che si è deciso di non ricordare."
+            }
+          ],
+          "scelte": [
+            {
+              "id": "a2-s1-a",
+              "testo": "«Dimmelo tu. Adesso. Prima che lo dica lei.»",
+              "nota": "La verità, detta adesso, ti toglie due possibilità e te ne dà una sola.",
+              "imposta": {
+                "a2_promise": "verita"
+              }
+            },
+            {
+              "id": "a2-s1-b",
+              "testo": "«Non voglio saperlo. Fammi firmare e basta.»",
+              "nota": "Una firma è una forma di oblio molto economica.",
+              "imposta": {
+                "a2_promise": "duro"
+              },
+              "costa": [
+                "ansi-testimone"
+              ],
+              "dai": [
+                "ansi-luna"
+              ]
+            },
+            {
+              "id": "a2-s1-c",
+              "testo": "«Allora finisci tu l'aiuola. E non guardare il volto.»",
+              "nota": "La cosa che diceva Brizio, detta a un altro, vale uguale.",
+              "imposta": {
+                "a2_promise": "finiro_volto"
+              }
+            }
+          ]
+        }
+      ],
+      "combattimento": "ansi",
+      "dopo": [
+        {
+          "id": "a2-d1",
+          "chi": "",
+          "battute": [
+            {
+              "testo": "Anselmo è fiorito in ginocchio, con le mani ancora in terra. È la posizione più onesta in cui si possa morire, e nessuno dei due commenterà.\n\nSotto, dove le mani erano, la terra è morbida. È lì che hai visto la bambina, e adesso non c'è più niente, e questo è l'unico modo che ha la verità di non ricominciare."
+            },
+            {
+              "testo": "Prima di andare via ti lascia un foglio piegato. Non la risposta: la domanda.\n\nÈ scritta con la calligrafia di Betta, che andava peggiorando, che è la stessa calligrafia di Anselmo, che è la stessa calligrafia degli altri. E adesso lo capisci: {a}avevano firmato lo stesso atto{/}."
+            }
+          ],
+          "dai": [
+            "brizio-perche"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a3",
+      "ordine": 3,
+      "titolo": "Orielia, che ha smesso di aspettare",
+      "epigrafe": "Terzo atto: la persona che non ti ha mai chiesto niente è quella che ti ha costato di più.",
+      "premessa": "La madre non è mai uscita di casa dopo il funerale. Non per malattia: per educazione, o per punizione, o perché in quella casa uscivano solo le donne con un motivo, e lei non aveva un motivo che non fosse tu.\n\nOra è nell'aiuola. Non ti ha scritto. Ti ha fatto sapere che c'era, e questo è più forte di una lettera, perché è una cosa che si fa solo se si è sicuri di non dover più tornare.",
+      "dai": [
+        "orielia-attesa",
+        "orielia-malattia",
+        "ansi-luna",
+        "donata-niente",
+        "nadia-mani"
+      ],
+      "scena": [
+        {
+          "id": "a3-s1",
+          "chi": "",
+          "battute": [
+            {
+              "testo": "È in piedi davanti all'aiuola, e ha la stessa altezza di quando te n sei andata. È la cosa che ti fa male: la terra l'ha invecchiata di quattro mesi, e il resto di lei no."
+            },
+            {
+              "testo": "Dice: «ho contato i fiori. Non gli anni: i fiori. Erano undici, e adesso sono quarantadue, e nessuno me l'ha detto, e io li ho contati lo stesso».\n\nPoi dice la frase che ti costituisce: «sono contenta che tu sia venuta, ma non per me. Per l'aiuola»."
+            },
+            {
+              "testo": "Ha le mani da giardiniere, e non le ricavi, perché le ha prese da un uomo che le teneva in terra.\n\nNon sono le mani di tuo padre. Sono altre mani, e tu non sai di chi sono."
+            },
+            {
+              "testo": "Anselmo, che è rimasto a guardare dalla siepe, dice una cosa sola e poi tace: «{c}se ci fai sedere, io me ne vado{/}».\n\nNon dice chi."
+            }
+          ],
+          "scelte": [
+            {
+              "id": "a3-s1-a",
+              "testo": "«Siediti. Un'ora. Solo un'ora.»",
+              "nota": "Un'ora con chi ti ha aspettato undici anni è un affare che non si rifà.",
+              "imposta": {
+                "a3_seduta": "si"
+              },
+              "costa": [
+                "orielia-malattia"
+              ],
+              "dai": [
+                "orielia-prima-pioggia"
+              ]
+            },
+            {
+              "id": "a3-s1-b",
+              "testo": "«Resta in piedi. L'aiuola si lavora in piedi.»",
+              "nota": "La madre in piedi per l'ultima volta. Non finisce bene e non finisce male.",
+              "imposta": {
+                "a3_seduta": "no"
+              }
+            }
+          ]
+        }
+      ],
+      "combattimento": "orielia",
+      "dopo": [
+        {
+          "id": "a3-d1",
+          "chi": "",
+          "battute": [
+            {
+              "testo": "È fiorita tutta insieme, in tre secondi, come una cosa che aspettava da molto più tempo di quanto tu avessi calcolato. La gonna copre metà dell'aiuola.\n\nSotto la gonna, dove la terra è più scura, non c'è niente. Non c'è un segno, non c'è una prova, non c'è un cadavere. C'è il fatto che una donna ha smesso di aspettare e ha cominciato a fiorire, ed è l'unica cosa che sua madre non ha mai fatto."
+            },
+            {
+              "se": {
+                "a3_seduta": "si"
+              },
+              "testo": "Siedi sull'aiuola, dove è stata lei un'ora, e l'ora è già passata da un pezzo.\n\nLa terra in quel punto è più tenera, e tu capisci perché Orielia ti chiedeva di sederti: non era una richiesta. Era una consegna."
+            },
+            {
+              "se": {
+                "a3_seduta": "no"
+              },
+              "testo": "Rimani in piedi davanti all'aiuola, e l'aiuola è più in bassa di un palmo, e il palmo te l'hanno dato loro, e non a te.\n\nOrielia non ti ha chiesto niente in trent'anni, e non ti chiede niente adesso, e questo è l'unico regalo che una madre abbia mai fatto a una figlia: non aver bisogno."
+            },
+            {
+              "testo": "Brizio, alla fine, dice: «alla mia età le domande sono inutili. Ma questa me la fai e io te la rispondo».\n\nE te la fa: «di chi è la bambina?»\n\nE tu non rispondi, perché in quel momento non lo sai, e perché nel gioco che stai giocando non lo saprai più."
+            }
+          ],
+          "dai": [
+            "brizio-secchio"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a4",
+      "ordine": 4,
+      "titolo": "Donata, che ha un prezzo",
+      "epigrafe": "Quarto atto: la persona che ha fatto mercato della tua vita senza sapere che era la tua vita.",
+      "premessa": "Il banco di Donata è ancora lì, ed è ancora aperto, e ci sei passata davanti quattrocento volte. Negli ultimi due anni ci sei passata davanti quattrocento volte e non ci sei mai fermata, e questa è una cosa che solo adesso ti sembra impossibile.\n\nOggi ti fermi. E dalla parte di dentro del banco c'è una persona, e ha la stessa età di tutti, e ti guarda come guarda te Brizio: con giudizio, e con fretta.",
+      "dai": [
+        "donata-prezzo",
+        "donata-commissione",
+        "betta-gravidanza",
+        "ansi-bambina",
+        "brizio-pianta"
+      ],
+      "scena": [
+        {
+          "id": "a4-s1",
+          "chi": "",
+          "battute": [
+            {
+              "testo": "Donata non si alza. Ti guarda da sotto il banco, perché da sotto il banco si guarda bene, e perché è l'unico modo di dare senza sembrare di dare.\n\nDice: «ho saputo che saresti venuta quando sono state piantate le rose. Le rose le pianta solo chi ha fretto, e tu hai sempre avuto fretta»."
+            },
+            {
+              "testo": "Poi dice la frase che ti spiega trent'anni di negozio: «Brizio non ha inventato niente. Io ho solo trovato i semi. C'è differenza, e la differenza la paga la terra»."
+            },
+            {
+              "se": {
+                "a2_promise": "verita"
+              },
+              "testo": "Sul bancone, sotto il vetro, c'è un sacchetto di carta marrone con i bordi che si rompono nello stesso punto di tutti gli altri. È pieno. È lì da prima che tu entrassi, e domani ci sarà ancora, perché Donata mette i sacchetti la sera e li toglie la mattina, e non ha detto a te niente, e non lo dirà a nessuno."
+            },
+            {
+              "se": {
+                "a2_promise": "duro"
+              },
+              "testo": "Sul bancone c'è un foglio con i conti, e i conti sono in grafia, e la grafia è di Brizio, e i conti sono di due persone diverse che hanno disegnato la stessa cifra alla fine.\n\nNon sono due persone. Sono la stessa, che ci metteva dentro anche quello che non sapeva di starci mettendo."
+            },
+            {
+              "se": {
+                "a2_promise": "finiro_volto"
+              },
+              "testo": "Sul bancone, sotto il vetro, c'è un sacchetto vuoto con i bordi già consumati. Non è un sacchetto nuovo: è uno che hai comprato tu, molto tempo fa, e che qualcuno ha svuotato e rimesso lì.\n\nNon ti ricordi di averlo comprato. Ti ricordi che era pesante."
+            }
+          ],
+          "scelte": [
+            {
+              "id": "a4-s1-a",
+              "testo": "«Ti dico chi era. E poi mi dici cosa hai visto, e per chi hai piantato.»",
+              "nota": "Due verità in cambio di una verità. Il baratto più onesto della tua vita.",
+              "imposta": {
+                "a4_nome": "detto"
+              }
+            },
+            {
+              "id": "a4-s1-b",
+              "testo": "«Non ti dico niente. Tu non hai mai chiesto, e siamo pari.»",
+              "nota": "La pari che hai già scelto tre volte. È un vizio, e i vizi si ripetono.",
+              "imposta": {
+                "a4_nome": "non_detto"
+              },
+              "costa": [
+                "sauro-nome"
+              ]
+            },
+            {
+              "id": "a4-s1-c",
+              "testo": "«Solo una cosa: dov'è la lastra. Dietro l'orto. Dimmi dov'è.»",
+              "nota": "Una domanda sola, e non è quella che ti sta sfuggendo.",
+              "imposta": {
+                "a4_nome": "resta"
+              },
+              "costa": [
+                "betta-partenza"
+              ]
+            }
+          ]
+        }
+      ],
+      "combattimento": "donata",
+      "dopo": [
+        {
+          "id": "a4-d1",
+          "chi": "",
+          "battute": [
+            {
+              "testo": "Donata è fiorita dietro il suo banco, e il banco le ha retto la schiena meglio di quanto abbia mai retto la tua.\n\nTi dice, mentre fiorisce, e lo dice con la stessa calma con cui diceva i prezzi: «l'ultimo sacchetto l'ho messo due volte. Una per te e una per chi ti aspetta. Non me lo ricordi? allora non sei tu. Sei la moglie»."
+            },
+            {
+              "se": {
+                "a4_nome": "detto"
+              },
+              "testo": "Sul bancone, nel vetro, il sacchetto è sparito. Al suo posto c'è una lastra piccola, di quelle che si mettono sui vasi, e c'è scritto un nome solo, e non è un nome di donna.\n\nLo leggi, e lo leggi due volte, e la seconda volta lo leggi ad alta voce, e l'orto intero lo sente."
+            },
+            {
+              "se": {
+                "a4_nome": "non_detto"
+              },
+              "testo": "Sul bancone, nel vetro, il sacchetto è sparito. Al suo posto c'è una lastra piccola, di quelle che si mettono sui vasi, e non c'è scritto niente.\n\nHai comprato una scheda per non leggere un nome. Il nome è ancora lì sotto il vetro, e adesso è tuo, e non lo puoi restituire perché non te l'hanno mai dato."
+            },
+            {
+              "se": {
+                "a4_nome": "resta"
+              },
+              "testo": "Sul bancone, nel vetro, c'è il sacchetto che hai comprato tu, e dentro c'è terra, e la terra è tua, e sotto la terra c'è una lastra piccola senza nome.\n\nL'hai cercata per vent'anni. Adesso l'hai trovata per un pezzo di ricordo, che è il prezzo che hai scelto e che è sempre il prezzo giusto."
+            },
+            {
+              "testo": "Dal fondo del giardino, dove non c'è niente, arriva una voce che non è di nessuno di quelli che stai aspettando. Dice una cosa sola, e poi la terra la copre: «{c}tu ci sei già passata, davanti alla lastra. Ventisette volte»{/}."
+            }
+          ],
+          "dai": [
+            "sauro-primo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a5",
+      "ordine": 5,
+      "titolo": "Il giardino",
+      "epigrafe": "Ultimo atto: il vaso non è una persona. È la tomba sotto il giardino, e sotto la tomba c'è l'uomo che piantò il primo fiore.",
+      "premessa": "Sono passate sei settimane da quando Orielia ha smesso di fiorire, e in sei settimane il giardino ha fatto più fiori di quanti ne abbia fatti in trent'anni.\n\nBrizio non ti ha detto niente. Ti ha solo spostato il vaso — il sesto, quello pulito — dal fondo dell'aiuola al centro, e adesso il centro dell'aiuola è la cosa più buona e più scura di tutto il giardino.",
+      "dai": [
+        "sauro-primo",
+        "sauro-giardino",
+        "sauro-sotto",
+        "sauro-nome",
+        "ansi-giuramento",
+        "orielia-prima-pioggia",
+        "brizio-perche",
+        "nadia-orecchio"
+      ],
+      "scena": [
+        {
+          "id": "a5-s1",
+          "chi": "",
+          "battute": [
+            {
+              "testo": "Quello che è piantato al centro dell'aiuola non ha radici.\n\nHai provato a tirarlo fuori e non viene, e non viene perché non è piantato: è stato messo lì, e poi c'è cresciuto dentro, e adesso è la terra che lo tiene e non viceversa."
+            },
+            {
+              "testo": "{c}«Sauro Ferro»{/}. Il nome è sulla lastra, e la lastra è dietro l'orto, e tu ci sei passata davanti ventisette volte.\n\nNon ventisette volte per distrazione: ventisette volte perché ogni volta che passavi guardavi il vaso e non la lastra, e ogni volta che guardavi il vaso pensavi che fosse un giardiniere, e non ti è mai venuto in mente che potesse essere tuo marito."
+            },
+            {
+              "testo": "Brizio, alle tue spalle, dice: «ti ho lasciata passare ventisette volte perché ogni volta che ti fermavi leggevi il nome e poi non tornavi. E il giardino ha continuato a fiorire lo stesso, perché è quello che fa».\n\nE poi dice, e questa è l'unica volta che alza la voce: «adesso il giardino ha finito. Non c'è più niente da piantare. C'è solo da leggere»."
+            }
+          ],
+          "scelte": [
+            {
+              "id": "a5-s1-a",
+              "testo": "Lo leggi tu, il nome, ad alta voce, e gli fai sentire come si sente.",
+              "nota": "Dritta, in piedi, davanti a tutti i fiori insieme. È la fine più difficile di tutte.",
+              "imposta": {
+                "a5_come": "dritta"
+              }
+            },
+            {
+              "id": "a5-s1-b",
+              "testo": "Non lo leggi. Chiedi che lo legga lui, che è l'unico che l'ha saputo tutta la vita.",
+              "nota": "Lo fai leggere a chi non ha scritto niente. È la fine più facile, e la più sola.",
+              "imposta": {
+                "a5_come": "parlata"
+              },
+              "costa": [
+                "nadia-orecchio"
+              ]
+            }
+          ]
+        }
+      ],
+      "combattimento": "sauro",
+      "dopo": [
+        {
+          "id": "a5-d1",
+          "chi": "",
+          "battute": [
+            {
+              "se": {
+                "a4_nome": "detto"
+              },
+              "testo": "Il sesto vaso è pieno, e non è fiorito. È andato giù.\n\nLa terra dell'aiuola scende di quattro dita, si chiude, e fa quello che fa la terra quando smette di ricevere: torna ferma. E sotto, dove c'era la radice a forma di mano, adesso c'è una mano, e le mani sono due, e sono le tue e sono le sue, e sono state nello stesso punto per ventisette anni senza toccarsi."
+            },
+            {
+              "se": {
+                "a4_nome": "non_detto"
+              },
+              "testo": "Il sesto vaso è pieno, e non è fiorito. È andato giù.\n\nE ti accorgi che l'hai riempito senza averlo letto, e che adesso non puoi più leggerlo, perché l'hai dato al terreno insieme a tutto il resto, e il terreno non restituisce, e questo è esattamente quello che ti aveva detto Brizio al primo atto: «chi guarda, metà muore»."
+            },
+            {
+              "se": {
+                "a4_nome": "resta"
+              },
+              "testo": "Il sesto vaso è pieno, e non è fiorito. È andato giù.\n\nE ti accorgi che l'hai riempito cercando, e che la cosa che cercavi era lì sotto da sempre, e che l'hai trovata solo quando hai smesso di guardarla e hai cominciato a guardare la terra."
+            },
+            {
+              "se": {
+                "a0_porta": "aperta"
+              },
+              "testo": "Il giardino fa l'ultima cosa che può fare, e la fa tutta insieme: fiorisce su tutto, sulla lastra, sui vasi, sul sentiero, sulla casa. Non è un miracolo: è un conto, chiuso al credito.\n\nBrizio guarda, e dice — e sono le ultime parole che ti dice, e le dice piano: «adesso non pianta più niente, perché non gli hai dato niente da piantare. Hai dato tutto. E la terra, alla fine, ha capito che non era un orto»."
+            },
+            {
+              "se": {
+                "a0_porta": "chiusa"
+              },
+              "testo": "Il giardino fa l'ultima cosa che può fare, e la fa a metà: fiorisce su metà, e dall'altra metà non esce niente.\n\nLa metà sterile è la metà dove c'è la porta di Betta, e la porta è chiusa, e dietro la porta c'è una casa con dentro una donna che ha aspettato undici anni, e che aspetterà anche questa volta, perché è quello che fanno le madri, e perché non sanno fare altro."
+            },
+            {
+              "se": {
+                "a5_come": "dritta"
+              },
+              "testo": "Ti siedi sull'aiuola. La terra è tiepida, ed è tiepida da sotto, e ti ricordi di un pomeriggio di cui non ricordi l'anno, e ti ricordi che qualcuno ti aveva messa la mano sulla testa e aveva detto «non guardare, sta' zitta».\n\nE ti ricordi — per un secondo, per uno solo — di chi era la voce. E poi non te lo ricordi più, perché è andato tutto nel terreno, e il terreno adesso è un giardino, e nel giardino non si cerca niente."
+            },
+            {
+              "se": {
+                "a5_come": "parlata"
+              },
+              "testo": "Ti siedi sull'aiuola. La terra è tiepida, ed è tiepida da sotto.\n\nNon ti ricordi di quel pomeriggio. Non ti ricordi della mano sulla testa, né della voce, né di chi fosse. E non lo sai perché non l'hai letto ad alta voce: lo hai fatto leggere a chi non aveva scritto niente, e chi non ha scritto niente non ricorda al posto tuo."
+            }
+          ],
+          "nota": "Qui finisce. Il resto lo scrive il giardino, e non lo scrive bene: lo scrive verde."
+        }
+      ],
+      "finale": "terra"
+    }
+  ],
+  "finali": {
+    "terra": {
+      "nome": "La Terra",
+      "condizione": "Non ti resta nessun ricordo. Zero. Il giardino è pieno e tu non c'entri più.",
+      "quadro": "vuoto",
+      "righe": [
+        "Tutti e sei i vasi sono fioriti nello stesso minuto, che è l'unico modo che hanno avuto di dirlo insieme: {c}non lo sapeva nessuno, quindi lo hanno fatto tutti insieme{/}.\n\nTu eri lì. Eri lì perché non c'era più niente che ti tenesse lontano, e perché a metà del quarto atto hai smesso di ricordare perché stavi piantando, e alla fine hai piantato anche te.",
+        "Il nome sulla lastra è stato letto una volta sola, e una volta sola è una lettura che non si rifà: è diventata cosa, non informazione. Lo saprai ancora, per qualche minuto, e poi lo saprai come si sanno le cose dei sogni.",
+        "Nessuno si ricorderà che quel giardino esisteva. Non perché sia brutto: perché è fiorito in modo che, visto da lontano, sembrava un campo qualunque. I campi qualunque vengono dimenticati per primi.",
+        "È andata bene. È questa la cosa che nessuno ti dirà e che è la verità: è andata bene, e ti ha costato tutto, e le due cose non si escludono."
+      ],
+      "sotto": "Il giardino ha continuato a fiorire per altri ventitré anni senza di te, e ogni primavera qualcuno ha detto «l'ha fatto il giardiniere», e nessuno ha chiesto quale.",
+      "azioni": [
+        {
+          "id": "mazzetto",
+          "testo": "Il Mazzetto"
+        },
+        {
+          "id": "cast",
+          "testo": "Il Cast"
+        },
+        {
+          "id": "ricomincia",
+          "testo": "Nuova puntata"
+        }
+      ]
+    },
+    "spoglio": {
+      "nome": "Lo Spoglio",
+      "condizione": "Ti resta un ricordo solo. Uno.",
+      "quadro": "spoglio",
+      "righe": [
+        "Cinque vasi su sei, e quello che ti resta è l'unico che non hai riempito, e l'hai lasciato vuoto per un motivo che non ricordi più.\n\nNon è un caso. Il giardino ha capito che se ti avesse dato l'ultimo pezzo non ti sarebbe rimasto niente su cui camminare, e ha fatto quello che fanno le cose che hanno più giudizio di noi: ha trattenuto.",
+        "Un nome solo. Non è il tuo, e adesso è l'unico che hai, e quindi è tuo, e quindi sei una persona che si chiama come si chiama quella cosa e fa un giardino e non ha un passato. Va bene così. È una vita intera, non un pezzo.",
+        "Gli altri cinque sono partiti senza salutarti, che è il modo in cui partono le persone che hai nutrito: senza malanconia, e senza accorgersi che la terra sotto di loro era già cambiata.",
+        "Non tornò. Tornò l'aiuola, un po' più scura, e l'odore di terra bagnata, e ogni tanto ti sembra di sentire qualcuno che dice «non viene»."
+      ],
+      "sotto": "Hai continuato a piantare per altri vent'anni, senza ricordare perché, e la cosa buffa è che sei diventata brava.",
+      "azioni": [
+        {
+          "id": "mazzetto",
+          "testo": "Il Mazzetto"
+        },
+        {
+          "id": "cast",
+          "testo": "Il Cast"
+        },
+        {
+          "id": "ricomincia",
+          "testo": "Nuova puntata"
+        }
+      ]
+    },
+    "prato": {
+      "nome": "Il Prato",
+      "condizione": "Da due a sei ricordi. Il giardino è verde e i nomi non tornano più.",
+      "quadro": "prato",
+      "righe": [
+        "Quattro vasi, forse cinque. Il giardino è un prato, e un prato è una cosa che si guarda da lontano e che non ha dentro nessuna storia, e per questo è più facile da vivere.\n\nNon ricordi i nomi. Ricordi la direzione da cui arrivavano quando parlavano, e ricordi che una di loro rideva prima delle altre, e che rideva per prima perché se non avesse riso lei non avrebbe riso nessuno.",
+        "Hai dato al terreno pezzi di tutti loro, e il terreno li ha messi insieme, e adesso il prato è fatto di quella mescola. Non è un ordine. È una stagione.",
+        "Quelli che restano li chiami come ti capita, e ogni tanto ne sbagli uno, e chi ti corregge è un vicino gentile che non sa che hai sbagliato.",
+        "Tu sei quella signora dei giardini. È l'unico titolo che ti è rimasto, e non è un titolo che hai preso: è un titolo che ti hanno dato loro, per non dire il tuo."
+      ],
+      "sotto": "Una bambina, molto dopo, ti ha chiesto perché il prato è così bello. E tu le hai detto la verità più corta che avevi: «perché qualcuno ci ha messo dentro qualcosa».",
+      "azioni": [
+        {
+          "id": "mazzetto",
+          "testo": "Il Mazzetto"
+        },
+        {
+          "id": "cast",
+          "testo": "Il Cast"
+        },
+        {
+          "id": "ricomincia",
+          "testo": "Nuova puntata"
+        }
+      ]
+    },
+    "vigna": {
+      "nome": "La Vigna",
+      "condizione": "Sei vasi su sei, e almeno sette ricordi. Fiorisce tutto, e manca un angolo.",
+      "quadro": "vigna",
+      "righe": [
+        "Sei. Li hai fioriti tutti, e questo è più di quello che chiunque abbia mai fatto in questa città, e meno di quello che ci vuole.\n\nIl giardino è pieno da tre lati. Il quarto è una macchia di terra nera, e la macchia ha la forma di una persona che non c'era, e tu non hai riempito quel vaso perché l'ultimo vaso era l'unica cosa che ti restava e non l'hai dato via. Non ancora.",
+        "Sai chi è la bambina. Non perché l'abbia scritto: perché l'hai letto, e l'hai tenuto, e l'hai ancora. È la differenza fra un ricordo e una parola, ed è tutta lì.",
+        "Gli altri cinque sono andati, e sono andati bene, e ci sono tombstone nuovi con dei fiori sopra, e ogni fioritura, ogni stagione, ti ricorda di aver nutrito qualcuno che non poteva più essere nutrito.",
+        "Resta tu, e resta l'angolo nero, e tu ci pianti ancora sopra, e non viene niente, e non viene niente anche fra vent'anni, e questo è l'unico posto del giardino che è ancora tuo."
+      ],
+      "sotto": "Sul muro del fondo, dove non arriva la luce, un certo giorno si è aperto un bocciolo. Solo lì. Non l'hai visto nascere, e quando gliel'hanno detto non ci hai creduto, e adesso è lì, e non ci credi lo stesso.",
+      "azioni": [
+        {
+          "id": "mazzetto",
+          "testo": "Il Mazzetto"
+        },
+        {
+          "id": "cast",
+          "testo": "Il Cast"
+        },
+        {
+          "id": "ricomincia",
+          "testo": "Nuova puntata"
+        }
+      ]
+    },
+    "giardino": {
+      "nome": "Il Giardino",
+      "condizione": "Sei vasi su sei, almeno dodici ricordi, e la promessa che hai fatto al primo atto l'hai mantenuta.",
+      "quadro": "giardino-pieno",
+      "righe": [
+        "L'hai mantenuta. La porta del primo atto, quella che hai potuto aprire solo una volta, e l'hai aperta, e poi per sei atti hai fatto esattamente quello che avevi detto che avresti fatto, e una cosa del genere, in trent'anni, capita a pochissime persone, e capita soprattutto a quelle che non se ne sono accorte.",
+        "Il giardino è pieno. Non un campo, non una vigna, non un prato con un buco: {c}pieno{/}, che è una parola che vuol dire che non c'è niente che non sia stato deciso da qualcuno, e in questo caso da te, e per sei persone, e poi per una settima che era sotto.\n\nLo hai saputo, che era lui. E hai finito lo stesso, perché finire è l'unica cosa che si fa con la verità: si guarda, e si continua.",
+        "Tutti e sei sono partiti, e nessuno ti ha chiesto niente, e nessuno ti ha ringraziata, e i titoli di coda dicono «fondatore del giardino» e non c'è nessun nome, e adesso lo sai, e non lo scrivi, perché scriverlo sarebbe disfarlo.",
+        "Quello che ti amava ti ha dimenticata in modo caldo, come si dimentica un buon odore: non perché se n'era andato, ma perché è passato attraverso una stanza e ha lasciato l'aria comoda. È così che ti cercano, adesso. Nelle stanze, per qualche secondo, senza sapere perché."
+      ],
+      "sotto": "Alla fine della puntata, sopra i titoli di coda, c'è una riga in piccolo che nessuno commenta e che dice: «la signora dei giardini è morta. Il giardino ha continuato senza di lei, e per ventitré anni è stato pieno».",
+      "azioni": [
+        {
+          "id": "mazzetto",
+          "testo": "Il Mazzetto"
+        },
+        {
+          "id": "cast",
+          "testo": "Il Cast"
+        },
+        {
+          "id": "ricomincia",
+          "testo": "Nuova puntata"
+        }
+      ]
+    }
+  }
+}

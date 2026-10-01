@@ -1,0 +1,63 @@
+{
+  "id": "/fiori-sulle-tombe",
+  "name": "Fiori sulle Tombe",
+  "short_name": "Fiori",
+  "description": "JRPG a turni dove il combattimento e' una donazione: un fiore guarisce il nemico e ti ferisce quanto lui. 6 atti, 28 ricordi, 5 finali, una puntata finale. Offline.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait",
+  "background_color": "#0f120c",
+  "theme_color": "#2b2a1c",
+  "lang": "it",
+  "dir": "ltr",
+  "categories": ["games", "entertainment", "books"],
+  "prefer_related_applications": false,
+  "icons": [
+    { "src": "icons/icon-72.png",     "sizes": "72x72",     "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-96.png",     "sizes": "96x96",     "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-128.png",    "sizes": "128x128",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-144.png",    "sizes": "144x144",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-152.png",    "sizes": "152x152",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/apple-touch-icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-192.png",    "sizes": "192x192",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-256.png",    "sizes": "256x256",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-384.png",    "sizes": "384x384",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png",    "sizes": "512x512",   "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-192.png", "sizes": "192x192",  "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512",  "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    {
+      "src": "icons/screenshot-narrow.png",
+      "sizes": "540x960",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Schermata di combattimento: l'orto con il vaso da riempire, e la barra della spesa"
+    },
+    {
+      "src": "icons/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Il Mazzetto aperto a lato, orto al centro su desktop"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Riprendi l'orto",
+      "short_name": "Continua",
+      "description": "Torna all'ultimo atto lasciato",
+      "url": "./?view=gioco",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Il Mazzetto",
+      "short_name": "Mazzetto",
+      "description": "I ricordi che ti restano, e i petali secchi",
+      "url": "./?view=mazzetto",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

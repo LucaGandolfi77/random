@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2b2a1c">
+<meta name="description" content="JRPG a turni dove non attacchi: offri. Un fiore a un nemico lo guarisce e ti ferisce quanto lui. 6 atti, 28 ricordi, 5 finali, una puntata. Offline.">
+<title>Fiori sulle Tombe</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Fiori">
+<meta name="color-scheme" content="dark">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-mano="desta">
+
+<div id="app">
+
+  <!-- ═══ COPERTINA ═══════════════════════════════════════ -->
+  <section id="view-copertina" class="view attiva" aria-label="Copertina">
+    <canvas id="fondo" aria-hidden="true"></canvas>
+    <div class="copertina-interno">
+      <p class="occhiello" aria-hidden="true">una telenovela che finisce nel cimitero</p>
+      <h1>Fiori<br>sulle Tombe</h1>
+      <p class="sommario">
+        I fiori di questa città fioriscono solo sui cadaveri, e l'unico modo per
+        far crescere il mondo è ferirti. Sei <em>Nadia Ferro</em>. Hai passato la
+        vita a dare fiori a gente che non te li chiedeva, e adesso ti tocca
+        chiedere: <em>di chi è la bambina che nessuno ha mai nominata?</em>
+      </p>
+      <div class="copertina-azioni">
+        <button type="button" class="grande" id="btn-continua" disabled>Continua</button>
+        <button type="button" class="fantasma" id="btn-nuova">Nuova puntata</button>
+      </div>
+      <div class="copertina-piccolo">
+        <button type="button" class="fantasma piccolo" id="btn-mazzetto-home">Il Mazzetto</button>
+        <button type="button" class="fantasma piccolo" id="btn-cast-home">Il Cast</button>
+        <button type="button" class="fantasma piccolo" id="btn-installa">Installa</button>
+        <button type="button" class="fantasma piccolo" id="btn-impostazioni">Impostazioni</button>
+      </div>
+      <p class="avviso-installa" id="avviso-installa" hidden></p>
+      <p class="crediti">un JRPG a doni · offline · nessun account · <span id="crediti-memorie">28</span> ricordi</p>
+    </div>
+  </section>
+
+  <!-- ═══ ATTO ════════════════════════════════════════════ -->
+  <section id="view-atto" class="view" aria-label="Atto">
+    <header class="barra">
+      <button type="button" class="icona" id="btn-atto-home" aria-label="Torna alla copertina">⌂</button>
+      <h2 id="atto-titolo">Atto</h2>
+      <span class="pillola" id="atto-memorie" aria-live="polite">28 ricordi</span>
+    </header>
+    <div class="atto-interno">
+      <p class="epigrafe" id="atto-epigrafe"></p>
+      <p class="premessa" id="atto-premessa"></p>
+      <ol class="stanze" id="atto-stanze"></ol>
+      <p class="petali-atto" id="atto-petali" aria-live="polite">0/6 petali</p>
+      <!-- I pulsanti di annusa, cast e rinnova sono qui dentro e vengono
+           ricreati a ogni disegno; btn-prosegui sta FUORI, altrimenti
+           verrebbe cancellato insieme a loro. -->
+      <div class="atto-strumenti" id="atto-strumenti"></div>
+      <div class="atto-azioni">
+        <button type="button" class="grande" id="btn-prosegui">Comincia</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SCENA (dialogo) ══════════════════════════════════ -->
+  <section id="view-scena" class="view scena" aria-label="Scena">
+    <header class="barra">
+      <button type="button" class="icona" id="btn-scena-quit" aria-label="Interrompi e torna all'atto">‹</button>
+      <span class="pillola" id="scena-chi">Nadia</span>
+      <span class="pillola tenue" id="scena-memorie">28</span>
+    </header>
+    <div class="scena-interno">
+      <p class="narrazione" id="scena-texto"></p>
+      <div class="scena-scelte" id="scena-scelte"></div>
+      <button type="button" class="grande pieno" id="btn-scena-avanti">Continua</button>
+    </div>
+  </section>
+
+  <!-- ═══ L'ORTO ══════════════════════════════════════════ -->
+  <section id="view-combattimento" class="view combattimento" aria-label="Orto">
+    <header class="hud" id="cb-hud">
+      <div class="hud-riga uno">
+        <div class="nemico">
+          <b id="cb-nemico">Betta</b>
+          <span id="cb-titolo" class="tenue">è partita con metà di tutto</span>
+          <span id="cb-arco" class="arco" hidden></span>
+        </div>
+        <div class="sete" aria-label="Sete del vaso">
+          <span class="tenue">sete</span>
+          <div class="pips" id="cb-sete" role="img" aria-label="sete 0 su 6"></div>
+        </div>
+      </div>
+      <div class="hud-riga due">
+        <div class="conta">
+          <span class="tenue">lui deve</span>
+          <b id="cb-spesa">100</b>
+          <span class="tenue" id="cb-spesa-n">100 / 100</span>
+        </div>
+        <div class="speso">
+          <span class="tenue">hai dato</span>
+          <div class="barra-speso"><i id="cb-speso"></i></div>
+        </div>
+        <div class="fiori">
+          <span class="tenue">in mano</span>
+          <div class="barra-fiori"><i id="cb-fiori"></i></div>
+          <span id="cb-fiori-n" aria-live="off">0</span>
+        </div>
+        <div class="conta">
+          <span class="tenue">ricordi</span>
+          <b id="cb-memorie">28</b>
+        </div>
+        <button type="button" class="icona" id="btn-cb-mazzetto" aria-label="Apri il Mazzetto">▤</button>
+        <button type="button" class="icona" id="btn-cb-cast" aria-label="Apri il Cast">◈</button>
+      </div>
+      <div class="palette" id="cb-palette" role="group" aria-label="Di chi è il fiore che stai dando"></div>
+    </header>
+
+    <div class="tela-r incassa" id="cb-rincassa">
+      <canvas id="cb-tela" aria-label="Orto: traccia il dito per seminare sopra il vaso" role="img"></canvas>
+      <canvas id="cb-effetti" aria-hidden="true"></canvas>
+      <p class="istruzione" id="cb-istruzione">semina sopra il vaso</p>
+      <p class="avviso-pennello" id="cb-avviso" role="status" aria-live="polite"></p>
+      <div class="intento" id="cb-intento" hidden></div>
+    </div>
+
+    <footer class="menu" id="cb-menu" role="group" aria-label="Mosse"></footer>
+  </section>
+
+  <!-- ═══ FINALE ══════════════════════════════════════════ -->
+  <section id="view-finale" class="view" aria-label="Finale">
+    <header class="barra">
+      <button type="button" class="icona" id="btn-finale-home" aria-label="Torna alla copertina">⌂</button>
+      <h2 id="finale-nome">Finale</h2>
+      <span class="pillola tenue" id="finale-memorie"></span>
+    </header>
+    <div class="finale-interno" id="finale-interno"></div>
+  </section>
+
+  <!-- ═══ IL MAZZETTO ═════════════════════════════════════ -->
+  <section id="view-mazzetto" class="view" aria-label="Il Mazzetto">
+    <header class="barra">
+      <button type="button" class="icona" id="btn-mazzetto-indietro" aria-label="Chiudi il Mazzetto">‹</button>
+      <h2>Il Mazzetto</h2>
+      <span class="pillola" id="mazzetto-conto">28 / 28</span>
+    </header>
+    <div class="mazzetto-interno">
+      <p class="premessa">
+        Ogni scheda è un ricordo. Le carte che dai al terreno non le rivedi più:
+        restano solo i petali secchi.
+      </p>
+      <p class="petali-mazzetto" id="mazzetto-petali" aria-live="polite">0/6</p>
+      <div class="filtri" id="mazzetto-filtri" role="group" aria-label="Filtra per persona"></div>
+      <div class="schede" id="mazzetto-schede"></div>
+      <div class="bruciate" id="mazzetto-bruciate"></div>
+    </div>
+  </section>
+
+  <!-- ═══ IL CAST ══════════════════════════════════════════ -->
+  <section id="view-cast" class="view" aria-label="Il Cast">
+    <header class="barra">
+      <button type="button" class="icona" id="btn-cast-indietro" aria-label="Chiudi il Cast">‹</button>
+      <h2>Il Cast</h2>
+      <span class="pillola" id="cast-conto">0/6 petali</span>
+    </header>
+    <div class="cast-interno">
+      <p class="premessa">
+        Sette persone. Per ognuna, tre frasi, e quella che vale è l'ultima che ti
+        tocca: <em>chi è</em>, <em>chi hai perso</em>, <em>chi ti ha piantato</em>.
+        Lo stato non dipende dall'atto. Dipende da come l'hai trattata.
+      </p>
+      <p class="cast-vuoto" id="cast-vuoto" hidden>Il cast non è ancora arrivato.</p>
+      <div class="cast-lista" id="cast-lista"></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ OVERLAY: scelta delle schede da dare al terreno ════ -->
+<div id="overlay-schede" class="overlay" hidden>
+  <div class="overlay-interno" role="dialog" aria-modal="true" aria-labelledby="overlay-schede-tit">
+    <h3 id="overlay-schede-tit">Cosa dai al terreno?</h3>
+    <p class="overlay-nota">Non torna. Scegli due carte, poi non saprai più cosa avevi scelto.</p>
+    <div class="scelte-schede" id="overlay-schede-lista"></div>
+    <button type="button" class="fantasma" id="overlay-schede-annulla">Rinuncia</button>
+  </div>
+</div>
+
+<!-- ═══ OVERLAY: impostazioni ═════════════════════════════ -->
+<div id="overlay-impostazioni" class="overlay" hidden>
+  <div class="overlay-interno" role="dialog" aria-modal="true" aria-labelledby="overlay-imp-tit">
+    <h3 id="overlay-imp-tit">Impostazioni</h3>
+    <div class="opzioni">
+      <label class="opzione"><input type="checkbox" id="opt-suono" checked><span>Suono</span></label>
+      <label class="opzione"><input type="checkbox" id="opt-narrazione"><span>Lettura ad alta voce dei testi</span></label>
+      <label class="opzione"><input type="checkbox" id="opt-meno-veloce"><span>Movimento ridotto</span></label>
+      <div class="opzione solo-testa">
+        <span>Colpo mano</span>
+        <div class="segmenti" role="group" aria-label="Colpo mano">
+          <button type="button" class="segmento" data-mano="sinistra">Sinistra</button>
+          <button type="button" class="segmento attivo" data-mano="destra">Destra</button>
+        </div>
+      </div>
+      <div class="opzione solo-testa">
+        <span>Presa</span>
+        <div class="segmenti" role="group" aria-label="Larghezza della presa">
+          <button type="button" class="segmento" data-mossa="sottile">Sottile</button>
+          <button type="button" class="segmento attivo" data-mossa="medio">Media</button>
+          <button type="button" class="segmento" data-mossa="largo">Largo</button>
+        </div>
+      </div>
+      <div class="opzione solo-testa">
+        <span>Luminosità</span>
+        <div class="segmenti" role="group" aria-label="Luminosità">
+          <button type="button" class="segmento" data-lume="chiaro">Chiara</button>
+          <button type="button" class="segmento attivo" data-lume="media">Media</button>
+          <button type="button" class="segmento" data-lume="scura">Scura</button>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="grande pieno" id="overlay-imp-chiudi">Chiudi</button>
+    <p class="overlay-nota"><button type="button" class="link" id="btn-cancella">Cancella la puntata</button></p>
+  </div>
+</div>
+
+<!-- ═══ TOAST ═════════════════════════════════════════════ -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<p class="sr-only" id="sr-stato" role="status" aria-live="polite"></p>
+
+<script src="js/save.js"></script>
+<script src="js/memoria.js"></script>
+<script src="js/epitaffio.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/orto.js"></script>
+<script src="js/dono.js"></script>
+<script src="js/vasi.js"></script>
+<script src="js/scena.js"></script>
+<script src="js/app.js"></script>
+<script src="js/pwa.js"></script>
+</body>
+</html>

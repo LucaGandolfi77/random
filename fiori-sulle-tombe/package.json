@@ -1,0 +1,21 @@
+{
+  "name": "fiori-sulle-tombe",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Fiori sulle Tombe - JRPG a turni dove il combattimento e' una donazione: un fiore guarisce il nemico e ti ferisce quanto lui. PWA offline, zero dipendenze.",
+  "keywords": ["pwa", "jrpg", "turn-based", "canvas", "grief", "telenovela", "italian", "service-worker"],
+  "license": "MIT",
+  "type": "commonjs",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node serve.js",
+    "dev": "HOST=0.0.0.0 node serve.js",
+    "test": "node --test",
+    "check": "node tools/check.mjs",
+    "check:fast": "node tools/check.mjs --fast",
+    "icons": "node tools/gen-icons.mjs",
+    "contrast": "node tools/contrast.mjs --check"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

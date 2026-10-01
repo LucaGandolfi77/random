@@ -12,6 +12,13 @@ Template in Markdown per pianificare, scrivere e pubblicare un libro.
 | [`template-checklist-pubblicazione.md`](template-checklist-pubblicazione.md) | Fase 3 — Revisione e pubblicazione: revisione, editing, formattazione, pubblicazione |
 | [`proposte-temi-sociali.md`](proposte-temi-sociali.md) | 26 pitch su temi sociali nel stile della raccolta (6 pazzissime) |
 | [`proposte-consumismo-capitalismo-tecnologia.md`](proposte-consumismo-capitalismo-tecnologia.md) | 20 pitch che esaltano consumismo, capitalismo e tecnologia (superficie critica, fondo esaltante) |
+| [`proposta-la-prima-linea.md`](proposta-la-prima-linea.md) | pitch completo (idea + 12 variazioni): un uomo, la fonderia, il rugby, il Daghestan e i libri |
+
+## In lavorazione (pianificazione)
+
+| Libro | Lingua | Stato |
+|-------|--------|-------|
+| [`la-prima-linea/`](la-prima-linea/) | EN | Fase 2 🟨 — bozza in inglese (9/14 capitoli, midpoint scritto); bibbia e schede in italiano |
 
 ## Libri completati
 

@@ -245,6 +245,17 @@ int main(void)
 	input_init();
 
 	for (;;) {
+		volatile u16 *oam = (volatile u16 *)MEM_OAM;
+
+		// SONDA OAM A VBLANK: leggo i primi quattro mezzeparole dell'OAM
+		// PRIMA di riscrivere i nostri sprite. Se qui sono tutte zero
+		// mentre a fine frame sono giuste, allora qualcosa azzera l'OAM
+		// durante il VBlank e i nostri attributi non arrivano mai al
+		// processore video.
+		if (s_frame > 4)
+			gfx_hex4((volatile u16 *)MAP_BG1, 0, 16, "VB",
+			         oam[0], oam[1], oam[2], oam[3]);
+
 		VBlankIntrWait();
 		s_frame++;
 		key_scan();
@@ -267,6 +278,12 @@ int main(void)
 
 		draw_hud();
 		actor_update_oam();
+
+		gfx_hex4((volatile u16 *)MAP_BG1, 0, 17, "EN",
+		         ((volatile u16 *)MEM_OAM)[0],
+		         ((volatile u16 *)MEM_OAM)[1],
+		         ((volatile u16 *)MEM_OAM)[2],
+		         ((volatile u16 *)MEM_OAM)[3]);
 
 		// La schermata di debug mostra i tre registri che decidono se gli
 		// sprite esistono: DISPCNT, BG0CNT e il primo attr0. Serve per una

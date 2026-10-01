@@ -30,6 +30,18 @@ Template in Markdown per pianificare, scrivere e pubblicare un libro.
 | [`il-permesso/`](il-permesso/) | IT | revisione strutturale ✅ (fino a Fase 2) |
 | [`the-regained-hours/`](the-regained-hours/) | EN | fino a Fase 6 🟨 (primo romanzo in inglese) |
 
+## Traduzioni inglesi
+
+| Libro | Cartella | Manoscritto | Glossario condiviso |
+|-------|----------|-------------|---------------------|
+| *The Smaller Life* | [`la-vita-minore-en/`](la-vita-minore-en/) | ✅ (~14.900 parole) | le cose che si tengono → the things you keep |
+| *Mai pen rai* | [`mai-pen-rai-en/`](mai-pen-rai-en/) | ✅ (~18.400 parole) | mai pen rai, farang, il timbro → the stamp |
+| *The Crossing* | [`lattraversamento-en/`](lattraversamento-en/) | ✅ (~15.400 parole) | inshallah, jërëjëf, il foglio piegato → the folded sheet |
+| *The Permit* | [`il-permesso-en/`](il-permesso-en/) | ✅ (~10.900 parole) | il cancello → the gate, la conta → the count, lavoro esterno → work release |
+| *The C++ Manual* | [`cpp-manual/`](cpp-manual/) | ✅ (~21.000 parole, EN) | manuale tecnico comico: da Hello World alla morte termica, con gag su Python |
+
+> Glossario condiviso della collezione: "le cose piccole" → the small things · "le cose che si tengono" → the things you keep · "le cose che si piantano" → the things you plant · "il cortile interno" → the inner courtyard · "com'è l'abitudine" → as is their habit · "di mattina/di sera" → in the morning/in the evening · il "si" impersonale → il "you" generico. I nomi propri, mai pen rai, farang, inshallah, jërëjëf e i titoli italiani di Leopardi (*L'infinito*, *A Silvia*, *Zibaldone*) restano invariati.
+
 ## Come usarlo
 
 1. **Copia i template** in una nuova cartella dedicata al tuo libro, ad esempio:

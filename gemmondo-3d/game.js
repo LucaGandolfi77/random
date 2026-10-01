@@ -2,1688 +2,2408 @@
    GEMMONDO — Raccolta Incrementale 3D (folle, geniale, simpatico)
    Muovi Cubetto, raccogli gemme, potenzia i droni, sblocca
    7 dimensioni e fai esplodere l'universo per le Stelle.
+
+   ── Dove sta cosa ──────────────────────────────────────────
+   core.js   dati di gioco, economia, artigianato, salvataggio.
+             Nessun import di three, nessun tocco al DOM: gira
+             identico nel browser e sotto `node --test`.
+   audio.js  suoni generati con WebAudio. Nessun file.
+   game.js   (questo file) Three.js, DOM, input, ciclo di gioco.
+
+   ── Regole che tengono insieme il tutto ───────────────────
+   · Ogni formula economica sta in core.js. Qui si chiama, non
+     si ricalcola: è il posto unico dove riequilibrare.
+   · Il ciclo è diviso in simulate(dt) e render. La simulazione
+     non disegna e il disegno non decide nulla: i test possono
+     quindi far girare il mondo a passo fisso senza dipendere
+     dalla GPU.
+   · Gli oggetti condivisi (geometrie, materiali, texture) vanno
+     messi in SHARED, altrimenti disposeGroup li distrugge.
+   · Gli upgrade che cambiano il reddito passivo passano tutti
+     da incomePerSec(), mai da una formula sparsa nel loop.
    ============================================================ */
-(() => {
-  'use strict';
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { Audio } from './audio.js';
+import {
+  ZONES, UPGRADES, RESOURCES, RECIPES, TOOL_NAMES, PRICES, EXCHANGE,
+  clamp, lerp, rand, choice, dist2D, fmt,
+  upgradeValue, upgradeCost, toolStats, toolLevel, toolLabel,
+  canCraft, isRecipeDone, recipeUnlocked, craftInto,
+  sellPrice, buyPrice, zonePriceBonus,
+  starMult, prestigeGain, applyPrestige, PRESTIGE_MIN, STAR_BONUS,
+  incomePerSec, gemValue, gemValueWithStars, offlineGain,
+  nodeCounts, nodeResource, nodeRespawnMs, harvestYield, NODE_HITS,
+  loadState, saveState, safeZoneIndex, zoneAt,
+} from './core.js';
 
-  /* ------------------------------------------------------------
-     1. UTILITÀ
-  ------------------------------------------------------------ */
-  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-  const lerp = (a, b, t) => a + (b - a) * t;
-  const rand = (a, b) => a + Math.random() * (b - a);
-  const randInt = (a, b) => Math.floor(rand(a, b + 1));
-  const choice = (arr) => arr[Math.floor(Math.random() * arr.length)];
-  const dist2D = (ax, az, bx, bz) => Math.hypot(ax - bx, az - bz);
+const audio = new Audio();
 
-  const UNITS = ['', 'K', 'M', 'B', 'T', 'Qa', 'Qi', 'Sx', 'Sp', 'Oc', 'No', 'Dc'];
-  function fmt(n) {
-    if (!isFinite(n)) return '∞';
-    if (n < 0) return '-' + fmt(-n);
-    if (n < 1000) {
-      if (n < 10 && n % 1 !== 0) return n.toFixed(1);
-      return Math.floor(n).toString();
-    }
-    let tier = Math.floor(Math.log10(n) / 3);
-    if (tier >= UNITS.length) tier = UNITS.length - 1;
-    const scaled = n / Math.pow(10, tier * 3);
-    const dec = scaled < 10 ? 2 : scaled < 100 ? 1 : 0;
-    return scaled.toFixed(dec) + UNITS[tier];
+/* ------------------------------------------------------------
+   1. STATO
+   ------------------------------------------------------------ */
+let state = loadState(window.localStorage);
+let booted = false;
+let saveTimer = null;
+let saveFailed = false;
+
+/* Salvataggio differito: `save()` non scrive subito. Ogni colpo, ogni
+   raccolta e ogni acquisto lo chiama, e prima scriveva in localStorage fino
+   a 30 volte al secondo. Ora si accoda e si spara al massimo una volta ogni
+   2 secondi (e comunque alla fine). */
+function save(immediate = false) {
+  if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
+  if (immediate) return doSave();
+  saveTimer = setTimeout(() => { saveTimer = null; doSave(); }, 2000);
+}
+let autosavePaused = false;
+function doSave() {
+  if (autosavePaused) return;
+  const err = saveState(window.localStorage, state);
+  if (err && !saveFailed) {
+    saveFailed = true;
+    toast('⚠️ Impossibile salvare: la memoria del browser è piena o bloccata. I progressi di questa sessione ci saranno, ma non sopravviveranno alla chiusura.');
   }
+}
 
-  /* ------------------------------------------------------------
-     2. DATI DI GIOCO — Zone (biomi) e Potenziamenti
-  ------------------------------------------------------------ */
-  const ZONES = [
-    {
-      name: 'Prato Felice', tagline: 'Dove le gemme crescono sugli alberi. Quasi.',
-      unlock: 0, base: 1, gem: 0x46f06a, ground: 0x4f9e5a, sky: 0x8fd8ff, fog: 0x9ad8e8,
-      sun: 0xfff4d6, hemiSky: 0xbfe8ff, hemiGround: 0x3c9d55, decor: ['tree', 'flower', 'rock'],
-      radius: 50,
-    },
-    {
-      name: 'Deserto Scintillante', tagline: 'Caldo, ma con stile.',
-      unlock: 250, base: 6, gem: 0xffb84d, ground: 0xe0bd6f, sky: 0xffd9a0, fog: 0xf2cf92,
-      sun: 0xffe0b0, hemiSky: 0xffe9c2, hemiGround: 0xc9974a, decor: ['cactus', 'rock', 'crystal'],
-      radius: 54,
-    },
-    {
-      name: 'Caverna di Cristallo', tagline: 'Sotto terra c’è il tesoro. E un po’ di muffa.',
-      unlock: 2500, base: 25, gem: 0xc46bff, ground: 0x3a2f5c, sky: 0x120c2e, fog: 0x170f38,
-      sun: 0x9f8bff, hemiSky: 0x7a63c9, hemiGround: 0x241a45, decor: ['crystal', 'rock', 'spike'],
-      radius: 56,
-    },
-    {
-      name: 'Oceano al Neon', tagline: 'Atlantide, ma con le luci LED.',
-      unlock: 25000, base: 120, gem: 0x00e5ff, ground: 0x123a66, sky: 0x081e3d, fog: 0x0a2144,
-      sun: 0x00e5ff, hemiSky: 0x3fd4ff, hemiGround: 0x0a2440, decor: ['coral', 'coral', 'rock'],
-      radius: 58,
-    },
-    {
-      name: 'Vulcano Fiamma', tagline: 'Non toccare la lava. Ovviamente.',
-      unlock: 400000, base: 700, gem: 0xff5a3c, ground: 0x3d1c14, sky: 0x1a0a06, fog: 0x2a0e08,
-      sun: 0xff7a3c, hemiSky: 0xff7a5a, hemiGround: 0x1a0a06, decor: ['rock', 'rock', 'spike', 'crystal'],
-      radius: 60,
-    },
-    {
-      name: 'Spazio Profondo', tagline: 'Nessuno può sentirti raccogliere.',
-      unlock: 8000000, base: 6000, gem: 0xffffff, ground: 0x0b0b14, sky: 0x000008, fog: 0x0b0b14,
-      sun: 0xcfe6ff, hemiSky: 0x3a4a7a, hemiGround: 0x08080f, decor: ['asteroid', 'asteroid', 'rock'],
-      radius: 64,
-    },
-    {
-      name: 'Dimensione Folle', tagline: 'Qui la fisica si è presa una pausa caffè.',
-      unlock: 150000000, base: 50000, gem: 0xff00ff, ground: 0x2a0f3a, sky: 0x1a0a2e, fog: 0x200a36,
-      sun: 0xffffff, hemiSky: 0xff5e9c, hemiGround: 0x12041f, decor: ['crystal', 'tree', 'coral', 'asteroid', 'spike'],
-      radius: 68,
-    },
-  ];
+/* ------------------------------------------------------------
+   2. RIFERIMENTI DOM
+   ------------------------------------------------------------ */
+const $ = (id) => document.getElementById(id);
+const el = {
+  energy: $('energy'), perSec: $('per-sec'), gems: $('gems'), stars: $('stars'),
+  zoneName: $('zone-name'), hint: $('hint'), toasts: $('toasts'), floaters: $('floaters'),
+  overlay: $('overlay'), panelTitle: $('panel-title'), panelEnergy: $('panel-energy'),
+  tabShop: $('tab-shop'), tabZones: $('tab-zones'), tabCraft: $('tab-craft'),
+  tabMerchant: $('tab-merchant'), tabPrestige: $('tab-prestige'),
+  splash: $('splash'), joyBase: $('joy-base'), joyStick: $('joy-stick'),
+  resBar: $('res-bar'), actionBtn: $('action-btn'),
+  btnCraft: $('btn-craft'), btnMerchant: $('btn-merchant'),
+  btnMute: $('btn-mute'), btnPlay: $('btn-play'), fatal: $('fatal'), fatalMsg: $('fatal-msg'),
+};
 
-  const UPGRADES = [
-    { id: 'speed',  name: 'Scarpe Razzo',      icon: '👟', base: 10,   mult: 1.35, desc: (v) => `Cubetto corre ×${v.toFixed(2)}` },
-    { id: 'radius', name: 'Braccia Lunghe',    icon: '🫸', base: 25,   mult: 1.4,  desc: (v) => `Raggio di raccolta ${v.toFixed(1)}m` },
-    { id: 'magnet', name: 'Magnete Cosmico',   icon: '🧲', base: 80,   mult: 1.45, desc: (v) => `Attira gemme entro ${v.toFixed(1)}m` },
-    { id: 'value',  name: 'Taglia Gemme',      icon: '💎', base: 50,   mult: 1.6,  desc: (v) => `Valore gemma ×${fmt(v)}` },
-    { id: 'spawn',  name: 'Fertilità',         icon: '🌱', base: 120,  mult: 1.5,  desc: (v) => `Massimo ${v} gemme nel mondo` },
-    { id: 'drone',  name: 'Droni Raccoglitori',icon: '🛸', base: 300,  mult: 1.7,  desc: (v) => `+${v} droni (reddito passivo)` },
-    { id: 'luck',   name: 'Fortuna Sfacciata', icon: '🍀', base: 500,  mult: 1.6,  desc: (v) => `${(v * 100).toFixed(0)}% gemme d’oro (×12)` },
-  ];
+/** Se WebGL non c'è, o three non ha caricato, spiega invece di lasciare una pagina morta. */
+function fatal(msg) {
+  if (!el.fatal) return;
+  el.fatalMsg.textContent = msg;
+  el.fatal.classList.remove('hidden');
+  el.splash.classList.add('hidden');
+}
 
-  function upgradeValue(id, lvl) {
-    switch (id) {
-      case 'speed':  return 1 + lvl * 0.18;
-      case 'radius': return 1.6 + lvl * 0.3;
-      case 'magnet': return 3 + lvl * 1.2;
-      case 'value':  return Math.pow(1.6, lvl);
-      case 'spawn':  return 8 + lvl * 3;
-      case 'drone':  return lvl;
-      case 'luck':   return Math.min(0.03 + lvl * 0.03, 0.6);
-      default: return 1;
-    }
-  }
-  function upgradeCost(id, lvl) {
-    const u = UPGRADES.find((x) => x.id === id);
-    return Math.floor(u.base * Math.pow(u.mult, lvl));
-  }
+/* ------------------------------------------------------------
+   3. SCENA
+   ------------------------------------------------------------ */
+const container = $('game');
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+} catch (e) {
+  fatal('Questo browser non ha potuto creare un contesto WebGL.');
+  throw e;
+}
 
-  /* --- Risorse raccoglibili / craftate --- */
-  const RESOURCES = {
-    legno:       { name: 'Legno',       icon: '🪵', color: '#c98a4b' },
-    pietra:      { name: 'Pietra',      icon: '🪨', color: '#9aa0a8' },
-    tavole:      { name: 'Tavole',      icon: '📦', color: '#d9a05b' },
-    mattoni:     { name: 'Mattoni',     icon: '🧱', color: '#c66b5a' },
-    ingranaggio: { name: 'Ingranaggi',  icon: '⚙️', color: '#d8d8e8' },
-    cristallo:   { name: 'Cristallo',   icon: '🔮', color: '#8f7bff' },
-    oro:         { name: 'Oro',         icon: '💰', color: '#ffd54f' },
-  };
+/* La quality parte "auto": scende da sola se i frame costano troppo (vedi
+   applyQuality). Su un telefono spento a 30fps si arresta al primo livello. */
+const quality = {
+  level: 2,          // 2 = tutto, 1 = niente bloom, 0 = niente ombre
+};
 
-  /* --- Attrezzi --- */
-  const TOOL_NAMES = { axe: { name: 'Ascia', icon: '🪓' }, pick: { name: 'Piccone', icon: '⛏️' } };
-  const TOOL_LEVELS = { axe: 3, pick: 3 };
-  function toolStats(kind) {
-    const lvl = Math.min(state.tools[kind] || 0, TOOL_LEVELS[kind]);
-    if (kind === 'axe') return { yield: [1, 3, 8, 20][lvl] ?? 1, interval: [2.2, 1.4, 0.9, 0.55][lvl] ?? 2.2 };
-    return { yield: [1, 2, 5, 12][lvl] ?? 1, interval: [2.2, 1.5, 1.0, 0.6][lvl] ?? 2.2 };
-  }
-  function toolLabel(kind) {
-    const lvl = state.tools[kind] || 0;
-    return lvl === 0 ? '✋ Mani Nude' : `${TOOL_NAMES[kind].icon} ${TOOL_NAMES[kind].name} Lv${lvl}`;
-  }
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, quality.pixelRatio));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+/* r152+: outputEncoding è morto, si usa outputColorSpace. */
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+container.appendChild(renderer.domElement);
 
-  /* --- Ricette di crafting --- */
-  const RECIPES = [
-    { id: 'tavole',      name: 'Tavole',           icon: '📦', out: { tavole: 1 },          cost: { legno: 3 },                            desc: 'Legno segato con molta fatica' },
-    { id: 'mattoni',     name: 'Mattoni',          icon: '🧱', out: { mattoni: 1 },         cost: { pietra: 3 },                           desc: 'Pietra cotta con molta rabbia' },
-    { id: 'axe1',        name: 'Ascia di Pietra',  icon: '🪓', out: { tool: 'axe', lvl: 1 }, cost: { legno: 3, pietra: 2 },                 desc: 'Per tagliare gli ALBERI come si deve' },
-    { id: 'pick1',       name: 'Piccone di Legno', icon: '⛏️', out: { tool: 'pick', lvl: 1 }, cost: { legno: 4, pietra: 3 },                desc: 'Per spaccare i SASSI come si deve' },
-    { id: 'ingranaggio', name: 'Ingranaggio',      icon: '⚙️', out: { ingranaggio: 1 },     cost: { tavole: 2, mattoni: 2, energia: 50 },  desc: 'Meccanica da quattro soldi', zone: 1 },
-    { id: 'axe2',        name: 'Ascia Rinforzata', icon: '🪓', out: { tool: 'axe', lvl: 2 }, cost: { tavole: 10, mattoni: 5, legno: 20 },   desc: 'Taglia come un forsennato', needTool: 'axe', needLvl: 1 },
-    { id: 'pick2',       name: 'Piccone Rinforzato', icon: '⛏️', out: { tool: 'pick', lvl: 2 }, cost: { tavole: 8, mattoni: 8, pietra: 25 }, desc: 'Spacca come un tritacarne', needTool: 'pick', needLvl: 1 },
-    { id: 'axe3',        name: 'Ascia del Multiverso', icon: '🪓', out: { tool: 'axe', lvl: 3 }, cost: { ingranaggio: 4, cristallo: 10, tavole: 25 }, desc: 'Il bosco piange al solo vederla', needTool: 'axe', needLvl: 2 },
-    { id: 'pick3',       name: 'Piccone Stellare', icon: '⛏️', out: { tool: 'pick', lvl: 3 }, cost: { ingranaggio: 4, cristallo: 12, mattoni: 30 }, desc: 'Scava fino al cuore delle stelle', needTool: 'pick', needLvl: 2 },
-  ];
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.5, 600);
+camera.position.set(0, 11, 17);
 
-  /* --- Prezzi del mercante (base, per unità) --- */
-  const PRICES = {
-    legno:       { sell: 2, buy: 3 },
-    pietra:      { sell: 2, buy: 3 },
-    tavole:      { sell: 8, buy: 12 },
-    mattoni:     { sell: 8, buy: 12 },
-    ingranaggio: { sell: 40, buy: 60 },
-    cristallo:   { sell: 60, buy: 90 },
-  };
-  const EXCHANGE = { sell: 25, buy: 40 }; // 100 Energia ↔ Oro
+/* Cielo a gradiente: una sfera rovesciata con uno shader di due colori.
+   Prima era un setClearColor piatto, e ogni zona sembrava lo stesso vetro colorato. */
+const skyUniforms = {
+  top: { value: new THREE.Color(0x8fd8ff) },
+  bottom: { value: new THREE.Color(0xffd9a0) },
+};
+const skyDome = new THREE.Mesh(
+  new THREE.SphereGeometry(320, 32, 20),
+  new THREE.ShaderMaterial({
+    uniforms: skyUniforms,
+    side: THREE.BackSide,
+    depthWrite: false,
+    vertexShader: /* glsl */`
+      varying vec3 vWorld;
+      void main() {
+        vWorld = (modelMatrix * vec4(position, 1.0)).xyz;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }`,
+    fragmentShader: /* glsl */`
+      uniform vec3 top;
+      uniform vec3 bottom;
+      varying vec3 vWorld;
+      void main() {
+        // 0 all'orizzonte, 1 allo zenith
+        float h = clamp(normalize(vWorld).y * 1.35 + 0.12, 0.0, 1.0);
+        gl_FragColor = vec4(mix(bottom, top, pow(h, 0.75)), 1.0);
+        #include <colorspace_fragment>
+      }`,
+  })
+);
+skyDome.frustumCulled = false;
+scene.add(skyDome);
 
-  /* ------------------------------------------------------------
-     3. STATO + SALVATAGGIO
-  ------------------------------------------------------------ */
-  const SAVE_KEY = 'gemmondo_save_v1';
-  const DEFAULT_STATE = {
-    energy: 0,
-    totalEarned: 0,
-    gemsCollected: 0,
-    zone: 0,
-    unlockedZone: 0,
-    stars: 0,
-    upgrades: {},
-    resources: {},
-    tools: { axe: 0, pick: 0 },
-    lastSave: Date.now(),
-    started: false,
-  };
+/* Luci */
+const hemi = new THREE.HemisphereLight(0xbfe8ff, 0x3c9d55, 0.9);
+scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xfff4d6, 1.1);
+sun.position.set(18, 32, 12);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+/* L'orto era ±60 ma il raggio di zona arriva a 68: le ombre si tagliavano
+   al bordo. Ora segue il giocatore (vedi animate) con una finestra stretta,
+   così la risoluzione della shadow map spetta tutta a quello che si vede. */
+sun.shadow.camera.left = -26;
+sun.shadow.camera.right = 26;
+sun.shadow.camera.top = 26;
+sun.shadow.camera.bottom = -26;
+sun.shadow.camera.near = 1;
+sun.shadow.camera.far = 140;
+sun.shadow.bias = -0.0006;
+sun.shadow.normalBias = 0.02;
+scene.add(sun);
+scene.add(sun.target);
 
-  let state = loadState();
+/* Rim light: separa Cubetto e gli oggetti emissivi dal fondo. */
+const rim = new THREE.DirectionalLight(0x00d4ff, 0.35);
+rim.position.set(-14, 10, -18);
+scene.add(rim);
 
-  function loadState() {
-    try {
-      const raw = localStorage.getItem(SAVE_KEY);
-      if (!raw) return { ...DEFAULT_STATE };
-      const s = JSON.parse(raw);
-      const merged = { ...DEFAULT_STATE, ...s };
-      merged.upgrades = merged.upgrades || {};
-      merged.resources = merged.resources || {};
-      merged.tools = merged.tools || { axe: 0, pick: 0 };
-      return merged;
-    } catch (e) {
-      return { ...DEFAULT_STATE };
-    }
-  }
-  function save() {
-    state.lastSave = Date.now();
-    try { localStorage.setItem(SAVE_KEY, JSON.stringify(state)); } catch (e) {}
-  }
+/* Punto luce per zona (lava, cristalli, neon). */
+const zoneLight = new THREE.PointLight(0xffffff, 0, 60, 2);
+zoneLight.position.set(0, 6, 0);
+scene.add(zoneLight);
 
-  // Reddito passivo (per secondo)
-  function droneRate() {
-    return upgradeValue('drone', (state.upgrades.drone || 0)) * 0.35;
-  }
-  function currentGemValue() {
-    const z = ZONES[state.zone];
-    return z.base * upgradeValue('value', (state.upgrades.value || 0));
-  }
-  function starMult() {
-    return 1 + state.stars * 0.1;
-  }
-  function incomePerSec() {
-    return droneRate() * currentGemValue() * starMult();
-  }
+/* Terreno: il raggio segue la zona, e il bordo ha un muro di confine
+   visibile, così il disco non finisce a caso nel nulla. */
+const groundGeo = new THREE.CircleGeometry(1, 64);
+const groundMat = new THREE.MeshStandardMaterial({ color: 0x4f9e5a, roughness: 0.95, metalness: 0 });
+const ground = new THREE.Mesh(groundGeo, groundMat);
+ground.rotation.x = -Math.PI / 2;
+ground.receiveShadow = true;
+scene.add(ground);
 
-  /* ------------------------------------------------------------
-     4. RIFERIMENTI DOM
-  ------------------------------------------------------------ */
-  const $ = (id) => document.getElementById(id);
-  const elEnergy = $('energy');
-  const elPerSec = $('per-sec');
-  const elGems = $('gems');
-  const elStars = $('stars');
-  const elZoneName = $('zone-name');
-  const elHint = $('hint');
-  const elToasts = $('toasts');
-  const elFloaters = $('floaters');
-  const elOverlay = $('overlay');
-  const elPanelTitle = $('panel-title');
-  const elPanelEnergy = $('panel-energy');
-  const elTabShop = $('tab-shop');
-  const elTabZones = $('tab-zones');
-  const elTabCraft = $('tab-craft');
-  const elTabMerchant = $('tab-merchant');
-  const elTabPrestige = $('tab-prestige');
-  const elSplash = $('splash');
-  const elJoyBase = $('joy-base');
-  const elJoyStick = $('joy-stick');
-  const elJoyZone = $('joy-zone');
-  const elResBar = $('res-bar');
-  const elActionBtn = $('action-btn');
-  const elBtnCraft = $('btn-craft');
-  const elBtnMerchant = $('btn-merchant');
+const wallMat = new THREE.MeshBasicMaterial({ color: 0x7b2fff, transparent: true, opacity: 0.22, side: THREE.DoubleSide });
+const wall = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 5, 64, 1, true), wallMat);
+wall.position.y = 2.5;
+scene.add(wall);
 
-  /* ------------------------------------------------------------
-     5. THREE.JS — SCENA
-  ------------------------------------------------------------ */
-  const container = $('game');
-  const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-  renderer.outputEncoding = THREE.sRGBEncoding;
-  container.appendChild(renderer.domElement);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.5, 400);
-  camera.position.set(0, 18, 14);
-
-  // Luci
-  const hemi = new THREE.HemisphereLight(0xbfe8ff, 0x3c9d55, 0.9);
-  scene.add(hemi);
-  const sun = new THREE.DirectionalLight(0xfff4d6, 1.1);
-  sun.position.set(18, 32, 12);
-  sun.castShadow = true;
-  sun.shadow.mapSize.set(2048, 2048);
-  sun.shadow.camera.left = -60;
-  sun.shadow.camera.right = 60;
-  sun.shadow.camera.top = 60;
-  sun.shadow.camera.bottom = -60;
-  sun.shadow.camera.near = 1;
-  sun.shadow.camera.far = 120;
-  sun.shadow.bias = -0.0004;
-  scene.add(sun);
-
-  // Terreno
-  const groundGeo = new THREE.CircleGeometry(90, 48);
-  const groundMat = new THREE.MeshStandardMaterial({ color: 0x4f9e5a, roughness: 0.95, metalness: 0 });
-  const ground = new THREE.Mesh(groundGeo, groundMat);
-  ground.rotation.x = -Math.PI / 2;
-  ground.receiveShadow = true;
-  scene.add(ground);
-
-  // Stelle (per Spazio / Dimensione Folle)
-  const starGeo = new THREE.BufferGeometry();
-  const starPos = [];
-  for (let i = 0; i < 600; i++) {
-    const r = rand(60, 160);
+/* Stelle (Spazio e Dimensione Folle) */
+const starGeo = new THREE.BufferGeometry();
+{
+  const pos = [];
+  for (let i = 0; i < 900; i++) {
+    const r = rand(90, 260);
     const th = rand(0, Math.PI * 2);
-    const y = rand(4, 90);
-    starPos.push(Math.cos(th) * r, y, Math.sin(th) * r);
+    pos.push(Math.cos(th) * r, rand(-40, 220), Math.sin(th) * r);
   }
-  starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3));
-  const starMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.5, sizeAttenuation: true, transparent: true, opacity: 0.9 });
-  starMat.fog = false; // le stelle ignorano la nebbia
-  const starField = new THREE.Points(starGeo, starMat);
-  starField.visible = false;
-  scene.add(starField);
+  starGeo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+}
+const starMat = new THREE.PointsMaterial({ color: 0xffffff, size: 1.1, sizeAttenuation: true, transparent: true, opacity: 0.95, fog: false, depthWrite: false });
+const starField = new THREE.Points(starGeo, starMat);
+starField.visible = false;
+scene.add(starField);
 
-  /* --- Giocatore: Cubetto --- */
-  const player = new THREE.Group();
-  const bodyMat = new THREE.MeshStandardMaterial({ color: 0xffb74d, roughness: 0.55, metalness: 0.05 });
-  const body = new THREE.Mesh(new THREE.BoxGeometry(1.15, 1.15, 1.15), bodyMat);
-  body.castShadow = true;
-  body.position.y = 0.6;
-  player.add(body);
+/* ------------------------------------------------------------
+   4. GIOCATORE: CUBETTO
+   ------------------------------------------------------------ */
+const player = new THREE.Group();
+const bodyMat = new THREE.MeshStandardMaterial({ color: 0xffb74d, roughness: 0.55, metalness: 0.05, flatShading: true });
+const body = new THREE.Mesh(new THREE.BoxGeometry(1.15, 1.15, 1.15), bodyMat);
+body.castShadow = true;
+body.position.y = 0.72;
+player.add(body);
 
-  const eyeGeo = new THREE.SphereGeometry(0.14, 12, 12);
-  const eyeMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.3 });
-  const pupilGeo = new THREE.SphereGeometry(0.07, 10, 10);
-  const pupilMat = new THREE.MeshBasicMaterial({ color: 0x1a1a1a });
-  const eyes = new THREE.Group();
-  for (const sx of [-0.26, 0.26]) {
-    const eye = new THREE.Mesh(eyeGeo, eyeMat);
-    eye.position.set(sx, 0.88, -0.58);
-    const pupil = new THREE.Mesh(pupilGeo, pupilMat);
-    pupil.position.set(sx, 0.88, -0.69);
-    eyes.add(eye); eyes.add(pupil);
+const face = new THREE.Group();
+face.position.y = 0.72;
+player.add(face);
+
+const eyeGeo = new THREE.SphereGeometry(0.14, 12, 12);
+const eyeMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.3 });
+const pupilGeo = new THREE.SphereGeometry(0.07, 10, 10);
+const pupilMat = new THREE.MeshBasicMaterial({ color: 0x1a1a1a });
+const eyes = new THREE.Group();
+for (const sx of [-0.26, 0.26]) {
+  const eye = new THREE.Mesh(eyeGeo, eyeMat);
+  eye.position.set(sx, 0.14, -0.58);
+  const pupil = new THREE.Mesh(pupilGeo, pupilMat);
+  pupil.position.set(sx, 0.14, -0.69);
+  eyes.add(eye, pupil);
+}
+face.add(eyes);
+
+const mouth = new THREE.Mesh(
+  new THREE.BoxGeometry(0.4, 0.06, 0.06),
+  new THREE.MeshBasicMaterial({ color: 0x5b3a1a })
+);
+mouth.position.set(0, -0.16, -0.58);
+face.add(mouth);
+
+/* Gambe: due scatolette che oscillano quando cammina. */
+const legs = [];
+const legMat = new THREE.MeshStandardMaterial({ color: 0xe69a3a, roughness: 0.6, flatShading: true });
+for (const sx of [-0.28, 0.28]) {
+  const leg = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.34, 0.34), legMat);
+  leg.position.set(sx, 0.17, 0);
+  leg.castShadow = true;
+  player.add(leg);
+  legs.push(leg);
+}
+
+/* Braccia: pendono e si bilanciano contrarie alle gambe. */
+const arms = [];
+for (const sx of [-0.74, 0.74]) {
+  const arm = new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.5, 0.26), legMat);
+  arm.position.set(sx, 0.72, 0);
+  arm.castShadow = true;
+  player.add(arm);
+  arms.push(arm);
+}
+
+/* Sciarpa: tre segmenti con ritardo, dà vita al personaggio. */
+const scarfMat = new THREE.MeshStandardMaterial({ color: 0xff5e9c, roughness: 0.8, flatShading: true });
+const scarf = [];
+let scarfPrev = null;
+for (let i = 0; i < 3; i++) {
+  const seg = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.22, 0.3), scarfMat);
+  seg.castShadow = true;
+  player.add(seg);
+  scarf.push({ mesh: seg, node: { x: 0, y: 1.32, z: 0.2 }, phase: i });
+}
+scarfPrev = scarf[0].node;
+
+const antenna = new THREE.Mesh(
+  new THREE.CylinderGeometry(0.03, 0.03, 0.5, 8),
+  new THREE.MeshStandardMaterial({ color: 0xcccccc, roughness: 0.4 })
+);
+antenna.position.set(0, 1.52, 0);
+player.add(antenna);
+const antennaGem = new THREE.Mesh(
+  new THREE.OctahedronGeometry(0.18),
+  new THREE.MeshStandardMaterial({ color: 0x00d4ff, emissive: 0x00d4ff, emissiveIntensity: 1.4 })
+);
+antennaGem.position.set(0, 1.8, 0);
+player.add(antennaGem);
+
+player.position.set(0, 0, 0);
+scene.add(player);
+
+/* ------------------------------------------------------------
+   5. PORTALE
+   ------------------------------------------------------------ */
+const portalGroup = new THREE.Group();
+const portalRing = new THREE.Mesh(
+  new THREE.TorusGeometry(1.4, 0.18, 12, 40),
+  new THREE.MeshStandardMaterial({ color: 0x7b2fff, emissive: 0x7b2fff, emissiveIntensity: 1.6 })
+);
+portalGroup.add(portalRing);
+const portalBase = new THREE.Mesh(
+  new THREE.CylinderGeometry(1.7, 2.0, 0.3, 24),
+  new THREE.MeshStandardMaterial({ color: 0x2a1a55, roughness: 0.6 })
+);
+portalBase.position.y = -0.15;
+portalBase.receiveShadow = true;
+portalGroup.add(portalBase);
+portalGroup.position.y = 1.1;
+scene.add(portalGroup);
+
+/* ------------------------------------------------------------
+   6. GEMME, DECOR, DRONI, PARTICELLE
+   ------------------------------------------------------------ */
+const gems = [];
+const decorGroup = new THREE.Group();
+scene.add(decorGroup);
+const droneGroup = new THREE.Group();
+scene.add(droneGroup);
+const drones = [];
+
+const gemGeo = new THREE.OctahedronGeometry(0.45);
+const goldGeo = new THREE.OctahedronGeometry(0.5);
+
+const glowTexture = (() => {
+  const c = document.createElement('canvas');
+  c.width = c.height = 64;
+  const ctx = c.getContext('2d');
+  const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  g.addColorStop(0, 'rgba(255,255,255,1)');
+  g.addColorStop(0.35, 'rgba(255,255,255,0.5)');
+  g.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, 64, 64);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+})();
+
+/* glowMat è condiviso da tutte le gemme: non va mai disporato per singolo. */
+const glowMat = new THREE.SpriteMaterial({
+  map: glowTexture, color: 0xffffff, transparent: true, opacity: 0.55,
+  blending: THREE.AdditiveBlending, depthWrite: false,
+});
+
+const gemMats = {};
+function gemMatFor(zoneIdx) {
+  if (!gemMats[zoneIdx]) {
+    const c = new THREE.Color(ZONES[zoneIdx].gem);
+    gemMats[zoneIdx] = new THREE.MeshStandardMaterial({
+      color: c.clone().multiplyScalar(0.4), emissive: c, emissiveIntensity: 1.4,
+      roughness: 0.2, metalness: 0.1,
+    });
   }
-  player.add(eyes);
+  return gemMats[zoneIdx];
+}
+const goldMat = new THREE.MeshStandardMaterial({
+  color: 0x6b4a00, emissive: 0xffd54f, emissiveIntensity: 1.6, roughness: 0.2, metalness: 0.3,
+});
 
-  const mouth = new THREE.Mesh(
-    new THREE.BoxGeometry(0.4, 0.06, 0.06),
-    new THREE.MeshBasicMaterial({ color: 0x5b3a1a })
-  );
-  mouth.position.set(0, 0.55, -0.58);
-  player.add(mouth);
+function spawnGem() {
+  const z = zoneAt(state.zone);
+  let x, zz, tries = 0;
+  do {
+    const a = rand(0, Math.PI * 2);
+    const r = rand(3, z.radius - 3);
+    x = Math.cos(a) * r;
+    zz = Math.sin(a) * r;
+    tries++;
+  } while (tries < 20 && dist2D(x, zz, player.position.x, player.position.z) < 6);
 
-  // antenna con gemma luminosa
-  const antenna = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.03, 0.03, 0.5, 8),
-    new THREE.MeshStandardMaterial({ color: 0xcccccc, roughness: 0.4 })
+  const golden = Math.random() < upgradeValue('luck', state.upgrades.luck || 0);
+  const mesh = new THREE.Mesh(golden ? goldGeo : gemGeo, golden ? goldMat : gemMatFor(state.zone));
+  mesh.position.set(x, rand(0.6, 1.2), zz);
+  mesh.castShadow = true;
+  const glow = new THREE.Sprite(glowMat);
+  glow.scale.setScalar(golden ? 2.6 : 1.8);
+  mesh.add(glow);
+  mesh.scale.setScalar(golden ? 1.5 : 1);
+  scene.add(mesh);
+  gems.push({ mesh, golden, baseY: mesh.position.y, phase: rand(0, Math.PI * 2) });
+}
+
+function clearGems() {
+  for (const g of gems) scene.remove(g.mesh);
+  gems.length = 0;
+}
+
+/* Particelle: pool fisso, nessuna allocazione in gioco. */
+const PARTICLE_COUNT = 140;
+const particles = [];
+const partGeo = new THREE.OctahedronGeometry(0.14);
+for (let i = 0; i < PARTICLE_COUNT; i++) {
+  const mat = new THREE.MeshBasicMaterial({
+    color: 0xffffff, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false,
+  });
+  const m = new THREE.Mesh(partGeo, mat);
+  m.visible = false;
+  scene.add(m);
+  particles.push({ mesh: m, mat, vel: new THREE.Vector3(), life: 0, maxLife: 1, active: false });
+}
+let partCursor = 0;
+const burstColor = new THREE.Color();
+function burst(pos, color, count) {
+  burstColor.set(color);
+  for (let n = 0; n < count; n++) {
+    const p = particles[partCursor];
+    partCursor = (partCursor + 1) % particles.length;
+    p.active = true;
+    p.life = p.maxLife = rand(0.35, 0.6);
+    p.mesh.position.copy(pos);
+    p.mesh.visible = true;
+    p.mat.color.copy(burstColor);
+    p.mat.opacity = 1;
+    const a = rand(0, Math.PI * 2);
+    const e = rand(0.3, Math.PI * 0.5);
+    const sp = rand(2, 5.5);
+    p.vel.set(Math.cos(a) * Math.cos(e) * sp, Math.sin(e) * sp + 1.5, Math.sin(a) * Math.cos(e) * sp);
+  }
+}
+
+/* Tetto della caverna: una cupola scura sopra il mondo, così il "sotto
+   terra" ha un soffitto invece di essere un disco nel nulla. */
+const caveDome = new THREE.Mesh(
+  new THREE.SphereGeometry(1, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2),
+  new THREE.MeshStandardMaterial({ color: 0x241a45, roughness: 1, side: THREE.BackSide, flatShading: true })
+);
+caveDome.visible = false;
+scene.add(caveDome);
+
+/* Stalattiti: coni appesi al soffitto, solo nelle zone chiuse. */
+const stalactiteGroup = new THREE.Group();
+scene.add(stalactiteGroup);
+
+/* Superficie dell'acqua per l'Oceano al Neon: un piano semitrasparente
+   con onde verificate, sopra il terreno di roccia. */
+const waterUniforms = { time: { value: 0 }, tint: { value: new THREE.Color(0x00e5ff) } };
+const water = new THREE.Mesh(
+  new THREE.CircleGeometry(1, 48),
+  new THREE.ShaderMaterial({
+    uniforms: waterUniforms,
+    transparent: true,
+    depthWrite: false,
+    vertexShader: /* glsl */`
+      uniform float time;
+      varying float vWave;
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        vec3 p = position;
+        /* due onde incrociate: abbastanza per far leggere il moto */
+        float w = sin(p.x * 9.0 + time * 1.7) * 0.10 + sin(p.y * 7.0 - time * 1.3) * 0.08;
+        p.z += w;
+        vWave = w;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+      }`,
+    fragmentShader: /* glsl */`
+      uniform float time;
+      uniform vec3 tint;
+      varying float vWave;
+      varying vec2 vUv;
+      void main() {
+        /* la cresta della onda è più chiara: fa le "strisce" del neon */
+        float crest = smoothstep(0.02, 0.16, vWave);
+        float fade = smoothstep(0.5, 0.15, length(vUv - 0.5));
+        vec3 col = mix(tint * 0.28, tint, crest);
+        gl_FragColor = vec4(col, 0.55 + crest * 0.35 * fade);
+        #include <colorspace_fragment>
+      }`,
+  })
+);
+water.rotation.x = -Math.PI / 2;
+water.position.y = 5.5;
+water.visible = false;
+scene.add(water);
+
+/* Lava: una pozza emissiva nelle zone calde, con i colori che pulsano. */
+const lavaUniforms = { time: { value: 0 }, hot: { value: new THREE.Color(0xff5a1a) } };
+const lava = new THREE.Mesh(
+  new THREE.CircleGeometry(1, 40),
+  new THREE.ShaderMaterial({
+    uniforms: lavaUniforms,
+    transparent: true,
+    depthWrite: false,
+    vertexShader: /* glsl */`
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }`,
+    fragmentShader: /* glsl */`
+      uniform float time;
+      uniform vec3 hot;
+      varying vec2 vUv;
+      /* rumore value carezzevole: la crosta si spacca e sotto si vede
+         il fuso. Nessuna texture, tutto calcolato. */
+      float h(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+      float noise(vec2 p) {
+        vec2 i = floor(p), f = fract(p);
+        f = f * f * (3.0 - 2.0 * f);
+        return mix(mix(h(i), h(i + vec2(1.0, 0.0)), f.x),
+                   mix(h(i + vec2(0.0, 1.0)), h(i + vec2(1.0, 1.0)), f.x), f.y);
+      }
+      void main() {
+        /* frequenza alta: a 7 le "fessure" erano larghe metà pozza e
+           sembravano una macchia sfocata */
+        vec2 p = vUv * 26.0;
+        float n = noise(p + vec2(time * 0.10, time * -0.07));
+        n = mix(n, noise(p * 2.7 - time * 0.05), 0.5);
+        /* la crosta scura si spacca: sotto il fuso */
+        float fuso = smoothstep(0.46, 0.78, n);
+        vec3 col = mix(hot * 0.12, mix(hot, vec3(1.0, 0.85, 0.5), fuso * 0.7), fuso);
+        float r = length(vUv - 0.5);
+        gl_FragColor = vec4(col, smoothstep(0.5, 0.28, r) * (0.25 + fuso * 0.75));
+        #include <colorspace_fragment>
+      }`,
+  })
+);
+lava.rotation.x = -Math.PI / 2;
+lava.position.y = 0.06;
+lava.visible = false;
+scene.add(lava);
+
+/* Nebulose per lo Spazio Profondo: sprite additivi grandi e tenui. */
+const nebulaGroup = new THREE.Group();
+scene.add(nebulaGroup);
+
+/* Stalattiti: coni appesi al tetto della caverna. Geometria e materiale
+   condivisi, quindi si ricreano i soli mesh. */
+const stalactiteGeo = new THREE.ConeGeometry(0.4, 1, 6);
+const stalactiteMat = new THREE.MeshStandardMaterial({ color: 0x3a2f5c, roughness: 0.95, flatShading: true });
+function buildStalactites(radius) {
+  stalactiteGroup.clear();
+  if (state.zone !== 2) return;
+  for (let i = 0; i < 26; i++) {
+    const a = rand(0, Math.PI * 2);
+    const r = rand(4, radius * 0.9);
+    const len = rand(3, 9);
+    const m = new THREE.Mesh(stalactiteGeo, stalactiteMat);
+    /* il cono di Three punta su +y: capovolto sembra stalattite */
+    m.position.set(Math.cos(a) * r, 26 - len / 2, Math.sin(a) * r);
+    m.scale.set(rand(0.6, 1.5), len, rand(0.6, 1.5));
+    m.rotation.y = rand(0, 3);
+    m.castShadow = true;
+    stalactiteGroup.add(m);
+  }
+}
+
+/* Nebulose: pochi sprite additivi grandi e tenui dietro le stelle. */
+const nebulaMats = [];
+function buildNebulae(radius) {
+  nebulaGroup.clear();
+  nebulaMats.length = 0;
+  if (state.zone < 5) return;
+  const tints = state.zone === 6
+    ? [0xff00ff, 0x00d4ff, 0xff5e9c, 0x7b2fff]
+    : [0x2a4a9f, 0x7b2fff, 0x1a6fa8, 0x4a2a8f];
+  for (let i = 0; i < 7; i++) {
+    const a = rand(0, Math.PI * 2);
+    const r = rand(radius * 1.2, radius * 2.2);
+    const mat = new THREE.SpriteMaterial({
+      map: glowTexture, color: tints[i % tints.length], transparent: true,
+      opacity: rand(0.1, 0.22), blending: THREE.AdditiveBlending, depthWrite: false, fog: false,
+    });
+    nebulaMats.push(mat);
+    const sp = new THREE.Sprite(mat);
+    sp.position.set(Math.cos(a) * r, rand(20, 110), Math.sin(a) * r);
+    sp.scale.setScalar(rand(70, 170));
+    nebulaGroup.add(sp);
+  }
+}
+
+/* Polvere ambientale: un solo Points, il colore lo dà la zona. */
+const MOTES_COUNT = 220;
+const moteGeo = new THREE.BufferGeometry();
+{
+  const pos = new Float32Array(MOTES_COUNT * 3);
+  for (let i = 0; i < MOTES_COUNT; i++) {
+    pos[i * 3] = rand(-40, 40);
+    pos[i * 3 + 1] = rand(0.5, 16);
+    pos[i * 3 + 2] = rand(-40, 40);
+  }
+  moteGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+}
+const moteMat = new THREE.PointsMaterial({
+  color: 0xffffff, size: 0.22, sizeAttenuation: true, transparent: true, opacity: 0.55, depthWrite: false,
+});
+const motes = new THREE.Points(moteGeo, moteMat);
+scene.add(motes);
+
+/* Risorse condivise: disposeGroup non deve mai liberarle, o il sprite
+   geometry di Three.js (un singleton di modulo) verrebbe distrutto a ogni
+   cambio zona e ogni sprite dovrebbe ricaricarlo. */
+const SHARED = new Set([gemGeo, goldGeo, partGeo, glowMat, glowTexture, stalactiteGeo, stalactiteMat]);
+
+function disposeGroup(g) {
+  g.traverse((o) => {
+    if (o.geometry && !SHARED.has(o.geometry)) o.geometry.dispose();
+    const mats = Array.isArray(o.material) ? o.material : o.material ? [o.material] : [];
+    for (const m of mats) if (!SHARED.has(m)) m.dispose();
+  });
+}
+
+/* Decorazioni: geometrie e materiali creati una volta per tipo e riusati
+   per tutte le istanze. Prima ogni gruppo ne creava di nuovi, e venivano
+   distrutti e ricreati a ogni viaggio. */
+const decorCache = {};
+function decorAssets(kind) {
+  if (decorCache[kind]) return decorCache[kind];
+  const mat = (hex, rough = 0.8) => new THREE.MeshStandardMaterial({ color: hex, roughness: rough, flatShading: true });
+  let parts;
+  switch (kind) {
+    case 'tree':
+      parts = [
+        { geo: new THREE.CylinderGeometry(0.14, 0.2, 1.2, 6), mat: mat(0x6b4a2a), y: 0.6 },
+        { geo: new THREE.ConeGeometry(0.7, 1.6, 8), mat: mat(0x2e9e4f), y: 1.7 },
+      ];
+      break;
+    case 'flower':
+      parts = [
+        { geo: new THREE.CylinderGeometry(0.05, 0.05, 0.6, 6), mat: mat(0x3c9d55), y: 0.3 },
+        { geo: new THREE.SphereGeometry(0.18, 8, 8), mat: mat(choice([0xff5e9c, 0xffd54f, 0x00d4ff])), y: 0.72 },
+      ];
+      break;
+    case 'rock':
+      parts = [{ geo: new THREE.DodecahedronGeometry(0.8, 0), mat: mat(0x8a8a92), y: 0.4, spin: true }];
+      break;
+    case 'crystal':
+      parts = [{
+        geo: new THREE.OctahedronGeometry(0.7, 0),
+        mat: new THREE.MeshStandardMaterial({ color: 0x8a5cff, emissive: 0x5a2fff, emissiveIntensity: 0.9, roughness: 0.2, flatShading: true }),
+        y: 0.9, spin: true,
+      }];
+      break;
+    case 'spike':
+      parts = [{ geo: new THREE.ConeGeometry(0.25, 1.4, 6), mat: mat(0x3a3a44), y: 0.7 }];
+      break;
+    case 'cactus':
+      parts = [
+        { geo: new THREE.CylinderGeometry(0.22, 0.26, 1.4, 7), mat: mat(0x2e9e4f), y: 0.7 },
+        { geo: new THREE.CylinderGeometry(0.12, 0.12, 0.6, 7), mat: mat(0x2e9e4f), y: 0.9, x: 0.3, rz: Math.PI / 2 },
+      ];
+      break;
+    case 'coral':
+      parts = [
+        { geo: new THREE.CylinderGeometry(0.1, 0.2, 1.1, 6), mat: mat(choice([0xff5e9c, 0x00e5ff, 0xffd54f])), y: 0.55 },
+        { geo: new THREE.CylinderGeometry(0.08, 0.14, 0.8, 6), mat: mat(0xff5e9c), y: 0.4, x: 0.25, z: 0.1 },
+      ];
+      break;
+    case 'asteroid':
+      parts = [{ geo: new THREE.IcosahedronGeometry(1, 0), mat: mat(0x6a6a76), y: 1, spin: true }];
+      break;
+    default:
+      parts = [];
+  }
+  decorCache[kind] = parts;
+  return parts;
+}
+
+function buildDecor() {
+  /* Le geometrie e i materiali sono in cache: si butta via solo il gruppo,
+     senza toccare le risorse GPU condivise. */
+  decorGroup.clear();
+  const z = zoneAt(state.zone);
+  const count = quality.level >= 1 ? 58 : 32;
+  for (let i = 0; i < count; i++) {
+    const kind = choice(z.decor);
+    const parts = decorAssets(kind);
+    if (!parts.length) continue;
+    const g = new THREE.Group();
+    for (const p of parts) {
+      const m = new THREE.Mesh(p.geo, p.mat);
+      m.position.set(p.x || 0, p.y || 0, p.z || 0);
+      if (p.rz) m.rotation.z = p.rz;
+      if (p.spin) m.rotation.set(rand(0, 3), rand(0, 3), rand(0, 3));
+      m.castShadow = true;
+      g.add(m);
+    }
+    /* Il 70% delle decorazioni sta nella metà interna del raggio: è
+       dove si gioca davvero, e a riempire gli angoli lontani il mondo
+       sembrava vuoto. */
+    const a = rand(0, Math.PI * 2);
+    const r = Math.random() < 0.7 ? rand(5, z.radius * 0.5) : rand(z.radius * 0.5, z.radius - 2);
+    g.position.set(Math.cos(a) * r, 0, Math.sin(a) * r);
+    g.rotation.y = rand(0, Math.PI * 2);
+    g.scale.setScalar(rand(0.7, 1.6));
+    decorGroup.add(g);
+  }
+}
+
+/* Droni */
+const droneBodyGeo = new THREE.OctahedronGeometry(0.34);
+const droneRingGeo = new THREE.TorusGeometry(0.42, 0.05, 8, 20);
+const droneBodyMat = new THREE.MeshStandardMaterial({
+  color: 0x7b2fff, emissive: 0x00d4ff, emissiveIntensity: 0.6, roughness: 0.3, metalness: 0.4,
+});
+const droneRingMat = new THREE.MeshStandardMaterial({ color: 0x00d4ff, emissive: 0x00d4ff, emissiveIntensity: 1.2 });
+
+function makeDroneMesh() {
+  const g = new THREE.Group();
+  const b = new THREE.Mesh(droneBodyGeo, droneBodyMat);
+  b.castShadow = true;
+  const ring = new THREE.Mesh(droneRingGeo, droneRingMat);
+  ring.rotation.x = Math.PI / 2;
+  g.add(b, ring);
+  g.userData = { angle: rand(0, Math.PI * 2), phase: rand(0, Math.PI * 2) };
+  return g;
+}
+
+function syncDrones() {
+  const want = Math.min(upgradeValue('drone', state.upgrades.drone || 0), 24);
+  while (drones.length < want) {
+    const m = makeDroneMesh();
+    droneGroup.add(m);
+    drones.push(m);
+  }
+  while (drones.length > want) {
+    droneGroup.remove(drones.pop());
+  }
+}
+
+/* ------------------------------------------------------------
+   7. RISORSE NEL MONDO — NODI + MERCANTE
+   ------------------------------------------------------------ */
+const nodeGroup = new THREE.Group();
+scene.add(nodeGroup);
+const nodes = [];
+const MERCHANT_POS = [14, 0, 10];
+
+/* Icone delle risorse disegnate su canvas: non dipendono dal font emoji
+   del sistema, quindi non cambiano aspetto da un telefono all'altro
+   (e non spariscono del tutto su Linux senza font colorati). */
+const ICONS = {
+  legno: (ctx, s) => {
+    ctx.fillStyle = '#c98a4b';
+    roundRect(ctx, s * 0.18, s * 0.3, s * 0.64, s * 0.4, s * 0.08);
+    ctx.fill();
+    ctx.fillStyle = '#8a5f30';
+    ctx.beginPath();
+    ctx.ellipse(s * 0.24, s * 0.5, s * 0.09, s * 0.2, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#8a5f30';
+    ctx.lineWidth = s * 0.035;
+    ctx.beginPath();
+    ctx.ellipse(s * 0.24, s * 0.5, s * 0.04, s * 0.09, 0, 0, Math.PI * 2);
+    ctx.stroke();
+  },
+  pietra: (ctx, s) => {
+    ctx.fillStyle = '#9aa0a8';
+    ctx.beginPath();
+    ctx.moveTo(s * 0.5, s * 0.2);
+    ctx.lineTo(s * 0.82, s * 0.46);
+    ctx.lineTo(s * 0.7, s * 0.8);
+    ctx.lineTo(s * 0.3, s * 0.8);
+    ctx.lineTo(s * 0.18, s * 0.46);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = '#c3c8d0';
+    ctx.beginPath();
+    ctx.moveTo(s * 0.5, s * 0.2);
+    ctx.lineTo(s * 0.82, s * 0.46);
+    ctx.lineTo(s * 0.5, s * 0.46);
+    ctx.closePath();
+    ctx.fill();
+  },
+  cristallo: (ctx, s) => {
+    ctx.fillStyle = '#8f7bff';
+    ctx.beginPath();
+    ctx.moveTo(s * 0.5, s * 0.14);
+    ctx.lineTo(s * 0.74, s * 0.52);
+    ctx.lineTo(s * 0.5, s * 0.86);
+    ctx.lineTo(s * 0.26, s * 0.52);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = '#c9bcff';
+    ctx.beginPath();
+    ctx.moveTo(s * 0.5, s * 0.14);
+    ctx.lineTo(s * 0.74, s * 0.52);
+    ctx.lineTo(s * 0.5, s * 0.52);
+    ctx.closePath();
+    ctx.fill();
+  },
+};
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+const iconTextures = {};
+function iconTexture(resource) {
+  if (!iconTextures[resource]) {
+    const c = document.createElement('canvas');
+    c.width = c.height = 128;
+    const ctx = c.getContext('2d');
+    (ICONS[resource] || ICONS.pietra)(ctx, 128);
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    iconTextures[resource] = t;
+  }
+  return iconTextures[resource];
+}
+
+const iconMats = {};
+function iconSprite(resource, scale) {
+  if (!iconMats[resource]) {
+    iconMats[resource] = new THREE.SpriteMaterial({
+      map: iconTexture(resource), transparent: true, depthWrite: false, opacity: 0.95,
+    });
+  }
+  const s = new THREE.Sprite(iconMats[resource]);
+  s.scale.setScalar(scale);
+  return s;
+}
+
+const ringMats = {};
+function ringMaterial(resource) {
+  if (!ringMats[resource]) {
+    ringMats[resource] = new THREE.MeshBasicMaterial({
+      color: RESOURCES[resource].color, transparent: true, opacity: 0.35,
+      side: THREE.DoubleSide, depthWrite: false,
+    });
+  }
+  return ringMats[resource];
+}
+
+function addResource(id, n) {
+  state.resources[id] = (state.resources[id] || 0) + n;
+}
+
+/* Nodi: alberi / sassi / cristalli */
+const nodeGeoCache = {};
+function nodeGeo(type) {
+  if (nodeGeoCache[type]) return nodeGeoCache[type];
+  let parts;
+  if (type === 'tree') {
+    parts = [
+      { geo: new THREE.CylinderGeometry(0.28, 0.42, 2.5, 7), mat: new THREE.MeshStandardMaterial({ color: 0x6b4a2a, roughness: 0.9, flatShading: true }), y: 1.25 },
+      { geo: new THREE.ConeGeometry(1.25, 2.1, 8), mat: new THREE.MeshStandardMaterial({ color: 0x2e9e4f, roughness: 0.9, flatShading: true }), y: 3.0 },
+      { geo: new THREE.ConeGeometry(0.9, 1.6, 8), mat: new THREE.MeshStandardMaterial({ color: 0x3fae5c, roughness: 0.9, flatShading: true }), y: 4.0 },
+    ];
+  } else if (type === 'rock') {
+    const mat = new THREE.MeshStandardMaterial({ color: 0x8a8a92, roughness: 0.95, flatShading: true });
+    parts = [
+      { geo: new THREE.IcosahedronGeometry(1.05, 0), mat, y: 0.8 },
+      { geo: new THREE.IcosahedronGeometry(0.75, 0), mat, x: 0.9, y: 0.55, z: 0.35 },
+    ];
+  } else {
+    const mat = new THREE.MeshStandardMaterial({
+      color: 0x8a5cff, emissive: 0x5a2fff, emissiveIntensity: 1.1, roughness: 0.2, flatShading: true,
+    });
+    parts = [
+      { geo: new THREE.OctahedronGeometry(0.85), mat, y: 1.05, ry: 0.5 },
+      { geo: new THREE.OctahedronGeometry(0.55), mat, x: 0.75, y: 0.75, z: 0.3, ry: -0.4 },
+      { geo: new THREE.OctahedronGeometry(0.42), mat, x: -0.65, y: 0.55, z: -0.4 },
+    ];
+  }
+  nodeGeoCache[type] = parts;
+  return parts;
+}
+
+const ringGeo = new THREE.RingGeometry(1.2, 1.55, 28);
+
+function makeNode(type) {
+  const mesh = new THREE.Group();
+  for (const p of nodeGeo(type)) {
+    const m = new THREE.Mesh(p.geo, p.mat);
+    m.position.set(p.x || 0, p.y || 0, p.z || 0);
+    if (p.ry) m.rotation.y = p.ry;
+    m.castShadow = true;
+    mesh.add(m);
+  }
+  const resource = nodeResource(type);
+  const sprite = iconSprite(resource, type === 'tree' ? 1.9 : type === 'rock' ? 1.6 : 1.8);
+  sprite.position.y = type === 'tree' ? 4.9 : type === 'rock' ? 2.7 : 3.1;
+  mesh.add(sprite);
+
+  /* L'anello è l'unico elemento per-nodo: materiale e geometria sono
+     condivisi, quindi disposeGroup li deve rispettare. */
+  const ring = new THREE.Mesh(ringGeo, ringMaterial(resource).clone());
+  ring.rotation.x = -Math.PI / 2;
+  ring.position.y = 0.04;
+  ring.renderOrder = 2;
+  mesh.add(ring);
+
+  return {
+    type, resource, mesh, sprite, ring,
+    hits: NODE_HITS, maxHits: NODE_HITS,
+    cooldownUntil: 0, respawnUntil: 0, depleted: false, shake: 0,
+    scale: 1, respawnTime: nodeRespawnMs(type),
+  };
+}
+
+function buildNodes() {
+  for (const n of nodes) { disposeGroup(n.mesh); nodeGroup.remove(n.mesh); }
+  nodes.length = 0;
+  const z = zoneAt(state.zone);
+  const counts = nodeCounts(state.zone);
+  for (const [type, count] of Object.entries(counts)) {
+    for (let i = 0; i < count; i++) {
+      let x, zz, tries = 0;
+      do {
+        const a = rand(0, Math.PI * 2);
+        const r = rand(7, z.radius - 5);
+        x = Math.cos(a) * r; zz = Math.sin(a) * r;
+        tries++;
+      } while (tries < 25 && (
+        dist2D(x, zz, 0, 0) < 6 ||
+        dist2D(x, zz, MERCHANT_POS[0], MERCHANT_POS[2]) < 6
+      ));
+      const node = makeNode(type);
+      node.mesh.position.set(x, 0, zz);
+      nodeGroup.add(node.mesh);
+      nodes.push(node);
+    }
+  }
+}
+
+const harvestPos = new THREE.Vector3();
+function harvestNode(node) {
+  const now = performance.now();
+  if (node.depleted) return;
+  if (now < node.cooldownUntil) { toast('⏳ Ancora un momento...'); audio.error(); return; }
+
+  const lvl = toolLevel(state, node.type === 'tree' ? 'axe' : 'pick');
+  if (lvl === 0 && Math.random() < 0.3) {
+    toast(choice([
+      '✋ Mani nude! Meglio un attrezzo...',
+      '💪 Con le mani è dura... crafta 🪓 o ⛏️ nel 🧰 Craft',
+      '😅 Le mani nude rendono poco. Molto poco.',
+    ]));
+  }
+
+  const amount = harvestYield(state, node.type);
+  addResource(node.resource, amount);
+  if (node.type === 'crystal') audio.mineCrystal();
+  else if (node.type === 'tree') audio.chop();
+  else audio.mine();
+
+  if (node.type === 'rock' && lvl >= 2 && Math.random() < 0.22) {
+    addResource('cristallo', 1);
+    toast('🔮 Un cristallo è spuntato dalla roccia!');
+  }
+
+  node.hits--;
+  node.cooldownUntil = now + toolStats(state, node.type === 'tree' ? 'axe' : 'pick').interval * 1000;
+  node.shake = 1;
+
+  harvestPos.copy(node.mesh.position);
+  harvestPos.y = 1.5;
+  burst(harvestPos, RESOURCES[node.resource].color, 8);
+  floater(harvestPos, `+${amount} ${RESOURCES[node.resource].icon}`, RESOURCES[node.resource].color);
+
+  if (node.hits <= 0) {
+    node.depleted = true;
+    node.respawnUntil = now + node.respawnTime;
+    toast(choice(
+      node.type === 'tree'
+        ? ['🌳 Albero abbattuto! Ricrescerà tra poco.', '🪓 Crac! L’albero si arrende.']
+        : node.type === 'rock'
+          ? ['🪨 Roccia spaccata! Tornerà presto.', '⛏️ Tonfo! La roccia va in pensione.']
+          : ['🔮 Cristallo estratto! Ricresce da solo.', '✨ I cristalli sono testardi ma generosi.']
+    ));
+  }
+  markDirty('resources');
+  save();
+}
+
+/* Mercante (Sgobbo) */
+let merchantGroup = null;
+function buildMerchant() {
+  if (merchantGroup) { disposeGroup(merchantGroup); scene.remove(merchantGroup); }
+  const g = new THREE.Group();
+  const table = new THREE.Mesh(
+    new THREE.BoxGeometry(2.8, 0.7, 1.7),
+    new THREE.MeshStandardMaterial({ color: 0x7a5230, roughness: 0.8, flatShading: true })
   );
-  antenna.position.set(0, 1.35, 0);
-  player.add(antenna);
-  const antennaGem = new THREE.Mesh(
-    new THREE.OctahedronGeometry(0.16),
-    new THREE.MeshStandardMaterial({ color: 0x00d4ff, emissive: 0x00d4ff, emissiveIntensity: 1.4 })
+  table.position.y = 0.35; table.castShadow = true; table.receiveShadow = true;
+  const boxMerch = new THREE.Mesh(
+    new THREE.BoxGeometry(0.42, 0.42, 0.42),
+    new THREE.MeshStandardMaterial({ color: 0x8a5cff, emissive: 0x5a2fff, emissiveIntensity: 0.9, flatShading: true })
   );
-  antennaGem.position.set(0, 1.62, 0);
-  player.add(antennaGem);
+  boxMerch.position.set(0.6, 0.86, 0.35);
+  const boxWood = new THREE.Mesh(
+    new THREE.BoxGeometry(0.5, 0.32, 0.5),
+    new THREE.MeshStandardMaterial({ color: 0xc98a4b, roughness: 0.9, flatShading: true })
+  );
+  boxWood.position.set(-0.55, 0.8, -0.25);
+
+  const poleGeo = new THREE.CylinderGeometry(0.06, 0.06, 2.3, 6);
+  const poleMat = new THREE.MeshStandardMaterial({ color: 0x4a2a12, roughness: 0.9 });
+  for (const [px, pz] of [[-1.3, -0.8], [1.3, -0.8], [-1.3, 0.8], [1.3, 0.8]]) {
+    const p = new THREE.Mesh(poleGeo, poleMat);
+    p.position.set(px, 1.15, pz);
+    p.castShadow = true;
+    g.add(p);
+  }
+  const roof = new THREE.Mesh(
+    new THREE.BoxGeometry(3.2, 0.12, 2.3),
+    new THREE.MeshStandardMaterial({ color: 0x7b2fff, flatShading: true })
+  );
+  roof.position.y = 2.35; roof.castShadow = true;
+
+  const bodyM = new THREE.Mesh(
+    new THREE.SphereGeometry(0.45, 14, 12),
+    new THREE.MeshStandardMaterial({ color: 0x2ec4b6, roughness: 0.6, flatShading: true })
+  );
+  bodyM.position.set(1.7, 1.0, 0); bodyM.castShadow = true;
+  const head = new THREE.Mesh(
+    new THREE.SphereGeometry(0.3, 14, 12),
+    new THREE.MeshStandardMaterial({ color: 0xffc79a, roughness: 0.7, flatShading: true })
+  );
+  head.position.set(1.7, 1.7, 0);
+  const hat = new THREE.Mesh(
+    new THREE.ConeGeometry(0.34, 0.5, 10),
+    new THREE.MeshStandardMaterial({ color: 0xff5e9c, flatShading: true })
+  );
+  hat.position.set(1.7, 2.12, 0);
+  const eyeMatM = new THREE.MeshBasicMaterial({ color: 0x1a1a1a });
+  const eyesM = new THREE.Group();
+  for (const sx of [1.56, 1.84]) {
+    const e = new THREE.Mesh(new THREE.SphereGeometry(0.055, 8, 8), eyeMatM);
+    e.position.set(sx, 1.76, 0.27);
+    eyesM.add(e);
+  }
+
+  g.add(table, boxMerch, boxWood, roof, bodyM, head, hat, eyesM);
+  const spr = iconSprite('cristallo', 1.9);
+  spr.material = iconMats.cristallo;
+  spr.position.set(1.7, 2.9, 0);
+  g.add(spr);
+
+  g.position.set(MERCHANT_POS[0], 0, MERCHANT_POS[2]);
+  g.rotation.y = Math.atan2(-MERCHANT_POS[0], -MERCHANT_POS[2]);
+  scene.add(g);
+  merchantGroup = g;
+}
+
+/* Azione contestuale */
+const NODE_REACH = 2.9;
+const MERCHANT_REACH = 3.6;
+const PORTAL_REACH = 5.0;
+let context = null;
+let lastCtxKey = null;
+
+function computeContext() {
+  let bestD = NODE_REACH, bestNode = null;
+  for (const n of nodes) {
+    /* I nodi in cooldown restano contesto: se sparissero, il pulsante
+       azione si nasconderebbe per tutta la durata del cooldown e il
+       giocatore fermo accanto all'albero non saprebbe più cosa fare.
+       Sarà harvestNode() a rispondere "ancora un momento". */
+    if (n.depleted) continue;
+    const d = dist2D(n.mesh.position.x, n.mesh.position.z, player.position.x, player.position.z);
+    if (d < bestD) { bestD = d; bestNode = n; }
+  }
+  if (bestNode) { context = { kind: 'node', node: bestNode }; return; }
+  if (merchantGroup) {
+    const d = dist2D(merchantGroup.position.x, merchantGroup.position.z, player.position.x, player.position.z);
+    if (d < MERCHANT_REACH) { context = { kind: 'merchant' }; return; }
+  }
+  if (dist2D(player.position.x, player.position.z, 0, 0) < PORTAL_REACH) context = { kind: 'portal' };
+  else context = null;
+}
+
+function doAction() {
+  if (!context) return;
+  if (context.kind === 'node') harvestNode(context.node);
+  else if (context.kind === 'merchant') openPanel('merchant');
+  else openPanel('zones');
+}
+
+function updateActionBtn() {
+  if (!context) {
+    if (lastCtxKey !== null) { el.actionBtn.classList.add('hidden'); lastCtxKey = null; }
+    return;
+  }
+  let key = context.kind;
+  let label = '';
+  if (context.kind === 'node') {
+    const cooling = performance.now() < context.node.cooldownUntil;
+    key = 'node:' + context.node.type + (cooling ? ':cd' : '');
+    label = cooling
+      ? (context.node.type === 'tree' ? '🪓 Taglia…' : context.node.type === 'rock' ? '⛏️ Mina…' : '🔮 Estrai…')
+      : (context.node.type === 'tree' ? '🪓 Taglia' : context.node.type === 'rock' ? '⛏️ Mina' : '🔮 Estrai');
+  } else if (context.kind === 'merchant') label = '🤝 Parla';
+  else label = '🌀 Zone';
+  if (key !== lastCtxKey) {
+    el.actionBtn.textContent = label;
+    lastCtxKey = key;
+  }
+  el.actionBtn.classList.remove('hidden');
+}
+
+/* ------------------------------------------------------------
+   8. CAMBIO ZONA
+   ------------------------------------------------------------ */
+function enterZone(idx) {
+  state.zone = safeZoneIndex(idx);
+  const z = zoneAt(state.zone);
+
+  groundMat.color.set(z.ground);
+  ground.scale.setScalar(z.radius);
+  wall.scale.set(z.radius, 1, z.radius);
+  wallMat.color.set(z.gem);
+  scene.fog = scene.fog || new THREE.Fog(z.fog, 40, 140);
+  scene.fog.color.set(z.fog);
+  scene.fog.near = z.radius * 0.45;
+  scene.fog.far = z.radius * 2.4;
+
+  skyUniforms.top.value.set(z.sky);
+  skyUniforms.bottom.value.set(z.fog);
+
+  hemi.color.set(z.hemiSky);
+  hemi.groundColor.set(z.hemiGround);
+  sun.color.set(z.sun);
+  rim.color.set(z.gem);
+  if (state.zone >= 4) { hemi.intensity = 0.55; sun.intensity = 1.0; }
+  else { hemi.intensity = 0.9; sun.intensity = 1.1; }
+
+  /* Luce per zona: lava, cristalli, neon. */
+  zoneLight.position.set(0, 6, 0);
+  if (state.zone === 2) { zoneLight.color.set(0x8a5cff); zoneLight.intensity = 26; zoneLight.distance = 55; }
+  else if (state.zone === 3) { zoneLight.color.set(0x00e5ff); zoneLight.intensity = 18; zoneLight.distance = 60; }
+  else if (state.zone === 4) { zoneLight.color.set(0xff5a1a); zoneLight.intensity = 34; zoneLight.distance = 70; }
+  else { zoneLight.intensity = 0; }
+
+  moteMat.color.set(z.gem);
+  moteMat.opacity = state.zone === 3 || state.zone === 5 ? 0.8 : 0.5;
+  motes.visible = state.zone !== 5;
+
+  /* Ogni zona ha un elemento che la rende riconoscibile a colpo d'occhio:
+     tetto e stalattiti nella caverna, acqua nell'oceano, lava nel
+     vulcano, nebulose nello spazio. */
+  caveDome.visible = state.zone === 2;
+  caveDome.scale.setScalar(z.radius * 1.05);
+  caveDome.position.y = 26;
+  water.visible = state.zone === 3;
+  water.scale.setScalar(z.radius * 0.98);
+  waterUniforms.tint.value.set(z.gem);
+  lava.visible = state.zone === 4;
+  lava.scale.setScalar(z.radius * 0.42);
+  lavaUniforms.hot.value.set(z.gem);
+
+  buildStalactites(z.radius);
+  buildNebulae(z.radius);
+
+  starField.visible = state.zone >= 5;
+  portalRing.material.color.set(z.gem);
+  portalRing.material.emissive.set(z.gem);
+
+  renderer.toneMappingExposure = z.exposure;
+  if (bloomPass) bloomPass.strength = z.bloom;
 
   player.position.set(0, 0, 0);
-  scene.add(player);
+  camera.position.set(0, 11, 17);
+  buildDecor();
+  buildNodes();
+  buildMerchant();
+  clearGems();
+  spawnTimer = 0;
+  for (let i = 0; i < 6; i++) spawnGem();
 
-  /* --- Portale (centro del mondo) --- */
-  const portalGroup = new THREE.Group();
-  const portalRing = new THREE.Mesh(
-    new THREE.TorusGeometry(1.4, 0.18, 12, 40),
-    new THREE.MeshStandardMaterial({ color: 0x7b2fff, emissive: 0x7b2fff, emissiveIntensity: 1.6 })
-  );
-  portalGroup.add(portalRing);
-  const portalBase = new THREE.Mesh(
-    new THREE.CylinderGeometry(1.7, 2.0, 0.3, 24),
-    new THREE.MeshStandardMaterial({ color: 0x2a1a55, roughness: 0.6 })
-  );
-  portalBase.position.y = -0.15;
-  portalBase.receiveShadow = true;
-  portalGroup.add(portalBase);
-  portalGroup.position.y = 1.1;
-  scene.add(portalGroup);
+  /* L'ambiente sonoro segue la zona: senza questo nasceva sul Prato e
+     restava lì per tutta la partita. */
+  audio.setAmbient(state.zone);
 
-  /* --- Gemme / decorazioni / droni / particelle --- */
-  const gems = [];
-  const decorGroup = new THREE.Group();
-  scene.add(decorGroup);
-  const droneGroup = new THREE.Group();
-  scene.add(droneGroup);
-  const drones = [];
+  el.zoneName.textContent = z.name;
+  toast(`${z.name} — ${z.tagline}`);
+  markDirty('all');
+  updateHUD();
+}
 
-  const gemGeo = new THREE.OctahedronGeometry(0.45);
-  const glowTexture = (() => {
-    const c = document.createElement('canvas');
-    c.width = c.height = 64;
-    const ctx = c.getContext('2d');
-    const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-    g.addColorStop(0, 'rgba(255,255,255,1)');
-    g.addColorStop(0.35, 'rgba(255,255,255,0.5)');
-    g.addColorStop(1, 'rgba(255,255,255,0)');
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, 64, 64);
-    const t = new THREE.CanvasTexture(c);
-    return t;
-  })();
-  const glowMat = new THREE.SpriteMaterial({
-    map: glowTexture, color: 0xffffff, transparent: true, opacity: 0.5,
-    blending: THREE.AdditiveBlending, depthWrite: false,
-  });
+/* ------------------------------------------------------------
+   9. INPUT
+   ------------------------------------------------------------ */
+const keys = {};
+const joyInput = { x: 0, y: 0 };
+let joyActive = false;
 
-  const gemMats = {}; // cache materiale per zona
-  function gemMatFor(zoneIdx) {
-    if (!gemMats[zoneIdx]) {
-      const c = new THREE.Color(ZONES[zoneIdx].gem);
-      gemMats[zoneIdx] = new THREE.MeshStandardMaterial({
-        color: c.clone().multiplyScalar(0.4), emissive: c, emissiveIntensity: 1.1,
-        roughness: 0.2, metalness: 0.1,
-      });
-    }
-    return gemMats[zoneIdx];
+/* Il movimento è riutilizzato: movementVector() non allocava un oggetto
+   nuovo a ogni frame. */
+const move = { x: 0, z: 0, len: 0 };
+function movementVector() {
+  let x = 0, z = 0;
+  if (keys.KeyW || keys.ArrowUp) z -= 1;
+  if (keys.KeyS || keys.ArrowDown) z += 1;
+  if (keys.KeyA || keys.ArrowLeft) x -= 1;
+  if (keys.KeyD || keys.ArrowRight) x += 1;
+  x += joyInput.x;
+  z += joyInput.y;
+  const len = Math.hypot(x, z);
+  if (len > 1) { x /= len; z /= len; }
+  move.x = x; move.z = z; move.len = Math.min(1, len);
+  return move;
+}
+
+const ACTION_CODES = new Set(['KeyE', 'KeyB', 'KeyC', 'KeyM', 'Escape']);
+
+window.addEventListener('keydown', (e) => {
+  /* I tasti d'azione scattano una volta sola: tenendo premuto E si
+     ricostruiva l'intero pannello Zone ~30 volte al secondo. */
+  if (ACTION_CODES.has(e.code) && e.repeat) return;
+
+  /* Prima dello start non si fa nulla: altrimenti B/E sullo splash
+     aprivano pannelli che restavano aperti sotto. */
+  if (!booted) return;
+
+  keys[e.code] = true;
+  if (e.code === 'KeyE') { if (context) doAction(); else openPanel('zones'); }
+  if (e.code === 'KeyB') openPanel('shop');
+  if (e.code === 'KeyC') openPanel('craft');
+  if (e.code === 'KeyM') openPanel('merchant');
+  if (e.code === 'Escape') closePanel();
+  if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(e.code)) e.preventDefault();
+});
+
+window.addEventListener('keyup', (e) => { keys[e.code] = false; });
+
+/* Senza questo, Alt-Tab o una notifica lasciavano i tasti "premuti":
+   Cubetto continuava a camminare da solo. */
+function releaseAllInput() {
+  for (const k of Object.keys(keys)) keys[k] = false;
+  joyActive = false;
+  joyInput.x = 0; joyInput.y = 0;
+  el.joyStick.style.transform = 'translate(0,0)';
+}
+window.addEventListener('blur', releaseAllInput);
+document.addEventListener('visibilitychange', () => { if (document.hidden) releaseAllInput(); });
+
+/* Joystick */
+const joyRadius = 44;
+function setJoy(e) {
+  const rect = el.joyBase.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  let dx = e.clientX - cx;
+  let dy = e.clientY - cy;
+  const len = Math.hypot(dx, dy);
+  if (len > joyRadius) { dx = (dx / len) * joyRadius; dy = (dy / len) * joyRadius; }
+  el.joyStick.style.transform = `translate(${dx}px, ${dy}px)`;
+  joyInput.x = dx / joyRadius;
+  joyInput.y = dy / joyRadius;
+}
+el.joyBase.addEventListener('pointerdown', (e) => {
+  el.joyBase.setPointerCapture(e.pointerId);
+  joyActive = true; setJoy(e);
+});
+el.joyBase.addEventListener('pointermove', (e) => { if (joyActive) setJoy(e); });
+function resetJoy() {
+  joyActive = false; joyInput.x = 0; joyInput.y = 0;
+  el.joyStick.style.transform = 'translate(0,0)';
+}
+el.joyBase.addEventListener('pointerup', resetJoy);
+el.joyBase.addEventListener('pointercancel', resetJoy);
+
+/* ------------------------------------------------------------
+   10. RACCOLTA
+   ------------------------------------------------------------ */
+let combo = 0;
+let comboTimer = 0;
+let lastPickupAt = 0;
+
+function collect(g) {
+  const i = gems.indexOf(g);
+  if (i < 0) return;
+  gems.splice(i, 1);
+  scene.remove(g.mesh);
+
+  /* Il valore è rivalutato al momento della raccolta: prima era fissato
+     nello spawn, quindi comprare "Taglia Gemme" non cambiava le gemme
+     già per terra. */
+  const val = (g.golden ? 12 : 1) * gemValueWithStars(state);
+  state.energy += val;
+  state.totalEarned += val;
+  state.gemsCollected++;
+
+  /* Combo: gemme raccolte in sequenza rapida. Si misura l'istante
+     dell'ultima raccolta, non la gemma: ogni gemma è un oggetto nuovo,
+     quindi una WeakMap per gemma sarebbe sempre vuota. */
+  const now = performance.now();
+  combo = now - lastPickupAt < 900 ? combo + 1 : 1;
+  lastPickupAt = now;
+
+  burst(g.mesh.position, g.golden ? 0xffd54f : ZONES[state.zone].gem, g.golden ? 14 : 7);
+  floater(g.mesh.position, g.golden ? `+${fmt(val)} 💛` : `+${fmt(val)}`, g.golden ? '#ffd54f' : '#9ff5b0');
+
+  if (g.golden) {
+    audio.collectGold();
+    toast(choice(['💛 GEMMA D’ORO! Che colpo di fortuna!', '🌟 Oro puro! Cubetto non ci crede.', '🍀 La Fortuna ti sorride, eccome!']));
+  } else {
+    audio.collect(combo);
   }
-  const goldMat = new THREE.MeshStandardMaterial({
-    color: 0x6b4a00, emissive: 0xffd54f, emissiveIntensity: 1.3, roughness: 0.2, metalness: 0.3,
-  });
-
-  function spawnGem() {
-    const z = ZONES[state.zone];
-    let x, zz, tries = 0;
-    do {
-      const a = rand(0, Math.PI * 2);
-      const r = rand(3, z.radius - 3);
-      x = Math.cos(a) * r;
-      zz = Math.sin(a) * r;
-      tries++;
-    } while (tries < 20 && dist2D(x, zz, player.position.x, player.position.z) < 6);
-
-    const golden = Math.random() < upgradeValue('luck', state.upgrades.luck || 0);
-    const mat = golden ? goldMat : gemMatFor(state.zone);
-    const mesh = new THREE.Mesh(gemGeo, mat);
-    mesh.position.set(x, rand(0.6, 1.2), zz);
-    mesh.castShadow = true;
-    const glow = new THREE.Sprite(glowMat);
-    glow.scale.setScalar(golden ? 2.6 : 1.8);
-    mesh.add(glow);
-    mesh.scale.setScalar(golden ? 1.5 : 1);
-    scene.add(mesh);
-    gems.push({
-      mesh, golden,
-      baseY: mesh.position.y,
-      phase: rand(0, Math.PI * 2),
-      value: (golden ? 12 : 1) * currentGemValue() * starMult(),
-    });
+  if (combo >= 10 && combo % 10 === 0) {
+    toast(`🔥 Combo ×${combo}! Le mani di Cubetto non si fermano più.`);
+    audio.milestone();
   }
-
-  function clearGems() {
-    for (const g of gems) scene.remove(g.mesh);
-    gems.length = 0;
+  if (state.gemsCollected > 0 && state.gemsCollected % 50 === 0) {
+    toast(`🎉 ${state.gemsCollected} gemme raccolte! Cubetto è orgoglioso di te.`);
+    audio.milestone();
   }
+  markDirty('energy');
+}
 
-  /* --- Particelle --- */
-  const PARTICLE_COUNT = 120;
-  const particles = [];
-  const partGeo = new THREE.OctahedronGeometry(0.14);
-  for (let i = 0; i < PARTICLE_COUNT; i++) {
-    const mat = new THREE.MeshBasicMaterial({
-      color: 0xffffff, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false,
-    });
-    const m = new THREE.Mesh(partGeo, mat);
-    m.visible = false;
-    scene.add(m);
-    particles.push({ mesh: m, mat, vel: new THREE.Vector3(), life: 0, maxLife: 1, active: false });
-  }
-  let partCursor = 0;
-  function burst(pos, color, count) {
-    const c = new THREE.Color(color);
-    for (let n = 0; n < count; n++) {
-      const p = particles[partCursor];
-      partCursor = (partCursor + 1) % particles.length;
-      p.active = true;
-      p.life = p.maxLife = rand(0.35, 0.6);
-      p.mesh.position.copy(pos);
-      p.mesh.visible = true;
-      p.mat.color.copy(c);
-      p.mat.opacity = 1;
-      const a = rand(0, Math.PI * 2);
-      const e = rand(0.3, Math.PI * 0.5);
-      const sp = rand(2, 5.5);
-      p.vel.set(Math.cos(a) * Math.cos(e) * sp, Math.sin(e) * sp + 1.5, Math.sin(a) * Math.cos(e) * sp);
-    }
-  }
+/* ------------------------------------------------------------
+   11. HUD, TOAST, FLOATER
+   ------------------------------------------------------------ */
 
-  /* --- Decorazioni --- */
-  function disposeGroup(g) {
-    g.traverse((o) => {
-      if (o.geometry) o.geometry.dispose();
-      if (o.material) {
-        if (Array.isArray(o.material)) o.material.forEach((m) => m.dispose());
-        else o.material.dispose();
-      }
-    });
-  }
-  function makeDecor(kind) {
-    const g = new THREE.Group();
-    const mat = (hex, rough = 0.8) => new THREE.MeshStandardMaterial({ color: hex, roughness: rough, flatShading: true });
-    switch (kind) {
-      case 'tree': {
-        const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.2, 1.2, 6), mat(0x6b4a2a));
-        trunk.position.y = 0.6; trunk.castShadow = true;
-        const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.7, 1.6, 8), mat(0x2e9e4f));
-        leaf.position.y = 1.7; leaf.castShadow = true;
-        g.add(trunk, leaf);
-        break;
-      }
-      case 'flower': {
-        const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.6, 6), mat(0x3c9d55));
-        stem.position.y = 0.3;
-        const head = new THREE.Mesh(new THREE.SphereGeometry(0.18, 8, 8), mat(choice([0xff5e9c, 0xffd54f, 0x00d4ff])));
-        head.position.y = 0.72;
-        g.add(stem, head);
-        break;
-      }
-      case 'rock': {
-        const r = new THREE.Mesh(new THREE.DodecahedronGeometry(rand(0.5, 1.1), 0), mat(0x8a8a92));
-        r.position.y = 0.4; r.rotation.set(rand(0, 3), rand(0, 3), rand(0, 3)); r.castShadow = true;
-        g.add(r);
-        break;
-      }
-      case 'crystal': {
-        const c = new THREE.Mesh(
-          new THREE.OctahedronGeometry(rand(0.5, 0.9)),
-          new THREE.MeshStandardMaterial({ color: 0x8a5cff, emissive: 0x5a2fff, emissiveIntensity: 0.7, roughness: 0.2 })
-        );
-        c.position.y = rand(0.5, 1.2); c.rotation.y = rand(0, 3); c.castShadow = true;
-        g.add(c);
-        break;
-      }
-      case 'spike': {
-        const s = new THREE.Mesh(new THREE.ConeGeometry(0.25, rand(1, 1.8), 6), mat(0x3a3a44));
-        s.position.y = rand(0.5, 0.9); s.castShadow = true;
-        g.add(s);
-        break;
-      }
-      case 'cactus': {
-        const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.26, 1.4, 7), mat(0x2e9e4f));
-        trunk.position.y = 0.7; trunk.castShadow = true;
-        const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.6, 7), mat(0x2e9e4f));
-        arm.position.set(0.3, 0.9, 0); arm.rotation.z = Math.PI / 2; arm.castShadow = true;
-        g.add(trunk, arm);
-        break;
-      }
-      case 'coral': {
-        const c1 = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.2, rand(0.8, 1.5), 6), mat(choice([0xff5e9c, 0x00e5ff, 0xffd54f])));
-        c1.position.y = 0.6; c1.castShadow = true;
-        const c2 = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.14, rand(0.6, 1.1), 6), mat(0xff5e9c));
-        c2.position.set(0.25, 0.5, 0.1); c2.castShadow = true;
-        g.add(c1, c2);
-        break;
-      }
-      case 'asteroid': {
-        const a = new THREE.Mesh(new THREE.IcosahedronGeometry(rand(0.6, 1.3), 0), mat(0x6a6a76));
-        a.position.y = rand(0.6, 1.4); a.rotation.set(rand(0, 3), rand(0, 3), rand(0, 3)); a.castShadow = true;
-        g.add(a);
-        break;
-      }
-    }
-    return g;
-  }
+/* updateHUD non viene più chiamato a ogni raccolta: prima ricostruiva
+   l'intero pannello Craft o Mercante per ogni gemma, N volte in un
+   frame. Ora il testo si aggiorna a 10 Hz e i pannelli si
+   ri-renderizzano solo quando cambia il tab o quando lo stato è "sporco". */
+let hudTimer = 0;
+const dirty = new Set();
+function markDirty(what) { dirty.add(what); }
+function isPanelOpen() { return !el.overlay.classList.contains('hidden'); }
 
-  function buildDecor() {
-    for (const c of decorGroup.children) disposeGroup(c);
-    while (decorGroup.children.length) decorGroup.remove(decorGroup.children[0]);
-    const z = ZONES[state.zone];
-    const count = 26 + (z.decor.length ? 12 : 0);
-    for (let i = 0; i < count; i++) {
-      const kind = choice(z.decor);
-      const d = makeDecor(kind);
-      const a = rand(0, Math.PI * 2);
-      const r = rand(6, z.radius - 2);
-      d.position.set(Math.cos(a) * r, 0, Math.sin(a) * r);
-      d.rotation.y = rand(0, Math.PI * 2);
-      decorGroup.add(d);
-    }
-  }
+function updateHUD(force = false) {
+  el.energy.textContent = fmt(state.energy);
+  el.perSec.textContent = `+${fmt(incomePerSec(state))}/s`;
+  el.gems.textContent = fmt(state.gemsCollected);
+  el.stars.textContent = fmt(state.stars);
+  el.panelEnergy.textContent = fmt(state.energy);
+  updateResourceBar();
 
-  /* --- Droni --- */
-  const droneBodyGeo = new THREE.OctahedronGeometry(0.34);
-  function makeDroneMesh() {
-    const g = new THREE.Group();
-    const mat = new THREE.MeshStandardMaterial({
-      color: 0x7b2fff, emissive: 0x00d4ff, emissiveIntensity: 0.6, roughness: 0.3, metalness: 0.4,
-    });
-    const b = new THREE.Mesh(droneBodyGeo, mat);
-    b.castShadow = true;
-    const ring = new THREE.Mesh(
-      new THREE.TorusGeometry(0.42, 0.05, 8, 20),
-      new THREE.MeshStandardMaterial({ color: 0x00d4ff, emissive: 0x00d4ff, emissiveIntensity: 1.2 })
-    );
-    ring.rotation.x = Math.PI / 2;
-    g.add(b, ring);
-    g.userData = { angle: rand(0, Math.PI * 2), phase: rand(0, Math.PI * 2) };
-    return g;
-  }
-  function syncDrones() {
-    const want = upgradeValue('drone', state.upgrades.drone || 0);
-    while (drones.length < want) {
-      const m = makeDroneMesh();
-      droneGroup.add(m);
-      drones.push(m);
-    }
-    while (drones.length > want) {
-      const m = drones.pop();
-      droneGroup.remove(m);
-    }
-  }
+  if (!force) return;
+  if (currentTab === 'craft') renderCraft();
+  else if (currentTab === 'merchant') renderMerchant();
+  else if (currentTab === 'shop') renderShop();
+  else if (currentTab === 'zones') renderZones();
+  else if (currentTab === 'prestige') renderPrestige();
+}
 
-  /* ------------------------------------------------------------
-     5bis. RISORSE NEL MONDO — Nodi raccoglibili + Mercante
-  ------------------------------------------------------------ */
-  const nodeGroup = new THREE.Group();
-  scene.add(nodeGroup);
-  const nodes = [];
-  const MERCHANT_POS = [14, 0, 10];
-
-  const emojiTexCache = {};
-  function emojiSprite(ch, scale) {
-    if (!emojiTexCache[ch]) {
-      const c = document.createElement('canvas');
-      c.width = c.height = 128;
-      const ctx = c.getContext('2d');
-      ctx.font = '84px system-ui, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(ch, 64, 66);
-      emojiTexCache[ch] = new THREE.CanvasTexture(c);
-    }
-    const m = new THREE.SpriteMaterial({ map: emojiTexCache[ch], transparent: true, depthWrite: false });
-    const s = new THREE.Sprite(m);
-    s.scale.setScalar(scale);
-    return s;
-  }
-
-  function addResource(id, n) {
-    state.resources[id] = (state.resources[id] || 0) + n;
-  }
-
-  /* --- Nodi: alberi / sassi / cristalli --- */
-  function makeNodeMesh(type) {
-    const g = new THREE.Group();
-    if (type === 'tree') {
-      const trunk = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.28, 0.42, 2.5, 7),
-        new THREE.MeshStandardMaterial({ color: 0x6b4a2a, roughness: 0.9 })
-      );
-      trunk.position.y = 1.25; trunk.castShadow = true;
-      const l1 = new THREE.Mesh(
-        new THREE.ConeGeometry(1.25, 2.1, 8),
-        new THREE.MeshStandardMaterial({ color: 0x2e9e4f, roughness: 0.9, flatShading: true })
-      );
-      l1.position.y = 3.0; l1.castShadow = true;
-      const l2 = new THREE.Mesh(
-        new THREE.ConeGeometry(0.9, 1.6, 8),
-        new THREE.MeshStandardMaterial({ color: 0x3fae5c, roughness: 0.9, flatShading: true })
-      );
-      l2.position.y = 4.0; l2.castShadow = true;
-      g.add(trunk, l1, l2);
-    } else if (type === 'rock') {
-      const mat = new THREE.MeshStandardMaterial({ color: 0x8a8a92, roughness: 0.95, flatShading: true });
-      const r1 = new THREE.Mesh(new THREE.IcosahedronGeometry(1.05, 0), mat);
-      r1.position.y = 0.8; r1.castShadow = true;
-      const r2 = new THREE.Mesh(new THREE.IcosahedronGeometry(0.75, 0), mat);
-      r2.position.set(0.9, 0.55, 0.35);
-      g.add(r1, r2);
-    } else { // cristallo
-      const mat = new THREE.MeshStandardMaterial({
-        color: 0x8a5cff, emissive: 0x5a2fff, emissiveIntensity: 0.8, roughness: 0.2,
-      });
-      const c1 = new THREE.Mesh(new THREE.OctahedronGeometry(0.85), mat);
-      c1.position.y = 1.05; c1.rotation.y = 0.5; c1.castShadow = true;
-      const c2 = new THREE.Mesh(new THREE.OctahedronGeometry(0.55), mat);
-      c2.position.set(0.75, 0.75, 0.3); c2.rotation.y = -0.4;
-      const c3 = new THREE.Mesh(new THREE.OctahedronGeometry(0.42), mat);
-      c3.position.set(-0.65, 0.55, -0.4);
-      g.add(c1, c2, c3);
-    }
-    return g;
-  }
-
-  function makeNode(type) {
-    const mesh = makeNodeMesh(type);
-    const resource = type === 'tree' ? 'legno' : type === 'rock' ? 'pietra' : 'cristallo';
-    const sprite = emojiSprite(RESOURCES[resource].icon, type === 'tree' ? 1.8 : type === 'rock' ? 1.5 : 1.7);
-    sprite.position.y = type === 'tree' ? 4.9 : type === 'rock' ? 2.7 : 3.1;
-    mesh.add(sprite);
-    const ring = new THREE.Mesh(
-      new THREE.RingGeometry(1.2, 1.55, 28),
-      new THREE.MeshBasicMaterial({
-        color: RESOURCES[resource].color, transparent: true, opacity: 0.35,
-        side: THREE.DoubleSide, depthWrite: false,
-      })
-    );
-    ring.rotation.x = -Math.PI / 2;
-    ring.position.y = 0.04;
-    ring.renderOrder = 2;
-    mesh.add(ring);
-    return {
-      type, resource, mesh, sprite, ring,
-      hits: 4, maxHits: 4,
-      cooldownUntil: 0, respawnUntil: 0, depleted: false, shake: 0,
-      scale: 1, respawnTime: type === 'tree' ? 30000 : type === 'rock' ? 26000 : 20000,
-    };
-  }
-
-  function buildNodes() {
-    for (const n of nodes) { disposeGroup(n.mesh); nodeGroup.remove(n.mesh); }
-    nodes.length = 0;
-    const z = ZONES[state.zone];
-    const counts = { tree: 5, rock: 5, crystal: state.zone >= 2 ? 3 : 0 };
-    for (const [type, count] of Object.entries(counts)) {
-      for (let i = 0; i < count; i++) {
-        let x, zz, tries = 0;
-        do {
-          const a = rand(0, Math.PI * 2);
-          const r = rand(7, z.radius - 5);
-          x = Math.cos(a) * r; zz = Math.sin(a) * r;
-          tries++;
-        } while (tries < 25 && (
-          dist2D(x, zz, 0, 0) < 6 ||
-          dist2D(x, zz, MERCHANT_POS[0], MERCHANT_POS[2]) < 6
-        ));
-        const node = makeNode(type);
-        node.mesh.position.set(x, 0, zz);
-        nodeGroup.add(node.mesh);
-        nodes.push(node);
-      }
-    }
-  }
-
-  function harvestNode(node) {
-    const now = performance.now();
-    if (node.depleted) return;
-    if (now < node.cooldownUntil) { toast('⏳ Ancora un momento...'); return; }
-    const isTree = node.type === 'tree';
-    const kind = isTree ? 'axe' : 'pick';
-    const lvl = state.tools[kind] || 0;
-    const stats = toolStats(kind);
-    if (lvl === 0 && Math.random() < 0.3) {
-      toast(choice(['✋ Mani nude! Meglio un attrezzo...', '💪 Con le mani è dura... crafta 🪓 o ⛏️ nel 🧰 Craft', '😅 Le mani nude rendono poco. Molto poco.']));
-    }
-    let amount = node.type === 'crystal' ? Math.max(1, Math.round(stats.yield * 0.6)) : stats.yield;
-    addResource(node.resource, amount);
-    if (node.type === 'rock' && lvl >= 2 && Math.random() < 0.22) {
-      addResource('cristallo', 1);
-      toast('🔮 Un cristallo è spuntato dalla roccia!');
-    }
-    node.hits--;
-    node.cooldownUntil = now + stats.interval * 1000;
-    node.shake = 1;
-
-    const pos = node.mesh.position.clone(); pos.y = 1.5;
-    burst(pos, RESOURCES[node.resource].color, 8);
-    floater(pos, `+${amount} ${RESOURCES[node.resource].icon}`, RESOURCES[node.resource].color);
-
-    if (node.hits <= 0) {
-      node.depleted = true;
-      node.respawnUntil = now + node.respawnTime;
-      toast(choice(
-        node.type === 'tree'
-          ? ['🌳 Albero abbattuto! Ricrescerà tra poco.', '🪓 Crac! L’albero si arrende.']
-          : node.type === 'rock'
-            ? ['🪨 Roccia spaccata! Tornerà presto.', '⛏️ Tonfo! La roccia va in pensione.']
-            : ['🔮 Cristallo estratto! Ricresce da solo.', '✨ I cristalli sono testardi ma generosi.']
-      ));
-    }
-    save(); updateHUD();
-  }
-
-  /* --- Mercante (Sgobbo) --- */
-  let merchantGroup = null;
-  function buildMerchant() {
-    if (merchantGroup) { disposeGroup(merchantGroup); scene.remove(merchantGroup); }
-    const g = new THREE.Group();
-    const table = new THREE.Mesh(
-      new THREE.BoxGeometry(2.8, 0.7, 1.7),
-      new THREE.MeshStandardMaterial({ color: 0x7a5230, roughness: 0.8 })
-    );
-    table.position.y = 0.35; table.castShadow = true; table.receiveShadow = true;
-    g.add(table);
-    const boxMerch = new THREE.Mesh(
-      new THREE.BoxGeometry(0.42, 0.42, 0.42),
-      new THREE.MeshStandardMaterial({ color: 0x8a5cff, emissive: 0x5a2fff, emissiveIntensity: 0.7 })
-    );
-    boxMerch.position.set(0.6, 0.86, 0.35); g.add(boxMerch);
-    const boxWood = new THREE.Mesh(
-      new THREE.BoxGeometry(0.5, 0.32, 0.5),
-      new THREE.MeshStandardMaterial({ color: 0xc98a4b, roughness: 0.9 })
-    );
-    boxWood.position.set(-0.55, 0.8, -0.25); g.add(boxWood);
-
-    const poleGeo = new THREE.CylinderGeometry(0.06, 0.06, 2.3, 6);
-    const poleMat = new THREE.MeshStandardMaterial({ color: 0x4a2a12 });
-    for (const [px, pz] of [[-1.3, -0.8], [1.3, -0.8], [-1.3, 0.8], [1.3, 0.8]]) {
-      const p = new THREE.Mesh(poleGeo, poleMat);
-      p.position.set(px, 1.15, pz);
-      g.add(p);
-    }
-    const roof = new THREE.Mesh(
-      new THREE.BoxGeometry(3.2, 0.12, 2.3),
-      new THREE.MeshStandardMaterial({ color: 0x7b2fff })
-    );
-    roof.position.y = 2.35; g.add(roof);
-
-    const body = new THREE.Mesh(
-      new THREE.SphereGeometry(0.45, 14, 12),
-      new THREE.MeshStandardMaterial({ color: 0x2ec4b6, roughness: 0.6 })
-    );
-    body.position.set(1.7, 1.0, 0); body.castShadow = true;
-    const head = new THREE.Mesh(
-      new THREE.SphereGeometry(0.3, 14, 12),
-      new THREE.MeshStandardMaterial({ color: 0xffc79a, roughness: 0.7 })
-    );
-    head.position.set(1.7, 1.7, 0);
-    const hat = new THREE.Mesh(
-      new THREE.ConeGeometry(0.34, 0.5, 10),
-      new THREE.MeshStandardMaterial({ color: 0xff5e9c })
-    );
-    hat.position.set(1.7, 2.12, 0);
-    const eyeMat = new THREE.MeshBasicMaterial({ color: 0x1a1a1a });
-    for (const sx of [1.56, 1.84]) {
-      const e = new THREE.Mesh(new THREE.SphereGeometry(0.055, 8, 8), eyeMat);
-      e.position.set(sx, 1.76, 0.27);
-      g.add(e);
-    }
-    g.add(body, head, hat);
-    const spr = emojiSprite('🤝', 1.9);
-    spr.position.set(1.7, 2.9, 0);
-    g.add(spr);
-
-    g.position.set(MERCHANT_POS[0], 0, MERCHANT_POS[2]);
-    g.rotation.y = Math.atan2(-MERCHANT_POS[0], -MERCHANT_POS[2]);
-    scene.add(g);
-    merchantGroup = g;
-  }
-
-  /* --- Azione contestuale --- */
-  let context = null;
-  let lastCtxKey = null;
-  function computeContext() {
-    const now = performance.now();
-    context = null;
-    let bestD = 2.9, bestNode = null;
-    for (const n of nodes) {
-      if (n.depleted || now < n.cooldownUntil) continue;
-      const d = dist2D(n.mesh.position.x, n.mesh.position.z, player.position.x, player.position.z);
-      if (d < bestD) { bestD = d; bestNode = n; }
-    }
-    if (bestNode) { context = { kind: 'node', node: bestNode }; return; }
-    if (merchantGroup) {
-      const d = dist2D(merchantGroup.position.x, merchantGroup.position.z, player.position.x, player.position.z);
-      if (d < 3.6) { context = { kind: 'merchant' }; return; }
-    }
-    if (dist2D(player.position.x, player.position.z, 0, 0) < 5) context = { kind: 'portal' };
-  }
-  function doAction() {
-    if (!context) return;
-    if (context.kind === 'node') harvestNode(context.node);
-    else if (context.kind === 'merchant') openPanel('merchant');
-    else openPanel('zones');
-  }
-  function updateActionBtn() {
-    if (!context) {
-      elActionBtn.classList.add('hidden');
-      lastCtxKey = null;
-      return;
-    }
-    let key = context.kind;
-    let label = '';
-    if (context.kind === 'node') {
-      key = 'node:' + context.node.type;
-      label = context.node.type === 'tree' ? '🪓 Taglia' : context.node.type === 'rock' ? '⛏️ Mina' : '🔮 Estrai';
-    } else if (context.kind === 'merchant') label = '🤝 Parla';
-    else label = '🌀 Zone';
-    if (key !== lastCtxKey) {
-      elActionBtn.innerHTML = label;
-      lastCtxKey = key;
-    }
-    elActionBtn.classList.remove('hidden');
-  }
-
-  /* ------------------------------------------------------------
-     6. CAMBIO ZONA
-  ------------------------------------------------------------ */
-  function enterZone(idx) {
-    state.zone = idx;
-    const z = ZONES[idx];
-    groundMat.color.set(z.ground);
-    scene.fog = new THREE.Fog(z.fog, 40, 140);
-    renderer.setClearColor(z.sky);
-    hemi.color.set(z.hemiSky);
-    hemi.groundColor.set(z.hemiGround);
-    sun.color.set(z.sun);
-    if (idx >= 4) { hemi.intensity = 0.55; sun.intensity = 1.0; }
-    else { hemi.intensity = 0.9; sun.intensity = 1.1; }
-    starField.visible = idx >= 5;
-    portalRing.material.color.set(z.gem);
-    portalRing.material.emissive.set(z.gem);
-
-    player.position.set(0, 0, 0);
-    camera.position.set(0, 18, 14);
-    buildDecor();
-    buildNodes();
-    buildMerchant();
-    clearGems();
-    for (let i = 0; i < 6; i++) spawnGem();
-
-    elZoneName.textContent = z.name;
-    toast(`${z.name} — ${z.tagline}`);
-    renderShop(); renderZones(); updateHUD();
-  }
-
-  /* ------------------------------------------------------------
-     7. INPUT
-  ------------------------------------------------------------ */
-  const keys = {};
-  const joyInput = { x: 0, y: 0 };
-  let joyActive = false;
-
-  window.addEventListener('keydown', (e) => {
-    keys[e.code] = true;
-    if (e.code === 'KeyE') { if (context) doAction(); else openZones(); }
-    if (e.code === 'KeyB') { openShop(); }
-    if (e.code === 'KeyC') { openPanel('craft'); }
-    if (e.code === 'KeyM') { openPanel('merchant'); }
-    if (e.code === 'Escape') { closePanel(); }
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(e.code)) e.preventDefault();
-  });
-  window.addEventListener('keyup', (e) => { keys[e.code] = false; });
-
-  // Joystick
-  const joyRadius = 44;
-  function setJoy(e) {
-    const rect = elJoyBase.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    let dx = e.clientX - cx;
-    let dy = e.clientY - cy;
-    const len = Math.hypot(dx, dy);
-    if (len > joyRadius) { dx = dx / len * joyRadius; dy = dy / len * joyRadius; }
-    elJoyStick.style.transform = `translate(${dx}px, ${dy}px)`;
-    joyInput.x = dx / joyRadius;
-    joyInput.y = dy / joyRadius;
-  }
-  elJoyBase.addEventListener('pointerdown', (e) => {
-    elJoyBase.setPointerCapture(e.pointerId);
-    joyActive = true; setJoy(e);
-  });
-  elJoyBase.addEventListener('pointermove', (e) => { if (joyActive) setJoy(e); });
-  function resetJoy(e) {
-    joyActive = false; joyInput.x = 0; joyInput.y = 0;
-    elJoyStick.style.transform = 'translate(0,0)';
-  }
-  elJoyBase.addEventListener('pointerup', resetJoy);
-  elJoyBase.addEventListener('pointercancel', resetJoy);
-
-  function movementVector() {
-    let x = 0, z = 0;
-    if (keys['KeyW'] || keys['ArrowUp']) z -= 1;
-    if (keys['KeyS'] || keys['ArrowDown']) z += 1;
-    if (keys['KeyA'] || keys['ArrowLeft']) x -= 1;
-    if (keys['KeyD'] || keys['ArrowRight']) x += 1;
-    // joystick: su = avanti (-z), destra = +x
-    x += joyInput.x;
-    z += joyInput.y;
-    const len = Math.hypot(x, z);
-    if (len > 1) { x /= len; z /= len; }
-    return { x, z, len: Math.min(1, len) };
-  }
-
-  /* ------------------------------------------------------------
-     8. RACCOLTA
-  ------------------------------------------------------------ */
-  function collect(g) {
-    scene.remove(g.mesh);
-    const idx = gems.indexOf(g);
-    if (idx >= 0) gems.splice(idx, 1);
-    const val = g.value;
-    state.energy += val;
-    state.totalEarned += val;
-    state.gemsCollected++;
-    burst(g.mesh.position, g.golden ? 0xffd54f : ZONES[state.zone].gem, g.golden ? 14 : 7);
-    floater(g.mesh.position, `+${fmt(val)}`, g.golden ? '#ffd54f' : '#9ff5b0');
-    if (g.golden) toast(choice(['💛 GEMMA D’ORO! Che colpo di fortuna!', '🌟 Oro puro! Cubetto non ci crede.', '🍀 La Fortuna ti sorride, eccome!']));
-    if (state.gemsCollected > 0 && state.gemsCollected % 50 === 0) {
-      toast(`🎉 ${state.gemsCollected} gemme raccolte! Cubetto è orgoglioso di te.`);
-    }
-    updateHUD();
-  }
-
-  /* ------------------------------------------------------------
-     9. UI — HUD, Pannello, Toast, Floater
-  ------------------------------------------------------------ */
-  function updateHUD() {
-    elEnergy.textContent = fmt(state.energy);
-    elPerSec.textContent = `+${fmt(incomePerSec())}/s`;
-    elGems.textContent = fmt(state.gemsCollected);
-    elStars.textContent = fmt(state.stars);
-    elPanelEnergy.textContent = fmt(state.energy);
-    updateResourceBar();
-    if (currentTab === 'craft') renderCraft();
-    if (currentTab === 'merchant') renderMerchant();
-  }
-
-  function updateResourceBar() {
-    elResBar.innerHTML = '';
+function updateResourceBar() {
+  /* Gli span sono creati una volta sola: si aggiorna solo il numero.
+     Prima innerHTML = '' li ricreava 7 volte per gemma raccolta. */
+  if (el.resBar.children.length !== Object.keys(RESOURCES).length) {
+    el.resBar.textContent = '';
     for (const [id, r] of Object.entries(RESOURCES)) {
       const span = document.createElement('span');
       span.className = 'res-item';
       span.title = r.name;
-      span.innerHTML = `${r.icon} <b>${fmt(state.resources[id] || 0)}</b>`;
-      elResBar.appendChild(span);
+      const ic = document.createElement('span');
+      ic.textContent = r.icon;
+      const b = document.createElement('b');
+      span.append(ic, b);
+      span.dataset.res = id;
+      el.resBar.appendChild(span);
     }
   }
-
-  function toast(msg) {
-    const div = document.createElement('div');
-    div.className = 'toast';
-    div.textContent = msg;
-    elToasts.appendChild(div);
-    while (elToasts.children.length > 4) elToasts.removeChild(elToasts.firstChild);
-    setTimeout(() => { if (div.parentNode) div.remove(); }, 3700);
+  let i = 0;
+  for (const id of Object.keys(RESOURCES)) {
+    const span = el.resBar.children[i++];
+    const want = fmt(state.resources[id] || 0);
+    if (span.lastChild.textContent !== want) span.lastChild.textContent = want;
   }
+}
 
-  function floater(worldPos, text, color) {
-    const v = worldPos.clone().project(camera);
-    if (v.z > 1) return;
-    const x = (v.x * 0.5 + 0.5) * window.innerWidth;
-    const y = (-v.y * 0.5 + 0.5) * window.innerHeight;
-    const el = document.createElement('div');
-    el.className = 'floater';
-    el.textContent = text;
-    el.style.left = x + 'px';
-    el.style.top = y + 'px';
-    el.style.color = color;
-    elFloaters.appendChild(el);
-    setTimeout(() => { if (el.parentNode) el.remove(); }, 950);
+function toast(msg) {
+  const div = document.createElement('div');
+  div.className = 'toast';
+  div.textContent = msg;
+  el.toasts.appendChild(div);
+  /* I toast fissi (riepilogo offline) non si contano nel limite e non
+     hanno timer: sono l'unica cosa che il giocatore deve poter leggere. */
+  while (el.toasts.querySelectorAll(':scope > .toast:not(.toast-sticky)').length > 3) {
+    const primo = el.toasts.querySelector('.toast:not(.toast-sticky)');
+    if (!primo) break;
+    primo.remove();
   }
+  setTimeout(() => { if (div.parentNode) div.remove(); }, 3700);
+}
 
-  /* --- Pannello --- */
-  let currentTab = 'shop';
-  function openPanel(tab) {
-    elOverlay.classList.remove('hidden');
-    setTab(tab || 'shop');
+const projScratch = new THREE.Vector3();
+function floater(worldPos, text, color) {
+  projScratch.copy(worldPos).project(camera);
+  if (projScratch.z > 1) return;
+  const x = (projScratch.x * 0.5 + 0.5) * window.innerWidth;
+  const y = (-projScratch.y * 0.5 + 0.5) * window.innerHeight;
+  const node = document.createElement('div');
+  node.className = 'floater';
+  node.textContent = text;
+  node.style.left = x + 'px';
+  node.style.top = y + 'px';
+  node.style.color = color;
+  el.floaters.appendChild(node);
+  setTimeout(() => { if (node.parentNode) node.remove(); }, 950);
+}
+
+/* ------------------------------------------------------------
+   12. PANNELLO
+   ------------------------------------------------------------ */
+let currentTab = 'shop';
+function openPanel(tab) {
+  el.overlay.classList.remove('hidden');
+  releaseAllInput();
+  setTab(tab || 'shop');
+  updateHUD(true);
+}
+function closePanel() { el.overlay.classList.add('hidden'); }
+function setTab(tab) {
+  currentTab = tab;
+  for (const t of document.querySelectorAll('#tabs .tab')) {
+    t.classList.toggle('active', t.dataset.tab === tab);
+    t.setAttribute('aria-selected', String(t.dataset.tab === tab));
   }
-  function closePanel() { elOverlay.classList.add('hidden'); }
-  function setTab(tab) {
-    currentTab = tab;
-    document.querySelectorAll('.tab').forEach((t) => t.classList.toggle('active', t.dataset.tab === tab));
-    elTabShop.classList.toggle('hidden', tab !== 'shop');
-    elTabZones.classList.toggle('hidden', tab !== 'zones');
-    elTabCraft.classList.toggle('hidden', tab !== 'craft');
-    elTabMerchant.classList.toggle('hidden', tab !== 'merchant');
-    elTabPrestige.classList.toggle('hidden', tab !== 'prestige');
-    elPanelTitle.textContent =
-      tab === 'shop' ? 'Negozio' : tab === 'zones' ? 'Zone' : tab === 'craft' ? 'Craft' :
-      tab === 'merchant' ? 'Mercante' : 'Rinascita';
-    if (tab === 'shop') renderShop();
-    if (tab === 'zones') renderZones();
-    if (tab === 'craft') renderCraft();
-    if (tab === 'merchant') renderMerchant();
-    if (tab === 'prestige') renderPrestige();
+  el.tabShop.classList.toggle('hidden', tab !== 'shop');
+  el.tabZones.classList.toggle('hidden', tab !== 'zones');
+  el.tabCraft.classList.toggle('hidden', tab !== 'craft');
+  el.tabMerchant.classList.toggle('hidden', tab !== 'merchant');
+  el.tabPrestige.classList.toggle('hidden', tab !== 'prestige');
+  el.panelTitle.textContent =
+    tab === 'shop' ? 'Negozio' : tab === 'zones' ? 'Zone' : tab === 'craft' ? 'Craft' :
+    tab === 'merchant' ? 'Mercante' : 'Rinascita';
+  updateHUD(true);
+}
+
+for (const t of document.querySelectorAll('#tabs .tab')) {
+  t.addEventListener('click', () => setTab(t.dataset.tab));
+}
+$('btn-shop').addEventListener('click', () => openPanel('shop'));
+$('btn-zones').addEventListener('click', () => openPanel('zones'));
+$('btn-close').addEventListener('click', closePanel);
+el.overlay.addEventListener('click', (e) => { if (e.target === el.overlay) closePanel(); });
+el.actionBtn.addEventListener('click', doAction);
+el.btnCraft.addEventListener('click', () => openPanel('craft'));
+el.btnMerchant.addEventListener('click', () => openPanel('merchant'));
+
+/* ---------- Negozio ---------- */
+function renderShop() {
+  el.tabShop.textContent = '';
+  for (const u of UPGRADES) {
+    const lvl = state.upgrades[u.id] || 0;
+    const val = upgradeValue(u.id, lvl);
+    const cost = upgradeCost(u.id, lvl);
+    const card = document.createElement('div');
+    card.className = 'up-card';
+    const info = document.createElement('div');
+    info.className = 'up-info';
+    const name = document.createElement('div');
+    name.className = 'up-name';
+    name.textContent = u.name;
+    const badge = document.createElement('span');
+    badge.className = 'up-lvl';
+    badge.textContent = `Lv ${lvl}`;
+    name.appendChild(badge);
+    const desc = document.createElement('div');
+    desc.className = 'up-desc';
+    desc.textContent = u.desc(val);
+    info.append(name, desc);
+
+    const icon = document.createElement('div');
+    icon.className = 'up-icon';
+    icon.textContent = u.icon;
+
+    const btn = document.createElement('button');
+    btn.className = 'up-buy';
+    btn.textContent = `💠 ${fmt(cost)}`;
+    btn.disabled = state.energy < cost;
+    btn.addEventListener('click', () => buyUpgrade(u.id, cost));
+
+    card.append(icon, info, btn);
+    el.tabShop.appendChild(card);
   }
-  function openShop() { openPanel('shop'); }
-  function openZones() { openPanel('zones'); }
+}
 
-  document.querySelectorAll('.tab').forEach((t) => t.addEventListener('click', () => setTab(t.dataset.tab)));
-  $('btn-shop').addEventListener('click', openShop);
-  $('btn-zones').addEventListener('click', openZones);
-  $('btn-close').addEventListener('click', closePanel);
-  elOverlay.addEventListener('click', (e) => { if (e.target === elOverlay) closePanel(); });
-  elActionBtn.addEventListener('click', doAction);
-  elBtnCraft.addEventListener('click', () => openPanel('craft'));
-  elBtnMerchant.addEventListener('click', () => openPanel('merchant'));
+function buyUpgrade(id, cost) {
+  if (state.energy < cost) { audio.error(); return; }
+  state.energy -= cost;
+  state.upgrades[id] = (state.upgrades[id] || 0) + 1;
+  if (id === 'drone') syncDrones();
+  audio.upgrade();
+  const u = UPGRADES.find((x) => x.id === id);
+  toast(choice([
+    `${u.icon} ${u.name} potenziato!`,
+    `📈 ${u.name} sale di livello!`,
+    `🔧 Cubetto ha migliorato ${u.name}.`,
+  ]));
+  save();
+  updateHUD(true);
+}
 
-  function renderShop() {
-    elTabShop.innerHTML = '';
-    for (const u of UPGRADES) {
-      const lvl = state.upgrades[u.id] || 0;
-      const val = upgradeValue(u.id, lvl);
-      const cost = upgradeCost(u.id, lvl);
-      const card = document.createElement('div');
-      card.className = 'up-card';
-      card.innerHTML = `
-        <div class="up-icon">${u.icon}</div>
-        <div class="up-info">
-          <div class="up-name">${u.name}<span class="up-lvl">Lv ${lvl}</span></div>
-          <div class="up-desc">${u.desc(val)}</div>
-        </div>
-      `;
-      const btn = document.createElement('button');
-      btn.className = 'up-buy';
-      btn.textContent = `💠 ${fmt(cost)}`;
-      btn.disabled = state.energy < cost;
-      btn.addEventListener('click', () => buyUpgrade(u.id, cost));
-      card.appendChild(btn);
-      elTabShop.appendChild(card);
-    }
-  }
-
-  function buyUpgrade(id, cost) {
-    if (state.energy < cost) return;
-    state.energy -= cost;
-    state.upgrades[id] = (state.upgrades[id] || 0) + 1;
-    if (id === 'drone') syncDrones();
-    save();
-    renderShop(); updateHUD();
-    const u = UPGRADES.find((x) => x.id === id);
-    toast(choice([
-      `${u.icon} ${u.name} potenziato!`,
-      `📈 ${u.name} sale di livello!`,
-      `🔧 Cubetto ha migliorato ${u.name}.`,
-    ]));
-  }
-
-  function renderZones() {
-    elTabZones.innerHTML = '';
-    for (let i = 0; i < ZONES.length; i++) {
-      const z = ZONES[i];
-      const locked = i > state.unlockedZone;
-      const isHere = i === state.zone;
-      const canUnlock = i === state.unlockedZone + 1;
-      const card = document.createElement('div');
-      card.className = 'zone-card' + (locked ? ' locked' : '');
-      card.innerHTML = `
-        <div class="zone-swatch" style="background:radial-gradient(circle at 40% 30%, #${z.gem.toString(16).padStart(6, '0')}, #${z.sky.toString(16).padStart(6, '0')})"></div>
-        <div class="zone-info">
-          <div class="zone-name">${i === 0 ? '🏡 ' : ''}${z.name}</div>
-          <div class="zone-tag">${z.tagline}</div>
-          <div class="zone-meta">Valore gemma: <b>${fmt(z.base)}</b> · ${locked ? '🔒 Bloccata' : isHere ? '📍 Sei qui' : 'Sbloccata'}</div>
-        </div>
-      `;
-      const btn = document.createElement('button');
-      btn.className = 'zone-btn' + (isHere ? ' here' : '');
-      if (isHere) {
-        btn.textContent = '📍';
-        btn.disabled = true;
-      } else if (locked) {
-        if (canUnlock) {
-          btn.textContent = `Sblocca 💠${fmt(z.unlock)}`;
-          btn.disabled = state.energy < z.unlock;
-          btn.addEventListener('click', () => unlockZone(i));
-        } else {
-          btn.textContent = '🔒';
-          btn.disabled = true;
-        }
-      } else {
-        btn.textContent = 'Viaggia ➜';
-        btn.addEventListener('click', () => { enterZone(i); closePanel(); });
-      }
-      card.appendChild(btn);
-      elTabZones.appendChild(card);
-    }
-  }
-
-  function unlockZone(i) {
+/* ---------- Zone ---------- */
+function renderZones() {
+  el.tabZones.textContent = '';
+  for (let i = 0; i < ZONES.length; i++) {
     const z = ZONES[i];
-    if (state.energy < z.unlock) return;
-    state.energy -= z.unlock;
-    state.unlockedZone = i;
-    save();
-    renderZones(); updateHUD();
-    toast(`🚪 Hai sbloccato ${z.name}! ${z.tagline}`);
-    enterZone(i);
-    closePanel();
-  }
+    const locked = i > state.unlockedZone;
+    const isHere = i === state.zone;
+    const canUnlock = i === state.unlockedZone + 1;
+    const card = document.createElement('div');
+    card.className = 'zone-card' + (locked ? ' locked' : '');
 
-  /* --- Craft --- */
-  function recipeUnlocked(r) {
-    if (r.zone && state.unlockedZone < r.zone) return false;
-    if (r.needTool && (state.tools[r.needTool] || 0) < r.needLvl) return false;
-    return true;
+    const swatch = document.createElement('div');
+    swatch.className = 'zone-swatch';
+    const hex = (n) => `#${n.toString(16).padStart(6, '0')}`;
+    swatch.style.background = `radial-gradient(circle at 40% 30%, ${hex(z.gem)}, ${hex(z.sky)})`;
+
+    const info = document.createElement('div');
+    info.className = 'zone-info';
+    const name = document.createElement('div');
+    name.className = 'zone-name';
+    name.textContent = `${i === 0 ? '🏡 ' : ''}${z.name}`;
+    const tag = document.createElement('div');
+    tag.className = 'zone-tag';
+    tag.textContent = z.tagline;
+    const meta = document.createElement('div');
+    meta.className = 'zone-meta';
+    meta.textContent = `Valore gemma: ${fmt(z.base)} · ${locked ? '🔒 Bloccata' : isHere ? '📍 Sei qui' : 'Sbloccata'}`;
+    info.append(name, tag, meta);
+
+    const btn = document.createElement('button');
+    btn.className = 'zone-btn' + (isHere ? ' here' : '');
+    if (isHere) {
+      btn.textContent = '📍';
+      btn.disabled = true;
+    } else if (locked) {
+      if (canUnlock) {
+        btn.textContent = `Sblocca 💠${fmt(z.unlock)}`;
+        btn.disabled = state.energy < z.unlock;
+        btn.addEventListener('click', () => unlockZone(i));
+      } else {
+        btn.textContent = '🔒';
+        btn.disabled = true;
+      }
+    } else {
+      btn.textContent = 'Viaggia ➜';
+      btn.addEventListener('click', () => { enterZone(i); closePanel(); });
+    }
+
+    card.append(swatch, info, btn);
+    el.tabZones.appendChild(card);
   }
-  function isRecipeDone(r) {
-    if (r.out.tool) return (state.tools[r.out.tool] || 0) >= r.out.lvl;
-    return false;
+}
+
+function unlockZone(i) {
+  const z = ZONES[i];
+  if (state.energy < z.unlock) { audio.error(); return; }
+  state.energy -= z.unlock;
+  state.unlockedZone = i;
+  audio.unlockZone();
+  toast(`🚪 Hai sbloccato ${z.name}! ${z.tagline}`);
+  burst(new THREE.Vector3(0, 2, 0), z.gem, 24);
+  save();
+  enterZone(i);
+  closePanel();
+}
+
+/* ---------- Craft ---------- */
+function renderCraft() {
+  el.tabCraft.textContent = '';
+  const inv = document.createElement('div');
+  inv.className = 'inv-grid';
+  for (const [id, r] of Object.entries(RESOURCES)) {
+    const item = document.createElement('div');
+    item.className = 'inv-item';
+    item.title = r.name;
+    const ic = document.createElement('span');
+    ic.className = 'ic';
+    ic.textContent = r.icon;
+    const n = document.createElement('span');
+    n.className = 'n';
+    n.textContent = fmt(state.resources[id] || 0);
+    item.append(ic, n);
+    inv.appendChild(item);
   }
-  function canCraft(r) {
-    if (!recipeUnlocked(r)) return false;
-    if (r.out.tool && (state.tools[r.out.tool] || 0) !== r.out.lvl - 1) return false;
+  el.tabCraft.appendChild(inv);
+
+  const toolsDiv = document.createElement('div');
+  toolsDiv.className = 'mer-quote';
+  toolsDiv.textContent = `Attrezzi attuali: ${toolLabel(state, 'axe')} · ${toolLabel(state, 'pick')}`;
+  el.tabCraft.appendChild(toolsDiv);
+
+  for (const r of RECIPES) {
+    const unlocked = recipeUnlocked(state, r);
+    const done = isRecipeDone(state, r);
+    const can = canCraft(state, r);
+    const card = document.createElement('div');
+    card.className = 'rec-card' + (unlocked ? '' : ' locked');
+
+    const cost = document.createElement('div');
+    cost.className = 'rec-cost';
     for (const [id, n] of Object.entries(r.cost)) {
       const have = id === 'energia' ? state.energy : (state.resources[id] || 0);
-      if (have < n) return false;
-    }
-    return true;
-  }
-  function craftRecipe(r) {
-    if (!canCraft(r)) return;
-    for (const [id, n] of Object.entries(r.cost)) {
-      if (id === 'energia') state.energy -= n;
-      else state.resources[id] = (state.resources[id] || 0) - n;
-    }
-    const p = player.position.clone().add(new THREE.Vector3(0, 1.6, 0));
-    if (r.out.tool) {
-      state.tools[r.out.tool] = r.out.lvl;
-      toast(`🛠️ ${r.name} creata! Ora raccogli molto di più!`);
-      floater(p, `${r.icon} Nuovo attrezzo!`, '#9ff5b0');
-    } else {
-      for (const [id, n] of Object.entries(r.out)) {
-        state.resources[id] = (state.resources[id] || 0) + n;
-        floater(p, `${RESOURCES[id].icon} +${n}`, RESOURCES[id].color);
-      }
-      toast(`🔨 Craft: ${r.name}`);
-    }
-    save(); renderCraft(); updateHUD();
-  }
-  function renderCraft() {
-    elTabCraft.innerHTML = '';
-    const inv = document.createElement('div');
-    inv.className = 'inv-grid';
-    inv.innerHTML = Object.entries(RESOURCES).map(([id, r]) =>
-      `<div class="inv-item" title="${r.name}"><span class="ic">${r.icon}</span><span class="n">${fmt(state.resources[id] || 0)}</span></div>`
-    ).join('');
-    elTabCraft.appendChild(inv);
-    const toolsDiv = document.createElement('div');
-    toolsDiv.className = 'mer-quote';
-    toolsDiv.textContent = `Attrezzi attuali: ${toolLabel('axe')} · ${toolLabel('pick')}`;
-    elTabCraft.appendChild(toolsDiv);
-
-    for (const r of RECIPES) {
-      const card = document.createElement('div');
-      const unlocked = recipeUnlocked(r);
-      const done = isRecipeDone(r);
-      const can = canCraft(r);
-      card.className = 'rec-card' + (unlocked ? '' : ' locked');
-      const costHtml = Object.entries(r.cost).map(([id, n]) => {
-        const icon = id === 'energia' ? '💠' : RESOURCES[id].icon;
-        const have = id === 'energia' ? state.energy : (state.resources[id] || 0);
-        return `<span class="${have >= n ? 'has' : 'no'}">${icon} ${fmt(n)}</span>`;
-      }).join('');
-      card.innerHTML = `
-        <div class="rec-icon">${r.icon}</div>
-        <div class="rec-info">
-          <div class="rec-name">${r.name}</div>
-          <div class="rec-desc">${r.desc}</div>
-          <div class="rec-cost">${costHtml}</div>
-        </div>`;
-      const btn = document.createElement('button');
-      btn.className = 'rec-btn' + (done ? ' done' : '');
-      if (done) btn.textContent = '✓ Fatto';
-      else if (!unlocked) btn.textContent = '🔒 Bloccata';
-      else { btn.textContent = '🔨 Craft'; btn.disabled = !can; }
-      btn.addEventListener('click', () => craftRecipe(r));
-      card.appendChild(btn);
-      elTabCraft.appendChild(card);
-    }
-  }
-
-  /* --- Mercante: compra / vendi / cambio --- */
-  function sellResource(id, q, price) {
-    if ((state.resources[id] || 0) < q) return;
-    state.resources[id] -= q;
-    const gold = q * price;
-    addResource('oro', gold);
-    toast(`💰 Venduti ${q} ${RESOURCES[id].icon} per ${fmt(gold)} Oro!`);
-    save(); renderMerchant(); updateHUD();
-  }
-  function buyResource(id, q, price) {
-    const total = price * q;
-    if ((state.resources.oro || 0) < total) return;
-    state.resources.oro -= total;
-    addResource(id, q);
-    toast(`🛍️ Comprati ${q} ${RESOURCES[id].icon}!`);
-    save(); renderMerchant(); updateHUD();
-  }
-  function exchangeEnergy(toBuy) {
-    if (toBuy) {
-      if ((state.resources.oro || 0) < EXCHANGE.buy) return;
-      state.resources.oro -= EXCHANGE.buy;
-      state.energy += 100;
-      toast('🔋 Comprati 100 💠 di Energia!');
-    } else {
-      if (state.energy < 100) return;
-      state.energy -= 100;
-      addResource('oro', EXCHANGE.sell);
-      toast('💱 Venduti 100 💠 per 25 💰!');
-    }
-    save(); renderMerchant(); updateHUD();
-  }
-  function renderMerchant() {
-    elTabMerchant.innerHTML = '';
-    const borsa = document.createElement('div');
-    borsa.className = 'mer-title';
-    borsa.textContent = `💰 Borsa di Sgobbo: ${fmt(state.resources.oro || 0)} Oro`;
-    elTabMerchant.appendChild(borsa);
-    const quote = document.createElement('p');
-    quote.className = 'mer-quote';
-    quote.textContent = 'Sgobbo: "Tutto si compra, tutto si vende... tranne i sogni. Quelli sono gratis."';
-    elTabMerchant.appendChild(quote);
-
-    const zoneBonus = 1 + state.zone * 0.15;
-
-    const tV = document.createElement('div');
-    tV.className = 'mer-title'; tV.textContent = '💱 Vendi al mercante';
-    elTabMerchant.appendChild(tV);
-    for (const [id, p] of Object.entries(PRICES)) {
-      const have = state.resources[id] || 0;
-      const price = Math.floor(p.sell * zoneBonus);
-      const row = document.createElement('div');
-      row.className = 'mer-row';
-      row.innerHTML = `
-        <div class="mer-res">${RESOURCES[id].icon} ${RESOURCES[id].name} <span class="n">(hai ${fmt(have)})</span></div>
-        <div class="mer-price">${price} 💰/u</div>`;
-      const btns = document.createElement('div'); btns.className = 'mer-btns';
-      for (const q of [1, 10]) {
-        const b = document.createElement('button');
-        b.className = 'mer-btn sell';
-        b.textContent = q === 1 ? 'Vendi 1' : `Vendi ${q}`;
-        b.disabled = have < q;
-        b.addEventListener('click', () => sellResource(id, q, price));
-        btns.appendChild(b);
-      }
-      row.appendChild(btns);
-      elTabMerchant.appendChild(row);
+      const s = document.createElement('span');
+      s.className = have >= n ? 'has' : 'no';
+      s.textContent = `${id === 'energia' ? '💠' : RESOURCES[id].icon} ${fmt(n)}`;
+      cost.appendChild(s);
     }
 
-    const tC = document.createElement('div');
-    tC.className = 'mer-title'; tC.textContent = '🛍️ Compra dal mercante';
-    elTabMerchant.appendChild(tC);
-    for (const [id, p] of Object.entries(PRICES)) {
-      const gold = state.resources.oro || 0;
-      const row = document.createElement('div');
-      row.className = 'mer-row';
-      row.innerHTML = `
-        <div class="mer-res">${RESOURCES[id].icon} ${RESOURCES[id].name}</div>
-        <div class="mer-price">${p.buy} 💰/u</div>`;
-      const btns = document.createElement('div'); btns.className = 'mer-btns';
-      for (const q of [1, 5]) {
-        const b = document.createElement('button');
-        b.className = 'mer-btn';
-        b.textContent = q === 1 ? 'Compra 1' : `Compra ${q}`;
-        b.disabled = gold < p.buy * q;
-        b.addEventListener('click', () => buyResource(id, q, p.buy));
-        btns.appendChild(b);
-      }
-      row.appendChild(btns);
-      elTabMerchant.appendChild(row);
-    }
+    const info = document.createElement('div');
+    info.className = 'rec-info';
+    const name = document.createElement('div');
+    name.className = 'rec-name';
+    name.textContent = r.name;
+    const desc = document.createElement('div');
+    desc.className = 'rec-desc';
+    desc.textContent = r.desc;
+    info.append(name, desc, cost);
 
-    const tE = document.createElement('div');
-    tE.className = 'mer-title'; tE.textContent = '🔁 Cambio Energia ↔ Oro';
-    elTabMerchant.appendChild(tE);
-    const rowE = document.createElement('div');
-    rowE.className = 'mer-row';
-    rowE.innerHTML = `<div class="mer-res">💠 Energia (hai ${fmt(state.energy)})</div>`;
-    const btnsE = document.createElement('div'); btnsE.className = 'mer-btns';
-    const b1 = document.createElement('button');
-    b1.className = 'mer-btn sell';
-    b1.textContent = 'Vendi 100 💠';
-    b1.disabled = state.energy < 100;
-    b1.addEventListener('click', () => exchangeEnergy(false));
-    const b2 = document.createElement('button');
-    b2.className = 'mer-btn';
-    b2.textContent = 'Compra 100 💠';
-    b2.disabled = (state.resources.oro || 0) < EXCHANGE.buy;
-    b2.addEventListener('click', () => exchangeEnergy(true));
-    btnsE.appendChild(b1); btnsE.appendChild(b2);
-    rowE.appendChild(btnsE);
-    elTabMerchant.appendChild(rowE);
-  }
+    const icon = document.createElement('div');
+    icon.className = 'rec-icon';
+    icon.textContent = r.icon;
 
-  function prestigeGain() {
-    if (state.totalEarned < 1e6) return 0;
-    return Math.floor(Math.pow(state.totalEarned / 1e6, 0.6));
-  }
-  let confirmPrestige = false;
-  let confirmTimer = null;
-
-  function renderPrestige() {
-    const gain = prestigeGain();
-    elTabPrestige.innerHTML = `
-      <div class="prestige-box">
-        <h3>🌌 Esplosione Cosmica</h3>
-        <p>Fai esplodere l'universo e ricomincia da zero in cambio di <b>Stelle</b>.
-        Ogni Stella dà un <b>+10%</b> permanente a tutti i guadagni.</p>
-        <div class="big-num">+${fmt(gain)} ⭐</div>
-        <p>Raccogli almeno <b>1.00M 💠</b> in totale per rinascere.<br>
-        Ora hai guadagnato <b>${fmt(state.totalEarned)} 💠</b> in questa vita.</p>
-      </div>
-      <p style="font-size:13px;color:var(--dim)">Hai già <b style="color:var(--gold)">${fmt(state.stars)} ⭐</b> (moltiplicatore ×${(1 + state.stars * 0.1).toFixed(2)}).</p>
-    `;
     const btn = document.createElement('button');
-    btn.className = 'big-btn2';
-    btn.textContent = confirmPrestige ? '⚠️ Tocca di nuovo per confermare!' : '💥 Fai esplodere tutto';
-    btn.disabled = gain <= 0;
-    btn.addEventListener('click', () => doPrestige(gain));
-    elTabPrestige.appendChild(btn);
+    btn.className = 'rec-btn' + (done ? ' done' : '');
+    if (done) btn.textContent = '✓ Fatto';
+    else if (!unlocked) btn.textContent = '🔒 Bloccata';
+    else { btn.textContent = '🔨 Craft'; btn.disabled = !can; }
+    if (can) btn.addEventListener('click', () => craft(r));
+
+    card.append(icon, info, btn);
+    el.tabCraft.appendChild(card);
   }
+}
 
-  function doPrestige(gain) {
-    if (gain <= 0) return;
-    if (!confirmPrestige) {
-      confirmPrestige = true;
-      renderPrestige();
-      clearTimeout(confirmTimer);
-      confirmTimer = setTimeout(() => { confirmPrestige = false; renderPrestige(); }, 3000);
-      return;
+const craftPos = new THREE.Vector3();
+function craft(r) {
+  if (!craftInto(state, r)) { audio.error(); return; }
+  audio.craft();
+  player.getWorldPosition(craftPos);
+  craftPos.y += 1.6;
+  if (r.out.tool) {
+    toast(`🛠️ ${r.name} creata! Ora raccogli molto di più!`);
+    floater(craftPos, `${r.icon} Nuovo attrezzo!`, '#9ff5b0');
+  } else {
+    for (const [id, n] of Object.entries(r.out)) {
+      floater(craftPos, `${RESOURCES[id].icon} +${n}`, RESOURCES[id].color);
     }
-    confirmPrestige = false;
-    state.stars += gain;
-    state.energy = 0;
-    state.totalEarned = 0;
-    state.gemsCollected = 0;
-    state.zone = 0;
-    state.unlockedZone = 0;
-    state.upgrades = {};
-    syncDrones();
-    save();
-    burst(player.position, 0xffd54f, 30);
-    toast(`💥 BOOM! Universo esploso! Hai guadagnato ${fmt(gain)} ⭐ (+${gain * 10}% guadagni!)`);
-    enterZone(0);
-    closePanel();
-    updateHUD();
+    toast(`🔨 Craft: ${r.name}`);
   }
+  burst(craftPos, 0x7fe3ff, 12);
+  markDirty('resources');
+  save();
+  updateHUD(true);
+}
 
-  /* ------------------------------------------------------------
-     10. LOOP PRINCIPALE
-  ------------------------------------------------------------ */
-  const clock = new THREE.Clock();
-  let spawnTimer = 0;
-  let incomeTick = 0;
-  let bobPhase = 0;
-  let time = 0;
+/* ---------- Mercante ---------- */
+function sellResource(id, q) {
+  if ((state.resources[id] || 0) < q) { audio.error(); return; }
+  const price = sellPrice(id, state.zone);
+  state.resources[id] -= q;
+  const gold = q * price;
+  addResource('oro', gold);
+  audio.coin();
+  toast(`💰 Venduti ${q} ${RESOURCES[id].icon} per ${fmt(gold)} Oro!`);
+  markDirty('resources');
+  save();
+  updateHUD(true);
+}
 
-  function animate() {
-    requestAnimationFrame(animate);
-    const dt = Math.min(clock.getDelta(), 0.05);
-    time += dt;
+function buyResource(id, q) {
+  const price = buyPrice(id, state.zone);
+  const total = price * q;
+  if ((state.resources.oro || 0) < total) { audio.error(); return; }
+  state.resources.oro -= total;
+  addResource(id, q);
+  audio.coin();
+  toast(`🛍️ Comprati ${q} ${RESOURCES[id].icon}!`);
+  markDirty('resources');
+  save();
+  updateHUD(true);
+}
 
-    // --- Movimento ---
-    const mv = movementVector();
-    const speed = 7 * upgradeValue('speed', state.upgrades.speed || 0);
-    const moving = mv.len > 0.05;
-    if (moving) {
-      player.position.x += mv.x * speed * dt;
-      player.position.z += mv.z * speed * dt;
-      const targetYaw = Math.atan2(-mv.x, -mv.z);
-      let dy = targetYaw - player.rotation.y;
-      while (dy > Math.PI) dy -= Math.PI * 2;
-      while (dy < -Math.PI) dy += Math.PI * 2;
-      player.rotation.y += dy * Math.min(1, dt * 10);
-      bobPhase += dt * (6 + speed * 0.5);
-    } else {
-      bobPhase = lerp(bobPhase, 0, dt * 4);
-    }
-
-    // limita al raggio della zona
-    const z = ZONES[state.zone];
-    const pr = Math.hypot(player.position.x, player.position.z);
-    if (pr > z.radius) {
-      player.position.x *= z.radius / pr;
-      player.position.z *= z.radius / pr;
-    }
-    const bob = moving ? Math.sin(bobPhase) * 0.08 : Math.sin(time * 2) * 0.02;
-    player.position.y = bob;
-    body.rotation.y = Math.sin(time * (moving ? 3 : 1)) * (moving ? 0.12 : 0.04);
-    body.rotation.x = Math.cos(bobPhase * 0.5) * (moving ? 0.06 : 0.02);
-
-    // antenna gemma pulsa
-    antennaGem.material.emissiveIntensity = 1.2 + Math.sin(time * 5) * 0.5;
-    antennaGem.rotation.y += dt * 3;
-
-    // --- Camera ---
-    const camTarget = new THREE.Vector3(
-      player.position.x,
-      player.position.y + 17,
-      player.position.z + 13
-    );
-    camera.position.lerp(camTarget, 1 - Math.exp(-dt * 5));
-    camera.lookAt(player.position.x, player.position.y + 1.2, player.position.z);
-
-    // --- Portale ---
-    portalGroup.rotation.y += dt * 0.8;
-    portalGroup.position.y = 1.1 + Math.sin(time * 1.4) * 0.1;
-
-    // --- Nodi raccoglibili: animazione, respawn, anelli ---
-    const nowMs = performance.now();
-    for (const n of nodes) {
-      if (n.depleted) {
-        n.scale = lerp(n.scale, 0, 1 - Math.exp(-dt * 10));
-        if (nowMs >= n.respawnUntil) {
-          n.depleted = false;
-          n.hits = n.maxHits;
-          n.mesh.visible = true;
-          n.scale = 0.01;
-        }
-      } else {
-        n.scale = lerp(n.scale, 1, 1 - Math.exp(-dt * 5));
-      }
-      if (n.depleted && n.scale < 0.06) n.mesh.visible = false;
-      n.mesh.scale.setScalar(Math.max(n.scale, 0.0001));
-      if (n.shake > 0.01) {
-        n.mesh.rotation.z = Math.sin(nowMs * 0.06) * 0.13 * n.shake;
-        n.mesh.rotation.x = Math.cos(nowMs * 0.05) * 0.09 * n.shake;
-        n.shake *= Math.exp(-dt * 6);
-      } else {
-        n.mesh.rotation.x = 0;
-        n.mesh.rotation.z = 0;
-      }
-      const nd = dist2D(n.mesh.position.x, n.mesh.position.z, player.position.x, player.position.z);
-      const near = !n.depleted && nd < 2.9;
-      const cooling = nowMs < n.cooldownUntil;
-      n.ring.material.opacity = n.depleted ? 0 : cooling ? 0.12 : near ? 0.75 : 0.32;
-    }
-
-    // --- Mercante: piccolo dondolio ---
-    if (merchantGroup) {
-      merchantGroup.position.y = Math.sin(time * 1.6) * 0.04;
-    }
-
-    // --- Azione contestuale (nodo / mercante / portale) ---
-    computeContext();
-    updateActionBtn();
-    if (context) {
-      const c = context;
-      if (c.kind === 'node') {
-        elHint.textContent = c.node.type === 'tree'
-          ? '🪓 Premi E (o tocca il pulsante) per tagliare'
-          : c.node.type === 'rock'
-            ? '⛏️ Premi E (o tocca il pulsante) per minare'
-            : '🔮 Premi E (o tocca il pulsante) per estrarre';
-      } else if (c.kind === 'merchant') {
-        elHint.textContent = '🤝 Premi E per parlare con Sgobbo il Mercante';
-      } else {
-        elHint.textContent = '🌀 Premi E per viaggiare tra le Zone';
-      }
-    } else {
-      elHint.textContent = 'WASD / frecce per muoverti · taglia alberi 🪵 e sassi 🪨';
-    }
-
-    // --- Gemme: animazione, magnete, raccolta ---
-    const pickupR = upgradeValue('radius', state.upgrades.radius || 0);
-    const magnetR = upgradeValue('magnet', state.upgrades.magnet || 0);
-    for (let i = gems.length - 1; i >= 0; i--) {
-      const g = gems[i];
-      const m = g.mesh;
-      m.rotation.y += dt * (g.golden ? 3 : 1.6);
-      m.position.y = g.baseY + Math.sin(time * 2 + g.phase) * 0.25;
-      const d = dist2D(m.position.x, m.position.z, player.position.x, player.position.z);
-      if (d < pickupR) {
-        collect(g);
-      } else if (d < magnetR) {
-        const pull = (1 - d / magnetR) * 10 * dt;
-        m.position.x += (player.position.x - m.position.x) * pull;
-        m.position.z += (player.position.z - m.position.z) * pull;
-        g.baseY = m.position.y;
-      }
-    }
-
-    // --- Spawn gemme ---
-    spawnTimer -= dt;
-    const maxGems = upgradeValue('spawn', state.upgrades.spawn || 0);
-    if (spawnTimer <= 0 && gems.length < maxGems) {
-      spawnGem();
-      spawnTimer = 0.9;
-    }
-
-    // --- Droni ---
-    for (const d of drones) {
-      d.userData.angle += dt * 0.9;
-      const a = d.userData.angle;
-      const r = 2.4;
-      d.position.set(
-        player.position.x + Math.cos(a) * r,
-        player.position.y + 1.3 + Math.sin(time * 2 + d.userData.phase) * 0.3,
-        player.position.z + Math.sin(a) * r
-      );
-      d.rotation.y += dt * 2;
-    }
-
-    // --- Reddito passivo ---
-    const ips = incomePerSec();
-    if (ips > 0) {
-      const gain = ips * dt;
-      state.energy += gain;
-      state.totalEarned += gain;
-      incomeTick += dt;
-      if (incomeTick >= 1 && drones.length) {
-        incomeTick = 0;
-        const d = choice(drones);
-        floater(d.position, `+${fmt(ips)}`, '#7fe3ff');
-      }
-    }
-
-    // --- Particelle ---
-    for (const p of particles) {
-      if (!p.active) continue;
-      p.life -= dt;
-      if (p.life <= 0) { p.active = false; p.mesh.visible = false; continue; }
-      p.vel.y -= 8 * dt;
-      p.mesh.position.addScaledVector(p.vel, dt);
-      const t = p.life / p.maxLife;
-      p.mat.opacity = t;
-      p.mesh.scale.setScalar(0.4 + t);
-    }
-
-    // --- Dimensione Folle: colori cangianti ---
-    if (state.zone === 6) {
-      const hue = (time * 40) % 360;
-      const c = new THREE.Color().setHSL(hue / 360, 1, 0.55);
-      gemMatFor(6).emissive.set(c);
-      gemMatFor(6).color.set(c.clone().multiplyScalar(0.4));
-      portalRing.material.color.set(c);
-      portalRing.material.emissive.set(c);
-      renderer.setClearColor(new THREE.Color().setHSL(hue / 360, 0.8, 0.12));
-    }
-
-    // --- Render ---
-    renderer.render(scene, camera);
-
-    // --- HUD leggero (solo energia cambia spesso) ---
-    elEnergy.textContent = fmt(state.energy);
+function exchangeEnergy(toBuy) {
+  if (toBuy) {
+    if ((state.resources.oro || 0) < EXCHANGE.buy) { audio.error(); return; }
+    state.resources.oro -= EXCHANGE.buy;
+    state.energy += EXCHANGE.energy;
+    audio.coin();
+    toast(`🔋 Comprati ${EXCHANGE.energy} 💠 di Energia!`);
+  } else {
+    if (state.energy < EXCHANGE.energy) { audio.error(); return; }
+    state.energy -= EXCHANGE.energy;
+    addResource('oro', EXCHANGE.sell);
+    audio.coin();
+    toast(`💱 Venduti ${EXCHANGE.energy} 💠 per ${EXCHANGE.sell} 💰!`);
   }
+  markDirty('resources');
+  save();
+  updateHUD(true);
+}
 
-  /* ------------------------------------------------------------
-     11. AVVIO
-  ------------------------------------------------------------ */
-  function applyOfflineProgress() {
-    const elapsed = (Date.now() - state.lastSave) / 1000;
-    if (elapsed > 30 && state.started) {
-      const capped = Math.min(elapsed, 8 * 3600);
-      const gain = incomePerSec() * capped * 0.5;
-      if (gain >= 1) {
-        state.energy += gain;
-        state.totalEarned += gain;
-      }
-      // anche i droni... anzi, gli attrezzi lavorano in autonomia
-      const hours = capped / 3600;
-      const woodGain = Math.floor(toolStats('axe').yield * 30 * 0.5 * hours);
-      const stoneGain = Math.floor(toolStats('pick').yield * 30 * 0.5 * hours);
-      if (woodGain > 0) addResource('legno', woodGain);
-      if (stoneGain > 0) addResource('pietra', stoneGain);
-      const parts = [];
-      if (gain >= 1) parts.push(`+${fmt(gain)} 💠`);
-      if (woodGain > 0) parts.push(`+${fmt(woodGain)} 🪵`);
-      if (stoneGain > 0) parts.push(`+${fmt(stoneGain)} 🪨`);
-      if (parts.length) toast(`😴 Ben tornato! Mentre dormivi: ${parts.join(' ')}`);
+function renderMerchant() {
+  const root = el.tabMerchant;
+  root.textContent = '';
+  const zone = state.zone;
+  const bonus = zonePriceBonus(zone);
+
+  const borsa = document.createElement('div');
+  borsa.className = 'mer-title';
+  borsa.textContent = `💰 Borsa di Sgobbo: ${fmt(state.resources.oro || 0)} Oro`;
+  root.appendChild(borsa);
+  const quote = document.createElement('p');
+  quote.className = 'mer-quote';
+  quote.textContent = 'Sgobbo: "Tutto si compra, tutto si vende... tranne i sogni. Quelli sono gratis."';
+  root.appendChild(quote);
+  const bonusNote = document.createElement('p');
+  bonusNote.className = 'mer-quote';
+  bonusNote.textContent = bonus > 1
+    ? `📍 Prezzi di zona: ×${bonus.toFixed(2)} su compra e vendita.`
+    : '📍 Prezzi base del Prato Felice.';
+  root.appendChild(bonusNote);
+
+  const mkRow = (resId, have, price, qty, action) => {
+    const row = document.createElement('div');
+    row.className = 'mer-row';
+    const res = document.createElement('div');
+    res.className = 'mer-res';
+    res.textContent = `${RESOURCES[resId].icon} ${RESOURCES[resId].name}`;
+    if (have !== null) {
+      const n = document.createElement('span');
+      n.className = 'n';
+      n.textContent = ` (hai ${fmt(have)})`;
+      res.appendChild(n);
     }
-  }
-
-  function boot() {
-    syncDrones();
-    enterZone(clamp(state.zone, 0, ZONES.length - 1));
-    applyOfflineProgress();
-    updateHUD();
-    animate();
-    setInterval(save, 3000);
-    window.addEventListener('beforeunload', save);
-    document.addEventListener('visibilitychange', () => { if (document.hidden) save(); });
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-  }
-
-  // Installazione PWA
-  let deferredPrompt = null;
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    $('btn-install').classList.remove('hidden');
-  });
-  $('btn-install').addEventListener('click', async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    deferredPrompt = null;
-    $('btn-install').classList.add('hidden');
-  });
-
-  // Service worker
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js').catch(() => {});
-    });
-  }
-
-  // Splash → gioco
-  $('btn-play').addEventListener('click', () => {
-    elSplash.classList.add('hidden');
-    if (!state.started) {
-      state.started = true;
-      toast('👋 Ciao! Io sono Cubetto. Raccogli le gemme e diventa ricchissimo!');
-      setTimeout(() => toast('🪓 Gli alberi 🪵 e i sassi 🪨 danno risorse: cerca il pulsante azione!'), 3000);
-      setTimeout(() => toast('🧰 Apri Craft per creare attrezzi · 🤝 il Mercante scambia con l’Oro 💰'), 6000);
+    const pr = document.createElement('div');
+    pr.className = 'mer-price';
+    pr.textContent = `${price} 💰/u`;
+    const btns = document.createElement('div');
+    btns.className = 'mer-btns';
+    for (const q of qty) {
+      const b = document.createElement('button');
+      b.className = action === 'sell' ? 'mer-btn sell' : 'mer-btn';
+      b.textContent = action === 'sell'
+        ? (q === 1 ? 'Vendi 1' : `Vendi ${q}`)
+        : (q === 1 ? 'Compra 1' : `Compra ${q}`);
+      b.disabled = action === 'sell'
+        ? (have || 0) < q
+        : (state.resources.oro || 0) < price * q;
+      b.addEventListener('click', () => action === 'sell' ? sellResource(resId, q) : buyResource(resId, q));
+      btns.appendChild(b);
     }
-    save();
-    boot();
-  });
-
-  // Se non è la prima volta, mostra subito il gioco ma con lo splash? No: lo splash si mostra sempre all'avvio.
-  // (boot() viene chiamato al click su GIOCA.)
-
-  // Handle di debug/test (opzionale, innocuo)
-  window.__gemmondo = {
-    get state() { return state; },
-    player,
-    nodes,
-    harvestNode,
-    craftRecipe,
-    sellResource,
-    buyResource,
-    computeContext,
-    doAction,
+    row.append(res, pr, btns);
+    return row;
   };
-})();
+
+  const tV = document.createElement('div');
+  tV.className = 'mer-title';
+  tV.textContent = '💱 Vendi al mercante';
+  root.appendChild(tV);
+  for (const id of Object.keys(PRICES)) {
+    root.appendChild(mkRow(id, state.resources[id] || 0, sellPrice(id, zone), [1, 10], 'sell'));
+  }
+
+  const tC = document.createElement('div');
+  tC.className = 'mer-title';
+  tC.textContent = '🛍️ Compra dal mercante';
+  root.appendChild(tC);
+  for (const id of Object.keys(PRICES)) {
+    root.appendChild(mkRow(id, null, buyPrice(id, zone), [1, 5], 'buy'));
+  }
+
+  const tE = document.createElement('div');
+  tE.className = 'mer-title';
+  tE.textContent = '🔁 Cambio Energia ↔ Oro';
+  root.appendChild(tE);
+  const rowE = document.createElement('div');
+  rowE.className = 'mer-row';
+  const resE = document.createElement('div');
+  resE.className = 'mer-res';
+  resE.textContent = `💠 Energia (hai ${fmt(state.energy)})`;
+  const prE = document.createElement('div');
+  prE.className = 'mer-price';
+  prE.textContent = `${EXCHANGE.sell} 💰 / ${EXCHANGE.energy} 💠`;
+  const btnsE = document.createElement('div');
+  btnsE.className = 'mer-btns';
+  const b1 = document.createElement('button');
+  b1.className = 'mer-btn sell';
+  b1.textContent = `Vendi ${EXCHANGE.energy} 💠`;
+  b1.disabled = state.energy < EXCHANGE.energy;
+  b1.addEventListener('click', () => exchangeEnergy(false));
+  const b2 = document.createElement('button');
+  b2.className = 'mer-btn';
+  b2.textContent = `Compra ${EXCHANGE.energy} 💠`;
+  b2.disabled = (state.resources.oro || 0) < EXCHANGE.buy;
+  b2.addEventListener('click', () => exchangeEnergy(true));
+  btnsE.append(b1, b2);
+  rowE.append(resE, prE, btnsE);
+  root.appendChild(rowE);
+}
+
+/* ---------- Rinascita ---------- */
+let confirmPrestige = false;
+let confirmTimer = null;
+
+function renderPrestige() {
+  const gain = prestigeGain(state);
+  el.tabPrestige.textContent = '';
+
+  const box = document.createElement('div');
+  box.className = 'prestige-box';
+  const h = document.createElement('h3');
+  h.textContent = '🌌 Esplosione Cosmica';
+  const p1 = document.createElement('p');
+  p1.textContent = 'Fai esplodere l\'universo e ricomincia da zero in cambio di Stelle. Ogni Stella dà un +10% permanente a tutti i guadagni.';
+  const num = document.createElement('div');
+  num.className = 'big-num';
+  num.textContent = `+${fmt(gain)} ⭐`;
+  const p2 = document.createElement('p');
+  p2.innerHTML = `Raccogli almeno <b>${fmt(PRESTIGE_MIN)} 💠</b> in totale per rinascere.<br>Ora hai guadagnato <b>${fmt(state.totalEarned)} 💠</b> in questa vita.`;
+  box.append(h, p1, num, p2);
+
+  const warn = document.createElement('p');
+  warn.className = 'mer-quote';
+  warn.textContent = '⚠️ Perderai anche attrezzi, risorse e Oro. Restano solo le Stelle.';
+  const stars = document.createElement('p');
+  stars.style.fontSize = '13px';
+  stars.style.color = 'var(--dim)';
+  stars.textContent = `Hai già ${fmt(state.stars)} ⭐ (moltiplicatore ×${starMult(state).toFixed(2)}).`;
+
+  const btn = document.createElement('button');
+  btn.className = 'big-btn2';
+  btn.textContent = confirmPrestige ? '⚠️ Tocca di nuovo per confermare!' : '💥 Fai esplodere tutto';
+  btn.disabled = gain <= 0;
+  btn.addEventListener('click', () => doPrestige(gain));
+
+  el.tabPrestige.append(box, warn, stars, btn);
+}
+
+function doPrestige(gain) {
+  if (gain <= 0) { audio.error(); return; }
+  if (!confirmPrestige) {
+    confirmPrestige = true;
+    renderPrestige();
+    clearTimeout(confirmTimer);
+    confirmTimer = setTimeout(() => { confirmPrestige = false; renderPrestige(); }, 3000);
+    return;
+  }
+  confirmPrestige = false;
+  clearTimeout(confirmTimer);
+  state = applyPrestige(state, gain);
+  syncDrones();
+  audio.prestige();
+  burst(player.position, 0xffd54f, 30);
+  toast(`💥 BOOM! Universo esploso! Hai guadagnato ${fmt(gain)} ⭐ (+${fmt(gain * STAR_BONUS * 100)}% guadagni!)`);
+  save(true);
+  enterZone(0);
+  closePanel();
+  updateHUD(true);
+}
+
+/* ------------------------------------------------------------
+   13. POST-PROCESSING
+   ------------------------------------------------------------ */
+let composer = null;
+let bloomPass = null;
+
+function buildComposer() {
+  const dpr = renderer.getPixelRatio();
+  composer = new EffectComposer(renderer);
+  composer.setPixelRatio(dpr);
+  composer.setSize(window.innerWidth, window.innerHeight);
+  composer.addPass(new RenderPass(scene, camera));
+  bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    0.5, 0.55, 0.75
+  );
+  composer.addPass(bloomPass);
+  composer.addPass(new OutputPass());
+}
+
+/* La quality scende da sola se il gioco gira sotto i 45 fps medi.
+   Ordine: prima sparisce il bloom, poi le ombre.
+   Misura il tempo REALE (performance.now), non il dt del loop: dt è
+   limitato a 0.05 per stabilizzare la fisica, quindi su un dispositivo
+   a 15 fps restituirebbe sempre 20 e il controllo non scenderebbe mai. */
+let perfMark = 0;
+let perfFrames = 0;
+function watchPerformance() {
+  const now = performance.now();
+  if (!perfMark) { perfMark = now; perfFrames = 0; return; }
+  perfFrames++;
+  const elapsed = (now - perfMark) / 1000;
+  if (elapsed < 2.5) return;
+  const fps = perfFrames / elapsed;
+  perfMark = now;
+  perfFrames = 0;
+  if (fps < 45 && quality.level > 0) {
+    quality.level--;
+    applyQuality();
+    toast(quality.level === 1
+      ? '📉 Grafica alleggerita per scorrere meglio: il bagliore è stato ridotto.'
+      : '📉 Grafica alleggerita ancora: le ombre sono state ridotte.');
+  }
+}
+
+function applyQuality() {
+  const on = quality.level >= 1;
+  if (on && !composer) buildComposer();
+  renderer.shadowMap.enabled = quality.level >= 2;
+  /* La shadow map va rilasciata quando le ombre si spengono, o il renderer
+     continua a tiene la texture allocata senza usarla. */
+  if (quality.level < 2 && sun.shadow.map) { sun.shadow.map.dispose(); sun.shadow.map = null; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, quality.level >= 1 ? 2 : 1.25));
+  if (composer) composer.setPixelRatio(renderer.getPixelRatio());
+  /* I materiali devono ricompilarsi dopo il cambio di stato delle ombre. */
+  scene.traverse((o) => { if (o.isMesh && o.material) o.material.needsUpdate = true; });
+}
+
+/** Forza un livello di qualità (0-2). Usato dal watchdog e dai test. */
+function setQuality(level) {
+  quality.level = clamp(Math.floor(level), 0, 2);
+  applyQuality();
+}
+
+function currentFps() {
+  return perfMark && perfFrames ? perfFrames / ((performance.now() - perfMark) / 1000) : 0;
+}
+
+
+
+/* ------------------------------------------------------------
+   14. CICLO PRINCIPALE
+   ------------------------------------------------------------ */
+const clock = new THREE.Clock();
+let spawnTimer = 0;
+let incomeTick = 0;
+let bobPhase = 0;
+let time = 0;
+let frames = 0;
+const camTarget = new THREE.Vector3();
+const zoneColorA = new THREE.Color();
+const zoneColorB = new THREE.Color();
+
+function animate() {
+  requestAnimationFrame(animate);
+  if (contextLost) { clock.getDelta(); return; }
+  const dt = Math.min(clock.getDelta(), 0.05);
+  frames++;
+  watchPerformance();
+  simulate(dt);
+  /* --- Render --- */
+  if (quality.level >= 1) composer.render();
+  else renderer.render(scene, camera);
+}
+
+/**
+ * Un passo di simulazione, separato dal rendering.
+ * Il rendering è la parte lenta e non deterministica (dipende dalla GPU):
+ * tenere la simulazione isolata permette ai test di avanare il mondo a
+ * passo fisso senza dipendere dai frame disegnati.
+ */
+function simulate(dt) {
+  time += dt;
+
+  /* --- Movimento --- */
+  const mv = movementVector();
+  const speed = 7 * upgradeValue('speed', state.upgrades.speed || 0);
+  const moving = mv.len > 0.05;
+  if (moving) {
+    player.position.x += mv.x * speed * dt;
+    player.position.z += mv.z * speed * dt;
+    const targetYaw = Math.atan2(-mv.x, -mv.z);
+    let dy = targetYaw - player.rotation.y;
+    while (dy > Math.PI) dy -= Math.PI * 2;
+    while (dy < -Math.PI) dy += Math.PI * 2;
+    player.rotation.y += dy * Math.min(1, dt * 10);
+    bobPhase += dt * (6 + speed * 0.5);
+  } else {
+    bobPhase = lerp(bobPhase, 0, dt * 4);
+  }
+
+  /* --- Limite di zona (raggio variabile) --- */
+  const zr = zoneAt(state.zone).radius;
+  const pr = Math.hypot(player.position.x, player.position.z);
+  if (pr > zr) {
+    player.position.x *= zr / pr;
+    player.position.z *= zr / pr;
+  }
+
+  const bob = moving ? Math.sin(bobPhase) * 0.08 : Math.sin(time * 2) * 0.02;
+  player.position.y = bob;
+  /* Il corpo non ruota più su se stesso: si muove la faccia, così
+     Cubetto guarda dove va invece di vibrare. */
+  body.rotation.y = Math.sin(time * (moving ? 3 : 1)) * (moving ? 0.12 : 0.04);
+  body.rotation.x = Math.cos(bobPhase * 0.5) * (moving ? 0.06 : 0.02);
+  face.position.y = 0.72;
+
+  /* Passeggino: gambe e braccia contrarie. */
+  const stride = moving ? Math.sin(bobPhase * 1.6) * 0.55 : 0;
+  legs[0].position.z = stride * 0.3;
+  legs[1].position.z = -stride * 0.3;
+  legs[0].rotation.x = stride;
+  legs[1].rotation.x = -stride;
+  arms[0].rotation.x = -stride * 0.8;
+  arms[1].rotation.x = stride * 0.8;
+
+  /* Sciarpa: ogni segmento segue il precedente con un ritardo. */
+  scarfPrev.x = 0;
+  scarfPrev.y = 1.32;
+  scarfPrev.z = 0.2;
+  for (const seg of scarf) {
+    seg.node.x = lerp(seg.node.x, scarfPrev.x, Math.min(1, dt * 14));
+    seg.node.y = lerp(seg.node.y, scarfPrev.y - 0.06, Math.min(1, dt * 14)) + Math.sin(time * 6 + seg.phase) * 0.02;
+    seg.node.z = lerp(seg.node.z, scarfPrev.z + (moving ? 0.35 : 0.12), Math.min(1, dt * 12));
+    seg.mesh.position.set(seg.node.x, seg.node.y, seg.node.z);
+    scarfPrev = seg.node;
+  }
+
+  /* La faccia guarda nella direzione di marcia, in spazio locale del player. */
+  face.position.y = 0.72;
+  face.position.z = 0;
+
+  antennaGem.material.emissiveIntensity = 1.2 + Math.sin(time * 5) * 0.5;
+  antennaGem.rotation.y += dt * 3;
+
+  /* --- Camera (senza allocazioni per frame) ---
+     Guarda un punto SOPRA e un po' davanti al giocatore: guardando il
+     centro esatto l'orizzonte restava fuori dall'inquadratura e il cielo
+     — l'unica cosa che distingue una zona dall'altra — non si vedeva. */
+  camTarget.set(player.position.x, player.position.y + 11, player.position.z + 17);
+  camera.position.lerp(camTarget, 1 - Math.exp(-dt * 5));
+  camera.lookAt(player.position.x, player.position.y + 2.4, player.position.z - 1);
+
+  /* La shadow camera segue il giocatore: finestra stretta = ombre nitide
+     anche nelle zone da raggio 68, che prima si tagliavano al bordo. */
+  sun.position.set(player.position.x + 18, 32, player.position.z + 12);
+  sun.target.position.set(player.position.x, 0, player.position.z);
+  sun.target.updateMatrixWorld();
+
+  /* --- Portale --- */
+  portalGroup.rotation.y += dt * 0.8;
+  portalGroup.position.y = 1.1 + Math.sin(time * 1.4) * 0.1;
+
+  /* --- Nodi: animazione, respawn, anelli --- */
+  const nowMs = performance.now();
+  for (const n of nodes) {
+    if (n.depleted) {
+      n.scale = lerp(n.scale, 0, 1 - Math.exp(-dt * 10));
+      if (nowMs >= n.respawnUntil) {
+        n.depleted = false;
+        n.hits = n.maxHits;
+        n.mesh.visible = true;
+        n.scale = 0.01;
+      }
+    } else {
+      n.scale = lerp(n.scale, 1, 1 - Math.exp(-dt * 5));
+    }
+    if (n.depleted && n.scale < 0.06) n.mesh.visible = false;
+    n.mesh.scale.setScalar(Math.max(n.scale, 0.0001));
+    if (n.shake > 0.01) {
+      n.mesh.rotation.z = Math.sin(nowMs * 0.06) * 0.13 * n.shake;
+      n.mesh.rotation.x = Math.cos(nowMs * 0.05) * 0.09 * n.shake;
+      n.shake *= Math.exp(-dt * 6);
+    } else {
+      n.mesh.rotation.x = 0;
+      n.mesh.rotation.z = 0;
+    }
+    /* La distanza è calcolata una volta sola: computeContext() la
+       ricalcolava subito dopo su tutti i nodi. */
+    const near = !n.depleted && nowMs >= n.cooldownUntil &&
+      dist2D(n.mesh.position.x, n.mesh.position.z, player.position.x, player.position.z) < NODE_REACH;
+    n.ring.material.opacity = n.depleted ? 0 : near ? 0.8 : 0.32;
+  }
+
+  if (merchantGroup) merchantGroup.position.y = Math.sin(time * 1.6) * 0.04;
+
+  /* --- Contesto e pulsante azione --- */
+  computeContext();
+  updateActionBtn();
+  updateHint();
+
+  /* --- Gemme: rotazione, magnete, raccolta --- */
+  const pickupR = upgradeValue('radius', state.upgrades.radius || 0);
+  const magnetR = upgradeValue('magnet', state.upgrades.magnet || 0);
+  for (let i = gems.length - 1; i >= 0; i--) {
+    const g = gems[i];
+    const m = g.mesh;
+    m.rotation.y += dt * (g.golden ? 3 : 1.6);
+    m.position.y = g.baseY + Math.sin(time * 2 + g.phase) * 0.25;
+    const d = dist2D(m.position.x, m.position.z, player.position.x, player.position.z);
+    if (d < pickupR) {
+      collect(g);
+    } else if (d < magnetR) {
+      const pull = (1 - d / magnetR) * 10 * dt;
+      m.position.x += (player.position.x - m.position.x) * pull;
+      m.position.z += (player.position.z - m.position.z) * pull;
+      g.baseY = m.position.y;
+    }
+  }
+
+  /* --- Spawn gemme --- */
+  spawnTimer -= dt;
+  const maxGems = upgradeValue('spawn', state.upgrades.spawn || 0);
+  if (spawnTimer <= 0 && gems.length < maxGems) {
+    spawnGem();
+    spawnTimer = 0.9;
+  }
+
+  /* --- Acqua e lava: le animano i loro shader --- */
+  if (water.visible) waterUniforms.time.value = time;
+  if (lava.visible) lavaUniforms.time.value = time;
+
+  /* --- Polvere ambientale: deriva lenta, si ricicla sul giocatore --- */
+  if (motes.visible) {
+    const p = moteGeo.attributes.position;
+    for (let i = 0; i < MOTES_COUNT; i++) {
+      let y = p.array[i * 3 + 1] - dt * (state.zone === 3 ? -1.2 : 0.5);
+      let x = p.array[i * 3];
+      if (y < 0.4) y = 16;
+      if (y > 17) y = 0.4;
+      const dx = x - player.position.x;
+      if (dx > 40) x -= 80; else if (dx < -40) x += 80;
+      p.array[i * 3] = x;
+      p.array[i * 3 + 1] = y;
+    }
+    p.needsUpdate = true;
+  }
+
+  /* --- Droni --- */
+  for (const d of drones) {
+    d.userData.angle += dt * 0.9;
+    const a = d.userData.angle;
+    const r = 2.4;
+    d.position.set(
+      player.position.x + Math.cos(a) * r,
+      player.position.y + 1.3 + Math.sin(time * 2 + d.userData.phase) * 0.3,
+      player.position.z + Math.sin(a) * r
+    );
+    d.rotation.y += dt * 2;
+  }
+
+  /* --- Reddito passivo --- */
+  const ips = incomePerSec(state);
+  if (ips > 0) {
+    const gain = ips * dt;
+    state.energy += gain;
+    state.totalEarned += gain;
+    incomeTick += dt;
+    if (incomeTick >= 1 && drones.length) {
+      incomeTick = 0;
+      floater(drones[0].position, `+${fmt(ips)}`, '#7fe3ff');
+    }
+  }
+
+  /* --- Combo --- */
+  comboTimer += dt;
+  if (comboTimer > 1.2 && combo > 0) { combo = 0; comboTimer = 0; }
+
+  /* --- Particelle --- */
+  for (const p of particles) {
+    if (!p.active) continue;
+    p.life -= dt;
+    if (p.life <= 0) { p.active = false; p.mesh.visible = false; continue; }
+    p.vel.y -= 8 * dt;
+    p.mesh.position.addScaledVector(p.vel, dt);
+    const t = p.life / p.maxLife;
+    p.mat.opacity = t;
+    p.mesh.scale.setScalar(0.4 + t);
+  }
+
+  /* --- Dimensione Folle: il colore cangia ovunque, non solo sulle gemme.
+     Prima toccava solo gemme e portale: cielo, nebbia, terreno e luci
+     restavano fermi e la zona sembrava quella di prima. --- */
+  if (state.zone === 6) {
+    const hue = (time * 40) % 360;
+    zoneColorA.setHSL(hue / 360, 1, 0.55);
+    zoneColorB.setHSL(hue / 360, 0.8, 0.12);
+    gemMatFor(6).emissive.copy(zoneColorA);
+    gemMatFor(6).color.copy(zoneColorA).multiplyScalar(0.4);
+    portalRing.material.color.copy(zoneColorA);
+    portalRing.material.emissive.copy(zoneColorA);
+    scene.fog.color.copy(zoneColorB);
+    skyUniforms.top.value.copy(zoneColorA).multiplyScalar(0.5);
+    skyUniforms.bottom.value.copy(zoneColorB);
+    groundMat.color.copy(zoneColorB).multiplyScalar(2.2);
+    zoneLight.color.copy(zoneColorA);
+    moteMat.color.copy(zoneColorA);
+  }
+
+  /* --- HUD: 10 Hz, non a ogni frame --- */
+  hudTimer -= dt;
+  if (hudTimer <= 0) {
+    hudTimer = 0.1;
+    updateHUD(isPanelOpen() && (dirty.has('energy') || dirty.has('resources')));
+    dirty.clear();
+  }
+
+}
+
+/* L'istruzione contestuale si aggiorna solo quando cambia davvero:
+   prima scriveva textContent ogni frame, e su mobile l'elemento è
+   display:none quindi era sprecato. */
+let lastHint = '';
+function updateHint() {
+  let h;
+  if (!context) {
+    h = matchMedia('(pointer: coarse)').matches
+      ? '🕹️ Usa il joystick · tocca 🪓 per raccogliere'
+      : 'WASD / frecce per muoverti · taglia alberi 🪵 e sassi 🪨';
+  } else if (context.kind === 'node') {
+    h = context.node.type === 'tree' ? '🪓 Premi E per tagliare'
+      : context.node.type === 'rock' ? '⛏️ Premi E per minare'
+      : '🔮 Premi E per estrarre';
+  } else if (context.kind === 'merchant') {
+    h = '🤝 Premi E per parlare con Sgobbo il Mercante';
+  } else {
+    h = '🌀 Premi E per viaggiare tra le Zone';
+  }
+  if (h !== lastHint) { el.hint.textContent = h; lastHint = h; }
+}
+
+/* ------------------------------------------------------------
+   15. AVVIO
+   ------------------------------------------------------------ */
+function applyOfflineProgress() {
+  const g = offlineGain(state);
+  if (g.seconds <= 0) return;
+  state.energy += g.energy;
+  state.totalEarned += g.energy;
+  if (g.wood) addResource('legno', g.wood);
+  if (g.stone) addResource('pietra', g.stone);
+
+  /* Il riepilogo sta in un riquadro dedicato e non è un toast: i toast
+     si accavallano (benvenuto, nome della zona, avvisi di quality) e
+     questo sparisce prima che il giocatore lo legga. */
+  const ore = Math.max(1, Math.round(g.seconds / 3600));
+  const parti = [];
+  if (g.energy >= 1) parti.push(`<b>+${fmt(g.energy)} 💠</b>`);
+  if (g.wood) parti.push(`<b>+${fmt(g.wood)} 🪵</b>`);
+  if (g.stone) parti.push(`<b>+${fmt(g.stone)} 🪨</b>`);
+  const box = document.createElement('div');
+  box.className = 'toast toast-sticky';
+  box.innerHTML = `😴 <b>Ben tornato!</b> Mentre eri via ${g.seconds >= 3600 ? `~${ore} ore` : `${Math.round(g.seconds / 60)} minuti`}: ${parti.join(' ')}`;
+  el.toasts.appendChild(box);
+  /* resta finché non lo chiude il giocatore: è l'unica prova che il gioco
+     ha lavorato mentre lui non c'era */
+  const chiudi = document.createElement('button');
+  chiudi.className = 'toast-x';
+  chiudi.textContent = '✕';
+  chiudi.setAttribute('aria-label', 'Chiudi il riepilogo');
+  chiudi.addEventListener('click', () => box.remove());
+  box.appendChild(chiudi);
+  while (el.toasts.children.length > 3) el.toasts.firstChild.remove();
+}
+
+function boot() {
+  /* Guard: senza questo una seconda chiamata registrerebbe listener
+     duplicati e avvierebbe un secondo requestAnimationFrame, con doppio
+     reddito e doppio costo. */
+  if (booted) return;
+  booted = true;
+
+/* applyOfflineProgress per PRIMO: legge il lastSave che viene dal disco,
+     quindi non deve precederla nessun save() — il click su Gioca ne
+     faceva uno e azzerava la finestra temporale, e la ricompensa offline
+     non è mai arrivata a nessuno. Va anche prima di enterZone, così
+     l'HUD mostra subito il riepilogo del ritorno. */
+  applyOfflineProgress();
+
+  syncDrones();
+  /* applyQuality() prima di enterZone(): costruisce il composer, così la
+     prima zona trova bloomPass già pronto e ne eredita l'intensità. */
+  applyQuality();
+  enterZone(state.zone);
+  updateHUD(true);
+
+  animate();
+
+  window.addEventListener('beforeunload', () => doSave());
+  document.addEventListener('visibilitychange', () => { if (document.hidden) doSave(); });
+  window.addEventListener('resize', onResize);
+  window.addEventListener('orientationchange', onResize);
+}
+
+function onResize() {
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, quality.level >= 1 ? 2 : 1.25));
+  renderer.setSize(w, h);
+  if (composer) {
+    composer.setPixelRatio(renderer.getPixelRatio());
+    composer.setSize(w, h);
+    if (bloomPass) bloomPass.resolution.set(w, h);
+  }
+}
+
+/* Contesto WebGL perso: senza questo un reset GPU (tipico su mobile
+   dopo un po' in scheda) lasciava un canvas morto senza recovery. */
+let contextLost = false;
+renderer.domElement.addEventListener('webglcontextlost', (e) => {
+  e.preventDefault();
+  contextLost = true;
+  toast('⚠️ Scheda graica persa. Attendo il recupero...');
+});
+renderer.domElement.addEventListener('webglcontextrestored', () => {
+  contextLost = false;
+  applyQuality();
+  toast('✅ Scheda graica recuperata. Andiamo!');
+});
+
+/* Audio: il contesto nasce solo qui, dentro un gesto utente. */
+function syncMuteBtn() {
+  el.btnMute.textContent = state.muted ? '🔇' : '🔊';
+  el.btnMute.classList.remove('hidden');
+  el.btnMute.setAttribute('aria-pressed', String(state.muted));
+}
+el.btnMute.addEventListener('click', () => {
+  audio.unlock();
+  state.muted = !state.muted;
+  audio.setMuted(state.muted);
+  syncMuteBtn();
+  save();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'KeyX') { state.muted = !state.muted; audio.setMuted(state.muted); syncMuteBtn(); save(); }
+});
+
+/* Installazione PWA */
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  $('btn-install').classList.remove('hidden');
+});
+$('btn-install').addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  $('btn-install').classList.add('hidden');
+});
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+
+/* Splash → gioco */
+audio.setMuted(state.muted);
+el.btnPlay.addEventListener('click', () => {
+  /* Primo gesto: qui si sblocca l'audio. */
+  audio.unlock();
+  audio.setAmbient(state.zone);
+  el.splash.classList.add('hidden');
+  if (!state.started) {
+    state.started = true;
+    toast('👋 Ciao! Io sono Cubetto. Raccogli le gemme e diventa ricchissimo!');
+    setTimeout(() => toast('🪓 Gli alberi 🪵 e i sassi 🪨 danno risorse: cerca il pulsante azione!'), 3000);
+    setTimeout(() => toast('🧰 Apri Craft per creare attrezzi · 🤝 il Mercante scambia con l’Oro 💰'), 6000);
+  }
+  /* boot() prima di save(): il save scrive lastSave, e se avvenisse prima
+     la ricompensa offline leggerebbe una finestra di zero secondi. */
+  boot();
+  save(true);
+  syncMuteBtn();
+});
+
+syncMuteBtn();
+
+/* ── Handle di test ──────────────────────────────────────
+   Non serve al gioco: serve ai test, che altrimenti non
+   avrebbero modo di pilotare lo stato. È un gioco single-player
+   offline, non c'è nulla da proteggere, ma teniamolo in fondo
+   e dichiarato. */
+window.__gemmondo = {
+  get state() { return state; },
+  get booted() { return booted; },
+  get frames() { return frames; },
+  get quality() { return quality; },
+  get gems() { return gems.length; },
+  get nodes() { return nodes.length; },
+  get drones() { return drones.length; },
+  get combo() { return combo; },
+  context: () => context,
+  upgradeIds: () => UPGRADES.map((u) => u.id),
+  setQuality,
+  fps: currentFps,
+  renderOnce: () => { if (quality.level >= 1) composer.render(); else renderer.render(scene, camera); },
+  gemsList: () => gems,
+  nodesList: () => nodes,
+  hasComposer: () => !!composer,
+  scene,
+  sky: skyDome,
+  player, camera, renderer,
+  harvestNode, craft, sellResource, buyResource, exchangeEnergy,
+  enterZone, doPrestige, computeContext, doAction,
+  save: () => doSave(),
+  /* Sospende l'autosave: i test che sabotano il salvataggio devono
+     poterlo fare senza che il beforeunload lo riscriva. */
+  pauseAutosave: (v = true) => { autosavePaused = !!v; },
+  /* Avanza la simulazione senza disegnare: i test non possono dipendere
+     dalla GPU (su swiftshader il rendering è lentissimo e i frame pochi). */
+  step: (n = 1, dt = 1 / 60) => { for (let i = 0; i < n; i++) simulate(dt); },
+  addEnergy: (n) => { state.energy += n; markDirty('energy'); },
+  setZone: (i) => { state.unlockedZone = Math.max(state.unlockedZone, i); enterZone(i); },
+};

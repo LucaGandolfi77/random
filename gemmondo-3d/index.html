@@ -15,6 +15,22 @@
   <link rel="apple-touch-icon" href="icon-180.png" />
   <title>GEMMONDO — Raccolta Incrementale 3D</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!--
+    Three.js r185 è distribuito solo come moduli ES (dal r171 il build è
+    spaccato in three.module.min.js + three.core.min.js, e gli addon
+    post-processing importano lo specifier nudo 'three'). L'import map
+    serve proprio a risolvere 'three' e 'three/addons/' senza bundler:
+    i file restano statici, il gioco resta offline e senza build step.
+  -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three/three.module.min.js",
+      "three/addons/": "./vendor/three/addons/"
+    }
+  }
+  </script>
 </head>
 <body>
   <!-- Canvas Three.js viene appeso qui -->
@@ -34,9 +50,11 @@
   <div id="hud-top-right">
     <button class="hud-btn glass" id="btn-shop" aria-label="Negozio">🛒<span class="btn-label">Negozio</span></button>
     <button class="hud-btn glass" id="btn-zones" aria-label="Zone">🗺️<span class="btn-label">Zone</span></button>
+    <button class="hud-btn glass hidden" id="btn-mute" aria-label="Silenzia" aria-pressed="false">🔊</button>
     <button class="hud-btn glass hidden" id="btn-install" aria-label="Installa">📲<span class="btn-label">Installa</span></button>
   </div>
 
+  <!-- Istruzione contestuale: il posto unico in cui il gioco spiega il prossimo gesto -->
   <div id="hud-bottom">
     <span class="hint" id="hint">WASD / frecce per muoverti · E apre le Zone</span>
   </div>
@@ -44,7 +62,7 @@
   <!-- Pulsante azione contestuale (taglia / mina / parla) -->
   <button id="action-btn" class="glass hidden" aria-label="Azione">🪓</button>
 
-  <!-- Tasti a schermo per touch (iPhone) -->
+  <!-- Tasti a schermo per touch -->
   <div id="mobile-btns">
     <button class="round-btn glass" id="btn-craft" aria-label="Craft">🧰</button>
     <button class="round-btn glass" id="btn-merchant" aria-label="Mercante">💰</button>
@@ -104,7 +122,16 @@
     </div>
   </div>
 
-  <script src="three.min.js"></script>
-  <script src="game.js"></script>
+  <!-- Errore di avvio: senza WebGL o senza three.js il gioco non parte mai -->
+  <div id="fatal" class="hidden">
+    <div class="fatal-inner">
+      <div class="logo-big">💠</div>
+      <h2 class="title" style="font-size:clamp(28px,6vw,40px)">GEMMONDO</h2>
+      <p id="fatal-msg" class="desc"></p>
+      <p class="foot">Serve un browser con WebGL. Prova con Chrome, Safari o Firefox aggiornati.</p>
+    </div>
+  </div>
+
+  <script type="module" src="game.js"></script>
 </body>
 </html>

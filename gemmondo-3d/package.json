@@ -1,0 +1,21 @@
+{
+  "name": "gemmondo-3d",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GEMMONDO — raccolta incrementale 3D: muovi Cubetto in 7 dimensioni, raccogli gemme, taglia alberi, spacca sassi, crafta e fai esplodere l'universo. PWA offline, zero dipendenze runtime.",
+  "keywords": ["pwa", "three.js", "incremental", "idle", "webgl", "offline", "italian"],
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node serve.js",
+    "dev": "HOST=0.0.0.0 node serve.js",
+    "test": "node --test \"test/**/*.test.mjs\"",
+    "check": "node tools/check.mjs",
+    "icons": "node gen-icons.cjs"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

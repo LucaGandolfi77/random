@@ -31,7 +31,7 @@
 | **DevOps** | Docker, Docker Compose, CloudFormation, Ansible, Packer, GitHub Actions |
 | **ML/Data** | NumPy, SciPy, scikit-learn, ONNX Runtime, PyTorch, Qiskit, Pandas, Matplotlib |
 | **Testing** | pytest, Vitest, Puppeteer, Playwright, VectorCast-style (vertest) |
-| **Other** | WebRTC, Socket.IO, Web Speech API, Three.js, Canvas 2D, Ren'Py |
+| **Other** | WebRTC, Socket.IO, Web Speech API, Three.js (r149→r185), Canvas 2D, Ren'Py |
 
 ---
 
@@ -66,6 +66,7 @@
 
 | Project | Description | Languages | Key Features |
 |---------|-------------|------------|--------------|
+| **gemmondo-3d** | Cozy incremental 3D collector (Cubetto the cube) | JavaScript, Three.js r185 | 7 biomes with distinct identity, harvest+craft+merchant loop, prestige, UnrealBloom + ACES, procedural WebAudio SFX, adaptive quality, offline PWA, node --test gate, zero runtime deps |
 | **due-lumi** | Pixel art retro adventure RPG | JavaScript | Procedural sprites/music, 4 endings, turn-based combat, zero external assets |
 | **la-pittura-mai-finita** | Turn-based JRPG where you paint the enemy with your finger | JavaScript | Canvas 2D, every brushstroke burns a memory, timed parry recovers one, 6 acts, 28 memories, generated epitaph, PWA iPhone-first, zero deps |
 | **echoes-of-the-last-dawn** | 3D JRPG browser game | JavaScript | Three.js low-poly, timed parry, 5 zones, 5 bosses, philosophical story |

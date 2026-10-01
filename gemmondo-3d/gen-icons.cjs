@@ -116,7 +116,7 @@ function gemColor(px, py) {
   return best;
 }
 
-function sample(px, py) {
+function sample(px, py, maskable) {
   // px,py in [0,1]^2, y verso il basso
   const x = px * 2 - 1;
   const y = -(py * 2 - 1); // ora y verso l'alto
@@ -129,24 +129,39 @@ function sample(px, py) {
     smoothstep(0.45, 1, t)
   );
 
-  // alpha dal rounded-rect (icona standard)
-  const alphaRect = 1 - smoothstep(-0.012, 0.012, roundRectSDF(x, y, 1.0, 1.0, 0.24));
+  /* Alpha.
+     Standard: rounded-rect, come chiede Apple/Google "any".
+     Maskable: quadrato pieno. Il sistema applica la sua maschera
+     (circolo, scudo, quadrato con bordi arrotondati) e la "safe zone"
+     è il cerchio centrale al 80%: tutto ciò che è oltre viene
+     ritagliato via. Con i bordi arrotondati — com'era prima, perché il
+     parametro `rounded` arrivava qui e non veniva usato — l'icona
+     maskable era identica byte per byte a quella standard e il logo
+     finiva tagliato sui bordi. */
+  const alphaRect = maskable
+    ? 1
+    : 1 - smoothstep(-0.012, 0.012, roundRectSDF(x, y, 1.0, 1.0, 0.24));
   if (alphaRect <= 0) return [bg[0], bg[1], bg[2], 0];
 
+  /* Nella versione maskable la gemma rientra nella safe zone centrale,
+     così non la taglia nessuna delle maschere del sistema. */
+  const inset = maskable ? 0.72 : 1.0;
+
   // Gemma
-  const dCrown = polygonSDF(x, y, [T, L, R]);
-  const dPav = polygonSDF(x, y, [L, R, B]);
+  const gx = x / inset, gy = y / inset;
+  const dCrown = polygonSDF(gx, gy, [T, L, R]);
+  const dPav = polygonSDF(gx, gy, [L, R, B]);
   const dGem = Math.min(dCrown, dPav);
   const gemEdge = smoothstep(-0.012, 0.012, dGem); // 0 dentro, 1 fuori
 
   let r = bg[0], g = bg[1], b = bg[2];
   if (gemEdge < 1) {
-    const col = gemColor(x, y) || [41, 183, 245];
+    const col = gemColor(gx, gy) || [41, 183, 245];
     const colOut = mixRGB(bg, col, 1 - gemEdge);
     r = colOut[0]; g = colOut[1]; b = colOut[2];
 
     // highlight speculare
-    const hd = Math.hypot(x - (-0.09), y - 0.24) - 0.05;
+    const hd = Math.hypot(gx - (-0.09), gy - 0.24) - 0.05;
     const hh = 1 - smoothstep(-0.012, 0.012, hd);
     if (hh > 0) {
       const w = mixRGB([r, g, b], [255, 255, 255], hh * 0.9);
@@ -155,8 +170,8 @@ function sample(px, py) {
   }
 
   // scintilla (stella a 4 punte) in alto a destra
-  const sx = 0.34, sy = 0.34;
-  const dx = Math.abs(x - sx), dy = Math.abs(y - sy);
+  const sx = 0.34 * inset, sy = 0.34 * inset;
+  const dx = Math.abs(gx - sx), dy = Math.abs(gy - sy);
   const arm = 0.10, thick = 0.024;
   const star = Math.min(
     Math.abs(dx) - thick, // braccio orizzontale
@@ -174,9 +189,8 @@ function sample(px, py) {
   return [r, g, b, Math.round(alphaRect * 255)];
 }
 
-function render(size, rounded) {
+function render(size, maskable) {
   const SS = 3; // supersampling
-  const W = size * SS;
   const rgba = Buffer.alloc(size * size * 4);
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
@@ -185,7 +199,7 @@ function render(size, rounded) {
         for (let sx = 0; sx < SS; sx++) {
           const px = (x + (sx + 0.5) / SS) / size;
           const py = (y + (sy + 0.5) / SS) / size;
-          const c = sample(px, py);
+          const c = sample(px, py, maskable);
           r += c[0]; g += c[1]; b += c[2]; a += c[3];
         }
       }
@@ -201,16 +215,27 @@ function render(size, rounded) {
 }
 
 const outDir = __dirname;
+/* maskable = true → quadrato pieno con safe zone (versione "maskable") */
 const targets = [
-  ['icon-16.png', 16, true],
-  ['icon-32.png', 32, true],
-  ['icon-180.png', 180, true],
-  ['icon-192.png', 192, true],
-  ['icon-512.png', 512, true],
-  ['icon-maskable-512.png', 512, false],
+  ['icon-16.png', 16, false],
+  ['icon-32.png', 32, false],
+  ['icon-180.png', 180, false],
+  ['icon-192.png', 192, false],
+  ['icon-512.png', 512, false],
+  ['icon-maskable-512.png', 512, true],
 ];
-for (const [name, size, rounded] of targets) {
-  const buf = render(size, rounded);
+for (const [name, size, maskable] of targets) {
+  const buf = render(size, maskable);
   fs.writeFileSync(path.join(outDir, name), buf);
-  console.log('OK', name, size + 'x' + size, buf.length, 'bytes');
+  console.log('OK', name, size + 'x' + size, buf.length, 'bytes', maskable ? '(maskable)' : '');
 }
+
+/* La maskable non deve essere identica alla standard: se lo fosse, il
+   parametro è di nuovo ignorato e il logo verrebbe tagliato. */
+const a = fs.readFileSync(path.join(outDir, 'icon-512.png'));
+const b = fs.readFileSync(path.join(outDir, 'icon-maskable-512.png'));
+if (a.equals(b)) {
+  console.error('ERRORE: icon-maskable-512.png è identica a icon-512.png');
+  process.exit(1);
+}
+console.log('OK la maskable è diversa dalla standard');
